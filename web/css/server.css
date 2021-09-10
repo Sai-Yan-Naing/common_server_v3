@@ -1,0 +1,912 @@
+/*
+    DEMO STYLE
+*/
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none!important;
+    transition: all 0.3s;
+}
+
+i,
+span {
+    display: inline-block;
+}
+
+
+/*#header {
+    position: absolute;
+}*/
+
+#headerBox {
+    width: 100%;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (Server)
+----------------------------------------------------- */
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 90vh;
+    transition: all 0.3s;
+}
+
+.server .wserver {
+    font-weight: 400!important;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.server .saba {
+    text-align: center;
+}
+
+.server .row-border {
+    border: 2px solid #000000;
+    padding: 50px 0px;
+}
+
+.server .row.row-border {
+    margin: 0px 70px 25px 70px;
+}
+
+.server .saba-tsuika {
+    color: #000000;
+    padding: 5px;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    top: 40px;
+    background: #ffffff;
+    border: 1px solid #000000;
+}
+
+.server .row .kyoyo-saba,
+.server .row .vps-saba,
+.server .row .wd-saba,
+.server .row .senyo-saba {
+    border: 1px solid #000000;
+    text-align: center;
+}
+
+.server .row .vps-btn .btn,
+.server .row .wd-btn .btn {
+    /*margin-left: -5px;    
+    border: 1px solid #000000;*/
+    border-radius: 0!important;
+    padding: 0!important;
+}
+
+.server .btn-group,
+.server .btn-group-vertical {
+    vertical-align: unset!important;
+    width: 100%;
+}
+
+.server .row .btn-ssd,
+.server .row .btn-hdd {
+    border: 1px solid #000000;
+    border-top: none;
+}
+
+.server input#contract-id {
+    border-radius: 0px;
+}
+
+.server .saba-result {
+    border: 2px solid #000000;
+    padding: 50px 0px;
+}
+
+.server .row.saba-result {
+    margin: 0px 70px 25px 70px;
+}
+
+.server #vps-hdd,
+.server #wd-ssd,
+.server #wd-hdd {
+    display: none;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (dhome)
+----------------------------------------------------- */
+
+.dhome .wserver {
+    text-align: left;
+}
+
+.dhome a {
+    color: #000000;
+    font-weight: 300;
+}
+.dhome .active a.setting_menu{
+    color: #fff !important;
+}
+.hovar-color
+{
+    background-color: #e6e6e6;
+}
+
+.dhome .tab-content>.active {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.dhome .nav-tabs .nav-link {
+    border: 1px solid #f5f5f5;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.dhome .nav-tabs .nav-link.active,
+.dhome .nav-tabs .nav-item.show .nav-link {
+    color: #000000;
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    background: #09CAE3!important;
+    color:white !important;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.dhome .btn-outline-dark:hover {
+    background: #ccc;
+}
+
+.dhome .icon-align {
+    text-align: center;
+}
+
+.dhome span.icon {
+    font-size: 23px;
+}
+
+.dhome .domain-icon {
+    font-size: 50px;
+}
+
+.dhome div#app-install {
+    padding: 0 40px;
+}
+
+.error {
+    color: #ff0000;
+}
+
+.back-button {
+    text-align: end;
+    margin-right: 70px;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (home)
+
+----------------------------------------------------- */
+
+.conButton {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.home .win-cpanel {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.home a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.home .tab-content>.active {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.home .nav-tabs .nav-link {
+    border: 1px solid #f5f5f5;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.home .nav-tabs .nav-link.active,
+.home .nav-tabs .nav-item.show .nav-link {
+    color: #000000;
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.home .btn-outline-dark:hover {
+    background: #ccc;
+}
+
+.home .icon-align {
+    text-align: center;
+}
+
+.home span.icon {
+    font-size: 23px;
+}
+
+.home .domain-icon {
+    font-size: 50px;
+}
+
+.home div#app-install {
+    padding: 0 40px;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (add_domain)
+----------------------------------------------------- */
+
+.wshare-server {
+    margin-bottom: 15px;
+}
+
+.add-multi {
+    margin-bottom: 10px;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (site_security)
+----------------------------------------------------- */
+
+.site-security .wserver {
+    text-align: left;
+}
+
+.site-security a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.site-security .tab-content>.active {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.site-security .nav-tabs .nav-link {
+    border: 1px solid #f5f5f5;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+/* main page */
+.main-page .nav-tabs .nav-link.active{
+    color: #000000;
+    background: #f5f5f5;
+    border-color: #09CAE3 !important;
+}
+.main-page .nav-tabs{
+    border-bottom: 2px solid #09CAE3 !important;
+}
+.main-page .nav-link{
+    color:#000 !important;
+}
+
+.main-page .bg-info{
+    background-color: #09CAE3 !important;
+}
+.main-page .bg-secondary{
+    background-color: rgba(34, 33, 33, 0.404) !important;
+}
+.main-page .btn-outline-info{
+    color:#09CAE3;
+    border-color: #09CAE3;
+    border-radius: 8px;
+}
+
+.main-page .btn-outline-info:hover{
+    border-color: #09CAE3;
+    background-color: #09CAE3;
+    color: #fff;
+}
+.main-page .btn-info, .main-page .btn-info:hover{
+    border-color: #09CAE3;
+    background-color: #09CAE3;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.main-page .btn-outline-danger{
+    border-radius: 8px;
+}
+
+.main-page .ver{
+    border-left: 2px solid #ccc;
+    height: 100%;
+}
+
+.main-page .subtitle{
+    width: 14.285%; border-right:1px solid #ccc; text-align:center;
+}
+.main-page .subtitle img{
+    width: 30px; height:30px;
+}
+
+.main-page .subtitle a{
+    color:#000;
+}
+
+.main-page .subtitle.active{
+    width: 14.285%; border:1px solid #ccc; text-align:center; background-color: #09CAE3; color:#fff;
+}
+
+
+
+/* end main page */
+
+.site-security .btn-outline-dark:hover {
+    background: #ccc;
+}
+
+.site-security .country-jp {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+}
+
+.site-security .icon-align {
+    text-align: center;
+}
+
+.site-security span.icon {
+    font-size: 23px;
+}
+
+.site-security .domain-icon {
+    font-size: 50px;
+}
+
+.site-security div#app-install {
+    padding: 0 40px;
+}
+
+.site-security .notice-msg {
+    border-radius: 5px;
+    padding: 8px;
+    margin-left: 15px;
+}
+
+/*.site-security thead th {
+    border-top: 1px solid #000000!important;
+}
+
+.site-security tbody tr:last-child td {
+    border-bottom: 1px solid #000000!important;
+}
+
+.site-security td,
+.site-security th {
+    border-left: 1px solid #000000!important;
+    border-right: 1px solid #000000!important;
+}*/
+
+.site-security .table-title {
+    background-color: #4472c4;
+}
+
+.site-security .table-waf tbody tr:nth-child(odd) {
+    background-color: #cdd4ea;
+}
+
+.site-security .table-waf tbody tr:nth-child(even) {
+    background-color: #e8ebf5;
+}
+
+.site-security #collapseDirectory .card-body {
+    border-radius: 50px;
+    margin: 10px;
+}
+
+.site-security .dir-icon {
+    padding-right: 25px;
+}
+
+.site-security #directoryTab a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.site-security #accordionDir {
+    margin-top: 25px;
+}
+
+.site-security .dir-icon {
+    font-size: 20px;
+}
+
+.site-security .trash-icon {
+    margin-top: 22px;
+}
+
+.border-less {
+    border: none !important;
+}
+
+.model-line-spacing {
+    margin-bottom: 10px;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (mail_connection)
+----------------------------------------------------- */
+
+.mail_connection .wserver {
+    text-align: left;
+}
+
+.mail_connection a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.mail_connection .icon-align {
+    text-align: center;
+}
+
+.mail_connection span.icon {
+    font-size: 23px;
+}
+
+.mail_connection .domain-icon {
+    font-size: 50px;
+}
+
+.mail_connection .nav-tabs {
+    border-bottom: none!important;
+}
+
+.nav-border {
+    border: 1px solid #dee2e6;
+}
+
+.connec-tabs {
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
+.connec-tabs .text-label-align {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 2px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+.mail_connection .m-40 {
+    margin: 0 15%;
+}
+
+#pop-imap .notice-msg {
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 0px;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (contract_connection)
+----------------------------------------------------- */
+
+.contract_information .wserver {
+    text-align: left;
+}
+
+.contract_information a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.contract_information .gb {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+}
+
+.contract_information .icon-align {
+    text-align: center;
+}
+
+.contract_information span.icon {
+    font-size: 23px;
+}
+
+.contract_information .domain-icon {
+    font-size: 50px;
+}
+
+.contract_information .contract {
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
+.contract_information .contract .text-label-align {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 2px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+.contract_information .m-40 {
+    margin: 0 15%;
+}
+
+.contract_information .server-info {
+    margin-bottom: 50px;
+}
+
+.contract_information .server-info table,
+.contract_information .server-info tr,
+.contract_information .server-info th,
+.contract_information .server-info td {
+    border: none!important;
+    background-color: unset!important;
+}
+
+.contract_information .btn-outline-dark:hover {
+    background: #ccc;
+}
+
+
+/*end wady*/
+
+
+/*16/2/2021*/
+
+
+/*//khin*/
+
+
+/*------------header----------------*/
+
+.boxHeader #subNavMenu {
+    margin-bottom: 0px !important;
+}
+
+
+/*===========basic config===================*/
+
+.tab-content #kihon-setting {
+    padding: 0 40px;
+}
+
+.data-item {
+    overflow: hidden;
+    display: none;
+}
+
+.tab-content #kihon-setting p {
+    color: #000;
+}
+
+.pl-0 {
+    padding-left: 30px;
+}
+
+.add-basic-auth,
+.add-user {
+    text-decoration: none !important;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem;
+    background: #fff !important;
+}
+
+.add-icon {
+    padding: 0 15px;
+}
+
+.add-basic-auth:hover,
+.add-basic-auth:focus,
+.add-user:hover,
+.add-user:focus {
+    color: #fff !important;
+    background-color: #6c757d !important;
+    border-color: #6c757d;
+}
+
+.basic-setting .down-icon {
+    padding-right: 5px;
+    font-size: 20px;
+}
+
+.basic-setting {
+    margin-bottom: 15px;
+}
+
+.mt-04 {
+    margin-top: 1.97rem !important;
+}
+
+
+/*-------------database css---------------*/
+
+.rcontent {
+    border: 1px solid #9b9ea0;
+    padding: 15px 20px;
+    margin-top: 17px;
+}
+
+.rcontent .add-db-icon {
+    padding-right: 15px;
+}
+
+.wrap {
+    border: 1px solid #b7b8b9;
+    margin-top: 10px;
+    border-radius: 50px;
+    padding: 5px 25px;
+}
+
+.db-title {
+    margin-top: 10px;
+}
+
+.wrap2 {
+    border: 1px solid #b7b8b9;
+    margin-top: 10px;
+    border-radius: 50px;
+    padding: 14px 25px;
+}
+
+.links.btn.btn-outline-primary {
+    border-color: #007bff !important;
+    border-radius: 0;
+    color:  #007bff;
+    font-weight: 400;
+}
+
+.links.btn.btn-outline-primary:hover {
+    color: #fff;
+}
+
+.links.btn.btn-outline-primary.active {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    border-radius: 0;
+    font-weight: 400;
+}
+
+.tab-content .tab-bg.active {
+    border: 1px solid #007BFF !important;
+    background: #fff !important;
+}
+
+
+/*------------------ftp css--------------*/
+
+.ftp-server {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.p-t-b-l-r-2 {
+    padding: .5rem;
+}
+
+.edit-delete-btn {
+    margin-top: -2.5rem;
+}
+
+.edit-delete-btn .edit {
+    padding-right: 10px;
+}
+
+
+/*----------mail-setting--------------*/
+
+.sign-domain {
+    margin-top: 2.3rem;
+    padding-left: 0px;
+}
+
+
+/*mail connection information*/
+
+.m-t-0 {
+    margin-top: -33px;
+}
+
+
+/*--------------backup-----------------*/
+
+.date-backup {
+    border: 1px solid #6c757d;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    margin-bottom: 15px;
+}
+
+
+/*end khin*/
+
+
+/*cza*/
+
+#oyo-setting .oyo-set {
+    margin-left: 40px;
+}
+
+#oyo-setting .oyo-sett {
+    margin-left: 30px;
+}
+
+#content .analysis {
+    border: 2px solid grey;
+}
+
+#content .num-visitor {
+    width: 100px;
+    padding-left: 10px;
+    padding-right: 20px;
+    background-color: rgb(0, 97, 177);
+    margin-top: 10px;
+}
+
+#content .three-box {
+    border: 2px solid grey;
+    margin-left: 10px;
+}
+
+#content .graph-display {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 50px;
+}
+
+#content .number-visitors {
+    border: 1px solid grey;
+}
+
+#content .inflow-source {
+    width: 100%;
+    height: 94px;
+    margin-left: 10px;
+    border: 2px solid grey;
+}
+
+#content .ip-address {
+    text-align: center;
+    border: 1px solid grey;
+    margin-top: 20px;
+}
+
+#content .ip-graph {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+#content .access-analysis {
+    background-color: #0a48b3;
+}
+
+.content-table tr:nth-child(even) {
+    background-color: lavender;
+}
+
+#content .error-log {
+    border: 2px solid grey;
+    height: 100px;
+}
+
+#content .number-total {
+    text-align: center;
+}
+
+.content-table tr:nth-child(odd) {
+    background-color: rgb(167, 172, 189);
+}
+
+
+/*end cza*/
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (contract_connection)
+----------------------------------------------------- */
+
+.contract_information .wserver {
+    text-align: left;
+}
+
+.contract_information a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.contract_information .gb {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+}
+
+.contract_information .icon-align {
+    text-align: center;
+}
+
+.contract_information span.icon {
+    font-size: 23px;
+}
+
+.contract_information .domain-icon {
+    font-size: 50px;
+}
+
+.contract_information .contract {
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
+.contract_information .contract .text-label-align {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 2px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+.contract_information .m-40 {
+    margin: 0 15%;
+}
+
+.contract_information .server-info {
+    margin-bottom: 50px;
+}
+
+.contract_information .server-info table,
+.contract_information .server-info tr,
+.contract_information .server-info th,
+.contract_information .server-info td {
+    border: none!important;
+    background-color: unset!important;
+}
+
+.contract_information .btn-outline-dark:hover {
+    background: #ccc;
+}
+
+.message_box {
+    position: absolute;
+    top: 14%;
+    background-color: #fff;
+    z-index: 10001;
+    padding:5px;
+    border:1px solid #CCCCCC;
+    text-align:center;
+    font-weight:bold;
+    width:40%;
+    left: 50%; 
+    height: 55px;
+    line-height:44px;
+    transform: translate(-50%, -50%);
+}
