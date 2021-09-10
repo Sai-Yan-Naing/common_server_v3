@@ -11,52 +11,52 @@
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
-                                    <button class="btn btn-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=new&webid=<?=$webid?>&error_pages"><span class="mr-2"><i class="fas fa-plus-square"></i></span>エラーページ追加</button>
+                                    <button class="btn btn-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=new&webid=<?=$webid?>&error_pages"><span class="mr-2"><i class="fas fa-plus-square"></i></span>アプリケーション追加</button>
                                         <div class="mt-4 table-responsive">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <th>Site Name</th>
-                                                    <th>APP</th>
-                                                    <th>Document Root</th>
-                                                    <th>Url</th>
-                                                    <th>Username</th>
-                                                    <th>Password</th>
-                                                    <th>Database</th>
-                                                    <th>DB User</th>
-                                                    <th>DB Password</th>
+                                                    <th class="border-dark">サイト名</th>
+                                                    <th class="border-dark">プリケーション</th>
+                                                    <th class="border-dark">Document Root</th>
+                                                    <th class="border-dark">Url</th>
+                                                    <th class="border-dark">ユーザー名</th>
+                                                    <th class="border-dark">Password</th>
+                                                    <th class="border-dark">Database</th>
+                                                    <th class="border-dark">DB ユーザー</th>
+                                                    <th class="border-dark">DB Password</th>
                                                 </tr>
                                                 <tr>
-                                                    <td>Travel Vlog</td>
-                                                    <td>Wordpress APP1</td>
-                                                    <td>/<?=$webuser?>/inputtext</td>
-                                                    <td><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
-                                                    <td>travelvlog</td>
-                                                    <td>welcome123!</td>
-                                                    <td>travelvlogdb</td>
-                                                    <td>travelvloguser</td>
-                                                    <td>welcome123!</td>
+                                                    <td class="border-dark">Travel Vlog</td>
+                                                    <td class="border-dark">Wordpress APP1</td>
+                                                    <td class="border-dark">/<?=$webuser?>/inputtext</td>
+                                                    <td class="border-dark"><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
+                                                    <td class="border-dark">travelvlog</td>
+                                                    <td class="border-dark">welcome123!</td>
+                                                    <td class="border-dark">travelvlogdb</td>
+                                                    <td class="border-dark">travelvloguser</td>
+                                                    <td class="border-dark">welcome123!</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Travel Vlog2</td>
-                                                    <td>Wordpress APP2</td>
-                                                    <td>/<?=$webuser?>/inputtext</td>
-                                                    <td><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
-                                                    <td>travelvlog</td>
-                                                    <td>welcome123!</td>
-                                                    <td>travelvlogdb</td>
-                                                    <td>travelvloguser</td>
-                                                    <td>welcome123!</td>
+                                                    <td class="border-dark">Travel Vlog2</td>
+                                                    <td class="border-dark">Wordpress APP2</td>
+                                                    <td class="border-dark">/<?=$webuser?>/inputtext</td>
+                                                    <td class="border-dark"><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
+                                                    <td class="border-dark">travelvlog</td>
+                                                    <td class="border-dark">welcome123!</td>
+                                                    <td class="border-dark">travelvlogdb</td>
+                                                    <td class="border-dark">travelvloguser</td>
+                                                    <td class="border-dark">welcome123!</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Travel Vlog3</td>
-                                                    <td>ECCUBE APP1</td>
-                                                    <td>/<?=$webuser?>/inputtext</td>
-                                                    <td><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
-                                                    <td>travelvlog</td>
-                                                    <td>welcome123!</td>
-                                                    <td>travelvlogdb</td>
-                                                    <td>travelvloguser</td>
-                                                    <td>welcome123!</td>
+                                                    <td class="border-dark">Travel Vlog3</td>
+                                                    <td class="border-dark">ECCUBE APP1</td>
+                                                    <td class="border-dark">/<?=$webuser?>/inputtext</td>
+                                                    <td class="border-dark"><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
+                                                    <td class="border-dark">travelvlog</td>
+                                                    <td class="border-dark">welcome123!</td>
+                                                    <td class="border-dark">travelvlogdb</td>
+                                                    <td class="border-dark">travelvloguser</td>
+                                                    <td class="border-dark">welcome123!</td>
                                                 </tr>
                                             </table>
                                         </div>

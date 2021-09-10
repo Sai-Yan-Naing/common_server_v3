@@ -58,19 +58,19 @@ $getAllRow=$commons->getAllRow($query);
                                             <h3>DNS</h3>
                                             <table class="table table-bordered">
                                                 <tr class="">
-                                                    <th class="font-weight-bold">タイプ</th>
-                                                    <th class="font-weight-bold">ホスト名</th>
-                                                    <th class="font-weight-bold">ドメイン名</th>
-                                                    <th class="font-weight-bold">ＩＰアドレス/ドメイン名</th>
+                                                    <th class="font-weight-bold border-dark">タイプ</th>
+                                                    <th class="font-weight-bold border-dark">ホスト名</th>
+                                                    <th class="font-weight-bold border-dark">ドメイン名</th>
+                                                    <th class="font-weight-bold border-dark">ＩＰアドレス/ドメイン名</th>
                                                 </tr>
                                                     <?php
                                                         foreach(json_decode($webdns) as $key=>$value) {
                                                     ?>
                                                 <tr class="">
-                                                    <td class=""><?= $value->type; ?></td>
-                                                    <td class=""><?= $value->sub; ?></td>
-                                                    <td class="">.<?=$webdomain?></td>
-                                                    <td class=""><?= $value->target; ?></td>
+                                                    <td class="border-dark"><?= $value->type; ?></td>
+                                                    <td class="border-dark"><?= $value->sub; ?></td>
+                                                    <td class="border-dark">.<?=$webdomain?></td>
+                                                    <td class="border-dark"><?= $value->target; ?></td>
                                                 </tr>
                                                 <?php 
                                                     }

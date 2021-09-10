@@ -28,19 +28,19 @@
                                             </div>
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <th class="font-weight-bold">IP</th>
-                                                    <th class="font-weight-bold">subnetMask</th>
-                                                    <th class="font-weight-bold">Status</th>
-                                                    <th class="font-weight-bold">Action</th>
+                                                    <th class="font-weight-bold border-dark">IP</th>
+                                                    <th class="font-weight-bold border-dark">subnetMask</th>
+                                                    <th class="font-weight-bold border-dark">Status</th>
+                                                    <th class="font-weight-bold border-dark">Action</th>
                                                 </tr>
                                                     <?php
                                                         foreach($webblacklist as $key=>$value) {
                                                     ?>
                                                     <tr>
-                                                        <td><?= $value->ip ?></td>
-                                                        <td><?= $value->mask ?></td>
-                                                        <td><span class='text-danger'><?=$value->status?></span></td>
-                                                        <td><button class="pr-2 btn btn-danger btn-sm common_dialog" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/security/ip?act=delete&webid=<?=$webid?>&act_id=<?=$key?>"><i class="fas fa-trash text-white"></i></button></td> 
+                                                        <td class="border-dark"><?= $value->ip ?></td>
+                                                        <td class="border-dark"><?= $value->mask ?></td>
+                                                        <td class="border-dark"><span class='text-danger'><?=$value->status?></span></td>
+                                                        <td class="border-dark"><button class="pr-2 btn btn-danger btn-sm common_dialog" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/security/ip?act=delete&webid=<?=$webid?>&act_id=<?=$key?>"><i class="fas fa-trash text-white"></i></button></td> 
                                                     </tr>
                                                     <?php
                                                         }

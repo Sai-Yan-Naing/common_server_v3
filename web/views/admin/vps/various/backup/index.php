@@ -43,9 +43,9 @@ $getAllRow=$commons->getAllRow($query);
                                         <div id="changeBackup">
                                         <table class="table mt-3 table-bordered">
                                             <tr>
-                                                <th>バックアップデータ</th>
-                                                <th>Date</th>
-                                                <th>Action</th>
+                                                <th class="font-weight-bold border-dark">バックアップデータ</th>
+                                                <th class="font-weight-bold border-dark">Date</th>
+                                                <th class="font-weight-bold border-dark">Action</th>
                                             </tr>
                                                 <?php 
                                                     $getAllRow=$commons->getAllRow("SELECT * FROM vps_backup WHERE ip='$webip'");
@@ -53,9 +53,9 @@ $getAllRow=$commons->getAllRow($query);
                                                     foreach ($getAllRow as $key => $vps_backup) {
                                                 ?>
                                             <tr>
-                                                <td><?= $vps_backup['name'] ?></td>
-                                                <td><?= $vps_backup['date'] ?></td>
-                                                <td>
+                                                <td class="border-dark"><?= $vps_backup['name'] ?></td>
+                                                <td class="border-dark"><?= $vps_backup['date'] ?></td>
+                                                <td class="border-dark">
                                                     <button data-toggle="modal" data-target="#common_modal" class="btn btn-warning btn-sm common_dialog"  gourl="/admin/vps/backup/restore?server=vps&setting=various&tab=backup&act=restore&act_id=<?=$vps_backup[id]?>&webid=<?=$webid?>">リストア</button>
                                                     <button  data-toggle="modal" data-target="#common_modal" class="btn btn-danger btn-sm common_dialog"  gourl="/admin/vps/backup/delete?server=vps&setting=various&tab=backup&act=delete&act_id=<?=$vps_backup[id]?>&webid=<?=$webid?>"><i class="fas fa-trash text-white"></i></button>
                                                 </td>

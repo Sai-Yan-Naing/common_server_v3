@@ -23,17 +23,17 @@ $error_pages = json_decode($weberrorpages);
                                         <div class="mt-4">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <th>エラーコード</th>
-                                                    <th>ファイルパス</th>
-                                                    <th>利用設定</th>
+                                                    <th  class="border-dark">エラーコード</th>
+                                                    <th  class="border-dark">ファイルパス</th>
+                                                    <th  class="border-dark">利用設定</th>
                                                 </tr>
                                                     <?php
                                                         foreach($error_pages as $key=>$ep) {
                                                     ?>
                                                     <tr>
-                                                        <td><?php echo $ep->statuscode; ?></td>
-                                                        <td><?php echo $ep->url; ?></td>
-                                                        <td>
+                                                        <td class="border-dark"><?php echo $ep->statuscode; ?></td>
+                                                        <td class="border-dark"><?php echo $ep->url; ?></td>
+                                                        <td class="border-dark">
                                                             <div style="display: -webkit-inline-box;">
                                                                 <button edit_id="<?= $key;?>" class="pr-2 btn btn-outline-info btn-sm common_dialog" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=edit&webid=<?=$webid?>&error_pages&act_id=<?=$key?>">編集</button>
                                                                 <form action="/admin/share/servers/sites/basic?confirm&act=&webid=<?=$webid?>&error_pages&act_id=<?=$key?>" method = "post" class="ml-2">
@@ -86,21 +86,18 @@ $error_pages = json_decode($weberrorpages);
                                                             </div>
                                                             <div class="mb-2">認証ユーザー</div>
                                                                 <table class="table table-bordered">
-                                                                    <thead>
                                                                     <tr>
-                                                                        <th class="font-weight-bold">ユーザー名</th>
-                                                                        <th class="font-weight-bold">パスワード</th>
-                                                                        <th class="font-weight-bold">パスワード変更</th>
+                                                                        <th class="font-weight-bold border-dark">ユーザー名</th>
+                                                                        <th class="font-weight-bold border-dark">パスワード</th>
+                                                                        <th class="font-weight-bold border-dark">パスワード変更</th>
                                                                     </tr>
-                                                                    </thead>
-                                                                    <tbody> 
                                                                     <?php 
                                                                         foreach($main_value->user as $user_key => $user_value){
                                                                     ?>
                                                                     <tr>
-                                                                        <td><?= $user_value->bass_user ?></td>
-                                                                        <td><?= $user_value->bass_pass ?></td>
-                                                                        <td>
+                                                                        <td class="border-dark"><?= $user_value->bass_user ?></td>
+                                                                        <td class="border-dark"><?= $user_value->bass_pass ?></td>
+                                                                        <td class="border-dark">
                                                                             <button class="btn btn-sm common_dialog" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=edit&dir_id=<?=$main_key?>&act_id=<?=$user_key?>&webid=<?=$webid?>"><i class="fas fa-edit text-warning"></i></button>
                                                                             <button class="btn btn-sm common_dialog" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=delete&dir_id=<?=$main_key?>&act_id=<?=$user_key?>&webid=<?=$webid?>"><i class="fas fa-trash text-danger"></i></button>
                                                                         </td>
@@ -108,7 +105,6 @@ $error_pages = json_decode($weberrorpages);
                                                                     <?php
                                                                     }
                                                                     ?>
-                                                                    </tbody>
                                                                 </table>
                                                                 <button class="btn btn-outline-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=new&dir_id=<?=$main_key?>&webid=<?=$webid?>"><span class=""><i class="fas fa-plus"></i></span>User追加</button>
                                                         </div>

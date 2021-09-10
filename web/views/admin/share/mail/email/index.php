@@ -24,17 +24,17 @@
                                         </div>
                                         <table class="table table-bordered">
                                                 <tr>
-                                                    <th class="font-weight-bold">登録メールアドレス</th>
-                                                    <th class="font-weight-bold">パスワード</th>
-                                                    <th class="font-weight-bold">Action</th>
+                                                    <th class="font-weight-bold border-dark">登録メールアドレス</th>
+                                                    <th class="font-weight-bold border-dark">パスワード</th>
+                                                    <th class="font-weight-bold border-dark">Action</th>
                                                 </tr>
                                                 <?php 
                                                     foreach ($getAllRow as $key => $mail) {
                                                 ?>
                                                 <tr>
-                                                    <td><?= $mail['email'];?>@<?= $webdomain ?></td>
-                                                    <td><?= $mail['password'] ?></td>
-                                                    <td>
+                                                    <td class="border-dark"><?= $mail['email'];?>@<?= $webdomain ?></td>
+                                                    <td class="border-dark"><?= $mail['password'] ?></td>
+                                                    <td class="border-dark">
                                                         <a href="javascript:;" data-toggle="modal" data-target="#common_modal" class="btn btn-warning btn-sm common_dialog"  gourl="/admin/share/mails?act=edit&webid=<?=$webid?>&act_id=<?=$mail['id']?>"><i class="fas fa-edit text-white"></i></a>
                                                         <a href="javascript:;"  data-toggle="modal" data-target="#common_modal" class="btn btn-danger btn-sm common_dialog"  gourl="/admin/share/mails?act=delete&webid=<?=$webid?>&act_id=<?= $mail['id']?>"><i class="fas fa-trash text-white"></i></a>
                                                     </td>

@@ -51,11 +51,11 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
                                         </form>
                                         <table class="table">
                                                 <tr class="row">
-                                                    <th class="col-sm-2">日時</th>
-                                                    <th class="col-sm-2">Method</th>
-                                                    <th class="col-sm-2">Action</th>
-                                                    <th class="col-sm-2">攻撃元IPアドレス</th>
-                                                    <th class="col-sm-4">攻撃ターゲットURL</th>
+                                                    <th class="col-sm-2 border-dark">日時</th>
+                                                    <th class="col-sm-2 border-dark">Method</th>
+                                                    <th class="col-sm-2 border-dark">Action</th>
+                                                    <th class="col-sm-2 border-dark">攻撃元IPアドレス</th>
+                                                    <th class="col-sm-4 border-dark">攻撃ターゲットURL</th>
                                                 </tr>
                                                 <?php
                                                 if($waf['usage']==1)

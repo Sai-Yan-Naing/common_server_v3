@@ -32,19 +32,19 @@
                                             </div>
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <th class="font-weight-bold">ユーザー名</th>
-                                                    <th class="font-weight-bold">パスワード</th>
-                                                    <th class="font-weight-bold">ディレクトリ</th>
-                                                    <th class="font-weight-bold">Action</th>
+                                                    <th class="font-weight-bold border-dark">ユーザー名</th>
+                                                    <th class="font-weight-bold border-dark">パスワード</th>
+                                                    <th class="font-weight-bold border-dark">ディレクトリ</th>
+                                                    <th class="font-weight-bold border-dark">Action</th>
                                                 </tr>
                                                     <?php
                                                         foreach($getAllRow as $key=>$value) {
                                                     ?>
                                                     <tr>
-                                                        <td><?= $value['ftp_user'] ?></td>
-                                                        <td><?= $value['ftp_pass'] ?></td>
-                                                        <td><?=$value['path']?></td>
-                                                        <td>
+                                                        <td  class="border-dark"><?= $value['ftp_user'] ?></td>
+                                                        <td  class="border-dark"><?= $value['ftp_pass'] ?></td>
+                                                        <td  class="border-dark"><?=$value['path']?></td>
+                                                        <td  class="border-dark">
                                                             <a href="javascript:;" data-toggle="modal" data-target="#common_modal" class="btn btn-outline-info btn-sm common_dialog"  gourl="/admin/share/servers/database?webid=<?=$webid;?>&act=edit&db=mysql&act_id=<?=$db['id']?>" edit_id="<?php echo $db['id']; ?>" db="MYSQL">編集</a>
                                                             <a href="javascript:;"  data-toggle="modal" data-target="#common_modal" class="btn btn-outline-danger btn-sm edit_database common_dialog"  gourl="/admin/share/servers/database?webid=<?=$webid?>&act=delete&db=mysql&act_id=<?=$db['id']?>" delete_id="<?php echo $db['id']; ?>" db="MYSQL">削除</a>
                                                         </td> 
