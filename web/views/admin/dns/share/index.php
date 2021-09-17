@@ -72,8 +72,8 @@
                                                         <td class="col-md-3">.<?=$getDns['domain']?></td>
                                                         <td class="col-md-3"><?= $value->target; ?></td>
                                                         <td class="col-md-2">
-                                                            <a href="javascript:;" data-toggle="modal" data-target="#common_modal" class="btn btn-outline-info btn-sm common_dialog"  gourl="/admin/share/servers/database?webid=<?=$webid;?>&act=edit&db=mysql&act_id=<?=$db['id']?>" edit_id="<?php echo $db['id']; ?>" db="MYSQL">編集</a>
-                                                            <a href="javascript:;"  data-toggle="modal" data-target="#common_modal" class="btn btn-outline-danger btn-sm edit_database common_dialog"  gourl="/admin/share/servers/database?webid=<?=$webid?>&act=delete&db=mysql&act_id=<?=$db['id']?>" delete_id="<?php echo $db['id']; ?>" db="MYSQL">削除</a>
+                                                            <a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-info btn-sm common_dialog"  gourl="/admin/dns?tab=share&act=edit&webid=<?=$webid;?>&act_id=<?=$key?>">編集</a>
+                                                            <a href="javascript:;"  data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-danger btn-sm edit_database btn-sm common_dialog"  gourl="/admin/dns?tab=share&act=delete&webid=<?=$webid;?>&act_id=<?=$key?>">削除</a>
                                                         </td>
                                                     </tr>
                                                     <?php 
@@ -82,11 +82,11 @@
                                                     </tbody>
                                                 </table>
                                                 <?php
-                                                    if(count(json_decode($getRow['dns'],true))<5)
+                                                    if(count(json_decode($getDns['dns'],true))<5)
                                                     {
                                                 ?>
                                                 <div class="row justify-content-center">
-                                                    <div class="col-sm-3"><button class="btn btn-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_modal" gourl="/admin/servers?server=dns&act=new&webid=<?=$getRow['id'];?>"><span class="mr-2"><i class="fas fa-plus-square"></i></span>レコード追加</button></div>
+                                                    <div class="col-sm-3"><button class="btn btn-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_dialog" gourl="/admin/dns?tab=share&act=new&webid=<?=$getDns['id'];?>"><span class="mr-2"><i class="fas fa-plus-square"></i></span>レコード追加</button></div>
                                                 </div>
                                                 <?php
                                                     }

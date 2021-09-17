@@ -16,7 +16,7 @@
                                                 <span>IPアクセス制限</span>
                                             </div>
                                             <div class="col-sm-9">
-                                                <button class="btn btn-info btn-sm common_modal" type="button" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/security/ip?act=new&webid=<?=$webid?>"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ブラックリストに追加</button>
+                                                <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=security&tab=ip&act=new&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ブラックリストに追加</button>
                                             </div>
                                         </div>
                                         <div class="mt-4">
@@ -34,13 +34,14 @@
                                                     <th class="font-weight-bold border-dark">Action</th>
                                                 </tr>
                                                     <?php
+                                                    $webblacklist = json_decode($webblacklist);
                                                         foreach($webblacklist as $key=>$value) {
                                                     ?>
                                                     <tr>
                                                         <td class="border-dark"><?= $value->ip ?></td>
                                                         <td class="border-dark"><?= $value->mask ?></td>
                                                         <td class="border-dark"><span class='text-danger'><?=$value->status?></span></td>
-                                                        <td class="border-dark"><button class="pr-2 btn btn-danger btn-sm common_dialog" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/security/ip?act=delete&webid=<?=$webid?>&act_id=<?=$key?>"><i class="fas fa-trash text-white"></i></button></td> 
+                                                        <td class="border-dark"><button class="pr-2 btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=security&tab=ip&act=delete&act_id=<?= $key ?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">削除</button></td> 
                                                     </tr>
                                                     <?php
                                                         }

@@ -9,6 +9,8 @@ require_once("config/all.php");
 require_once("models/common.php");
 require_once("commons/common.php");
 // require_once("usage/usage.php");
+require_once('mails/mail.php');
+$webmailer = new Mailer;
 $commons = new Common;
 $web_acc = $commons->getRow("SELECT * FROM vps_account WHERE id='$_GET[webid]' AND customer_id='D000123'");
 $webid = $web_acc['id'];

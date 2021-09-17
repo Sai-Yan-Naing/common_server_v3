@@ -49,11 +49,11 @@
                                                 <form action="" method = "post">
                                                     <input type="hidden" name="app" value="site">
                                                     <input type="hidden" name="domain" value="<?=$domain['domain'] ?>">
-                                                    <label class="switch text-white">
+                                                    <label class="switch text-white common_dialog" gourl="/admin/multiple_domain?act=onoff&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog">
                                                         <input type="checkbox" <?= $domain['stopped']==0? "checked":""  ?>>
                                                         <span class="slider <?= $domain['stopped']==0? "slideron":"slideroff"  ?>"></span>
                                                         <span class="handle <?= $domain['stopped']==0? "handleon":"handleoff"  ?>"></span>
-                                                        <span class="<?= $domain['stopped']==0? "labelon":"labeloff"  ?>"><?= $domain['stopped']==0? "停止":"起動"  ?></span>
+                                                        <span class="<?= $domain['stopped']==0? "labelon":"labeloff"  ?>"><?= $domain['stopped']==0? "起動":"停止"  ?></span>
                                                     </label>
                                                 </form>
                                             </td>
@@ -61,19 +61,21 @@
                                                 <form action="" method = "post">
                                                     <input type="hidden" name="app" value="site">
                                                     <input type="hidden" name="domain" value="<?=$domain['domain'] ?>">
-                                                    <label class="switch text-white">
+                                                    <label class="switch text-white common_dialog"  gourl="/admin/multiple_domain?act=apponoff&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog">
                                                         <input type="checkbox" <?= $domain['appstopped']==0? "checked":""  ?>>
                                                         <span class="slider <?= $domain['appstopped']==0? "slideron":"slideroff"  ?>"></span>
                                                         <span class="handle <?= $domain['appstopped']==0? "handleon":"handleoff"  ?>"></span>
-                                                        <span class="<?= $domain['appstopped']==0? "labelon":"labeloff"  ?>"><?= $domain['appstopped']==0? "停止":"起動"  ?></span>
+                                                        <span class="<?= $domain['appstopped']==0? "labelon":"labeloff"  ?>"><?= $domain['appstopped']==0? "起動":"停止"  ?></span>
                                                     </label>
                                                 </form>
                                             </td>
                                             <td class="col-sm-2">
-                                            <button class="btn btn-sm btn-outline-danger">削除</button>
+                                            <button class="btn btn-sm common_dialog <?= $domain['sitebinding']==0? "btn-outline-danger":"btn-outline-info"  ?>" gourl="/admin/multiple_domain?act=sitebinding&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog"><?= $domain['sitebinding']==0? "削除":"追加"  ?></button>
                                             </td>
                                             <td class="col-sm-1">
-                                                <button class="btn btn-sm btn-outline-danger">削除</button>
+                                            <?php if($domain['origin']!=1){?>
+                                                <button class="btn btn-sm btn-outline-danger common_dialog" gourl="/admin/multiple_domain?act=delete&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
+                                            <?php } ?>
                                             </td>
                                         </tr>
                                         <?php 
@@ -84,7 +86,7 @@
                                 </div>
                                 <div class="d-flex  justify-content-center">
                                     <div class="row justify-content-center col-sm-10 ">
-                                        <div class="col-sm-3"><button class="btn btn-outline-info form-control">マルチドメイン追加</button></div>
+                                        <div class="col-sm-3"><button class="btn btn-outline-info form-control common_dialog" gourl="/admin/multiple_domain?act=new" data-toggle="modal" data-target="#common_dialog">マルチドメイン追加</button></div>
                                         <div class="col-sm-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control">ドメイン取得/移管</a></div>
                                         <div class="col-sm-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control">サーバー追加</a></div>
                                         <div class="col-sm-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control">DNS情報</a></div>

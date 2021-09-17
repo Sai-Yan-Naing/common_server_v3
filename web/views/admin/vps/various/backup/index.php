@@ -35,7 +35,7 @@ $getAllRow=$commons->getAllRow($query);
                                                         <input type="checkbox" <?= $domain['stopped']==0? "checked":""  ?>>
                                                         <span class="slider <?= $domain['stopped']==0? "slideron":"slideroff"  ?>"></span>
                                                         <span class="handle <?= $domain['stopped']==0? "handleon":"handleoff"  ?>"></span>
-                                                        <span class="<?= $domain['stopped']==0? "labelon":"labeloff"  ?>"><?= $domain['stopped']==0? "停止":"起動"  ?></span>
+                                                        <span class="<?= $domain['stopped']==0? "labelon":"labeloff"  ?>"><?= $domain['stopped']==0? "起動":"停止"  ?></span>
                                                     </label>
                                                 </form>
                                             </div>

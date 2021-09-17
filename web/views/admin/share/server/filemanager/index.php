@@ -19,9 +19,9 @@ $getAllRow=$commons->getAllRow($query);
                                         </li>
                                     </ul>
                                     <ul class="navbar-nav">
-                                        <li class="mr-3" style="cursor: pointer;"><a data-toggle="modal" data-target="#upload_file"><i class="fas fa-cloud-upload-alt fa-2x"></i></a></li>
-                                        <li class="mr-3" style="cursor: pointer;"><a class="fm_common_c text-dark" action="newDir"  data-toggle="modal" data-target="#fm_common_modal" file_name=""  gourl="/admin/share/servers/filemanager/confirm?webid=<?=$webid?>"  webid="<?=$webid?>"><i class="far fa-folder fa-2x"></i></a></li>
-                                        <li class="mr-3" style="cursor: pointer;"><a class="fm_common_c text-dark" action="newFile"  data-toggle="modal" data-target="#fm_common_modal" file_name=""  gourl="/admin/share/servers/filemanager/confirm?webid=<?=$webid?>"  webid="<?=$webid?>"><i class="far fa-file fa-2x"></i></a></li>
+                                        <li class="mr-3" style="cursor: pointer;"><a data-toggle="modal" data-target="#upload_file"><i class="fas fa-cloud-upload-alt nav-tab-icon"></i></a></li>
+                                        <li class="mr-3" style="cursor: pointer;"><a class="fm_common_c text-dark" action="newDir"  data-toggle="modal" data-target="#fm_common_modal" file_name=""  gourl="/admin/share/servers/filemanager/confirm?webid=<?=$webid?>"  webid="<?=$webid?>"><i class="far fa-folder nav-tab-icon"></i></a></li>
+                                        <li class="mr-3" style="cursor: pointer;"><a class="fm_common_c text-dark" action="newFile"  data-toggle="modal" data-target="#fm_common_modal" file_name=""  gourl="/admin/share/servers/filemanager/confirm?webid=<?=$webid?>"  webid="<?=$webid?>"><i class="far fa-file nav-tab-icon"></i></a></li>
                                         <li class="mr-3"></li>
                                     </ul>
 
@@ -72,7 +72,7 @@ $getAllRow=$commons->getAllRow($query);
                                             ?>
                                                 <tr>
                                                 <td class="folder_click" foldername="<?= $value ?>" style="cursor: pointer;"  gourl="/admin/share/servers/filemanager/confirm?webid=<?=$webid?>"  webid="<?=$webid?>">
-                                                    <i class="far fa-folder fa-2x "></i> 
+                                                    <i class="far fa-folder  nav-tab-icon"></i> 
                                                     <span><?= $value ?></span>
                                                 </td>
                                                 <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
@@ -104,7 +104,7 @@ $getAllRow=$commons->getAllRow($query);
                                                 ?>
                                                 <tr>
                                                 
-                                                <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext)){ echo 'data-target="#open_file"'; } ?> file_name="<?= $value ?>"  gourl="/admin/share/servers/filemanager/confirm?webid=<?=$webid?>"  webid="<?=$webid?>"><div><i class="far fa-file fa-2x"></i><span class="ml-1"><?= $value ?></span></div></td>
+                                                <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext)){ echo 'data-target="#open_file"'; } ?> file_name="<?= $value ?>"  gourl="/admin/share/servers/filemanager/confirm?webid=<?=$webid?>"  webid="<?=$webid?>"><div><i class="far fa-file nav-tab-icon"></i><span class="ml-1"><?= $value ?></span></div></td>
                                                 
                                                 <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
                                                 <td><?= filetype($dir.'/'.$value)?></td>

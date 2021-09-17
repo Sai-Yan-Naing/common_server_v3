@@ -50,7 +50,7 @@
                                                             <input type="checkbox" <?= $vps['active']!=0? "checked":""  ?>>
                                                             <span class="slider <?= $vps['active']!=0? "slideron":"slideroff"  ?>"></span>
                                                             <span class="handle <?= $vps['active']!=0? "handleon":"handleoff"  ?>"></span>
-                                                            <span class="<?= $vps['active']!=0? "labelon":"labeloff"  ?>"><?= $vps['active']!=0? "停止":"起動"  ?></span>
+                                                            <span class="<?= $vps['active']!=0? "labelon":"labeloff"  ?>"><?= $vps['active']!=0? "起動":"停止"  ?></span>
                                                         </label>
                                                     </form>
                                             </td>

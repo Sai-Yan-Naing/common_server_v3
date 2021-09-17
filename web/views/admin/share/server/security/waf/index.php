@@ -27,35 +27,35 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
                                         </div>
                                         <div class="form-group">
                                             <label for="usage-setting" class="col-sm-2 col-form-label">利用設定</label>
-                                            <label class="switch text-white">
+                                            <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=security&tab=waf&act=usage&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                 <input type="checkbox" <?= (int)$waf['usage']==1? "checked":""  ?>>
                                                 <span class="slider <?= (int)$waf['usage']==1? "slideron":"slideroff"  ?>"></span>
                                                 <span class="handle <?= (int)$waf['usage']==1? "handleon":"handleoff"  ?>"></span>
-                                                <span class="<?= (int)$waf['usage']==1? "labelon":"labeloff"  ?>"><?= (int)$waf['usage']==1? "停止":"起動"  ?></span>
+                                                <span class="<?= (int)$waf['usage']==1? "labelon":"labeloff"  ?>"><?= (int)$waf['usage']==1? "起動":"停止"  ?></span>
                                             </label>
                                         </div>
                                         <div class="form-group">
                                             <label for="display-switch" class="col-sm-2 col-form-label">表示切替</label>
-                                            <label class="switch text-white">
+                                            <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=security&tab=waf&act=display&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                 <input type="checkbox" <?= (int)$waf['display']==1? "checked":""  ?>>
                                                 <span class="slider <?= (int)$waf['display']==1? "slideron":"slideroff"  ?>"></span>
                                                 <span class="handle <?= (int)$waf['display']==1? "handleon":"handleoff"  ?>"></span>
-                                                <span class="<?= (int)$waf['display']==1? "labelon":"labeloff"  ?>"><?= (int)$waf['display']==1? "停止":"起動"  ?></span>
+                                                <span class="<?= (int)$waf['display']==1? "labelon":"labeloff"  ?>"><?= (int)$waf['display']==1? "起動":"停止"  ?></span>
                                             </label>
                                         </div>
-                                        <form action="/admin/share/servers/security/waf?confirm&webid=<?=$webid?>" method ="post" id="usage-onoff">
+                                        <!-- <form action="/admin/share/servers/security/waf?confirm&webid=<?=$webid?>" method ="post" id="usage-onoff">
                                             <input type="hidden" name="switch" value="usage">
                                         </form>
                                         <form action="/admin/share/servers/security/waf?confirm&webid=<?=$webid?>" method ="post" id="display-onoff">
                                             <input type="hidden" name="switch" value="display">
-                                        </form>
-                                        <table class="table">
+                                        </form> -->
+                                        <table class="table table-borderless">
                                                 <tr class="row">
-                                                    <th class="col-sm-2 border-dark">日時</th>
-                                                    <th class="col-sm-2 border-dark">Method</th>
-                                                    <th class="col-sm-2 border-dark">Action</th>
-                                                    <th class="col-sm-2 border-dark">攻撃元IPアドレス</th>
-                                                    <th class="col-sm-4 border-dark">攻撃ターゲットURL</th>
+                                                    <th class="col-sm-2">日時</th>
+                                                    <th class="col-sm-2">Method</th>
+                                                    <th class="col-sm-2">Action</th>
+                                                    <th class="col-sm-2">攻撃元IPアドレス</th>
+                                                    <th class="col-sm-4">攻撃ターゲットURL</th>
                                                 </tr>
                                                 <?php
                                                 if($waf['usage']==1)
@@ -106,4 +106,76 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
                 </main>
             </div>
         </div> 
+        <?php 
+    function wafAction($values)
+    {
+        ?>
+<tr class="row">
+    <td class="col-sm-2"><?= date('d-M-Y H:i:s A', $values[0]) ?></td>
+     <?php 
+        foreach ($values as $key => $value) {
+        
+        if(in_array($value, ['GET','POST','HEAD','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH','PROPFIND']))
+        {
+    ?>
+        <td class="col-sm-2"><?= $value ?></td>
+        <?php
+        }
+    }
+
+        foreach ($values as $key => $value) {
+        
+        if(str_replace(":","",$value)=="ACTIONMONITOR" || str_replace(":","",$value)=="ACTIONBLOCKED")
+        {
+    ?>
+        <td class="col-sm-2"><?= str_replace("ACTION","",str_replace(":","",$value)) ?></td>
+        <?php
+        }
+
+    }
+        foreach ($values as $key => $value) {
+        
+        if(filter_var($value, FILTER_VALIDATE_IP))
+        {
+    ?>
+        <td class="col-sm-2"><?= $value ?></td>
+        <?php
+        }
+    }
+        foreach ($values as $key => $value) {
+        
+        if(filter_var($value, FILTER_VALIDATE_URL))
+        {
+    ?>
+        <td class="col-sm-4" style="word-break: break-all;"><?= $value ?></td>
+        <?php
+        }
+    }
+    ?>
+</tr>
+    <?php
+    
+}
+
+function wafFilter($double,$filter,$webdomain)
+    {
+        $temp = [];
+        foreach($double as $keys=>$values)
+        {
+            if (strpos(implode(' ', $double[$keys]),$webdomain) !== false)
+            {
+                foreach($values as $key=>$value)
+                {
+                    if(str_replace(":","",$value) == "ACTION$filter")
+                    {
+                        $temp[$keys]=$values;
+                    }
+
+                }
+            }
+
+        }
+        return $temp;
+    }
+?>
  <?php require_once("views/admin/share/footer.php"); ?>

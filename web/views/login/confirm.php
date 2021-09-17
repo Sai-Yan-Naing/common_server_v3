@@ -14,7 +14,7 @@ $commons = new Common;
 if (filter_var($domainid, FILTER_VALIDATE_IP)) {
     $webroot_acc = $commons->getRow("SELECT * FROM vps_account WHERE ip='$domainid'");
     if($webroot_acc != null){
-        // setcookie("vps_user", $domain_userid);
+        // setcookie("vps_user", $domainid);
         // setcookie("password", $pass_encrypted);
         // header("location: /admin");
         $error = "ご契約ID and Password error";
@@ -26,7 +26,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP)) {
 }else if(is_valid_domain_name($domainid)){
     $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE domain='$domainid'");
     if($webroot_acc != null){
-        // setcookie("doamin_user", $domain_userid);
+        // setcookie("doamin_user", $domainid);
         // setcookie("password", $pass_encrypted);
         // header("location: /admin");
         $error = "ご契約ID and Password error";
@@ -38,9 +38,10 @@ if (filter_var($domainid, FILTER_VALIDATE_IP)) {
 }else{
     $webroot_acc = $commons->getRow("SELECT * FROM customer WHERE user_id='$domainid' AND password='$pass_encrypted'");
     if($webroot_acc != null){
-        setcookie("admin", $domain_userid);
+        setcookie("admin", $domainid);
         setcookie("password", $pass_encrypted);
         header("location: /admin");
+        die('hello');
     }else{
         $error = "ご契約ID and Password error";
         require_once('views/login/index.php');

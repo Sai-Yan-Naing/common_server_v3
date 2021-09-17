@@ -11,7 +11,7 @@
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
-                                        <form action="/admin/share/ssl-confirm?webid=<?=$webid?>" method="post" id="free-ssl" />
+                                        <form action="/admin/share/server?setting=security&tab=ssl&act=index&webid=<?=$webid?>" method="post" id="free-ssl" />
                                             <div class="form-group row">
                                                 <span class="col">無料SSL設定</span>
                                             </div>
@@ -62,7 +62,7 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-6"></div>
                                                 <div class="col-sm-3 mal-auto">
-                                                    <button class="btn btn-outline-info btn-sm common_dialog btn-block" type="button" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=new&webid=<?=$webid?>&error_pages">登録</button>
+                                                    <button class="btn btn-outline-info btn-sm common_dialog btn-block" type="submit" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=new&webid=<?=$webid?>&error_pages">登録</button>
                                                 </div>
                                                 <div class="col-sm-3"></div>
                                             </div>

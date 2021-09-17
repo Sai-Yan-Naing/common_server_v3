@@ -11686,3 +11686,11 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+
+/* custom style */
+.nav-style h2{
+color: white;
+}
+.nav-tab-icon{
+  width: 25px !important; height:25px !important;
+}

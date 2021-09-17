@@ -5,6 +5,7 @@ switch ($request['path']) {
     case '/' : include 'views/login.php';break;
     case '/login' : include 'views/login.php';break;
     case '/admin' : include 'views/admin/index.php';break;
+    case '/admin/multiple_domain' : include 'views/admin/multiple_domain/index.php';break;
     case '/admin/contactus' : include 'views/admin/contactus.php';break;
     case '/admin/domain-transfer' : include 'views/admin/domain_transfer.php';break;
     case '/admin/add-server' : include 'views/admin/add_server.php';break;
@@ -14,7 +15,7 @@ switch ($request['path']) {
     case '/admin/share/server' : include 'views/admin/share/server/index.php'; break;
     case '/admin/share/mail' : include 'views/admin/share/mail/index.php'; break;
     case '/admin/share/various' : include 'views/admin/share/various/index.php'; break;
-    case '/admin/share/contactus' : include 'views/admin/share/contactus/index.php'; break;
+    case '/admin/share/contactus' : include 'views/admin/share/contactus.php'; break;
 
     // admin vps
     case '/admin/vps/server' : include 'views/admin/vps/server/index.php'; break;
@@ -25,5 +26,8 @@ switch ($request['path']) {
     // case '/admin/share/contactus' : include 'views/admin/share/contactus/index.php'; break;
 
     //default
+    case '/validate' : include 'views/validate.php'; break;
+    case '/change/app_version' : include 'views/app_version.php'; break;
+    case '/domainChecker' : include 'views/domain_checker.php'; break;
     default: http_response_code(404); include'views/404.php'; break;
 }

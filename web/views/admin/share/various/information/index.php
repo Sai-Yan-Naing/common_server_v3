@@ -25,24 +25,24 @@ $getAllRow=$commons->getAllRow($query);
                                             <div class="form-group d-flex">
                                                 <label for="status" class="col-sm-3 col-form-label">ステータス</label>
                                                 <div class="col-sm-2"><span class="col-form-label"> 起動中 </span></div>
-                                                <label class="switch text-white">
+                                                <label class="switch text-white common_dialog" gourl="/admin/share/various?setting=information&act=onoff&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                     <input type="checkbox" <?= $webstopped==0? "checked":""  ?>>
                                                     <span class="slider <?= $webstopped==0? "slideron":"slideroff"  ?>"></span>
                                                     <span class="handle <?= $webstopped==0? "handleon":"handleoff"  ?>"></span>
-                                                    <span class="<?= $webstopped==0? "labelon":"labeloff"  ?>"><?= $webstopped==0? "停止":"起動"  ?></span>
+                                                    <span class="<?= $webstopped==0? "labelon":"labeloff"  ?>"><?= $webstopped==0? "起動":"停止"  ?></span>
                                                 </label>
                                             </div>
                                             <div class="form-group d-flex">
                                                 <label for="app-pool" class="col-sm-3 col-form-label">アプリケーションプール</label>
                                                 <div class="col-sm-2"><span class="col-form-label"> 起動中 </span></div>
-                                                <label class="switch text-white">
+                                                <label class="switch text-white common_dialog" gourl="/admin/share/various?setting=information&act=apponoff&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                     <input type="checkbox" <?= $webappstopped==0? "checked":""  ?>>
                                                     <span class="slider <?= $webappstopped==0? "slideron":"slideroff"  ?>"></span>
                                                     <span class="handle <?= $webappstopped==0? "handleon":"handleoff"  ?>"></span>
-                                                    <span class="<?= $webappstopped==0? "labelon":"labeloff"  ?>"><?= $webappstopped==0? "停止":"起動"  ?></span>
+                                                    <span class="<?= $webappstopped==0? "labelon":"labeloff"  ?>"><?= $webappstopped==0? "起動":"停止"  ?></span>
                                                 </label>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group d-flex">
                                                 <label for="capacity-used" class="col-sm-3 col-form-label">使用ディスク容量</label>
                                                 <!--<div class="col-sm-4" ><progress id="capacity-used" max="100" value="70"> </progress></div>-->
                                                 <!-- <div class="col-sm-4" id="chartContainer" style="height: 300px; width: 100%;"> </div> -->

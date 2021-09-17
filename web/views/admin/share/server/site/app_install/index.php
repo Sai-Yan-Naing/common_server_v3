@@ -9,14 +9,19 @@
                             <div class="shadow-lg p-3 mb-5 bg-white rounded">
                             <?php require_once("views/admin/share/server/$setting/tab.php") ?>
                                 <!-- start -->
+                                <?php
+
+                                    $getAll= $commons->getAllRow("SELECT * FROM `app` WHERE domain='$webdomain'");
+                                ?>
                                 <div class="tab-content">
                                     <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
-                                    <button class="btn btn-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_modal" gourl="/admin/share/servers/sites/basic?act=new&webid=<?=$webid?>&error_pages"><span class="mr-2"><i class="fas fa-plus-square"></i></span>アプリケーション追加</button>
+                                    <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=app_install&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>アプリケーション追加</button>
                                         <div class="mt-4 table-responsive">
                                             <table class="table table-bordered">
                                                 <tr>
                                                     <th class="border-dark">サイト名</th>
-                                                    <th class="border-dark">プリケーション</th>
+                                                    <th class="border-dark">アプリケーション</th>
+                                                    <th class="border-dark">バージョン</th>
                                                     <th class="border-dark">Document Root</th>
                                                     <th class="border-dark">Url</th>
                                                     <th class="border-dark">ユーザー名</th>
@@ -25,39 +30,20 @@
                                                     <th class="border-dark">DB ユーザー</th>
                                                     <th class="border-dark">DB Password</th>
                                                 </tr>
+                                                <?php foreach($getAll as $app){ ?>
                                                 <tr>
-                                                    <td class="border-dark">Travel Vlog</td>
-                                                    <td class="border-dark">Wordpress APP1</td>
-                                                    <td class="border-dark">/<?=$webuser?>/inputtext</td>
-                                                    <td class="border-dark"><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
-                                                    <td class="border-dark">travelvlog</td>
-                                                    <td class="border-dark">welcome123!</td>
-                                                    <td class="border-dark">travelvlogdb</td>
-                                                    <td class="border-dark">travelvloguser</td>
-                                                    <td class="border-dark">welcome123!</td>
+                                                    <td class="border-dark"><?= $app['site_name'] ?></td>
+                                                    <td class="border-dark"><?= $app['app_name'] ?></td>
+                                                    <td class="border-dark"><?= $app['app_version'] ?></td>
+                                                    <td class="border-dark">/<?= $webuser ?>/<?= $app['root']?></td>
+                                                    <td class="border-dark"><a href="<?= $app['url'] ?>/wp-admin/" target="_blank"><?= $app['url'] ?></a></td>
+                                                    <td class="border-dark"><?= $app['user_name'] ?></td>
+                                                    <td class="border-dark"><?= $app['password'] ?></td>
+                                                    <td class="border-dark"><?= $app['db_name'] ?></td>
+                                                    <td class="border-dark"><?= $app['db_user'] ?></td>
+                                                    <td class="border-dark"><?= $app['db_pass'] ?></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="border-dark">Travel Vlog2</td>
-                                                    <td class="border-dark">Wordpress APP2</td>
-                                                    <td class="border-dark">/<?=$webuser?>/inputtext</td>
-                                                    <td class="border-dark"><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
-                                                    <td class="border-dark">travelvlog</td>
-                                                    <td class="border-dark">welcome123!</td>
-                                                    <td class="border-dark">travelvlogdb</td>
-                                                    <td class="border-dark">travelvloguser</td>
-                                                    <td class="border-dark">welcome123!</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="border-dark">Travel Vlog3</td>
-                                                    <td class="border-dark">ECCUBE APP1</td>
-                                                    <td class="border-dark">/<?=$webuser?>/inputtext</td>
-                                                    <td class="border-dark"><a href="http://<?=$webdomain?>/inputtext">http://<?=$webdomain?>/inputtext</a></td>
-                                                    <td class="border-dark">travelvlog</td>
-                                                    <td class="border-dark">welcome123!</td>
-                                                    <td class="border-dark">travelvlogdb</td>
-                                                    <td class="border-dark">travelvloguser</td>
-                                                    <td class="border-dark">welcome123!</td>
-                                                </tr>
+                                                <?php } ?>
                                             </table>
                                         </div>
                                     </div>
