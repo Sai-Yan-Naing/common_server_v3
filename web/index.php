@@ -40,6 +40,7 @@ switch ($request['path']) {
     // case '/share/contactus' : include 'views/share/contactus/index.php'; break;
 
     //default
+    case '/logout' : include 'views/login/logout.php'; break;
     case '/validate' : include 'views/validate.php'; break;
     case '/change/app_version' : include 'views/app_version.php'; break;
     case '/domainChecker' : include 'views/domain_checker.php'; break;

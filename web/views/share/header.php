@@ -26,13 +26,16 @@
     </head>
     <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="height: 75px;">
-            <a class="navbar-brand ps-3" href=""><h2><span style="font-size:2em;">W</span>inserver</h2></a>
+            <a class="navbar-brand ps-3" href="/share/server?setting=site&tab=app_install&act=index"><h2><span style="font-size:2em;">W</span>inserver</h2></a>
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             
             <h5 class="text-center font-weight-bold ms-auto text-white">Winserver Share Control Panel</h5>
             <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link text-center text-white"href="/login" role="button" aria-expanded="false"><i class="fas fa-sign-out-alt"></i><br>ログアウト</a>
+                    <form action="<?= call_ass() ?>logout" method="post" >
+                        <input type="hidden" name="user" value="share_user">
+                        <button id="logout" type="submit" class="nav-link text-center text-white logout"  role="button" aria-expanded="false"><i class="fas fa-sign-out-alt"></i><br>ログアウト</button>
+                    </form>
                 </li>
             </ul>
         </nav>

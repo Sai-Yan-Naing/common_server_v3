@@ -6,6 +6,7 @@ require_once("models/common.php");
 require_once("models/backup.php");
 require_once("commons/common.php");
 require_once('mails/mail.php');
+require_once('views/share_validate.php');
 $webmailer = new Mailer;
 $commons = new Common;
 $web_acc = $commons->getRow("SELECT * FROM web_account WHERE domain='$_COOKIE[share_user]'");

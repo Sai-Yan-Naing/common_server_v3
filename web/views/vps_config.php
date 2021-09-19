@@ -10,6 +10,7 @@ require_once("models/common.php");
 require_once("commons/common.php");
 // require_once("usage/usage.php");
 require_once('mails/mail.php');
+require_once('views/vps_validate.php');
 $webmailer = new Mailer;
 $commons = new Common;
 $web_acc = $commons->getRow("SELECT * FROM vps_account WHERE ip='$_COOKIE[vps_user]'");

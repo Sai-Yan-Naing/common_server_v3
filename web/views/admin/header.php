@@ -33,7 +33,10 @@
             <h5 class="text-center font-weight-bold ms-auto text-white">Winserver Control Panel</h5>
             <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0 me-lg-4">
                 <li class="nav-item dropdown">
-                    <a class="nav-link text-center text-white"href="/login" role="button" aria-expanded="false"><i class="fas fa-sign-out-alt"></i><br>ログアウト</a>
+                    <form action="<?= call_ass() ?>logout" method="post" >
+					<input type="hidden" name="user" value="admin">
+					<button id="logout" type="submit" class="nav-link text-center text-white logout"  role="button" aria-expanded="false"><i class="fas fa-sign-out-alt"></i><br>ログアウト</button>
+					</form>
                 </li>
             </ul>
         </nav>

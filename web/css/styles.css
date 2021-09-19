@@ -11694,3 +11694,8 @@ color: white;
 .nav-tab-icon{
   width: 30px !important; height:30px !important;
 }
+
+.logout{
+  background-color: transparent;
+  border: none;
+}

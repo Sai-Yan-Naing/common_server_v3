@@ -8,6 +8,7 @@ $tab = $_GET['tab'];
 require_once("config/all.php");
 require_once("models/common.php");
 require_once("commons/common.php");
+require_once('views/admin/admin_vpsvalidate.php');
 // require_once("usage/usage.php");
 require_once('mails/mail.php');
 $webmailer = new Mailer;

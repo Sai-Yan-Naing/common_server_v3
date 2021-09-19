@@ -6,6 +6,7 @@ require_once("models/common.php");
 require_once("models/backup.php");
 require_once("commons/common.php");
 require_once('mails/mail.php');
+require_once('views/admin/admin_sharevalidate.php');
 $webmailer = new Mailer;
 $commons = new Common;
 $web_acc = $commons->getRow("SELECT * FROM web_account WHERE id='$_GET[webid]' AND customer_id='D000123'");
