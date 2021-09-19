@@ -25,6 +25,20 @@ switch ($request['path']) {
     // case '/admin/share/various' : include 'views/admin/share/various/index.php'; break;
     // case '/admin/share/contactus' : include 'views/admin/share/contactus/index.php'; break;
 
+    // share
+    case '/share/server' : include 'views/share/server/index.php'; break;
+    case '/share/mail' : include 'views/share/mail/index.php'; break;
+    case '/share/various' : include 'views/share/various/index.php'; break;
+    case '/share/contactus' : include 'views/share/contactus.php'; break;
+
+    // vps
+    case '/vps/server' : include 'views/vps/server/index.php'; break;
+    case '/vps/various' : include 'views/vps/various/index.php'; break;
+    case '/vps/contactus' : include 'views/vps/contactus/index.php'; break;
+    // case '/share/mail' : include 'views/share/mail/index.php'; break;
+    // case '/share/various' : include 'views/share/various/index.php'; break;
+    // case '/share/contactus' : include 'views/share/contactus/index.php'; break;
+
     //default
     case '/validate' : include 'views/validate.php'; break;
     case '/change/app_version' : include 'views/app_version.php'; break;

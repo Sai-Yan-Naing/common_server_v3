@@ -14,11 +14,9 @@ $commons = new Common;
 if (filter_var($domainid, FILTER_VALIDATE_IP)) {
     $webroot_acc = $commons->getRow("SELECT * FROM vps_account WHERE ip='$domainid'");
     if($webroot_acc != null){
-        // setcookie("vps_user", $domainid);
-        // setcookie("password", $pass_encrypted);
-        // header("location: /admin");
-        $error = "ご契約ID and Password error";
-        require_once('views/login/index.php');
+        setcookie("vps_user", $domainid);
+        setcookie("password", $pass_encrypted);
+        header("location: /vps/server?tab=connection&act=index");
     }else{
         $error = "ご契約ID and Password error";
         require_once('views/login/index.php');
@@ -26,11 +24,9 @@ if (filter_var($domainid, FILTER_VALIDATE_IP)) {
 }else if(is_valid_domain_name($domainid)){
     $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE domain='$domainid'");
     if($webroot_acc != null){
-        // setcookie("doamin_user", $domainid);
-        // setcookie("password", $pass_encrypted);
-        // header("location: /admin");
-        $error = "ご契約ID and Password error";
-        require_once('views/login/index.php');
+        setcookie("share_user", $domainid);
+        setcookie("password", $pass_encrypted);
+        header("location: /share/server?setting=site&tab=app_install&act=index");
     }else{
         $error = "ご契約ID and Password error";
         require_once('views/login/index.php');
