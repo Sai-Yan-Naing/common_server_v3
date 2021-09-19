@@ -4,3 +4,4 @@ vendor/*
 composer.lock
 views/test.php
 views/test2.php
+views/test3.php
