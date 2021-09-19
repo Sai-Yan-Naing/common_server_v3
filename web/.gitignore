@@ -3,3 +3,4 @@ web.config
 vendor/*
 composer.lock
 views/test.php
+views/test2.php
