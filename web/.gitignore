@@ -2,3 +2,4 @@ config/all.php
 web.config
 vendor/*
 composer.lock
+views/test.php
