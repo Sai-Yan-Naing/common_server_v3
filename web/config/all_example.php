@@ -17,7 +17,7 @@ define("MAIL_HOST", "smtp.googlemail.com");
 define("MAIL_USER", "capital.saiyannaing@gmail.com");
 define("MAIL_PASS", "saiyannaing123!");
 define("FROM", "capital.saiyannaing@gmail.com");
-define("FROMNAME", "SAI YAN NAING");
+define("FROM_NAME", "SAI YAN NAING");
 define("MAIL_PORT", 587);
 define("TO", "support@winserver.ne.jp");
 define("TONAME", "TESTER");
@@ -39,6 +39,3 @@ const SQLSERVER_2016_PASS = "welcome123";
 
 const SQLSERVER_2016_HOST_NAME = "mssql5.winserver.ne.jp";
 const SQLSERVER_2016_HOST_IP = "203.137.92.252";
-
-
-?>
