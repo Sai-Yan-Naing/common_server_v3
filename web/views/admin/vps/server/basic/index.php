@@ -5,8 +5,8 @@
             <main class="main-page">
                     <div class="container-fluid px-4">
                             <?php require_once('views/admin/vps/title.php') ?>
+                            <?php require_once('views/admin/vps/server/subtitle.php') ?>
                             <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                            <?php require_once("views/admin/vps/server/tab.php") ?>
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div id="page-body" class="tab-pane active pr-3 pl-3"><br>

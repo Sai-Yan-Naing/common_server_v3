@@ -70,7 +70,7 @@
                                                 </form>
                                             </td>
                                             <td class="col-sm-2">
-                                            <button class="btn btn-sm common_dialog <?= $domain['sitebinding']==0? "btn-outline-danger":"btn-outline-info"  ?>" gourl="/admin/multiple_domain?act=sitebinding&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog"><?= $domain['sitebinding']==0? "削除":"追加"  ?></button>
+                                            <button class="btn btn-sm common_dialog <?= $domain['sitebinding']==0? "btn-outline-info":"btn-outline-danger"  ?>" gourl="/admin/multiple_domain?act=sitebinding&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog"><?= $domain['sitebinding']==0? "追加":"削除"  ?></button>
                                             </td>
                                             <td class="col-sm-1">
                                             <?php if($domain['origin']!=1){?>

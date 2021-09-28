@@ -9,7 +9,7 @@ $TabArr = ['app_install','basic','app_setting','ssl','waf','directory','ip','mys
 // $ftpTabArr = [''];
 // $fileTabArr = [''];
 // $analysisTabArr = [''];
-$actArr = ['index','new','delete','edit','confirm','onoff','new_dir','delete_dir','confirm_dir','new_user','delete_user','edit_user','.user.ini','dotnet_version','php_version','web.config','usage','display'];
+$actArr = ['index','new','delete','edit','confirm','onoff','new_dir','delete_dir','confirm_dir','new_user','delete_user','edit_user','.user.ini','dotnet_version','php_version','web.config','usage','display','upload','new_file','zip','unzip','rename_dir','rename_file','delete_dir','delete_file'];
 if(isset($setting) && in_array($setting,$setArr)){
         if(isset($tab) && in_array($tab,$TabArr)){
             if(isset($act) && in_array($act,$actArr)){

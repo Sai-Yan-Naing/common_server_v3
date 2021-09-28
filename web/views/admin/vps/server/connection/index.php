@@ -5,12 +5,12 @@
             <main class="main-page">
                     <div class="container-fluid px-4">
                             <?php require_once('views/admin/vps/title.php') ?>
+                            <?php require_once('views/admin/vps/server/subtitle.php') ?>
                             <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                            <?php require_once("views/admin/vps/server/tab.php") ?>
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
-                                    <form action="/admin/vps/server/confirm?server=vps&setting=various&tab=connection&webid=<?=$webid?>" method="post">
+                                    <form action="/admin/vps/server?tab=connection&act=confirm&webid=<?=$webid?>" method="post">
                                         <div class="form-group row">
                                             <div class="col-sm-4">
                                                 <label for="" class="col-form-label">グローバルIPアドレス</label>

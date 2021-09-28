@@ -4,6 +4,15 @@
             <br><br>
             <span><?=$webip?></span>
         </a>
+        <a class="subtitle pt-4 pb-4">
+            <label class="switch text-white common_dialog text-left m-0" gourl="/admin/vps/various?setting=<?=$setting?>&tab=<?=$tab?>&act=onoff&webid=<?= $webid?>"  data-toggle="modal" data-target="#common_dialog">
+                <input type="checkbox" <?= $webactive!=0? "checked":""  ?>>
+                <span class="slider <?= $webactive!=0? "slideron":"slideroff"  ?>"></span>
+                <span class="handle <?= $webactive!=0? "handleon":"handleoff"  ?>"></span>
+                <span class="<?= $webactive!=0? "labelon":"labeloff"  ?>"><?= $webactive!=0? "起動":"停止"  ?></span>
+            </label><br><br>
+            <span class="text-dark ">Server Status </span>
+        </a>
         <a href="/admin/vps/various?setting=firewall&tab=firewall&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='firewall')?"active":"text-dark"?>">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='firewall')?"firewall1":"firewall"?>.png" alt="site.png">
             <br><br>

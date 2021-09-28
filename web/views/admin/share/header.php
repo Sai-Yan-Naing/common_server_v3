@@ -22,24 +22,26 @@
         <script type="text/javascript" src="<?= call_ass() ?>js/jquery.validate.min.js"></script>
         <script src="<?= call_ass() ?>js/scripts.js"></script>
         <script src="<?= call_ass() ?>js/common.js"></script>
+        <script src="<?= call_ass() ?>js/filemanager.js"></script>
         <script src="<?= call_ass() ?>js/common_validate.js"></script>
     </head>
     <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" style="height: 75px;">
-            <a class="navbar-brand ps-3" href="/admin/share/server?setting=site&tab=app_install&act=index&webid=<?=$webid?>"><h2><span style="font-size:2em;">W</span>inserver</h2></a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <nav class="sb-topnav navbar navbar-expand" style="height: 75px;">
+            <!-- <a class="navbar-brand ps-3" href="/admin/share/server?setting=site&tab=app_install&act=index&webid=<?=$webid?>"><h2><span style="font-size:2em;">W</span>inserver</h2></a> -->
+            <div class="navbar-brand ps-3"></div>
+            <button class="btn btn-sm order-1 order-lg-0 me-4 me-lg-0 btn-outline-info" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             
-            <h5 class="text-center font-weight-bold ms-auto text-white">Winserver Share Control Panel</h5>
+            <!-- <h5 class="text-center font-weight-bold ms-auto text-white">Winserver Share Control Panel</h5> -->
             <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0 me-lg-4">
                 <li class="nav-item dropdown">
                     <form action="<?= call_ass() ?>logout" method="post" >
                         <input type="hidden" name="user" value="admin">
-                        <button id="logout" type="submit" class="nav-link text-center text-white logout"  role="button" aria-expanded="false"><i class="fas fa-sign-out-alt"></i><br>ログアウト</button>
+                        <button id="logout" type="submit" class="nav-link text-center text-dark logout font-weight-border"  role="button" aria-expanded="false" style="font-size: 20px;"><i class="fas fa-sign-out-alt"></i><br>ログアウト</button>
 					</form>
                 </li>
             </ul>
         </nav>
-
+        <h3 class="text-center" style="top:30px; position:relative;">Winserver Share Control Panel</h3>
         <?php 
         function call_ass()
         {

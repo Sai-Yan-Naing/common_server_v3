@@ -130,7 +130,7 @@ function allValidate() {
                 $(element).attr("id") +
                 '-error" class="error">' +
                 $(element).val() +
-                " is not available</label>"
+                " を取得することができません。別の名前を指定してください。</label>"
             );
             result = false;
           } else {
@@ -139,7 +139,7 @@ function allValidate() {
                 $(element).attr("id") +
                 '-error" class="text-success">' +
                 $(element).val() +
-                " is available</label>"
+                " を取得することができます。</label>"
             );
             result = true;
           }
@@ -591,7 +591,7 @@ function allValidate() {
           maxlength: "8～70文字、半角英数字記号",
         },
         "permission[]": {
-          required: "Please check permission",
+          required: "いずれかの権限を選択してください。",
         },
       },
       submitHandler: function (form) {

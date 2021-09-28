@@ -15,7 +15,7 @@ $error_page = json_decode($weberrorpages);
     <input type="hidden" name="action" value="onoff">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
     <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-    Are you sure to <?= $error_page->$act_id->stopped==1?  "起動":"停止"  ?>?
+    Are you sure to <?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?>?
       
   </form>
 </div>

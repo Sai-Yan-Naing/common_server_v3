@@ -43,7 +43,7 @@ $error_pages = json_decode($weberrorpages);
                                                                         <input type="checkbox" <?= $ep->stopped==1? "checked":""  ?>>
                                                                         <span class="slider <?= $ep->stopped==1? "slideron":"slideroff"  ?>"></span>
                                                                         <span class="handle <?= $ep->stopped==1? "handleon":"handleoff"  ?>"></span>
-                                                                        <span class="<?= $ep->stopped==1? "labelon":"labeloff"  ?>"><?= $ep->stopped==1? "起動":"起動中"  ?></span>
+                                                                        <span class="<?= $ep->stopped==1? "labelon":"labeloff"  ?>"><?= $ep->stopped==1? "ON":"OFF"  ?></span>
                                                                     </label>
                                                                 </form>
                                                             </div>

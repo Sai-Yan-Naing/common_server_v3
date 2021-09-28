@@ -7,7 +7,7 @@
 						<?php require_once('views/admin/vps/title.php') ?>
                             <div class="shadow-lg p-3 mb-5 bg-white rounded">
                             	<h3>お問合せ</h3>
-								<form action="/admin/contact_us/confirm" class="mt-3" id="contactus_form" method="post">
+								<form action="/admin/vps/contactus?act=confirm&webid=<?=$webid?>" class="mt-3" id="contactus_form" method="post">
 									<div class="d-flex">
 										<div style="width: 45%;">
 											<label class="font-weight-bold" for="name">名前 :</label>
@@ -25,7 +25,7 @@
 							      			<textarea id="message" class="form-control mb-3" name="message" rows="6" placeholder="内容を入力してください"></textarea>
 											  <div class="d-flex">
 												  <div></div>
-											  		<button type="button" class="btn btn-outline-info ml-auto col-sm-5">送信</>
+											  		<button type="submit" class="btn btn-outline-info ml-auto col-sm-5">送信</>
 											  </div>
 										</div>
 									</div>

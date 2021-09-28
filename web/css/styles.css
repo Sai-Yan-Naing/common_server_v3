@@ -11373,14 +11373,14 @@ body {
   z-index: 1038;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav {
-  padding-top: 56px;
+  /* padding-top: 56px; */
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
   overflow-y: auto;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
   padding-left: 225px;
-  top: 56px;
+  /* top: 56px; */
 }
 
 #layoutError {
@@ -11435,7 +11435,8 @@ body {
   flex-wrap: nowrap;
 }
 .sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-heading {
-  padding: 1.75rem 1rem 0.75rem;
+  /* padding: 1.75rem 1rem 0.75rem; */
+  padding: 0.75rem 1rem 0.75rem;
   font-size: 0.55rem;
   font-weight: bold;
   text-transform: uppercase;

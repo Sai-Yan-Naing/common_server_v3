@@ -124,6 +124,121 @@ class Common{
 			return false;
 		}
 
+		function addMsUserAndDB($version, $db, $db_user, $db_pass){
+			$version="2016";
+			$dsn = constant("SQLSERVER_" . $version . "_DSN");
+			$user = constant("SQLSERVER_" . $version . "_USER");
+			$pass = constant("SQLSERVER_" . $version . "_PASS");
+		// die('no ok');
+			try {
+				
+				$pdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
+				$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+	
+				$db = trim($pdo->quote($db), "'\"");
+	
+				# データベースを作成
+				$stmt = $pdo->prepare("CREATE DATABASE [$db];");
+				$result = $stmt->execute();
+				$stmt->closeCursor();
+				if (!$result) { return false; }
+				
+				# データベースのファイルサイズを10GBに設定
+				$stmt = $pdo->prepare("ALTER DATABASE [$db] MODIFY FILE ( NAME = N'$db', MAXSIZE = 10485760KB , FILEGROWTH = 1024KB );");
+				$result = $stmt->execute();
+				// $error_message = $stmt->errorInfo()[2];
+				$stmt->closeCursor();
+				if (!$result) {
+					# トランザクションでロールバックできないため削除
+					$stmt = $pdo->prepare("DROP DATABASE [$db];");
+					$stmt->execute();
+					return false;
+				}
+				
+				# ユーザを作成
+				$stmt = $pdo->prepare("CREATE LOGIN [$db_user] WITH PASSWORD=N'$db_pass', DEFAULT_DATABASE=[$db], CHECK_POLICY=ON, CHECK_EXPIRATION=OFF; DENY VIEW ANY DATABASE TO [$db_user]");
+				$result = $stmt->execute();
+				// $error_message = $stmt->errorInfo()[2];
+				$stmt->closeCursor();
+				if (!$result) {
+					# トランザクションでロールバックできないため削除
+					$stmt = $pdo->prepare("DROP DATABASE [$db];");
+					$stmt->execute();
+					return false;
+				}
+				
+				# データベースの所有者を設定
+				$stmt = $pdo->prepare("ALTER AUTHORIZATION ON DATABASE::[$db] TO [$db_user];");
+				$result = $stmt->execute();
+				// $error_message = $stmt->errorInfo()[2];
+				$stmt->closeCursor();
+				if (!$result) {
+					# トランザクションでロールバックできないため削除
+					$stmt = $pdo->prepare("DROP DATABASE [$db];");
+					$stmt->execute();
+					$stmt = $pdo->prepare("DROP LOGIN [$db_user];");
+					$stmt->execute();
+					return false;
+				}
+			} catch (PDOException $e) {
+				$error_message = $e->getMessage();
+				die("test");
+				// require("views/allerror.php");
+				if (!is_null($stmt)) { $stmt->closeCursor(); }
+				$pdo = NULL;
+				return false;
+			}
+			$pdo = NULL;
+			return true;
+		}
+		function changeMssqlPassword($dbuser,$dbpass){
+			$pdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
+			$stmt = $pdo->prepare("ALTER LOGIN $dbuser WITH PASSWORD = '$dbpass';");
+			if(!$stmt->execute())
+			return false;
+			
+
+			try {
+			  $conn = new PDO(DSN, ROOT, ROOT_PASS);
+				  // set the PDO error mode to exception
+				  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+				  $sql = "UPDATE db_account_for_mssql SET db_pass='$dbpass' WHERE db_user='$dbuser'";
+
+				  // Prepare statement
+				  $stmt = $conn->prepare($sql);
+
+				  // execute the query
+				  if(!$stmt->execute())
+				  {
+				  	return false;
+				  }
+				} catch(PDOException $e) {
+					$conn = null;
+				  echo $sql . "<br>" . $e->getMessage();
+				  return false;
+				}
+
+				$conn = null;
+			return true;
+	}
+	function deleteMssqlDB($dbid,$dbuser,$db){
+		// return $dbid.$dbuser.$db;
+			// $dsn2 = 'mysql:host=localhost:3307';
+			$mspdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			$stmt1 = $mspdo->prepare("DROP DATABASE $db");
+			if(!$stmt1->execute()) return false;
+			
+			$stmt = $mspdo->prepare("DROP LOGIN $dbuser");
+			if(!$stmt->execute()) return false;
+			
+			$dstmt = $pdo_account->prepare("DELETE FROM `db_account_for_mssql` WHERE id = ?");
+			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+			if(!$dstmt->execute(array($dbid))) return false;
+			return true;
+	}
+
 		function addMariaUserAndDB($db, $db_user, $db_pass){
 			try {
 				// $dsn2 = 'mysql:host=localhost:3307';

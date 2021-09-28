@@ -56,10 +56,11 @@ function domainChecker($domain, $this) {
     },
     success: function (data) {
       $("#" + $this.attr("id") + "_result").remove();
-      $result = $domain + " is avaliable";
+      $result = $domain + " を取得することができます。";
       $class = "text-success";
       if (data.status) {
-        $result = $domain + " is not avaliable";
+        $result =
+          $domain + " を取得することができません。別の名前を指定してください。";
         $class = "text-danger";
       }
       $this.after(

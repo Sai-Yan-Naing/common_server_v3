@@ -46,7 +46,7 @@
                                                         <input type="hidden" name="action" value="onoff">
                                                         <input type="hidden" name="confirm" value="post">
                                                         <input type="hidden" name="act_id" value="<?= $vps['id'] ?>">
-                                                        <label class="switch text-white">
+                                                        <label class="switch text-white common_dialog" gourl="/admin/vps?act=onoff&act_id=<?= $vps[id]?>"  data-toggle="modal" data-target="#common_dialog">
                                                             <input type="checkbox" <?= $vps['active']!=0? "checked":""  ?>>
                                                             <span class="slider <?= $vps['active']!=0? "slideron":"slideroff"  ?>"></span>
                                                             <span class="handle <?= $vps['active']!=0? "handleon":"handleoff"  ?>"></span>
@@ -55,7 +55,7 @@
                                                     </form>
                                             </td>
                                             <td class="col-sm-2">
-                                                <button type="button" class="btn btn-outline-danger btn-sm common_dialog"  data-toggle="modal" data-target="#common_modal" gourl="/admin/vps-delete?act=delete&act_id=<?=$vps[id]?>&vm_name=<?=$vps['instance']?>">削除</button>
+                                                <button type="button" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/vps?act=delete&act_id=<?= $vps[id]?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
                                             </td>
                                             </tr>
                                         <?php
