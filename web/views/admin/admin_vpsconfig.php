@@ -25,4 +25,7 @@ $webpass = $web_acc['password'];
 $webactive = $web_acc['active'];
 $webrdp = $web_acc['rdp'];
 $webhttp_rdp = $web_acc['http_rdp'];
+$web_memory = $web_acc['memory'];
+$web_storage  = $web_acc['storage'];
+$web_cpu = $web_acc["cpu"];
 ?>

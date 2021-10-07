@@ -10,7 +10,7 @@
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
-                                        <form action="" method="post">
+                                        <form action="/admin/vps/server?tab=basic&act=confirm&webid=<?=$webid?>" method="post">
                                             <div class="form-group row">
                                                 <label for="" class="col-sm-3 col-form-label">OS</label>
                                                 <div class="col-sm-8">
@@ -26,20 +26,26 @@
                                             <div class="form-group row">
                                                 <label for="" class="col-sm-3 col-form-label">メモリ</label>
                                                 <div class="col-sm-8">
-                                                    <span>GB</span>
+                                                    <span><input type="text" name="memory" value="<?=$web_memory?>"> GB</span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="" class="col-sm-3 col-form-label">ストレージ</label>
                                                 <div class="col-sm-8">
-                                                    <span>GB</span>
+                                                    <span><input type="text" name="storage" value="<?=$web_storage?>"> GB</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="" class="col-sm-3 col-form-label"> cpu</label>
+                                                <div class="col-sm-8">
+                                                    <span><input type="text" name="cpu" value="<?=$web_cpu?>"> プラン</span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-3"></div>
                                                 <div class="col-sm-5">
-                                                    <a href="" class="btn btn-outline-info btn-sm">プラン変更依頼</a>
-                                                    <a href="" class="btn btn-outline-info btn-sm">OS初期化</a>
+                                                    <button type="submit" name="request" class="btn btn-outline-info btn-sm">プラン変更依頼</button>
+                                                    <button type="submit" name="osreinstall" class="btn btn-outline-info btn-sm">OS初期化</button>
                                                 </div>
                                                 <div class="col-sm-4"></div>
                                             </div>

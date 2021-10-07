@@ -35,14 +35,14 @@ $getAllRow=$commons->getAllRow($query);
                                         </div>                          
                                     </div>
                                 </div>
-                                <form action="/admin/vps/easy_install/confirm?server=vps&setting=various&tab=easy_install&action=new&webid=<?=$webid?>" id="sql_2016" method="post">
-                                    <input type="hidden" value="2016">
+                                <form action="/admin/vps/various?setting=easy_install&tab=easy_install&act=confirm&webid=<?=$webid?>" id="sql_2016" method="post">
+                                    <input type="hidden" name="sqlv" value="2016">
                                 </form>
-                                <form action="/admin/vps/easy_install/confirm?server=vps&setting=various&tab=easy_install&action=new&webid=<?=$webid?>" id="sql_2017" method="post">
-                                    <input type="hidden" value="2017">
+                                <form action="/admin/vps/various?setting=easy_install&tab=easy_install&act=confirm&webid=<?=$webid?>" id="sql_2017" method="post">
+                                    <input type="hidden" name="sqlv" value="2017">
                                 </form>
-                                <form action="/admin/vps/easy_install/confirm?server=vps&setting=various&tab=easy_install&action=new&webid=<?=$webid?>" id="sql_2019" method="post">
-                                    <input type="hidden" value="2019">
+                                <form action="/admin/vps/various?setting=easy_install&tab=easy_install&act=confirm&webid=<?=$webid?>" id="sql_2019" method="post">
+                                    <input type="hidden" name="sqlv" value="2019">
                                 </form>
                                 <!-- end content -->
                             </div>

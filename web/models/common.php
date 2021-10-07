@@ -175,47 +175,6 @@ class Common{
 		return false;
 	}
 
-	function addMariaUserAndDB($db, $db_user, $db_pass)
-	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
-
-		try
-		{
-			// $dsn2 = 'mysql:host=localhost:3307';
-			$pdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
-			$db = trim($pdo->quote($db), "'\"");
-			$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
-			if ( ! $stmt->execute())
-			{
-				return false;
-			}
-
-			$stmt = $pdo->prepare('CREATE USER :db_user@'%' IDENTIFIED BY :db_pass;');
-			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
-			$stmt->bindParam(':db_pass', $db_pass, PDO::PARAM_STR);
-			if ( ! $stmt->execute())
-			{
-				$stmt = $pdo->prepare("DROP DATABASE `$db`;");
-				$stmt->execute();
-				return false;
-			}
-
-			$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
-			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
-			if ( ! $stmt->execute())
-			{
-				return false;
-			}
-		}
-		catch (PDOException $e)
-		{
-			$pdo_account = NULL;
-			return false;
-		}
-
 		function addMsUserAndDB($version, $db, $db_user, $db_pass){
 			$version="2016";
 			$dsn = constant("SQLSERVER_" . $version . "_DSN");
@@ -331,7 +290,7 @@ class Common{
 			return true;
 	}
 
-		function addMariaUserAndDB($db, $db_user, $db_pass){
+	function addMariaUserAndDB($db, $db_user, $db_pass){
 			try {
 				// $dsn2 = 'mysql:host=localhost:3307';
 				$pdo = new PDO(MADSN, MAROOT, MAROOT_PASS);

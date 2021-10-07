@@ -45,5 +45,6 @@ switch ($request['path']) {
 	case '/validate' : include 'views/validate.php'; break;
 	case '/change/app_version' : include 'views/app_version.php'; break;
 	case '/domainChecker' : include 'views/domain_checker.php'; break;
+
 	default: http_response_code(404); include'views/404.php'; break;
 }

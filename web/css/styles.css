@@ -6537,6 +6537,7 @@ textarea.form-control-lg {
   right: 0;
   left: 0;
   z-index: 1030;
+  background-color: #fff;
 }
 
 .fixed-bottom {
@@ -11380,7 +11381,7 @@ body {
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
   padding-left: 225px;
-  /* top: 56px; */
+  top: 56px;
 }
 
 #layoutError {
