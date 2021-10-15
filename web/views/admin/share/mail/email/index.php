@@ -1,7 +1,7 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
- $query = "SELECT * FROM add_email WHERE domain='$webdomain'";
- $getAllRow=$commons->getAllRow($query);
+ $query = "SELECT * FROM add_email WHERE domain=?";
+ $getAllRow=$commons->getAllRow($query,[$webdomain]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
@@ -29,19 +29,17 @@
                                                     <th class="font-weight-bold border-dark">Action</th>
                                                 </tr>
                                                 <?php 
-                                                    foreach ($getAllRow as $key => $mail) {
+                                                    foreach ($getAllRow as $key => $mail): 
                                                 ?>
                                                 <tr>
-                                                    <td class="border-dark"><?= $mail['email'];?>@<?= $webdomain ?></td>
+                                                    <td class="border-dark"><?= htmlspecialchars($mail['email'], ENT_QUOTES);?>@<?= htmlspecialchars($webdomain, ENT_QUOTES) ?></td>
                                                     <td class="border-dark"><?= $mail['password'] ?></td>
                                                     <td class="border-dark">
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/mail?setting=email&tab=tab&act=edit&act_id=<?= $mail['id'] ?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/mail?setting=email&tab=tab&act=delete&act_id=<?= $mail['id'] ?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
                                                 </tr>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach; ?>
                                         </table>
                                     </div>
                                 </div>

@@ -8,6 +8,5 @@ require_once('views/admin/admin_validate.php');
 $webadminID = $_COOKIE['admin'];
 $commons = new Common;
 $webmailer = new Mailer;
-$admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id='$webadminID'");
+$admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=?",[$webadminID]);
 $webadminID = $admin_acc['user_id'];
-?>

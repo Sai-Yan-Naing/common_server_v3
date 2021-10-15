@@ -1,9 +1,9 @@
 <?php
 require_once("views/share_config.php");
 $temp = json_decode($weberrorpages,true);
-if(isset($_POST['action']))
+if ( isset($_POST['action']))
 {
-	if($_POST['action']=="new")
+	if ( $_POST['action'] === "new")
 	{
 		// die('hello');
 		$status = 1;
@@ -13,7 +13,8 @@ if(isset($_POST['action']))
 		$url_spec= $_POST['url_spec'];
         $temp['ID-'.$status_code] = ["url"=>$url_spec,"stopped"=>$status,"statuscode"=>$status_code];
 		echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
-	}else if($_POST['action']=="edit"){
+	} elseif ( $_POST['action'] === "edit")
+	{
 		$action= $_POST['action'];
 		$status_code= $_POST['status_code'];
 		$url_spec= $_POST['url_spec'];
@@ -30,7 +31,7 @@ if(isset($_POST['action']))
 	}else{
 		$action= $_POST['action'];
 		$act_id= $_POST['act_id'];
-        $status = $temp[$act_id]['stopped']==0? 1 : 0;
+        $status = $temp[$act_id]['stopped'] === 0? 1 : 0;
         $temp[$act_id]['url']=$temp[$act_id]['url'];
         $temp[$act_id]['stopped']=$status;
 
@@ -46,8 +47,8 @@ if(isset($_POST['action']))
 
     // print_r($result);
     // die();
-    $query_dir = "UPDATE web_account SET error_pages='$result' WHERE id='$webid'";
-    if(!$commons->doThis($query_dir))
+    $query_dir = "UPDATE web_account SET error_pages=? WHERE id=?";
+    if ( !$commons->doThis($query_dir,[$result,$webid]))
     {
         $_SESSION['error'] = true;
         $_SESSION['message'] = 'Cannot Update Error page';

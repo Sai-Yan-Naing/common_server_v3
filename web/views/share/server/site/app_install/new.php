@@ -6,7 +6,7 @@
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-    <form action="/share/server?setting=site&tab=app_install&act=confirm" method="post" id="app_install_form" />
+    <form action="/share/server?setting=site&tab=app_install&act=confirm" method="post" id="app_install_form">
         <div class="row">
             <label for="application" class="col-sm-3 col-form-label">アプリケーション</label>
             <div class="col-sm-8">
@@ -32,7 +32,7 @@
             <label for="version" class="col-sm-3 col-form-label">バージョン</label>
             <div class="col-sm-8" id="version">
                 <?php
-                foreach ($values=app_version("WORDPRESS") as $key => $value) {
+                foreach ($values=app_version("WORDPRESS") as $key => $value) :
                 ?>
                     <div class="form-check-inline">
                         <label class="form-check-label">
@@ -40,7 +40,7 @@
                         </label>
                     </div>
                 <?php
-                }
+                endforeach;
                 ?>
             </div>
         </div>

@@ -1,8 +1,9 @@
 <?php 
     $main=$_GET['main'];
-    if($main=='vps'){
+    if ( $main=='vps' )
+    {
         require_once('views/admin/vps.php');
-    }else{
+    }else
+    {
         require_once("views/admin/share.php");
     }
-?>

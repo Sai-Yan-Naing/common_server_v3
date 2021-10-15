@@ -12,13 +12,13 @@ $getRow = $commons->getRow($query);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/multiple_domain?act=confirm" method="post" id="onoff">
+  <form action="/admin/multiple_domain?act=confirm" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="onoff">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="stopped" value="<?= $getRow['stopped'] ?>">
     <input type="hidden" name="sitename" value="<?= $getRow['user'] ?>">
     <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-    <?= $getRow['stopped']==1? "起動" : "停止"  ?>しますか？
+    <?= $getRow['stopped']===1? "起動" : "停止"  ?>しますか？
       
   </form>
 </div>

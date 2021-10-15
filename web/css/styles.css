@@ -11701,3 +11701,16 @@ color: white;
   background-color: transparent;
   border: none;
 }
+
+.page-loading{
+  display: block;
+  /* z-index: 1070 !important; */
+  background-color: transparent !important;
+  border: none !important;
+}
+#page-loading{
+  z-index: 1070 !important;
+}
+.load-body{
+  z-index: 1065 !important;
+}

@@ -37,7 +37,7 @@
 						<div id="wd-ssd"> WD SSD </div>
 						<div id="wd-hdd"> WD HDD </div>
 					</div>
-					<div class="back-button"><a href="/admin"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
+					<div class="back-button"><a href="/admin" onclick="loading()"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
 				</div>
 			</div>
 		</main>

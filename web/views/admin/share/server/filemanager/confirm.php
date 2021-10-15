@@ -1,36 +1,43 @@
 <?php 
 
 require_once('views/admin/admin_shareconfig.php');
-$user = $weborigin==1?$webrootuser:$webrootuser."/".$webuser;
+$user = $weborigin===1?$webrootuser:$webrootuser."/".$webuser;
 $dir = ROOT_PATH.$user."/";
-if(isset($_POST['foldername'])){
+if (isset($_POST['foldername']))
+{
     $foldername = $_POST['foldername'];
     echo filepath($dir,$foldername,$webid);
     die;
-}else if(isset($_POST['action']) and $_POST['action']=='rename'){
+} elseif (isset($_POST['action']) and $_POST['action']==='rename')
+{
     // die('rename');
-    if($_POST['common_path']==null || $_POST['common_path']==''){
+    if ($_POST['common_path']===null || $_POST['common_path']==='')
+	{
 		$_dir=$dir;
-	}else{
+	} else
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}
     rename($_dir.$_POST['old'],$_dir.$_POST['rename']);
 	echo filepath($dir,$_POST['common_path'],$webid);
 	die();
-}else if($_POST['action'] =='delete_file')
+} elseif ($_POST['action'] ==='delete_file')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ($_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
-	}else{
+	}else
+	{
 		$_dir=$dir;
 	}
     // echo $_dir.$_POST['delete_file'];
 	unlink($_dir.$_POST['delete_file']);
 	filepath($dir,$_POST['common_path'],$webid);
     die;
-}else if($_POST['action'] =='delete_dir')
+}elseif ($_POST['action'] ==='delete_dir')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ( $_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}else{
 		$_dir=$dir;
@@ -38,9 +45,10 @@ if(isset($_POST['foldername'])){
 	delete_directory($_dir.$_POST['delete_dir']);;
 	filepath($dir,$_POST['common_path'],$webid);
     die;
-}else if($_POST['action'] =='new_dir')
+} elseif ( $_POST['action'] ==='new_dir')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ( $_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}else{
 		$_dir=$dir;
@@ -48,9 +56,10 @@ if(isset($_POST['foldername'])){
 	mkdir($_dir.$_POST['new_dir']);
 	filepath($dir,$_POST['common_path'],$webid);
     die;
-}else if($_POST['action'] =='new_file')
+} elseif ( $_POST['action'] ==='new_file')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ( $_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}else{
 		$_dir=$dir;
@@ -58,9 +67,10 @@ if(isset($_POST['foldername'])){
 	createFile($_dir.$_POST['new_file']);
 	filepath($dir,$_POST['common_path'],$webid);
     die;
-}else if($_POST['action'] =='upload')
+} elseif ( $_POST['action'] ==='upload')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ( $_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}else{
 		$_dir=$dir;
@@ -68,9 +78,10 @@ if(isset($_POST['foldername'])){
 	uploadFile($_dir,$_FILES['upload']);
 	filepath($dir,$_POST['common_path'],$webid);
     die;
-}else if($_POST['action'] =='zip')
+} elseif ( $_POST['action'] ==='zip')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ( $_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}else{
 		$_dir=$dir;
@@ -80,9 +91,10 @@ if(isset($_POST['foldername'])){
 	compressed($_dir,$_POST['zip'],$_POST['zip']);
 	filepath($dir,$_POST['common_path'],$webid);
     die;
-}else if($_POST['action'] =='unzip')
+} elseif ( $_POST['action'] ==='unzip')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ( $_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}else{
 		$_dir=$dir;
@@ -92,9 +104,10 @@ if(isset($_POST['foldername'])){
 	uncompressed($_dir.$_POST['zip'],$_dir);
 	filepath($dir,$_POST['common_path'],$webid);
     die;
-}else if(isset($_GET['download']))
+} elseif ( isset($_GET['download']))
 {
-	if($_GET['common_path']!=null and $_GET['common_path']!=''){
+	if ( $_GET['common_path']!==null and $_GET['common_path']!=='')
+	{
 		$_dir=$dir.$_GET['common_path'].'/';
 	}else{
 		$_dir=$dir;
@@ -103,18 +116,21 @@ if(isset($_POST['foldername'])){
     // die;
 	download($_dir.$_GET['download'],$_GET['download']);
 	// header("Location: filemanager.php");
-}else if(isset($_POST['file_name']) and $_POST['action']=='open_file')
+} elseif ( isset($_POST['file_name']) and $_POST['action']==='open_file')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ( $_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
-	}else{
+	} else
+	{
 		$_dir=$dir;
 	}
 	open_file($_dir,$_POST['file_name'],$webid);
 	die();
-}else if(isset($_POST['text_editor_open']) and $_POST['action']=='save_file' )
+} elseif ( isset($_POST['text_editor_open']) and $_POST['action']==='save_file' )
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
+	if ( $_POST['common_path']!==null and $_POST['common_path']!=='')
+	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}else{
 		$_dir=$dir;
@@ -145,8 +161,8 @@ class FlxZipArchive extends ZipArchive
     $dir = opendir ($location);
     while ($file = readdir($dir))
     {
-        if ($file == '.' || $file == '..') continue;
-        $do = (filetype( $location . $file) == 'dir') ? 'addDir' : 'addFile';
+        if ($file === '.' || $file === '..') continue;
+        $do = (filetype( $location . $file) === 'dir') ? 'addDir' : 'addFile';
         $this->$do($location . $file, $name . $file);
     }
  } 
@@ -213,7 +229,7 @@ function compressed($dir,$origin,$name)
 {
 	$the_folder = $dir;
 	// $zip_file_name = $pathdir.$name.".zip";
-	if(is_file($dir.$origin))
+	if ( is_file($dir.$origin))
 	{
 		zipFile($dir,$origin,$name);
 	}else
@@ -222,7 +238,7 @@ function compressed($dir,$origin,$name)
 		$zip_file_name = $dir.$name.'.zip';
 		$za = new FlxZipArchive;
 		$res = $za->open($zip_file_name, ZipArchive::CREATE);
-		if($res === TRUE) 
+		if ( $res === TRUE) 
 		{
 		    $za->addDir($the_folder, basename($the_folder));
 		    $za->close();
@@ -260,7 +276,7 @@ function uncompressed($from, $to)
 
 function filepath($dir,$foldername,$webid)
 {
-		if($foldername=="" || $foldername==null)
+		if ( $foldername==="" || $foldername===null)
 		{
 			$dir    = $dir.$foldername;
 		}else{
@@ -274,9 +290,12 @@ function filepath($dir,$foldername,$webid)
         $directories = array();
         $files_list  = array();
         $files = scandir($dir);
-        foreach($files as $file){
-           if(($file != '.') && ($file != '..')){
-              if(is_dir($dir.'/'.$file)){
+        foreach($files as $file)
+		{
+           if ( ($file !== '.') && ($file !== '..'))
+		   {
+              if ( is_dir($dir.'/'.$file))
+			  {
                  $directories[]  = $file;
               }else{
                  $files_list[]    = $file;
@@ -287,7 +306,8 @@ function filepath($dir,$foldername,$webid)
             ?>
     
     <tr>
-                                                <td class="folder_click" foldername="<?php if($foldername!=null){ echo $foldername.'/'.$value;}else{echo $value;} ?>" style="cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">
+                                                <td class="folder_click" foldername="<?php if ( $foldername!==null)
+												{ echo $foldername.'/'.$value;}else{echo $value;} ?>" style="cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">
                                                     <i class="far fa-folder  nav-tab-icon"></i> 
                                                     <span><?= $value ?></span>
                                                 </td>
@@ -312,7 +332,7 @@ function filepath($dir,$foldername,$webid)
                                             }
                                             $ext = array('html','css','php','js', 'txt' , 'config' , 'sql', 'ini');
                 
-                                            $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+                                            $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443) ? "https://" : "http://";
                                             
                                             $url = $protocol . $_SERVER['HTTP_HOST'];
                                             foreach ($files_list as $key => $value) {
@@ -320,7 +340,8 @@ function filepath($dir,$foldername,$webid)
                                                 ?>
                                                 <tr>
                                                 
-                                                <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext)){ echo 'data-target="#common_dialog"'; } ?> file_name="<?= $value ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"><div><i class="far fa-file nav-tab-icon"></i><span class="ml-1"><?= $value ?></span></div></td>
+                                                <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext))
+												{ echo 'data-target="#common_dialog"'; } ?> file_name="<?= $value ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"><div><i class="far fa-file nav-tab-icon"></i><span class="ml-1"><?= $value ?></span></div></td>
                                                 
                                                 <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
                                                 <td><?= filetype($dir.'/'.$value)?></td>
@@ -336,7 +357,7 @@ function filepath($dir,$foldername,$webid)
                                                         圧縮
                                                         </button>
                                                         <?php 
-                                                        if(getFileExt($dir.'/'.$value)=="zip")
+                                                        if ( getFileExt($dir.'/'.$value)==="zip")
                                                         {?>
                                                             <button class="btn text-dark common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=unzip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
                                                             解凍

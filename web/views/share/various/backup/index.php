@@ -43,7 +43,7 @@ $get_backup = $backup->checkScheduler($webdomain);
                                     <div id="changeBackup">
                                     <?php
                                         $file = showFolder($dirname);
-                                        if($file){
+                                        if($file):
                                     ?>
                                         <table class="table mt-3 table-bordered">
                                             <tr>
@@ -60,9 +60,7 @@ $get_backup = $backup->checkScheduler($webdomain);
                                                 </td>
                                             </tr>
                                         </table>
-                                    <?php 
-                                        } 
-                                    ?>
+                                    <?php endif; ?>
                                     </div>
                                 </div>
                                 <!-- end content -->

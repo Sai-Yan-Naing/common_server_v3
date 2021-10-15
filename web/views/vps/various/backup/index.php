@@ -50,7 +50,7 @@ $getAllRow=$commons->getAllRow($query);
                                                 <?php 
                                                     $getAllRow=$commons->getAllRow("SELECT * FROM vps_backup WHERE ip='$webip'");
                                                     $dirname = "G:/vps_backup/$vps_backup[name]";
-                                                    foreach ($getAllRow as $key => $vps_backup) {
+                                                    foreach ($getAllRow as $key => $vps_backup) :
                                                 ?>
                                             <tr>
                                                 <td class="border-dark"><?= $vps_backup['name'] ?></td>
@@ -60,7 +60,7 @@ $getAllRow=$commons->getAllRow($query);
                                                     <button  data-toggle="modal" data-target="#common_modal" class="btn btn-danger btn-sm common_dialog"  gourl="/vps/backup/delete?server=vps&setting=various&tab=backup&act=delete&act_id=<?=$vps_backup[id]?>"><i class="fas fa-trash text-white"></i></button>
                                                 </td>
                                             </tr>
-                                            <?php } ?>
+                                            <?php endforeach; ?>
                                         </table>
                                     </div>
                                         <div class="mb-3">
@@ -77,4 +77,6 @@ $getAllRow=$commons->getAllRow($query);
                 </main>
             </div>
         </div> 
- <?php require_once("views/vps/footer.php"); ?>
+ <?php
+ require_once("views/vps/footer.php");
+ 

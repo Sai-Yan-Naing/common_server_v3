@@ -9,7 +9,7 @@ require_once('mails/mail.php');
 require_once('views/admin/admin_sharevalidate.php');
 $webmailer = new Mailer;
 $commons = new Common;
-$web_acc = $commons->getRow("SELECT * FROM web_account WHERE id='$_GET[webid]' AND customer_id='D000123'");
+$web_acc = $commons->getRow("SELECT * FROM web_account WHERE id=? AND customer_id=?",[$_GET['webid'],$_COOKIE['admin']]);
 $webid = $web_acc['id'];
 $webadminID = $web_acc['customer_id'];
 $webuser = $web_acc['user'];
@@ -24,7 +24,7 @@ $webappversion = $web_acc['app_version'];
 $webblacklist = $web_acc['blacklist'];
 $weborigin = $web_acc['origin'];
 // for root site
-$webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =1 AND customer_id='D000123'");
+$webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$_COOKIE['admin']]);
 $webrootid = $webroot_acc['id'];
 $webadminID = $web_acc['customer_id'];
 $webrootuser = $webroot_acc['user'];
@@ -39,5 +39,3 @@ $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
 
 $setting = $_GET['setting'];
-
-?>

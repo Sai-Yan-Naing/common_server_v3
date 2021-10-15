@@ -6,7 +6,7 @@
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-	<form action="/admin/vps/various?setting=backup&tab=backup&act=confirm&webid=<?=$webid?>" method = "post" id="autobackup">
+	<form action="/admin/vps/various?setting=backup&tab=backup&act=confirm&webid=<?=$webid?>" method = "post" id="autobackup" onsubmit="loading()">
         <input type="hidden" name="action" value="backup">
         Are you sure to backup server <b style="color: green"><?=$webip?> </b> ?
     </form>

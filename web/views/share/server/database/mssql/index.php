@@ -1,7 +1,7 @@
 <?php require_once('views/share/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_account_for_mssql where domain = '$webdomain'";
-$getAllRow = $commons->getAllRow($query);
+$query = "SELECT * FROM db_account_for_mssql where domain = ?";
+$getAllRow = $commons->getAllRow($query,[$webdomain]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/share/sidebar.php');?>
@@ -20,7 +20,7 @@ $getAllRow = $commons->getAllRow($query);
                                                 <span>データベース</span>
                                             </div>
                                             <div class="col-sm-9">
-                                                <button class="btn btn-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_modal" gourl="/share/servers/security/directory?act=new"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
+                                            <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">
@@ -32,21 +32,19 @@ $getAllRow = $commons->getAllRow($query);
                                                     <th class="font-weight-bold border-dark">接続先情報</th>
                                                 </tr>
                                                 <?php 
-                                                    foreach($getAllRow as $db) {
+                                                    foreach($getAllRow as $db) :
                                                 ?>
                                                 <tr>
                                                     <td class="border-dark"><?php echo $db['db_name']; ?></td>
                                                     <td class="border-dark"><?php echo $db['db_user']; ?></td>
                                                     <td class="border-dark"><?php echo $db['db_pass']; ?></td>
                                                     <td class="border-dark">
-                                                        <a href="javascript:;" data-toggle="modal" data-target="#common_modal" class="btn btn-outline-info btn-sm common_dialog"  gourl="/share/servers/database?webid=<?=$webid;?>&act=edit&db=mysql&act_id=<?=$db['id']?>" edit_id="<?php echo $db['id']; ?>" db="MYSQL">編集</a>
-                                                        <a href="javascript:;"  data-toggle="modal" data-target="#common_modal" class="btn btn-outline-danger btn-sm edit_database common_dialog"  gourl="/share/servers/database?webid=<?=$webid?>&act=delete&db=mysql&act_id=<?=$db['id']?>" delete_id="<?php echo $db['id']; ?>" db="MYSQL">削除</a>
+                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=edit&act_id=<?= $db['id'] ?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
+                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=delete&act_id=<?= $db['id'] ?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
                                                     <td class="border-dark">情報</td>
                                                 </tr>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <?php endforeach; ?>
                                         </table>
                                     </div>
                                 </div>
@@ -56,4 +54,5 @@ $getAllRow = $commons->getAllRow($query);
                 </main>
             </div>
         </div> 
- <?php require_once("views/share/footer.php"); ?>
+ <?php 
+ require_once("views/share/footer.php");

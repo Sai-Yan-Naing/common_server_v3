@@ -5,21 +5,17 @@ $act = $_GET['act'];
 $setArr = ['information','backup'];
 // $TabArr = ['smtp','pop','tab'];
 $actArr = ['index','new','delete','edit','onoff','apponoff','confirm','restore'];
-if(isset($setting) && in_array($setting,$setArr)){
-            if(isset($act) && in_array($act,$actArr)){
+if ( isset($setting) && in_array($setting,$setArr)) {
+            if ( isset($act) && in_array($act,$actArr))
+     {
                     include "views/share/various/$setting/$act.php";
-            }else{
+            } else
+            {
                 include 'views/share/404.php';
             }
-}else{
+} else
+{
     include 'views/share/404.php';
 }
-// if(isset($setting) && isset($tab) && isset($act) && $tab != null && $setting != null && $act != null && in_array($setting,$setArr)){
-//     // echo "hello";
-//     include "views/share/mail/$setting/$tab/$act.php";
-// }else{
-//     // echo "404";
-//     include 'views/share/404.php';
-// }
 die();
 ?>

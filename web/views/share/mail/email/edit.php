@@ -1,8 +1,8 @@
 <?php
 require_once('views/share_config.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM add_email WHERE id='$act_id'";
-$getRow = $commons->getRow($query);
+$query = "SELECT * FROM add_email WHERE id= ? ";
+$getRow = $commons->getRow($query,[$act_id]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
@@ -28,7 +28,7 @@ $getRow = $commons->getRow($query);
         </div>
         <div class="col-sm-3"></div>
     </div>
-	<form action="/share/mail?setting=email&tab=tab&act=confirm" method="post" id="email_create">
+	<form action="/share/mail?setting=email&tab=tab&act=confirm" method="post" id="email_create" onclick="loading()">
 		<input type="hidden" name="action" value="edit">
 		<input type="hidden" name="email" value="<?= $getRow['email'] ?>">
 		<input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">

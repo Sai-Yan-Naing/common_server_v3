@@ -1,9 +1,8 @@
 <?php
-if(!isset($_POST['post'])){?> This Page is not support Get Method
+if ( ! isset($_POST['post'])):?> This Page is not support Get Method
     <a href="javascript:history.go(-1)" title="Return to the previous page">« Go back</a>
-    <?php }?>
-
-<?php
+<?php 
+endif;
 require_once('config/all.php');
 require_once('models/common.php');
 $domainid = $_POST['domainid'];
@@ -11,34 +10,43 @@ $password = $_POST['password'];
 $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
 $commons = new Common;
 
-if (filter_var($domainid, FILTER_VALIDATE_IP)) {
+if (filter_var($domainid, FILTER_VALIDATE_IP))
+{
     $webroot_acc = $commons->getRow("SELECT * FROM vps_account WHERE ip='$domainid'");
-    if($webroot_acc != null){
+    if ( $webroot_acc != null)
+    {
         setcookie("vps_user", $domainid);
         setcookie("password", $pass_encrypted);
         header("location: /vps/server?tab=connection&act=index");
-    }else{
+    } else
+    {
         $error = "ご契約ID and Password error";
         require_once('views/login/index.php');
     }
-}else if(is_valid_domain_name($domainid)){
+} elseif ( is_valid_domain_name ($domainid))
+{
     $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE domain='$domainid'");
-    if($webroot_acc != null){
+    if ( $webroot_acc != null)
+    {
         setcookie("share_user", $domainid);
         setcookie("password", $pass_encrypted);
         header("location: /share/server?setting=site&tab=app_install&act=index");
-    }else{
+    } else
+    {
         $error = "ご契約ID and Password error";
         require_once('views/login/index.php');
     }
-}else{
+} else
+{
     $webroot_acc = $commons->getRow("SELECT * FROM customer WHERE user_id='$domainid' AND password='$pass_encrypted'");
-    if($webroot_acc != null){
+    if ( $webroot_acc != null)
+    {
         setcookie("admin", $domainid);
         setcookie("password", $pass_encrypted);
         header("location: /admin");
         die('hello');
-    }else{
+    } else
+    {
         $error = "ご契約ID and Password error";
         require_once('views/login/index.php');
     }

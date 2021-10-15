@@ -5,6 +5,9 @@ $(document).on("click", ".common_dialog", function () {
   $.ajax({
     type: "POST",
     url: $url,
+    beforeSend: function () {
+      document.getElementById("display_dialog").innerHTML = $('#common_modal_loading').html();
+    },
     success: function (data) {
       document.getElementById("display_dialog").innerHTML = data;
       allValidate();
@@ -156,4 +159,14 @@ $(document).on("click", "#php_ini_btn", function () {
       $("#phpini_").html(data);
     },
   });
+});
+
+function loading() {
+  $("#page-loading").css("display", "block");
+  $("#load-body").css("display", "block");
+}
+
+$(document).on("change", ".spec_change", function () {
+  $(".spec_change").parent().removeClass("bg-primary text-white");
+  $(this).parent().addClass("bg-primary text-white");
 });

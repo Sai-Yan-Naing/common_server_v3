@@ -1,7 +1,7 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_ftp WHERE domain='$webdomain'";
-$getAllRow=$commons->getAllRow($query);
+$query = "SELECT * FROM db_ftp WHERE domain=?";
+$getAllRow=$commons->getAllRow($query,[$webdomain]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
@@ -48,19 +48,19 @@ $getAllRow=$commons->getAllRow($query);
                                                     <th class="font-weight-bold border-dark">Action</th>
                                                 </tr>
                                                 <?php 
-                                                    foreach ($getAllRow as $key => $ftp) {
+                                                    foreach ($getAllRow as $key => $ftp):
                                                 ?>
                                                 <tr>
-                                                    <td class="border-dark"><?php echo $ftp['ftp_user']; ?></td>
-                                                    <td class="border-dark"><?php echo $ftp['ftp_pass']; ?></td>
-                                                    <td class="border-dark"><?php echo $ftp['permission']; ?></td>
+                                                    <td class="border-dark"><?php echo htmlspecialchars($ftp['ftp_user'], ENT_QUOTES); ?></td>
+                                                    <td class="border-dark"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></td>
+                                                    <td class="border-dark"><?php echo htmlspecialchars($ftp['permission'], ENT_QUOTES); ?></td>
                                                     <td class="border-dark">
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=edit&act_id=<?=$ftp['id']?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=delete&act_id=<?=$ftp['id']?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
                                                 </tr>
                                                 <?php
-                                                    }
+                                                    endforeach;
                                                 ?>
                                         </table>
                                     </div>

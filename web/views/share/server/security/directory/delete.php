@@ -1,9 +1,9 @@
 <?php
 require_once('views/share_config.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM sub_ftp WHERE id='$act_id' and domain='$webdomain'";
+$query = "SELECT * FROM sub_ftp WHERE id= ? and domain=?";
 $datas = new Common;
-$getRow = $commons->getRow($query);
+$getRow = $commons->getRow($query,[$act_id,$webdomain]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">

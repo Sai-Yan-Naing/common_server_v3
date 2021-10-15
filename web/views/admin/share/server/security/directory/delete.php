@@ -18,7 +18,7 @@ $getRow = $commons->getRow($query);
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="dir_path" value="<?= $getRow['path'] ?>">
     <input type="hidden" name="ftp_user" value="<?= $getRow['ftp_user'] ?>">
-    Are you sure to delete <b style="color: red"><?= $getRow['ftp_user'] ?> </b> ?
+    Are you sure to delete <b style="color: red"><?= htmlspecialchars($getRow['ftp_user'], ENT_QUOTES); ?> </b> ?
       
   </form>
 </div>

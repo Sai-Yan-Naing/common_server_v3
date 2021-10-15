@@ -1,6 +1,7 @@
 <?php
     $act = $_GET['act'];
-    switch($act){
+    switch ( $act )
+    {
         case "index": include "views/admin/share/contactus/index.php";break;
         case "confirm": include "views/admin/share/contactus/confirm.php";break;
         //default

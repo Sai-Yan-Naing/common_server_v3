@@ -1,7 +1,8 @@
 <?php
 require_once("views/admin/admin_config.php");
 $action = $_POST['action'];
-if($action == 'new'){
+if ( $action === 'new' )
+{
     $webdomain = $_POST['domain'];
     $password = $_POST['password'];
     $password1 = hash_hmac('sha256', $password, PASS_KEY);
@@ -16,10 +17,14 @@ if($action == 'new'){
     $dns = json_encode($temp);
     $app_version = json_encode($temp1);
     
-    $insert_q = "INSERT INTO web_account (`domain`, `password`, `user`, `plan`, `customer_id`,`dns`,`app_version`) VALUES ('$webdomain', '$password1', '$user', 1, '$webadminID','$dns','$app_version')";
-    $insert_ftp = "INSERT INTO db_ftp (`ftp_user`, `ftp_pass`, `domain`, `permission`) VALUES ('$user', '$password', '$webdomain', 'F,R,W')";
-    $insert_waf = "INSERT INTO waf (`domain`, `usage`, `display`) VALUES ('$webdomain', 0, 0)";
-    if(!$commons->doThis($insert_q) || !$commons->doThis($insert_ftp) || !$commons->doThis($insert_waf))
+    $insert_q = "INSERT INTO web_account (`domain`, `password`, `user`, `plan`, `customer_id`,`dns`,`app_version`) VALUES (?, ?, ?, ?, ?,?,?)";
+    $insert_ftp = "INSERT INTO db_ftp (`ftp_user`, `ftp_pass`, `domain`, `permission`) VALUES (?, ?, ?, ?)";
+    $insert_waf = "INSERT INTO waf (`domain`, `usage`, `display`) VALUES (?, ?, ?)";
+    if (
+        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $webadminID,$dns,$app_version]) ||
+        !$commons->doThis($insert_ftp,[$user, $password, $webdomain, 'F,R,W']) ||
+        !$commons->doThis($insert_waf,[$webdomain, 0, 0])
+    )
     {
             require_once("views/admin/share.php");
             die("");
@@ -29,30 +34,33 @@ if($action == 'new'){
     $origin_user= $origin['user'];
     $ip=IP;
 	echo shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/addsite.ps1" '.$webdomain.' '.$user.' '.$password.' '.$ip. ' '.$origin_user);
-}else if($action=='onoff'){
+} elseif ( $action === 'onoff')
+{
     $act_id = $_POST['act_id'];
     $stopped = $_POST['stopped']==0? 1 : 0;
     $startstop = $_POST['stopped']==0? "stop" : "start";
     $sitename = $_POST['sitename'];
-    $qry = "UPDATE web_account SET `stopped` = '$stopped' WHERE `id` = $act_id";
-    if(!$commons->doThis($qry)){
+    $qry = "UPDATE web_account SET `stopped` = '$stopped' WHERE `id` = ?";
+    if( ! $commons->doThis($qry,[$act_id])){
             require_once("views/admin/share.php");
             die("");
     }
     echo shell_exec("%windir%\system32\inetsrv\appcmd.exe $startstop sites $sitename");
     // die;
-}else if($action=='apponoff'){
+} elseif ( $action === 'apponoff')
+{
     $act_id = $_POST['act_id'];
     $appstopped = $_POST['appstopped']==0? 1 : 0;
     $startstop = $_POST['appstopped']==0? "stop" : "start";
     $sitename = $_POST['sitename'];
-    $qry = "UPDATE web_account SET `appstopped` = '$appstopped' WHERE `id` = $act_id";
-    if(!$commons->doThis($qry)){
+    $qry = "UPDATE web_account SET `appstopped` = '$appstopped' WHERE `id` = ?";
+    if ( ! $commons->doThis($qry,[$act_id])){
             require_once("views/admin/share.php");
             die("");
     }
     echo shell_Exec("%windir%\system32\inetsrv\appcmd.exe $startstop  apppool /apppool.name:$sitename");
-}else if($action=='sitebinding'){
+} elseif ( $action=='sitebinding')
+{
     $act_id = $_POST['act_id'];
     $sitebinding = $_POST['sitebinding']==0? 1 : 0;
     $subject = $_POST['sitebinding']==0? 'Add Binding': 'Delete Binding';
@@ -61,35 +69,22 @@ if($action == 'new'){
     $bindDomain = $sitename.'.winserver.ne.jp';
     $ip = IP;
     $checker="http/".$ip.":80:".$bindDomain;
-    $do = $_POST['sitebinding']==0? "+" : "-";
-    // if(checkSiteBinding($checker, $sitename) && $act=='new')
-    // {
-    //     $_SESSION['error'] = true;
-    //     $_SESSION['message'] = 'Already Binding';
-    //     header('location:/admin');
-    //     die('');
-    // }
-    // if(!checkSiteBinding($checker, $sitename) && $act=='delete')
-    // {
-    //     $_SESSION['error'] = true;
-    //     $_SESSION['message'] = 'Not Binding';
-    //     header('location:/admin');
-    //     die('');
-    // }
-    //end powershell
+    $do = $_POST['sitebinding']===0? "+" : "-";
     $qry = "UPDATE web_account SET `sitebinding` = '$sitebinding' WHERE `id` = $act_id";
-    if(!$commons->doThis($qry)){
+    if ( ! $commons->doThis($qry))
+    {
             require_once("views/admin/share.php");
             die("");
     }
     $body = "Successfully $subject";
-    if(!$webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body)){
+    if ( ! $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body))
+    {
         require_once("views/admin/share.php");
             die("");
     }
     echo shell_exec("%systemroot%\system32\inetsrv\appcmd.exe set site /site.name:$sitename /".$do."bindings.[protocol='http',bindingInformation='".$ip.":80:".$bindDomain."']");
     
-}else if($action=='delete'){
+}elseif($action=='delete'){
     $today = date("Y-m-d H:i:s");
     $act_id = $_POST['act_id'];
     $sitebinding = $_POST['sitebinding']==0? 1 : 0;

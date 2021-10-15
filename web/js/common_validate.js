@@ -223,6 +223,7 @@ function allValidate() {
       },
       submitHandler: function (form) {
         // return false;
+        loading();
         form.submit();
       },
     });
@@ -285,6 +286,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -395,6 +397,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -450,6 +453,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -469,6 +473,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -532,6 +537,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -595,6 +601,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -637,6 +644,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -682,6 +690,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -718,6 +727,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -738,7 +748,7 @@ function allValidate() {
     //         }
     //     },
     //     submitHandler: function(form) {
-    //         form.submit();
+    //         form.submiddt();
     //     }
     // });
 
@@ -780,6 +790,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -802,6 +813,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -825,6 +837,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });
@@ -851,6 +864,7 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        loading();
         form.submit();
       },
     });

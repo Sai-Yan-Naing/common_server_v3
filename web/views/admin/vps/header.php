@@ -49,12 +49,13 @@
             unset($url[0]);
             unset($url[1]);
             $ass = '';
-            foreach(array_values($url) as $value)
+            foreach (array_values($url) as $value)
             {
                 $ass.='../';
             }
             return $ass;
 
  }
-?>
-<?php require_once("views/common_modal.php");?>
+  
+require_once("views/common_modal.php");
+require_once("views/loading.php");

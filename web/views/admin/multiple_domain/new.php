@@ -15,15 +15,6 @@
                 <input type="text" class="form-control checkit" id="domain" column="domain" table="web_account" remark="domain" name="domain" placeholder="ドメイン名">
             </div>
         </div>
-        <!-- <div class="form-group row">
-            <label for="document" class="col-sm-2 col-form-label">ドキュメントルート</label>
-            <div class="col-sm-1">
-                root/
-            </div>
-            <div class="col-sm-7">
-                <input type="text" class="form-control" id="web_dir" name="web_dir" placeholder="8～20文字、半角英数字記号">
-            </div>
-        </div> -->
         <div class="form-group row">
             <label for="ftp_user" class="col-sm-2 col-form-label">FTPユーザー名</label>
             <div class="col-sm-8">

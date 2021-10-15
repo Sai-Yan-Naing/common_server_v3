@@ -15,7 +15,7 @@ $getAllRow=$commons->getAllRow($query);
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div class="tab-pane active p-3">
-                                    <form action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="sql_server_edition">
+                                    <form onsubmit="loading()" action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="sql_server_edition">
                                     <input type="hidden" name="act" value="sql_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
@@ -32,7 +32,7 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="remote_desktop_license">
+                                    <form onsubmit="loading()" action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="remote_desktop_license">
                                     <input type="hidden" name="act" value="rdl">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
@@ -52,7 +52,7 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="office_license">
+                                    <form onsubmit="loading()" action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="office_license">
                                     <input type="hidden" name="act" value="office_l">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
@@ -72,7 +72,7 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="window_server_license">
+                                    <form onsubmit="loading()" action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="window_server_license">
                                     <input type="hidden" name="act" value="window_server_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
@@ -89,7 +89,7 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="site_guard_license">
+                                    <form onsubmit="loading()" action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="site_guard_license">
                                     <input type="hidden" name="act" value="site_guard_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
@@ -106,7 +106,7 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="ssl_license">
+                                    <form onsubmit="loading()" action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="ssl_license">
                                     <input type="hidden" name="act" value="ssl">
                                         <div class="form-group row">
                                             <div class="col-sm-3">

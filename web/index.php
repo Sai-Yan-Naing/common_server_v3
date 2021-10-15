@@ -1,7 +1,8 @@
 <?php   
 $url = $_SERVER['REQUEST_URI'];
 $request = parse_url($url);
-switch ($request['path']) {
+switch ($request['path']) 
+{
     case '/' : include 'views/login.php';break;
     case '/login' : include 'views/login.php';break;
     case '/admin' : include 'views/admin/index.php';break;
@@ -45,6 +46,7 @@ switch ($request['path']) {
 	case '/validate' : include 'views/validate.php'; break;
 	case '/change/app_version' : include 'views/app_version.php'; break;
 	case '/domainChecker' : include 'views/domain_checker.php'; break;
+	case '/testing' : include 'views/testing.php'; break;
 
 	default: http_response_code(404); include'views/404.php'; break;
 }

@@ -1,7 +1,7 @@
 <?php require_once('views/admin/vps/header.php'); ?>
 <?php 
-$query = "SELECT * FROM vps_backup WHERE ip='$webip'";
-$getvps=$commons->getRow($query);
+$query = "SELECT * FROM vps_backup WHERE ip=?";
+$getvps=$commons->getRow($query,[$webip]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/vps/sidebar.php');?>
@@ -50,7 +50,7 @@ $getvps=$commons->getRow($query);
                                                 <?php 
                                                     $getAllRow=$commons->getAllRow("SELECT * FROM vps_backup WHERE ip='$webip'");
                                                     $dirname = "G:/vps_backup/$vps_backup[name]";
-                                                    foreach ($getAllRow as $key => $vps_backup) {
+                                                    foreach ($getAllRow as $key => $vps_backup) :
                                                 ?>
                                             <tr>
                                                 <td class="border-dark"><?= $vps_backup['name'] ?></td>
@@ -60,7 +60,7 @@ $getvps=$commons->getRow($query);
                                                     <button class="btn btn-outline-danger btn-sm  common_dialog" gourl="/admin/vps/various?setting=backup&tab=backup&act=delete&act_id=<?= $vps_backup['id']?>&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">削除</button>
                                                 </td>
                                             </tr>
-                                            <?php } ?>
+                                            <?php endforeach; ?>
                                         </table>
                                     </div>
                                         <div class="mb-3">

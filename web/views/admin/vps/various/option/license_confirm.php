@@ -2,21 +2,26 @@
 session_start();
 require_once("views/admin/admin_vpsconfig.php");
 // die('hello');
-    if(isset($_POST['act']))
+    if (isset($_POST['act']))
     {
         $act = $_POST['act'];
-       if($act == "sql_license")
+       if ($act == "sql_license")
        {
         echo $request ="SQL Server Web Edition追加 1 月額";
-       }else if($act == "rdl"){
+       } elseif ($act == "rdl")
+       {
         echo $request ="Remote Desktop License追加 ".$_POST['request']." 月額";
-       }else if($act == "office_l"){
+       } elseif ($act == "office_l")
+       {
         echo $request ="OFFICE追加 ".$_POST['request']." 月額";
-       }else  if($act == "window_server_license"){
+       }elseif ($act == "window_server_license")
+       {
         echo $request ="Windows Server Security追加 1 年額";
-       }else if($act == "site_guard_license"){
+       } elseif ($act == "site_guard_license")
+       {
         echo $request ="Site Gird Server Edition追加 1 月額";
-       }else{
+       } else
+       {
         echo $request ="SSL証明書追加 1 年額";
        }
         // echo $request = $_POST['request'];

@@ -10,17 +10,17 @@ $status = ['table'=>$table,'column'=>$column,'chekcer'=>$checker,'remark'=>$rema
 $check = new CommonValidate;
 // echo $checkresult = $check->checkInDb('web_account', 'user', 'saiyannaing');
 $checkresult = $check->checkInDb($table, $column, $checker);
-if($checkresult)
+if ( $checkresult )
 {
     $status['status'] =$checkresult;
     echo json_encode($status);
     die();
 }
 
-if($remark=='domain')
+if ( $remark === 'domain' )
 {
     $checkresult = $check->domainChecker($checker);
-    if($checkresult)
+    if ( $checkresult )
     {
         $status['status'] =$checkresult;
         echo json_encode($status);
@@ -29,10 +29,10 @@ if($remark=='domain')
     
 }
 
-if($remark=='winuser')
+if ( $remark === 'winuser' )
 {
     $checkresult = $check->winUser($checker);
-    if($checkresult)
+    if ( $checkresult )
     {
         $status['status'] =$checkresult;
         echo json_encode($status);
@@ -41,10 +41,10 @@ if($remark=='winuser')
     
 }
 
-if($remark=='mydbname')
+if ( $remark === 'mydbname' )
 {
     $checkresult = $check->mysqlDatabase($checker);
-    if($checkresult)
+    if ( $checkresult )
     {
         $status['status'] =$checkresult;
         echo json_encode($status);
@@ -53,10 +53,10 @@ if($remark=='mydbname')
     
 }
 
-if($remark=='mydbuser')
+if ( $remark === 'mydbuser')
 {
     $checkresult = $check->mysqlUser($checker);
-    if($checkresult)
+    if ( $checkresult)
     {
         $status['status'] =$checkresult;
         echo json_encode($status);
@@ -65,10 +65,10 @@ if($remark=='mydbuser')
     
 }
 
-if($remark=='msdbname')
+if ( $remark === 'msdbname')
 {
     $checkresult = $check->mssqlDatabase($checker);
-    if($checkresult)
+    if ( $checkresult)
     {
         $status['status'] =$checkresult;
         echo json_encode($status);
@@ -77,10 +77,10 @@ if($remark=='msdbname')
     
 }
 
-if($remark=='msdbuser')
+if ( $remark === 'msdbuser')
 {
     $checkresult = $check->mssqlUser($checker);
-    if($checkresult)
+    if ( $checkresult)
     {
         $status['status'] =$checkresult;
         echo json_encode($status);
@@ -89,10 +89,10 @@ if($remark=='msdbuser')
     
 }
 
-if($remark=='madbname')
+if ( $remark === 'madbname')
 {
     $checkresult = $check->mariadDatabase($checker);
-    if($checkresult)
+    if ( $checkresult)
     {
         $status['status'] =$checkresult;
         echo json_encode($status);
@@ -101,10 +101,10 @@ if($remark=='madbname')
     
 }
 
-if($remark=='madbuser')
+if ( $remark === 'madbuser')
 {
     $checkresult = $check->mariadbUser($checker);
-    if($checkresult)
+    if ( $checkresult)
     {
         $status['status'] =$checkresult;
         echo json_encode($status);

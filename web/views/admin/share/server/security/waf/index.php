@@ -1,6 +1,6 @@
 <?php 
 require_once('views/admin/share/header.php');
-$waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
+$waf = $commons->getRow("SELECT * FROM waf WHERE domain =? ",[$webdomain]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
@@ -17,11 +17,10 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
                                         <div class="form-group row">
                                             <span class="col">WAF設定</span>
                                             <?php
-                                                if(isset($error))
-                                                {?>
+                                                if ( isset($error)):?>
                                             <span class="col error"><?= $error ?></span>
                                             <?php
-                                                }
+                                                endif;
                                             ?>
                                             
                                         </div>
@@ -43,12 +42,6 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
                                                 <span class="<?= (int)$waf['display']==1? "labelon":"labeloff"  ?>"><?= (int)$waf['display']==1? "起動":"停止"  ?></span>
                                             </label>
                                         </div>
-                                        <!-- <form action="/admin/share/servers/security/waf?confirm&webid=<?=$webid?>" method ="post" id="usage-onoff">
-                                            <input type="hidden" name="switch" value="usage">
-                                        </form>
-                                        <form action="/admin/share/servers/security/waf?confirm&webid=<?=$webid?>" method ="post" id="display-onoff">
-                                            <input type="hidden" name="switch" value="display">
-                                        </form> -->
                                         <table class="table table-borderless">
                                                 <tr class="row">
                                                     <th class="col-sm-2">日時</th>
@@ -58,7 +51,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
                                                     <th class="col-sm-4">攻撃ターゲットURL</th>
                                                 </tr>
                                                 <?php
-                                                if($waf['usage']==1)
+                                                if ( $waf['usage']==1)
                                                 {
                                                     $file = file_get_contents(SWAF_PATH);
                                                         $filearr = explode("\n", $file);
@@ -67,29 +60,30 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
                                                         // echo "</pre>";
                                                         $double = array();
                                                         
-                                                        foreach ($filearr as $key => $value) {
+                                                        foreach ($filearr as $key => $value):
                                                             $double[$key] = array_values(array_filter(explode(" ", $value)));
                                                             
-                                                        }
+                                                        endforeach;
                                                         $count = 0;
                                                         $filter = "MONITOR";
-                                                        if($waf['display']==1)
+                                                        if ( $waf['display']==1)
                                                         {
                                                             $filter = "BLOCKED";
                                                         }
-                                                        if(count(wafFilter($double,$filter,$webdomain))>0)
+                                                        if ( count( wafFilter($double,$filter,$webdomain))>0)
                                                         {
                                                             foreach (wafFilter($double,$filter,$webdomain) as $keys => $values) {
                                                                 
                                                                 wafAction($values);
                                                                 $count++;
-                                                                if($count>=10)
+                                                                if ( $count>=10)
                                                                 {
                                                                     break;
                                                                 }
                                                             
                                                             }
-                                                        }else{
+                                                        } else
+                                                        {
                                                             
                                                             echo "<tr><td colspan='5'>なし</td></tr>";
                                                         }
@@ -115,7 +109,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
      <?php 
         foreach ($values as $key => $value) {
         
-        if(in_array($value, ['GET','POST','HEAD','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH','PROPFIND']))
+        if ( in_array($value, ['GET','POST','HEAD','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH','PROPFIND']))
         {
     ?>
         <td class="col-sm-2"><?= $value ?></td>
@@ -125,7 +119,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
 
         foreach ($values as $key => $value) {
         
-        if(str_replace(":","",$value)=="ACTIONMONITOR" || str_replace(":","",$value)=="ACTIONBLOCKED")
+        if ( str_replace(":","",$value)=="ACTIONMONITOR" || str_replace(":","",$value)=="ACTIONBLOCKED")
         {
     ?>
         <td class="col-sm-2"><?= str_replace("ACTION","",str_replace(":","",$value)) ?></td>
@@ -135,7 +129,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
     }
         foreach ($values as $key => $value) {
         
-        if(filter_var($value, FILTER_VALIDATE_IP))
+        if ( filter_var($value, FILTER_VALIDATE_IP))
         {
     ?>
         <td class="col-sm-2"><?= $value ?></td>
@@ -144,7 +138,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
     }
         foreach ($values as $key => $value) {
         
-        if(filter_var($value, FILTER_VALIDATE_URL))
+        if ( filter_var($value, FILTER_VALIDATE_URL))
         {
     ?>
         <td class="col-sm-4" style="word-break: break-all;"><?= $value ?></td>
@@ -166,7 +160,7 @@ function wafFilter($double,$filter,$webdomain)
             {
                 foreach($values as $key=>$value)
                 {
-                    if(str_replace(":","",$value) == "ACTION$filter")
+                    if ( str_replace(":","",$value) == "ACTION$filter")
                     {
                         $temp[$keys]=$values;
                     }

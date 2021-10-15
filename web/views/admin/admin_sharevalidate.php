@@ -1,3 +1,5 @@
 <?php
- if(!isset($_COOKIE['admin'])){header("location: /login");}
-?>
+ if( ! isset($_COOKIE['admin']) )
+ {
+     header("location: /login");
+ }

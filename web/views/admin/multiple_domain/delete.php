@@ -12,7 +12,7 @@ $getRow = $commons->getRow($query);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/multiple_domain?act=confirm" method="post" id="onoff">
+  <form action="/admin/multiple_domain?act=confirm" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="removal" value="<?= $getRow['removal'] ?>">

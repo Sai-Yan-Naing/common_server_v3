@@ -1,7 +1,7 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_ftp WHERE domain='$webdomain'";
-$getAllRow=$commons->getAllRow($query);
+$query = "SELECT * FROM db_ftp WHERE domain=?";
+$getAllRow=$commons->getAllRow($query,[$webdomain]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
@@ -46,14 +46,14 @@ $getAllRow=$commons->getAllRow($query);
                                                 <label for="capacity-used" class="col-sm-3 col-form-label">使用ディスク容量</label>
                                                 <!--<div class="col-sm-4" ><progress id="capacity-used" max="100" value="70"> </progress></div>-->
                                                 <!-- <div class="col-sm-4" id="chartContainer" style="height: 300px; width: 100%;"> </div> -->
-                                                <div class="col-sm-4"><span><?php if($weborigin!=1){ echo sizeFormat(folderSize("E:/webroot/LocalUser/".$webrootuser."/$webuser"));}else{echo sizeFormat(folderSize("E:/webroot/LocalUser/$webuser"));} ?></span></div>
+                                                <div class="col-sm-4"><span><?php if($weborigin!=1): echo sizeFormat(folderSize("E:/webroot/LocalUser/".$webrootuser."/$webuser"));else:echo sizeFormat(folderSize("E:/webroot/LocalUser/$webuser"));endif; ?></span></div>
                                             </div>
-                                        <form action="/admin/share/various?confirm&webid=<?=$webid?>" method = "post" id="site-onoff">
+                                        <!-- <form action="/admin/share/various?confirm&webid=<?=$webid?>" method = "post" id="site-onoff">
                                             <input type="hidden" name="app" value="site">
                                         </form>
                                         <form action="/admin/share/various?confirm&webid=<?=$webid?>" method = "post" id="app-onoff">
                                             <input type="hidden" name="app" value="app">
-                                        </form>
+                                        </form> -->
                                         <div class='ml-2 mr-2'>
                                             <h3>DNS</h3>
                                             <table class="table table-bordered">
@@ -64,7 +64,7 @@ $getAllRow=$commons->getAllRow($query);
                                                     <th class="font-weight-bold border-dark">ＩＰアドレス/ドメイン名</th>
                                                 </tr>
                                                     <?php
-                                                        foreach(json_decode($webdns) as $key=>$value) {
+                                                        foreach(json_decode($webdns) as $key=>$value):
                                                     ?>
                                                 <tr class="">
                                                     <td class="border-dark"><?= $value->type; ?></td>
@@ -72,9 +72,7 @@ $getAllRow=$commons->getAllRow($query);
                                                     <td class="border-dark">.<?=$webdomain?></td>
                                                     <td class="border-dark"><?= $value->target; ?></td>
                                                 </tr>
-                                                <?php 
-                                                    }
-                                                ?>
+                                                <?php endforeach ?>
                                             </table>
                                         </div>
                                     </div>

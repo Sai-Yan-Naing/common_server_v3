@@ -27,7 +27,7 @@ $getRow = $commons->getRow($query);
                         <label for="db_user" class="col-sm-2 col-form-label">ユーザー名</label>
                         <div class="col-sm-10">
                           <input type="hidden" class="form-control" id="db_user" readonly name="db_user" value="<?= $getRow['db_user'] ?>" placeholder="8～70文字、半角英数記号の組み合わせ">
-                          <label for=""><?= $getRow['db_user'] ?></label>
+                          <label for=""><?= htmlspecialchars($getRow['db_user'], ENT_QUOTES) ?></label>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -1,7 +1,7 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-    $query = "SELECT * FROM sub_ftp WHERE domain='$webdomain'";
-    $getAllRow = $commons->getAllRow($query); 
+    $query = "SELECT * FROM sub_ftp WHERE domain= ? ";
+    $getAllRow = $commons->getAllRow($query,[$webdomain]); 
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
@@ -26,9 +26,9 @@
                                         <div class="mt-4">
                                             <div class="d-flex mb-2">
                                                 <div class="col-sm-3">Root path /<?=$webuser?>/web/</div>
-                                                <div class="text-danger col-sm-6"><span class="text-center"><?php if (isset($error)) {
+                                                <div class="text-danger col-sm-6"><span class="text-center"><?php if (isset($error)):
                                                     echo $error;
-                                                } ?></span></div>
+                                                endif; ?></span></div>
                                             </div>
                                             <table class="table table-bordered">
                                                 <tr>
@@ -38,7 +38,7 @@
                                                     <th class="font-weight-bold border-dark">Action</th>
                                                 </tr>
                                                     <?php
-                                                        foreach($getAllRow as $key=>$value) {
+                                                        foreach ($getAllRow as $key=>$value):
                                                     ?>
                                                     <tr>
                                                         <td  class="border-dark"><?= $value['ftp_user'] ?></td>
@@ -50,7 +50,7 @@
                                                         </td> 
                                                     </tr>
                                                     <?php
-                                                        }
+                                                        endforeach;
                                                     ?>
                                             </table>
                                         </div>

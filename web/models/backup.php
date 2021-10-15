@@ -6,7 +6,7 @@
  */
 class Backup
 {
-	function addAutoBackup($domain,$name,$scheduler)
+	function addAutoBackup ($domain,$name,$scheduler)
 	{
 		try
 		{

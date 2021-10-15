@@ -1,8 +1,8 @@
 <?php
 require_once('views/share_config.php');
 $act_id = $_GET['act_id'];
-$query = "select * from db_account where domain='$webdomain' and id='$act_id'";
-$getRow = $commons->getRow($query);
+$query = "select * from db_account where domain= ? and id= ?";
+$getRow = $commons->getRow($query, [$webdomain,$act_id]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">

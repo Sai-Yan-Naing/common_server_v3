@@ -1,7 +1,7 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_ftp WHERE domain='$webdomain'";
-$getAllRow=$commons->getAllRow($query);
+$query = "SELECT * FROM db_ftp WHERE domain=?";
+$getAllRow=$commons->getAllRow($query,[$webdomain]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>

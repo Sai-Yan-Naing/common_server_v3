@@ -9,42 +9,50 @@ $vm_user = JAPANSYS;
 $vm_pass = JAPANSYS_PASS;
 $vm_action = $_GET['action'];
 // $vm_change_action  = WINSERVERROOT;
- if($vm_action=="change_rdp"){
+ if($vm_action === "change_rdp")
+ {
     $vm_fw = $webrdp;
-    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip='$webip'";
+    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip= ?";
     $vm_change_action = $_POST['port'];
- }else if($vm_action=="change_rdip"){
+ } elseif ($vm_action === "change_rdip")
+ {
     //  die('ok');
     $vm_fw = $webrdp;
-    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip='$webip'";
+    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip= ?";
     $vm_change_action = $_POST['ip'];
-}else if($vm_action=="default_rdp"){
+} elseif ($vm_action === "default_rdp")
+{
     $vm_fw = $webrdp;
-    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip='$webip'";
+    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip= ?";
     $vm_change_action = 3389;
-}else if($vm_action=="default_rdip"){
+} elseif ($vm_action === "default_rdip")
+{
     $vm_fw = $webrdp;
-    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip='$webip'";
+    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip= ?";
     $vm_change_action = 'any';
-}else if($vm_action=="change_httprdp"){
+} elseif ($vm_action === "change_httprdp")
+{
     $vm_fw = $webhttp_rdp;
-    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip='$webip'";
+    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip= ?";
     $vm_change_action = $_POST['port'];
-}else if($vm_action=="change_httprdip"){
+} elseif ($vm_action === "change_httprdip")
+{
     $vm_fw = $webhttp_rdp;
-    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip='$webip'";
+    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip= ?";
     $vm_change_action = $_POST['ip'];
-}else if($vm_action=="default_httprdp"){
+} elseif ($vm_action === "default_httprdp")
+{
     $vm_fw = $webhttp_rdp;
     $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip='$webip'";
     $vm_change_action = 80;
-}else if($vm_action=="default_httprdip"){
+} elseif ($vm_action === "default_httprdip")
+{
     $vm_fw = $webhttp_rdp;
-    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip='$webip'";
+    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip= ?";
     $vm_change_action = 'any';
 }
 
-if(!$commons->doThis($insert_q))
+if(!$commons->doThis($insert_q,[$webip]))
 {
     echo $error="cannot update vps";
     die();

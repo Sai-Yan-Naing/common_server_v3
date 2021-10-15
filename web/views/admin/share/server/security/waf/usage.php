@@ -1,6 +1,6 @@
 <?php
 require_once('views/admin/admin_shareconfig.php');
-$waf = $commons->getRow("SELECT * FROM waf WHERE domain='$webdomain'");
+$waf = $commons->getRow("SELECT * FROM waf WHERE domain= ? ", [$webdomain]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">

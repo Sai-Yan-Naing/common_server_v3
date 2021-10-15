@@ -20,6 +20,7 @@ class Common{
 	function getAllRow($query, $params = [])
 	{
 		// die($query);
+		// die($params);
 		$stmt1 = $this->pdo->prepare($query);
 		$stmt1->execute($params);
 		$data = $stmt1->fetchAll(PDO::FETCH_ASSOC);
@@ -28,12 +29,13 @@ class Common{
 
 	function doThis($query, $params = [])
 	{
-		// die($query);
+		// die($params);
 		try
 		{
 			$stmt1 = $this->pdo->prepare($query);
 			if( ! $stmt1->execute($params))
 			{
+				die('error');
 				return false;
 			}
 
@@ -70,26 +72,22 @@ class Common{
 			{
 				return false;
 			}
-
-			$stmt = $pdo->prepare('CREATE USER :db_user@'%' IDENTIFIED BY :db_pass;');
-			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
-			$stmt->bindParam(':db_pass', $db_pass, PDO::PARAM_STR);
+			$stmt = $pdo->prepare("CREATE USER :db_user@'%' IDENTIFIED BY :db_pass;");
+			$stmt->bindParam(":db_user", $db_user, PDO::PARAM_STR);
+			$stmt->bindParam(":db_pass", $db_pass, PDO::PARAM_STR);
 			if(!$stmt->execute())
 			{
 				$stmt = $pdo->prepare("DROP DATABASE `$db`;");
 				$stmt->execute();
 				return false;
 			}
-
 			$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
 			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
 			$stmt->execute();
+			return true;
 		}
 		catch (PDOException $e)
 		{
-			//print('Error ' . $e->getMessage());
-			$error_message = 'データベースへの接続エラーです。';
-			$pdo_account = NULL;
 			die();
 		}
 
@@ -100,7 +98,7 @@ class Common{
 	function changeMysqlPassword($db_user, $db_pass)
 	{
 		$pdo = new PDO(DSN, ROOT, ROOT_PASS);
-		$stmt = $pdo->prepare('ALTER USER :db_user@'%' IDENTIFIED BY :db_pass;');
+		$stmt = $pdo->prepare("ALTER USER :db_user@'%' IDENTIFIED BY :db_pass;");
 		if ( ! $stmt->execute(['db_user' => $db_user, 'db_pass' => $db_pass]))
 		{
 			return false;
@@ -123,7 +121,7 @@ class Common{
 		}
 
 		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
-		$stmt = $pdo_account->prepare('DROP USER dbuser@'%'');
+		$stmt = $pdo_account->prepare("DROP USER :dbuser@'%'");
 		if ( ! $stmt->execute(['dbuser' => $dbuser]))
 		{
 			return false;
@@ -177,9 +175,9 @@ class Common{
 
 		function addMsUserAndDB($version, $db, $db_user, $db_pass){
 			$version="2016";
-			$dsn = constant("SQLSERVER_" . $version . "_DSN");
-			$user = constant("SQLSERVER_" . $version . "_USER");
-			$pass = constant("SQLSERVER_" . $version . "_PASS");
+			// $dsn = constant("SQLSERVER_" . $version . "_DSN");
+			// $user = constant("SQLSERVER_" . $version . "_USER");
+			// $pass = constant("SQLSERVER_" . $version . "_PASS");
 		// die('no ok');
 			try {
 				
@@ -231,6 +229,7 @@ class Common{
 					$stmt->execute();
 					return false;
 				}
+				return true;
 			} catch (PDOException $e) {
 				$error_message = $e->getMessage();
 				die("test");
@@ -315,6 +314,7 @@ class Common{
 				{
 					return false;
 				}
+				return true;
 			} catch (PDOException $e) {
 				$conn = NULL;
 				return false;
@@ -332,7 +332,7 @@ class Common{
 		// $dsn2 = 'mysql:host=localhost:3307';
 		$mapdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
 		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
-		$stmt = $mapdo->prepare('DROP USER :dbuser@'%'');
+		$stmt = $mapdo->prepare("DROP USER :dbuser@'%'");
 		if ( ! $stmt->execute(['dbuser' => $dbuser]))
 		{
 			return false;
@@ -392,5 +392,25 @@ class Common{
 		$data = curl_exec($ch);
 		curl_close($ch);
 		return $data;
+	}
+
+	function getSpec($query, $params = [])
+	{
+		// die($query);
+		try{
+			$pdo = new PDO(DBDSN, DBROOT, DBROOT_PASS);
+			$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+			$stmt1 = $pdo->prepare($query);
+			$stmt1->execute($params);
+			$data = $stmt1->fetch(PDO::FETCH_ASSOC);
+			// print_r($data);
+			// die;
+			return $data;
+		} catch (PDOException $e) {
+			die('error');
+			$pdo = NULL;
+			return false;
+		}
+		
 	}
 }

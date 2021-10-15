@@ -52,4 +52,5 @@
             return $ass;
 
  }
-?>
+
+ require_once("views/loading.php");

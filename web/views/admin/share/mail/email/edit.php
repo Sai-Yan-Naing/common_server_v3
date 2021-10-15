@@ -34,7 +34,7 @@ $getRow = $commons->getRow($query);
 		<input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     	<div class="form-group row mr-2 justify-content-center">
     		<span for="email" class="col-sm-3">メールアドレス</span>
-		    <span  class="col-sm-6 form-label"><span id="change_mail_text"></span><?= $getRow['email'] ?>@<?= $webdomain;?></span>
+		    <span  class="col-sm-6 form-label"><span id="change_mail_text"></span><?= htmlspecialchars($getRow['email'], ENT_QUOTES) ?>@<?= htmlspecialchars($webdomain, ENT_QUOTES) ?></span>
             <span class="col-sm-3"></span>
     	</div>
         <div class="form-group row mr-2 justify-content-center">

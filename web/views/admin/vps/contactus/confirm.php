@@ -4,7 +4,7 @@ require_once("views/admin/admin_vpsconfig.php");
 	$toName = $_POST['name'];
 	$subject = "mail subject";
 	$body = $_POST['message'];
-	$webmailer->sendMail($to,$toName,$subject,$body);
+	$webmailer->sendMail($to,$toName,$subject,$body,TO);
 	header("location: /admin/vps/contactus?act=index&webid=$webid");
 	die('admin');
 

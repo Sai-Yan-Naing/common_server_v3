@@ -1,8 +1,8 @@
 <?php
 require_once('views/admin/admin_shareconfig.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM db_ftp WHERE id='$act_id'";
-$getRow = $commons->getRow($query);
+$query = "SELECT * FROM db_ftp WHERE id=?";
+$getRow = $commons->getRow($query,[$act_id]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
@@ -39,17 +39,17 @@ $getRow = $commons->getRow($query);
               <div class="form-group">
                   <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" id="full_control" name="permission[]" <?php if(in_array("F", explode(",",$getRow['permission']))) {echo "checked";} ?> value="F">フルコントロール
+                <input type="checkbox" class="form-check-input" id="full_control" name="permission[]" <?php if ( in_array("F", explode(",",$getRow['permission']))) : echo "checked"; endif ?> value="F">フルコントロール
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input permission" name="permission[]" value="R" <?php if(in_array("R", explode(",",$getRow['permission']))) {echo "checked";} ?>>読み
+                <input type="checkbox" class="form-check-input permission" name="permission[]" value="R" <?php if ( in_array("R", explode(",",$getRow['permission']))) : echo "checked";endif ?>>読み
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input permission" name="permission[]" value="W" <?php if(in_array("W", explode(",",$getRow['permission']))) {echo "checked";} ?>>書き
+                <input type="checkbox" class="form-check-input permission" name="permission[]" value="W" <?php if ( in_array("W", explode(",",$getRow['permission']))) : echo "checked"; endif; ?>>書き
               </label>
             </div>
                   <label for="permission" id="permission_error" class="error"></label>

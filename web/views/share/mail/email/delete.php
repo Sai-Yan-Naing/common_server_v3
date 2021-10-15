@@ -2,8 +2,8 @@
 <?php
 require_once('views/share_config.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM add_email WHERE id='$act_id'";
-$getRow = $commons->getRow($query);
+$query = "SELECT * FROM add_email WHERE id=m ? ";
+$getRow = $commons->getRow($query, [$act_id]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">

@@ -1,7 +1,7 @@
 <?php
 require_once("views/share_config.php");
 $webappversion = json_decode($webappversion);
-    if(isset($_GET['apply']) && $_GET['apply']=='web.config')
+    if ( isset($_GET['apply']) && $_GET['apply'] === 'web.config')
     {
         $file = $webrootuser."/".$webuser."/web/web.config";
         $value = $_POST['web_config'];
@@ -10,7 +10,7 @@ $webappversion = json_decode($webappversion);
         die();
     }
 
-    if(isset($_GET['apply']) && $_GET['apply']=='.user.ini')
+    if ( isset($_GET['apply']) && $_GET['apply'] === '.user.ini')
     {
         $file = $webrootuser."/".$webuser."/web/.user.ini";
         $value = $_POST['php_ini'];
@@ -19,7 +19,7 @@ $webappversion = json_decode($webappversion);
         die();
     }
 
-    if(isset($_GET['apply']) && $_GET['apply']=='dotnet_version')
+    if ( isset($_GET['apply']) && $_GET['apply'] === 'dotnet_version')
     {
         $version = $_POST['version'];
         shell_exec("%systemroot%\system32\inetsrv\APPCMD set apppool $webuser /managedRuntimeVersion:$version");
@@ -32,7 +32,7 @@ $webappversion = json_decode($webappversion);
         die();
     }
 
-    if(isset($_GET['apply']) && $_GET['apply']=='php_version')
+    if ( isset($_GET['apply']) && $_GET['apply'] === 'php_version')
     {
         $version = $_POST['version'];
         $exec = "e:/scripts/php_version/php_version_change.bat $webuser $version";

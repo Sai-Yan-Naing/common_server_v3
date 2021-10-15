@@ -16,31 +16,35 @@ unset($root_url[0]);
 unset($root_url[1]);
 unset($root_url[2]);
 $root_url = implode("/",$root_url);
-if(!$commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
 {
     $error = "Something error";
     require_once("views/admin/share/server/site/app_install/index.php");
     die("");
 }
-$insert_q = "INSERT INTO db_account (`domain`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES ('$webdomain', '$db_name', '$db_user', 1, '$db_pass')";
+$insert_q = "INSERT INTO db_account (`domain`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES (?, ?, ?, ?, ?)";
 
-$insert_app = "INSERT INTO app (`domain`, `site_name`, `app_name`, `app_version`, `root`, `url`,`user_name`, `password`, `db_name`, `db_user`, `db_pass`) VALUES ('$webdomain', '$site_name', '$app_name', '$app_version', '$root_url', '$url','$user_name', '$password', '$db_name', '$db_user', '$db_pass')";
+$insert_app = "INSERT INTO app (`domain`, `site_name`, `app_name`, `app_version`, `root`, `url`,`user_name`, `password`, `db_name`, `db_user`, `db_pass`) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
 
-if(!$commons->doThis($insert_q)){
+if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
+{
     $error = "cannot add db account";
         require_once("views/admin/share/server/site/app_install/index.php");
         die("");
 }
 
-if(!$commons->doThis($insert_app)){
+if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
+{
     $error = "cannot add db account";
         require_once("views/admin/share/server/site/app_install/index.php");
         die("");
 }
 $src = APP_PATH."$app_name/$app_version";
-if($weborigin!=1){  
+if ( $weborigin!==1)
+{  
     $dst = ROOT_PATH.$webrootuser.'/'.$webuser.'/web/'.$root_url;
-}else{
+} else
+{
     $dst = ROOT_PATH.$webuser.'/web/'.$root_url;
 }
 copy_paste($src, $dst);
@@ -64,7 +68,7 @@ $sql_contents = str_replace("replace_wp_url",$url,$sql_contents);
 file_put_contents($sql_file,$sql_contents);
 $import = file_get_contents($sql_file);
 
-if(!$commons->importWP($import,$db_name,$db_user,$db_pass))
+if ( ! $commons->importWP($import,$db_name,$db_user,$db_pass))
 {
     echo "import fail";
 }

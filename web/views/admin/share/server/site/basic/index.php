@@ -28,11 +28,11 @@ $error_pages = json_decode($weberrorpages);
                                                     <th  class="border-dark">利用設定</th>
                                                 </tr>
                                                     <?php
-                                                        foreach($error_pages as $key=>$ep) {
+                                                        foreach($error_pages as $key=>$ep):
                                                     ?>
                                                     <tr>
-                                                        <td class="border-dark"><?php echo $ep->statuscode; ?></td>
-                                                        <td class="border-dark"><?php echo $ep->url; ?></td>
+                                                        <td class="border-dark"><?= htmlspecialchars($ep->statuscode, ENT_QUOTES); ?></td>
+                                                        <td class="border-dark"><?= htmlspecialchars($ep->url, ENT_QUOTES); ?></td>
                                                         <td class="border-dark">
                                                             <div style="display: -webkit-inline-box;">
                                                                 <button edit_id="<?= $key;?>" class="pr-2 btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=edit&act_id=<?=$key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">編集</button>
@@ -49,9 +49,7 @@ $error_pages = json_decode($weberrorpages);
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <?php
-                                                        }
-                                                    ?>
+                                                    <?php endforeach; ?>
                                             </table>
                                         </div>
                                         <div class="row">

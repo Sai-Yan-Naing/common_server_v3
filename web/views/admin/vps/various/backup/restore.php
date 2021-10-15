@@ -1,8 +1,8 @@
 <?php
  require_once('views/admin/admin_vpsconfig.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM vps_backup WHERE id='$act_id'";
-$getRow = $commons->getRow($query);
+$query = "SELECT * FROM vps_backup WHERE id=?";
+$getRow = $commons->getRow($query,[$act_id]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
@@ -11,7 +11,7 @@ $getRow = $commons->getRow($query);
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-	<form action="/admin/vps/various?setting=backup&tab=backup&act=confirm&webid=<?=$webid?>" method = "post" id="vpsautobackup">
+	<form action="/admin/vps/various?setting=backup&tab=backup&act=confirm&webid=<?=$webid?>" method = "post" id="vpsautobackup" onsubmit="loading()">
     <input type="hidden" name="action" value="restore">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="backup_vmname" value="<?= $getRow['name'] ?>">

@@ -13,7 +13,7 @@ class Mailer
 		$this->mail = new PHPMailer(true);
 	}
 
-	function sendMail($to,$toName,$subject,$body)
+	function sendMail($to,$toName,$subject,$body,$cc = "")
 	{
 		try {
 			//Server settings
@@ -27,16 +27,18 @@ class Mailer
 			$this->mail->Port       = MAIL_PORT;
 
 			//Recipients
-			$this->mail->setFrom(FROM, FROM_NAME);
+			$this->mail->setFrom(FROM, FROMNAME);
 			$this->mail->addAddress($to, $toName);
-
+			if ( isset($cc) && $cc !==null){
+				$this->mail->addCC($cc,CCNAME);
+			}
 			//Content
 			$this->mail->isHTML(true);
 			$this->mail->Subject = $subject;
 			$this->mail->Body    = $body;
 			// $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-			if(!$this->mail->send())
+			if ( ! $this->mail->send())
 			{
 				return false;
 			}

@@ -11,10 +11,10 @@
 						<div class="col-md-10">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="">共用サーバー</a>
+									<a class="nav-link active" aria-current="page" href="" onclick="loading()">共用サーバー</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="">VPS/デスクトッププラン</a>
+									<a class="nav-link" href="" onclick="loading()">VPS/デスクトッププラン</a>
 								</li>
 							</ul>
 						</div>
@@ -23,9 +23,9 @@
 						<div class="col-md-2 text-right">
 							<label>契約ドメイン</label>
 							<?php
-							$query = "SELECT * FROM web_account WHERE `customer_id` = 'D000123' && `removal` is null";
+							$query = "SELECT * FROM web_account WHERE `customer_id` = ? && `removal` is null";
 							$commons = new Common;
-							$getAllRow = $commons->getAllRow($query);
+							$getAllRow = $commons->getAllRow($query,[$webadminID]);
 							?>
 							<?php foreach ($getAllRow as $value): ?>
 								<a href="/admin/dns?tab=share&act=index&webid=<?= htmlspecialchars($value['id'], ENT_QUOTES); ?>">
@@ -46,7 +46,7 @@
 							$query = 'SELECT * FROM web_account WHERE `customer_id` = :customer_id && `removal` is null && `id`=:param';
 						}
 
-						$getDns = $commons->getRow($query, ['customer_id' => 'D000123','param' => $param]);
+						$getDns = $commons->getRow($query, ['customer_id' => $webadminID,'param' => $param]);
 						?>
 						<div class="col-md-10">
 							<div class="card">
@@ -66,10 +66,10 @@
 											$temp = json_decode($getDns['dns']);
 											foreach ($temp as $key => $value): ?>
 												<tr class="row">
-													<td class="col-md-2"><?= $value->type; ?></td>
-													<td class="col-md-2"><?= $value->sub; ?></td>
-													<td class="col-md-3">.<?= $getDns['domain'] ?></td>
-													<td class="col-md-3"><?= $value->target; ?></td>
+													<td class="col-md-2"><?= htmlspecialchars($value->type, ENT_QUOTES); ?></td>
+													<td class="col-md-2"><?= htmlspecialchars($value->sub, ENT_QUOTES); ?></td>
+													<td class="col-md-3">.<?= htmlspecialchars($getDns['domain'], ENT_QUOTES);  ?></td>
+													<td class="col-md-3"><?= htmlspecialchars( $value->target, ENT_QUOTES); ?></td>
 													<td class="col-md-2">
 														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/dns?tab=share&act=edit&webid=<?= $webid; ?>&act_id=<?= $key ?>">編集</a>
 														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-danger btn-sm edit_database btn-sm common_dialog" gourl="/admin/dns?tab=share&act=delete&webid=<?= $webid; ?>&act_id=<?= $key ?>">削除</a>
@@ -87,7 +87,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="back-button"><a href="/admin"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
+					<div class="back-button"><a href="/admin" onclick="loading()"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
 				</div>
 			</div>
 		</main>

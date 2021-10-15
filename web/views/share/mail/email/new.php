@@ -25,7 +25,7 @@ require_once('views/share_config.php');
         </div>
         <div class="col-sm-3"></div>
     </div>
-	<form action="/share/mail?setting=email&tab=tab&act=confirm" method="post" id="email_create">
+	<form action="/share/mail?setting=email&tab=tab&act=confirm" method="post" id="email_create" onclick="loading()">
 		<input type="hidden" name="action" value="new">
     	<div class="row mr-2 justify-content-center mb-1">
     		<label for="email" class="col-sm-3">メールアドレス</label>

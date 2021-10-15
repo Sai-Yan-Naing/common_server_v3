@@ -3,7 +3,7 @@ require_once("views/admin/admin_config.php");
 $to = $_GET['to'];
 $t_domain = $_POST['domain'];
 
-if ($to == 'domain_search')
+if ($to === 'domain_search')
 {
 	$subject = "Domain search";
 	$domain = "Domain search body";

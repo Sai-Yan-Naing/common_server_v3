@@ -4,23 +4,23 @@
             <br><br>
             <span><?=$webdomain?></span>
         </a>
-        <a href="/admin/share/mail?setting=email&tab=tab&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='email')?"active":"text-dark"?>">
-            <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='email')?"setting1":"setting"?>.png" alt="site.png">
+        <a href="/admin/share/mail?setting=email&tab=tab&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting==='email')?"active":"text-dark"?>" onclick="loading()">
+            <img src="<?= call_ass() ?>img/subtitle/<?=($setting==='email')?"setting1":"setting"?>.png" alt="site.png">
             <br><br>
             <span>メール設定 </span>
         </a>
-        <a href="/admin/share/mail?setting=connection&tab=pop&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='connection')?"active":"text-dark"?>">
-            <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='connection')?"connection1":"connection"?>.png" alt="site.png">
+        <a href="/admin/share/mail?setting=connection&tab=pop&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting==='connection')?"active":"text-dark"?>" onclick="loading()">
+            <img src="<?= call_ass() ?>img/subtitle/<?=($setting==='connection')?"connection1":"connection"?>.png" alt="site.png">
             <br><br>
             <span>メール接続情報</span>
         </a>
-        <a href="http://mail.<?=$webdomain?>" target="_blank" class="subtitle pt-4 pb-4 <?=($setting=='database')?"active":"text-dark"?>">
+        <a href="http://mail.<?=$webdomain?>" target="_blank" class="subtitle pt-4 pb-4 <?=($setting==='database')?"active":"text-dark"?>">
             <img src="<?= call_ass() ?>img/subtitle/webmail.png" alt="site.png">
             <br><br>
             <span>WEBメール</span>
         </a>
-        <a href="/admin/share/mail?setting=list&tab=null&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='list')?"active":"text-dark"?>">
-            <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='list')?"maillist1":"maillist"?>.png" alt="site.png">
+        <a href="/admin/share/mail?setting=list&tab=null&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting==='list')?"active":"text-dark"?>">
+            <img src="<?= call_ass() ?>img/subtitle/<?=($setting==='list')?"maillist1":"maillist"?>.png" alt="site.png">
             <br><br>
             <span>メーリングリスト</span>
         </a>

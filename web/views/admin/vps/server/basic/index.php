@@ -1,62 +1,76 @@
 <?php require_once('views/admin/vps/header.php'); ?>
-    <div id="layoutSidenav">
-        <?php require_once('views/admin/vps/sidebar.php');?>
-            <div id="layoutSidenav_content">
-            <main class="main-page">
-                    <div class="container-fluid px-4">
-                            <?php require_once('views/admin/vps/title.php') ?>
-                            <?php require_once('views/admin/vps/server/subtitle.php') ?>
-                            <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                                <!-- start -->
-                                <div class="tab-content">
-                                    <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
-                                        <form action="/admin/vps/server?tab=basic&act=confirm&webid=<?=$webid?>" method="post">
-                                            <div class="form-group row">
-                                                <label for="" class="col-sm-3 col-form-label">OS</label>
-                                                <div class="col-sm-8">
-                                                    <span>Windows server 2019</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="" class="col-sm-3 col-form-label">契約プラン</label>
-                                                <div class="col-sm-8">
-                                                    <span>SSD1902-16GB</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="" class="col-sm-3 col-form-label">メモリ</label>
-                                                <div class="col-sm-8">
-                                                    <span><input type="text" name="memory" value="<?=$web_memory?>"> GB</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="" class="col-sm-3 col-form-label">ストレージ</label>
-                                                <div class="col-sm-8">
-                                                    <span><input type="text" name="storage" value="<?=$web_storage?>"> GB</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="" class="col-sm-3 col-form-label"> cpu</label>
-                                                <div class="col-sm-8">
-                                                    <span><input type="text" name="cpu" value="<?=$web_cpu?>"> プラン</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-3"></div>
-                                                <div class="col-sm-5">
-                                                    <button type="submit" name="request" class="btn btn-outline-info btn-sm">プラン変更依頼</button>
-                                                    <button type="submit" name="osreinstall" class="btn btn-outline-info btn-sm">OS初期化</button>
-                                                </div>
-                                                <div class="col-sm-4"></div>
-                                            </div>
-                                        </form>
-                                        <div class="mb-4">※OS初期化の場合、サーバーの再設定まで少しお時間をいただきますので予めご了承下さい。</div>
+<div id="layoutSidenav">
+<?php require_once('views/admin/vps/sidebar.php');?>
+    <div id="layoutSidenav_content">
+        <main class="main-page">
+            <div class="container-fluid px-4">
+                    <?php require_once('views/admin/vps/title.php') ?>
+                    <?php require_once('views/admin/vps/server/subtitle.php') ?>
+                    <?php
+                    $plan = "SELECT plan FROM vps_account Where id=?";
+                    $getpln = $commons->getRow($plan,[$webid]);
+                    $plan_ = $getpln['plan'];
+                    $query = "SELECT spec_info.value,price_tbl.plan_name FROM service_db.dbo.price_tbl
+                    inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
+                    INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
+                    $getmemory = $commons->getSpec($query,['memory',$plan_]);
+                    $getdisk = $commons->getSpec($query,['disk_hdd',$plan_]);
+                    $getcore = $commons->getSpec($query,['core',$plan_]);
+                    $spec = [
+                        "plan_name"=>$getmemory['plan_name'], 
+                        "memory"=>$getmemory['value'], 
+                        "disk_hdd"=>$getdisk['value'],
+                        "core" => $getcore['value']];
+                    ?>
+                    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                        <!-- start -->
+                        <div class="tab-content">
+                            <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-3 col-form-label">OS</label>
+                                        <div class="col-sm-8">
+                                            <span>Windows server 2019</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- end content -->
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-3 col-form-label">契約プラン</label>
+                                        <div class="col-sm-8">
+                                            <span><?= $spec['plan_name']  ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-3 col-form-label">メモリ</label>
+                                        <div class="col-sm-8">
+                                            <span><label for=""><?= $spec['memory']  ?></label> GB</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-3 col-form-label">ストレージ</label>
+                                        <div class="col-sm-8">
+                                            <span><label for=""><?= $spec['disk_hdd']?></label> GB</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-3 col-form-label"> cpu</label>
+                                        <div class="col-sm-8">
+                                            <span><label for=""><?= $spec['core']  ?></label> プラン</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-5">
+                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/vps/server?tab=basic&act=spec&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">プラン変更依頼</button>
+                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/vps/server?tab=basic&act=osreinstall&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">OS初期化</button>
+                                        </div>
+                                        <div class="col-sm-4"></div>
+                                    </div>
+                                <div class="mb-4">※OS初期化の場合、サーバーの再設定まで少しお時間をいただきますので予めご了承下さい。</div>
                             </div>
+                        </div>
+                        <!-- end content -->
                     </div>
-                </main>
             </div>
-        </div> 
+        </main>
+    </div>
+</div> 
  <?php require_once("views/admin/vps/footer.php"); ?>

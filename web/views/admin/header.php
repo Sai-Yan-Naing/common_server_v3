@@ -56,5 +56,5 @@
             return $ass;
 
  }
-?>
-<?php require_once("views/common_modal.php");?>
+require_once("views/common_modal.php");
+require_once("views/loading.php");

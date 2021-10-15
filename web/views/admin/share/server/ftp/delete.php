@@ -1,8 +1,8 @@
 <?php
 require_once('views/admin/admin_shareconfig.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM db_ftp WHERE id='$act_id'";
-$getRow = $commons->getRow($query);
+$query = "SELECT * FROM db_ftp WHERE id=?";
+$getRow = $commons->getRow($query,[$act_id]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">

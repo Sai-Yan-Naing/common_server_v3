@@ -13,9 +13,10 @@ require_once('views/admin/admin_vpsvalidate.php');
 require_once('mails/mail.php');
 $webmailer = new Mailer;
 $commons = new Common;
-$web_acc = $commons->getRow("SELECT * FROM vps_account WHERE id='$_GET[webid]' AND customer_id='D000123'");
+$web_acc = $commons->getRow("SELECT * FROM vps_account WHERE id= ? AND customer_id= ?",[$_GET['webid'],$_COOKIE['admin']]);
 $webid = $web_acc['id'];
 $webip = $web_acc['ip'];
+$webgateway = $web_acc['gateway'];
 $webadminID = $web_acc['customer_id'];
 $webvmhost_ip = $web_acc['host_ip'];
 $webvmhost_user = $web_acc['host_user'];
@@ -28,4 +29,3 @@ $webhttp_rdp = $web_acc['http_rdp'];
 $web_memory = $web_acc['memory'];
 $web_storage  = $web_acc['storage'];
 $web_cpu = $web_acc["cpu"];
-?>

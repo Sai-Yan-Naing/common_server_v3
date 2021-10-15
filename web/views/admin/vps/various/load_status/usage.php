@@ -51,7 +51,8 @@
         $vm_pass = JAPANSYS_PASS;
         // $vm_action = "ramt";
 
-        if (stristr(PHP_OS, "win")) {
+        if ( stristr(PHP_OS, "win")) 
+        {
             // Get total physical memory (this is in bytes)
             $shell =shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$cmd);;
             $shell = trim(preg_replace('/\s\s+/', ' ', $shell));
@@ -81,12 +82,16 @@
             //     }
             // }
         }
-        if (is_null($memoryTotal) || is_null($memoryFree)) {
+        if (is_null($memoryTotal) || is_null($memoryFree)) 
+        {
             return null;
-        } else {
-            if ($getPercentage) {
+        } else 
+        {
+            if ($getPercentage) 
+            {
                 return round((100 - ((int)$memoryFree * 1024 * 100 / (int)$memoryTotal)),2);
-            } else {
+            } else 
+            {
                 return array(
                     "total" => $memoryTotal,
                     "free" => $memoryFree,

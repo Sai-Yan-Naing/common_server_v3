@@ -16,14 +16,11 @@ $webappversion = json_decode($webappversion);
           <div class="col-sm-10">
             <select name="version" id="php_version" class="form-control">
             <?php
-                foreach(getPhpVersion() as $phpkey=>$phpvalue)
-                {?>
+                foreach(getPhpVersion() as $phpkey=>$phpvalue) : ?>
 
                 <option value="<?=$phpvalue?>" <?php if($phpvalue==$webappversion->app->php){ echo "selected";} ?>><?=$phpvalue?></option>
 
-            <?php
-                }
-            ?>
+            <?php endforeach; ?>
             </select>
           </div>
       </div>

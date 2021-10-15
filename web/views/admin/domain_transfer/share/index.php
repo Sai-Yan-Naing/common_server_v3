@@ -9,7 +9,7 @@
 					<div class="row justify-content-center">
 						<div class="col-md-8">
 							<div class="mt-3 mb-3">ドメイン取得</div>
-							<form action="/admin/domain-transfer?tab=share&act=confirm&to=domain_search" method="post" id="domain_search_fm">
+							<form onsubmit="loading()" action="/admin/domain-transfer?tab=share&act=confirm&to=domain_search" method="post" id="domain_search_fm">
 								<div class="form-group row">
 									<label for="domain" class="col-sm-3 col-form-label">ドメイン名</label>
 									<div class="col-sm-6">
@@ -25,7 +25,7 @@
 					<div class="row justify-content-center">
 						<div class="col-md-8">
 							<div class="mt-3 mb-4">ドメイン移管（他社から弊社に移管）</div>
-							<form action="/admin/domain-transfer?tab=share&act=confirm&to=us" method="post" id="domian_transfer_tous">
+							<form onsubmit="loading()" action="/admin/domain-transfer?tab=share&act=confirm&to=us" method="post" id="domian_transfer_tous">
 								<div class="form-group row">
 									<label for="domain" class="col-sm-3 col-form-label">ドメイン名</label>
 									<div class="col-sm-9">
@@ -50,7 +50,7 @@
 					<div class="row justify-content-center mt-4">
 						<div class="col-md-8">
 							<div class="mb-3">ドメイン移管（弊社から他社に移管）</div>
-							<form action="/admin/domain-transfer?tab=share&act=confirm&to=other" method="post" id="domian_transfer_to_other">
+							<form onsubmit="loading()" action="/admin/domain-transfer?tab=share&act=confirm&to=other" method="post" id="domian_transfer_to_other">
 								<div class="form-group row">
 									<label for="domain" class="col-sm-3 col-form-label">ドメイン名</label>
 									<div class="col-sm-9">
@@ -66,7 +66,7 @@
 							</form>
 						</div>
 					</div>
-					<div class="back-button"><a href="/admin"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
+					<div class="back-button"><a href="/admin" onclick="loading()"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
 				</div>
 
 			</div>
