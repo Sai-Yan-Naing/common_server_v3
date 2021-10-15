@@ -2,26 +2,36 @@
 define("PASS_KEY", "cee358b7cd218370be64e518934687be");
 
 define("ROOT", 'root');
-define("ROOT_PASS", "welcome");
-define("DSN", 'mysql:host=localhost:3306;dbname=japan_system_development_d');
+define("ROOT_PASS", "");
+define("DSN", 'mysql:host=localhost:3306;dbname=japan_system_development_852021');
+define("MANAGER",'http://localhost/phpmyadmin');
 
 define("MAROOT", 'root');
-define("MAROOT_PASS", "welcome");
+define("MAROOT_PASS", "");
 define("MADSN", 'mysql:host=localhost:3307');
+define("MDMANAGER",'http://localhost/mariadb/phpmyadmin');
 
-define("IP", "203.137.92.252");
+define("IP", "127.0.0.1");
 
 // For email
 
-define("MAIL_HOST", "smtp.googlemail.com");
+define("MAIL_HOST", "smtp.gmail.com");
 define("MAIL_USER", "capital.saiyannaing@gmail.com");
-define("MAIL_PASS", "saiyannaing123!");
+define("MAIL_PASS", "ypoefnjbdqmmtchx");
 define("FROM", "capital.saiyannaing@gmail.com");
-define("FROM_NAME", "SAI YAN NAING");
+define("FROMNAME", "Saiyannaing");
 define("MAIL_PORT", 587);
-define("TO", "support@winserver.ne.jp");
-define("TONAME", "TESTER");
+define("SMTPSecure", 'tls');
+define("TO", "saiyannaing259768648@gmail.com");
+define("CC", "saiyannaing@ckmphpdev.tech");
+define("CCNAME", "Winserver");
+// define("TONAME", "SaiYanNaing");
 define("MAIL_SERVER","http://ssl8.ethical-sai.tech");
+
+define("WINSERVERROOT", 'winserverroot');
+define("JAPANSYS", 'japansys');
+define("JAPANSYS_PASS", 'bmbivPanKuQ5AVe');
+
 
 // define("STARTER_PLAN", 1);
 // define("COMMON_PLAN", 1);
@@ -30,12 +40,20 @@ define("MAIL_SERVER","http://ssl8.ethical-sai.tech");
 define('SWAF_PATH','C:/JP-Secure/SiteGuard Lite/logs/http/detect.log');
 define('ROOT_PATH','E:/webroot/LocalUser/');
 define('PHP_ROOT_PATH','C:/Program Files/PHP/');
-define('DEFAULT_PHP','v7.2.9-nts');
+define('DEFAULT_PHP','v7.3');
 define('DEFAULT_DOTNET','v4.0');
 
-const SQLSERVER_2016_DSN = "sqlsrv:Server=localhost;Database=master";
+define('APP_PATH','G:/application/');
+define('APP_CONFIG_PATH','G:/app_config/');
+
+const SQLSERVER_2016_DSN = "sqlsrv:Server=localhost\SQLEXPRESS;Database=master";
 const SQLSERVER_2016_USER = "sa";
-const SQLSERVER_2016_PASS = "welcome123";
+const SQLSERVER_2016_PASS = "welcome123!";
 
 const SQLSERVER_2016_HOST_NAME = "mssql5.winserver.ne.jp";
 const SQLSERVER_2016_HOST_IP = "203.137.92.252";
+
+define('DBDSN','sqlsrv:Server=202.218.224.21;Database=master');
+// define('SERVICEDSN','sqlsrv:Server=202.218.224.21;Database=service_db');
+define('DBROOT','tester');
+define('DBROOT_PASS','welcome123!');
