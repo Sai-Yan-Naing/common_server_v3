@@ -10,7 +10,7 @@ $temp_key = $_GET['act_id'];
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=dir&webid=<?=$webid?>" method="post" id="delete_bass_dir">
+  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=dir&webid=<?=$webid?>" method="post" id="delete_bass_dir" onsubmit="loading()">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="dir_id" value="<?= $temp_key ?>">
     <input type="hidden" name="bass_dir" value="<?= $temp->$temp_key->url ?>">

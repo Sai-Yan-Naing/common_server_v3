@@ -14,7 +14,7 @@
             <br><br>
             <span>メール接続情報</span>
         </a>
-        <a href="http://mail.<?=$webdomain?>" target="_blank" class="subtitle pt-4 pb-4 <?=($setting==='database')?"active":"text-dark"?>">
+        <a href="http://mail.<?=$webdomain?>/IClient/Login.aspx?ReturnUrl=%2fIClient%2fdefault.aspx" target="_blank" class="subtitle pt-4 pb-4 <?=($setting==='database')?"active":"text-dark"?>">
             <img src="<?= call_ass() ?>img/subtitle/webmail.png" alt="site.png">
             <br><br>
             <span>WEBメール</span>

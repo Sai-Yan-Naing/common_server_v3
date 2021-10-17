@@ -11,7 +11,7 @@
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
-                                        <form action="/admin/share/server?setting=security&tab=ssl&act=index&webid=<?=$webid?>" method="post" id="free-ssl">
+                                        <form action="/admin/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="free-ssl">
                                             <div class="form-group row">
                                                 <span class="col">無料SSL設定</span>
                                             </div>

@@ -1,8 +1,9 @@
 <?php 
 
 require_once('views/admin/admin_shareconfig.php');
-$user = $weborigin===1?$webrootuser:$webrootuser."/".$webuser;
-$dir = ROOT_PATH.$user."/";
+$user = $weborigin == 1?$webrootuser:$webrootuser."/".$webuser;
+ $dir = ROOT_PATH.$user.'/';
+// die;
 if (isset($_POST['foldername']))
 {
     $foldername = $_POST['foldername'];

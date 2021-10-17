@@ -8,7 +8,7 @@ require_once('views/admin/admin_shareconfig.php');
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-	<form action="/admin/share/various?setting=backup&act=confirm&webid=<?=$webid?>" method = "post" id="autobackup">
+	<form action="/admin/share/various?setting=backup&act=confirm&webid=<?=$webid?>" method = "post" id="autobackup" onsubmit="loading()">
         <input type="hidden" name="action" value="delete">
         <b style="color: red"><?=$webdomain ?> </b> をバックアップ削除しますか？
     </form>

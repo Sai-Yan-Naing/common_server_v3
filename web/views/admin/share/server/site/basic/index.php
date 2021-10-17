@@ -36,7 +36,7 @@ $error_pages = json_decode($weberrorpages);
                                                         <td class="border-dark">
                                                             <div style="display: -webkit-inline-box;">
                                                                 <button edit_id="<?= $key;?>" class="pr-2 btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=edit&act_id=<?=$key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">編集</button>
-                                                                <form action="/admin/share/servers/sites/basic?confirm&act=&webid=<?=$webid?>&error_pages&act_id=<?=$key?>" method = "post" class="ml-2">
+                                                                <form action="/admin/share/servers/sites/basic?confirm&act=&webid=<?=$webid?>&error_pages&act_id=<?=$key?>" method = "post" class="ml-2" onsubmit="loading()">
                                                                     <input type="hidden" name="action" value="onoff">
                                                                     <input type="hidden" name="act_id" value="<?=$key;?>">
                                                                     <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=onoff&act_id=<?=$key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">

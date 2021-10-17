@@ -14,7 +14,7 @@ $temp = json_decode($webbasicsetting);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="basic_adduser_create">
+  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="basic_adduser_create" onsubmit="loading()">
     <input type="hidden" name="action" value="edit">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
     <input type="hidden" name="dir_id" value="<?= $dir_id ?>">

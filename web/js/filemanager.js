@@ -22,9 +22,10 @@ $(document).on("click", ".folder_click", function () {
       $_path +
       '"  style="padding: 5px 0; cursor:pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=' +
       $webid +
-      '">Home</a>' +
+      '" webid="'+$webid+'">Home</a>' +
       "</li>";
-    if ($foldername != "" && $foldername != null) {
+      $filepath = $filepath.filter(e => e !== '')
+    if ($foldername !== "" && $foldername !== null) {
       // alert(1)
       for (var i = 0; i <= $filepath.length - 1; i++) {
         // $_path+='/'+$filepath[i];
@@ -39,12 +40,13 @@ $(document).on("click", ".folder_click", function () {
           $_path +
           '" style="padding: 5px 0; cursor:pointer;" gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=' +
           $webid +
-          '"><i class="ml-2 mr-2 fa fa-chevron-right" aria-hidden="true"></i>' +
+          '" webid="'+$webid+'"><i class="ml-2 mr-2 fa fa-chevron-right" aria-hidden="true"></i>' +
           $filepath[i] +
           "</a>" +
           "</li>";
       }
     }
+    console.log($filepath)
     $("#dir_path").html($path);
     $("#common_path").attr("path", $foldername);
     $(".download_file").each(function (i, obj) {

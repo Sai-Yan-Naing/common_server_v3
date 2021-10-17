@@ -1,13 +1,13 @@
 <?php
 require_once('views/admin/admin_shareconfig.php');
-// if ( !isset($_POST['action']) || !isset($_POST['ftp_user']))
+if ( !isset($_POST['action']) || !isset($_POST['ftp_user']))
 { header("location: /admin/share/server?setting=security&tab=directory&act=index&webid=$webid"); die();}
 $originuser = '';
 if ( $weborigin!=1)
 {
 	$originuser = $webrootuser;
 }
-if ( isset($_POST['action']) and $_POST['action']==='new')
+if ( isset($_POST['action']) and $_POST['action'] === 'new')
 {
 	$ftp_user=$_POST['ftp_user'];
 	$ftp_pass=$_POST['ftp_pass'];

@@ -12,7 +12,7 @@ $temp = json_decode($webbasicsetting);
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="delete_bass_user">
+  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="delete_bass_user" onsubmit="loading()">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="bass_dir" value="<?= $temp->$dir_id->url ?>">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">

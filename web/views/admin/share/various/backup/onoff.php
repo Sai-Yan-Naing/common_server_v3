@@ -12,7 +12,7 @@ $get_backup = $backup->checkScheduler($webdomain);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/various?setting=backup&act=confirm&webid=<?=$webid?>" method="post" id="onoff">
+  <form action="/admin/share/various?setting=backup&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="auto_backup">
     <!-- <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="stopped" value="<?= $getRow['stopped'] ?>">

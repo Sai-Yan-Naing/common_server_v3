@@ -9,7 +9,7 @@ $webappversion = json_decode($webappversion);
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-  <form action="/admin/share/server?setting=site&tab=app_setting&act=confirm&apply=php_version&webid=<?=$webid?>" method="post" id="phpversion_fm">
+  <form action="/admin/share/server?setting=site&tab=app_setting&act=confirm&apply=php_version&webid=<?=$webid?>" method="post" id="phpversion_fm" onsubmit="loading()">
     <input type="hidden" name="action" value="new">
       <div class="row justify-content-center">
           <label for="php_version" class="col-sm-2 text-right p-2">PHPバージョン</label>
