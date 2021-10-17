@@ -13,6 +13,11 @@
                     $query = "SELECT spec_info.value,price_tbl.plan_name FROM service_db.dbo.price_tbl
                     inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
                     INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
+                    // $query = "SELECT * FROM service_db.dbo.PRICE_TBL WHERE SERVICE= '07' AND TYPE = '02' AND PLN IN ('42','43','44','45','46','47','48');";
+                    // $test = $commons->getSpec($query);
+                    // echo "<pre>";
+                    // print_r($test);
+                    // die;
                     $getmemory = $commons->getSpec($query,['memory',$plan_]);
                     $getdisk = $commons->getSpec($query,['disk_hdd',$plan_]);
                     $getcore = $commons->getSpec($query,['core',$plan_]);

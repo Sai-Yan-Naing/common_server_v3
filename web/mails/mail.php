@@ -13,7 +13,7 @@ class Mailer
 		$this->mail = new PHPMailer(true);
 	}
 
-	function sendMail($to,$toName,$subject,$body,$cc = "")
+	function sendMail($to,$toName,$subject,$body,$cc = null,$noreply=null)
 	{
 		try {
 			//Server settings
@@ -27,7 +27,12 @@ class Mailer
 			$this->mail->Port       = MAIL_PORT;
 
 			//Recipients
-			$this->mail->setFrom(FROM, FROMNAME);
+			
+			// if ( isset($noreply) && $noreply !==null){
+			// 	$this->mail->setFrom($noreply,NOREPLYNAME);
+			// }else{
+				$this->mail->setFrom(FROM, FROMNAME);
+			// }
 			$this->mail->addAddress($to, $toName);
 			if ( isset($cc) && $cc !==null){
 				$this->mail->addCC($cc,CCNAME);

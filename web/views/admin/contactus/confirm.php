@@ -2,8 +2,30 @@
 require_once("views/admin/admin_config.php");
 $to = $_POST['email'];
 $toName = $_POST['name'];
-$subject = "mail subject";
-$body = $_POST['message'];
-$webmailer->sendMail($to, $toName, $subject, $body);
+$message = $_POST['message'];
+$phone = $_POST['phone'];
+$today = date("Y/m/d");
+
+$timestamp = date("Y/m/d :h:m:s");
+
+$subject ='=?UTF-8?B?'.base64_encode('ウィンサーバー').'?=';
+$body = file_get_contents('views/mailer/admin/contactus/user.php');
+$body = str_replace('$message', $message, $body);
+$body = str_replace('$phone', $phone, $body);
+$body = str_replace('$email', $to, $body);
+$body = str_replace('$name', $toName, $body);
+$body = str_replace('$today', $today, $body);
+
+$webmailer->sendMail($to,$toName,$subject,$body,CC);
+
+$body = file_get_contents('views/mailer/admin/contactus/mail.php');
+$body = str_replace('$message', $message, $body);
+$body = str_replace('$contractID', $webadminID, $body);
+$body = str_replace('$phone', $phone, $body);
+$body = str_replace('$email', CC, $body);
+$body = str_replace('$name', $toName, $body);
+$body = str_replace('$today', $timestamp, $body);
+
+$webmailer->sendMail($to,$toName,$subject,$body,CC);
 header('location: /admin/contactus?act=index');
 die('admin');

@@ -26,8 +26,8 @@ $gateway = $webgateway;
             $getdisk = $commons->getSpec($query,['disk_hdd',$plan])['value'];
             $getcore = $commons->getSpec($query,['core',$plan])['value'];
         
-        //     $vm_storage = (int)$getdisk*1024*1048576;
-            $vm_storage = 100*1024*1048576;
+            $vm_storage = (int)$getdisk*1024*1048576;
+            // $vm_storage = 80*1024*1048576;
 
             $vm_memory = (int)$getmemory*1024*1048576;
             $vm_cpu = (int)$getcore;
@@ -40,14 +40,14 @@ $gateway = $webgateway;
                 $body = str_replace('$disk', $getdisk, $body);
                 $body = str_replace('$cpu', $vm_cpu, $body);
                 $body = preg_replace('/\\\\/','', $body); //Strip backslashes
-                $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body); 
+                $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body,''); 
                 $cmd = "changeplan";
 
                 shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu);
 
         } else
         {
-                $vm_storage = 60*1024*1048576;
+                // $vm_storage = 60*1024*1048576;
                 shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu.' '.$ipaddress.' '.$gateway);
         }
     }

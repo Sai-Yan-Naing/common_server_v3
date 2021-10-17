@@ -2,17 +2,20 @@
 require_once('views/admin/admin_vpsconfig.php');
 $plan_q = "SELECT plan FROM vps_account Where id=?";
 $getpln = $commons->getRow($plan_q,[$webid]);
-$plans = ['78', '79', '80', '81'];
+$plans = ['78', '79', '80', '81','82'];
 
 $query = "SELECT spec_info.value,price_tbl.plan_name FROM service_db.dbo.price_tbl
-inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
-INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND
-spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
-
+                    inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
+                    INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
+// $query = "SELECT * FROM service_db.dbo.PRICE_TBL WHERE SERVICE= '07' AND TYPE = '02' AND PLN IN ('42','43','44','45','46','47','48');";
+// $test = $commons->getSpec($query);
+// echo "<pre>";
+// print_r($test);
+// die;
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Change Plan</h4>
+  <h4 class="modal-title">プラン変更</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -33,11 +36,11 @@ spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' A
         ];
 ?>
         <div class="col-xl-3 col-md-6">
-            <label class="card mb-4 <?= ($plan === $getpln['plan'])? 'bg-primary text-white' : ''; ?>">
+            <label class="card mb-4 <?= ($plan === $getpln['plan'])? 'bg-primary text-white' : (($plan > $getpln['plan'])? 'pointer' :''); ?>">
                 <div class="card-header">
                      <?=$spec['plan_name'] ?>
                 </div>
-                <input type="radio" name="spec" form="updateplan" value="<?= $plan;?>" class="spec_change d-none" <?= ($plan === $getpln['plan'])? 'checked' : ''; ?>>
+                <input type="radio" name="spec" form="updateplan" value="<?= $plan;?>" class="spec_change d-none" <?= ($plan === $getpln['plan'])? 'checked' : ''; ?> <?= ((int)$plan < $getpln['plan'])? 'disabled' : ''; ?>>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">メモリ</div>
@@ -55,7 +58,7 @@ spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' A
             </label>
         </div>
         <?php endforeach; ?>
-        <form action="/admin/vps/server?tab=basic&act=confirm&webid=<?= $webid?>" method="post" id="updateplan" onsubmit="loading()">
+        <form action="/admin/vps/server?tab=basic&act=confirm&webid=<?= $webid ?>" method="post" id="updateplan">
         <input type="hidden" name="action" value="updateplan">
         </form>
     </div>

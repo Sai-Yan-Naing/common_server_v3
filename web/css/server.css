@@ -349,6 +349,7 @@ span {
 
 .main-page .subtitle{
     width: 14.285%; border-right:1px solid #ccc; text-align:center;
+    word-break: break-all;
 }
 .main-page .subtitle img{
     width: 30px; height:30px;

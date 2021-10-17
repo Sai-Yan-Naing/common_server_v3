@@ -170,3 +170,12 @@ $(document).on("change", ".spec_change", function () {
   $(".spec_change").parent().removeClass("bg-primary text-white");
   $(this).parent().addClass("bg-primary text-white");
 });
+
+$(document).on("submit", "#updateplan", function () {
+  // var name = $('input[name="spec"]');
+  // if (name.value == name.defaultValue) {
+  //   alert("Plan Cannot be change")
+  // };
+  // return false;
+  loading();
+});
