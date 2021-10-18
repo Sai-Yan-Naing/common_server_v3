@@ -27,7 +27,7 @@ $weboriginid = $web_acc['origin_id'];
 // for root site
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE id= ?",[$weboriginid]);
 $webrootid = $webroot_acc['id'];
-$webadminID = $web_acc['customer_id'];
+$webadminID = $webroot_acc['customer_id'];
 $webrootuser = $webroot_acc['user'];
 $webrootdomain = $webroot_acc['domain'];
 $webrootpass = $webroot_acc['password'];
@@ -40,3 +40,5 @@ $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
 
 $setting = $_GET['setting'];
+
+$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webrootuser; 

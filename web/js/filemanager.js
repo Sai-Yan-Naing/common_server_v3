@@ -20,8 +20,8 @@ $(document).on("click", ".folder_click", function () {
       '<li class="nav-item">' +
       '<a class="nav-link folder_click text-white" foldername="' +
       $_path +
-      '"  style="padding: 5px 0; cursor:pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=' +
-      $webid +
+      '"  style="padding: 5px 0; cursor:pointer;"  gourl="' +
+      $gourl +
       '" webid="'+$webid+'">Home</a>' +
       "</li>";
       $filepath = $filepath.filter(e => e !== '')
@@ -38,8 +38,8 @@ $(document).on("click", ".folder_click", function () {
           '<li class="nav-item">' +
           '<a class="nav-link folder_click text-white" foldername="' +
           $_path +
-          '" style="padding: 5px 0; cursor:pointer;" gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=' +
-          $webid +
+          '" style="padding: 5px 0; cursor:pointer;" gourl="' +
+          $gourl +
           '" webid="'+$webid+'"><i class="ml-2 mr-2 fa fa-chevron-right" aria-hidden="true"></i>' +
           $filepath[i] +
           "</a>" +

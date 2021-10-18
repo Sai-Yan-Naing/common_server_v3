@@ -3,19 +3,19 @@ require_once("views/admin/admin_shareconfig.php");
 $webappversion = json_decode($webappversion);
     if ( isset($_GET['apply']) && $_GET['apply'] ==='web.config')
     {
-        $file = $webrootuser."/".$webuser."/web/web.config";
+        $file = $webpath."/web/web.config";
         $value = $_POST['web_config'];
         putFile($file,$value);
-        webconfigset($webrootuser.'/'.$webuser);
+        webconfigset($webpath);
         die();
     }
 
     if ( isset($_GET['apply']) && $_GET['apply'] ==='.user.ini')
     {
-        $file = $webrootuser."/".$webuser."/web/.user.ini";
+        $file = $webpath."/web/.user.ini";
         $value = $_POST['php_ini'];
         putFile($file,$value);
-        phpiniset($webrootuser.'/'.$webuser);
+        phpiniset($webpath);
         die();
     }
 

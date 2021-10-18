@@ -1,6 +1,6 @@
 <?php
-require_once('views/admin_shareconfig.php');
-// if(!isset($_POST['db_user']) || !isset($_POST['type'])){header("location: /share/server/database?webid=$webid&db=mysql");}
+require_once('views/share_config.php');
+// if(!isset($_POST['db_user']) || !isset($_POST['type'])){header("location: /share/server/database?&db=mysql");}
 // require_once('models/mysql.php');
 $type = $_POST["type"];
 $action = $_POST["action"];
@@ -16,7 +16,8 @@ $db_pass = $_POST["db_pass"];
             require_once("views/share/server/site/app_install/index.php");
             die("");
         }
-		// echo "ok";
+		$hostname = SQLSERVER_2016_HOST_NAME;
+		$hostip = SQLSERVER_2016_HOST_IP;
         $insert_q = "INSERT INTO db_account_for_mssql(`domain`, `host_name`, `host_ip`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		if ( ! $commons->doThis($insert_q,[$webdomain, $hostname, $hostip, $db_name, $db_user, 1, $db_pass]))
@@ -46,5 +47,7 @@ $db_pass = $_POST["db_pass"];
 				die("");
 		}
 	}
-	header("Location: /share/server?setting=database&tab=mssql&act=index&webid=$webid");
+	header("Location: /share/server?setting=database&tab=mssql&act=index&");
 	die("");
+	
+?>

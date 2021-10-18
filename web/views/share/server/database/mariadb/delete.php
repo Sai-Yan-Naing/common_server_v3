@@ -19,7 +19,7 @@ $getRow = $commons->getRow($getRow);
     <input type="hidden" name="db_user" value="<?= $getRow['db_user'] ?>">
     <input type="hidden" name="db_pass" value="<?= $getRow['db_pass'] ?>">
     <input type="hidden" name="db_name" value="<?= $getRow['db_name'] ?>">
-    Are you sure to delete <b style="color: red"><?= $getRow['db_user'] ?> </b> ?
+    Are you sure to delete <b style="color: red"><?= htmlspecialchars($getRow['db_user'], ENT_QUOTES) ?> </b> ?
       
   </form>
 </div>

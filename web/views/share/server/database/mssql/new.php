@@ -1,5 +1,5 @@
 <?php
-require_once('views/admin_shareconfig.php');
+require_once('views/share_config.php');
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
@@ -8,7 +8,7 @@ require_once('views/admin_shareconfig.php');
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-    <form action="/share/server?setting=database&tab=mssql&act=confirm&webid=<?=$webid?>" method="post" id="database_create">
+    <form action="/share/server?setting=database&tab=mssql&act=confirm" method="post" id="database_create">
       <input type="hidden" name="action" value="new">
         <div class="row mb-3">
             <div class="col-sm-2">

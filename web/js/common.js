@@ -179,3 +179,43 @@ $(document).on("submit", "#updateplan", function () {
   // return false;
   loading();
 });
+
+$(document).on("change", "input[name='type']", function () {
+  $action = $("#database_create").attr("action");
+  $action = $action.split("&db=");
+  console.log($action);
+  if ($(this).val() == "MYSQL") {
+    if($action[0].includes("tab=mariadb")){
+      $action = $action[0].replace("tab=mariadb", "tab=mysql");
+    }else{
+      $action = $action[0].replace("tab=mssql", "tab=mysql");
+    }
+    $("#db_name").attr("table", "db_account");
+    $("#db_name").attr("remark", "mydbname");
+    $("#db_user").attr("table", "db_account");
+    $("#db_user").attr("remark", "mydbuser");
+    $("#database_create").attr("action", $action + "&db=mysql");
+  } else if ($(this).val() == "MSSQL") {
+    if($action[0].includes("tab=mariadb")){
+      $action = $action[0].replace("tab=mariadb", "tab=mssql");
+    }else{
+      $action = $action[0].replace("tab=mysql", "tab=mssql");
+    }
+    $("#db_name").attr("table", "db_account_for_mssql");
+    $("#db_name").attr("remark", "msdbname");
+    $("#db_user").attr("table", "db_account_for_mssql");
+    $("#db_user").attr("remark", "msdbuser");
+    $("#database_create").attr("action", $action + "&db=mssql");
+  } else {
+    if($action[0].includes("tab=mysql")){
+      $action = $action[0].replace("tab=mysql", "tab=mariadb");
+    }else{
+      $action = $action[0].replace("tab=mssql", "tab=mariadb");
+    }
+    $("#db_name").attr("table", "db_account_for_mariadb");
+    $("#db_name").attr("remark", "madbname");
+    $("#db_user").attr("table", "db_account_for_mariadb");
+    $("#db_user").attr("remark", "madbuser");
+    $("#database_create").attr("action", $action + "&db=mariadb");
+  }
+});

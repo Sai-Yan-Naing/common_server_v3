@@ -17,11 +17,11 @@ if ( $action === 'new' )
     $dns = json_encode($temp);
     $app_version = json_encode($temp1);
     
-    $insert_q = "INSERT INTO web_account (`domain`, `password`, `user`, `plan`, `customer_id`,`dns`,`app_version`) VALUES (?, ?, ?, ?, ?,?,?)";
+    $insert_q = "INSERT INTO web_account (`domain`, `password`, `user`, `plan`, `customer_id`,`dns`,`app_version`,`origin_id`) VALUES (?, ?, ?, ?, ?, ?,?,?)";
     $insert_ftp = "INSERT INTO db_ftp (`ftp_user`, `ftp_pass`, `domain`, `permission`) VALUES (?, ?, ?, ?)";
     $insert_waf = "INSERT INTO waf (`domain`, `usage`, `display`) VALUES (?, ?, ?)";
     if (
-        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $webadminID,$dns,$app_version]) ||
+        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $webadminID,$dns,$app_version,$webrootid]) ||
         !$commons->doThis($insert_ftp,[$user, $password, $webdomain, 'F,R,W']) ||
         !$commons->doThis($insert_waf,[$webdomain, 0, 0])
     )

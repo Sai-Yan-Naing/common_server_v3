@@ -2,11 +2,12 @@
     $url = $_SERVER['REQUEST_URI'];
     $url= explode('/',$url);
  ?>
-<div id="layoutSidenav_nav">
+<div id="layoutSidenav_nav"  style="z-index: 1040;">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <!-- <div class="sb-sidenav-menu-heading"><a class="" href="/share/server"><h3><span style="font-size:50px;">W</span>inserver</h3></a></div> -->
+                    <div class="sb-sidenav-menu-heading"><a class="text-white" href="/share/server?setting=site&tab=app_install&act=index" onclick="loading()"><h3><span style="font-size:50px;">W</span>inserver</h3></a></div>
                     <div class="sb-sidenav-menu-heading text-white" style="font-size: x-large;">Main Menu<label style="border-top: 1px solid #fff; width:150px; display:block"></label></div>
                     
                     <a class="nav-link active" href="/share/server?setting=site&tab=app_install&act=index" onclick="loading()">

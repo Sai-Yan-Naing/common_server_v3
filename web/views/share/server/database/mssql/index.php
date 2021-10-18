@@ -19,8 +19,11 @@ $getAllRow = $commons->getAllRow($query,[$webdomain]);
                                             <div class="col-sm-3">
                                                 <span>データベース</span>
                                             </div>
-                                            <div class="col-sm-9">
-                                            <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
+                                            <div class="col-sm-3">
+                                            <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=new"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <a class="btn btn-info btn-sm" href="/share/server?setting=database&tab=mssql&act=manager" target="_blank"><span class="mr-2"><i class="fas fa-plus-square"></i></span>MSSQL マネージャー</a>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">
@@ -39,8 +42,8 @@ $getAllRow = $commons->getAllRow($query,[$webdomain]);
                                                     <td class="border-dark"><?php echo $db['db_user']; ?></td>
                                                     <td class="border-dark"><?php echo $db['db_pass']; ?></td>
                                                     <td class="border-dark">
-                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=edit&act_id=<?= $db['id'] ?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
-                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=delete&act_id=<?= $db['id'] ?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=edit&act_id=<?= $db['id'] ?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
+                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=delete&act_id=<?= $db['id'] ?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
                                                     <td class="border-dark">情報</td>
                                                 </tr>
@@ -54,5 +57,4 @@ $getAllRow = $commons->getAllRow($query,[$webdomain]);
                 </main>
             </div>
         </div> 
- <?php 
- require_once("views/share/footer.php");
+ <?php require_once("views/share/footer.php"); ?>
