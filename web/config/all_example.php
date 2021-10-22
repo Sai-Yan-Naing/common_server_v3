@@ -15,18 +15,20 @@ define("IP", "127.0.0.1");
 
 // For email
 
-define("MAIL_HOST", "smtp.gmail.com");
-define("MAIL_USER", "capital.saiyannaing@gmail.com");
-define("MAIL_PASS", "ypoefnjbdqmmtchx");
-define("FROM", "capital.saiyannaing@gmail.com");
-define("FROMNAME", "Saiyannaing");
-define("MAIL_PORT", 587);
-define("SMTPSecure", 'tls');
-define("TO", "saiyannaing259768648@gmail.com");
-define("CC", "saiyannaing@ckmphpdev.tech");
+define("MAIL_HOST", "mail.winserver.ne.jp");
+define("MAIL_USER", "shinsei@winserver.ne.jp");
+define("MAIL_PASS", "TmSnye4JytUL");
+define("FROM", "shinsei@winserver.ne.jp");
+define("FROMNAME", "Winserver");
+define("MAIL_PORT", 25);
+define("SMTPSecure", false);
+define("TO", "support@winserver.ne.jp");
+define("CC", "support@winserver.ne.jp");
 define("CCNAME", "Winserver");
-// define("TONAME", "SaiYanNaing");
+define("TONAME", "TESTER");
 define("MAIL_SERVER","http://ssl8.ethical-sai.tech");
+define("NOREPLY", "noreply@ckmphpdev.tech");
+define('NOREPLYNAME',"WINSERVER NO REPLY");
 
 define("WINSERVERROOT", 'winserverroot');
 define("JAPANSYS", 'japansys');

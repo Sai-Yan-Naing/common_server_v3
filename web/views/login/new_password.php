@@ -11,10 +11,23 @@
                                 <h3 class="text-center font-weight-bold">Control Panel Login</h3>
                             </div>
                             <div class="card-body">
-                                <form action="/login?act=pass-reset" method="post">
+                            <?php if($error!=null): ?>
+                                <h5 class="text-danger text-center"><?= $error ?></h5>
+                                <?php 
+                                endif;
+                                if (isset($_COOKIE['domainid'])):
+                                    $domainid =$_COOKIE['domainid'];
+                                endif;
+                                ?>
+                                <form action="/login?act=newpass-reset" method="post">
+                                    <input type="hidden" name="domainid" value="<?=$domainid;?>">
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="address" name="domainid" type="text" placeholder="name@example.com" />
-                                        <label for="inputEmail">ご契約ID</label>
+                                        <input class="form-control" id="address" name="pass" type="password" placeholder="*****" />
+                                        <label for="inputEmail">New Password</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="address" name="cpass" type="password" placeholder="*****" />
+                                        <label for="inputEmail">Comfirm Nassword</label>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <a class="btn btn-outline-info" href="/login"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></a>

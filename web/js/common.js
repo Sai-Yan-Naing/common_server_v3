@@ -172,11 +172,11 @@ $(document).on("change", ".spec_change", function () {
 });
 
 $(document).on("submit", "#updateplan", function () {
-  // var name = $('input[name="spec"]');
-  // if (name.value == name.defaultValue) {
-  //   alert("Plan Cannot be change")
-  // };
-  // return false;
+  var isValid = $("input[name=spec]").is(":checked");
+  if ( ! isValid) {
+    alert("Please select plan")
+    return false;
+  };
   loading();
 });
 

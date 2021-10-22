@@ -29,7 +29,9 @@ class Common{
 
 	function doThis($query, $params = [])
 	{
-		// die($params);
+		// echo $query;
+		// print_r($paams);
+		// die();
 		try
 		{
 			$stmt1 = $this->pdo->prepare($query);
@@ -402,7 +404,7 @@ class Common{
 			$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 			$stmt1 = $pdo->prepare($query);
 			$stmt1->execute($params);
-			$data = $stmt1->fetch(PDO::FETCH_ASSOC);
+			$data = $stmt1->fetchAll(PDO::FETCH_ASSOC);
 			// print_r($data);
 			// die;
 			return $data;

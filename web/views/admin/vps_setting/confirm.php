@@ -10,6 +10,7 @@ $vm_name = $getvps['instance'];
 $today = date("Y-m-d H:i:s");
 if ( $action  === 'delete')
 {
+	$action ="delete_vm";
 	$update_q = "UPDATE vps_account SET removal= ? WHERE id=? ";
 	if ( ! $commons->doThis($update_q,[$today,$act_id]))
 	{
@@ -31,6 +32,6 @@ if ( $action  === 'delete')
 	die();
 	}
 }
-echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
+shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
 header("location: /admin?main=vps");
 ?>

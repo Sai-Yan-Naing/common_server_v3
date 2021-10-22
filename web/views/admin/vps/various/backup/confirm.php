@@ -1,7 +1,7 @@
 <?php
  require_once('views/admin/admin_vpsconfig.php');
-// if ( !isset($_POST['action']))
-{ header("location: /admin/share/various/backup?webid=$webid");}
+if ( !isset($_POST['action']))
+{ header("location: /admin/vps/various/backup?webid=$webid");}
 // require_once('models/backup.php');
 $date = date('d-m-Y-his');
 $backupname = $date.'-'.$webip;
@@ -90,7 +90,7 @@ $vm_name = $webvm_name;
         // die();
         // $dirname = "C:/Hyper-V/Backup/12-08-2021-010001-127.0.0.11/202189wind2019/Virtual Machines/41EE1485-F007-4668-81DD-D0F3AD95A830.vmcx";
         // print_r($dirname."\\".$backupfile);
-        // $dirname
+        // echo $backupfile;
         // die('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/manage_vm/vm.ps1" '. $webvm_name." ".$action." ".$dirname." ".$backupfile);
         $getvps = $commons->getRow("SELECT * FROM vps_account WHERE ip=?",[$webip]);
         $active = $getvps['active'];

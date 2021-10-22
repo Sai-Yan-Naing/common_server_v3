@@ -12,25 +12,26 @@ $gateway = $webgateway;
     if ( isset($_POST['action']) )
     {
         $plan = $_POST['spec'];
-        $qry = "UPDATE vps_account SET `plan` = ? WHERE `id` = ?";
-        if( ! $commons->doThis($qry,[$plan,$webid]) ){
-                // require_once("views/admin/share.php");
-                die("error");
-        }
-
-        $query = "SELECT spec_info.value,price_tbl.plan_name FROM service_db.dbo.price_tbl
-                inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
-                INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND
-                spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
-            $getmemory = $commons->getSpec($query,['memory',$plan])['value'];
-            $getdisk = $commons->getSpec($query,['disk_hdd',$plan])['value'];
-            $getcore = $commons->getSpec($query,['core',$plan])['value'];
-        
-            $vm_storage = (int)$getdisk*1024*1048576;
+        $query = "SELECT spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
+        inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
+        INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] IN ('memory', 'disk_hdd','core') WHERE price_tbl.service = '07' 
+                            AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
+        $getspec = $commons->getSpec($query,[$plan]);
+        $spec = [
+        "plan_name"=>$getspec[0]['plan_name'], 
+        "memory"=>$getspec[0]['value'], 
+        "disk_hdd"=>$getspec[1]['value'],
+        "core" => $getspec[2]['value']];
+//         echo "<pre>";
+// print_r($spec);
+// die;
+            $vm_storage = (int)$spec['disk_hdd']*1024*1048576;
+            $getdisk = (int)$spec['disk_hdd'];
             // $vm_storage = 80*1024*1048576;
 
-            $vm_memory = (int)$getmemory*1024*1048576;
-            $vm_cpu = (int)$getcore;
+            $vm_memory = (int)$spec['memory']*1024*1048576;
+            $getmemory = (int)$spec['memory'];
+            $vm_cpu = (int)$spec['core'];
     
         if ($_POST["action"] !== "osreinstall" )
         {       
@@ -40,10 +41,15 @@ $gateway = $webgateway;
                 $body = str_replace('$disk', $getdisk, $body);
                 $body = str_replace('$cpu', $vm_cpu, $body);
                 $body = preg_replace('/\\\\/','', $body); //Strip backslashes
-                $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body,''); 
+                $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body); 
                 $cmd = "changeplan";
 
-                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu);
+                $qry = "UPDATE vps_account SET `plan_update` = ? WHERE `id` = ?";
+                if( ! $commons->doThis($qry,[$plan,$webid]) ){
+                        // require_once("views/admin/share.php");
+                        die("error");
+                }
+                // shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu);
 
         } else
         {

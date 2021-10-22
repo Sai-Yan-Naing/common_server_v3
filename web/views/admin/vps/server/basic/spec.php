@@ -1,16 +1,44 @@
 <?php
 require_once('views/admin/admin_vpsconfig.php');
-$plan_q = "SELECT plan FROM vps_account Where id=?";
+$plan_q = "SELECT * FROM vps_account Where id=?";
 $getpln = $commons->getRow($plan_q,[$webid]);
-$plans = ['78', '79', '80', '81','82'];
-
-$query = "SELECT spec_info.value,price_tbl.plan_name FROM service_db.dbo.price_tbl
-                    inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
-                    INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
-// $query = "SELECT * FROM service_db.dbo.PRICE_TBL WHERE SERVICE= '07' AND TYPE = '02' AND PLN IN ('42','43','44','45','46','47','48');";
-// $test = $commons->getSpec($query);
+$plans = ['42','43','44','45','46','47','48'];
+$query = "SELECT price_tbl.pln,spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
+inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
+INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] IN ('memory', 'disk_hdd','core') WHERE price_tbl.service = '07' 
+AND  price_tbl.type = '02' AND  price_tbl.pln IN ('42','43','44','45','46','47','48')";
+$getspecs = $commons->getSpec($query,$plans);
+$specs = [];
+foreach($getspecs as $getspec)
+{
+    foreach($plans as $plan)
+      {  if ($getspec['pln']==$plan)
+        {
+            // $specs[$plan][$getspec['key']] =[
+            //     $getspec[value]
+            // ];
+            $specs[$plan]['plan_name'] =$getspec['plan_name'];
+            $specs[$plan]['pln'] =$getspec['pln'];
+            if ($getspec['key']==='memory')
+            {
+                $specs[$plan]['memory'] = $getspec['value'];
+            } elseif ($getspec['key']==='disk_hdd')
+            {
+                $specs[$plan]['disk_hdd'] = $getspec['value'];
+            }else{
+                $specs[$plan]['core'] = $getspec['value'];
+            }
+            
+        }
+    }
+}
+// $spec = [
+//     "plan_name"=>$getspec[0]['plan_name'], 
+//     "memory"=>$getspec[0]['value'], 
+//     "disk_hdd"=>$getspec[1]['value'],
+//     "core" => $getspec[2]['value']];
 // echo "<pre>";
-// print_r($test);
+// print_r($specs);
 // die;
 ?>
 <!-- Modal Header -->
@@ -22,25 +50,18 @@ $query = "SELECT spec_info.value,price_tbl.plan_name FROM service_db.dbo.price_t
 <div class="modal-body">
     <div class="row">
         <?php 
-        
-        foreach ($plans as $key=>$plan): 
-
-        $getmemory = $commons->getSpec($query,['memory',$plan]);
-        $getdisk = $commons->getSpec($query,['disk_hdd',$plan]);
-        $getcore = $commons->getSpec($query,['core',$plan]);
-        $spec = [
-            "plan_name"=>$getmemory['plan_name'], 
-            "memory"=>$getmemory['value'], 
-            "disk_hdd"=>$getdisk['value'],
-            "core" => $getcore['value']
-        ];
+        if ((int)end($specs)['pln'] === (int) $getpln['plan'] ):
+            echo "<div>This plan is the last plan</div>";
+        endif;
+        foreach ($specs as $key=>$spec):
+        if ((int)$key > (int)$getpln['plan']):
 ?>
         <div class="col-xl-3 col-md-6">
-            <label class="card mb-4 <?= ($plan === $getpln['plan'])? 'bg-primary text-white' : (($plan > $getpln['plan'])? 'pointer' :''); ?>">
+            <label class="card mb-4">
                 <div class="card-header">
                      <?=$spec['plan_name'] ?>
                 </div>
-                <input type="radio" name="spec" form="updateplan" value="<?= $plan;?>" class="spec_change d-none" <?= ($plan === $getpln['plan'])? 'checked' : ''; ?> <?= ((int)$plan < $getpln['plan'])? 'disabled' : ''; ?>>
+                <input type="radio" name="spec" form="updateplan" value="<?= (int)$key;?>" class="spec_change d-none">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">メモリ</div>
@@ -57,7 +78,7 @@ $query = "SELECT spec_info.value,price_tbl.plan_name FROM service_db.dbo.price_t
                 </div>
             </label>
         </div>
-        <?php endforeach; ?>
+        <?php endif;endforeach; ?>
         <form action="/admin/vps/server?tab=basic&act=confirm&webid=<?= $webid ?>" method="post" id="updateplan">
         <input type="hidden" name="action" value="updateplan">
         </form>

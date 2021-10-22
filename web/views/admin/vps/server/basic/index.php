@@ -10,22 +10,16 @@
                     $plan = "SELECT plan FROM vps_account Where id=?";
                     $getpln = $commons->getRow($plan,[$webid]);
                     $plan_ = $getpln['plan'];
-                    $query = "SELECT spec_info.value,price_tbl.plan_name FROM service_db.dbo.price_tbl
+                    $query = "SELECT spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
                     inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
-                    INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] = ? WHERE price_tbl.service = '01' AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
-                    // $query = "SELECT * FROM service_db.dbo.PRICE_TBL WHERE SERVICE= '07' AND TYPE = '02' AND PLN IN ('42','43','44','45','46','47','48');";
-                    // $test = $commons->getSpec($query);
-                    // echo "<pre>";
-                    // print_r($test);
-                    // die;
-                    $getmemory = $commons->getSpec($query,['memory',$plan_]);
-                    $getdisk = $commons->getSpec($query,['disk_hdd',$plan_]);
-                    $getcore = $commons->getSpec($query,['core',$plan_]);
+                    INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] IN ('memory', 'disk_hdd','core') WHERE price_tbl.service = '07' 
+					AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
+                    $getspec = $commons->getSpec($query,[$plan_]);
                     $spec = [
-                        "plan_name"=>$getmemory['plan_name'], 
-                        "memory"=>$getmemory['value'], 
-                        "disk_hdd"=>$getdisk['value'],
-                        "core" => $getcore['value']];
+                        "plan_name"=>$getspec[0]['plan_name'], 
+                        "memory"=>$getspec[0]['value'], 
+                        "disk_hdd"=>$getspec[1]['value'],
+                        "core" => $getspec[2]['value']];
                     ?>
                     <div class="shadow-lg p-3 mb-5 bg-white rounded">
                         <!-- start -->
