@@ -35,7 +35,7 @@
 						</div>
 						<?php
 						$webid = isset($_GET['webid']) ? $_GET['webid'] : null;
-						if ($webid === null)
+						if ($webid == null)
 						{
 							$param = 1;
 							$query = 'SELECT * FROM web_account WHERE `customer_id` = :customer_id && `removal` is null && `origin`=:param';
@@ -71,8 +71,8 @@
 													<td class="col-md-3">.<?= htmlspecialchars($getDns['domain'], ENT_QUOTES);  ?></td>
 													<td class="col-md-3"><?= htmlspecialchars( $value->target, ENT_QUOTES); ?></td>
 													<td class="col-md-2">
-														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/dns?tab=share&act=edit&webid=<?= $webid; ?>&act_id=<?= $key ?>">編集</a>
-														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-danger btn-sm edit_database btn-sm common_dialog" gourl="/admin/dns?tab=share&act=delete&webid=<?= $webid; ?>&act_id=<?= $key ?>">削除</a>
+														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/dns?tab=share&act=edit&webid=<?= $getDns['id']; ?>&act_id=<?= $key ?>">編集</a>
+														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-danger btn-sm edit_database btn-sm common_dialog" gourl="/admin/dns?tab=share&act=delete&webid=<?= $getDns['id']; ?>&act_id=<?= $key ?>">削除</a>
 													</td>
 												</tr>
 											<?php endforeach; ?>

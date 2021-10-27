@@ -52,7 +52,7 @@ $subject = '=?UTF-8?B?' . base64_encode('DNS情報変更申請') . '?=';
 //    $body = str_replace('$target', $target, $body);
 //    $body = preg_replace('/\\\\/','', $body); //Strip backslashes
 $body = "<h2>契約ID1234589 : {$admin}</h2>
-        <p>DNS情報変更申請</p>
+        <p>DNS情報変更申請</p>
         <p>DNS情報の変更内容</p>
         <p>{$type}レコード　{$sub}.{$domain}->{$target}</p>
         <p>DNS情報の変更反映まで今しばらくお待ちください</p>

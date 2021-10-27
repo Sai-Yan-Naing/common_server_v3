@@ -18,5 +18,5 @@ require_once('views/admin/admin_vpsconfig.php');
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff">確認</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff"><?= $webactive==0? "起動" : "停止"  ?></button>
 </div>

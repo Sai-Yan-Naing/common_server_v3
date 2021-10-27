@@ -7,13 +7,9 @@ require_once ('models/security.php');
 $security = new Security;
 $waf = $security->getSecurity($webdomain);
 $switch = $_POST['switch'];
-$onoff = 0;
-if ( isset($_POST['onoff']) and $_POST['onoff'])
-{
-	$onoff = 1;
-}
 if ( $switch=='usage')
 {
+	$onoff = (int)$waf['usage']==1? 0 : 1;
 	echo $usage_query = "UPDATE waf SET `usage`='$onoff' WHERE `domain`=?";
 	if ( !$commons->doThis($usage_query,[$webdomain]))
 	{
@@ -23,6 +19,7 @@ if ( $switch=='usage')
 	}
 } else
 {
+	$onoff = (int)$waf['display']==1? 0 : 1;
 	echo $display_query = "UPDATE waf SET `display`='$onoff' WHERE `domain`=?";
 	if ( !$commons->doThis($display_query, [$webdomain]))
 	{

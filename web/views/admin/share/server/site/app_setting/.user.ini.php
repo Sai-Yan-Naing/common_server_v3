@@ -1,6 +1,6 @@
 <?php require_once("views/admin/admin_shareconfig.php"); ?>
     <div class="modal-header">
-    <button type="button" class="btn btn-outline-info mr-3" form="php_ini_fm" id="php_ini_btn" gourl="/admin/share/server?setting=site&tab=app_setting&act=confirm&apply=.user.ini&webid=<?=$webid?>">Save</button>
+    <button type="button" class="btn btn-outline-info mr-3" form="php_ini_fm" id="php_ini_btn" gourl="/admin/share/server?setting=site&tab=app_setting&act=confirm&apply=.user.ini&webid=<?=$webid?>">保存</button>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>

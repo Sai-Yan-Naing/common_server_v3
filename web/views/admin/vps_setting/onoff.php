@@ -22,5 +22,5 @@ $getRow = $commons->getRow($query);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff">確認</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff"><?= $getRow['active']==0? "起動" : "停止"  ?></button>
 </div>
