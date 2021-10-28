@@ -1,5 +1,5 @@
 <?php 
-require_once("views/admin/admin_vpsconfig.php");
+require_once("views/vps_config.php");
 // die('hello');
     // if(isset($_GET['act']))
     // {
@@ -10,7 +10,7 @@ echo $ip_address = $_POST['ip_address'];
 echo $virtual_switch = $_POST['virtual_switch'];
 // die('');
 $subject ='Request Specification';
-$body = file_get_contents('views/mailer/admin/vps/option.php');
+$body = file_get_contents('views/mailer/vps/option.php');
 $body = str_replace('$memory', $memory, $body);
 $body = str_replace('$cpu', $cpu, $body);
 $body = str_replace('$disk', $disk, $body);
@@ -20,7 +20,5 @@ $body = preg_replace('/\\\\/','', $body); //Strip backslashes
 $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body);
 $_SESSION['error'] = false;
 $_SESSION['message'] = 'Success';
-header("location:/admin/vps/various?setting=option&tab=spec&act=index&webid=$webid");
+header("location:/vps/various?setting=option&tab=spec&act=index");
 die();
-    // }
-?>

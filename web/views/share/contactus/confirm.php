@@ -8,7 +8,7 @@ $today = date("Y/m/d");
 
 $timestamp = date("Y/m/d :h:m:s");
 
-$subject =ウィンサーバー;
+$subject ='ウィンサーバー';
 $body = file_get_contents('views/mailer/share/contactus/user.php');
 $body = str_replace('$message', $message, $body);
 $body = str_replace('$phone', $phone, $body);

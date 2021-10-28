@@ -1,4 +1,5 @@
 <?php
+ob_start();
 if(!isset($_COOKIE['vps_user'])){header('location: /login');}
 // if(!isset($_GET['server']) && !isset($_GET['setting']) and !isset($_GET['tab'])){header('location: /admin');}
 $webserver = $_GET['server'];
@@ -16,6 +17,7 @@ $commons = new Common;
 $web_acc = $commons->getRow("SELECT * FROM vps_account WHERE ip=?", [$_COOKIE['vps_user']]);
 $webid = $web_acc['id'];
 $webip = $web_acc['ip'];
+$webgateway = $web_acc['gateway'];
 $webadminID = $web_acc['customer_id'];
 $webvmhost_ip = $web_acc['host_ip'];
 $webvmhost_user = $web_acc['host_user'];

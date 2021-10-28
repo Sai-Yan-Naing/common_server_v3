@@ -1,7 +1,7 @@
 <?php require_once('views/vps/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_ftp WHERE domain='$webdomain'";
-$getAllRow=$commons->getAllRow($query);
+$query = "SELECT * FROM vps_backup WHERE ip=?";
+$getvps=$commons->getRow($query,[$webip]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/vps/sidebar.php');?>
@@ -20,7 +20,7 @@ $getAllRow=$commons->getAllRow($query);
                                                 <label for="" class="col-form-label">手動バックアップ</label>
                                             </div>
                                             <div class="col-sm-7">
-                                            <button class="btn btn-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_modal" gourl="/vps/backup/new?server=vps&setting=various&tab=backup&action=new"><span class="mr-2"><i class="fas fa-plus-square"></i></span>バックアップを実施</button>
+                                            <button class="btn btn-info btn-sm  common_dialog" gourl="/vps/various?setting=backup&tab=backup&act=new"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>バックアップを実施</button>
                                             </div>
                                         </div> 
                                         <div class="form-group row">
@@ -31,11 +31,11 @@ $getAllRow=$commons->getAllRow($query);
                                                 <form action="" method = "post" class="ml-2">
                                                     <input type="hidden" name="action" value="onoff">
                                                     <input type="hidden" name="key" value="<?=$key;?>">
-                                                    <label class="switch text-white">
-                                                        <input type="checkbox" <?= $domain['stopped']==0? "checked":""  ?>>
-                                                        <span class="slider <?= $domain['stopped']==0? "slideron":"slideroff"  ?>"></span>
-                                                        <span class="handle <?= $domain['stopped']==0? "handleon":"handleoff"  ?>"></span>
-                                                        <span class="<?= $domain['stopped']==0? "labelon":"labeloff"  ?>"><?= $domain['stopped']==0? "起動":"停止"  ?></span>
+                                                    <label class="switch text-white common_dialog" gourl="/vps/various?setting=backup&tab=backup&act=autobackup"  data-toggle="modal" data-target="#common_dialog">
+                                                        <input type="checkbox" <?= $getvps['scheduler']==1? "checked":""  ?>>
+                                                        <span class="slider <?= $getvps['scheduler']==1? "slideron":"slideroff"  ?>"></span>
+                                                        <span class="handle <?= $getvps['scheduler']==1? "handleon":"handleoff"  ?>"></span>
+                                                        <span class="<?= $getvps['scheduler']==1? "labelon":"labeloff"  ?>"><?= $getvps['scheduler']==1? "起動":"停止"  ?></span>
                                                     </label>
                                                 </form>
                                             </div>
@@ -56,8 +56,8 @@ $getAllRow=$commons->getAllRow($query);
                                                 <td class="border-dark"><?= $vps_backup['name'] ?></td>
                                                 <td class="border-dark"><?= $vps_backup['date'] ?></td>
                                                 <td class="border-dark">
-                                                    <button data-toggle="modal" data-target="#common_modal" class="btn btn-warning btn-sm common_dialog"  gourl="/vps/backup/restore?server=vps&setting=various&tab=backup&act=restore&act_id=<?=$vps_backup[id]?>">リストア</button>
-                                                    <button  data-toggle="modal" data-target="#common_modal" class="btn btn-danger btn-sm common_dialog"  gourl="/vps/backup/delete?server=vps&setting=various&tab=backup&act=delete&act_id=<?=$vps_backup[id]?>"><i class="fas fa-trash text-white"></i></button>
+                                                    <button data-toggle="modal" class="btn btn-outline-info btn-sm  common_dialog" gourl="/vps/various?setting=backup&tab=backup&act=restore&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">リストア</button>
+                                                    <button class="btn btn-outline-danger btn-sm  common_dialog" gourl="/vps/various?setting=backup&tab=backup&act=delete&act_id=<?= $vps_backup['id']?>&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">削除</button>
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>
@@ -77,6 +77,4 @@ $getAllRow=$commons->getAllRow($query);
                 </main>
             </div>
         </div> 
- <?php
- require_once("views/vps/footer.php");
- 
+ <?php require_once("views/vps/footer.php"); ?>

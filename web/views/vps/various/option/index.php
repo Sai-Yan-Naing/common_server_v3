@@ -15,7 +15,7 @@ $getAllRow=$commons->getAllRow($query);
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div class="tab-pane active p-3">
-                                        <form action="/vps/option/confirm?" method="post" id="spec_option">
+                                        <form action="/vps/various?setting=option&tab=spec&act=confirm" method="post" id="spec_option" onsubmit="loading()">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 メモリ追加

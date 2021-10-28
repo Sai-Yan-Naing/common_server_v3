@@ -1,5 +1,5 @@
 <?php
-require_once('views/admin/admin_vpsconfig.php');
+require_once('views/vps_config.php');
 $cmd = "reinitializevm";
 $host_ip = $webvmhost_ip;
 $host_user = $webvmhost_user;
@@ -35,8 +35,8 @@ $gateway = $webgateway;
     
         if ($_POST["action"] !== "osreinstall" )
         {       
-                $subject = 'Request Specification';
-                $body = file_get_contents('views/mailer/admin/vps/info.php');
+                $subject ='Request Specification';
+                $body = file_get_contents('views/mailer/vps/info.php');
                 $body = str_replace('$memory', $getmemory, $body);
                 $body = str_replace('$disk', $getdisk, $body);
                 $body = str_replace('$cpu', $vm_cpu, $body);
@@ -46,7 +46,7 @@ $gateway = $webgateway;
 
                 $qry = "UPDATE vps_account SET `plan_update` = ? WHERE `id` = ?";
                 if( ! $commons->doThis($qry,[$plan,$webid]) ){
-                        // require_once("views/admin/share.php");
+                        // require_once("views/share.php");
                         die("error");
                 }
                 // shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu);
@@ -57,6 +57,6 @@ $gateway = $webgateway;
                 shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu.' '.$ipaddress.' '.$gateway);
         }
     }
-header("location: /admin/vps/server?tab=basic&act=index&webid=$webid");
+header("location: /vps/server?tab=basic&act=index");
 
 ?>

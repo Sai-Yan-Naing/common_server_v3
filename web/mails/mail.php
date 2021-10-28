@@ -23,7 +23,7 @@ class Mailer
 		$body = mb_convert_encoding($body, "ISO-2022-JP-MS", "UTF-8");
 		try {
 			//Server settings
-			$this->mail->SMTPDebug = 2;
+			$this->mail->SMTPDebug = SMTP_DEBUG;
 			$this->mail->isSMTP();
 			$this->mail->Host       = MAIL_HOST;
 			$this->mail->SMTPAuth   = true;
@@ -53,9 +53,9 @@ class Mailer
 
 			if ( ! $this->mail->send())
 			{
-				// return false;
+				return false;
 			}
- die();
+//  die();
 			return true;
 		}
 		catch (Exception $e)

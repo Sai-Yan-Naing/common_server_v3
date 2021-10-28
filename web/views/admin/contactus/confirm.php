@@ -27,5 +27,5 @@ $body = str_replace('$name', $toName, $body);
 $body = str_replace('$today', $timestamp, $body);
 
 $webmailer->sendMail($to,$toName,$subject,$body,CC);
-// header('location: /admin/contactus?act=index');
+header('location: /admin/contactus?act=index');
 die('admin');

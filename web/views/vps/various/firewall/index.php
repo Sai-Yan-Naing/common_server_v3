@@ -21,7 +21,7 @@ $getAllRow=$commons->getAllRow($query);
                                                 ポート
                                             </div>
                                             <div class="col-sm-3">
-                                            <form action="/vps/firewall/confirm?server=vps&setting=various&tab=firewall&action=change_rdp" id="change_rdp" method="post">
+                                            <form onsubmit="loading()" action="/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_rdp" id="change_rdp" method="post">
                                                 <input type="text" class="form-control" name="port">
                                             </form>
                                             </div>
@@ -29,7 +29,7 @@ $getAllRow=$commons->getAllRow($query);
                                             <button  type="submit" class="btn btn-sm btn-outline-info" form="change_rdp">変更</button>
                                             </div>
                                             <div class="col-sm-2">
-                                            <form action="/vps/firewall/confirm?server=vps&setting=various&tab=firewall&action=default_rdp" id="default_rdp" method="post">
+                                            <form onsubmit="loading()" action="/vps/various?setting=firewall&tab=firewall&act=confirm&action=default_rdp" id="default_rdp" method="post">
                                                 <input type="hidden" class="form-control" name="port" value="3389">
                                             </form>
                                             <button  type="submit" class="btn btn-sm btn-outline-info" form="default_rdp">デフォルトに戻す</button>
@@ -40,7 +40,7 @@ $getAllRow=$commons->getAllRow($query);
                                                 IP接続制限
                                             </div>
                                             <div class="col-sm-3">
-                                            <form action="/vps/firewall/confirm?server=vps&setting=various&tab=firewall&action=change_rdip" id="change_rdip" method="post">
+                                            <form onsubmit="loading()" action="/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_rdip" id="change_rdip" method="post">
                                                 <input type="text" class="form-control" name="ip">
                                             </form>
                                             </div>
@@ -48,8 +48,8 @@ $getAllRow=$commons->getAllRow($query);
                                             <button  type="submit" class="btn btn-sm btn-outline-info" form="change_rdip">変更</button>
                                             </div>
                                             <div class="col-sm-2">
-                                            <form action="/vps/firewall/confirm?server=vps&setting=various&tab=firewall&action=default_rdp" id="default_rdip" method="post">
-                                                <input type="hidden" class="form-control" name="ip" value="127.0.0.1">
+                                            <form onsubmit="loading()" action="/vps/various?setting=firewall&tab=firewall&act=confirm&action=default_rdip" id="default_rdip" method="post">
+                                                <input type="hidden" class="form-control" name="ip" value="any">
                                             </form>
                                             <button  type="submit" class="btn btn-sm btn-outline-info" form="default_rdip">デフォルトに戻す</button>
                                             </div>
@@ -63,7 +63,7 @@ $getAllRow=$commons->getAllRow($query);
                                                 ポート
                                             </div>
                                             <div class="col-sm-3">
-                                            <form action="/vps/firewall/confirm?server=vps&setting=various&tab=firewall&action=change_httprdp" id="change_httprdp" method="post">
+                                            <form onsubmit="loading()" action="/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_httprdp" id="change_httprdp" method="post">
                                                 <input type="text" class="form-control" name="port">
                                             </form>
                                             </div>
@@ -71,7 +71,7 @@ $getAllRow=$commons->getAllRow($query);
                                             <button  type="submit" class="btn btn-sm btn-outline-info" form="change_httprdp">変更</button>
                                             </div>
                                             <div class="col-sm-2">
-                                            <form action="/vps/firewall/confirm?server=vps&setting=various&tab=firewall&action=default_httprdp" id="default_httprdp" method="post">
+                                            <form onsubmit="loading()" action="/vps/various?setting=firewall&tab=firewall&act=confirm&action=default_httprdp" id="default_httprdp" method="post">
                                                 <input type="hidden" class="form-control" name="port" value="80">
                                             </form>
                                             <button  type="submit" class="btn btn-sm btn-outline-info" form="default_httprdp">デフォルトに戻す</button>
@@ -82,7 +82,7 @@ $getAllRow=$commons->getAllRow($query);
                                                 IP接続制限
                                             </div>
                                             <div class="col-sm-3">
-                                            <form action="/vps/firewall/confirm?server=vps&setting=various&tab=firewall&action=change_httprdip" id="change_httprdip" method="post">
+                                            <form onsubmit="loading()" action="/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_httprdip" id="change_httprdip" method="post">
                                                 <input type="text" class="form-control" name="ip">
                                             </form>
                                             </div>
@@ -90,8 +90,8 @@ $getAllRow=$commons->getAllRow($query);
                                             <button  type="submit" class="btn btn-sm btn-outline-info" form="change_httprdip">変更</button>
                                             </div>
                                             <div class="col-sm-2">
-                                            <form action="/vps/firewall/confirm?server=vps&setting=various&tab=firewall&action=default_httprdp" id="default_httprdip" method="post">
-                                                <input type="hidden" class="form-control" name="ip" value="127.0.0.1">
+                                            <form onsubmit="loading()" action="/vps/various?setting=firewall&tab=firewall&act=confirm&action=default_httprdip" id="default_httprdip" method="post">
+                                                <input type="hidden" class="form-control" name="ip" value="any">
                                             </form>
                                             <button  type="submit" class="btn btn-sm btn-outline-info" form="default_httprdip">デフォルトに戻す</button>
                                             </div>
