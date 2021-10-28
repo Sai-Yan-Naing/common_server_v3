@@ -1,7 +1,7 @@
 <?php
 require_once('views/share_config.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM db_ftp WHERE id= ?";
+$query = "SELECT * FROM db_ftp WHERE id=?";
 $getRow = $commons->getRow($query,[$act_id]);
 ?>
 <!-- Modal Header -->
@@ -39,17 +39,17 @@ $getRow = $commons->getRow($query,[$act_id]);
               <div class="form-group">
                   <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" id="full_control" name="permission[]" <?php if(in_array("F", explode(",",$getRow['permission']))) {echo "checked";} ?> value="F">フルコントロール
+                <input type="checkbox" class="form-check-input" id="full_control" name="permission[]" <?php if ( in_array("F", explode(",",$getRow['permission']))) : echo "checked"; endif ?> value="F">フルコントロール
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input permission" name="permission[]" value="R" <?php if(in_array("R", explode(",",$getRow['permission']))) {echo "checked";} ?>>読み
+                <input type="checkbox" class="form-check-input permission" name="permission[]" value="R" <?php if ( in_array("R", explode(",",$getRow['permission']))) : echo "checked";endif ?>>読み
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input permission" name="permission[]" value="W" <?php if(in_array("W", explode(",",$getRow['permission']))) {echo "checked";} ?>>書き
+                <input type="checkbox" class="form-check-input permission" name="permission[]" value="W" <?php if ( in_array("W", explode(",",$getRow['permission']))) : echo "checked"; endif; ?>>書き
               </label>
             </div>
                   <label for="permission" id="permission_error" class="error"></label>
@@ -61,5 +61,5 @@ $getRow = $commons->getRow($query,[$act_id]);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="ftp_create">作成</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="ftp_create">変更</button>
 </div>

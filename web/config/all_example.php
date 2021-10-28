@@ -20,6 +20,7 @@ define("MAIL_USER", "shinsei@winserver.ne.jp");
 define("MAIL_PASS", "TmSnye4JytUL");
 define("FROM", "shinsei@winserver.ne.jp");
 define("FROMNAME", "Winserver");
+define("SMTP_DEBUG", 0);
 define("MAIL_PORT", 25);
 define("SMTPSecure", false);
 define("TO", "support@winserver.ne.jp");

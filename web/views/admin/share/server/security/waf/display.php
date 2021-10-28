@@ -10,7 +10,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain= ? ", [$webdomain]);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=security&tab=waf&act=confirm&webid=<?=$webid?>" method="post" id="onoff">
+  <form action="/admin/share/server?setting=security&tab=waf&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit='loading()'>
     <input type="hidden" name="switch" value="display">
     <input type="hidden" name="onoff" value="<?= (int)$waf['display']==1? 0 : 1 ?>">
     <?= (int)$waf['display'] == 1 ? "停止" : "起動" ?>しますか ?

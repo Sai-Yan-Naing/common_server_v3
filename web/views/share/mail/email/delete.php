@@ -2,8 +2,8 @@
 <?php
 require_once('views/share_config.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM add_email WHERE id=m ? ";
-$getRow = $commons->getRow($query, [$act_id]);
+$query = "SELECT * FROM add_email WHERE id='$act_id'";
+$getRow = $commons->getRow($query);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
@@ -17,7 +17,7 @@ $getRow = $commons->getRow($query, [$act_id]);
 		<input type="hidden" name="action" value="delete">
 		<input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
 		<input type="hidden" name="email" value="<?= $getRow['email'] ?>">
-		Are you sure to delete <b style="color: red"><?= $getRow['email'] ?>@<?= $webdomain ?> </b> ?
+		Are you sure to delete <b style="color: red"><?= htmlspecialchars($getRow['email'], ENT_QUOTES) ?>@<?= htmlspecialchars($webdomain, ENT_QUOTES) ?> </b> ?
 	    
 	</form>
 </div>

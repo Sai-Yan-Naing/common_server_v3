@@ -40,5 +40,5 @@ $db_pass = $_POST["db_pass"];
 		}
 		echo "error";
 	}
-	header("Location: /share/server?setting=database&tab=mariadb&act=index&");
+	header("Location: /share/server?setting=database&tab=mariadb&act=index");
 	die("");

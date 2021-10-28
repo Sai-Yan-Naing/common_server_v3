@@ -1,7 +1,7 @@
 <?php
 require_once('views/share_config.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM db_ftp WHERE id= ?";
+$query = "SELECT * FROM db_ftp WHERE id=?";
 $getRow = $commons->getRow($query,[$act_id]);
 ?>
 <!-- Modal Header -->
@@ -16,7 +16,7 @@ $getRow = $commons->getRow($query,[$act_id]);
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="ftp_user" value="<?= $getRow['ftp_user'] ?>">
-    Are you sure to delete <b style="color: red"><?= $getRow['ftp_user'] ?> </b> ?
+    <b style="color: red"><?= $getRow['ftp_user'] ?> </b>を削除しますか？?
       
   </form>
 </div>

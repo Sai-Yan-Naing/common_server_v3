@@ -11,16 +11,14 @@ $error_page = json_decode($weberrorpages);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=site&tab=basic&act=confirm" method="post" id="onoff">
+  <form action="/share/server?setting=site&tab=basic&act=confirm" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="onoff">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
-    <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-    Are you sure to <?= $error_page->$act_id->stopped==1?  "起動":"停止"  ?>?
-      
+    エラー設定を<?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?>にしますか
   </form>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff">確認</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff"><?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?></button>
 </div>

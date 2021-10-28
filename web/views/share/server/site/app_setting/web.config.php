@@ -6,9 +6,9 @@
         </button>
     </div>
     <div class="modal-body">
-        <form action="/share/server?setting=site&tab=app_setting&act=confirm" method="post" id="web_config_fm">
+        <form action="/share/server?setting=site&tab=app_setting&act=confirm" method="post" id="web_config_fm" onsubmit="loading()">
             <div class="form-group">
-            <textarea class="text-white bg-dark web" name="web_config" id="webconfig" rows="25"><?php echo "hello"; echo htmlspecialchars(getFile($webpath."/web/web.config")) ?></textarea>
+            <textarea class="text-white bg-dark web" name="web_config" id="webconfig" rows="25"><?php echo htmlspecialchars(getFile($webpath."/web/web.config")) ?></textarea>
             </div>
         </form>
     </div>

@@ -1,6 +1,6 @@
 <?php require_once('views/share/header.php'); ?>
 <?php 
-    $query = "SELECT * FROM sub_ftp WHERE domain= ?";
+    $query = "SELECT * FROM sub_ftp WHERE domain= ? ";
     $getAllRow = $commons->getAllRow($query,[$webdomain]); 
 ?>
     <div id="layoutSidenav">
@@ -20,13 +20,13 @@
                                                 <span>ディレクトリアクセス制限</span>
                                             </div>
                                             <div class="col-sm-9">
-                                                <button class="btn btn-info btn-sm  common_dialog" gourl="/share/server?setting=security&tab=directory&act=new&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ディレクトリ追加</button>
+                                                <button class="btn btn-info btn-sm  common_dialog" gourl="/share/server?setting=security&tab=directory&act=new" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ディレクトリ追加</button>
                                             </div>
                                         </div>
                                         <div class="mt-4">
                                             <div class="d-flex mb-2">
                                                 <div class="col-sm-3">Root path /<?=$webuser?>/web/</div>
-                                                <div class="text-danger col-sm-6"><span class="text-center"><?php if (isset($error)) :
+                                                <div class="text-danger col-sm-6"><span class="text-center"><?php if (isset($error)):
                                                     echo $error;
                                                 endif; ?></span></div>
                                             </div>
@@ -38,7 +38,7 @@
                                                     <th class="font-weight-bold border-dark">Action</th>
                                                 </tr>
                                                     <?php
-                                                        foreach($getAllRow as $key=>$value):
+                                                        foreach ($getAllRow as $key=>$value):
                                                     ?>
                                                     <tr>
                                                         <td  class="border-dark"><?= $value['ftp_user'] ?></td>
@@ -49,7 +49,9 @@
                                                             <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=security&tab=directory&act=delete&act_id=<?= $value['id'] ?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
                                                         </td> 
                                                     </tr>
-                                                    <?php endforeach ?>
+                                                    <?php
+                                                        endforeach;
+                                                    ?>
                                             </table>
                                         </div>
                                     </div>

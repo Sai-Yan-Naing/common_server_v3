@@ -1,4 +1,4 @@
-<form action="/share/appinstall-confirm?webid=<?=$webid?>" method="post" id="app_install_form" />
+<form action="/share/appinstall-confirm?webid=<?=$webid?>" method="post" id="app_install_form">
     <div class="form-group row">
         <label for="application" class="col-sm-3 col-form-label">アプリケーション</label>
         <div class="col-sm-8">
@@ -24,14 +24,15 @@
         <label for="version" class="col-sm-3 col-form-label">バージョン</label>
         <div class="col-sm-8" id="version">
             <?php
-            foreach ($values=app_version("WORDPRESS") as $key => $value) :
+            foreach ($values=app_version("WORDPRESS") as $key => $value) {
             ?>
                 <div class="form-check-inline">
                 <label class="form-check-label">
                     <input type="radio" class="form-check-input" name="app-version" <?php if($values[0]==$value){ echo "checked";}?> value="<?=$value?>"><?= $value ?>
                 </label>
                 </div>
-            <?php endforeach;
+            <?php
+            }
             ?>
         </div>
     </div>

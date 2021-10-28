@@ -1,7 +1,7 @@
 <?php
 require_once("views/share_config.php");
 $webappversion = json_decode($webappversion);
-    if ( isset($_GET['apply']) && $_GET['apply'] === 'web.config')
+    if ( isset($_GET['apply']) && $_GET['apply'] ==='web.config')
     {
         $file = $webpath."/web/web.config";
         $value = $_POST['web_config'];
@@ -10,7 +10,7 @@ $webappversion = json_decode($webappversion);
         die();
     }
 
-    if ( isset($_GET['apply']) && $_GET['apply'] === '.user.ini')
+    if ( isset($_GET['apply']) && $_GET['apply'] ==='.user.ini')
     {
         $file = $webpath."/web/.user.ini";
         $value = $_POST['php_ini'];
@@ -19,20 +19,20 @@ $webappversion = json_decode($webappversion);
         die();
     }
 
-    if ( isset($_GET['apply']) && $_GET['apply'] === 'dotnet_version')
+    if ( isset($_GET['apply']) && $_GET['apply'] ==='dotnet_version')
     {
         $version = $_POST['version'];
         shell_exec("%systemroot%\system32\inetsrv\APPCMD set apppool $webuser /managedRuntimeVersion:$version");
         $webappversion->app->dotnet=$version;
         $temp=$webappversion;
         $result=json_encode($temp);
-        $query_dir = "UPDATE web_account SET app_version='$result' WHERE id='$webid'";
-        $commons->doThis($query_dir);
+        $query_dir = "UPDATE web_account SET app_version='$result' WHERE id= ?";
+        $commons->doThis($query_dir,[$webid]);
         header("location: /share/server?setting=site&tab=app_setting&act=index");
         die();
     }
 
-    if ( isset($_GET['apply']) && $_GET['apply'] === 'php_version')
+    if ( isset($_GET['apply']) && $_GET['apply'] ==='php_version')
     {
         $version = $_POST['version'];
         $exec = "e:/scripts/php_version/php_version_change.bat $webuser $version";

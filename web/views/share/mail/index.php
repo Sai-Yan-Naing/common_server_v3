@@ -5,7 +5,7 @@ $act = $_GET['act'];
 $setArr = ['email','connection','list'];
 $TabArr = ['smtp','pop','tab'];
 $actArr = ['index','new','delete','edit','confirm'];
-if ( isset($setting) && in_array($setting,$setArr))
+if (isset($setting) && in_array($setting,$setArr))
 {
         if ( isset($tab) && in_array($tab,$TabArr))
         {
@@ -26,8 +26,9 @@ if ( isset($setting) && in_array($setting,$setArr))
         {
             include 'views/share/404.php';
         }
-} else
+} else 
 {
     include 'views/share/404.php';
 }
 die();
+?>

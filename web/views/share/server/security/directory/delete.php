@@ -1,9 +1,9 @@
 <?php
 require_once('views/share_config.php');
 $act_id = $_GET['act_id'];
-$query = "SELECT * FROM sub_ftp WHERE id= ? and domain=?";
+$query = "SELECT * FROM sub_ftp WHERE id='$act_id' and domain='$webdomain'";
 $datas = new Common;
-$getRow = $commons->getRow($query,[$act_id,$webdomain]);
+$getRow = $commons->getRow($query);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
@@ -18,7 +18,7 @@ $getRow = $commons->getRow($query,[$act_id,$webdomain]);
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="dir_path" value="<?= $getRow['path'] ?>">
     <input type="hidden" name="ftp_user" value="<?= $getRow['ftp_user'] ?>">
-    Are you sure to delete <b style="color: red"><?= $getRow['ftp_user'] ?> </b> ?
+    Are you sure to delete <b style="color: red"><?= htmlspecialchars($getRow['ftp_user'], ENT_QUOTES); ?> </b> ?
       
   </form>
 </div>
