@@ -15,7 +15,8 @@ $getAllRow=$commons->getAllRow($query);
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div class="tab-pane active p-3">
-                                    <form action="/vps/option/license_confirm?&act=sql_license" method="post" id="sql_server_edition">
+                                    <form onsubmit="loading()" action="/vps/various?setting=option&tab=license&act=license_confirm" method="post" id="sql_server_edition">
+                                    <input type="hidden" name="act" value="sql_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 SQL Server Web Edition追加
@@ -31,7 +32,8 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/vps/option/license_confirm?&act=rdl" method="post" id="remote_desktop_license">
+                                    <form onsubmit="loading()" action="/vps/various?setting=option&tab=license&act=license_confirm" method="post" id="remote_desktop_license">
+                                    <input type="hidden" name="act" value="rdl">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 Remote Desktop License追加
@@ -50,7 +52,8 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/vps/option/license_confirm?&act=office_l" method="post" id="office_license">
+                                    <form onsubmit="loading()" action="/vps/various?setting=option&tab=license&act=license_confirm" method="post" id="office_license">
+                                    <input type="hidden" name="act" value="office_l">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 OFFICE追加
@@ -69,7 +72,8 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/vps/option/license_confirm?&act=window_server_license" method="post" id="window_server_license">
+                                    <form onsubmit="loading()" action="/vps/various?setting=option&tab=license&act=license_confirm" method="post" id="window_server_license">
+                                    <input type="hidden" name="act" value="window_server_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 Windows Server Security追加
@@ -85,7 +89,8 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/vps/option/license_confirm?&act=site_guard_license" method="post" id="site_guard_license">
+                                    <form onsubmit="loading()" action="/vps/various?setting=option&tab=license&act=license_confirm" method="post" id="site_guard_license">
+                                    <input type="hidden" name="act" value="site_guard_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 Site Gird Server Edition追加
@@ -101,7 +106,8 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="/vps/option/license_confirm?&act=ssl_license" method="post" id="ssl_license">
+                                    <form onsubmit="loading()" action="/vps/various?setting=option&tab=license&act=license_confirm" method="post" id="ssl_license">
+                                    <input type="hidden" name="act" value="ssl">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 SSL証明書追加

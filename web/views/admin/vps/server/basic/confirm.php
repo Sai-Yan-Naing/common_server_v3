@@ -35,7 +35,7 @@ $gateway = $webgateway;
     
         if ($_POST["action"] !== "osreinstall" )
         {       
-                $subject ='=?UTF-8?B?'.base64_encode('Request Specification').'?=';
+                $subject = 'Request Specification';
                 $body = file_get_contents('views/mailer/admin/vps/info.php');
                 $body = str_replace('$memory', $getmemory, $body);
                 $body = str_replace('$disk', $getdisk, $body);

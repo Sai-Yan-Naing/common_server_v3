@@ -18,12 +18,12 @@ $getRow = $commons->getRow($query);
     <input type="hidden" name="appstopped" value="<?= $getRow['appstopped'] ?>">
     <input type="hidden" name="sitename" value="<?= $getRow['user'] ?>">
     <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-    <?= $getRow['appstopped']===1? "起動" : "停止"  ?>しますか？
+    <?= $getRow['appstopped']==1? "起動" : "停止"  ?>しますか？
       
   </form>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff">確認</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff"><?= $getRow['appstopped']==1? "起動" : "停止"  ?></button>
 </div>

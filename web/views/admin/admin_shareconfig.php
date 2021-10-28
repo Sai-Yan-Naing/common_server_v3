@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // if(!isset($_COOKIE['admin'])){header('location: /login');}
 // if(!isset($_GET['webid']) || $_GET['webid']==null){header('location: /admin');}
 require_once("config/all.php");

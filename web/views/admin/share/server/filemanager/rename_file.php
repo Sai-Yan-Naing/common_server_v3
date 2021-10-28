@@ -3,7 +3,7 @@ require_once('views/admin/admin_shareconfig.php');
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Rename File</h4>
+  <h4 class="modal-title">ファイル名変更</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

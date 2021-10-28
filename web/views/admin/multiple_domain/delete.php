@@ -17,12 +17,12 @@ $getRow = $commons->getRow($query);
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="removal" value="<?= $getRow['removal'] ?>">
     <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-    Are you sure to delete ?
+    <b style="color: red"><?= $getRow['domain'] ?></b>を削除しますか？
       
   </form>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-danger btn-sm" form="onoff">確認</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff">削除</button>
 </div>

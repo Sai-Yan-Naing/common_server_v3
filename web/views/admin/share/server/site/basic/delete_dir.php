@@ -5,7 +5,7 @@ $temp_key = $_GET['act_id'];
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Delete Directory</h4>
+  <h4 class="modal-title">ディレクトリ削除</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -14,12 +14,12 @@ $temp_key = $_GET['act_id'];
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="dir_id" value="<?= $temp_key ?>">
     <input type="hidden" name="bass_dir" value="<?= $temp->$temp_key->url ?>">
-    Are you sure to delete <b style="color: red"><?= $temp->$temp_key->url ?> </b> ?
+    <b style="color: red"><?= $temp->$temp_key->url ?> </b>を削除しますか？
       
   </form>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
-  <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">No</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="delete_bass_dir">Delete</button>
+  <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="delete_bass_dir">削除</button>
 </div>

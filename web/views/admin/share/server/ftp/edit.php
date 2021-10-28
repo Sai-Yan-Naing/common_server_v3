@@ -61,5 +61,5 @@ $getRow = $commons->getRow($query,[$act_id]);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="ftp_create">作成</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="ftp_create">変更</button>
 </div>

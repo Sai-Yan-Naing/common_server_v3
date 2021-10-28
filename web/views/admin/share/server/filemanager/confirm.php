@@ -190,7 +190,7 @@ function open_file($dir,$file_name, $webid)
 	?>
 
 		<div class="modal-header">
-            <button type="button" class="btn btn-outline-info mr-3" id="save_file" file_name="<?= $file_name ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">Save</button>
+            <button type="button" class="btn btn-outline-info mr-3" id="save_file" file_name="<?= $file_name ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">保存</button>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -318,10 +318,10 @@ function filepath($dir,$foldername,$webid)
                                                 <td class="d-flex" colspan="2">
                                                     <div class="text-end col-sm-12">
                                                         <span class=""></span>
-                                                        <button class="btn text-dark common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                        <button class="btn text-dark common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
                                                         圧縮
                                                         </button>
-                                                        <button class="btn text-dark common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="rename">名前変更
+                                                        <button class="btn text-dark common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="rename">名前変更
                                                         </button>
                                                         <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="delete">
                                                         削除
@@ -354,19 +354,19 @@ function filepath($dir,$foldername,$webid)
                                                         <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value?>" class="btn text-dark download_file">
                                                         <i class="fa fa-download"></i>
                                                         </a>
-                                                        <button class="btn text-dark common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                        <button class="btn text-dark common_dialog_fm  btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
                                                         圧縮
                                                         </button>
                                                         <?php 
                                                         if ( getFileExt($dir.'/'.$value)==="zip")
                                                         {?>
-                                                            <button class="btn text-dark common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=unzip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                            <button class="btn text-dark common_dialog_fm  btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=unzip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
                                                             解凍
                                                         </button>
                                                         <?php 
                                                         }
                                                         ?>
-                                                        <button class="btn text-dark common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="rename">名前変更
+                                                        <button class="btn text-dark common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="rename">名前変更
                                                         </button>
                                                         <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="delete">
                                                         削除

@@ -36,7 +36,7 @@ switch ($request['path'])
 	// vps
 	case '/vps/server' : include 'views/vps/server/index.php'; break;
 	case '/vps/various' : include 'views/vps/various/index.php'; break;
-	case '/vps/contactus' : include 'views/vps/contactus/index.php'; break;
+	case '/vps/contactus' : include 'views/vps/contactus.php'; break;
 	// case '/share/mail' : include 'views/share/mail/index.php'; break;
 	// case '/share/various' : include 'views/share/various/index.php'; break;
 	// case '/share/contactus' : include 'views/share/contactus/index.php'; break;

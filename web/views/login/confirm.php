@@ -12,9 +12,9 @@ $commons = new Common;
 
 if (filter_var($domainid, FILTER_VALIDATE_IP))
 {
-    echo("system maintenace");
-    echo '<a href="javascript:history.go(-1)" title="Return to the previous page">« Go back</a>';
-    die;
+    // echo("system maintenace");
+    // echo '<a href="javascript:history.go(-1)" title="Return to the previous page">« Go back</a>';
+    // die;
     $webroot_acc = $commons->getRow("SELECT * FROM vps_account WHERE ip='$domainid' AND password='$pass_encrypted'");
     if ( $webroot_acc != null)
     {

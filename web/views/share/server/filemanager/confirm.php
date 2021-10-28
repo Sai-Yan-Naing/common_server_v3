@@ -190,7 +190,7 @@ function open_file($dir,$file_name, $webid)
 	?>
 
 		<div class="modal-header">
-            <button type="button" class="btn btn-outline-info mr-3" id="save_file" file_name="<?= $file_name ?>"  gourl="/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">Save</button>
+            <button type="button" class="btn btn-outline-info mr-3" id="save_file" file_name="<?= $file_name ?>"  gourl="/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">保存</button>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
