@@ -9,14 +9,14 @@ $webappversion = json_decode($webappversion);
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-  <form action="/share/server?setting=site&tab=app_setting&act=confirm&apply=php_version" method="post" id="phpversion_fm">
+  <form action="/share/server?setting=site&tab=app_setting&act=confirm&apply=php_version" method="post" id="phpversion_fm" onsubmit="loading()">
     <input type="hidden" name="action" value="new">
       <div class="row justify-content-center">
           <label for="php_version" class="col-sm-2 text-right p-2">PHPバージョン</label>
           <div class="col-sm-10">
             <select name="version" id="php_version" class="form-control">
             <?php
-                foreach(getPhpVersion() as $phpkey=>$phpvalue):?>
+                foreach(getPhpVersion() as $phpkey=>$phpvalue) : ?>
 
                 <option value="<?=$phpvalue?>" <?php if($phpvalue==$webappversion->app->php){ echo "selected";} ?>><?=$phpvalue?></option>
 

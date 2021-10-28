@@ -1,6 +1,6 @@
 <?php
 require_once('views/share_config.php');
-// if(!isset($_POST['db_user']) || !isset($_POST['type'])){header("location: /share/server/database?&db=mysql");}
+// if(!isset($_POST['db_user']) || !isset($_POST['type'])){header("location: /share/server/database?webid=$webid&db=mysql");}
 // require_once('models/mysql.php');
 $type = $_POST["type"];
 $action = $_POST["action"];
@@ -46,7 +46,7 @@ $db_pass = $_POST["db_pass"];
 				die("");
 		}
 	}
-	header("Location: /share/server?setting=database&tab=mysql&act=index&");
+	header("Location: /share/server?setting=database&tab=mysql&act=index");
 	die("");
 	
 ?>

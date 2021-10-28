@@ -6,9 +6,9 @@
         </button>
     </div>
     <div class="modal-body">
-        <form action="" method="post" id="php_ini_fm">
+        <form action="" method="post" id="php_ini_fm" onsubmit="loading()">
             <div class="form-group">
-            <textarea class="text-white bg-dark web" id="phpini" name="php_ini" rows="25"><?php echo $webpath; echo htmlspecialchars(getFile($webpath."/web/.user.ini")) ?></textarea>
+            <textarea class="text-white bg-dark web" id="phpini" name="php_ini" rows="25"><?php echo htmlspecialchars(getFile($webpath."/web/.user.ini")) ?></textarea>
             </div>
         </form>
     </div>

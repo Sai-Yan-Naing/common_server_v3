@@ -9,7 +9,7 @@ require_once('views/share_config.php');
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="fm_fun" style="position:relative">
+  <form action="/share/server?setting=filemanager&tab=tab&act=confirm" method="post" id="fm_fun" style="position:relative">
     <input type="hidden" name="action" value="new_dir">
     <label>Name:</label>
     <input type="text" class="form-control" name="new_dir">

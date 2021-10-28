@@ -21,7 +21,7 @@ $get_backup = $backup->checkScheduler($webdomain);
                                             <span>自動バックアップ</span>
                                         </div>
                                         <div class="col-sm-9">
-                                            <form action="/share/various/backup?confirm" method = "post">
+                                            <form action="/share/various/backup?confirm" method = "post" onsubmit="loading()">
                                                 <input type="hidden" name="action" value="auto_backup">
                                                 <label class="switch text-white common_dialog" gourl="/share/various?setting=backup&act=onoff"  data-toggle="modal" data-target="#common_dialog">
                                                     <input type="checkbox" <?= (int)$get_backup['scheduler']==1? "checked":""  ?>>
@@ -60,7 +60,9 @@ $get_backup = $backup->checkScheduler($webdomain);
                                                 </td>
                                             </tr>
                                         </table>
-                                    <?php endif; ?>
+                                    <?php 
+                                        endif;
+                                    ?>
                                     </div>
                                 </div>
                                 <!-- end content -->

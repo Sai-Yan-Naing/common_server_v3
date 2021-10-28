@@ -24,7 +24,7 @@ if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
 }
 $insert_q = "INSERT INTO db_account (`domain`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES (?, ?, ?, ?, ?)";
 
-$insert_app = "INSERT INTO app (`domain`, `site_name`, `app_name`, `app_version`, `root`, `url`,`user_name`, `password`, `db_name`, `db_user`, `db_pass`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$insert_app = "INSERT INTO app (`domain`, `site_name`, `app_name`, `app_version`, `root`, `url`,`user_name`, `password`, `db_name`, `db_user`, `db_pass`) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
 
 if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
 {
@@ -43,7 +43,8 @@ $src = APP_PATH."$app_name/$app_version";
 if ( $weborigin!==1)
 {  
     $dst = ROOT_PATH.$webrootuser.'/'.$webuser.'/web/'.$root_url;
-} else {
+} else
+{
     $dst = ROOT_PATH.$webuser.'/web/'.$root_url;
 }
 copy_paste($src, $dst);

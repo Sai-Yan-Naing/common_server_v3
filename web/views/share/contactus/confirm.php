@@ -28,3 +28,5 @@ $body = str_replace('$today', $timestamp, $body);
 $webmailer->sendMail($to,$toName,$subject,$body,CC);
 header("location: /share/contactus?act=index");
 die('admin');
+
+?>

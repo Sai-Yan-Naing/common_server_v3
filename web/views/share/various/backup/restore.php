@@ -8,7 +8,7 @@ require_once('views/share_config.php');
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-	<form action="/share/various?setting=backup&act=confirm" method = "post" id="autobackup">
+	<form action="/share/various?setting=backup&act=confirm" method = "post" id="autobackup" onsubmit="loading()">
         <input type="hidden" name="action" value="restore">
         Are you sure to restore backup server <b class="text-warning"><?=$webdomain ?> </b> ?
     </form>

@@ -11,11 +11,11 @@
                         <!-- start -->
                         <div class="tab-content">
                             <div id="pop-imap" class="tab-pane active pl-3"><br>
-                                <form action="" method="post" id="" />
+                                <form action="" method="post" id="">
                                     <div class="form-group row">
                                         <label for="cserver-name" class="col-sm-3 col-form-label">接続サーバー名</label>
                                         <div class="col-sm-8">
-                                        <span class="col-form-label"> mail.<?= $webdomain; ?> </span>
+                                        <span class="col-form-label"> mail.<?= htmlspecialchars($webdomain, ENT_QUOTES); ?> </span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -64,5 +64,4 @@
         </main>
     </div>
 </div> 
- <?php 
- require_once("views/share/footer.php");
+ <?php require_once("views/share/footer.php"); ?>

@@ -42,4 +42,4 @@ $webrootblacklist = $webroot_acc['blacklist'];
 
 $setting = $_GET['setting'];
 
-$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webrootuser; 
+$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webuser; 
