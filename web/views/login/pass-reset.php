@@ -23,7 +23,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
             die();
         }
         setcookie("domainid", $domainid);
-        echo "Password reset link sent successfully. Please check your email";
+        header('location: /login?act=check-email');
         die;
     } else
     {
@@ -45,7 +45,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
             die();
         }
         setcookie("domainid", $domainid);
-        echo "Password reset link sent successfully. Please check your email";
+        header('location: /login?act=check-email');
         die;
     } else
     {
@@ -66,7 +66,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
             die();
         }
         setcookie("domainid", $domainid);
-        echo "Password reset link sent successfully. Please check your email";
+        header('location: /login?act=check-email');
         die('hello');
     } else
     {

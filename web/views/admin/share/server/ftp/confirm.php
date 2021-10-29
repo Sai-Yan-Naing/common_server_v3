@@ -62,5 +62,5 @@ if ( $weborigin!=1)
 	$originuser = $webrootuser;
 }
 Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser." ".$per." ".$action." ".$originuser);
-header("location: /admin/share/server?setting=ftp&tab=tab&act=index&webid=$webid");
+header("location: /admin/share/server?setting=ftp&tab=tab&act=index&webid=$webid$pagy");
 ?>

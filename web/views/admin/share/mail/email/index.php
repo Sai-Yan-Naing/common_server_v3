@@ -1,7 +1,11 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
- $query = "SELECT * FROM add_email WHERE domain=?";
- $getAllRow=$commons->getAllRow($query,[$webdomain]);
+$limit = 1;
+$table = 'add_email';  
+$params = [$webdomain];
+require_once('views/pagination/start.php');
+$query = "SELECT * FROM $table where domain = ? LIMIT $start, $limit";
+$getAllRow = $commons->getAllRow($query, $params);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
@@ -44,6 +48,16 @@
                                     </div>
                                 </div>
                                 <!-- end content -->
+                                <div class="d-flex mt-3">
+                                    <div></div>
+                                    <div class='ml-auto'>
+                                        <?php 
+                                            $paginatecount = "SELECT COUNT(*) FROM $table  where domain = ?";
+                                            $page_url = "/admin/share/mail?setting=email&tab=tab&act=index&webid=".$webid."&page=";
+                                            require_once('views/pagination/end.php')
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
                     </div>
                 </main>

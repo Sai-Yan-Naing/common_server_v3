@@ -1,10 +1,10 @@
 <?php 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 require_once 'config/all.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 class Mailer
 {
 	public $mail;
@@ -24,15 +24,15 @@ class Mailer
 		try {
 			//Server settings
 			$this->mail->SMTPDebug = SMTP_DEBUG;
-			$this->mail->isSMTP();
-			$this->mail->Host       = MAIL_HOST;
+			// $this->mail->isSMTP();
 			$this->mail->SMTPAuth   = true;
+			$this->mail->Host       = MAIL_HOST;
 			$this->mail->CharSet       = 'ISO-2022-JP';
 			$this->mail->Encoding      = "7bit"; 
-			$this->mail->Username   = MAIL_USER;
-			$this->mail->Password   = MAIL_PASS;
 			$this->mail->SMTPSecure = SMTPSecure;
 			$this->mail->Port       = MAIL_PORT;
+			$this->mail->Username   = MAIL_USER;
+			$this->mail->Password   = MAIL_PASS;
 
 			//Recipients
 			
@@ -55,7 +55,6 @@ class Mailer
 			{
 				return false;
 			}
-//  die();
 			return true;
 		}
 		catch (Exception $e)

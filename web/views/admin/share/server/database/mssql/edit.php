@@ -13,7 +13,7 @@ $getRow = $commons->getRow($query);
 <!-- Modal body -->
 <div class="modal-body">
 
-                <form action="/admin/share/server?setting=database&tab=mssql&act=confirm&webid=<?=$webid?>" method="post" id="database_create">
+                <form action="/admin/share/server?setting=database&tab=mssql&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="database_create">
                   <input type="hidden" name="action" value="edit">
                   <input type="hidden" name="type" value="MSSQL">
                     <div class="row mb-3">
