@@ -10,6 +10,7 @@ $commons = new Common;
 $webmailer = new Mailer;
 $admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=?",[$webadminID]);
 $webadminID = $admin_acc['user_id'];
+$webadminName = $admin_acc['name'];
 
 // for root site
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$webadminID]);
@@ -25,3 +26,6 @@ $webrootdns = $webroot_acc['dns'];
 $webrootbasicsetting = $webroot_acc['basic_setting'];
 $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
+
+$pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
+$pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';

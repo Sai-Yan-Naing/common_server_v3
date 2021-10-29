@@ -8,6 +8,15 @@ class Common{
 		$this->pdo = new PDO(DSN, ROOT, ROOT_PASS);
 	}
 
+	function getCount($query, $params = [])
+	{
+		// return $query;die;
+		$stmt1 = $this->pdo->prepare($query);
+		$stmt1->execute($params);
+		$data = $stmt1->fetchColumn();
+		return $data;
+	}
+
 	function getRow($query, $params = [])
 	{
 		// die($query);

@@ -1,6 +1,9 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_account_for_mariadb where domain = ?";
+$limit = 2;
+$table = 'db_account_for_mariadb';  
+require_once('views/pagination/start.php');
+$query = "SELECT * FROM $table where domain = ? LIMIT $start, $limit";
 $getAllRow = $commons->getAllRow($query, [$webdomain]);
 ?>
     <div id="layoutSidenav">
@@ -42,8 +45,8 @@ $getAllRow = $commons->getAllRow($query, [$webdomain]);
                                                     <td class="border-dark"><?php echo htmlspecialchars($db['db_user'], ENT_QUOTES); ?></td>
                                                     <td class="border-dark"><?php echo htmlspecialchars($db['db_pass'], ENT_QUOTES); ?></td>
                                                     <td class="border-dark">
-                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mariadb&act=edit&act_id=<?= $db['id']?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
-                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mariadb&act=delete&act_id=<?= $db['id']?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mariadb&act=edit&act_id=<?= $db['id']?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
+                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mariadb&act=delete&act_id=<?= $db['id']?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
                                                     <td class="border-dark">情報</td>
                                                 </tr>
@@ -52,6 +55,17 @@ $getAllRow = $commons->getAllRow($query, [$webdomain]);
                                     </div>
                                 </div>
                                 <!-- end content -->
+                                <div class="d-flex mt-3">
+                                    <div></div>
+                                    <div class='ml-auto'>
+                                        <?php 
+                                            $paginatecount = "SELECT COUNT(*) FROM $table  where domain = ?";
+                                            $params = [$webdomain];
+                                            $page_url = "/admin/share/server?setting=database&tab=mariadb&act=index&webid=".$webid."&page=";
+                                            require_once('views/pagination/end.php')
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
                     </div>
                 </main>

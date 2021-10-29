@@ -53,7 +53,7 @@ $error_pages = json_decode($weberrorpages);
                                             </table>
                                         </div>
                                         <div class="row">
-                                            <label for="basic-auth" class="col-sm-2 col-form-label font-weight-bold">BASIC認証</label>
+                                            <h for="basic-auth" class="col-sm-2 col-form-label font-weight-bold">BASIC認証</h>
                                             <div class="col-sm-4">
                                             <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=new_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>BASIC認証追加</button>
                                             </div>
@@ -79,8 +79,8 @@ $error_pages = json_decode($weberrorpages);
                                                     <div id="collapse-<?=$key_replace?>" class="collapse <?=$show?>" aria-labelledby="head-<?=$key_replace?>" data-parent="#accordion">
                                                         <div class="card-body">
                                                             <div class="row justify-content-center">
-                                                                <div class="col-md-3 border ">対象ディレクトリ</div>
-                                                                <div class="col-md-4 border "><?= $main_value->url ?></div>
+                                                                <div class="col-md-3 border p-2 font-weight-bold">対象ディレクトリ</div>
+                                                                <div class="col-md-4 border p-2"><?= $main_value->url ?></div>
                                                             </div>
                                                             <div class="mb-2">認証ユーザー</div>
                                                                 <table class="table table-bordered">

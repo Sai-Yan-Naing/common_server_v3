@@ -8,7 +8,7 @@ $today = date("Y/m/d");
 
 $timestamp = date("Y/m/d :h:m:s");
 
-$subject ='=?UTF-8?B?'.base64_encode('ウィンサーバー').'?=';
+$subject ='ウィンサーバー';
 $body = file_get_contents('views/mailer/admin/contactus/user.php');
 $body = str_replace('$message', $message, $body);
 $body = str_replace('$phone', $phone, $body);
@@ -21,6 +21,7 @@ $webmailer->sendMail($to,$toName,$subject,$body,CC);
 $body = file_get_contents('views/mailer/admin/contactus/mail.php');
 $body = str_replace('$message', $message, $body);
 $body = str_replace('$contractID', $webadminID, $body);
+$body = str_replace('$webadminName', $webadminName, $body);
 $body = str_replace('$phone', $phone, $body);
 $body = str_replace('$email', CC, $body);
 $body = str_replace('$name', $toName, $body);

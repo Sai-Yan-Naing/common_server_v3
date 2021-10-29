@@ -1,6 +1,9 @@
 <html>
+<head>
+    <?php header("Content-Type: text/html; charset=UTF-8"); ?>
+</head>
     <body>
-        <p>Name: 様$name</p>
+        <p>Name: $name様</p>
         <p>この度は、ウィンサーバーにお問い合わせいただき、
 誠にありがとうございます。</p>
         <p>お問い合わせの内容を確認の上、１営業日以内にご返信いたしますので、

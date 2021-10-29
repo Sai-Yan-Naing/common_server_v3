@@ -2,15 +2,15 @@
 <div id="layoutSidenav">
 <?php require_once('views/vps/sidebar.php');?>
     <div id="layoutSidenav_content">
-    <main class="main-page">
+        <main class="main-page">
             <div class="container-fluid px-4">
                     <?php require_once('views/vps/title.php') ?>
+                    <?php require_once('views/vps/server/subtitle.php') ?>
                     <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                    <?php require_once("views/vps/server/tab.php") ?>
                         <!-- start -->
                         <div class="tab-content">
                             <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
-                            <form action="/vps/server/confirm?server=vps&setting=various&tab=connection" method="post">
+                            <form action="/vps/server?tab=connection&act=confirm" method="post" onsubmit="loading()">
                                 <div class="form-group row">
                                     <div class="col-sm-4">
                                         <label for="" class="col-form-label">グローバルIPアドレス</label>

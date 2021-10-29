@@ -9,7 +9,7 @@ echo $disk = $_POST['disk'];
 echo $ip_address = $_POST['ip_address'];
 echo $virtual_switch = $_POST['virtual_switch'];
 // die('');
-$subject ='=?UTF-8?B?'.base64_encode('Request Specification').'?=';
+$subject ='Request Specification';
 $body = file_get_contents('views/mailer/admin/vps/option.php');
 $body = str_replace('$memory', $memory, $body);
 $body = str_replace('$cpu', $cpu, $body);

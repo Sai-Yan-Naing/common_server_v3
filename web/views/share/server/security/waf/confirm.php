@@ -7,23 +7,21 @@ require_once ('models/security.php');
 $security = new Security;
 $waf = $security->getSecurity($webdomain);
 $switch = $_POST['switch'];
-$onoff = 0;
-if ( isset($_POST['onoff']) and $_POST['onoff'])
-{
-	$onoff = 1;
-}
 if ( $switch=='usage')
 {
-	echo $usage_query = "UPDATE waf SET `usage`=? WHERE `domain`=?";
-	if ( !$commons->doThis($usage_query,[$onoff,$webdomain]))
+	$onoff = (int)$waf['usage']==1? 0 : 1;
+	echo $usage_query = "UPDATE waf SET `usage`='$onoff' WHERE `domain`=?";
+	if ( !$commons->doThis($usage_query,[$webdomain]))
 	{
 		$error = "Usage cannot be change";
 		require_once ("views/share/server/security/waf/index.php");
 		// header("location: /share/server/security/waf/index?webid=$webid");
 	}
-}else{
-	echo $display_query = "UPDATE waf SET `display`=? WHERE `domain`=?";
-	if ( !$commons->doThis($display_query,[$onoff,$webdomain]))
+} else
+{
+	$onoff = (int)$waf['display']==1? 0 : 1;
+	echo $display_query = "UPDATE waf SET `display`='$onoff' WHERE `domain`=?";
+	if ( !$commons->doThis($display_query, [$webdomain]))
 	{
 		$error = "Display cannot be change";
 		require_once ("views/share/server/security/waf/index.php");
@@ -31,5 +29,3 @@ if ( $switch=='usage')
 	}
 }
 header("location: /share/server?setting=security&tab=waf&act=index");
-
-?>

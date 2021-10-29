@@ -6,7 +6,7 @@
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-    <form action="/share/server?setting=security&tab=ip&act=confirm&webid=<?= $webid?>" method="post" id="blockip_create">
+    <form action="/share/server?setting=security&tab=ip&act=confirm" method="post" id="blockip_create">
       <input type="hidden" name="action" value="new">
       <div class="d-flex justify-content-center">
           <label for="block_ip" class="col-sm-2 text-right p-2">IP Address</label>
@@ -19,5 +19,5 @@
 <!-- Modal footer -->
 <div class="modal-footer  d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="blockip_create">作成</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="blockip_create">追加</button>
 </div>

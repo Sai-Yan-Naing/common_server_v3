@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // if(!isset($_COOKIE['admin'])){header('location: /login');}
 // if(!isset($_GET['webid']) || $_GET['webid']==null){header('location: /admin');}
 require_once("config/all.php");
@@ -25,9 +26,9 @@ $webblacklist = $web_acc['blacklist'];
 $weborigin = $web_acc['origin'];
 $weboriginid = $web_acc['origin_id'];
 // for root site
-$webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE id= ?",[$weboriginid]);
+$webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$webadminID]);
 $webrootid = $webroot_acc['id'];
-$webadminID = $webroot_acc['customer_id'];
+$webarootdminID = $webroot_acc['customer_id'];
 $webrootuser = $webroot_acc['user'];
 $webrootdomain = $webroot_acc['domain'];
 $webrootpass = $webroot_acc['password'];
@@ -41,4 +42,7 @@ $webrootblacklist = $webroot_acc['blacklist'];
 
 $setting = $_GET['setting'];
 
-$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webrootuser; 
+$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webuser; 
+
+$pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
+$pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';

@@ -9,7 +9,7 @@ $webappversion = json_decode($webappversion);
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-  <form action="/share/server?setting=site&tab=app_setting&act=confirm&apply=dotnet_version" method="post" id="dotnet">
+  <form action="/share/server?setting=site&tab=app_setting&act=confirm&apply=dotnet_version" method="post" id="dotnet" onsubmit="loading()">
     <input type="hidden" name="action" value="new">
       <div class="row justify-content-center">
           <label for="dotnet_v" class="col-sm-2 text-right p-2">.NETバージョン</label>
@@ -25,5 +25,5 @@ $webappversion = json_decode($webappversion);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="dotnet">Save</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="dotnet">保存</button>
 </div>

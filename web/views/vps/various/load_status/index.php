@@ -1,8 +1,8 @@
-<?php require_once('views/vps/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_ftp WHERE domain='$webdomain'";
-$getAllRow=$commons->getAllRow($query);
-?>
+require_once('views/vps/header.php');
+require_once('views/vps/various/load_status/usage.php');
+$cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name); $memory_usage = memory_usage(true,$webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
+ ?>
     <div id="layoutSidenav">
         <?php require_once('views/vps/sidebar.php');?>
             <div id="layoutSidenav_content">
@@ -20,7 +20,7 @@ $getAllRow=$commons->getAllRow($query);
                                                 CPU
                                             </div>
                                             <div class="col-sm-6">
-                                                Average of cpu usage : <span id="cpu_usage"><?= $cpu_usage ?>%</span>
+                                                Average of cpu usage : <span id="cpu_usage"  gourl="/vps/various?setting=load_status&tab=load_status&act=usage1&case=cpu"><?= $cpu_usage ?>%</span>
                                                 <div class="progress">
                                                     <div class="progress-bar <?php if($cpu_usage<=60){ echo 'bg-success';}else if($cpu_usage>60 and $cpu_usage<80){ echo 'bg-warning';}else{echo 'bg-danger';} ?>" id="cpu" style="width:<?= $cpu_usage ?>%"></div>
                                                 </div>
@@ -31,7 +31,7 @@ $getAllRow=$commons->getAllRow($query);
                                             メモリ
                                             </div>
                                             <div class="col-sm-6">
-                                                Average of memory usage : <span id="memory_usage"><?= $memory_usage ?>%</span>
+                                                Average of memory usage : <span id="memory_usage" gourl="/vps/various?setting=load_status&tab=load_status&act=usage1&case=memory"><?= $memory_usage ?>%</span>
                                                 <div class="progress">
                                                     <div class="progress-bar <?php if($memory_usage<=60){ echo 'bg-success';}else if($memory_usage>60 and $memory_usage<80){ echo 'bg-warning';}else{echo 'bg-danger';} ?>" id="memory" style="width:<?= $memory_usage ?>%"></div>
                                                 </div>
@@ -63,3 +63,45 @@ $getAllRow=$commons->getAllRow($query);
             </div>
         </div> 
  <?php require_once("views/vps/footer.php"); ?>
+
+ <script>
+        $(document).ready(function(){
+            $url1=$("#cpu_usage").attr("gourl");
+            $url2=$("#memory_usage").attr("gourl");
+            setInterval(function(){ 
+                usage('cpu',$url1);
+            }, 4000);
+            setInterval(function(){
+                usage('memory',$url2);
+            }, 10000)
+        });
+
+        function usage($var,$gourl)
+        {
+            $url = document.URL.split('/');
+	        $url=$url[0]+"//"+$url[2];
+            $.ajax({
+                type: "POST",
+                url: $url+$gourl,
+                data: {},
+                success: function(data){
+                    // if($var=='cpu')
+                    // {
+                        $("#"+$var+"_usage").html(data+ ' %');
+                        $("#"+$var).css({"width":data+"%"})
+                        $("#"+$var).removeClass();
+                        if(data<=60)
+                        {
+                            $("#"+$var).addClass("progress-bar bg-success");
+                        }else if(data>60 && data<=80)
+                        {
+                            $("#"+$var).addClass("progress-bar bg-warning");
+                        }else{
+                            $("#"+$var).addClass("progress-bar bg-danger");
+                        }
+                    // }
+                    
+                }
+            });
+        }
+    </script>

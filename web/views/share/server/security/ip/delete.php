@@ -10,7 +10,7 @@ $act_id = $_GET['act_id'];
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-  <form action="/share/server?setting=security&tab=ip&act=confirm&webid=<?= $webid?>" method="post" id="delete_ip">
+  <form action="/share/server?setting=security&tab=ip&act=confirm" method="post" id="delete_ip">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
     <input type="hidden" name="block_ip" value="<?= $webblacklist->$act_id->ip ?>">

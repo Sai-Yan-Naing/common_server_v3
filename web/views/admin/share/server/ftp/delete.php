@@ -12,11 +12,11 @@ $getRow = $commons->getRow($query,[$act_id]);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=ftp&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="delete_ftp">
+  <form action="/admin/share/server?setting=ftp&tab=tab&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="delete_ftp">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="ftp_user" value="<?= $getRow['ftp_user'] ?>">
-    Are you sure to delete <b style="color: red"><?= $getRow['ftp_user'] ?> </b> ?
+    <b style="color: red"><?= $getRow['ftp_user'] ?> </b>を削除しますか？?
       
   </form>
 </div>

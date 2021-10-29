@@ -28,7 +28,8 @@ if ( isset($_POST['action']))
 		// echo $code;
 		// echo "<br>".$status_code;
 		// die();
-	}else{
+	} else
+	{
 		$action= $_POST['action'];
 		$act_id= $_POST['act_id'];
         $status = $temp[$act_id]['stopped'] === 0? 1 : 0;

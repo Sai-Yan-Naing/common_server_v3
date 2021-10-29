@@ -9,7 +9,7 @@ require_once('views/share_config.php');
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="fm_fun" style="position:relative" fun="upload" enctype="multipart/form-data">
+  <form action="/share/server?setting=filemanager&tab=tab&act=confirm" method="post" id="fm_fun" style="position:relative" fun="upload" enctype="multipart/form-data">
     <input type="hidden" name="action" value="upload">
     <label class="ps_absolute">ファイルをドラッグ＆ドロップしてください</label>
     <div style="position: relative; height: 200px">

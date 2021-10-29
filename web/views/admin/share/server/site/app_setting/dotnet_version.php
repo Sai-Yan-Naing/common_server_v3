@@ -25,5 +25,5 @@ $webappversion = json_decode($webappversion);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="dotnet">Save</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="dotnet">保存</button>
 </div>

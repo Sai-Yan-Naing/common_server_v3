@@ -252,15 +252,15 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
-          minlength: 8,
+          minlength: 1,
         },
         subject: {
           required: true,
-          minlength: 8,
+          minlength: 1,
         },
         message: {
           required: true,
-          minlength: 8,
+          minlength: 1,
         },
       },
       // Specify validation error messages
@@ -274,15 +274,15 @@ function allValidate() {
         },
         phone: {
           required: "Please enter Phone number",
-          minlength: "Phone number must be at least 8 characters long",
+          minlength: "Phone number must be at least 1 characters long",
         },
         subject: {
           required: "Please enter subject",
-          minlength: "Subject must be at least 8 characters long",
+          minlength: "Subject must be at least 1 characters long",
         },
         message: {
           required: "Please enter message",
-          minlength: "Message must be at least 8 characters long",
+          minlength: "Message must be at least 1 characters long",
         },
       },
       submitHandler: function (form) {
@@ -616,6 +616,7 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
+          alreadyexist: true,
         },
         mail_pass_word: {
           required: true,

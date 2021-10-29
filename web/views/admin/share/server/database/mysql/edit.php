@@ -13,7 +13,7 @@ $getRow = $commons->getRow($query,[$act_id]);
 <!-- Modal body -->
 <div class="modal-body">
 
-                <form action="/admin/share/server?setting=database&tab=mysql&act=confirm&webid=<?=$webid?>" method="post" id="database_create">
+                <form action="/admin/share/server?setting=database&tab=mysql&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="database_create">
                   <input type="hidden" name="action" value="edit">
                   <input type="hidden" name="type" value="MYSQL">
                     <div class="row mb-3">
@@ -42,5 +42,5 @@ $getRow = $commons->getRow($query,[$act_id]);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="database_create">作成</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="database_create">パスワード変更</button>
 </div>

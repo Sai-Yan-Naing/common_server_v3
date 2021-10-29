@@ -95,7 +95,7 @@ if ( $action === 'new' )
     }
 }
 
-header('location: /admin');
+header("location: /admin$pagyc");
 
 
 ?>

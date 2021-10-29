@@ -14,9 +14,9 @@ if ( $action  === 'delete')
 	$update_q = "UPDATE vps_account SET removal= ? WHERE id=? ";
 	if ( ! $commons->doThis($update_q,[$today,$act_id]))
 	{
-	$error="cannot update delete";
-	require_once('views/admin/vps.php');
-	die();
+		$error="cannot update delete";
+		require_once('views/admin/vps.php');
+		die();
 	}
 } else
 {
@@ -27,11 +27,11 @@ if ( $action  === 'delete')
 	$update_q = "UPDATE vps_account SET active= ? WHERE id= ? ";
 	if ( ! $commons->doThis($update_q,[$status,$act_id]))
 	{
-	$error="cannot update vps";
-	require_once('views/admin/vps.php');
-	die();
+		$error="cannot update vps";
+		require_once('views/admin/vps.php');
+		die();
 	}
 }
 shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
-header("location: /admin?main=vps");
+header("location: /admin?main=vps$pagy");
 ?>

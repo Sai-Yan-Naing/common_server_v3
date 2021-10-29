@@ -12,7 +12,7 @@ $getRow = $commons->getRow($query);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=database&tab=mssql&act=confirm&webid=<?=$webid?>" method="post" id="delete_database">
+  <form action="/admin/share/server?setting=database&tab=mssql&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="delete_database">
     <input type="hidden" name="type" value="MSSQL">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">

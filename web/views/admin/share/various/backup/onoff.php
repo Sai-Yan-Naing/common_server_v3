@@ -25,5 +25,5 @@ $get_backup = $backup->checkScheduler($webdomain);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff">確認</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff"><?= (int)$get_backup['scheduler']==1? "停止" : "起動" ?></button>
 </div>

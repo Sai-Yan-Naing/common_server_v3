@@ -10,7 +10,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain= ? ", [$webdomain]);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=security&tab=waf&act=confirm&webid=<?=$webid?>" method="post" id="onoff">
+  <form action="/admin/share/server?setting=security&tab=waf&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit='loading()'>
     <input type="hidden" name="switch" value="usage">
     <input type="hidden" name="onoff" value="<?= (int)$waf['usage']==1? 0 : 1 ?>">
     <?= (int)$waf['usage']==1? "停止" : "起動" ?>しますか ?
@@ -20,5 +20,5 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain= ? ", [$webdomain]);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff">確認</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff"><?= (int)$waf['usage']==1? "停止" : "起動" ?></button>
 </div>

@@ -28,18 +28,28 @@ require_once('views/admin/admin_shareconfig.php');
 	<form action="/admin/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="email_create">
 		<input type="hidden" name="action" value="new">
     	<div class="row mr-2 justify-content-center mb-1">
-    		<label for="email" class="col-sm-3">メールアドレス</label>
-		    <input type="text" class="form-control col-sm-6" placeholder="メールアドレス" column="email" onkeyup="change_mail_text(this.value)" id="email" name="email">
-		    <label  class="col-sm-3 form-label"  for="email"><span id="change_mail_text"></span>@<?= $webdomain?></label>
+    		<div class="col-sm-3"><label for="email">メールアドレス</label></div>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" placeholder="メールアドレス" column="email" onkeyup="change_mail_text(this.value)" id="email" name="email" column="email" table="add_email" remark="db">
+            </div>
+		    <div class="col-sm-3">
+                <label  class="form-label"  for="email"><span id="change_mail_text"></span>@<?= $webdomain?></label>
+            </div>
     	</div>
         <span class="row mr-2 justify-content-center mb-1">
             <label for="email" id="email_error" class="error col-sm-6"></label>
         </span>
         <div class="form-group row mr-2  justify-content-center">
-            <label for="mail_pass_word"  class="col-sm-3 form-label">パスワード</label>
-            <input type="password" class="form-control col-sm-6" name="mail_pass_word" id="mail_pass_word" placeholder="8～70文字、半角英数記号の組み合わせ">
-            <div class="col-sm-3"></div>
-            <label for="mail_pass_word" id="mail_pass_word_error" class="error  col-sm-6"></label>
+            <div class="col-sm-3">
+                <label for="mail_pass_word"  class="form-label">パスワード</label>
+            </div>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" name="mail_pass_word" id="mail_pass_word" placeholder="8～70文字、半角英数記号の組み合わせ">
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+            
         </div>
 	</form>
 </div>
