@@ -1,7 +1,11 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_ftp WHERE domain=?";
-$getAllRow=$commons->getAllRow($query,[$webdomain]);
+$limit = 1;
+$table = 'db_ftp';  
+$params = [$webdomain];
+require_once('views/pagination/start.php');
+$query = "SELECT * FROM $table WHERE domain=? LIMIT $start, $limit";
+$getAllRow=$commons->getAllRow($query,$params);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
@@ -71,8 +75,8 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                                     ?>
                                                     </td>
                                                     <td class="border-dark">
-                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=edit&act_id=<?=$ftp['id']?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
-                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=delete&act_id=<?=$ftp['id']?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=edit&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
+                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=delete&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
                                                 </tr>
                                                 <?php
@@ -82,6 +86,16 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                     </div>
                                 </div>
                                 <!-- end content -->
+                                <div class="d-flex mt-3">
+                                    <div></div>
+                                    <div class='ml-auto'>
+                                        <?php 
+                                            $paginatecount = "SELECT COUNT(*) FROM $table  where domain = ?";
+                                            $page_url = "/admin/share/server?setting=ftp&tab=tab&act=index&webid=".$webid."&page=";
+                                            require_once('views/pagination/end.php')
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
                     </div>
                 </main>

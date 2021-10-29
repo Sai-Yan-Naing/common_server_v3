@@ -20,6 +20,7 @@ $webmailer->sendMail($to,$toName,$subject,$body,CC);
 $body = file_get_contents('views/mailer/admin/share/contactus/mail.php');
 $body = str_replace('$message', $message, $body);
 $body = str_replace('$contractID', $webadminID, $body);
+$body = str_replace('$webadminName', $webadminName, $body);
 $body = str_replace('$phone', $phone, $body);
 $body = str_replace('$email', CC, $body);
 $body = str_replace('$name', $toName, $body);

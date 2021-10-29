@@ -616,6 +616,7 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
+          alreadyexist: true,
         },
         mail_pass_word: {
           required: true,

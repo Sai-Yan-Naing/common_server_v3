@@ -16,7 +16,10 @@
                             </li>
                         </ul>
                         <?php  
-                            $query = "SELECT * FROM web_account WHERE `customer_id` = ? && `removal` is null";
+                            $limit = 3;
+                            $table = 'web_account';  
+                            require_once('views/pagination/start.php');
+                            $query = "SELECT * FROM $table WHERE `customer_id` = ? && `removal` is null LIMIT $start, $limit";
                             $commons = new Common;
                             $multidomain=$commons->getAllRow($query,[$webadminID]);
                         ?>
@@ -49,7 +52,7 @@
                                         <form action="" method = "post">
                                             <input type="hidden" name="app" value="site">
                                             <input type="hidden" name="domain" value="<?=$domain['domain'] ?>">
-                                            <label class="switch text-white common_dialog" gourl="/admin/multiple_domain?act=onoff&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog">
+                                            <label class="switch text-white common_dialog" gourl="/admin/multiple_domain?act=onoff&act_id=<?= $domain[id].$pagy ?>"  data-toggle="modal" data-target="#common_dialog">
                                                 <input type="checkbox" <?= $domain['stopped']==0? "checked":""  ?>>
                                                 <span class="slider <?= $domain['stopped']==0? "slideron":"slideroff"  ?>"></span>
                                                 <span class="handle <?= $domain['stopped']==0? "handleon":"handleoff"  ?>"></span>
@@ -61,7 +64,7 @@
                                         <form action="" method = "post">
                                             <input type="hidden" name="app" value="site">
                                             <input type="hidden" name="domain" value="<?=$domain['domain'] ?>">
-                                            <label class="switch text-white common_dialog"  gourl="/admin/multiple_domain?act=apponoff&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog">
+                                            <label class="switch text-white common_dialog"  gourl="/admin/multiple_domain?act=apponoff&act_id=<?= $domain[id].$pagy?>"  data-toggle="modal" data-target="#common_dialog">
                                                 <input type="checkbox" <?= $domain['appstopped']==0? "checked":""  ?>>
                                                 <span class="slider <?= $domain['appstopped']==0? "slideron":"slideroff"  ?>"></span>
                                                 <span class="handle <?= $domain['appstopped']==0? "handleon":"handleoff"  ?>"></span>
@@ -70,11 +73,11 @@
                                         </form>
                                     </td>
                                     <td class="col-sm-2">
-                                    <button class="btn btn-sm common_dialog <?= $domain['sitebinding']==0? "btn-outline-info":"btn-outline-danger"  ?>" gourl="/admin/multiple_domain?act=sitebinding&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog"><?= $domain['sitebinding']==0? "追加":"削除"  ?></button>
+                                    <button class="btn btn-sm common_dialog <?= $domain['sitebinding']==0? "btn-outline-info":"btn-outline-danger"  ?>" gourl="/admin/multiple_domain?act=sitebinding&act_id=<?= $domain[id].$pagy?>"  data-toggle="modal" data-target="#common_dialog"><?= $domain['sitebinding']==0? "追加":"削除"  ?></button>
                                     </td>
                                     <td class="col-sm-1">
                                     <?php if($domain['origin']!=1){?>
-                                        <button class="btn btn-sm btn-outline-danger common_dialog" gourl="/admin/multiple_domain?act=delete&act_id=<?= $domain[id]?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
+                                        <button class="btn btn-sm btn-outline-danger common_dialog" gourl="/admin/multiple_domain?act=delete&act_id=<?= $domain[id].$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
                                     <?php } ?>
                                     </td>
                                 </tr>
@@ -91,6 +94,17 @@
                                 <div class="col-sm-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
                                 <div class="col-sm-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>
                             </div>
+                        </div>
+                        <div class="d-flex mt-3">
+                            <div></div>
+                            <div class='ml-auto'>
+                                <?php 
+                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE `customer_id` = ? && `removal` is null";
+                                    $params = [$webadminID];
+                                    $page_url = '/admin?page=';
+                                    require_once('views/pagination/end.php')
+                                ?>
+                             </div>
                         </div>
                     </div>
             </div>

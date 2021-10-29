@@ -12,7 +12,7 @@ $getRow = $commons->getRow($query,[$act_id]);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/vps?act=confirm" method="post" id="onoff" onsubmit="loading()">
+  <form action="/admin/vps?act=confirm<?=$pagy?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <b style="color: red"><?= $getRow['ip'] ?></b>を削除しますか？

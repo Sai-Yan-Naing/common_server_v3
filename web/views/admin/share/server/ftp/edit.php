@@ -12,7 +12,7 @@ $getRow = $commons->getRow($query,[$act_id]);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=ftp&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="ftp_create">
+  <form action="/admin/share/server?setting=ftp&tab=tab&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="ftp_create">
     <input type="hidden" name="action" value="edit">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
       <div class="form-group row">

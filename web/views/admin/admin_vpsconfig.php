@@ -14,6 +14,13 @@ require_once('views/admin/admin_vpsvalidate.php');
 require_once('mails/mail.php');
 $webmailer = new Mailer;
 $commons = new Common;
+// echo $_COOKIE['admin'];
+$webadminID = $_COOKIE['admin'];
+
+$admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=?",[$webadminID]);
+$webadminID = $admin_acc['user_id'];
+$webadminName = $admin_acc['name'];
+
 $web_acc = $commons->getRow("SELECT * FROM vps_account WHERE id= ? AND customer_id= ?",[$_GET['webid'],$_COOKIE['admin']]);
 $webid = $web_acc['id'];
 $webip = $web_acc['ip'];
@@ -30,3 +37,6 @@ $webhttp_rdp = $web_acc['http_rdp'];
 $web_memory = $web_acc['memory'];
 $web_storage  = $web_acc['storage'];
 $web_cpu = $web_acc["cpu"];
+
+$pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
+$pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';

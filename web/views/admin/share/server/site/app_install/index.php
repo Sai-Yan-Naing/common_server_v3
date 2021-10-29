@@ -10,8 +10,10 @@
                         <?php require_once("views/admin/share/server/$setting/tab.php") ?>
                             <!-- start -->
                             <?php
-
-                                $getAll= $commons->getAllRow("SELECT * FROM `app` WHERE domain= ?",[$webdomain]);
+                                $limit = 1;  
+                                $table = 'app';
+                                require_once('views/pagination/start.php');
+                                $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ? LIMIT $start, $limit",[$webdomain]);
                             ?>
                             <div class="tab-content">
                                 <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
@@ -49,6 +51,18 @@
                                 </div>
                             </div>
                             <!-- end content -->
+                            
+                        <div class="d-flex mt-3">
+                            <div></div>
+                            <div class='ml-auto'>
+                                <?php 
+                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE `domain` = ?";
+                                    $params = [$webdomain];
+                                    $page_url = '/admin/share/server?setting=site&tab=app_install&act=index&webid='.$webid.'&page=';
+                                    require_once('views/pagination/end.php')
+                                ?>
+                             </div>
+                        </div>
                         </div>
                 </div>
             </main>

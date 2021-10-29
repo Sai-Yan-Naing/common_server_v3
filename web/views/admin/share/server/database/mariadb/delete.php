@@ -12,7 +12,7 @@ $getRow = $commons->getRow($getRow);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=database&tab=mariadb&act=confirm&webid=<?= $webid?>" method="post" id="delete_database">
+  <form action="/admin/share/server?setting=database&tab=mariadb&act=confirm&webid=<?= $webid?><?=$pagy?>" method="post" id="delete_database">
     <input type="hidden" name="type" value="MARIADB">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">

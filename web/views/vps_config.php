@@ -27,3 +27,6 @@ $webpass = $web_acc['password'];
 $webactive = $web_acc['active'];
 $webrdp = $web_acc['rdp'];
 $webhttp_rdp = $web_acc['http_rdp'];
+
+$pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
+$pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';

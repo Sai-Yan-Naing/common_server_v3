@@ -1,4 +1,7 @@
 <html>
+<head>
+    <?php header("Content-Type: text/html; charset=UTF-8"); ?>
+</head>
     <body>
         <p>Name: $name様</p>
         <p>この度は、ウィンサーバーにお問い合わせいただき、

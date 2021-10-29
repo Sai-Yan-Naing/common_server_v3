@@ -15,10 +15,13 @@
                                 <a class="nav-link active" href="/admin?main=vps" onclick="loading()">VPS/デスクトッププラン</a>
                             </li>
                         </ul>
-                        <?php  
-                            $query = "SELECT * from vps_account where customer_id='D000123' && `removal` is null";
+                        <?php 
+                            $limit = 2;  
+                            $table = 'vps_account';
+                            require_once('views/pagination/start.php'); 
+                            $query = "SELECT * from $table where customer_id=? && `removal` is null LIMIT $start, $limit";
                             $commons = new Common;
-                            $getAllRow = $commons->getAllRow($query);
+                            $getAllRow = $commons->getAllRow($query,[$webadminID]);
                         ?>
                         <div>
                         <table class="table table-borderless">
@@ -39,14 +42,14 @@
                                     <td class="col-sm-3"><?=$vps['ip'] ?></td>
                                     <td class="col-sm-3">4 プラン</td>
                                     <td class="col-sm-2">
-                                        <a href="/admin/vps/server?tab=connection&act=index&webid=<?= $vps['id'] ?>" class="btn btn-outline-info btn-sm" target="_blank">設定</a>
+                                        <a href="/admin/vps/server?tab=connection&act=index&webid=<?= $vps['id'].$pagy ?>" class="btn btn-outline-info btn-sm" target="_blank">設定</a>
                                     </td>
                                     <td class="col-sm-2">
                                             <form action="/admin/vps-confirm" method = "post">
                                                 <input type="hidden" name="action" value="onoff">
                                                 <input type="hidden" name="confirm" value="post">
                                                 <input type="hidden" name="act_id" value="<?= $vps['id'] ?>">
-                                                <label class="switch text-white common_dialog" gourl="/admin/vps?act=onoff&act_id=<?= $vps[id]?>"  data-toggle="modal" data-target="#common_dialog">
+                                                <label class="switch text-white common_dialog" gourl="/admin/vps?act=onoff&act_id=<?= $vps[id].$pagy?>"  data-toggle="modal" data-target="#common_dialog">
                                                     <input type="checkbox" <?= $vps['active']!=0? "checked":""  ?>>
                                                     <span class="slider <?= $vps['active']!=0? "slideron":"slideroff"  ?>"></span>
                                                     <span class="handle <?= $vps['active']!=0? "handleon":"handleoff"  ?>"></span>
@@ -55,7 +58,7 @@
                                             </form>
                                     </td>
                                     <td class="col-sm-2">
-                                        <button type="button" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/vps?act=delete&act_id=<?= $vps[id]?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
+                                        <button type="button" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/vps?act=delete&act_id=<?= $vps[id]?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
                                     </td>
                                     </tr>
                                 <?php endforeach;?>
@@ -67,6 +70,17 @@
                                 <div class="col-sm-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">ドメイン取得/移管</a></div>
                                 <div class="col-sm-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
                                 <div class="col-sm-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-3">
+                            <div></div>
+                            <div class='ml-auto'>
+                                <?php 
+                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE `customer_id` = ? && `removal` is null";
+                                    $params = [$webadminID];
+                                    $page_url = '/admin?main=vps&page=';
+                                    require_once('views/pagination/end.php')
+                                ?>
                             </div>
                         </div>
                     </div>
