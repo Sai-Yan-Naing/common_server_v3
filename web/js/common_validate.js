@@ -266,14 +266,14 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         name: {
-          required: "Please enter Name",
+          required: "Please enter name",
         },
         email: {
           required: "Please enter email",
           minlength: "Please enter a valid email address",
         },
         phone: {
-          required: "Please enter Phone number",
+          required: "Please enter phone number",
           minlength: "Phone number must be at least 1 characters long",
         },
         subject: {

@@ -73,7 +73,7 @@ $cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
             }, 4000);
             setInterval(function(){
                 usage('memory',$url2);
-            }, 10000)
+            }, 14000)
         });
 
         function usage($var,$gourl)

@@ -37,10 +37,20 @@
                             <tbody>
                                 <?php
                                 foreach($getAllRow as $key=>$vps):
+                                    $query = "SELECT spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
+                                    inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
+                                    INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] IN ('memory', 'disk_hdd','core') WHERE price_tbl.service = '07' 
+                                    AND  price_tbl.type = '02' AND  price_tbl.pln = ?";
+                                    $getspec = $commons->getSpec($query,[$vps['plan']]);
+                                    $spec = [
+                                        "plan_name"=>$getspec[0]['plan_name'], 
+                                        "memory"=>$getspec[0]['value'], 
+                                        "disk_hdd"=>$getspec[1]['value'],
+                                        "core" => $getspec[2]['value']];
                                     ?>
                                     <tr class="row">
                                     <td class="col-sm-3"><?=$vps['ip'] ?></td>
-                                    <td class="col-sm-3">4 プラン</td>
+                                    <td class="col-sm-3"><?= $spec['plan_name'] ?></td>
                                     <td class="col-sm-2">
                                         <a href="/admin/vps/server?tab=connection&act=index&webid=<?= $vps['id'].$pagy ?>" class="btn btn-outline-info btn-sm" target="_blank">設定</a>
                                     </td>
