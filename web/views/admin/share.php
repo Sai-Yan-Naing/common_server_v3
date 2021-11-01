@@ -16,7 +16,7 @@
                             </li>
                         </ul>
                         <?php  
-                            $limit = 3;
+                            $limit = 10;
                             $table = 'web_account';  
                             require_once('views/pagination/start.php');
                             $query = "SELECT * FROM $table WHERE `customer_id` = ? && `removal` is null LIMIT $start, $limit";
