@@ -9,7 +9,9 @@ $act_id = $_GET['act_id'];
 // echo $getRow['id'];
 ?>
 <div class="modal-header">
-	<h4 class="modal-title">削除 DNS</h4>
+	<h4 class="modal-title">申請が完了しました。
+弊社にて作業完了次第、ご連絡させていただきますので
+反映まで今しばらくお待ちください。</h4>
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

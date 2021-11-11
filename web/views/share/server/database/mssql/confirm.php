@@ -47,7 +47,7 @@ $db_pass = $_POST["db_pass"];
 				die("");
 		}
 	}
-	header("Location: /share/server?setting=database&tab=mssql&act=index");
+	header("Location: /share/server?setting=database&tab=mssql&act=index&webid=$webid$pagy");
 	die("");
 	
 ?>

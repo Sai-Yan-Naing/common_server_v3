@@ -27,7 +27,7 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr class="row">
-                                <th class="col-sm-3">Ip</th>
+                                <th class="col-sm-3">ＩＰアドレス</th>
                                 <th class="col-sm-3">プラン</th>
                                 <th class="col-sm-2">設定</th>
                                 <th class="col-sm-2">サーバー</th>
@@ -68,7 +68,7 @@
                                             </form>
                                     </td>
                                     <td class="col-sm-2">
-                                        <button type="button" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/vps?act=delete&act_id=<?= $vps[id]?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
+                                        <button type="button" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/vps?act=delete&act_id=<?= $vps[id]?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">解約</button>
                                     </td>
                                     </tr>
                                 <?php endforeach;?>

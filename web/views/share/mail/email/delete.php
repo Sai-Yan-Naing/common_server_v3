@@ -13,7 +13,7 @@ $getRow = $commons->getRow($query);
 <!-- Modal body -->
 <div class="modal-body">
 
-	<form action="/share/mail?setting=email&tab=tab&act=confirm" method="post" id="delete_ftp">
+	<form action="/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="delete_ftp">
 		<input type="hidden" name="action" value="delete">
 		<input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
 		<input type="hidden" name="email" value="<?= $getRow['email'] ?>">

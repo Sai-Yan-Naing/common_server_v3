@@ -28,7 +28,7 @@ $getRow = $commons->getRow($query);
         </div>
         <div class="col-sm-3"></div>
     </div>
-	<form action="/share/mail?setting=email&tab=tab&act=confirm" method="post" id="email_create">
+	<form action="/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="email_create">
 		<input type="hidden" name="action" value="edit">
 		<input type="hidden" name="email" value="<?= $getRow['email'] ?>">
 		<input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">

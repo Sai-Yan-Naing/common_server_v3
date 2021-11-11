@@ -41,6 +41,6 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 }
 
 $commons->mail_server($webdomain,$email,$mail_pass_word,$action,$isexist);
-header("location: /share/mail?setting=email&tab=tab&act=index");
+header("location: /share/mail?setting=email&tab=tab&act=index&webid=$webid$pagy");
 
 ?>

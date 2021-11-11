@@ -6,7 +6,9 @@ $query = "SELECT * FROM web_account WHERE id=:webid";
 $getRow = $commons->getRow($query, ['webid' => $webid]);
 ?>
 <div class="modal-header">
-	<h4 class="modal-title">レコード追加</h4>
+	<h4 class="modal-title">申請が完了しました。
+弊社にて作業完了次第、ご連絡させていただきますので
+反映まで今しばらくお待ちください。</h4>
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

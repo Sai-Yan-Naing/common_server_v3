@@ -18,7 +18,9 @@ $getRow = $commons->getRow($query);
     <input type="hidden" name="sitebinding" value="<?= $getRow['sitebinding'] ?>">
     <input type="hidden" name="sitename" value="<?= $getRow['user'] ?>">
     <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-    <?= $getRow['sitebinding']==0? "追加" : "削除"  ?>しますか？
+     <?= $getRow['sitebinding']==0? "を追加しました
+      ＤＮＳの追加まで今しばらくお待ちください
+      弊社よりＤＮＳ追加作業後連絡させていただきます" : "を削除しました"  ?>
       
   </form>
 </div>

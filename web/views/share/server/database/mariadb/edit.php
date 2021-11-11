@@ -12,7 +12,7 @@ $getRow = $commons->getRow($query);
 <!-- Modal body -->
 <div class="modal-body">
 
-                <form action="/share/server?setting=database&tab=mariadb&act=confirm" method="post" id="database_create">
+                <form action="/share/server?setting=database&tab=mariadb&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="database_create">
                   <input type="hidden" name="action" value="edit">
                   <input type="hidden" name="type" value="MARIADB">
                     <div class="row mb-3">
