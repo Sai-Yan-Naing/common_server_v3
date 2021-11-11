@@ -8,7 +8,7 @@ require_once("views/admin/admin_shareconfig.php");
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-    <form action="/admin/share/server?setting=site&tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="error_create" onsubmit="loading()">
+    <form action="/admin/share/server?setting=site&tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="error_create">
 	    <input type="hidden" name="action" value="new">
 	      <div class="form-group row">
 	          <label for="status_code" class="col-sm-4">ステータスコード</label>

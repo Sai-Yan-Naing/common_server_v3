@@ -3,11 +3,11 @@ require_once('views/admin/admin_shareconfig.php');
 $email=$_POST['email'];
 
 $query = "SELECT * FROM add_email WHERE domain='$webdomain'";
-$isexist='noexist';
-if ( count($commons->getAllRow($query)) > 0 )
-{
-    $isexist='exist';
-}
+$isexist='exist';
+// if ( count($commons->getAllRow($query)) > 0 )
+// {
+//     $isexist='exist';
+// }
 $action =$_POST['action'];
 if ( isset($_POST['action']) and $_POST['action'] === 'new')
 {

@@ -14,6 +14,10 @@ if ($action === 'new')
 	$temp = json_decode($getDns['dns'], true);
 	$temp['ID-' . time()] = ['type' => $type, 'sub' => $sub, 'target' => $target];
 	$result = json_encode($temp);
+	$msg = "申請が完了しました。<br>".
+	"弊社にて作業完了次第、ご連絡させていただきますので<br>".
+	"反映まで今しばらくお待ちください。";
+    $msgsession ="msg";
 }
 elseif ($action === 'edit')
 {
@@ -23,6 +27,10 @@ elseif ($action === 'edit')
 	$temp[$act_id]['sub'] = $_POST['sub'];
 	$temp[$act_id]['target'] = $_POST['target'];
 	$result = json_encode($temp);
+	$msg = "申請が完了しました。<br>".
+	"弊社にて作業完了次第、ご連絡させていただきますので<br>".
+	"反映まで今しばらくお待ちください。";
+    $msgsession ="msg";
 }
 elseif ($action === 'delete')
 {
@@ -33,6 +41,9 @@ elseif ($action === 'delete')
 	$target = $temp[$act_id]['target'];
 	unset($temp[$act_id]);
 	$result = json_encode($temp);
+	$msg = "申請が完了しました。<br>".
+	"弊社にて作業完了次第、ご連絡させていただきますので反映まで今しばらくお待ちください。";
+    $msgsession ="msgdel";
 }
 
 $qry = 'UPDATE web_account SET `dns` = :dns WHERE `id` = :id';
@@ -51,7 +62,7 @@ $subject = '=?UTF-8?B?' . base64_encode('DNS情報変更申請') . '?=';
 //    $body = str_replace('$domain', $getDns['domain'], $body);
 //    $body = str_replace('$target', $target, $body);
 //    $body = preg_replace('/\\\\/','', $body); //Strip backslashes
-$body = "<h2>契約ID1234589 : {$admin}</h2>
+$body = "<h2>契約 : {$admin}</h2>
         <p>DNS情報変更申請</p>
         <p>DNS情報の変更内容</p>
         <p>{$type}レコード　{$sub}.{$domain}->{$target}</p>
@@ -64,5 +75,5 @@ if ( ! $webmailer->sendMail(TO, TONAME, $subject, $body))
 	require('views/admin/dns/share/index.php');
 	die();
 }
-
+flash($msgsession,$msg);
 header('location: /admin/dns?tab=share&act=index&webid=' . $webid);

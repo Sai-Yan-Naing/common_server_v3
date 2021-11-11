@@ -46,7 +46,7 @@
                                         <a href="/admin/share/server?setting=site&tab=app_install&act=index&webid=<?=$domain[id]?>" target="_blank" class="btn btn-sm btn-outline-info">設定</a>
                                     </td>
                                     <td class="col-sm-2">
-                                        <span><?php if($domain['origin']!=1){ echo sizeFormat(folderSize("E:/webroot/LocalUser/".$multidomain[0]['user']."/$domain[user]"));}else{echo sizeFormat(folderSize("E:/webroot/LocalUser/$domain[user]"));} ?></span>
+                                        <span><?php if($domain['origin'] !=1 ){ echo sizeFormat(folderSize("E:/webroot/LocalUser/".$webrootuser."/".$domain['user']));}else{echo sizeFormat(folderSize("E:/webroot/LocalUser/".$domain['user']));} ?></span>
                                     </td>
                                     <td class="col-sm-1">
                                         <form action="" method = "post">
@@ -100,6 +100,7 @@
                             <div class='ml-auto'>
                                 <?php 
                                     $paginatecount = "SELECT COUNT(*) FROM $table WHERE `customer_id` = ? && `removal` is null";
+                                    // SELECT COUNT(*) FROM web_account WHERE `customer_id` = 'D000123' && `removal` is null
                                     $params = [$webadminID];
                                     $page_url = '/admin?page=';
                                     require_once('views/pagination/end.php')

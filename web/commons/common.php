@@ -312,7 +312,7 @@ function sizeFormat($bytes)
         return false;
     }
 
-    function createFile($file)
+function createFile($file)
 {
 	// $file="E:\webroot\LocalUser/test1.php";
 	$myfile = fopen("$file", "w") or die("Unable to open file!");
@@ -371,6 +371,15 @@ function uploadFile($dir,$file)
 	}
 }
 
-
-
-?>
+function flash($name, $text = '' )
+{
+    if (isset($_SESSION[$name]))
+    {
+        $msg = $_SESSION[$name];
+        unset($_SESSION[$name]);
+        return $msg;
+    }else{
+        $_SESSION[$name] = $text;
+    }
+    return '';
+}
