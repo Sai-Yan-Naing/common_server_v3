@@ -6,6 +6,9 @@ $message = $_POST['message'];
 $phone = $_POST['phone'];
 $today = date("Y/m/d");
 
+$msgsession =  "msg";
+$msg = "お問合せが完了しました。<br>弊社より回答させていただきますので今しばらくお待ちください";
+
 $timestamp = date("Y/m/d :h:m:s");
 
 $subject ='ウィンサーバー';
@@ -28,6 +31,7 @@ $body = str_replace('$name', $toName, $body);
 $body = str_replace('$today', $timestamp, $body);
 
 $webmailer->sendMail($to,$toName,$subject,$body,CC);
+flash($msgsession,$msg);
 header("location: /admin/vps/contactus?act=index&webid=$webid");
 die('admin');
 

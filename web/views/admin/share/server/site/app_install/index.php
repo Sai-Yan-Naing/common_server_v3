@@ -25,7 +25,7 @@
                                                 <th class="border-dark">アプリケーション</th>
                                                 <th class="border-dark">バージョン</th>
                                                 <th class="border-dark">Document Root</th>
-                                                <th class="border-dark">Url</th>
+                                                <th class="border-dark">URL</th>
                                                 <th class="border-dark">ユーザー名</th>
                                                 <th class="border-dark">Password</th>
                                                 <th class="border-dark">Database</th>

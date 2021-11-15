@@ -1,6 +1,6 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$limit = 1;
+$limit = 10;
 $table = 'add_email';  
 $params = [$webdomain];
 require_once('views/pagination/start.php');

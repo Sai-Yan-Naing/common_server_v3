@@ -1,6 +1,6 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$limit = 1;
+$limit = 10;
 $table = 'db_ftp';  
 $params = [$webdomain];
 require_once('views/pagination/start.php');
@@ -18,10 +18,10 @@ $getAllRow=$commons->getAllRow($query,$params);
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div class="active">
-                                        <div class="ftp-title mb-3">ＦＴＰサーバー情報</div>
+                                        <div class="ftp-title mb-3">FTPサーバー情報</div>
                                             <div class="row mb-3">
                                                 <div class="col-sm-3">
-                                                    <span>ＦＴＰサーバー</span>
+                                                    <span>FTPサーバー</span>
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <span><?= IP ?></span>
@@ -49,7 +49,7 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                     <th class="font-weight-bold border-dark">FTP ユーザー名</th>
                                                     <th class="font-weight-bold border-dark">パスワード</th>
                                                     <th class="font-weight-bold border-dark">書き込み権限</th>
-                                                    <th class="font-weight-bold border-dark">Action</th>
+                                                    <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
                                                 <?php 
                                                     foreach ($getAllRow as $key => $ftp):

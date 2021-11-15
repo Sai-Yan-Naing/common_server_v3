@@ -14,7 +14,7 @@ $getpln = $commons->getRow($plan_q,[$webid]);
         <input type="hidden" name="action" value="osreinstall">
         <input type="hidden" name="spec" value="<?= $getpln['plan'] ?>">
         <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-        Are you sure to OS初期化 ?
+        OSの初期化を行いますか ?
         
     </form>
 </div>

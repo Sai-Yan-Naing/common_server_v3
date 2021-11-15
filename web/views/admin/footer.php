@@ -3,6 +3,9 @@
                 "closeButton": true,
   "progressBar": true,
   "positionClass": "toast-top-full-width",
+  "timeOut": 0,
+    "extendedTimeOut": 0,
+    "tapToDismiss": false
 }
 <?php if (isset($_SESSION['msg'])): ?>
 toastr.success("<?php echo flash('msg');?>").css({"max-width":"50%","top":20,"text-align":"center"});
@@ -11,6 +14,5 @@ toastr.success("<?php echo flash('msg');?>").css({"max-width":"50%","top":20,"te
 toastr.error("<?php echo flash('msgdel');?>").css({"max-width":"50%","top":20,"text-align":"center"});
 <?php endif; ?>
 </script>
-<?php echo $_SESSION['msg']; ?>
         </body>
 </html>

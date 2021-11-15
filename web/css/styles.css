@@ -11717,3 +11717,38 @@ color: white;
 .pointer{
   cursor: pointer;
 }
+.h-title{
+  width:50%;
+}
+/* admin home */
+.tb-width
+{
+  width: 13.285%;
+  word-break: break-all;
+}
+.tb-width-1
+{
+  width: 15.285%;
+  word-break: break-all;
+}
+.tb-width-2
+{
+  width: 16.285%;
+  word-break: break-all;
+}
+/* end admin home */
+/* admin vps home */
+.vtb-width{
+  width: 20%;
+  word-break: break-all;
+}
+a{
+  word-break: break-all;
+}
+/*end admin vps home */
+
+@media (max-width: 991px) {
+ .navbar-brand{
+   width: 0 !important;
+ }
+}
