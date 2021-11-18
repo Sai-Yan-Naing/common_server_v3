@@ -10,7 +10,7 @@
                         <?php require_once("views/admin/share/server/$setting/tab.php") ?>
                             <!-- start -->
                             <?php
-                                $limit = 1;  
+                                $limit = 10;  
                                 $table = 'app';
                                 require_once('views/pagination/start.php');
                                 $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ? LIMIT $start, $limit",[$webdomain]);
