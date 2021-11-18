@@ -22,29 +22,34 @@
 					<div class="row mb-4 justify-content-center">
 						<div class="col-sm-2 text-right">
 							<label>契約ドメイン</label>
+							<div style="height: 350px; overflow:auto">
 							<?php
+							$webid = isset($_GET['webid']) ? $_GET['webid'] : null;
 							$query = "SELECT * FROM web_account WHERE `customer_id` = ? && `removal` is null";
 							$commons = new Common;
 							$getAllRow = $commons->getAllRow($query,[$webadminID]);
+							if ($webid == null):
+								$param = $webrootid;
+							else:
+								$param = $webid;
+							endif;
 							?>
 							<?php foreach ($getAllRow as $value): ?>
-								<a href="/admin/dns?tab=share&act=index&webid=<?= htmlspecialchars($value['id'], ENT_QUOTES); ?>">
+								<a href="/admin/dns?tab=share&act=index&webid=<?= htmlspecialchars($value['id'], ENT_QUOTES); ?>" class="<?= ($param==$value['id'])? 'text-dark font-weight-bold h5':'' ?>">
 									<div class="mb-2"><?= htmlspecialchars($value['domain'], ENT_QUOTES);; ?></div>
 								</a>
 							<?php endforeach; ?>
+							</div>
 						</div>
 						<?php
 						$webid = isset($_GET['webid']) ? $_GET['webid'] : null;
-						if ($webid == null)
-						{
-							$param = 1;
+						if ($webid == null):
+							$param = $webrootid;
 							$query = 'SELECT * FROM web_account WHERE `customer_id` = :customer_id && `removal` is null && `origin`=:param';
-						}
-						else
-						{
+						else:
 							$param = $webid;
 							$query = 'SELECT * FROM web_account WHERE `customer_id` = :customer_id && `removal` is null && `id`=:param';
-						}
+						endif;
 
 						$getDns = $commons->getRow($query, ['customer_id' => $webadminID,'param' => $param]);
 						?>

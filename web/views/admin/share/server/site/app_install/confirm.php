@@ -16,6 +16,8 @@ unset($root_url[0]);
 unset($root_url[1]);
 unset($root_url[2]);
 $root_url = implode("/",$root_url);
+$msg = "jp message";
+$msgsession ="msg";
 if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
 {
     $error = "Something error";
@@ -72,4 +74,5 @@ if ( ! $commons->importWP($import,$db_name,$db_user,$db_pass))
 {
     echo "import fail";
 }
+flash($msgsession,$msg);
 header("location: /admin/share/server?setting=site&tab=app_install&act=index&webid=$webid");

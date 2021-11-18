@@ -6,7 +6,8 @@ $date = date("Y-m-d");
 $dirname = "G:/backup/$webuser/";
 
 $getbackup = $commons->getRow("select * from backup_data where domain='$webdomain'");
-
+$msg = "jp message";
+$msgsession ="msg";
 
 if (!$webuser) 
 {
@@ -46,6 +47,7 @@ if (!$webuser)
 
 		$backup->addAutoBackup($webdomain,$webuser,$onoff);
     }
+    flash($msgsession,$msg);
     header("location: /admin/share/various?setting=backup&act=index&webid=$webid");
 
 ?>

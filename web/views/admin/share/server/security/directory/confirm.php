@@ -1,7 +1,11 @@
 <?php
 require_once('views/admin/admin_shareconfig.php');
 if ( !isset($_POST['action']) || !isset($_POST['ftp_user']))
-{ header("location: /admin/share/server?setting=security&tab=directory&act=index&webid=$webid"); die();}
+{ 
+	header("location: /admin/share/server?setting=security&tab=directory&act=index&webid=$webid"); die();
+}
+$msg = "jp message";
+$msgsession ="msg";
 $originuser = '';
 if ( $weborigin!=1)
 {
@@ -61,7 +65,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 		delete_directory($dirname);
       }
 }
-
+flash($msgsession,$msg);
 header("location: /admin/share/server?setting=security&tab=directory&act=index&webid=$webid");
 
 ?>

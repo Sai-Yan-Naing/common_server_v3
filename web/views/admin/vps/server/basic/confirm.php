@@ -9,6 +9,8 @@ $vm_user = JAPANSYS;
 $vm_pass = JAPANSYS_PASS;
 $ipaddress = $webip;
 $gateway = $webgateway;
+$msgsession =  "msg";
+$msg = "jb message";
     if ( isset($_POST['action']) )
     {
         $plan = $_POST['spec'];
@@ -35,7 +37,9 @@ $gateway = $webgateway;
     
         if ($_POST["action"] !== "osreinstall" )
         {       
-                $subject = 'Request Specification';
+                // $msgsession =  "msg";
+		// $msg = "OS初期化が完了しました。";
+                $subject = '【Winserver】オプションの追加依頼完了';
                 $body = file_get_contents('views/mailer/admin/vps/info.php');
                 $body = str_replace('$memory', $getmemory, $body);
                 $body = str_replace('$disk', $getdisk, $body);
@@ -53,10 +57,13 @@ $gateway = $webgateway;
 
         } else
         {
+                $msgsession =  "msg";
+		$msg = "OS初期化が完了しました。";
                 // $vm_storage = 60*1024*1048576;
                 shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu.' '.$ipaddress.' '.$gateway);
         }
     }
+    flash($msgsession,$msg);
 header("location: /admin/vps/server?tab=basic&act=index&webid=$webid");
 
 ?>

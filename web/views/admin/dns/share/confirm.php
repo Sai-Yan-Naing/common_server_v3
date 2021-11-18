@@ -54,14 +54,9 @@ if ( ! $commons->doThis($qry, ['dns' => $result, 'id' => $getDns['id']]))
 	die();
 }
 
-$subject = '=?UTF-8?B?' . base64_encode('DNS情報変更申請') . '?=';
-//    $body = file_get_contents('views/mailer/admin/dns.php');
-//    $body = str_replace('$admin', $admin, $body);
-//    $body = str_replace('$type', $type, $body);
-//    $body = str_replace('$sub', $sub, $body);
-//    $body = str_replace('$domain', $getDns['domain'], $body);
-//    $body = str_replace('$target', $target, $body);
-//    $body = preg_replace('/\\\\/','', $body); //Strip backslashes
+// $subject = '=?UTF-8?B?' . base64_encode('DNS情報変更申請') . '?=';
+// $subject = 'DNS情報変更申請';
+$subject = '【Winserver】DNSレコード追加申請完了';
 $body = "<h2>契約 : {$admin}</h2>
         <p>DNS情報変更申請</p>
         <p>DNS情報の変更内容</p>

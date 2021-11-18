@@ -4,6 +4,8 @@ $site = $webuser;
 $ip = $_POST['block_ip'];
 $action = $_POST['action'];
 $temp = json_decode($webblacklist,true);
+$msg = "jp message";
+$msgsession ="msg";
 if ( $action=='new')
 {
 	if ( isExistBlackListIp($site,$ip))
@@ -39,4 +41,5 @@ if ( $action=='new')
 }
 
 Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/blockip/blockip.ps1" '. $site." ".$ip.' '.$action);
+flash($msgsession,$msg);
 header("location:/admin/share/server?setting=security&tab=ip&act=index&webid=$webid");

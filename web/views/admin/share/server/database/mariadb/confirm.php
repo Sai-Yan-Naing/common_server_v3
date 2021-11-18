@@ -5,8 +5,12 @@ $action = $_POST["action"];
 
 $db_user = $_POST["db_user"];
 $db_pass = $_POST["db_pass"];
+$msgsession =  "msg";
+$msg = "jp message";
 	if ( $action === "new")
 	{
+		$msgsession =  "msg";
+		$msg = "DBの追加が完了しました。";
 		$db_name = $_POST["db_name"];
 		
 		if ( ! $commons->addMariaUserAndDB($db_name, $db_user, $db_pass) )
@@ -34,11 +38,11 @@ $db_pass = $_POST["db_pass"];
 		$db_name = $_POST['db_name'];
 		if ( ! $commons->deleteMariaDB($act_id,$db_user,$db_name))
 		{
-			echo $error = "Something errors";
+			$error = "Something errors";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
 		}
-		echo "error";
 	}
+	flash($msgsession,$msg);
 	header("Location: /admin/share/server?setting=database&tab=mariadb&act=index&webid=$webid$pagy");
 	die("");

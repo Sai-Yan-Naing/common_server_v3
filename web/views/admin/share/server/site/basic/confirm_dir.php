@@ -5,6 +5,8 @@ require_once("views/admin/admin_shareconfig.php");
     $temp = json_decode($webbasicsetting,true);
     $bass_dir = $_POST['bass_dir'];
     $dir_path=$webrootuser.'/'.$webuser.'/'.$bass_dir;
+    $msg = "jp message";
+    $msgsession ="msg";
     if ($for==='dir')
     {
         if ($action === 'new')
@@ -55,6 +57,7 @@ require_once("views/admin/admin_shareconfig.php");
     $_SESSION['error'] = false;
     $_SESSION['message'] = 'Success';
     addBassman($webrootuser.'/'.$webuser,$result);
+    flash($msgsession,$msg);
     header("location: /admin/share/server?setting=site&tab=basic&act=index&webid=$webid");
     die();
 

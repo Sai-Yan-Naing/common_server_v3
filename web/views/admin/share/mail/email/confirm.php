@@ -4,6 +4,8 @@ $email=$_POST['email'];
 
 $query = "SELECT * FROM add_email WHERE domain='$webdomain'";
 $isexist='exist';
+$msg = "jp message";
+$msgsession ="msg";
 // if ( count($commons->getAllRow($query)) > 0 )
 // {
 //     $isexist='exist';
@@ -41,6 +43,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 }
 
 $commons->mail_server($webdomain,$email,$mail_pass_word,$action,$isexist);
+flash($msgsession,$msg);
 header("location: /admin/share/mail?setting=email&tab=tab&act=index&webid=$webid");
 
 ?>
