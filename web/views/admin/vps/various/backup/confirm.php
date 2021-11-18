@@ -59,6 +59,7 @@ $vm_name = $webvm_name;
         // die('restore');
         $act_id=$_POST['act_id'];
         $dirname = "C://Hyper-V//Backup//$getvpsbackup[name]//$webvm_name";
+        $back_name = $getvpsbackup['name'];
         $temp = "C://Hyper-V//Backup//$getvpsbackup[name]//$webvm_name//Virtual Machines";
         $directories = array();
         $files_list  = array();
@@ -97,7 +98,7 @@ $vm_name = $webvm_name;
         // die($active);
         // echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/manage_vm/vm.ps1" '. $webvm_name." ".$action." ".$dirname." ".$backupfile." ".$active);
         $action = 'restore_backup';
-        echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $dirname." ". $del_dir." ".$backupfile);
+        echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $back_name." ". $del_dir." ".$backupfile);
         // die('restore');
     } elseif (isset($_POST['action']) and $_POST['action'] === "auto_backup")
     {

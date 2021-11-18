@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('config/all.php');
 require_once('models/common.php');
 require_once('commons/common.php');

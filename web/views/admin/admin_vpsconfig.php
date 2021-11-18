@@ -1,4 +1,5 @@
 <?php
+session_start();
 ob_start();
 // if(!isset($_COOKIE['admin'])){header('location: /login');}
 // if(!isset($_GET['server']) && !isset($_GET['setting']) and !isset($_GET['tab'])){header('location: /admin');}

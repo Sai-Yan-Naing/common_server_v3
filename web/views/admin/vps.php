@@ -16,7 +16,7 @@
                             </li>
                         </ul>
                         <?php 
-                            $limit = 2;  
+                            $limit = 10;  
                             $table = 'vps_account';
                             require_once('views/pagination/start.php'); 
                             $query = "SELECT * from $table where customer_id=? && `removal` is null LIMIT $start, $limit";
@@ -27,11 +27,11 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr class="row">
-                                <th class="col-sm-3">Ip</th>
-                                <th class="col-sm-3">プラン</th>
-                                <th class="col-sm-2">設定</th>
-                                <th class="col-sm-2">サーバー</th>
-                                <th class="col-sm-2">解約</th>
+                                <th class="vtb-width">ＩＰアドレス</th>
+                                <th class="vtb-width">プラン</th>
+                                <th class="vtb-width">設定</th>
+                                <th class="vtb-width">サーバー</th>
+                                <th class="vtb-width">解約</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,12 +49,12 @@
                                         "core" => $getspec[2]['value']];
                                     ?>
                                     <tr class="row">
-                                    <td class="col-sm-3"><?=$vps['ip'] ?></td>
-                                    <td class="col-sm-3"><?= $spec['plan_name'] ?></td>
-                                    <td class="col-sm-2">
+                                    <td class="vtb-width"><?=$vps['ip'] ?></td>
+                                    <td class="vtb-width"><?= $spec['plan_name'] ?></td>
+                                    <td class="vtb-width">
                                         <a href="/admin/vps/server?tab=connection&act=index&webid=<?= $vps['id'].$pagy ?>" class="btn btn-outline-info btn-sm" target="_blank">設定</a>
                                     </td>
-                                    <td class="col-sm-2">
+                                    <td class="vtb-width">
                                             <form action="/admin/vps-confirm" method = "post">
                                                 <input type="hidden" name="action" value="onoff">
                                                 <input type="hidden" name="confirm" value="post">
@@ -67,20 +67,18 @@
                                                 </label>
                                             </form>
                                     </td>
-                                    <td class="col-sm-2">
-                                        <button type="button" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/vps?act=delete&act_id=<?= $vps[id]?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
+                                    <td class="vtb-width">
+                                        <button type="button" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/vps?act=delete&act_id=<?= $vps[id]?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">解約</button>
                                     </td>
                                     </tr>
                                 <?php endforeach;?>
                             </tbody>
                             </table>
                         </div>
-                        <div class="d-flex  justify-content-center">
-                            <div class="row justify-content-center col-sm-10 ">
-                                <div class="col-sm-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">ドメイン取得/移管</a></div>
-                                <div class="col-sm-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
-                                <div class="col-sm-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>
-                            </div>
+                        <div class="row justify-content-center">
+                                <div class="col-lg-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">ドメイン取得/移管</a></div>
+                                <div class="col-lg-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
+                                <div class="col-lg-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>
                         </div>
                         <div class="d-flex mt-3">
                             <div></div>

@@ -6,7 +6,7 @@ $getRow = $commons->getRow($query);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Web site</h4>
+  <h4 class="modal-title"> ＷＥＢサイト起動/停止</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -17,7 +17,6 @@ $getRow = $commons->getRow($query);
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="stopped" value="<?= $getRow['stopped'] ?>">
     <input type="hidden" name="sitename" value="<?= $getRow['user'] ?>">
-    <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
     <?= $getRow['stopped']==1? "起動" : "停止"  ?>しますか？
       
   </form>

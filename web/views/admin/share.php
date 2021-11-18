@@ -27,13 +27,13 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr class="row">
-                                    <th class="col-sm-2">契約ドメイン</th>
-                                    <th class="col-sm-2">サイト設定</th>
-                                    <th class="col-sm-2">使用容量</th>
-                                    <th class="col-sm-1">サイト</th>
-                                    <th class="col-sm-2">アプリケーションプール</th>
-                                    <th class="col-sm-2">エイリアス</th>
-                                    <th class="col-sm-1">削除</th>
+                                    <th class="tb-width-2">契約ドメイン</th>
+                                    <th class="tb-width">サイト設定</th>
+                                    <th class="tb-width">使用容量</th>
+                                    <th class="tb-width-1">サイト</th>
+                                    <th class="tb-width-1">アプリケーションプール</th>
+                                    <th class="tb-width">エイリアス</th>
+                                    <th class="tb-width">削除</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,14 +41,14 @@
                                     foreach($multidomain as $domain):
                                 ?>
                                 <tr class="row">
-                                    <td class="col-sm-2"><a href="http://<?=$domain[domain]?>" target="_blank" class="text-dark"><?=$domain['domain']?></a></td>
-                                    <td class="col-sm-2">
+                                    <td class="tb-width-2"><a href="http://<?=$domain[domain]?>" target="_blank" class="text-dark"><?=$domain['domain']?></a></td>
+                                    <td class="tb-width">
                                         <a href="/admin/share/server?setting=site&tab=app_install&act=index&webid=<?=$domain[id]?>" target="_blank" class="btn btn-sm btn-outline-info">設定</a>
                                     </td>
-                                    <td class="col-sm-2">
-                                        <span><?php if($domain['origin']!=1){ echo sizeFormat(folderSize("E:/webroot/LocalUser/".$multidomain[0]['user']."/$domain[user]"));}else{echo sizeFormat(folderSize("E:/webroot/LocalUser/$domain[user]"));} ?></span>
+                                    <td class="tb-width">
+                                        <span><?php if($domain['origin'] !=1 ){ echo sizeFormat(folderSize("E:/webroot/LocalUser/".$webrootuser."/".$domain['user']));}else{echo sizeFormat(folderSize("E:/webroot/LocalUser/".$domain['user']));} ?></span>
                                     </td>
-                                    <td class="col-sm-1">
+                                    <td class="tb-width-1">
                                         <form action="" method = "post">
                                             <input type="hidden" name="app" value="site">
                                             <input type="hidden" name="domain" value="<?=$domain['domain'] ?>">
@@ -60,7 +60,7 @@
                                             </label>
                                         </form>
                                     </td>
-                                    <td class="col-sm-2">
+                                    <td class="tb-width-1">
                                         <form action="" method = "post">
                                             <input type="hidden" name="app" value="site">
                                             <input type="hidden" name="domain" value="<?=$domain['domain'] ?>">
@@ -72,10 +72,10 @@
                                             </label>
                                         </form>
                                     </td>
-                                    <td class="col-sm-2">
+                                    <td class="tb-width">
                                     <button class="btn btn-sm common_dialog <?= $domain['sitebinding']==0? "btn-outline-info":"btn-outline-danger"  ?>" gourl="/admin/multiple_domain?act=sitebinding&act_id=<?= $domain[id].$pagy?>"  data-toggle="modal" data-target="#common_dialog"><?= $domain['sitebinding']==0? "追加":"削除"  ?></button>
                                     </td>
-                                    <td class="col-sm-1">
+                                    <td class="tb-width">
                                     <?php if($domain['origin']!=1){?>
                                         <button class="btn btn-sm btn-outline-danger common_dialog" gourl="/admin/multiple_domain?act=delete&act_id=<?= $domain[id].$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</button>
                                     <?php } ?>
@@ -87,19 +87,18 @@
                             </tbody>
                         </table>
                         </div>
-                        <div class="d-flex  justify-content-center">
-                            <div class="row justify-content-center col-sm-10 ">
-                                <div class="col-sm-3"><button class="btn btn-outline-info form-control common_dialog" gourl="/admin/multiple_domain?act=new" data-toggle="modal" data-target="#common_dialog">マルチドメイン追加</button></div>
-                                <div class="col-sm-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">ドメイン取得/移管</a></div>
-                                <div class="col-sm-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
-                                <div class="col-sm-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>
-                            </div>
+                        <div class="row justify-content-center">
+                                <div class="col-md-3"><button class="btn btn-outline-info form-control common_dialog" gourl="/admin/multiple_domain?act=new" data-toggle="modal" data-target="#common_dialog">マルチドメイン追加</button></div>
+                                <div class="col-md-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">ドメイン取得/移管</a></div>
+                                <div class="col-md-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
+                                <div class="col-md-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>
                         </div>
                         <div class="d-flex mt-3">
                             <div></div>
                             <div class='ml-auto'>
                                 <?php 
                                     $paginatecount = "SELECT COUNT(*) FROM $table WHERE `customer_id` = ? && `removal` is null";
+                                    // SELECT COUNT(*) FROM web_account WHERE `customer_id` = 'D000123' && `removal` is null
                                     $params = [$webadminID];
                                     $page_url = '/admin?page=';
                                     require_once('views/pagination/end.php')

@@ -10,8 +10,11 @@
                         <?php require_once("views/share/server/$setting/tab.php") ?>
                             <!-- start -->
                             <?php
-
-                                $getAll= $commons->getAllRow("SELECT * FROM `app` WHERE domain= ?",[$webdomain]);
+                                $limit = 10;  
+                                $table = 'app';
+                                $params = [$webdomain];
+                                require_once('views/pagination/start.php');
+                                $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain=? LIMIT $start, $limit",[$webdomain]);
                             ?>
                             <div class="tab-content">
                                 <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
@@ -36,7 +39,7 @@
                                                 <td class="border-dark"><?= $app['app_name'] ?></td>
                                                 <td class="border-dark"><?= $app['app_version'] ?></td>
                                                 <td class="border-dark"><a href="/share/server?setting=filemanager&tab=tab&act=index">/<?= $webuser ?>/<?= $app['root']?></a></td>
-                                                <td class="border-dark"><a href="<?= $app['url'] ?>/wp-" target="_blank"><?= $app['url'] ?></a></td>
+                                                <td class="border-dark"><a href="<?= $app['url'] ?>/wp-admin" target="_blank"><?= $app['url'] ?></a></td>
                                                 <td class="border-dark"><?= $app['user_name'] ?></td>
                                                 <td class="border-dark"><?= $app['password'] ?></td>
                                                 <td class="border-dark"><?= $app['db_name'] ?></td>
@@ -49,6 +52,16 @@
                                 </div>
                             </div>
                             <!-- end content -->
+                            <div class="d-flex mt-3">
+                                <div></div>
+                                <div class='ml-auto'>
+                                    <?php 
+                                        $paginatecount = "SELECT COUNT(*) FROM $table WHERE `domain` = ?";
+                                        $page_url = '/share/server?setting=site&tab=app_install&act=index&page=';
+                                        require_once('views/pagination/end.php')
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                 </div>
             </main>

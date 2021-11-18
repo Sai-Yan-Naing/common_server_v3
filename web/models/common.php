@@ -332,6 +332,39 @@ class Common{
 			}
 		}
 
+		function changeMariaPassword($dbuser,$dbpass){
+			// $dsn2 = 'mysql:host=localhost:3307';
+			$mapdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
+			$stmt = $mapdo->prepare("ALTER USER '$dbuser'@'%' IDENTIFIED BY '$dbpass';");
+			if(!$stmt->execute())
+			{
+				return false;
+			}
+			$mapdo = NULL;
+
+			try {
+			  $conn = new PDO(DSN, ROOT, ROOT_PASS);
+				  // set the PDO error mode to exception
+				  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+				  $sql = "UPDATE db_account_for_mariadb SET db_pass='$dbpass' WHERE db_user='$dbuser'";
+
+				  // Prepare statement
+				  $stmt = $conn->prepare($sql);
+
+				  // execute the query
+				  if(!$stmt->execute())
+				  {
+				  	return false;
+				  }
+				} catch(PDOException $e) {
+				  return false;
+				}
+
+				$conn = null;
+			return true;
+	}
+
 	function deleteMariaDB($dbid, $dbuser, $db)
 	{
 		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))

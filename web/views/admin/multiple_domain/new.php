@@ -1,6 +1,6 @@
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Add Multiple Domain</h4>
+  <h4 class="modal-title">マルチドメイン追加</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -12,7 +12,7 @@
         <div class="form-group row">
             <label for="domain" class="col-sm-2 col-form-label">ドメイン名</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control checkit" id="domain" column="domain" table="web_account" remark="domain" name="domain" placeholder="ドメイン名">
+                <input type="text" class="form-control checkit" id="domain" column="domain" table="web_account" remark="" name="domain" placeholder="ドメイン名">
             </div>
         </div>
         <div class="form-group row">

@@ -10,7 +10,7 @@
                         <?php require_once("views/admin/share/server/$setting/tab.php") ?>
                             <!-- start -->
                             <?php
-                                $limit = 1;  
+                                $limit = 10;  
                                 $table = 'app';
                                 require_once('views/pagination/start.php');
                                 $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ? LIMIT $start, $limit",[$webdomain]);
@@ -25,7 +25,7 @@
                                                 <th class="border-dark">アプリケーション</th>
                                                 <th class="border-dark">バージョン</th>
                                                 <th class="border-dark">Document Root</th>
-                                                <th class="border-dark">Url</th>
+                                                <th class="border-dark">URL</th>
                                                 <th class="border-dark">ユーザー名</th>
                                                 <th class="border-dark">Password</th>
                                                 <th class="border-dark">Database</th>

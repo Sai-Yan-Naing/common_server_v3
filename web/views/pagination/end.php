@@ -1,9 +1,11 @@
 <?php  
-    $row_db = $commons->getCount($paginatecount,$params) ;
-    $total_records = $row_db[0];  
+    $total_records = $commons->getCount($paginatecount,$params) ;
     $total_pages = ceil($total_records / $limit); 
     /* echo  $total_pages; */
+    // echo "<br>";
     // echo $total_records;
+    // echo "<br>";
+    // echo $limit;
     if($total_records>$limit):
 ?>
 

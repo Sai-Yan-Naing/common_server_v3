@@ -10,7 +10,7 @@ $error_page = json_decode($weberrorpages);
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-    <form action="/admin/share/server?setting=site&tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="error_edit" onsubmit="loading()">
+    <form action="/admin/share/server?setting=site&tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="error_edit">
 	    <input type="hidden" name="action" value="edit">
 	    <input type="hidden" name="act_id" value="<?=$act_id?>">
 	    <input type="hidden" name="code" value="<?=$error_page->$act_id->statuscode?>">
