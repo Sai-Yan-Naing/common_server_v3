@@ -18,9 +18,9 @@ class Mailer
 	function sendMail($to,$toName,$subject,$body,$cc = null,$noreply=null)
 	{
 		$fromName = FROMNAME;
-		$toName = mb_encode_mimeheader($toName, "ISO-2022-JP-MS");
-		$subject = mb_encode_mimeheader($subject, "ISO-2022-JP-MS");
-		$body = mb_convert_encoding($body, "ISO-2022-JP-MS", "UTF-8");
+		$toName = mb_encode_mimeheader($toName, "ISO-2022-JP",'UTF-8');
+		$subject = mb_encode_mimeheader($subject, "ISO-2022-JP",'UTF-8');
+		$body = mb_convert_encoding($body, "ISO-2022-JP",'UTF-8');
 		try {
 			//Server settings
 			$this->mail->SMTPDebug = SMTP_DEBUG;
@@ -47,7 +47,7 @@ class Mailer
 			}
 			//Content
 			$this->mail->isHTML(true);
-			$this->mail->Subject = $subject;
+			$this->mail->Subject = mb_convert_encoding('DNS情報変更申請', 'ISO-2022-JP','UTF-8');
 			$this->mail->Body    = $body;
 			// $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 

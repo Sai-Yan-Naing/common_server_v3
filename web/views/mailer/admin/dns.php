@@ -1,4 +1,5 @@
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-2022-jp">
     <body>
         <p>$admin様</p>
         <p>下記の内容にてDNSレコード追加申請の受付完了しました。</p>

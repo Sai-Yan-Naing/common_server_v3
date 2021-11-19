@@ -14,7 +14,7 @@ $act_id = $_GET['act_id'];
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-	<form action="/admin/dns?tab=share&act=confirm&webid=<?= htmlspecialchars($getRow['id'], ENT_QUOTES); ?>" method="post" id="dns_create" onsubmit="loading()">
+	<form action="/admin/dns?tab=share&act=confirm&webid=<?= htmlspecialchars($getRow['id'], ENT_QUOTES); ?>" method="post" id="dns_create">
 		<input type="hidden" name="action" value="edit">
 		<input type="hidden" name="act_id" value="<?= htmlspecialchars($act_id, ENT_QUOTES); ?>">
 		<input type="hidden" name="type" value="<?= htmlspecialchars($dns->$act_id->type, ENT_QUOTES); ?>">

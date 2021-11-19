@@ -12,7 +12,7 @@ $getRow = $commons->getRow($query, ['webid' => $webid]);
 <!-- Modal body -->
 <div class="modal-body">
 
-	<form action="/admin/dns?tab=share&act=confirm&webid=<?= htmlspecialchars($getRow['id'], ENT_QUOTES); ?>" method="post" id="dns_create" onsubmit="loading()">
+	<form action="/admin/dns?tab=share&act=confirm&webid=<?= htmlspecialchars($getRow['id'], ENT_QUOTES); ?>" method="post" id="dns_create">
 		<input type="hidden" name="action" value="new">
 		<div class="row justify-content-center">
 			<label for="type" class="col-sm-2 text-right p-2">タイプ</label>

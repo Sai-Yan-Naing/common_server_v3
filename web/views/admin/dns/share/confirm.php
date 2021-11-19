@@ -56,7 +56,7 @@ if ( ! $commons->doThis($qry, ['dns' => $result, 'id' => $getDns['id']]))
 
 // $subject = '=?UTF-8?B?' . base64_encode('DNS情報変更申請') . '?=';
 // $subject = 'DNS情報変更申請';
-$subject = '「Winserver」DNSレコード追加申請完了';
+$subject = '【Winserver】DNSレコード追加申請完了';
 $body = file_get_contents('views/mailer/admin/dns.php');
 $body = str_replace('$admin', $webadminName, $body);
 $body = str_replace('$sub', $sub, $body);
