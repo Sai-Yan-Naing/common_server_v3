@@ -95,7 +95,7 @@
 													<td class="col-sm-3">.<?= htmlspecialchars($getDns['domain'], ENT_QUOTES);  ?></td>
 													<td class="col-sm-3"><?= htmlspecialchars( $value->target, ENT_QUOTES); ?></td>
 													<td class="col-sm-2">
-														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/dns?tab=share&act=edit&webid=<?= $getDns['id']; ?>&act_id=<?= $key ?>">編集</a>
+														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/dns?tab=share&act=edit&webid=<?= $getDns['id']; ?>&act_id=<?= $key ?><?= $pagy ?>">編集</a>
 														<a href="javascript:;" data-toggle="modal" data-target="#common_dialog" class="btn btn-outline-danger btn-sm edit_database btn-sm common_dialog" gourl="/admin/dns?tab=share&act=delete&webid=<?= $getDns['id']; ?>&act_id=<?= $key ?>">削除</a>
 													</td>
 												</tr>

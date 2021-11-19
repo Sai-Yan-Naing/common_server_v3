@@ -75,4 +75,4 @@ if ( ! $webmailer->sendMail(TO, TONAME, $subject, $body))
 	die();
 }
 flash($msgsession,$msg);
-header('location: /admin/dns?tab=share&act=index&webid=' . $webid);
+header('location: /admin/dns?tab=share&act=index&webid=' . $webid.$pagy);
