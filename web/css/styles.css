@@ -11758,3 +11758,7 @@ a{
   padding-right: 4px !important;
   padding-left: 4px !important;
 }
+.bg-info
+{
+  background-color: #09CAE3 !important;
+}

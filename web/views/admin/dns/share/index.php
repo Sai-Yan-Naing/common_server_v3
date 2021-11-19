@@ -22,10 +22,14 @@
 					<div class="row mb-4 justify-content-center">
 						<div class="col-sm-2 text-right">
 							<label>契約ドメイン</label>
-							<div style="height: 350px; overflow:auto">
+							<div style="height: 275px; overflow:auto">
 							<?php
+							$limit = 10;
+                            $table = 'web_account';  
+                            require_once('views/pagination/start.php');
+                            
 							$webid = isset($_GET['webid']) ? $_GET['webid'] : null;
-							$query = "SELECT * FROM web_account WHERE `customer_id` = ? && `removal` is null";
+							$query = "SELECT * FROM $table WHERE `customer_id` = ? && `removal` is null LIMIT $start, $limit";
 							$commons = new Common;
 							$getAllRow = $commons->getAllRow($query,[$webadminID]);
 							if ($webid == null):
@@ -35,11 +39,26 @@
 							endif;
 							?>
 							<?php foreach ($getAllRow as $value): ?>
-								<a href="/admin/dns?tab=share&act=index&webid=<?= htmlspecialchars($value['id'], ENT_QUOTES); ?>" class="<?= ($param==$value['id'])? 'text-dark font-weight-bold h5':'' ?>">
-									<div class="mb-2"><?= htmlspecialchars($value['domain'], ENT_QUOTES);; ?></div>
+								<a href="/admin/dns?tab=share&act=index&webid=<?= htmlspecialchars($value['id'], ENT_QUOTES); ?><?= $pagy ?>">
+									<div class="mb-2 pr-2 pl-2 py-1 <?= ($param==$value['id'])? 'bg-info text-white':'text-secondary' ?>"><?= htmlspecialchars($value['domain'], ENT_QUOTES);; ?></div>
 								</a>
 							<?php endforeach; ?>
 							</div>
+							
+							<!-- pagination -->
+							<div class="d-flex mt-3">
+								<div></div>
+								<div class='ml-auto'>
+									<?php 
+										$paginatecount = "SELECT COUNT(*) FROM $table WHERE `customer_id` = ? && `removal` is null";
+										// SELECT COUNT(*) FROM web_account WHERE `customer_id` = 'D000123' && `removal` is null
+										$params = [$webadminID];
+										$page_url = "/admin/dns?tab=share&act=index&webid=$param&page=";
+										require_once('views/pagination/end.php')
+									?>
+								</div>
+							</div>
+							<!-- end pagination -->
 						</div>
 						<?php
 						$webid = isset($_GET['webid']) ? $_GET['webid'] : null;
