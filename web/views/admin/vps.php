@@ -27,7 +27,7 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr class="row">
-                                <th class="vtb-width">ＩＰアドレス</th>
+                                <th class="vtb-width">IPアドレス</th>
                                 <th class="vtb-width">プラン</th>
                                 <th class="vtb-width">設定</th>
                                 <th class="vtb-width">サーバー</th>

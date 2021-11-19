@@ -10,16 +10,19 @@ class Mailer
 	public $mail;
 	function __construct()
 	{
-		mb_language('ja');
-  		mb_internal_encoding('UTF-8');
+		// mb_language('ja');
+  		// mb_internal_encoding('UTF-8');
 		$this->mail = new PHPMailer(true);
 	}
 
 	function sendMail($to,$toName,$subject,$body,$cc = null,$noreply=null)
 	{
+		mb_language("japanese");
+		mb_internal_encoding("UTF-8");
 		$fromName = FROMNAME;
 		$toName = mb_encode_mimeheader($toName, "ISO-2022-JP",'UTF-8');
-		$subject = mb_encode_mimeheader($subject, "ISO-2022-JP",'UTF-8');
+		$subject = mb_encode_mimeheader($subject, "ISO-2022-JP","UTF-8");
+		// $subject = "=?utf-8?b?".base64_encode($subject)."?=";
 		$body = mb_convert_encoding($body, "ISO-2022-JP",'UTF-8');
 		try {
 			//Server settings
