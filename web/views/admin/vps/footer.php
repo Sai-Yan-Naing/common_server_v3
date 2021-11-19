@@ -8,11 +8,17 @@
     "tapToDismiss": false
 }
 <?php if (isset($_SESSION['msg'])): ?>
-toastr.success("<?php echo flash('msg');?>").css({"max-width":"50%","top":20,"text-align":"center"});
+        $('#common_dialog').modal('show');
+        document.getElementById("display_dialog").innerHTML = '<div class=modal-body text-center>'+"<?= flash('msg') ?>"+'</div>'+
+        '<div class="modal-footer d-flex justify-content-center">'+
+        '<button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">OK</button></div>';
 <?php endif; ?>
 <?php if (isset($_SESSION['msgdel'])): ?>
-toastr.error("<?php echo flash('msgdel');?>").css({"max-width":"50%","top":20,"text-align":"center"});
+        $('#common_dialog').modal('show');
+        document.getElementById("display_dialog").innerHTML = '<div class=modal-body text-center>'+"<?= flash('msgdel') ?>"+'</div>'+
+        '<div class="modal-footer d-flex justify-content-center">'+
+        '<button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">OK</button></div>';
 <?php endif; ?>
 </script>
-</body>
+        </body>
 </html>
