@@ -47,7 +47,7 @@ class Mailer
 			}
 			//Content
 			$this->mail->isHTML(true);
-			$this->mail->Subject = mb_convert_encoding('DNS情報変更申請', 'ISO-2022-JP','UTF-8');
+			$this->mail->Subject = $subject;
 			$this->mail->Body    = $body;
 			// $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
