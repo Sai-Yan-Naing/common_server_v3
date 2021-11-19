@@ -56,14 +56,18 @@ if ( ! $commons->doThis($qry, ['dns' => $result, 'id' => $getDns['id']]))
 
 // $subject = '=?UTF-8?B?' . base64_encode('DNS情報変更申請') . '?=';
 // $subject = 'DNS情報変更申請';
-$subject = '【Winserver】DNSレコード追加申請完了';
-$body = "<h2>契約 : {$admin}</h2>
-        <p>DNS情報変更申請</p>
-        <p>DNS情報の変更内容</p>
-        <p>{$type}レコード　{$sub}.{$domain}->{$target}</p>
-        <p>DNS情報の変更反映まで今しばらくお待ちください</p>
-        <p>変更申請後、弊社にて作業を行います。</p>
-        <p>変更作業については営業時間内での対応となります。</p>";
+$subject = '「Winserver」DNSレコード追加申請完了';
+$body = file_get_contents('views/mailer/admin/dns.php');
+$body = str_replace('$admin', $webadminName, $body);
+$body = str_replace('$sub', $sub, $body);
+$body = str_replace('$domain', $domain, $body);
+$body = str_replace('$target', $target, $body);
+// $body = "<h2>契約 : {$admin}</h2>
+//         <p>DNS情報変更申請</p>
+//         <p>下記の内容にてDNSレコード追加申請の受付完了しました。</p>
+//         <p>{$sub}.{$domain}->{$target}</p>
+//         <p>弊社の方にて作業を行わせていただきますので</p>
+//         <p>今しばらくお待ちいただきますようよろしくお願いいたします。</p>";
 if ( ! $webmailer->sendMail(TO, TONAME, $subject, $body))
 {
 	$error = 'Cannot send email';
