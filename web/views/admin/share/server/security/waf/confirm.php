@@ -7,6 +7,8 @@ require_once ('models/security.php');
 $security = new Security;
 $waf = $security->getSecurity($webdomain);
 $switch = $_POST['switch'];
+$msg = "jp message";
+$msgsession ="msg";
 if ( $switch=='usage')
 {
 	$onoff = (int)$waf['usage']==1? 0 : 1;
@@ -28,4 +30,5 @@ if ( $switch=='usage')
 		// header("location: /admin/share/server/security/waf/index?webid=$webid");
 	}
 }
+flash($msgsession,$msg);
 header("location: /admin/share/server?setting=security&tab=waf&act=index&webid=$webid");

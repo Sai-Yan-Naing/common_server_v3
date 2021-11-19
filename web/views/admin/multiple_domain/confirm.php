@@ -19,7 +19,7 @@ if ( $action === 'new' )
     $dns = json_encode($temp);
     $app_version = json_encode($temp1);
 
-    $msg = $webdomain."を追加しました";
+    $msg = "サイトの追加が完了しました。";
     $msgsession ="msg";
     
     $insert_q = "INSERT INTO web_account (`domain`, `password`, `user`, `plan`, `customer_id`,`dns`,`app_version`,`origin_id`) VALUES (?, ?, ?, ?, ?, ?,?,?)";
@@ -87,7 +87,7 @@ if ( $action === 'new' )
 {
     $act_id = $_POST['act_id'];
     $sitebinding = $_POST['sitebinding']==0? 1 : 0;
-    $subject = $_POST['sitebinding']==0? 'Add Binding': 'Delete Binding';
+    $subject = $_POST['sitebinding']==0? '【Winserver】エイリアスの追加申し込み完了': '【Winserver】エイリアスの削除完了';
 // for powershell
     $sitename = $_POST['sitename'];
     $bindDomain = $sitename.'.winserver.ne.jp';
@@ -106,7 +106,13 @@ if ( $action === 'new' )
             require_once("views/admin/share.php");
             die("");
     }
-    $body = "Successfully $subject";
+    $body = file_get_contents('views/mailer/admin/binding/delete.php');
+    if ($_POST['sitebinding']==0)
+    {
+        $body = file_get_contents('views/mailer/admin/binding/add.php');
+    }
+    $body = str_replace('$name', $webadminName, $body);
+
     if ( ! $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body))
     {
         require_once("views/admin/share.php");

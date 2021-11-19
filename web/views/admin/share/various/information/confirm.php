@@ -1,6 +1,8 @@
 <?php
 require_once("views/admin/admin_shareconfig.php");
 $action = $_POST['action'];
+$msg = "jp message";
+$msgsession ="msg";
 if ( $action=='onoff' )
 {
     $act_id = $_POST['act_id'];
@@ -29,5 +31,5 @@ if ( $action=='onoff' )
     }
     echo shell_Exec("%windir%\system32\inetsrv\appcmd.exe $startstop  apppool /apppool.name:$sitename");
 }
-
+flash($msgsession,$msg);
 header("location: /admin/share/various?setting=information&act=index&webid=$webid");

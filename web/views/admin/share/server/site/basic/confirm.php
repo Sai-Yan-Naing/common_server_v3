@@ -1,6 +1,8 @@
 <?php
 require_once("views/admin/admin_shareconfig.php");
 $temp = json_decode($weberrorpages,true);
+$msg = "jp message";
+$msgsession ="msg";
 if ( isset($_POST['action']))
 {
 	if ( $_POST['action'] === "new")
@@ -56,8 +58,7 @@ if ( isset($_POST['action']))
         require_once('views/admin/share/server/site/basic/index.php');
         die();
     }
-    $_SESSION['error'] = false;
-    $_SESSION['message'] = 'Success';
+    flash($msgsession,$msg);
 	header("location : /admin/share/server?setting=site&tab=basic&act=index&webid=$webid");
 }
 

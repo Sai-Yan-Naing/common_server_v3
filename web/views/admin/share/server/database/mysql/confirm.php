@@ -7,8 +7,12 @@ $action = $_POST["action"];
 
 $db_user = $_POST["db_user"];
 $db_pass = $_POST["db_pass"];
-	if ( $action === "new" )
+$msgsession =  "msg";
+$msg = "jp message";
+	if ( $action== "new")
 	{
+		$msgsession =  "msg";
+		$msg = "DBの追加が完了しました。";
 		$db_name = $_POST["db_name"];
 		
 		if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
@@ -46,6 +50,7 @@ $db_pass = $_POST["db_pass"];
 				die("");
 		}
 	}
+	flash($msgsession,$msg);
 	header("Location: /admin/share/server?setting=database&tab=mysql&act=index&webid=$webid$pagy");
 	die("");
 	

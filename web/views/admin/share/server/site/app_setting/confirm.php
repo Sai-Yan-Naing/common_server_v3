@@ -1,6 +1,8 @@
 <?php
 require_once("views/admin/admin_shareconfig.php");
 $webappversion = json_decode($webappversion);
+$msg = "jp message";
+$msgsession ="msg";
     if ( isset($_GET['apply']) && $_GET['apply'] ==='web.config')
     {
         $file = $webpath."/web/web.config";
@@ -28,6 +30,7 @@ $webappversion = json_decode($webappversion);
         $result=json_encode($temp);
         $query_dir = "UPDATE web_account SET app_version='$result' WHERE id= ?";
         $commons->doThis($query_dir,[$webid]);
+        flash($msgsession,$msg);
         header("location: /admin/share/server?setting=site&tab=app_setting&act=index&webid=$webid");
         die();
     }
@@ -44,6 +47,7 @@ $webappversion = json_decode($webappversion);
         // print_r($result);
         $query_dir = "UPDATE web_account SET app_version='$result' WHERE id='$webid'";
         $commons->doThis($query_dir);
+        flash($msgsession,$msg);
         header("location: /admin/share/server?setting=site&tab=app_setting&act=index&webid=$webid");
     }
 

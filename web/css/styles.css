@@ -11752,3 +11752,9 @@ a{
    width: 0 !important;
  }
 }
+
+.hbtn .col-md-3, .hbtn .btn
+{
+  padding-right: 4px !important;
+  padding-left: 4px !important;
+}
