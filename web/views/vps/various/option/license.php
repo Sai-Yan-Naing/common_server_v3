@@ -19,7 +19,7 @@ $getAllRow=$commons->getAllRow($query);
                                     <input type="hidden" name="act" value="sql_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                SQL Server Web Edition追加
+                                                SQL Server Web Edition追加
                                             </div>
                                             <div class="col-sm-3">
                                                 <span>月額</span>
@@ -36,7 +36,7 @@ $getAllRow=$commons->getAllRow($query);
                                     <input type="hidden" name="act" value="rdl">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                Remote Desktop License追加
+                                                Remote Desktop License追加
                                             </div>
                                             <div class="col-sm-3">
                                                 <input type="text" class="form-control" name="request" placeholder="個">
@@ -76,7 +76,7 @@ $getAllRow=$commons->getAllRow($query);
                                     <input type="hidden" name="act" value="window_server_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                Windows Server Security追加
+                                                Windows Server Security追加
                                             </div>
                                             <div class="col-sm-3">
                                                 <span>年額</span>
@@ -93,7 +93,7 @@ $getAllRow=$commons->getAllRow($query);
                                     <input type="hidden" name="act" value="site_guard_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                Site Gird Server Edition追加
+                                                Site Gird Server Edition追加
                                             </div>
                                             <div class="col-sm-3">
                                                 <span>月額</span>

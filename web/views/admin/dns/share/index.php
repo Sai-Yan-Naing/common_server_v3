@@ -7,7 +7,7 @@
 				<?php require_once('views/admin/title.php') ?>
 				<div class="shadow-lg p-3 mb-5 bg-white rounded">
 					<div class="row justify-content-center mt-4">
-						<div class="col-sm-2 text-right p-2">契約サービス</div>
+						<div class="col-sm-2 text-right p-2"></div>
 						<div class="col-sm-10">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
@@ -21,8 +21,8 @@
 					</div>
 					<div class="row mb-4 justify-content-center">
 						<div class="col-sm-2 text-right">
-							<label>契約ドメイン</label>
-							<div style="height: 275px; overflow:auto">
+							<label>契約サービス</label>
+							<div>
 							<?php
 							$limit = 10;
                             $table = 'web_account';  
@@ -40,7 +40,7 @@
 							?>
 							<?php foreach ($getAllRow as $value): ?>
 								<a href="/admin/dns?tab=share&act=index&webid=<?= htmlspecialchars($value['id'], ENT_QUOTES); ?><?= $pagy ?>">
-									<div class="mb-2 pr-2 pl-2 py-1 <?= ($param==$value['id'])? 'bg-info text-white':'text-secondary' ?>"><?= htmlspecialchars($value['domain'], ENT_QUOTES);; ?></div>
+									<div class="mb-2 pr-2 pl-2 py-1 <?= ($param==$value['id'])? 'bg-info text-white font-weight-bold h5':'text-secondary' ?>"><?= htmlspecialchars($value['domain'], ENT_QUOTES);; ?></div>
 								</a>
 							<?php endforeach; ?>
 							</div>
@@ -81,7 +81,7 @@
 												<th class="font-weight-bold col-sm-2">タイプ</th>
 												<th class="font-weight-bold col-sm-2">ホスト名</th>
 												<th class="font-weight-bold col-sm-3">ドメイン名</th>
-												<th class="font-weight-bold col-sm-3">ＩＰアドレス/ドメイン名</th>
+												<th class="font-weight-bold col-sm-3">IPアドレス/ドメイン名</th>
 												<th class="font-weight-bold col-sm-2">Action</th>
 											</tr>
 										</thead>

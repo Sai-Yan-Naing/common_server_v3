@@ -17,7 +17,7 @@ $getAllRow=$commons->getAllRow($query);
                                 <h6>簡単インストール</h6>
                                 <div class="form-group row">
                                     <div class="col-sm-4">
-                                        <a class="btn btn-outline-info btn-sm my-2" href="/admin/vps/various?setting=easy_install&tab=easy_install&act=confirm&action=iisinstall&webid=<?=$webid?>" onclick="loading()">IIS　インストール</a>
+                                        <a class="btn btn-outline-info btn-sm my-2" href="/admin/vps/various?setting=easy_install&tab=easy_install&act=confirm&action=iisinstall&webid=<?=$webid?>" onclick="loading()">IISインストール</a>
                                     </div>
                                 </div> 
                                 <div class="mb-4">
