@@ -27,10 +27,10 @@
                                                 <th class="border-dark">Document Root</th>
                                                 <th class="border-dark">URL</th>
                                                 <th class="border-dark">ユーザー名</th>
-                                                <th class="border-dark">Password</th>
-                                                <th class="border-dark">Database</th>
-                                                <th class="border-dark">DB ユーザー</th>
-                                                <th class="border-dark">DB Password</th>
+                                                <th class="border-dark">パスワード</th>
+                                                <th class="border-dark">データベース</th>
+                                                <th class="border-dark">DBユーザー</th>
+                                                <th class="border-dark">DBパスワード</th>
                                             </tr>
                                             <?php foreach($getAll as $app){ ?>
                                             <tr>

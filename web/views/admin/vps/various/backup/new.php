@@ -1,14 +1,14 @@
 <!-- Modal Header -->
 <?php require_once('views/admin/admin_vpsconfig.php'); ?>
 <div class="modal-header">
-  <h4 class="modal-title">Server Backup</h4>
+  <h4 class="modal-title">サーバーバックアップ</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
 <div class="modal-body">
 	<form action="/admin/vps/various?setting=backup&tab=backup&act=confirm&webid=<?=$webid?>" method = "post" id="autobackup" onsubmit="loading()">
         <input type="hidden" name="action" value="backup">
-        Are you sure to backup server <b style="color: green"><?=$webip?> </b> ?
+        <b style="color: green"><?=$webip?></b>をバックアップしますか ?
     </form>
 </div>
 <!-- Modal footer -->

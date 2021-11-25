@@ -4,7 +4,7 @@ $getvpsbackup = $commons->getRow("SELECT * FROM vps_backup WHERE ip='$webip'");
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Server Auto Backup</h4>
+  <h4 class="modal-title">自動バックアップに変更</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

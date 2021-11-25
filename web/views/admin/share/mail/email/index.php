@@ -30,7 +30,7 @@ $getAllRow = $commons->getAllRow($query, $params);
                                                 <tr>
                                                     <th class="font-weight-bold border-dark">登録メールアドレス</th>
                                                     <th class="font-weight-bold border-dark">パスワード</th>
-                                                    <th class="font-weight-bold border-dark">Action</th>
+                                                    <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
                                                 <?php 
                                                     foreach ($getAllRow as $key => $mail): 

@@ -105,15 +105,15 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                             <div class="row ml-2">
 
                                                 <div class="col-4 ip-address">
-                                                    <div>ＩＰアドレス</div>
+                                                    <div>IPアドレス</div>
                                                     <div class="ip-graph">グラフ表示</div>
                                                 </div>
                                                 <div class="col-4 ip-address">
-                                                    <div>ＩＰアドレス</div>
+                                                    <div>IPアドレス</div>
                                                     <div  class="ip-graph">グラフ表示</div>
                                                 </div>
                                                 <div class="col-4 ip-address">
-                                                    <div>ＩＰアドレス</div>
+                                                    <div>IPアドレス</div>
                                                     <div  class="ip-graph">グラフ表示</div>
                                                 </div>
                                             </div>
@@ -127,7 +127,7 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                                         <tr class="access-analysis" style="background-color: #0a48b3;">
                                                             <th scope="col">日付  <i class="fa fa-caret-down" style="font-size: 20px;" aria-hidden="true"></i></th>
                                                             <th scope="col">対象ブラウザ <i class="fas fa-caret-down" style="font-size: 20px;"></i></th>
-                                                            <th scope="col">接続元ＩＰアドレス <i class="fa fa-caret-down" style="font-size:20px"></i></th>
+                                                            <th scope="col">接続元IPアドレス <i class="fa fa-caret-down" style="font-size:20px"></i></th>
                                                             <th scope="col">アクセスファイル <i class="fa fa-caret-down" style="font-size:20px"></i></th>
                                                         </tr>
                                                     </thead>

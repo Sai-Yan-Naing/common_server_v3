@@ -14,7 +14,7 @@
 									<a class="nav-link active" aria-current="page" href="" onclick="loading()">共用サーバー</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="" onclick="loading()">VPS/デスクトッププラン</a>
+									<a class="nav-link" href="" onclick="loading()">VPS/デスクトップ</a>
 								</li>
 							</ul>
 						</div>
@@ -82,7 +82,7 @@
 												<th class="font-weight-bold col-sm-2">ホスト名</th>
 												<th class="font-weight-bold col-sm-3">ドメイン名</th>
 												<th class="font-weight-bold col-sm-3">IPアドレス/ドメイン名</th>
-												<th class="font-weight-bold col-sm-2">Action</th>
+												<th class="font-weight-bold col-sm-2">操作</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -102,11 +102,11 @@
 											<?php endforeach; ?>
 										</tbody>
 									</table>
-									<?php if (count(json_decode($getDns['dns'], true)) < 5): ?>
+									
 										<div class="row justify-content-center">
 											<div class="col-sm-3"><button class="btn btn-info btn-sm common_dialog" type="button" data-toggle="modal" data-target="#common_dialog" gourl="/admin/dns?tab=share&act=new&webid=<?= $getDns['id']; ?>"><span class="mr-2"><i class="fas fa-plus-square"></i></span>レコード追加</button></div>
 										</div>
-									<?php endif; ?>
+									
 								</div>
 							</div>
 						</div>

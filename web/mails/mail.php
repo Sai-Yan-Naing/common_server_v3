@@ -19,10 +19,10 @@ class Mailer
 	{
 		mb_language("japanese");
 		mb_internal_encoding("UTF-8");
+		// iconv_set_encoding("internal_encoding", "UTF-8");
 		$fromName = FROMNAME;
 		$toName = mb_encode_mimeheader($toName, "ISO-2022-JP",'UTF-8');
-		$subject = mb_encode_mimeheader($subject, "ISO-2022-JP","UTF-8");
-		// $subject = "=?utf-8?b?".base64_encode($subject)."?=";
+		$subject = mb_encode_mimeheader($subject, "ISO-2022-JP",'UTF-8');
 		$body = mb_convert_encoding($body, "ISO-2022-JP",'UTF-8');
 		try {
 			//Server settings

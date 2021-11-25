@@ -23,6 +23,10 @@ if ( $action=='new')
 	
 	$ftp_pass=$_POST['ftp_pass'];
     $permission = implode(",",$permission);
+	
+	$msg = "FTPユーザー".$ftp_user."の追加が完了しました。";
+	$msgsession ="msg";
+
     $insert_q = "INSERT INTO db_ftp (ftp_user, ftp_pass, domain, permission) VALUES ('$ftp_user', '$ftp_pass', '$webdomain', '$permission')";
 	if ( !$commons->doThis($insert_q))
 	{
@@ -44,6 +48,8 @@ if ( $action=='new')
 		require_once('views/admin/share/server/ftp/index.php');
 		die();
 	 }
+	 $msg = "FTPを変更しました";
+	 $msgsession ="msg";
 }else
 {
 	$act_id=$_POST['act_id'];
@@ -57,6 +63,9 @@ if ( $action=='new')
 		require_once('views/admin/share/server/ftp/index.php');
 		die();
 	}
+	
+	$msg = "FTPユーザー".$ftp_user."の削除が完了しました。";
+	$msgsession ="msg";
 }
 $originuser = '';
 if ( $weborigin!=1)

@@ -61,7 +61,7 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                                     <th class="font-weight-bold border-dark">タイプ</th>
                                                     <th class="font-weight-bold border-dark">ホスト名</th>
                                                     <th class="font-weight-bold border-dark">ドメイン名</th>
-                                                    <th class="font-weight-bold border-dark">ＩＰアドレス/ドメイン名</th>
+                                                    <th class="font-weight-bold border-dark">IPアドレス/ドメイン名</th>
                                                 </tr>
                                                     <?php
                                                         foreach(json_decode($webdns) as $key=>$value):

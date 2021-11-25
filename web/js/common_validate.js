@@ -686,8 +686,8 @@ function allValidate() {
           required: "Please enter ホスト名",
         },
         target: {
-          required: "Please enter ＩＰ/ドメイン",
-          minlength: "ＩＰ/ドメイン must be at least 8 characters long",
+          required: "Please enter IP/ドメイン",
+          minlength: "IP/ドメイン must be at least 8 characters long",
         },
       },
       submitHandler: function (form) {
