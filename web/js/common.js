@@ -231,3 +231,28 @@ $(document).on('click','#sidebarToggle',function(){
     $('.navbar-brand').css({'width':'225px'})
   }
 })
+
+function dnsexceed5($url) {
+  $url = $url.replace("new", "validate");
+  let $status=false;
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: $url,
+    success: function (data) {
+      $status = data.status;
+    },
+  });
+  return $status;
+}
+
+function dnsexceed5c() 
+{
+    $('#common_dialog').modal('show');
+    document.getElementById("display_dialog").innerHTML = '<div class="modal-body text-center">レコードが５件目以降の場合は別途追加費用1レコードにつき１０５円/月かかりますがよろしいですか？</div>'+
+        '<div class="modal-footer d-flex justify-content-center">'+
+        '<button type="submit" class="btn btn-outline-info btn-sm">OK</button>'+
+        '<button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button></div>';
+        return true;
+
+}

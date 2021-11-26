@@ -691,6 +691,10 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
+        // if(dnsexceed5($url))
+        // {
+        //   console.log(dnsexceed5c());
+        // }
         loading();
         form.submit();
       },
