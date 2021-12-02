@@ -12,7 +12,7 @@
                                 <a class="nav-link active" aria-current="page" href="/admin" onclick="loading()">共用サーバー</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin?main=vps" onclick="loading()">VPS/デスクトッププラン</a>
+                                <a class="nav-link" href="/admin?main=vps" onclick="loading()">VPS/デスクトップ</a>
                             </li>
                         </ul>
                         <?php  

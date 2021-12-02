@@ -25,7 +25,7 @@ $getvps=$commons->getRow($query,[$webip]);
                                         </div> 
                                         <div class="form-group row">
                                             <div class="col-sm-4">
-                                                <label for="" class="col-form-label">自動バックアップ</label>
+                                                <label for="" class="col-form-label">自動バックアップに変更</label>
                                             </div>
                                             <div class="col-sm-7">
                                                 <form action="" method = "post" class="ml-2">
@@ -44,8 +44,8 @@ $getvps=$commons->getRow($query,[$webip]);
                                         <table class="table mt-3 table-bordered">
                                             <tr>
                                                 <th class="font-weight-bold border-dark">バックアップデータ</th>
-                                                <th class="font-weight-bold border-dark">Date</th>
-                                                <th class="font-weight-bold border-dark">Action</th>
+                                                <th class="font-weight-bold border-dark">日付</th>
+                                                <th class="font-weight-bold border-dark">操作</th>
                                             </tr>
                                                 <?php 
                                                     $getAllRow=$commons->getAllRow("SELECT * FROM vps_backup WHERE ip='$webip'");

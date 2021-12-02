@@ -29,9 +29,9 @@ $getAllRow=$commons->getAllRow($query);
                                     </div>
                                 </div>   
                                 <div class="form-group row">
-                                    <div class="col-sm-4"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2016">2016</button></div>
-                                    <div class="col-sm-4"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2017">2017</button></div>
-                                    <div class="col-sm-4"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2019">2019</button></div>
+                                    <div class="col-sm-2"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2016">2016インストール</button></div>
+                                    <div class="col-sm-2"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2017">2017インストール</button></div>
+                                    <div class="col-sm-2"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2019">2019インストール</button></div>
                                 </div>                          
                             </div>
                         </div>
