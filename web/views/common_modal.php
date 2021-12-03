@@ -42,3 +42,15 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="excommon_dialog" data-keyboard="true" data-backdrop="static">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content" id="exdisplay_dialog">
+	  	  <div class="modal-body text-center">レコードが５件目以降の場合は別途追加費用1レコードにつき110円/月かかりますがよろしいですか？</div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
+          <button type="button" class="btn btn-outline-info btn-sm" id="btn_Confirm">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>

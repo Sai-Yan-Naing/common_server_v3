@@ -14,15 +14,11 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                 <!-- start -->
                                 <div class="contract">
                                     <div class="server-info">
-                                        <h6 class="6">サーバー情報</h6>
-                                            <div class="text-label-align">
-                                                基本情報
-                                            </div>
-                                            <div class="form-group row">
+                                            <div class="mb-1 d-flex">
                                                 <label for="con-server" class="col-sm-3 col-form-label">接続サーバー</label>
                                                 <div class="col-sm-8"><span class="col-form-label"><?= IP ?></span></div>
                                             </div>
-                                            <div class="form-group d-flex">
+                                            <div class="mb-1 d-flex">
                                                 <label for="status" class="col-sm-3 col-form-label">ステータス</label>
                                                 <div class="col-sm-2"><span class="col-form-label"> 起動中 </span></div>
                                                 <label class="switch text-white common_dialog" gourl="/admin/share/various?setting=information&act=onoff&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
@@ -32,7 +28,7 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                                     <span class="<?= $webstopped==0? "labelon":"labeloff"  ?>"><?= $webstopped==0? "起動":"停止"  ?></span>
                                                 </label>
                                             </div>
-                                            <div class="form-group d-flex">
+                                            <div class="mb-1 d-flex">
                                                 <label for="app-pool" class="col-sm-3 col-form-label">アプリケーションプール</label>
                                                 <div class="col-sm-2"><span class="col-form-label"> 起動中 </span></div>
                                                 <label class="switch text-white common_dialog" gourl="/admin/share/various?setting=information&act=apponoff&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
@@ -42,7 +38,7 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                                     <span class="<?= $webappstopped==0? "labelon":"labeloff"  ?>"><?= $webappstopped==0? "起動":"停止"  ?></span>
                                                 </label>
                                             </div>
-                                            <div class="form-group d-flex">
+                                            <div class="mb-1 d-flex">
                                                 <label for="capacity-used" class="col-sm-3 col-form-label">使用ディスク容量</label>
                                                 <!--<div class="col-sm-4" ><progress id="capacity-used" max="100" value="70"> </progress></div>-->
                                                 <!-- <div class="col-sm-4" id="chartContainer" style="height: 300px; width: 100%;"> </div> -->
@@ -54,8 +50,8 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                         <form action="/admin/share/various?confirm&webid=<?=$webid?>" method = "post" id="app-onoff">
                                             <input type="hidden" name="app" value="app">
                                         </form> -->
-                                        <div class='ml-2 mr-2'>
-                                            <h3>DNS</h3>
+                                        <div class='ml-3 mr-2'>
+                                            <div style="font-size: 1.2rem;">DNS</div>
                                             <table class="table table-bordered">
                                                 <tr class="">
                                                     <th class="font-weight-bold border-dark">タイプ</th>

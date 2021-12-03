@@ -663,7 +663,11 @@ function allValidate() {
     //     }
     //     return true;
     // }, 'Invalid IP address');
-
+    // $("#common_dialog").modal("show");
+// $('#display_dialog').html('<div class="modal-body text-center">レコードが５件目以降の場合は別途追加費用1レコードにつき110円/月かかりますがよろしいですか？</div>'+
+//         '<div class="modal-footer d-flex justify-content-center">'+
+//         '<button type="button" class="btn btn-outline-info btn-sm" id="btn_Confirm">OK</button>'+
+//         '<button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button></div>');
     // for add dns_create
     $("form[id='dns_create']").validate({
       rules: {
@@ -691,15 +695,28 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
-        // if(dnsexceed5($url))
-        // {
-        //   console.log(dnsexceed5c());
-        // }
-        loading();
-        form.submit();
+            // alert($url)
+        // 
+        if(dnsexceed5($url))
+        {
+          finalConfirm(form);
+        }else{
+          form.submit();
+        }
+        // form.submit();
       },
     });
-
+    function finalConfirm(form) {
+                if ($("#dns_create").attr("data-send") !== "ready") {
+                    $("#common_dialog").modal("hide");
+                    $("#excommon_dialog").modal("show");
+                    $("#btn_Confirm").click(function () {
+                        $("#excommon_dialog").modal("hide");
+                        $("#dns_create").attr("data-send", "ready");
+                        form.submit();
+                    });
+                }
+            }
     // end dns_create
 
     // for add basic_adduser_create
