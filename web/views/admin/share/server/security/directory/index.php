@@ -35,7 +35,7 @@
                                                     <th class="font-weight-bold border-dark">ユーザー名</th>
                                                     <th class="font-weight-bold border-dark">パスワード</th>
                                                     <th class="font-weight-bold border-dark">ディレクトリ</th>
-                                                    <th class="font-weight-bold border-dark">Action</th>
+                                                    <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
                                                     <?php
                                                         foreach ($getAllRow as $key=>$value):
