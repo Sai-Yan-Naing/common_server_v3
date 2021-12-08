@@ -3,8 +3,7 @@ require_once('views/admin/admin_vpsconfig.php');
 $getvpsbackup = $commons->getRow("SELECT * FROM vps_backup WHERE ip='$webip'");
 ?>
 <!-- Modal Header -->
-<div class="modal-header">
-  <h4 class="modal-title">自動バックアップに変更</h4>
+<div class="modal-header"><h4 class="modal-title">サーバーバックアップ</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

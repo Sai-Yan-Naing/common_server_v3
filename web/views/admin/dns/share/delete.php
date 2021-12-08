@@ -9,7 +9,7 @@ $act_id = $_GET['act_id'];
 // echo $getRow['id'];
 ?>
 <div class="modal-header">
-	<h4 class="modal-title">削除 DNS</h4>
+	<h4 class="modal-title">レコード削除</h4>
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

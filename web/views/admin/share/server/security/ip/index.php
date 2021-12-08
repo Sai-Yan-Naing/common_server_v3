@@ -29,9 +29,9 @@
                                             <table class="table table-bordered">
                                                 <tr>
                                                     <th class="font-weight-bold border-dark">IP</th>
-                                                    <th class="font-weight-bold border-dark">subnetMask</th>
-                                                    <th class="font-weight-bold border-dark">Status</th>
-                                                    <th class="font-weight-bold border-dark">Action</th>
+                                                    <th class="font-weight-bold border-dark">サブネットマスク</th>
+                                                    <th class="font-weight-bold border-dark">状況</th>
+                                                    <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
                                                     <?php
                                                     $webblacklist = json_decode($webblacklist);

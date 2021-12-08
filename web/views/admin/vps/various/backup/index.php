@@ -25,7 +25,7 @@ $getvps=$commons->getRow($query,[$webip]);
                                         </div> 
                                         <div class="form-group row">
                                             <div class="col-sm-4">
-                                                <label for="" class="col-form-label">自動バックアップ</label>
+                                                <label for="" class="col-form-label">自動バックアップに変更</label>
                                             </div>
                                             <div class="col-sm-7">
                                                 <form action="" method = "post" class="ml-2">

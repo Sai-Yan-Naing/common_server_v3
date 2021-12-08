@@ -14,7 +14,7 @@ $error_page = json_decode($weberrorpages);
   <form action="/admin/share/server?setting=site&tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="onoff">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
-    エラー設定を<?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?>にしますか
+    エラー設定を<?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?>にしました
   </form>
 </div>
 <!-- Modal footer -->
