@@ -16,7 +16,7 @@ $getRow = $commons->getRow($query,[$act_id]);
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="ftp_user" value="<?= $getRow['ftp_user'] ?>">
-    <b style="color: red"><?= $getRow['ftp_user'] ?> </b>を削除しますか？?
+    <b style="color: red"><?= $getRow['ftp_user'] ?> </b>を削除しますか？
       
   </form>
 </div>

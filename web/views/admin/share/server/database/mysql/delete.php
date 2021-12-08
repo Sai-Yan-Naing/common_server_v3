@@ -6,7 +6,7 @@ $getRow = $commons->getRow($query,[$act_id]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Delete MYSQL Database </h4>
+  <h4 class="modal-title">MYSQL　DB　削除</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -19,7 +19,7 @@ $getRow = $commons->getRow($query,[$act_id]);
     <input type="hidden" name="db_user" value="<?= $getRow['db_user'] ?>">
     <input type="hidden" name="db_pass" value="<?= $getRow['db_pass'] ?>">
     <input type="hidden" name="db_name" value="<?= $getRow['db_name'] ?>">
-    Are you sure to delete <b style="color: red"><?= $getRow['db_user'] ?> </b> ?
+    <b style="color: red"><?= $getRow['db_user'] ?> </b>を削除しますか？
       
   </form>
 </div>

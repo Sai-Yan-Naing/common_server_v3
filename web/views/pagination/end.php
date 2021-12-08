@@ -12,7 +12,7 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination m-0">
         <li class="page-item <?= ($page >= 2)?'':'disabled'?>">
-            <a class="page-link" href="<?= $page_url.($page - 1)?>">Previous</a>
+            <a class="page-link" href="<?= $page_url.($page - 1)?>">&lt;</a>
         </li>
     <?php for ($i=1; $i<=$total_pages; $i++): ?>
         <li class="page-item <?= $i==$page?'active':'' ?>">
@@ -20,7 +20,7 @@
         </li>
     <?php endfor; ?>
         <li class="page-item <?= ($page<$total_pages)?'':'disabled'?>">
-            <a class="page-link" href="<?= $page_url.($page + 1)?>">Next</a>
+            <a class="page-link" href="<?= $page_url.($page + 1)?>">&gt;</a>
         </li>
   </ul>
 </nav>

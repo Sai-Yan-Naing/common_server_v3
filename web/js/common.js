@@ -219,3 +219,29 @@ $(document).on("change", "input[name='type']", function () {
     $("#database_create").attr("action", $action + "&db=mariadb");
   }
 });
+
+$(document).on('click','#sidebarToggle',function(){
+  $width = $('.navbar-brand').width();
+  if($width==209)
+  {
+    $('.navbar-brand').css({'width':'17px'})
+  }
+  if($width==1)
+  {
+    $('.navbar-brand').css({'width':'225px'})
+  }
+})
+
+function dnsexceed5($url) {
+  $url = $url.replace("new", "validate");
+  let $status=false;
+  $.ajax({
+    type: "POST",
+    async: false,
+    url: $url,
+    success: function (data) {
+      $status = data.status;
+    },
+  });
+  return $status;
+}

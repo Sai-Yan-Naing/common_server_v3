@@ -30,10 +30,10 @@ require_once('views/admin/admin_shareconfig.php');
     	<div class="row mr-2 justify-content-center mb-1">
     		<div class="col-sm-3"><label for="email">メールアドレス</label></div>
             <div class="col-sm-6">
-                <input type="text" class="form-control" placeholder="メールアドレス" column="email" onkeyup="change_mail_text(this.value)" id="email" name="email" column="email" table="add_email" remark="db">
+                <input type="text" class="form-control" placeholder="メールアドレス" column="email" id="email" name="email" column="email" table="add_email" remark="db">
             </div>
 		    <div class="col-sm-3">
-                <label  class="form-label"  for="email"><span id="change_mail_text"></span>@<?= $webdomain?></label>
+                <!-- <label  class="form-label"  for="email"><span id="change_mail_text"></span>@<?= $webdomain?></label> -->
             </div>
     	</div>
         <span class="row mr-2 justify-content-center mb-1">

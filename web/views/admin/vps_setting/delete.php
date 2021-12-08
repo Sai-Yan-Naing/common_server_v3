@@ -15,7 +15,8 @@ $getRow = $commons->getRow($query,[$act_id]);
   <form action="/admin/vps?act=confirm<?=$pagy?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
-    <b style="color: red"><?= $getRow['ip'] ?></b>を削除しますか？
+    <b style="color: red"><?= $getRow['ip'] ?></b>を解約し、削除しますか？
+    <br>※削除した場合、データの復旧を行うことはできません。
   </form>
 </div>
 <!-- Modal footer -->

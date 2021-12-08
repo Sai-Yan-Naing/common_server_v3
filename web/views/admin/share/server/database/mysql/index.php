@@ -1,6 +1,6 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$limit = 2;
+$limit = 10;
 $table = 'db_account';  
 $params = [$webdomain];
 require_once('views/pagination/start.php');

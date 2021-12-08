@@ -14,6 +14,7 @@ if ($action === 'new')
 	$temp = json_decode($getDns['dns'], true);
 	$temp['ID-' . time()] = ['type' => $type, 'sub' => $sub, 'target' => $target];
 	$result = json_encode($temp);
+	$count = count(json_decode($result, true));
 	$msg = "申請が完了しました。<br>".
 	"弊社にて作業完了次第、ご連絡させていただきますので<br>".
 	"反映まで今しばらくお待ちください。";
@@ -56,8 +57,12 @@ if ( ! $commons->doThis($qry, ['dns' => $result, 'id' => $getDns['id']]))
 
 // $subject = '=?UTF-8?B?' . base64_encode('DNS情報変更申請') . '?=';
 // $subject = 'DNS情報変更申請';
-$subject = '[Win]申請完了';
+$subject = '【Winserver】DNSレコード追加申請完了';
 $body = file_get_contents('views/mailer/admin/dns.php');
+if ($count>5 && $action === 'new')
+{
+	$body = file_get_contents('views/mailer/admin/dns2.php');
+}
 $body = str_replace('$admin', $webadminName, $body);
 $body = str_replace('$sub', $sub, $body);
 $body = str_replace('$domain', $domain, $body);

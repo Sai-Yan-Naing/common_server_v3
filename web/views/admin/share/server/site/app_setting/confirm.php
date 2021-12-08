@@ -23,6 +23,7 @@ $msgsession ="msg";
 
     if ( isset($_GET['apply']) && $_GET['apply'] ==='dotnet_version')
     {
+        $msg = ".NETバージョンを変更しました";
         $version = $_POST['version'];
         shell_exec("%systemroot%\system32\inetsrv\APPCMD set apppool $webuser /managedRuntimeVersion:$version");
         $webappversion->app->dotnet=$version;
@@ -37,6 +38,7 @@ $msgsession ="msg";
 
     if ( isset($_GET['apply']) && $_GET['apply'] ==='php_version')
     {
+        $msg = "PHPバージョンを変更しました";
         $version = $_POST['version'];
         $exec = "e:/scripts/php_version/php_version_change.bat $webuser $version";
 
