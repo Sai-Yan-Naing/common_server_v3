@@ -28,18 +28,18 @@ require_once("views/admin/admin_shareconfig.php");
         $dir_id = $_POST['dir_id'];
         if ($action==='new')
         {
-            $msg = "認証ユーザーを作成しました";
             $bass_user = $_POST['bass_user'];
             $bass_pass = $_POST['bass_pass'];
             $temp[$dir_id]['user']["ID-".time()] = ['bass_user'=>$bass_user,'bass_pass'=>$bass_pass];
+            $msg = "認証ユーザー [".$bass_user."] を作成しました";
         } elseif ($action==='delete')
         {
-            $msg = "認証ユーザーを編集しました";
+            $msg = "認証ユーザー [".$bass_user."] を編集しました";
             $act_id = $_POST['act_id'];
             unset($temp[$dir_id]['user'][$act_id]);
             
         }else{
-            $msg = "認証ユーザーを削除しました";
+            $msg = "パスワードの変更が完了しました";
             $bass_user = $_POST['bass_user'];
             $bass_pass = $_POST['bass_pass'];
             $act_id = $_POST['act_id'];
@@ -65,5 +65,3 @@ require_once("views/admin/admin_shareconfig.php");
     flash($msgsession,$msg);
     header("location: /admin/share/server?setting=site&tab=basic&act=index&webid=$webid");
     die();
-
-?>

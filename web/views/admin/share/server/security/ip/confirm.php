@@ -8,6 +8,7 @@ $msg = "jp message";
 $msgsession ="msg";
 if ( $action=='new')
 {
+	$msg = "ブラックリストに [".$ip."] を追加しました。";
 	if ( isExistBlackListIp($site,$ip))
 	{
 		$error = $ip." is already exist.";
@@ -26,6 +27,7 @@ if ( $action=='new')
 	  die();
 	}
 } else {
+	$msg = "ブラックリストに [".$ip."] をしました削除しました。";
 	$act_id = $_POST['act_id'];
 	unset($temp[$act_id]);
 	$result = json_encode($temp);

@@ -20,6 +20,8 @@ $body = str_replace('$name', $toName, $body);
 $body = str_replace('$today', $today, $body);
 
 $webmailer->sendMail($to,$toName,$subject,$body,CC);
+// echo $webmailer2->sendMail($to,$toName,$subject,$body,CC);
+// die();
 
 $body = file_get_contents('views/mailer/admin/contactus/mail.php');
 $body = str_replace('$message', $message, $body);

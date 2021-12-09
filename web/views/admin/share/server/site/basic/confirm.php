@@ -15,7 +15,7 @@ if ( isset($_POST['action']))
 		$url_spec= $_POST['url_spec'];
         $temp['ID-'.$status_code] = ["url"=>$url_spec,"stopped"=>$status,"statuscode"=>$status_code];
 		echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
-		$msg = "エラー設定".$code."を追加しました";
+		$msg = "[エラーページ ".$code."] を追加しました";
 	} elseif ( $_POST['action'] === "edit")
 	{
 		$action= $_POST['action'];
@@ -28,7 +28,7 @@ if ( isset($_POST['action']))
         $temp[$act_id]['statuscode']=$status_code;	
 		$status = $temp[$act_id]['stopped'];
 		
-		$msg = "エラー設定".$code."を編集しました";
+		$msg = "[エラーページ ".$code."] を編集しました";
 				
 		echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status." edit");
 		// echo $code;
@@ -46,7 +46,7 @@ if ( isset($_POST['action']))
 		$code = $status_code;
 		$url_spec = $temp[$act_id]['url'];
 		$msg = $status== 1? "ON" : "OFF";
-		$msg = "エラー設定".$code."を".$msg."にしました";
+		$msg = "[エラーページ ".$code."] を".$msg."にしました";
 		// echo $code;
 		// die();
 		echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);

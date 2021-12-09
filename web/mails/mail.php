@@ -5,7 +5,7 @@ require_once 'config/all.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-class Mailer
+class Mailer1
 {
 	public $mail;
 	function __construct()
@@ -27,7 +27,7 @@ class Mailer
 		try {
 			//Server settings
 			$this->mail->SMTPDebug = SMTP_DEBUG;
-			// $this->mail->isSMTP();
+			$this->mail->isSMTP();
 			$this->mail->SMTPAuth   = true;
 			$this->mail->Host       = MAIL_HOST;
 			$this->mail->CharSet       = 'ISO-2022-JP';
@@ -65,4 +65,69 @@ class Mailer
 			echo "Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}";
 		}
 	}
+}
+
+class Mailer{
+	function sendMail($to,$toName,$subject,$body,$cc = null,$noreply=null)
+	{
+		try {
+		// return MAIL_HOST;
+		// Create the SMTP Transport
+		$transport = (new Swift_SmtpTransport(MAIL_HOST, MAIL_PORT,SMTPSecure))
+        ->setUsername(FROM)
+        ->setPassword(MAIL_PASS);
+ 
+    // Create the Mailer using your created Transport
+    $mailer = new Swift_Mailer($transport);
+ 
+    // Create a message
+    $message = new Swift_Message();
+ 
+    // Set a "subject"
+    $message->setSubject($subject);
+ 
+    // Set the "From address"
+    $message->setFrom([FROM => FROMNAME]);
+ 
+    // Set the "To address" [Use setTo method for multiple recipients, argument should be array]
+    $message->addTo($to,$toName);
+	if ( isset($cc) && $cc !==null){
+		$message->addCc($cc, CCNAME);
+	}
+ 
+    // Add "CC" address [Use setCc method for multiple recipients, argument should be array]
+    // $message->addCc('recipient@gmail.com', 'recipient name');
+ 
+    // Add "BCC" address [Use setBcc method for multiple recipients, argument should be array]
+    // $message->addBcc('recipient@gmail.com', 'recipient name');
+ 
+    // Add an "Attachment" (Also, the dynamic data can be attached)
+    // $attachment = Swift_Attachment::fromPath('example.xls');
+    // $attachment->setFilename('report.xls');
+    // $message->attach($attachment);
+ 
+    // Add inline "Image"
+    // $inline_attachment = Swift_Image::fromPath('nature.jpg');
+    // $cid = $message->embed($inline_attachment);
+ 
+    // Set the plain-text "Body"
+    $message->setBody($body);
+ 
+    // Set a "Body"
+    // $message->addPart('This is the HTML version of the message.<br>Example of inline image:<br><img src="'.$cid.'" width="200" height="200"><br>Thanks,<br>Admin', 'text/html');
+ 
+    // Send the message
+    // $result = $mailer->send($message);
+	if ( !  $mailer->send($message))
+			{
+				return false;
+			}
+			return true;
+			
+} catch (Exception $e) {
+    echo $e->getMessage();
+  }
+	}
+
+	
 }

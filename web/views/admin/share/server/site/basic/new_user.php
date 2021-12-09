@@ -11,7 +11,7 @@ $temp_key = $_GET['dir_id'];
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="basic_adduser_create" onsubmit="loading()">
+  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="basic_adduser_create">
     <input type="hidden" name="action" value="new">
     <input type="hidden" name="dir_id" value="<?= $temp_key?>">
       <div class="row justify-content-center">

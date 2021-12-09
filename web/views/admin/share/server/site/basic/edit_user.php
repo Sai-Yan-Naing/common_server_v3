@@ -14,7 +14,7 @@ $temp = json_decode($webbasicsetting);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="basic_adduser_create" onsubmit="loading()">
+  <form action="/admin/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="basic_adduser_create">
     <input type="hidden" name="action" value="edit">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
     <input type="hidden" name="dir_id" value="<?= $dir_id ?>">
@@ -43,5 +43,5 @@ $temp = json_decode($webbasicsetting);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="basic_adduser_create">作成</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="basic_adduser_create">変更</button>
 </div>

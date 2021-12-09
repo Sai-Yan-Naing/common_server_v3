@@ -23,7 +23,6 @@ $msgsession ="msg";
 
     if ( isset($_GET['apply']) && $_GET['apply'] ==='dotnet_version')
     {
-        $msg = ".NETバージョンを変更しました";
         $version = $_POST['version'];
         shell_exec("%systemroot%\system32\inetsrv\APPCMD set apppool $webuser /managedRuntimeVersion:$version");
         $webappversion->app->dotnet=$version;
@@ -31,6 +30,7 @@ $msgsession ="msg";
         $result=json_encode($temp);
         $query_dir = "UPDATE web_account SET app_version='$result' WHERE id= ?";
         $commons->doThis($query_dir,[$webid]);
+        $msg = ".NETバージョン [".$version."] を変更しました";
         flash($msgsession,$msg);
         header("location: /admin/share/server?setting=site&tab=app_setting&act=index&webid=$webid");
         die();
@@ -38,7 +38,6 @@ $msgsession ="msg";
 
     if ( isset($_GET['apply']) && $_GET['apply'] ==='php_version')
     {
-        $msg = "PHPバージョンを変更しました";
         $version = $_POST['version'];
         $exec = "e:/scripts/php_version/php_version_change.bat $webuser $version";
 
@@ -49,6 +48,7 @@ $msgsession ="msg";
         // print_r($result);
         $query_dir = "UPDATE web_account SET app_version='$result' WHERE id='$webid'";
         $commons->doThis($query_dir);
+        $msg = "PHPバージョン [".$version."] を変更しました";
         flash($msgsession,$msg);
         header("location: /admin/share/server?setting=site&tab=app_setting&act=index&webid=$webid");
     }

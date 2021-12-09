@@ -51,6 +51,9 @@ require_once('views/admin/admin_shareconfig.php');
             </div>
             
         </div>
+        <div class="form-group row mr-2  justify-content-center">
+            <div>メールアカウント名を入力してください（例）infoと入力するとinfo＠<?=$webdomain?>で作成します。</div>
+        </div>
 	</form>
 </div>
 <!-- Modal footer -->

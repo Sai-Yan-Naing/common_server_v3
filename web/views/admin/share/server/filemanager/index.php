@@ -56,7 +56,7 @@
                                     <th class="font-weight-bold">更新日時</th>
                                     <th class="font-weight-bold">ファイル形式</th>
                                     <th class="font-weight-bold">ファイル容量</th>
-                                    <th colspan="2" class="text-center font-weight-bold">作業</th>
+                                    <th class="font-weight-bold">作業</th>
                                     </tr>
                                 </thead>
                                 <tbody id="changebody">
@@ -71,8 +71,8 @@
                                         <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
                                         <td><?= filetype($dir.'/'.$value)?></td>
                                         <td><?php echo sizeFormat(folderSize($dir.'/'.$value)) ?></td>
-                                        <td class="d-flex" colspan="2">
-                                            <div class="text-end col-sm-12">
+                                        <td class="d-flex">
+                                            <div class="col-sm-12">
                                                 <span class=""></span>
                                                 <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
                                                 圧縮
@@ -106,8 +106,8 @@
                                         <td path="E:\webroot\LocalUser" file="<?=$value?>">
                                             <?php echo sizeFormat(filesize($dir.'/'.$value)) ?>
                                         </td>
-                                        <td class="d-flex" colspan="2">
-                                            <div class="col-sm-12 text-end">
+                                        <td class="d-flex" >
+                                            <div class="col-sm-12 ">
                                                 <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value?>&common_path=" class="btn download_file">
                                                 <i class="fa fa-download"></i>
                                                 </a>

@@ -12,7 +12,8 @@ $msgsession ="msg";
 if ( $switch=='usage')
 {
 	$onoff = (int)$waf['usage']==1? 0 : 1;
-	echo $usage_query = "UPDATE waf SET `usage`='$onoff' WHERE `domain`=?";
+	$msg = (int)$waf['usage']==1? 'WAFをオフにしました' : 'WAFをONにしました。';
+	$usage_query = "UPDATE waf SET `usage`='$onoff' WHERE `domain`=?";
 	if ( !$commons->doThis($usage_query,[$webdomain]))
 	{
 		$error = "Usage cannot be change";
@@ -22,7 +23,8 @@ if ( $switch=='usage')
 } else
 {
 	$onoff = (int)$waf['display']==1? 0 : 1;
-	echo $display_query = "UPDATE waf SET `display`='$onoff' WHERE `domain`=?";
+	$msg = (int)$waf['display']==1? '表示切替をオフにしました。' : '表示切替をONにしました。';
+	 $display_query = "UPDATE waf SET `display`='$onoff' WHERE `domain`=?";
 	if ( !$commons->doThis($display_query, [$webdomain]))
 	{
 		$error = "Display cannot be change";

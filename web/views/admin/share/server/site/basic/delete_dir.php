@@ -5,7 +5,7 @@ $temp_key = $_GET['act_id'];
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">ディレクトリ削除</h4>
+  <h4 class="modal-title"> BASIC認証削除</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
