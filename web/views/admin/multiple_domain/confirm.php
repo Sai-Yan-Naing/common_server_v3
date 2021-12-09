@@ -10,7 +10,7 @@ if ( $action === 'new' )
     $password1 = hash_hmac('sha256', $password, PASS_KEY);
     $user = $_POST['ftp_user'];
     
-    $temp["ID1-".time()] = ['type'=>'A','sub'=>'mail','target'=>IP];
+    $temp["ID1-".time()] = ['type'=>'A','sub'=>'mail','target'=>MAILIP];
     $temp["ID2-".time()] = ['type'=>'A','sub'=>'www','target'=>IP];
     $temp["ID3-".time()] = ['type'=>'A','sub'=>'','target'=>IP];
     $temp["ID4-".time()] = ['type'=>'MX','sub'=>'','target'=>'mail.'.$webdomain];

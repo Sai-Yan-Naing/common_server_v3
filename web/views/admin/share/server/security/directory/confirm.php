@@ -38,6 +38,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	 $dir_path=$_POST['dir_path'];
 	 $act_id=$_POST['act_id'];
      $update_q = "UPDATE sub_ftp SET ftp_pass='$ftp_pass' WHERE id=? and domain=? ";
+	 $msg = "ディレクトリ [".$dir_path."] に　ユーザー [".$ftp_user."] のパスワードを編集しました。";
 	 if ( !$commons->doThis($update_q,[$act_id,$webdomain]))
 	 {
 	 	$error=$ftp_user." cannot update password.";
