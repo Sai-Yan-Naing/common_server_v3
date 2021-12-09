@@ -111,7 +111,7 @@ class Mailer{
     // $cid = $message->embed($inline_attachment);
  
     // Set the plain-text "Body"
-    $message->setBody($body);
+    $message->setBody($body,'text/html');
  
     // Set a "Body"
     // $message->addPart('This is the HTML version of the message.<br>Example of inline image:<br><img src="'.$cid.'" width="200" height="200"><br>Thanks,<br>Admin', 'text/html');
