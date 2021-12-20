@@ -10,7 +10,7 @@ require_once('views/admin/admin_shareconfig.php');
 <div class="modal-body">
 	<form action="/admin/share/various?setting=backup&act=confirm&webid=<?=$webid?>" method = "post" id="autobackup" onsubmit="loading()">
         <input type="hidden" name="action" value="delete">
-        <b style="color: red"><?=$webdomain ?> </b> をバックアップ削除しますか？
+        「<b style="color: red"><?=$webdomain ?> </b>（<?=$_GET['cron']?>）」を削除しますか？
     </form>
 </div>
 <!-- Modal footer -->

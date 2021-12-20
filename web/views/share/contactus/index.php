@@ -28,7 +28,7 @@
 								</div>
 								<div class="col-md-5">
 									<div class="mb-3">
-										<label class="font-weight-bold" for="message">お問い合わせ内容:</label>
+										<label class="font-weight-bold" for="message">お問合せ内容:</label>
 										<textarea id="message" class="form-control" name="message" rows="6" placeholder="内容を入力してください"></textarea>
 									</div>
 									  <div class="d-flex">

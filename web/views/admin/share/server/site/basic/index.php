@@ -23,29 +23,31 @@ $error_pages = json_decode($weberrorpages);
                                         <div class="mt-4">
                                             <table class="table table-bordered">
                                                 <tr>
-                                                    <th  class="border-dark">エラーコード</th>
-                                                    <th  class="border-dark">ファイルパス</th>
-                                                    <th  class="border-dark">利用設定</th>
+                                                    <th  class="">エラーコード</th>
+                                                    <th  class="">ファイルパス</th>
+                                                    <th  class="">利用設定</th>
                                                 </tr>
                                                     <?php
                                                         foreach($error_pages as $key=>$ep):
                                                     ?>
                                                     <tr>
-                                                        <td class="border-dark"><?= htmlspecialchars($ep->statuscode, ENT_QUOTES); ?></td>
-                                                        <td class="border-dark"><?= htmlspecialchars($ep->url, ENT_QUOTES); ?></td>
-                                                        <td class="border-dark">
+                                                        <td class=""><?= htmlspecialchars($ep->statuscode, ENT_QUOTES); ?></td>
+                                                        <td class=""><?= htmlspecialchars($ep->url, ENT_QUOTES); ?></td>
+                                                        <td class="">
                                                             <div style="display: -webkit-inline-box;">
                                                                 <button edit_id="<?= $key;?>" class="pr-2 btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=edit&act_id=<?=$key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">編集</button>
                                                                 <form action="/admin/share/servers/sites/basic?confirm&act=&webid=<?=$webid?>&error_pages&act_id=<?=$key?>" method = "post" class="ml-2" onsubmit="loading()">
                                                                     <input type="hidden" name="action" value="onoff">
                                                                     <input type="hidden" name="act_id" value="<?=$key;?>">
-                                                                    <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=onoff&act_id=<?=$key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
+                                                                    <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=site&tab=basic&errorcode=<?=$ep->statuscode?>&act=onoff&act_id=<?=$key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                                         <input type="checkbox" <?= $ep->stopped==1? "checked":""  ?>>
                                                                         <span class="slider <?= $ep->stopped==1? "slideron":"slideroff"  ?>"></span>
                                                                         <span class="handle <?= $ep->stopped==1? "handleon":"handleoff"  ?>"></span>
                                                                         <span class="<?= $ep->stopped==1? "labelon":"labeloff"  ?>"><?= $ep->stopped==1? "ON":"OFF"  ?></span>
                                                                     </label>
                                                                 </form>
+                                                                
+                                                                <a href="javascript:;" class="btn btn-outline-danger ml-2 btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=delete&act_id=<?=$key?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -67,35 +69,46 @@ $error_pages = json_decode($weberrorpages);
                                                         $key_replace = implode('_',explode('/',$main_key));
                                                 ?>
                                                 <div class="card">
-                                                    <div class="card-header" id="head-<?=$key_replace?>">
+                                                    <div class="card-header" id="head-<?=$key_replace?>" style="background-color: white;">
                                                         <h5 class="mb-0 d-flex">
-                                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-<?=$key_replace?>" aria-expanded="<?= ($first==1)? true:false; ?>" aria-controls="collapse-<?=$key_replace?>">
+                                                            <!-- <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-<?=$key_replace?>" aria-expanded="<?= ($first==1)? true:false; ?>" aria-controls="collapse-<?=$key_replace?>">
+                                                            BASIC認証設定 <?= $first ?>
+                                                            </button> -->
+                                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-<?=$key_replace?>" aria-expanded="true" aria-controls="collapse-<?=$key_replace?>">
                                                             BASIC認証設定 <?= $first ?>
                                                             </button>
                                                             <button class="btn btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=delete_dir&act_id=<?=$main_key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-trash text-danger"></i></button>
+                                                            <button class="ml-auto btn btn-link" data-toggle="collapse" data-target="#collapse-<?=$key_replace?>" aria-expanded="true" aria-controls="collapse-<?=$key_replace?>">
+                                                            <span class="">+</span>
+                                                            </button>
                                                         </h5>
                                                     </div>
-                                                        <?php $show =($first==1)?"show":"";?>
-                                                    <div id="collapse-<?=$key_replace?>" class="collapse <?=$show?>" aria-labelledby="head-<?=$key_replace?>" data-parent="#accordion">
+                                                        <!-- <?php $show =($first==1)?"show":"";?> -->
+                                                        <!-- <div id="collapse-<?=$key_replace?>" class="collapse <?=$show?>"  -->
+                                                    <div id="collapse-<?=$key_replace?>" class="collapse show" aria-labelledby="head-<?=$key_replace?>" data-parent="#accordion">
                                                         <div class="card-body">
                                                             <div class="row justify-content-center">
-                                                                <div class="col-md-3 border p-2 font-weight-bold">対象ディレクトリ</div>
-                                                                <div class="col-md-4 border p-2"><?= $main_value->url ?></div>
+                                                                <label for="">対象ディレクトリ:  &nbsp;&nbsp;<?= $main_value->url ?></label>
                                                             </div>
-                                                            <div class="mb-2">認証ユーザー</div>
+                                                            <div class="mb-2 d-flex mt-2">
+                                                                <div>認証ユーザー</div>
+                                                            <div class="ml-5">
+                                                                    <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=new_user&dir_id=<?=$main_key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class=""><i class="fas fa-plus"></i></span>ユーザー追加</button>
+                                                            </div>
+                                                        </div>
                                                                 <table class="table table-bordered">
                                                                     <tr>
-                                                                        <th class="font-weight-bold border-dark">ユーザー名</th>
-                                                                        <th class="font-weight-bold border-dark">パスワード</th>
-                                                                        <th class="font-weight-bold border-dark">パスワード変更</th>
+                                                                        <th class="font-weight-bold ">ユーザー名</th>
+                                                                        <th class="font-weight-bold ">パスワード</th>
+                                                                        <th class="font-weight-bold ">パスワード変更</th>
                                                                     </tr>
                                                                     <?php 
                                                                         foreach($main_value->user as $user_key => $user_value){
                                                                     ?>
                                                                     <tr>
-                                                                        <td class="border-dark"><?= $user_value->bass_user ?></td>
-                                                                        <td class="border-dark"><?= $user_value->bass_pass ?></td>
-                                                                        <td class="border-dark">
+                                                                        <td class=""><?= $user_value->bass_user ?></td>
+                                                                        <td class=""><?= $user_value->bass_pass ?></td>
+                                                                        <td class="">
                                                                             <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=edit_user&dir_id=<?=$main_key?>&act_id=<?=$user_key?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
                                                                             <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=delete_user&dir_id=<?=$main_key?>&act_id=<?=$user_key?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                                         </td>
@@ -104,7 +117,6 @@ $error_pages = json_decode($weberrorpages);
                                                                     }
                                                                     ?>
                                                                 </table>
-                                                                <button class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=new_user&dir_id=<?=$main_key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class=""><i class="fas fa-plus"></i></span>User追加</button>
                                                         </div>
                                                     </div>
                                                 </div>

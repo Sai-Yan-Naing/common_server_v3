@@ -24,7 +24,7 @@ if ( $action=='new')
 	$ftp_pass=$_POST['ftp_pass'];
     $permission = implode(",",$permission);
 	
-	$msg = "FTPユーザー [".$ftp_user."] の追加が完了しました。";
+	$msg = "FTPユーザー 「".$ftp_user."」 の追加が完了しました。";
 	$msgsession ="msg";
 
     $insert_q = "INSERT INTO db_ftp (ftp_user, ftp_pass, domain, permission) VALUES ('$ftp_user', '$ftp_pass', '$webdomain', '$permission')";
@@ -48,7 +48,7 @@ if ( $action=='new')
 		require_once('views/admin/share/server/ftp/index.php');
 		die();
 	 }
-	 $msg = "FTP [".$ftp_user."] を変更しました";
+	 $msg = "FTPユーザー 「".$ftp_user."」 を変更しました";
 	 $msgsession ="msg";
 }else
 {
@@ -64,7 +64,7 @@ if ( $action=='new')
 		die();
 	}
 	
-	$msg = "FTPユーザー [".$ftp_user."] の削除が完了しました。";
+	$msg = "FTPユーザー 「".$ftp_user."」 を削除しました";
 	$msgsession ="msg";
 }
 $originuser = '';

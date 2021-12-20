@@ -17,7 +17,7 @@
                                 <form action="/login?act=confirm" method="post">
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="domainid" name="domainid" type="text" placeholder="name@example.com" />
-                                        <label for="domainid">ご契約ID</label>
+                                        <label for="domainid">ご契約ID/ドメイン</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="password" type="password" name="password" placeholder="パスワード" />

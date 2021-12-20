@@ -20,13 +20,10 @@ $getAllRow = $commons->getAllRow($query, [$webdomain]);
                                     <div class="active">
                                         <div class="row mt-3 mb-3">
                                             <div class="col-sm-3">
-                                                <span>データベース</span>
-                                            </div>
-                                            <div class="col-sm-3">
                                             <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mssql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
                                             <div class="col-sm-3">
-                                                <a class="btn btn-info btn-sm" href="/admin/share/server?setting=database&tab=mssql&act=manager&webid=<?=$webid?>" target="_blank"><span class="mr-2"><i class="fas fa-plus-square"></i></span>MSSQL マネージャー</a>
+                                                <a  href="/admin/share/server?setting=database&tab=mssql&act=manager&webid=<?=$webid?>" target="_blank"><u>MSSQL マネージャー</u></a>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">

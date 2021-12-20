@@ -6,7 +6,7 @@ $get_backup = $backup->checkScheduler($webdomain);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">バックアップ</h4>
+  <h4 class="modal-title">自動バックアップ</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -18,7 +18,7 @@ $get_backup = $backup->checkScheduler($webdomain);
     <input type="hidden" name="stopped" value="<?= $getRow['stopped'] ?>">
     <input type="hidden" name="sitename" value="<?= $getRow['user'] ?>"> -->
     <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-    <?= (int)$get_backup['scheduler']==1? "停止" : "起動" ?>しますか ?
+    <?= (int)$get_backup['scheduler']==1? "停止" : "起動" ?>しますか？
       
   </form>
 </div>

@@ -12,6 +12,7 @@
                         <div class="tab-content">
                             <div id="pop-imap" class="tab-pane active pl-3"><br>
                                 <form action="" method="post" id="">
+                                    <div>「～メール確認に時間がかかることがあります。」</div>
                                     <div class="form-group row">
                                         <label for="cserver-name" class="col-sm-3 col-form-label">接続サーバー名</label>
                                         <div class="col-sm-8">
@@ -39,20 +40,21 @@
                                     <div class="form-group row">
                                         <div class="col-sm-10">
                                             <span class="border border-secondary notice-msg">
-                                                弊社ではＩＭＡＰでの接続を推奨しておりません。メールサーバー側にメールデータが溜まることによりメール確認に時間がかかることがあります。ＰＯＰ接続いただくことで、スムーズなメールの送受信が可能です。
+                                                弊社ではIMAPでの接続を推奨しておりません。メールサーバー側にメールデータが溜まることによりメール確認に時間がかかることがあります。POP接続いただくことで、スムーズなメールの送受信が可能です。
                                             </span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-10">
                                             <span class="border border-secondary notice-msg">
-                                            メールクライアントの設定によりメールサーバーにメールデータが溜まることでメール容量が一杯になりメール受信ができなくなることがありますので、メールクライアントの設定で、「サーバーを残す」設定にしていただいた場合は、期限を設定するなどを行って頂き、メール容量を管理してください。
+                                            メールクライアントの設定により、サーバーにメールデータが溜まることで容量が一杯になりメールが受信できなくなることがあります。
+「サーバーにメールを残す」設定の場合は、期限を設定する等、メール容量の管理にご留意ください。
                                             </span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-10">
-                                            <span class="border border-danger text-danger notice-msg">容量がオーバーした場合はＷＥＢメールにてログインいただき、不要なメールの削除を行ってください。</span>
+                                            <span class="border border-danger text-danger notice-msg">容量がオーバーした場合はWEBメールにてログインいただき、不要なメールの削除を行ってください。</span>
                                         </div>
                                     </div>
                                 </form>

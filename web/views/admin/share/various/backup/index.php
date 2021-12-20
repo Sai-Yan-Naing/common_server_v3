@@ -15,7 +15,6 @@ $get_backup = $backup->checkScheduler($webdomain);
                             <div class="shadow-lg p-3 mb-5 bg-white rounded">
                                 <!-- start -->
                                 <div class="tab-content">
-                                    <div class="mb-3">バックアップ</div>
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <span>自動バックアップ</span>
@@ -34,7 +33,7 @@ $get_backup = $backup->checkScheduler($webdomain);
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-sm-3">
-                                            <span>自動バックアップ</span>
+                                            <span>手動バックアップ</span>
                                         </div>
                                         <div class="col-sm-5">
                                             <button class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/various?setting=backup&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class=""><i class="fas fa-plus"></i></span>バックアップを実施</button>
@@ -55,8 +54,8 @@ $get_backup = $backup->checkScheduler($webdomain);
                                                 <td class="border-dark"><?= $file ?></td>
                                                 <td class="border-dark"><?= date("Y-m-d h:i:sA", filemtime($dirname.$file)) ?></td>
                                                 <td class="border-dark">
-                                                    <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/various?setting=backup&act=restore&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">リストア</a>
-                                                    <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/various?setting=backup&act=delete&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                    <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/various?setting=backup&cron=<?=$file?>&act=restore&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">リストア</a>
+                                                    <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/various?setting=backup&cron=<?=$file?>&act=delete&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                 </td>
                                             </tr>
                                         </table>

@@ -11,7 +11,7 @@ $msg = "jp message";
 	{
 		$db_name = $_POST["db_name"];
 		$msgsession =  "msg";
-		$msg = "DB [".$db_name."] の追加が完了しました。 ";
+		$msg = "DB 「".$db_name."」 の追加が完了しました。 ";
 		
 		if ( ! $commons->addMariaUserAndDB($db_name, $db_user, $db_pass) )
 		{
@@ -36,12 +36,12 @@ $msg = "jp message";
 		$query = "SELECT * FROM db_account_for_mariadb WHERE db_user=?";
 		$getRow = $commons->getRow($query,[$db_user]);
 		$msgsession =  "msg";
-		$msg = "DB [".$getRow['db_user']."] パスワードを変更しました。";
+		$msg = "DB 「".$getRow['db_user']."」 パスワードを変更しました。";
 	}else {
 		$act_id = $_POST['act_id'];
 		$db_name = $_POST['db_name'];
 		$msgsession =  "msg";
-		$msg = "DB [".$db_name."] の削除が完了しました。";
+		$msg = "DB 「".$db_name."」 の削除が完了しました。";
 		if ( ! $commons->deleteMariaDB($act_id,$db_user,$db_name))
 		{
 			$error = "Something errors";

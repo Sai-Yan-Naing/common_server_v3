@@ -11,14 +11,14 @@ $error_page = json_decode($weberrorpages);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/admin/share/server?setting=site&tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
-    <input type="hidden" name="action" value="onoff">
+  <form action="/admin/share/server?setting=site&tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="delete_error" onsubmit="loading()">
+    <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
-    エラー設定「<?= $_GET['errorcode']?>」を<?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?>にしますか?
+    「エラーページ <?= $error_page->$act_id->statuscode?>」 を削除しますか？
   </form>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="onoff"><?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?></button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="delete_error">削除</button>
 </div>

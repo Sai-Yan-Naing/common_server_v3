@@ -31,19 +31,19 @@ require_once("views/admin/admin_shareconfig.php");
             $bass_user = $_POST['bass_user'];
             $bass_pass = $_POST['bass_pass'];
             $temp[$dir_id]['user']["ID-".time()] = ['bass_user'=>$bass_user,'bass_pass'=>$bass_pass];
-            $msg = "認証ユーザー [".$bass_user."] を作成しました";
+            $msg = "認証ユーザー 「".$bass_user."」 を作成しました";
         } elseif ($action==='delete')
         {
-            $msg = "認証ユーザー [".$bass_user."] を編集しました";
+            $msg = "認証ユーザー 「".$bass_user."」 を削除しました";
             $act_id = $_POST['act_id'];
             unset($temp[$dir_id]['user'][$act_id]);
             
         }else{
-            $msg = "パスワードの変更が完了しました";
             $bass_user = $_POST['bass_user'];
             $bass_pass = $_POST['bass_pass'];
             $act_id = $_POST['act_id'];
             $temp[$dir_id]['user'][$act_id]['bass_pass'] = $bass_pass;
+            $msg = "認証ユーザー「".$bass_user."」のパスワードの変更が完了しました";
         }
         
     }

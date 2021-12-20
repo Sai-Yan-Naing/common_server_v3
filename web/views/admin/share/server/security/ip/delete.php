@@ -5,7 +5,7 @@ $act_id = $_GET['act_id'];
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Remove IP From Black Lists</h4>
+  <h4 class="modal-title">IP削除</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -13,8 +13,8 @@ $act_id = $_GET['act_id'];
   <form action="/admin/share/server?setting=security&tab=ip&act=confirm&webid=<?= $webid?>" method="post" id="delete_ip">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
-    <input type="hidden" name="block_ip" value="<?= $webblacklist->$act_id->ip ?>">
-    Are you sure to delete <b style="color: red"><?= $webblacklist->$act_id->ip ?> </b> ?   
+    <input type="hidden" name="block_ip" value="<?= $webblacklist->$act_id->ip ?>"> 
+    ブラックリストから「<b style="color: red"><?= $webblacklist->$act_id->ip ?> </b>」を削除しますか？ 
   </form>
 </div>
 <!-- Modal footer -->

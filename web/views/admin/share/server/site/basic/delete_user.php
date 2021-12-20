@@ -17,7 +17,7 @@ $temp = json_decode($webbasicsetting);
     <input type="hidden" name="bass_dir" value="<?= $temp->$dir_id->url ?>">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
     <input type="hidden" name="dir_id" value="<?= $dir_id ?>">
-    <b style="color: red"><?= $temp->$dir_id->user->$act_id->bass_user ?> </b>を削除しますか？
+    ユーザー削除「<b style="color: red"><?= $temp->$dir_id->user->$act_id->bass_user ?></b>」を削除しますか？
   </form>
 </div>
 <!-- Modal footer -->

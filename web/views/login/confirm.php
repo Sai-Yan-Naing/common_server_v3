@@ -23,7 +23,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
         header("location: /vps/server?tab=connection&act=index");
     } else
     {
-        $error = "ご契約ID and Password error";
+        $error = "ご契約ID/ドメインまたはパスワードに誤りがあります。";
         require_once('views/login/index.php');
     }
 } elseif ( is_valid_domain_name ($domainid))
@@ -36,7 +36,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
         header("location: /share/server?setting=site&tab=app_install&act=index");
     } else
     {
-        $error = "ご契約ID and Password error";
+        $error = "ご契約ID/ドメインまたはパスワードに誤りがあります。";
         require_once('views/login/index.php');
     }
 } else
@@ -47,10 +47,10 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
         setcookie("admin", $domainid);
         setcookie("password", $pass_encrypted);
         header("location: /admin");
-        die('hello');
+        die('');
     } else
     {
-        $error = "ご契約ID and Password error";
+        $error = "ご契約ID/ドメインまたはパスワードに誤りがあります。";
         require_once('views/login/index.php');
     }
     

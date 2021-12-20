@@ -6,7 +6,7 @@ require_once('views/admin/admin_shareconfig.php');
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">FTPユーザー削除</h4>
+  <h4 class="modal-title">ファイル/ディレクトリ削除</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -15,7 +15,7 @@ require_once('views/admin/admin_shareconfig.php');
   <form action="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="fm_fun" style="position:relative">
     <input type="hidden" name="action" value="delete_file">
     <input type="hidden" name="delete_file" value="delete">
-    <b style="color: red" id="delete_name">domainname</b>を削除しますか ?
+    「<b style="color: red" id="delete_name">domainname</b>」を削除しますか？
       
   </form>
 </div>

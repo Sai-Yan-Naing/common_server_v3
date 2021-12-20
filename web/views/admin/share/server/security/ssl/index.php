@@ -16,9 +16,9 @@
                                                 <span class="col">無料SSL設定</span>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="common-name" class="col-sm-2 col-form-label">コモンネーム</label>
+                                                <label for="name" class="col-sm-2 col-form-label">コモンネーム</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="common-name" name="common_name" placeholder="例：www.assistup.co.jp">
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder="例：www.assistup.co.jp">
                                                 </div>
                                             </div>
                                             
@@ -58,6 +58,10 @@
                                             
                                             <div class="form-group row">
                                                 <span class="text-danger notice-msg col-sm-10">入力項目については半角英数字にてご入力ください。全角では入力できません。</span>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <span class="text-danger notice-msg col-sm-10">SSLの反映にはお時間がかかります。しばらく待ってからご確認をお願い致します。</span>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6"></div>

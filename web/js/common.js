@@ -37,7 +37,7 @@ function domainChecker($domain, $this) {
     $this.after(
       '<span class="error" id="' +
         $this.attr("id") +
-        '_error">Invalid Domain Format</span>'
+        '_error">ドメインの形式で入力してください</span>'
     );
     $("#domain_checker_btn").attr("disabled", true);
     return;

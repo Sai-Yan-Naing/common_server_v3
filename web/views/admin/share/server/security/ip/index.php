@@ -12,15 +12,12 @@
                                 <div class="tab-content">
                                     <div id="ip-restriction" class=" pr-3 pl-3 pb-3 tab-pane active"><br>
                                         <div class="row">
-                                            <div class="col-sm-3">
-                                                <span>IPアクセス制限</span>
-                                            </div>
                                             <div class="col-sm-9">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=security&tab=ip&act=new&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ブラックリストに追加</button>
                                             </div>
                                         </div>
                                         <div class="mt-4">
-                                            <div class="d-flex mb-2">
+                                            <div class="row mb-2">
                                                 <div class="col-sm-3">ブラックリスト</div>
                                                 <div class="text-danger col-sm-6"><span class="text-center"><?php if (isset($error)) {
                                                     echo $error;

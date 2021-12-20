@@ -56,7 +56,7 @@
                                     <th class="font-weight-bold">更新日時</th>
                                     <th class="font-weight-bold">ファイル形式</th>
                                     <th class="font-weight-bold">ファイル容量</th>
-                                    <th class="font-weight-bold">作業</th>
+                                    <th class="font-weight-bold pl-4">作業</th>
                                     </tr>
                                 </thead>
                                 <tbody id="changebody">
@@ -65,8 +65,10 @@
                                     ?>
                                         <tr>
                                         <td class="folder_click" foldername="<?= $value ?>" style="cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">
-                                            <i class="far fa-folder  nav-tab-icon"></i> 
-                                            <span><?= $value ?></span>
+                                            <div class="d-flex">
+                                                <i class="far fa-folder  nav-tab-icon"></i> 
+                                                <span class="ml-2 mt-1"><?= $value ?></span>
+                                            </div>
                                         </td>
                                         <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
                                         <td><?= filetype($dir.'/'.$value)?></td>
@@ -99,7 +101,10 @@
                                         ?>
                                         <tr>
                                         
-                                        <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext)){ echo 'data-target="#common_dialog"'; } ?> file_name="<?= $value ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"><div><i class="far fa-file nav-tab-icon"></i><span class="ml-1"><?= $value ?></span></div></td>
+                                        <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext)){ echo 'data-target="#common_dialog"'; } ?> file_name="<?= $value ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>">
+                                        <div class="d-flex">
+                                            <i class="far fa-file nav-tab-icon"></i><span class="ml-2 mt-1"><?= $value ?></span>
+                                        </div></td>
                                         
                                         <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
                                         <td><?= filetype($dir.'/'.$value)?></td>
@@ -108,9 +113,6 @@
                                         </td>
                                         <td class="d-flex" >
                                             <div class="col-sm-12 ">
-                                                <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value?>&common_path=" class="btn download_file">
-                                                <i class="fa fa-download"></i>
-                                                </a>
                                                 <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
                                                 圧縮
                                                 </button>
@@ -128,6 +130,9 @@
                                                 <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="delete">
                                                 削除
                                                 </button>
+                                                <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value?>&common_path=" class="btn download_file">
+                                                <i class="fa fa-download"></i>
+                                                </a>
                                             </div>
                                         </td>
                                         </tr>

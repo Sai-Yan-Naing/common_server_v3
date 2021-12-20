@@ -21,13 +21,10 @@ $getAllRow = $commons->getAllRow($query, $params);
                                     <div class="active">
                                         <div class="row mt-3 mb-3">
                                             <div class="col-sm-3">
-                                                <span>データベース</span>
-                                            </div>
-                                            <div class="col-sm-3">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mysql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
                                             <div class="col-sm-3">
-                                                <a class="btn btn-info btn-sm" href="<?=MANAGER?>" target="_blank"><span class="mr-2"><i class="fas fa-plus-square"></i></span>MYSQL マネージャー</a>
+                                                <a href="<?=MANAGER?>" target="_blank"><u>MYSQL マネージャー</u></a>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">

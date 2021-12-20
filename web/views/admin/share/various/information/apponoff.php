@@ -3,7 +3,7 @@ require_once('views/admin/admin_shareconfig.php');
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Web site</h4>
+  <h4 class="modal-title">アプリケーションの起動/停止</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

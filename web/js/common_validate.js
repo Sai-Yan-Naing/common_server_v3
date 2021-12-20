@@ -20,7 +20,7 @@ function allValidate() {
         }
         return true;
       },
-      "Invalid IP address"
+      "無効なIPアドレスです"
     );
 
     // for  domain validate
@@ -31,7 +31,7 @@ function allValidate() {
           /^([a-zA-Z0-9_.+-])+(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(value);
       },
-      "Invalid domain"
+      "無効なドメインです"
     );
 
     $.validator.addMethod(
@@ -55,7 +55,7 @@ function allValidate() {
           return true;
         }
       },
-      "Please enter number and alphabet character only"
+      "半角英数字のみを入力してください"
     );
 
     // allow special character
@@ -67,7 +67,7 @@ function allValidate() {
           return true;
         }
       },
-      "Please enter number and alphabet character only"
+      "半角英数字のみを入力してください"
     );
 
     $.validator.addMethod(
@@ -266,11 +266,12 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         name: {
-          required: "Please enter name",
+          required: "名前を入力してください",
         },
         email: {
-          required: "Please enter email",
-          minlength: "Please enter a valid email address",
+          required: "メールアドレスを入力してください",
+          minlength: "有効なメールアドレスを入力してください",
+          email:'有効なメールアドレスを入力してください'
         },
         phone: {
           required: "Please enter phone number",
@@ -281,7 +282,7 @@ function allValidate() {
           minlength: "Subject must be at least 1 characters long",
         },
         message: {
-          required: "Please enter message",
+          required: "お問合せ内容を入力してください",
           minlength: "Message must be at least 1 characters long",
         },
       },
@@ -374,6 +375,7 @@ function allValidate() {
         },
         email: {
           required: "Please enter メールアドレス",
+          email:"有効なエラーコードを入力してください"
         },
         password: {
           required: "Please enter password",
@@ -479,7 +481,53 @@ function allValidate() {
     });
 
     // end blockip_create
-
+    // for ssl
+ $("form[id='free-ssl']").validate({
+      rules: {
+        name: {
+          required: true,
+          numberalphabet: true,
+        },
+        prefecture: {
+          required: true,
+          numberalphabet: true,
+        },
+        municipality: {
+          required: true,
+          numberalphabet: true,
+        },
+        organization: {
+          required: true,
+          numberalphabet: true,
+        },
+        department: {
+          required: true,
+          numberalphabet: true,
+        },
+      },
+      messages: {
+        name: {
+          required: "Please enter コモンネーム", 
+        },
+        prefecture: {
+          required: "Please enter 都道府県（Ｓ）", 
+        },
+        municipality: {
+          required: "Please enter 市区町村（Ｌ）", 
+        },
+        organization: {
+          required: "Please enter 組織名（Ｏ）",
+        },
+        department: {
+          required: "Please enter 部署名（ＯＵ）",
+        },
+      },
+      submitHandler: function (form) {
+        loading();
+        form.submit();
+      },
+    });
+    // for ssl
     // for add database_create
     $("form[id='database_create']").validate({
       onkeyup: function (element) {
@@ -691,7 +739,7 @@ function allValidate() {
         },
         target: {
           required: "Please enter IP/ドメイン",
-          minlength: "IP/ドメイン must be at least 8 characters long",
+          minlength: "IP/ドメインは8文字以上にしてください",
         },
       },
       submitHandler: function (form) {
@@ -873,6 +921,7 @@ function allValidate() {
         },
         url_spec: {
           required: true,
+          nowhitespace:true,
         },
       },
 
@@ -880,9 +929,10 @@ function allValidate() {
       messages: {
         status_code: {
           required: "Please enter status code",
+          number: "有効なエラーコードを入力してください"
         },
         url_spec: {
-          required: "Please enter error page path",
+          required: "有効なURLを入力してください",
         },
       },
       submitHandler: function (form) {

@@ -15,7 +15,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain =? ",[$webdomain]);
                                 <div class="tab-content">
                                     <div id="waf" class="pr-3 pl-3 tab-pane active"><br>
                                         <div class="form-group row">
-                                            <span class="col">WAF設定</span>
+                                            <span class="col">WAF利用設定</span>
                                             <?php
                                                 if ( isset($error)):?>
                                             <span class="col error"><?= $error ?></span>
