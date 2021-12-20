@@ -34,6 +34,8 @@ require_once("views/admin/admin_shareconfig.php");
             $msg = "認証ユーザー 「".$bass_user."」 を作成しました";
         } elseif ($action==='delete')
         {
+            $act_id = $_POST['act_id'];
+            $bass_user = $temp[$dir_id]['user'][$act_id]['bass_user'];
             $msg = "認証ユーザー 「".$bass_user."」 を削除しました";
             $act_id = $_POST['act_id'];
             unset($temp[$dir_id]['user'][$act_id]);

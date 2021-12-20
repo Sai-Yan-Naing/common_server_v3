@@ -236,19 +236,10 @@ function allValidate() {
           required: true,
         },
         email: {
-          required: {
-            depends: function (element) {
-              return $("#phone").val() == "";
-            },
-          },
+          required: true,
           email: true,
         },
         phone: {
-          required: {
-            depends: function (element) {
-              return $("#email").val() == "";
-            },
-          },
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
