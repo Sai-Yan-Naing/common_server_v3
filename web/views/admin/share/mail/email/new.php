@@ -25,15 +25,14 @@ require_once('views/admin/admin_shareconfig.php');
         </div>
     </div>
 	<form action="/admin/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="email_create">
-    
-    <div class="form-group row mr-2" style="color: #b7a3a3;">
-            <div>メールアカウント名を入力してください（例）infoと入力するとinfo＠<?=$webdomain?>で作成します。</div>
-        </div>
 
 		<input type="hidden" name="action" value="new">
     	<div class="row mr-2 mb-1">
+                <div class="d-flex">
+                    <label for="email">メールアドレス</label>
+                    <div class="ml-3">※ メールアカウント名を入力してください（例）infoと入力するとinfo＠<?=$webdomain?>で作成します。</div>
+                </div>
             <div class="col-sm-6">
-            <label for="email">メールアドレス</label>
                 <input type="text" class="form-control" placeholder="メールアドレス" column="email" id="email" name="email" column="email" table="add_email" remark="db">
             </div>
 		    <div class="col-sm-2">
