@@ -13,7 +13,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain= ? ", [$webdomain]);
   <form action="/admin/share/server?setting=security&tab=waf&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit='loading()'>
     <input type="hidden" name="switch" value="usage">
     <input type="hidden" name="onoff" value="<?= (int)$waf['usage']==1? 0 : 1 ?>">
-    「WAF設定」<?= (int)$waf['usage']==1? "停止" : "起動" ?>しますか ?
+    「利用設定」を<?= (int)$waf['usage']==1? "停止" : "起動" ?>しますか？
       
   </form>
 </div>
