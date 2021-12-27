@@ -36,8 +36,10 @@ if ( isset($_POST['action']))
 		// die();
 	} elseif ( $_POST['action'] === "delete")
 	{
-		echo $action= $_POST['action'];
-		echo $act_id= $_POST['act_id'];
+		 $action= $_POST['action'];
+		 $act_id= $_POST['act_id'];
+		$code = $temp[$act_id]['statuscode'];
+		echo $msg = "「エラーページ ".$code."」を削除しました";
 		unset($temp[$act_id]);
 		// echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
 	} else

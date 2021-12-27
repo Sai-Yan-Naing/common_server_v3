@@ -11,13 +11,13 @@ require_once("views/admin/admin_shareconfig.php");
     {
         if ($action === 'new')
         {
-            $msg = "BASIC認証を作成しました";
+            $msg = "BASIC認証「".$bass_dir."」を作成しました";
             $temp["ID-".time()]["url"] =$bass_dir;
             $temp["ID-".time()]["user"] =null;
             createDir($dir_path);
             // $temp
         }else{
-            $msg = "BASIC認証を削除しました";
+            $msg = "BASIC認証「".$temp[$_POST['dir_id']]['url']."」を削除しました";
             unset($temp[$_POST['dir_id']]);
             // echo ROOT_PATH.$dir_path;
             // die();

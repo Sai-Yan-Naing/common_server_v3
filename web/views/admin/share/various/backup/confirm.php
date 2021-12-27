@@ -43,11 +43,12 @@ if (!$webuser)
     } elseif (isset($_POST['action']) and $_POST['action']=="auto_backup")
     {
     	$onoff=$getbackup['scheduler']==1? 0 : 1;
+    	$stsp=$getbackup['scheduler']==1? "停止" : "起動";
+        $msg = "自動バックアップを".$stsp."しました";
+        
     	$backup = new Backup;
 
 		$backup->addAutoBackup($webdomain,$webuser,$onoff);
     }
     flash($msgsession,$msg);
     header("location: /admin/share/various?setting=backup&act=index&webid=$webid");
-
-?>

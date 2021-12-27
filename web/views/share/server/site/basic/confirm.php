@@ -60,5 +60,3 @@ if ( isset($_POST['action']))
     $_SESSION['message'] = 'Success';
 	header("location : /share/server?setting=site&tab=basic&act=index");
 }
-
-?>

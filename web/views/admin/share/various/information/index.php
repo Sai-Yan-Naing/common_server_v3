@@ -20,7 +20,7 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                             </div>
                                             <div class="mb-1 d-flex">
                                                 <label for="status" class="col-sm-3 col-form-label">ステータス</label>
-                                                <div class="col-sm-2"><span class="col-form-label"> 起動中 </span></div>
+                                                <div class="col-sm-2"><span class="col-form-label"> <?= $webstopped==0? "။起動中":"停止中" ?> </span></div>
                                                 <label class="switch text-white common_dialog" gourl="/admin/share/various?setting=information&act=onoff&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                     <input type="checkbox" <?= $webstopped==0? "checked":""  ?>>
                                                     <span class="slider <?= $webstopped==0? "slideron":"slideroff"  ?>"></span>
@@ -30,7 +30,7 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                             </div>
                                             <div class="mb-1 d-flex">
                                                 <label for="app-pool" class="col-sm-3 col-form-label">アプリケーションプール</label>
-                                                <div class="col-sm-2"><span class="col-form-label"> 起動中 </span></div>
+                                                <div class="col-sm-2"><span class="col-form-label"> <?= $webappstopped==0? "起動中":"停止中"  ?> </span></div>
                                                 <label class="switch text-white common_dialog" gourl="/admin/share/various?setting=information&act=apponoff&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                     <input type="checkbox" <?= $webappstopped==0? "checked":""  ?>>
                                                     <span class="slider <?= $webappstopped==0? "slideron":"slideroff"  ?>"></span>

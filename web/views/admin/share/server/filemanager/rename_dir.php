@@ -11,7 +11,7 @@ require_once('views/admin/admin_shareconfig.php');
 
   <form action="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="fm_fun" style="position:relative">
     <input type="hidden" name="action" value="rename">
-    <label>Name:</label>
+    <label>ディレクトリ名:</label>
     <input type="hidden" name="old" id="old">
     <input type="text" class="form-control" name="rename" id="rename">
   </form>

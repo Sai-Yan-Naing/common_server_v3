@@ -146,4 +146,16 @@ class CommonValidate
 
 		return false;
 	}
+
+	function errorFile($url)
+	{
+		// return 'hello';
+		// return file_exists($url);
+		if(!file_exists($url))
+		{
+			return true;
+		}
+
+		return false;
+	}
 }

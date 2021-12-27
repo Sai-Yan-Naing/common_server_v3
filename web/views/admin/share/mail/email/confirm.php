@@ -13,7 +13,7 @@ $msgsession ="msg";
 $action =$_POST['action'];
 if ( isset($_POST['action']) and $_POST['action'] === 'new')
 {
-	$msg = $email."@".$webdomain."メールアドレスの追加が完了しました。";
+	$msg = "メールアドレス「".$email."@".$webdomain."」を追加しました";
 	$msgsession ="msg";
 	$mail_pass_word=$_POST['mail_pass_word'];
 	$insert_q = "INSERT INTO add_email (`domain`, `email`, `password`) VALUES ( ?, ?, ?)";
@@ -35,13 +35,13 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	}
 	$query = "SELECT * FROM add_email WHERE id=?";
 	$getRow = $commons->getRow($query,[$act_id]);
-	$msg = $getRow['email']."@".$webdomain."メールパスワードを変更しました";
+	$msg = "メールアドレス「".$getRow['email']."@".$webdomain."」のパスワードを変更しました";;
 	$msgsession ="msg";
 }else {
 	$act_id=$_POST['act_id'];
 	$query = "SELECT * FROM add_email WHERE id=?";
 	$getRow = $commons->getRow($query,[$act_id]);
-	$msg = $getRow['email']."@".$webdomain."メールアドレスの削除が完了しました。";
+	$msg = "メールアドレス「".$getRow['email']."@".$webdomain."」の削除が完了しました";
 	$msgsession ="msg";
     $delete_q = "DELETE FROM add_email WHERE id=?";
 	if ( ! $commons->doThis($delete_q,[$act_id]))

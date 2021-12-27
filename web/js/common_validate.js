@@ -75,7 +75,7 @@ function allValidate() {
       function (value, element) {
         return !/\s/.test(value);
       },
-      "Cannot enter white space"
+      "スペースは使用できません"
     );
 
     // allow underscroll ( _ ) and dash (-)
@@ -88,7 +88,7 @@ function allValidate() {
           return true;
         }
       },
-      "Cannot enter special character"
+      "特殊文字は使用できません"
     );
 
     $.validator.addMethod(
@@ -98,11 +98,17 @@ function allValidate() {
         let result = false;
         $url = document.URL.split("/");
         $url = $url[0] + "//" + $url[2];
+        $ext='';
+        if($(element).attr("remark")=='error_file')
+        {
+          $webid=$(element).attr("webid");
+          $ext='?webid='+$webid;
+        }
         // sessionStorage.setItem("result", false);
         // console.log($url + "saiyanaing");
         var $ajax = $.ajax({
           type: "POST",
-          url: $url + "/validate",
+          url: $url + "/validate"+$ext,
           async: false,
           dataType: "JSON",
           beforeSend: function () {
@@ -152,7 +158,79 @@ function allValidate() {
           );
           result = false;
         });
-        console.log(result + " result");
+        // console.log(result + " result");
+        return result;
+      },
+      ""
+    );
+
+    $.validator.addMethod(
+      "noalreadyexist",
+      function (value, element) {
+        $("#" + $(element).attr("id") + "-error").remove();
+        let result = false;
+        $url = document.URL.split("/");
+        $url = $url[0] + "//" + $url[2];
+        $ext='';
+        if($(element).attr("remark")=='error_file')
+        {
+          $webid=$(element).attr("webid");
+          $ext='?webid='+$webid;
+        }
+        // sessionStorage.setItem("result", false);
+        // console.log($url + "saiyanaing");
+        var $ajax = $.ajax({
+          type: "POST",
+          url: $url + "/validate"+$ext,
+          async: false,
+          dataType: "JSON",
+          beforeSend: function () {
+            $(element).after(
+              '<label id="' +
+                $(element).attr("id") +
+                '-error" class="error">' +
+                "Loading......</label>"
+            );
+          },
+          data: {
+            table: $(element).attr("table"),
+            column: $(element).attr("column"),
+            checker: value,
+            remark: $(element).attr("remark"),
+          },
+        });
+        $("#" + $(element).attr("id") + "-error").remove();
+        $done = $ajax.done(function (data) {
+          $("#" + $(element).attr("id") + "-error").remove();
+          console.log(data.status + "back end");
+          if (data["status"]) {
+            $(element).after(
+              '<label id="' +
+                $(element).attr("id") +
+                '-error" class="error">' +
+                " 有効なURLを入力してください</label>"
+            );
+            result = false;
+          } else {
+            $(element).after(
+              '<label id="' +
+                $(element).attr("id") +
+                '-error" class="text-success">' +
+                $(element).val() +
+                " を取得することができます。</label>"
+            );
+            result = true;
+          }
+        });
+        $fail = $ajax.fail(function () {
+          $(element).after(
+            '<span id="' +
+              $(element).attr("id") +
+              '-error" class="error">Internal server error</span>'
+          );
+          result = false;
+        });
+        // console.log(result + " result");
         return result;
       },
       ""
@@ -203,7 +281,7 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         domain: {
-          required: "Please enter ドメイン名",
+          required: "ドメイン名を入力してください",
         },
         web_dir: {
           required: "Please enter  web directory",
@@ -211,12 +289,12 @@ function allValidate() {
           maxlength: "8～20文字、半角英数字記号",
         },
         ftp_user: {
-          required: "Please enter FTP user",
+          required: "FTPユーザー名を入力してください",
           minlength: "1～255文字、半角英数小文字と_-.@",
           maxlength: "1～255文字、半角英数小文字と_-.@",
         },
         password: {
-          required: "Please enter password",
+          required: "パスワードを入力してください",
           minlength: "8～70文字、半角英数字記号",
           maxlength: "8～70文字、半角英数字記号",
         },
@@ -274,7 +352,7 @@ function allValidate() {
         },
         message: {
           required: "お問合せ内容を入力してください",
-          minlength: "Message must be at least 1 characters long",
+          minlength: "問い合わせ内容を入力してください",
         },
       },
       submitHandler: function (form) {
@@ -354,37 +432,38 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         url: {
-          required: "Please enter URL",
+          required: "URLを入力してください",
           url: "Please enter valid URL",
         },
         site_name: {
-          required: "Please enter  サイト名",
+          required: "サイト名を入力してください",
         },
         username: {
-          required: "Please enter ユーザー名",
+          required: "ユーザー名を入力してください",
           minlength: "1～255文字、半角英数小文字と_-.@",
+          maxlength: "ユーザー名は255文字以内にしてください",
         },
         email: {
-          required: "Please enter メールアドレス",
-          email:"有効なエラーコードを入力してください"
+          required: "メールアドレスを入力してください",
+          email:"有効なメールアドレスを入力してください"
         },
         password: {
-          required: "Please enter password",
+          required: "パスワードを入力してください",
           minlength: "8～70文字、半角英数字記号",
           maxlength: "8～70文字、半角英数字記号",
         },
         db_name: {
-          required: "Please enter データベース名",
+          required: "データベース名を入力してください",
           minlength: "5～70文字、半角英数字記号",
           maxlength: "5～70文字、半角英数字記号",
         },
         db_user: {
-          required: "Please enter ユーザー名",
+          required: "ユーザー名を入力してください",
           minlength: "5～70文字、半角英数字記号",
           maxlength: "5～70文字、半角英数字記号",
         },
         db_pass: {
-          required: "Please enter パスワード",
+          required: "パスワードを入力してください",
           minlength: "8～70文字、半角英数字記号",
           maxlength: "8～70文字、半角英数字記号",
         },
@@ -432,7 +511,7 @@ function allValidate() {
       },
       messages: {
         dir_path: {
-          required: "Please enter ディレクトリ",
+          required: "ディレクトリ名を入力してください",
         },
         ftp_user: {
           required: "Please enter  ユーザー名",
@@ -440,7 +519,7 @@ function allValidate() {
           maxlength: "1-14文字、半角英数字",
         },
         ftp_pass: {
-          required: "Please enter パスワード",
+          required: "パスワードを入力してください",
           minlength: "8～70文字、半角英数字記号",
           maxlength: "8～70文字、半角英数字記号",
         },
@@ -462,7 +541,7 @@ function allValidate() {
       },
       messages: {
         block_ip: {
-          required: "Please enter IP Address",
+          required: "IPアドレスを入力してください",
         },
       },
       submitHandler: function (form) {
@@ -498,19 +577,19 @@ function allValidate() {
       },
       messages: {
         name: {
-          required: "Please enter コモンネーム", 
+          required: "コモンネームを入力してください", 
         },
         prefecture: {
-          required: "Please enter 都道府県（Ｓ）", 
+          required: "都道府県を入力してください", 
         },
         municipality: {
-          required: "Please enter 市区町村（Ｌ）", 
+          required: "市区町村を入力してください", 
         },
         organization: {
-          required: "Please enter 組織名（Ｏ）",
+          required: "組織名を入力してください",
         },
         department: {
-          required: "Please enter 部署名（ＯＵ）",
+          required: "部署名を入力してください",
         },
       },
       submitHandler: function (form) {
@@ -560,17 +639,17 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         db_name: {
-          required: "Please enter データベース名",
+          required: "データベース名を入力してください",
           minlength: "4～20文字、半角英数字記号",
           maxlength: "4～20文字、半角英数字記号",
         },
         db_user: {
-          required: "Please enter ユーザー名",
+          required: "ユーザー名を入力してください",
           minlength: "4～20文字、半角英数字記号",
           maxlength: "4～20文字、半角英数字記号",
         },
         db_pass: {
-          required: "Please enter パスワード",
+          required: "パスワードを入力してください",
           minlength: "8～70文字、半角英数字記号",
           maxlength: "8～70文字、半角英数字記号",
         },
@@ -631,7 +710,7 @@ function allValidate() {
           maxlength: "1-14文字、半角英数字",
         },
         ftp_pass: {
-          required: "Please enter パスワード",
+          required: "パスワードを入力してください",
           minlength: "8～70文字、半角英数字記号",
           maxlength: "8～70文字、半角英数字記号",
         },
@@ -675,10 +754,10 @@ function allValidate() {
       },
       messages: {
         email: {
-          required: "Please enter メールアドレス",
+          required: "メールアドレスを入力してください",
         },
         mail_pass_word: {
-          required: "Please enter パスワード",
+          required: "パスワードを入力してください",
           minlength: "8～70文字、半角英数字記号",
           maxlength: "8～70文字、半角英数字記号",
         },
@@ -719,6 +798,7 @@ function allValidate() {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
+          maxlength: 16,
           minlength: 8,
         },
       },
@@ -726,10 +806,11 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         sub: {
-          required: "Please enter ホスト名",
+          required: "ホスト名を入力してください",
         },
         target: {
-          required: "Please enter IP/ドメイン",
+          required: "IP/ドメインを入力してください",
+          maxlength: "ホスト名は14文字以内にしてください",
           minlength: "IP/ドメインは8文字以上にしてください",
         },
       },
@@ -766,6 +847,7 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
+          maxlength: 14,
         },
         bass_pass: {
           required: true,
@@ -779,10 +861,11 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         bass_user: {
-          required: "Please enter ユーザー名",
+          required: "ユーザー名を入力してください",
+          maxlength: "ユーザー名は14文字以内にしてください",
         },
         bass_pass: {
-          required: "Please enter パスワード",
+          required: "パスワードを入力してください",
           minlength: "8～70文字、半角英数記号の組み合わせ",
           maxlength: "8～70文字、半角英数記号の組み合わせ",
         },
@@ -805,7 +888,7 @@ function allValidate() {
     //     // Specify validation error messages
     //     messages: {
     //         domain: {
-    //             required: "Please enter ドメイン名",
+    //             required: "ドメイン名を入力してください",
     //         }
     //     },
     //     submitHandler: function(form) {
@@ -842,12 +925,12 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         domain: {
-          required: "Please enter ドメイン名",
+          required: "ドメイン名を入力してください",
         },
         authcode: {
-          required: "Please enter AuthCode",
-          minlength: "AuthCode must be between 4 and 16 characters long",
-          maxlength: "AuthCode must be between 4 and 16 characters long",
+          required: "AuthCodeを入力してください",
+          minlength: "AuthCodeは4-16文字以内で入力してください",
+          maxlength: "AuthCodeは4-16文字以内で入力してください",
         },
       },
       submitHandler: function (form) {
@@ -870,7 +953,7 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         domain: {
-          required: "Please enter ドメイン名",
+          required: "ドメイン名を入力してください",
         },
       },
       submitHandler: function (form) {
@@ -894,7 +977,7 @@ function allValidate() {
       // Specify validation error messages
       messages: {
         bass_dir: {
-          required: "Please enter directory",
+          required: "対象ディレクトリを入力してください",
         },
       },
       submitHandler: function (form) {
@@ -905,22 +988,30 @@ function allValidate() {
 
     // for add bass_dir_create
     $("form[id='error_create']").validate({
+      onkeyup: function (element) {
+        $("#" + $(element).attr("id") + "-error").remove();
+      },
       rules: {
         status_code: {
           required: true,
           number: true,
+          minlength: 3,
+          maxlength: 3,
         },
         url_spec: {
           required: true,
           nowhitespace:true,
+          noalreadyexist: true,
         },
       },
 
       // Specify validation error messages
       messages: {
         status_code: {
-          required: "Please enter status code",
-          number: "有効なエラーコードを入力してください"
+          required: "ステータスコードを入力してください",
+          number: "有効なエラーコードを入力してください",
+          minlength: "ステータスコードは3文字以内にしてください",
+          maxlength: "ステータスコードは3文字以内にしてください",
         },
         url_spec: {
           required: "有効なURLを入力してください",

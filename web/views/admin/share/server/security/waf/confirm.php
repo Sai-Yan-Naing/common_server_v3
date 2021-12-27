@@ -12,7 +12,7 @@ $msgsession ="msg";
 if ( $switch=='usage')
 {
 	$onoff = (int)$waf['usage']==1? 0 : 1;
-	$msg = (int)$waf['usage']==1? 'WAFをオフにしました' : 'WAFをONにしました。';
+	$msg = (int)$waf['usage']==1? '利用設定をオフにしました' : '利用設定をONにしました。';
 	$usage_query = "UPDATE waf SET `usage`='$onoff' WHERE `domain`=?";
 	if ( !$commons->doThis($usage_query,[$webdomain]))
 	{

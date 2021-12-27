@@ -12,6 +12,10 @@ $(document).on("click", ".folder_click", function () {
   $result = $.ajax({
     type: "POST",
     url: $url,
+    async:false,
+    beforeSend: function () {
+      loading();
+    },
     data: { foldername: $foldername },
   });
   $done = $result.done(function (data) {
@@ -54,6 +58,7 @@ $(document).on("click", ".folder_click", function () {
       $(this).attr("href", $temp + "&common_path=" + $_path);
     });
   });
+  stoploading();
 });
 
 $(document).on("click", ".common_dialog_fm", function () {
