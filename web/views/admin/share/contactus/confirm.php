@@ -7,7 +7,7 @@ $phone = $_POST['phone'];
 $today = date("Y/m/d");
 
 $msgsession =  "msg";
-$msg = "お問合せが完了しました。<br>弊社より回答させていただきますので今しばらくお待ちください";
+$msg = "お問合せが完了しました<br>弊社より回答させていただきますので今しばらくお待ちください";
 
 $timestamp = date("Y/m/d :h:m:s");
 

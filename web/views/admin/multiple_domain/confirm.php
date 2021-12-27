@@ -19,7 +19,7 @@ if ( $action === 'new' )
     $dns = json_encode($temp);
     $app_version = json_encode($temp1);
 
-    $msg = "サイトの追加が完了しました。";
+    $msg = "サイトの追加が完了しました";
     $msgsession ="msg";
     
     $insert_q = "INSERT INTO web_account (`domain`, `password`, `user`, `plan`, `customer_id`,`dns`,`app_version`,`origin_id`) VALUES (?, ?, ?, ?, ?, ?,?,?)";

@@ -15,9 +15,9 @@ if ($action === 'new')
 	$temp['ID-' . time()] = ['type' => $type, 'sub' => $sub, 'target' => $target];
 	$result = json_encode($temp);
 	$count = count(json_decode($result, true));
-	$msg = "申請が完了しました。<br>".
+	$msg = "申請が完了しました<br>".
 	"弊社にて作業完了次第、ご連絡させていただきますので<br>".
-	"反映まで今しばらくお待ちください。";
+	"反映まで今しばらくお待ちください";
     $msgsession ="msg";
 }
 elseif ($action === 'edit')
@@ -28,9 +28,9 @@ elseif ($action === 'edit')
 	$temp[$act_id]['sub'] = $_POST['sub'];
 	$temp[$act_id]['target'] = $_POST['target'];
 	$result = json_encode($temp);
-	$msg = "申請が完了しました。<br>".
+	$msg = "申請が完了しました<br>".
 	"弊社にて作業完了次第、ご連絡させていただきますので<br>".
-	"反映まで今しばらくお待ちください。";
+	"反映まで今しばらくお待ちください";
     $msgsession ="msg";
 }
 elseif ($action === 'delete')
@@ -42,8 +42,8 @@ elseif ($action === 'delete')
 	$target = $temp[$act_id]['target'];
 	unset($temp[$act_id]);
 	$result = json_encode($temp);
-	$msg = "申請が完了しました。<br>".
-	"弊社にて作業完了次第、ご連絡させていただきますので反映まで今しばらくお待ちください。";
+	$msg = "申請が完了しました<br>".
+	"弊社にて作業完了次第、ご連絡させていただきますので反映まで今しばらくお待ちください";
     $msgsession ="msgdel";
 }
 

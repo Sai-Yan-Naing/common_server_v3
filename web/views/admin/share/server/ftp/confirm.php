@@ -24,7 +24,7 @@ if ( $action=='new')
 	$ftp_pass=$_POST['ftp_pass'];
     $permission = implode(",",$permission);
 	
-	$msg = "FTPユーザー 「".$ftp_user."」 の追加が完了しました。";
+	$msg = "FTPユーザー 「".$ftp_user."」 の追加が完了しました";
 	$msgsession ="msg";
 
     $insert_q = "INSERT INTO db_ftp (ftp_user, ftp_pass, domain, permission) VALUES ('$ftp_user', '$ftp_pass', '$webdomain', '$permission')";

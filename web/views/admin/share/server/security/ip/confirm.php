@@ -8,7 +8,7 @@ $msg = "jp message";
 $msgsession ="msg";
 if ( $action=='new')
 {
-	$msg = "ブラックリストに 「".$ip."」 を追加しました。";
+	$msg = "ブラックリストに 「".$ip."」 を追加しました";
 	if ( isExistBlackListIp($site,$ip))
 	{
 		$error = $ip." is already exist.";

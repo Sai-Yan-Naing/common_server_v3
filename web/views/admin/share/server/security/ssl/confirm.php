@@ -1,6 +1,6 @@
 <?php
 require_once('views/admin/admin_shareconfig.php');
-$msg = "Let’s Encryptの登録が完了しました。<br>設定反映までしばらくお待ちください。";
+$msg = "Let’s Encryptの登録が完了しました。<br>設定反映までしばらくお待ちください";
 $msgsession ="msg";
 // $user = $getWeb['user'];
 // if(!isset($_POST['common_name'])){ header("location: /share/servers/security");}

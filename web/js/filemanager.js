@@ -1,5 +1,5 @@
 $(document).on("click", ".folder_click", function () {
-  // alert(1)
+  // loading();
   $foldername = $(this).attr("foldername");
   $this = $(this);
   $filepath = $foldername.split("/");
@@ -12,10 +12,13 @@ $(document).on("click", ".folder_click", function () {
   $result = $.ajax({
     type: "POST",
     url: $url,
-    async:false,
-    beforeSend: function () {
-      loading();
-    },
+    // async:false,
+     beforeSend: function(){
+     loading();
+   },
+   complete: function(){
+     stoploading();
+   },
     data: { foldername: $foldername },
   });
   $done = $result.done(function (data) {
@@ -50,7 +53,6 @@ $(document).on("click", ".folder_click", function () {
           "</li>";
       }
     }
-    console.log($filepath)
     $("#dir_path").html($path);
     $("#common_path").attr("path", $foldername);
     $(".download_file").each(function (i, obj) {
@@ -58,7 +60,8 @@ $(document).on("click", ".folder_click", function () {
       $(this).attr("href", $temp + "&common_path=" + $_path);
     });
   });
-  stoploading();
+  // stoploading();
+  // alert('done')
 });
 
 $(document).on("click", ".common_dialog_fm", function () {
@@ -193,10 +196,14 @@ $(document).on("submit", "#fm_fun", function () {
     processData: false,
     beforeSend: function () {
       $("#common_dialog").modal("hide");
+     loading();
       //   alert("error");
       //   return false;
       // $("#err").fadeOut();
     },
+   complete: function(){
+     stoploading();
+   },
     success: function (data) {
       document.getElementById("changebody").innerHTML = data;
       $(".download_file").each(function (i, obj) {

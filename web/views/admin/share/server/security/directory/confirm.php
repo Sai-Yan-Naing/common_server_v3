@@ -16,7 +16,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	$ftp_user=$_POST['ftp_user'];
 	$ftp_pass=$_POST['ftp_pass'];
 	$dir_path=$_POST['dir_path'];
-	$msg = "ディレクトリ 「".$dir_path."」 にユーザー 「".$ftp_user."」 のアクセス権限を追加しました。";
+	$msg = "ディレクトリ 「".$dir_path."」 にユーザー 「".$ftp_user."」 のアクセス権限を追加しました";
     $insert_q = "INSERT INTO sub_ftp (domain, ftp_user, ftp_pass, path) VALUES (?, ?, ?, ?)";
 	if ( !$commons->doThis($insert_q,[$webdomain, $ftp_user, $ftp_pass, $dir_path]))
 	{
@@ -38,7 +38,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	 $dir_path=$_POST['dir_path'];
 	 $act_id=$_POST['act_id'];
      $update_q = "UPDATE sub_ftp SET ftp_pass='$ftp_pass' WHERE id=? and domain=? ";
-	 $msg = "ユーザー 「".$ftp_user."」 のパスワードを編集しました。";
+	 $msg = "ユーザー 「".$ftp_user."」 のパスワードを編集しました";
 	 if ( !$commons->doThis($update_q,[$act_id,$webdomain]))
 	 {
 	 	$error=$ftp_user." cannot update password.";
@@ -52,7 +52,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	$ftp_user=$_POST['ftp_user'];
 	$dir_path=$_POST['dir_path'];
     $delete_q = "DELETE FROM sub_ftp WHERE id= ? ";
-	$msg = "ディレクトリ 「".$dir_path."」 に　ユーザー 「".$ftp_user."」 を削除しました。";
+	$msg = "ディレクトリ 「".$dir_path."」 に　ユーザー 「".$ftp_user."」 を削除しました";
 	if ( !$commons->doThis($delete_q,[$act_id]))
 	{
 		$error=$ftp_user." cannot delete.";
