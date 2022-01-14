@@ -11762,3 +11762,14 @@ a{
 {
   background-color: #09CAE3 !important;
 }
+.plusminus-btn::after{
+  content: '-';
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.plusminus:checked + .plusminus-btn::after{
+  content: '+';
+  font-size: 22px;
+  font-weight: bold;
+}

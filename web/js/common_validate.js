@@ -514,7 +514,7 @@ function allValidate() {
           required: "ディレクトリ名を入力してください",
         },
         ftp_user: {
-          required: "Please enter  ユーザー名",
+          required: "ユーザー名を入力してください",
           minlength: "1-14文字、半角英数字",
           maxlength: "1-14文字、半角英数字",
         },
@@ -705,7 +705,7 @@ function allValidate() {
       },
       messages: {
         ftp_user: {
-          required: "Please enter  ユーザー名",
+          required: "ユーザー名を入力してください",
           minlength: "1-14文字、半角英数字",
           maxlength: "1-14文字、半角英数字",
         },
@@ -745,13 +745,13 @@ function allValidate() {
         },
       },
 
-      errorPlacement: function (error, element) {
-        if (element.attr("name") == "email") {
-          error.insertAfter($("#email_error"));
-        } else {
-          error.insertAfter($("#mail_pass_word_error"));
-        }
-      },
+      // errorPlacement: function (error, element) {
+      //   if (element.attr("name") == "email") {
+      //     error.insertAfter($("#email_error"));
+      //   } else {
+      //     error.insertAfter($("#mail_pass_word_error"));
+      //   }
+      // },
       messages: {
         email: {
           required: "メールアドレスを入力してください",
@@ -793,12 +793,13 @@ function allValidate() {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
+          maxlength: 14,
         },
         target: {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          maxlength: 16,
+          maxlength: 70,
           minlength: 8,
         },
       },
@@ -807,10 +808,11 @@ function allValidate() {
       messages: {
         sub: {
           required: "ホスト名を入力してください",
+          maxlength: "ホスト名は14文字以内にしてください",
         },
         target: {
           required: "IP/ドメインを入力してください",
-          maxlength: "ホスト名は14文字以内にしてください",
+          maxlength: "ホスト名は70文字以内にしてください",
           minlength: "IP/ドメインは8文字以上にしてください",
         },
       },

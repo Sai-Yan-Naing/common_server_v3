@@ -41,7 +41,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	$act_id=$_POST['act_id'];
 	$query = "SELECT * FROM add_email WHERE id=?";
 	$getRow = $commons->getRow($query,[$act_id]);
-	$msg = "メールアドレス「".$getRow['email']."@".$webdomain."」の削除が完了しました";
+	$msg = "メールアドレス「".$getRow['email']."@".$webdomain."」を削除しました";
 	$msgsession ="msg";
     $delete_q = "DELETE FROM add_email WHERE id=?";
 	if ( ! $commons->doThis($delete_q,[$act_id]))

@@ -29,9 +29,9 @@
             <br><br>
             <span>ファイルマネージャー</span>
         </a>
-        <a href="/admin/share/server?setting=analysis&tab=tab&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='analysis')?"active":"text-dark"?>" onclick="loading()">
+        <!-- <a href="/admin/share/server?setting=analysis&tab=tab&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='analysis')?"active":"text-dark"?>" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='analysis')?"analysis1":"analysis"?>.png" alt="site.png">
             <br><br>
             <span>アクセス分析</span>
-        </a>
+        </a> -->
 </div>

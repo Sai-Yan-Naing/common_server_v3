@@ -12,17 +12,20 @@ switch ($request['path'])
     case '/admin/domain-transfer' : include 'views/admin/domain_transfer.php';break;
     case '/admin/add-server' : include 'views/admin/add_server.php';break;
     case '/admin/dns' : include 'views/admin/dns.php';break;
+    case '/admin/manual' : include 'views/admin/manual/index.php';break;
 
 	// admin share
 	case '/admin/share/server' : include 'views/admin/share/server/index.php'; break;
 	case '/admin/share/mail' : include 'views/admin/share/mail/index.php'; break;
 	case '/admin/share/various' : include 'views/admin/share/various/index.php'; break;
 	case '/admin/share/contactus' : include 'views/admin/share/contactus.php'; break;
+	case '/admin/share/manual' : include 'views/admin/share/manual/index.php'; break;
 
     // admin vps
     case '/admin/vps/server' : include 'views/admin/vps/server/index.php'; break;
     case '/admin/vps/various' : include 'views/admin/vps/various/index.php'; break;
     case '/admin/vps/contactus' : include 'views/admin/vps/contactus.php'; break;
+    case '/admin/vps/manual' : include 'views/admin/vps/manual/index.php'; break;
     // case '/admin/share/mail' : include 'views/admin/share/mail/index.php'; break;
     // case '/admin/share/various' : include 'views/admin/share/various/index.php'; break;
     // case '/admin/share/contactus' : include 'views/admin/share/contactus/index.php'; break;

@@ -16,6 +16,8 @@ if (!$webuser)
 // die($_POST['user']);
 	if ( isset($_POST['action']) and $_POST['action']=="delete")
     {
+        
+        $msg = $webdomain." のバックアップデータの削除が完了しました";
     	
         deleteBackup($dirname);
         
@@ -30,6 +32,7 @@ if (!$webuser)
             deleteBackup($directory);
         }
         copy_paste($src, $dst);
+        $msg = $webdomain." のバックアップが完了しました";
     } elseif (isset($_POST['action']) and $_POST['action']=="restore")
     {
     	$file = showFolder($dirname);
@@ -39,6 +42,7 @@ if (!$webuser)
             deleteBackup($dst);
         }
         copy_paste($src, $dst);
+        $msg = $web." のバックアップデータのリストアを完了しました";
         
     } elseif (isset($_POST['action']) and $_POST['action']=="auto_backup")
     {

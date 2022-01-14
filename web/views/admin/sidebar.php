@@ -20,9 +20,10 @@ $url= explode('/',$url);
                     ご契約情報
                 </a>
                 
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="/admin/manual">
                     <div class="sb-nav-link-icon"><img src="/img/sidebar/manual.png" alt="" class="nav-tab-icon"></div>
                     マニュアル
+                    <?php if ( strpos($url[1],'admin') !==false && strpos($url[2],'manual') !==false ): echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'; endif ?>
                 </a>
                 
                 <a class="nav-link active" href="/admin/contactus?act=index" onclick="loading()">

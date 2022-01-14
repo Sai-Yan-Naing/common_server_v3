@@ -22,9 +22,10 @@ $url= explode('/',$url);
                     <?php if ( strpos($url[1],'admin') !==false && ($url[2]=="vps" && strpos($url[3],'various') !==false )) : echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'; endif; ?>
                 </a>
                 
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="/admin/vps/manual?webid=<?=$webid?>" onclick="loading()">
                     <div class="sb-nav-link-icon"><img src="/img/sidebar/manual.png" alt="" class="nav-tab-icon"></div>
                     マニュアル
+                    <?php if ( strpos($url[1],'admin') !==false && strpos($url[3],'manual') !==false ): echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'; endif ?>
                 </a>
                 
                 <a class="nav-link active" href="/admin/vps/contactus?act=index&webid=<?=$webid?>" onclick="loading()">

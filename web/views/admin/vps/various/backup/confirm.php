@@ -12,6 +12,9 @@ $host_user = $webvmhost_user;
 $host_password = $webvmhost_password;
 $vm_name = $webvm_name;
 
+$msg = "jp message";
+$msgsession ="msg";
+
         $getvpsbackup = $commons->getRow("SELECT * FROM vps_backup WHERE ip='$webip'");
 	if ( isset($_POST['action']) and $_POST['action'] === "delete")
     {
@@ -25,6 +28,7 @@ $vm_name = $webvm_name;
             // require_once('views/admin/share/servers/ftp/index.php');
             die();
         }
+        $msg = $webip."のバックアップデータの削除が完了しました";
         // $backup_vmname = $_POST['backup_vmname'];
         echo $del_dir = "C:/Hyper-V/Backup/$getvpsbackup[name]/";
         echo  Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $dirname." ". $del_dir);
@@ -47,6 +51,7 @@ $vm_name = $webvm_name;
             echo $error="cannot create vps backup";
             die();
         }
+        $msg = $webip."のバックアップが完了しました";
         $dirname = "C:/Hyper-V/Backup/$backupname/";
         // echo $webvm_name;
         // die('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/manage_vm/vm.ps1" '. $webvm_name." ".$action." ".$dirname);
@@ -93,6 +98,7 @@ $vm_name = $webvm_name;
         // print_r($dirname."\\".$backupfile);
         // echo $backupfile;
         // die('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/manage_vm/vm.ps1" '. $webvm_name." ".$action." ".$dirname." ".$backupfile);
+        $msg = $webip."のバックアップデータのリストアを完了しました";
         $getvps = $commons->getRow("SELECT * FROM vps_account WHERE ip=?",[$webip]);
         $active = $getvps['active'];
         // die($active);
@@ -102,7 +108,9 @@ $vm_name = $webvm_name;
         // die('restore');
     } elseif (isset($_POST['action']) and $_POST['action'] === "auto_backup")
     {
-        $status = $getvpsbackup['scheduler'] === 1?0:1;
+        $status = $getvpsbackup['scheduler'] == 1?0:1;
+    	$stsp=$getvpsbackup['scheduler']==1? "停止" : "起動";
+        $msg = "自動バックアップを".$stsp."しました";
             $update_q = "UPDATE vps_backup SET scheduler='$status' WHERE ip='$webip'";
         if ( !$commons->doThis($update_q))
         {
@@ -110,6 +118,5 @@ $vm_name = $webvm_name;
             die();
         }
     }
+    flash($msgsession,$msg);
     header("location: /admin/vps/various?setting=backup&tab=backup&act=index&webid=$webid");
-
-?>

@@ -28,9 +28,10 @@
                                 <?php if ( $url[1]=='admin' && $url[2]=='share' && strpos($url[3],'various') !==false): echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>';endif; ?>
                             </a>
 
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="/admin/share/manual?webid=<?=$webid?>">
                                 <div class="sb-nav-link-icon"><img src="/img/sidebar/manual.png" alt="" class="nav-tab-icon"></div>
                                 マニュアル
+                                <?php if ( strpos($url[1],'admin') !==false && strpos($url[3],'manual') !==false ): echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'; endif ?>
                             </a>
                             
                             <a class="nav-link active" href="/admin/share/contactus?act=index&webid=<?=$webid?>" onclick="loading()">

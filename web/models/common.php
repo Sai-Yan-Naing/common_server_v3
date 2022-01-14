@@ -106,6 +106,52 @@ class Common{
 		return true;
 	}
 
+	function addMyUserAndDB1($db, $db_user, $db_pass)
+	{
+		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		{
+			return false;
+		}
+
+		try
+		{
+			$pdo = new PDO(MYDSN, MYROOT, MYROOT_PASS);
+			$db = trim($pdo->quote($db), "'\"");
+			$stmt = $pdo->prepare('SHOW DATABASES LIKE :db');
+			$stmt->execute(['db' => $db]);
+			if ($stmt->fetch(PDO::FETCH_ASSOC))
+			{
+				die("db already exist");
+			}
+
+			$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
+			if (!$stmt->execute(['db' => $db]))
+			{
+				return false;
+			}
+			$stmt = $pdo->prepare("CREATE USER :db_user@'%' IDENTIFIED BY :db_pass;");
+			$stmt->bindParam(":db_user", $db_user, PDO::PARAM_STR);
+			$stmt->bindParam(":db_pass", $db_pass, PDO::PARAM_STR);
+			if(!$stmt->execute())
+			{
+				$stmt = $pdo->prepare("DROP DATABASE `$db`;");
+				$stmt->execute();
+				return false;
+			}
+			$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
+			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
+			$stmt->execute();
+			return true;
+		}
+		catch (PDOException $e)
+		{
+			die();
+		}
+
+		$pdo = NULL;
+		return true;
+	}
+
 	function changeMysqlPassword($db_user, $db_pass)
 	{
 		$pdo = new PDO(DSN, ROOT, ROOT_PASS);
@@ -162,7 +208,7 @@ class Common{
 
 		try
 		{
-			$pdo_account = new PDO('mysql:host=localhost;dbname='.$db_name, $db_username, $pass);
+			$pdo_account = new PDO('mysql:host=localhost:3310;dbname='.$db_name, $db_username, $pass);
 			// echo $pdo_account->exec($sql);
 			if ($pdo_account->exec($sql) === 0)
 			{

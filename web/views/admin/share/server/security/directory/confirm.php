@@ -52,7 +52,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	$ftp_user=$_POST['ftp_user'];
 	$dir_path=$_POST['dir_path'];
     $delete_q = "DELETE FROM sub_ftp WHERE id= ? ";
-	$msg = "ディレクトリ 「".$dir_path."」 に　ユーザー 「".$ftp_user."」 を削除しました";
+	$msg = "ディレクトリ 「".$dir_path."」/ユーザー 「".$ftp_user."」 を削除しました";
 	if ( !$commons->doThis($delete_q,[$act_id]))
 	{
 		$error=$ftp_user." cannot delete.";

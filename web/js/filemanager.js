@@ -148,7 +148,7 @@ $(document).on("click", "#save_file", function () {
       action: "save_file",
     },
     success: function (data) {
-      alert("successfull saved");
+      alert("保存完了しました");
     },
   });
 });
@@ -176,7 +176,11 @@ $(document).on("submit", "#fm_fun", function () {
     }
   }
   if ($("input[type=text]").val() == "" || $("input[type=text]") == null) {
-    alert("Invalid Format");
+    if ($(this).attr("fun") == "file") {
+    alert("Please enter the file name");
+    }else{
+      alert("Please enter the directory name");
+    }
     return false;
   }
   if ($(this).attr("fun") == "file") {

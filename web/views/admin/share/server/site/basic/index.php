@@ -61,13 +61,13 @@ $error_pages = json_decode($weberrorpages);
                                             </div>
                                         </div>
                                             <!-- basic setting1 -->
-                                            <div id="accordion">
                                                 <?php
                                                     $first = 0;
-                                                    foreach(json_decode($webbasicsetting) as $main_key => $main_value){
+                                                    foreach(json_decode($webbasicsetting) as $main_key => $main_value):
                                                         $first++;
                                                         $key_replace = implode('_',explode('/',$main_key));
                                                 ?>
+                                                <div id="accordion<?=$first?>">
                                                 <div class="card">
                                                     <div class="card-header" id="head-<?=$key_replace?>" style="background-color: white;">
                                                         <h5 class="mb-0 d-flex">
@@ -78,14 +78,15 @@ $error_pages = json_decode($weberrorpages);
                                                             BASIC認証設定 <?= $first ?>
                                                             </button>
                                                             <button class="btn btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=delete_dir&act_id=<?=$main_key?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-trash text-danger"></i></button>
-                                                            <button class="ml-auto btn btn-link" data-toggle="collapse" data-target="#collapse-<?=$key_replace?>" aria-expanded="true" aria-controls="collapse-<?=$key_replace?>">
-                                                            <span class="">+</span>
-                                                            </button>
+                                                            <label class="ml-auto" data-toggle="collapse" data-target="#collapse-<?=$key_replace?>" aria-expanded="true" aria-controls="collapse-<?=$key_replace?>">
+                                                            <input type="checkbox" style="display: none;" class="plusminus">
+                                                            <span class="plusminus-btn"></span>
+                                                            </label>
                                                         </h5>
                                                     </div>
                                                         <!-- <?php $show =($first==1)?"show":"";?> -->
                                                         <!-- <div id="collapse-<?=$key_replace?>" class="collapse <?=$show?>"  -->
-                                                    <div id="collapse-<?=$key_replace?>" class="collapse show" aria-labelledby="head-<?=$key_replace?>" data-parent="#accordion">
+                                                    <div id="collapse-<?=$key_replace?>" class="collapse show" aria-labelledby="head-<?=$key_replace?>" data-parent="#accordion<?=$first?>">
                                                         <div class="card-body">
                                                             <div class="row justify-content-center">
                                                                 <label for="">対象ディレクトリ:  &nbsp;&nbsp;<?= $main_value->url ?></label>
@@ -120,8 +121,8 @@ $error_pages = json_decode($weberrorpages);
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php } ?>
-                                            </div>
+                                                </div>
+                                                <?php endforeach; ?>
                                             <!-- end basic -->
                                     </div>
                                 </div>
