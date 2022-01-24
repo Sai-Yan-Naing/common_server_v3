@@ -119,6 +119,20 @@ function allValidate() {
       "特殊文字は使用できません"
     );
 
+    
+    $.validator.addMethod(
+      "allowspecialchar3",
+      function (value) {
+        // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
+        
+        var regex = /^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{6,127}$/
+        if (regex.test(value)) {
+          return true;
+        }
+      },
+      "特殊文字は使用できません"
+    );
+
     // allow specail char (-_!#^~)
     $.validator.addMethod(
       "allowspecialchar",
@@ -307,8 +321,8 @@ function allValidate() {
           nowhitespace: true,
           // nospecialchar: true,
           allowspecialchar: true,
-          minlength: 6,
-          maxlength: 127,
+          minlength: 1,
+          maxlength: 20,
           alreadyexist: true,
           onkeyup: false,
         },
@@ -316,8 +330,9 @@ function allValidate() {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          minlength: 8,
-          maxlength: 70,
+          minlength: 6,
+          maxlength: 127,
+          allowspecialchar3: true,
         },
       },
       // Specify validation error messages
@@ -354,6 +369,7 @@ function allValidate() {
       rules: {
         name: {
           required: true,
+          // allowspecialchar3: true,
         },
         email: {
           required: true,
@@ -546,10 +562,11 @@ function allValidate() {
         },
         ftp_pass: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
           minlength: 6,
           maxlength: 127,
+          allowspecialchar3: true,
         },
       },
       messages: {
@@ -731,10 +748,11 @@ function allValidate() {
         },
         ftp_pass: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
           minlength: 6,
           maxlength: 127,
+          allowspecialchar3: true,
         },
         "permission[]": {
           required: true,
@@ -915,10 +933,12 @@ function allValidate() {
         },
         bass_pass: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
           minlength: 6,
           maxlength: 127,
+          allowspecialchar3:true,
+
         },
       },
 
