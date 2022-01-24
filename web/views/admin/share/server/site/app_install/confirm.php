@@ -8,6 +8,7 @@ $user_name = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 $db_name = $_POST["db_name"];
+// $db_user = 'ec313_dbuser';
 $db_user = $_POST["db_user"];
 $db_pass = $_POST["db_pass"];
 
@@ -78,6 +79,7 @@ if($app_name ==="WORDPRESS")
     }  
     $msg = "インストールが完了しました";
 }else{
+    // echo 'hello';
     if ( ! $commons->addMyUserAndDB1($db_name, $db_user, $db_pass))
     {
         $error = "Something error";
@@ -108,10 +110,15 @@ if($app_name ==="WORDPRESS")
     {
         $dst = ROOT_PATH.$webuser.'/web/'.$root_url;
     }
-    if ($app_version=="eccube-3.0.18")
+    if ($app_version=="eccube3")
     {
-        copy_paste($src, $dst);
-        die('ok');
+        // $clone = 'git clone https://github.com/Sai-Yan-Naing/eccube3.git '.$dst;
+        // shell_exec($clone);
+        // copy_paste($src, $dst);
+        // echo $dst;
+        $ECCUBE_AUTH_MAGIC = 'u5pCrNa6eNpJU8lDKX7WvyeO8P0out2Y';
+        $salt = 'Uo3KLGFImXPsOYFrQ2TjwRj80Kv9ciYc';
+        $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
         $path_to_file = $dst.'/app/config/eccube/config.yml';
         $file_contents = file_get_contents($path_to_file);
         $file_contents = str_replace("test_strv_name",$site_name,$file_contents);
@@ -128,6 +135,7 @@ if($app_name ==="WORDPRESS")
         $file_contents = file_get_contents($path_to_file);
         $file_contents = str_replace("test_strv_dir",$root_url,$file_contents);
         $file_contents = str_replace("test_strv_rootpath",$dst ,$file_contents);
+        $file_contents = str_replace("dir_path",$root_url ,$file_contents);
         file_put_contents($path_to_file,$file_contents);
         // // die('ok');
         
@@ -137,25 +145,31 @@ if($app_name ==="WORDPRESS")
         $file_contents = str_replace("test_strv_email@gmail.com",$email,$file_contents);
         $file_contents = str_replace("test_strv_name",$site_name,$file_contents);
         $file_contents = str_replace("test_strv_id",$user_name,$file_contents);
+        $file_contents = str_replace("test_strv_pass",$user_pass,$file_contents);
         file_put_contents($sql_file,$file_contents);
     }else{
-        echo $dst;
-        $clone = 'git clone https://github.com/Sai-Yan-Naing/eccube4.1.git '.$dst;
-        shell_exec($clone);
+        // echo $dst;
+        // $clone = 'git clone https://github.com/Sai-Yan-Naing/eccube4.1.git '.$dst;
+        // shell_exec($clone);
         $env = $dst.'/.env';
+        $ECCUBE_AUTH_MAGIC = 'Mt7yAMxp69mUX3XHKkn1IXPjWMR8XUjn';
+        $salt = 'CDJnBUsIOymOfp7pZqPGgJ8waBHkvkmN';
+        $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
+
         $file_contents = file_get_contents($env);
-        $file_contents = str_replace("e4_dbuser",$db_user,$file_contents);
-        $file_contents = str_replace("e4_dbpass",$db_pass,$file_contents);
-        $file_contents = str_replace("e4_dbname",$db_name,$file_contents);
-        $file_contents = str_replace("e4_dir",$root_url,$file_contents);
+        $file_contents = str_replace("e4replace_dbuser",$db_user,$file_contents);
+        $file_contents = str_replace("e4replace_dbpass",$db_pass,$file_contents);
+        $file_contents = str_replace("e4replace_dbname",$db_name,$file_contents);
+        $file_contents = str_replace("e4replace_dir",$root_url,$file_contents);
         file_put_contents($env,$file_contents);
 
         $sql_file = $dst.'/config.sql';
         $file_contents = file_get_contents($sql_file);
-        $file_contents = str_replace("e4_dbname",$db_name,$file_contents);
-        $file_contents = str_replace("e4_email@gmail.com",$email,$file_contents);
-        $file_contents = str_replace("e4_sitename",$site_name,$file_contents);
-        $file_contents = str_replace("e4_id",$user_name,$file_contents);
+        $file_contents = str_replace("e4replace_dbname",$db_name,$file_contents);
+        $file_contents = str_replace("e4replace_email@gmail.com",$email,$file_contents);
+        $file_contents = str_replace("e4replace_sitename",$site_name,$file_contents);
+        $file_contents = str_replace("e4replace_id",$user_name,$file_contents);
+        $file_contents = str_replace("e4replace_pass",$user_pass,$file_contents);
         file_put_contents($sql_file,$file_contents);
     }
     
@@ -166,5 +180,6 @@ if($app_name ==="WORDPRESS")
         echo "import fail";
     }  
 }
+// die('no');
 flash($msgsession,$msg);
 header("location: /admin/share/server?setting=site&tab=app_install&act=index&webid=$webid");

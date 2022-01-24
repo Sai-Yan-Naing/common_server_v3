@@ -12,7 +12,8 @@ require_once('views/admin/admin_shareconfig.php');
   <form action="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="fm_fun" style="position:relative" fun="file">
     <input type="hidden" name="action" value="new_file">
     <label>ファイル名：</label>
-    <input type="text" class="form-control" name="new_file" file="file">
+    <input type="text" class="form-control" name="new_file" file="file" id="new_file">
+    <label class="error" style="display: none;" id="new_file_error">ファイル名を入力してください</label>
   </form>
 </div>
 <!-- Modal footer -->

@@ -35,17 +35,11 @@ require_once('views/admin/admin_shareconfig.php');
             <div class="col-sm-6">
                 <input type="text" class="form-control" placeholder="メールアドレス" column="email" id="email" name="email" column="email" table="add_email" remark="db">
             </div>
-		    <div class="col-sm-2">
-                <!-- <label  class="form-label"  for="email"><span id="change_mail_text"></span>@<?= $webdomain?></label> -->
-            </div>
     	</div>
-        <span class="row mr-2 mb-1">
-            <label for="email" id="email_error" class="error col-sm-6"></label>
-        </span>
         <div class="form-group row mr-2 ">
             <div class="col-sm-6">
             <label for="mail_pass_word"  class="form-label">パスワード</label>
-                <input type="password" class="form-control" name="mail_pass_word" id="mail_pass_word" placeholder="8～70文字、半角英数記号の組み合わせ">
+                <input type="password" class="form-control" name="mail_pass_word" id="mail_pass_word" placeholder="8～30文字、半角英数記号の組み合わせ">
             </div>
             <div class="col-sm-2">
 

@@ -177,9 +177,13 @@ $(document).on("submit", "#fm_fun", function () {
   }
   if ($("input[type=text]").val() == "" || $("input[type=text]") == null) {
     if ($(this).attr("fun") == "file") {
-    alert("Please enter the file name");
+    // alert("Please enter the file name");
+      $("#new_file_error").show();
+      // $("#new_file_error").html('ファイル名を入力してください');
     }else{
-      alert("Please enter the directory name");
+      // alert("Please enter the directory name");
+      $("#new_dir_error").show();
+      // $("#new_dir_error").html('ディレクトリ名を入力してください');
     }
     return false;
   }
@@ -218,3 +222,14 @@ $(document).on("submit", "#fm_fun", function () {
   });
   return false;
 });
+
+$(document).on('keyup','#new_dir,#new_file',function(){
+  if($(this).val() != "" && $(this) != null)
+  {
+    $(this).next().hide();
+    console.log('hide')
+  }else{
+    $(this).next().show();
+    console.log('show')
+  }
+})

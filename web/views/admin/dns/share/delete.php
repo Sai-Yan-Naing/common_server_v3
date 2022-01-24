@@ -17,7 +17,7 @@ $act_id = $_GET['act_id'];
 	<form action="/admin/dns?tab=share&act=confirm&webid=<?= htmlspecialchars($getRow['id'], ENT_QUOTES); ?>" method="post" id="delete_dns">
 		<input type="hidden" name="action" value="delete">
 		<input type="hidden" name="act_id" value="<?= htmlspecialchars($act_id, ENT_QUOTES); ?>">
-		<b style="color: red"><?= htmlspecialchars($dns->$act_id->sub, ENT_QUOTES); ?>.<?= htmlspecialchars($getRow['domain'], ENT_QUOTES); ?> </b>’を削除しますか？
+		「<b style="color: red"><?= htmlspecialchars($dns->$act_id->sub, ENT_QUOTES); ?>.<?= htmlspecialchars($getRow['domain'], ENT_QUOTES); ?></b>」を削除しますか？
 	</form>
 </div>
 <!-- Modal footer -->

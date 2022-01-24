@@ -62,7 +62,7 @@
             <div class="col-sm-6">
                 <label for="username" class="col-form-label">ユーザー名</label>
                 <div class="">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="1～255文字、半角英数小文字と_-.@">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="4～50文字、半角英数小文字と_-.@">
                 </div>
             </div>
             <div class="col-sm-6">
@@ -76,7 +76,7 @@
             <div class="col-sm-6">
                 <label for="password" class="col-form-label">パスワード</label>
                 <div class="">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="8～32文字、半角英数記号の組み合わせ">
                 </div>
             </div>
         </div>

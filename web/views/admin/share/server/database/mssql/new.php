@@ -31,19 +31,19 @@ require_once('views/admin/admin_shareconfig.php');
         <div class="form-group row">
             <label for="db_name" class="col-sm-2 col-form-label">データベース名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="db_name" name="db_name" placeholder="8～70文字、半角英数記号の組み合わせ"  column="db_user" table="db_account_for_mssql" remark="msdbname">
+              <input type="text" class="form-control" id="db_name" name="db_name" placeholder="1～64文字、半角英数字記号"  column="db_user" table="db_account_for_mssql" remark="msdbname">
             </div>
         </div>
         <div class="form-group row">
             <label for="db_user" class="col-sm-2 col-form-label">ユーザー名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="db_user" name="db_user" placeholder="8～70文字、半角英数記号の組み合わせ"  column="db_user" table="db_account_for_mssql" remark="msdbuser">
+              <input type="text" class="form-control" id="db_user" name="db_user" placeholder="1～32文字、半角英数字記号"  column="db_user" table="db_account_for_mssql" remark="msdbuser">
             </div>
         </div>
         <div class="form-group row">
             <label for="db_pass" class="col-sm-2 col-form-label">パスワード</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～70文字、半角英数記号の組み合わせ">
+              <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～64文字、半角英数字記号">
             </div>
         </div>
     </form>

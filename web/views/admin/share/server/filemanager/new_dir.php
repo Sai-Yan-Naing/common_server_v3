@@ -12,7 +12,8 @@ require_once('views/admin/admin_shareconfig.php');
   <form action="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="fm_fun" style="position:relative">
     <input type="hidden" name="action" value="new_dir">
     <label>ディレクトリ名：</label>
-    <input type="text" class="form-control" name="new_dir">
+    <input type="text" class="form-control" name="new_dir" id="new_dir">
+    <label class="error" style="display: none;" id="new_dir_error">ディレクトリ名を入力してください</label>
   </form>
 </div>
 <!-- Modal footer -->

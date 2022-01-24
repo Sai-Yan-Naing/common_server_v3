@@ -78,12 +78,53 @@ function allValidate() {
       "スペースは使用できません"
     );
 
-    // allow underscroll ( _ ) and dash (-)
+    // allow underscroll (@), ( _ ) and dash (-)
     // var regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     $.validator.addMethod(
       "nospecialchar",
       function (value) {
-        var regex = /[!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?]+/;
+        var regex = /[!#$%^&*()+\=\[\]{};':"\\|,.<>\/?]+/;
+        if (!regex.test(value)) {
+          return true;
+        }
+      },
+      "特殊文字は使用できません"
+    );
+
+    // allow !#$%&'()*+-./:;<=>?@[]^_`{|}~
+    $.validator.addMethod(
+      "allowspecialchar1",
+      function (value) {
+        // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
+        
+        var regex = /^[! A-Za-z0-9_@./#&+-]*$/;
+        if (regex.test(value)) {
+          return true;
+        }
+      },
+      "特殊文字は使用できません"
+    );
+
+    // allow !#$%&'()*+-./:;<=>?@[]^_`{|}~
+    $.validator.addMethod(
+      "allowspecialchar2",
+      function (value) {
+        // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
+        
+        var regex = /^[ A-Za-z0-9_./#&+-]*$/;
+        if (regex.test(value)) {
+          return true;
+        }
+      },
+      "特殊文字は使用できません"
+    );
+
+    // allow specail char (-_!#^~)
+    $.validator.addMethod(
+      "allowspecialchar",
+      function (value) {
+        var regex = /[@$%&*()+\=\[\]{};':"\\|,.<>\/?]+/;
+        // var regex = /[-_!#^~]+/;
         if (!regex.test(value)) {
           return true;
         }
@@ -264,9 +305,10 @@ function allValidate() {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          nospecialchar: true,
-          minlength: 1,
-          maxlength: 255,
+          // nospecialchar: true,
+          allowspecialchar: true,
+          minlength: 6,
+          maxlength: 127,
           alreadyexist: true,
           onkeyup: false,
         },
@@ -290,13 +332,13 @@ function allValidate() {
         },
         ftp_user: {
           required: "FTPユーザー名を入力してください",
-          minlength: "1～255文字、半角英数小文字と_-.@",
-          maxlength: "1～255文字、半角英数小文字と_-.@",
+          minlength: "ユーザー名は20文字以内にしてください",
+          maxlength: "ユーザー名は20文字以内にしてください",
         },
         password: {
           required: "パスワードを入力してください",
-          minlength: "8～70文字、半角英数字記号",
-          maxlength: "8～70文字、半角英数字記号",
+          minlength: "6～127文字、半角英数字記号",
+          maxlength: "6～127文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {
@@ -388,26 +430,27 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
-          minlength: 1,
-          maxlength: 255,
+          minlength: 4,
+          maxlength: 50,
         },
         email: {
           required: true,
         },
         password: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
+          allowspecialchar1: true,
           nowhitespace: true,
           minlength: 8,
-          maxlength: 70,
+          maxlength: 32,
         },
         db_name: {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
-          minlength: 5,
-          maxlength: 70,
+          minlength: 1,
+          maxlength: 60,
           alreadyexist: true,
           onkeyup: false,
         },
@@ -416,8 +459,8 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
-          minlength: 5,
-          maxlength: 70,
+          minlength: 1,
+          maxlength: 32,
           alreadyexist: true,
           onkeyup: false,
         },
@@ -426,7 +469,7 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           minlength: 8,
-          maxlength: 70,
+          maxlength: 64,
         },
       },
       // Specify validation error messages
@@ -440,8 +483,8 @@ function allValidate() {
         },
         username: {
           required: "ユーザー名を入力してください",
-          minlength: "1～255文字、半角英数小文字と_-.@",
-          maxlength: "ユーザー名は255文字以内にしてください",
+          minlength: "4～50文字、半角英数小文字と_-.@",
+          maxlength: "4～50文字、半角英数小文字と_-.@",
         },
         email: {
           required: "メールアドレスを入力してください",
@@ -449,23 +492,23 @@ function allValidate() {
         },
         password: {
           required: "パスワードを入力してください",
-          minlength: "8～70文字、半角英数字記号",
-          maxlength: "8～70文字、半角英数字記号",
+          minlength: "8～32文字、半角英数字記号",
+          maxlength: "8～32文字、半角英数字記号",
         },
         db_name: {
           required: "データベース名を入力してください",
-          minlength: "5～70文字、半角英数字記号",
-          maxlength: "5～70文字、半角英数字記号",
+          minlength: "1～64文字、半角英数字記号",
+          maxlength: "1～64文字、半角英数字記号",
         },
         db_user: {
           required: "ユーザー名を入力してください",
-          minlength: "5～70文字、半角英数字記号",
-          maxlength: "5～70文字、半角英数字記号",
+          minlength: "1～32文字、半角英数字記号",
+          maxlength: "1～32文字、半角英数字記号",
         },
         db_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～70文字、半角英数字記号",
-          maxlength: "8～70文字、半角英数字記号",
+          minlength: "8～64文字、半角英数字記号",
+          maxlength: "8～64文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {
@@ -489,15 +532,15 @@ function allValidate() {
         dir_path: {
           required: true,
           nowhitespace: true,
-          nospecialchar: true,
+          allowspecialchar: true,
         },
         ftp_user: {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          nospecialchar: true,
+          allowspecialchar: true,
           minlength: 1,
-          maxlength: 14,
+          maxlength: 20,
           alreadyexist: true,
           onkeyup: false,
         },
@@ -505,8 +548,8 @@ function allValidate() {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          minlength: 8,
-          maxlength: 70,
+          minlength: 6,
+          maxlength: 127,
         },
       },
       messages: {
@@ -515,13 +558,13 @@ function allValidate() {
         },
         ftp_user: {
           required: "ユーザー名を入力してください",
-          minlength: "1-14文字、半角英数字",
-          maxlength: "1-14文字、半角英数字",
+          minlength: "ユーザー名は20文字以内にしてください",
+          maxlength: "ユーザー名は20文字以内にしてください",
         },
         ftp_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～70文字、半角英数字記号",
-          maxlength: "8～70文字、半角英数字記号",
+          minlength: "6～127文字、半角英数字記号",
+          maxlength: "6～127文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {
@@ -613,8 +656,8 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
-          minlength: 4,
-          maxlength: 20,
+          minlength: 1,
+          maxlength: 60,
           alreadyexist: true,
           onkeyup: false,
         },
@@ -623,8 +666,8 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           nospecialchar: true,
-          minlength: 4,
-          maxlength: 20,
+          minlength: 1,
+          maxlength: 32,
           alreadyexist: true,
           onkeyup: false,
         },
@@ -633,25 +676,25 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           minlength: 8,
-          maxlength: 70,
+          maxlength: 64,
         },
       },
       // Specify validation error messages
       messages: {
         db_name: {
           required: "データベース名を入力してください",
-          minlength: "4～20文字、半角英数字記号",
-          maxlength: "4～20文字、半角英数字記号",
+          minlength: "1～60文字、半角英数字記号",
+          maxlength: "1～60文字、半角英数字記号",
         },
         db_user: {
           required: "ユーザー名を入力してください",
-          minlength: "4～20文字、半角英数字記号",
-          maxlength: "4～20文字、半角英数字記号",
+          minlength: "1～32文字、半角英数字記号",
+          maxlength: "1～32文字、半角英数字記号",
         },
         db_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～70文字、半角英数字記号",
-          maxlength: "8～70文字、半角英数字記号",
+          minlength: "8～64文字、半角英数字記号",
+          maxlength: "8～64文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {
@@ -679,9 +722,10 @@ function allValidate() {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          nospecialchar: true,
+          // nospecialchar: true,
+          allowspecialchar:true,
           minlength: 1,
-          maxlength: 14,
+          maxlength: 20,
           alreadyexist: true,
           onkeyup: false,
         },
@@ -689,8 +733,8 @@ function allValidate() {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          minlength: 8,
-          maxlength: 70,
+          minlength: 6,
+          maxlength: 127,
         },
         "permission[]": {
           required: true,
@@ -706,13 +750,13 @@ function allValidate() {
       messages: {
         ftp_user: {
           required: "ユーザー名を入力してください",
-          minlength: "1-14文字、半角英数字",
-          maxlength: "1-14文字、半角英数字",
+          minlength: "ユーザー名は20文字以内にしてください",
+          maxlength: "ユーザー名は20文字以内にしてください",
         },
         ftp_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～70文字、半角英数字記号",
-          maxlength: "8～70文字、半角英数字記号",
+          minlength: "6～127文字、半角英数字記号",
+          maxlength: "6～127文字、半角英数字記号",
         },
         "permission[]": {
           required: "いずれかの権限を選択してください。",
@@ -728,20 +772,34 @@ function allValidate() {
 
     // for add email_create
     $("form[id='email_create']").validate({
+      onkeyup: function (element) {
+        $("#" + element.id + "-error").remove();
+        var element_id = $(element).attr("id");
+        if (this.settings.rules[element_id].onkeyup !== false) {
+          $.validator.defaults.onkeyup.apply(this, arguments);
+        }
+      },
+      focusout: function (element) {
+        $("#" + $(element).attr("id") + "-error").remove();
+      },
+
       rules: {
         email: {
           required: true,
-          numberalphabet: true,
+          allowspecialchar2: true,
           nowhitespace: true,
-          nospecialchar: true,
+          // nospecialchar: true,
+          minlength: 1,
+          maxlength: 30,
           alreadyexist: true,
+          onkeyup: false,
         },
         mail_pass_word: {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
           minlength: 8,
-          maxlength: 70,
+          maxlength: 30,
         },
       },
 
@@ -754,12 +812,15 @@ function allValidate() {
       // },
       messages: {
         email: {
+          onlynumberalphabet: '特殊文字は使用できません',
           required: "メールアドレスを入力してください",
+          minlength: "1～30文字、半角英数字記号",
+          maxlength: "1～30文字、半角英数字記号",
         },
         mail_pass_word: {
           required: "パスワードを入力してください",
-          minlength: "8～70文字、半角英数字記号",
-          maxlength: "8～70文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号",
+          maxlength: "8～30文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {
@@ -848,15 +909,16 @@ function allValidate() {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          nospecialchar: true,
-          maxlength: 14,
+          allowspecialchar: true,
+          maxlength: 20,
+          minlength: 1
         },
         bass_pass: {
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          minlength: 8,
-          maxlength: 70,
+          minlength: 6,
+          maxlength: 127,
         },
       },
 
@@ -864,12 +926,13 @@ function allValidate() {
       messages: {
         bass_user: {
           required: "ユーザー名を入力してください",
-          maxlength: "ユーザー名は14文字以内にしてください",
+          maxlength: "ユーザー名は20文字以内にしてください",
+          minlength: "ユーザー名は20文字以内にしてください",
         },
         bass_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～70文字、半角英数記号の組み合わせ",
-          maxlength: "8～70文字、半角英数記号の組み合わせ",
+          minlength: "6～127文字、半角英数記号の組み合わせ",
+          maxlength: "6～127文字、半角英数記号の組み合わせ",
         },
       },
       submitHandler: function (form) {
