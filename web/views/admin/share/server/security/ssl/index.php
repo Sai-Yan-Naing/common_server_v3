@@ -49,12 +49,12 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="form-group row">
+                                            <!-- <div class="form-group row">
                                                 <label for="department" class="col-sm-2 col-form-label">部署名（ＯＵ）</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="department" name="department" placeholder="例：System Development Section">
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             
                                             <div class="form-group row">
                                                 <span class="text-danger notice-msg col-sm-10">入力項目については半角英数字にてご入力ください。全角では入力できません。</span>
