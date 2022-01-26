@@ -69,7 +69,7 @@ class Common{
 		try
 		{
 			$dsn2 = 'mysql:host=localhost:3306';
-			$pdo = new PDO($dsn2, ROOT, ROOT_PASS);
+			$pdo = new PDO(MYDSN, MYROOT, MYROOT_PASS);
 			$db = trim($pdo->quote($db), "'\"");
 			$stmt = $pdo->prepare('SHOW DATABASES LIKE :db');
 			$stmt->execute(['db' => $db]);
@@ -99,7 +99,7 @@ class Common{
 		}
 		catch (PDOException $e)
 		{
-			die();
+			die($e);
 		}
 
 		$pdo = NULL;
@@ -154,7 +154,7 @@ class Common{
 
 	function changeMysqlPassword($db_user, $db_pass)
 	{
-		$pdo = new PDO(DSN, ROOT, ROOT_PASS);
+		$pdo = new PDO(MYDSN, MYROOT, MYROOT_PASS);
 		$stmt = $pdo->prepare("ALTER USER :db_user@'%' IDENTIFIED BY :db_pass;");
 		if ( ! $stmt->execute(['db_user' => $db_user, 'db_pass' => $db_pass]))
 		{
@@ -177,7 +177,7 @@ class Common{
 			return false;
 		}
 
-		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+		$pdo_account = new PDO(MYDSN, MYROOT, MYROOT_PASS);
 		$stmt = $pdo_account->prepare("DROP USER :dbuser@'%'");
 		if ( ! $stmt->execute(['dbuser' => $dbuser]))
 		{

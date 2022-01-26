@@ -45,7 +45,7 @@ $getAllRow = $commons->getAllRow($query, [$webdomain]);
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mssql&act=edit&act_id=<?= $db['id'] ?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mssql&act=delete&act_id=<?= $db['id'] ?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
-                                                    <td class="border-dark"><?=IP."/".MSSQLHOST?></td>
+                                                    <td class="border-dark"><?=IP?></td>
                                                 </tr>
                                                 <?php endforeach; ?>
                                         </table>

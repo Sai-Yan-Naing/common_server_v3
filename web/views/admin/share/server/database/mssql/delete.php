@@ -19,7 +19,7 @@ $getRow = $commons->getRow($query);
     <input type="hidden" name="db_user" value="<?= $getRow['db_user'] ?>">
     <input type="hidden" name="db_pass" value="<?= $getRow['db_pass'] ?>">
     <input type="hidden" name="db_name" value="<?= $getRow['db_name'] ?>">
-    <b style="color: red"><?= $getRow['db_user'] ?> </b>を削除しますか？
+    <b style="color: red"><?= $getRow['db_name'] ?> </b>を削除しますか？
       
   </form>
 </div>

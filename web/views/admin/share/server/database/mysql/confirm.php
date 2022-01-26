@@ -14,7 +14,6 @@ $msg = "jp message";
 		$db_name = $_POST["db_name"];
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の追加が完了しました ";
-		
 		if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
         {
             echo $error = "Something error";
@@ -58,6 +57,3 @@ $msg = "jp message";
 	}
 	flash($msgsession,$msg);
 	header("Location: /admin/share/server?setting=database&tab=mysql&act=index&webid=$webid$pagy");
-	die("");
-	
-?>
