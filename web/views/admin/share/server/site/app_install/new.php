@@ -62,7 +62,7 @@
             <div class="col-sm-6">
                 <label for="username" class="col-form-label">ユーザー名</label>
                 <div class="">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="4～50文字、半角英数小文字と_-.@">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="4～50文字、半角英数字と_-.@">
                 </div>
             </div>
             <div class="col-sm-6">

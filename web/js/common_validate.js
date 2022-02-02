@@ -83,7 +83,7 @@ function allValidate() {
     $.validator.addMethod(
       "nospecialchar",
       function (value) {
-        var regex = /[!#$%^&*()+\=\[\]{};':"\\|,.<>\/?]+/;
+        var regex = /[!#$%^&*()+\=\[\]{};':"\\|,<>\/?]+/;
         if (!regex.test(value)) {
           return true;
         }
@@ -130,7 +130,7 @@ function allValidate() {
           return true;
         }
       },
-      "特殊文字は使用できません"
+      "英大文字・英小文字・数字・記号のうち3種類を含む必要があります"
     );
 
     // allow specail char (-_!#^~)
@@ -499,8 +499,8 @@ function allValidate() {
         },
         username: {
           required: "ユーザー名を入力してください",
-          minlength: "4～50文字、半角英数小文字と_-.@",
-          maxlength: "4～50文字、半角英数小文字と_-.@",
+          minlength: "4～50文字、半角英数字と_-.@",
+          maxlength: "4～50文字、半角英数字と_-.@",
         },
         email: {
           required: "メールアドレスを入力してください",

@@ -11773,3 +11773,30 @@ a{
   font-size: 22px;
   font-weight: bold;
 }
+
+ul.manual li{
+  list-style: none;
+  height: 30px;
+}
+
+/* ul.manual li::before{
+  content: "\00BB";
+} */
+.cmanual
+{
+  scroll-padding-top:300px;
+
+}
+.cmanual h1{
+  font-size: 2em;
+}
+.cmanual h2{
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+.cmanual p{
+  color: black;
+  font-size: unset;
+}

@@ -57,7 +57,7 @@
                                             </div> -->
                                             
                                             <div class="form-group row">
-                                                <span class="text-danger notice-msg col-sm-10">入力項目については半角英数字にてご入力ください。全角では入力できません。</span>
+                                                <span class="text-danger notice-msg col-sm-10">半角にてご入力ください。全角では入力できません。</span>
                                             </div>
                                             
                                             <div class="form-group row">

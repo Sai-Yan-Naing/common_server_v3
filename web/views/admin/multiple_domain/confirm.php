@@ -41,7 +41,7 @@ if ( $action === 'new' )
     $origin= $commons->getRow($query_origin);
     $origin_user= $origin['user'];
     $ip=IP;
-	echo shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/addsite.ps1" '.$webdomain.' '.$user.' '.$password.' '.$ip. ' '.$origin_user);
+	shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/addsite.ps1" '.$webdomain.' '.$user.' '.$password.' '.$ip. ' '.$origin_user);
     $commons->mail_server($webdomain,'winserverroot','welcome123!','new','noexist');
 } elseif ( $action === 'onoff')
 {
