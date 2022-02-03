@@ -18,7 +18,7 @@ $db_pass = $_POST["db_pass"];
         }
 		$hostname = SQLSERVER_2016_HOST_NAME;
 		$hostip = SQLSERVER_2016_HOST_IP;
-        $insert_q = "INSERT INTO db_account_for_mssql(`domain`, `host_name`, `host_ip`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $insert_q = "INSERT INTO db_account_for_mssql(domain, host_name, host_ip, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		if ( ! $commons->doThis($insert_q,[$webdomain, $hostname, $hostip, $db_name, $db_user, 1, $db_pass]))
 		{

@@ -29,7 +29,8 @@
                             require_once('views/pagination/start.php');
                             
 							$webid = isset($_GET['webid']) ? $_GET['webid'] : null;
-							$query = "SELECT * FROM $table WHERE `customer_id` = ? && `removal` is null LIMIT $start, $limit";
+							$query = "SELECT * FROM $table WHERE customer_id = ? AND removal is null ORDER BY id
+                            OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
 							$commons = new Common;
 							$getAllRow = $commons->getAllRow($query,[$webadminID]);
 							if ($webid == null):
@@ -50,8 +51,8 @@
 								<div></div>
 								<div class='ml-auto'>
 									<?php 
-										$paginatecount = "SELECT COUNT(*) FROM $table WHERE `customer_id` = ? && `removal` is null";
-										// SELECT COUNT(*) FROM web_account WHERE `customer_id` = 'D000123' && `removal` is null
+										$paginatecount = "SELECT COUNT(*) FROM $table WHERE customer_id = ? AND removal is null";
+										// SELECT COUNT(*) FROM web_account WHERE customer_id = 'D000123' AND removal is null
 										$params = [$webadminID];
 										$page_url = "/admin/dns?tab=share&act=index&webid=$param&page=";
 										require_once('views/pagination/end.php')
@@ -64,10 +65,10 @@
 						$webid = isset($_GET['webid']) ? $_GET['webid'] : null;
 						if ($webid == null):
 							$param = $webrootid;
-							$query = 'SELECT * FROM web_account WHERE `customer_id` = :customer_id && `removal` is null && `origin`=:param';
+							$query = 'SELECT * FROM web_account WHERE customer_id = :customer_id AND removal is null AND origin=:param';
 						else:
 							$param = $webid;
-							$query = 'SELECT * FROM web_account WHERE `customer_id` = :customer_id && `removal` is null && `id`=:param';
+							$query = 'SELECT * FROM web_account WHERE customer_id = :customer_id AND removal is null AND id=:param';
 						endif;
 
 						$getDns = $commons->getRow($query, ['customer_id' => $webadminID,'param' => $param]);

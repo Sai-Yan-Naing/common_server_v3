@@ -5,7 +5,9 @@ class Common{
 
 	function __construct()
 	{
-		$this->pdo = new PDO(DSN, ROOT, ROOT_PASS);
+		// $this->pdo = new PDO(DSN, ROOT, ROOT_PASS);
+			$this->pdo = new PDO(DBDSN1, DBROOT1, DBROOT_PASS1);
+			$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	}
 
 	function getCount($query, $params = [])
@@ -39,14 +41,15 @@ class Common{
 	function doThis($query, $params = [])
 	{
 		// echo $query;
-		// print_r($paams);
+		// echo "<pre>";
+		// print_r($params);
 		// die();
 		try
 		{
 			$stmt1 = $this->pdo->prepare($query);
 			if( ! $stmt1->execute($params))
 			{
-				die('error');
+				die('error2');
 				return false;
 			}
 
@@ -78,7 +81,7 @@ class Common{
 				die("db already exist");
 			}
 
-			$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
+			$stmt = $pdo->prepare("CREATE DATABASE $db;");
 			if (!$stmt->execute(['db' => $db]))
 			{
 				return false;
@@ -88,11 +91,11 @@ class Common{
 			$stmt->bindParam(":db_pass", $db_pass, PDO::PARAM_STR);
 			if(!$stmt->execute())
 			{
-				$stmt = $pdo->prepare("DROP DATABASE `$db`;");
+				$stmt = $pdo->prepare("DROP DATABASE $db;");
 				$stmt->execute();
 				return false;
 			}
-			$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
+			$stmt = $pdo->prepare("GRANT ALL ON $db.* TO :db_user@'%';");
 			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
 			$stmt->execute();
 			return true;
@@ -124,7 +127,7 @@ class Common{
 				die("db already exist");
 			}
 
-			$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
+			$stmt = $pdo->prepare("CREATE DATABASE $db;");
 			if (!$stmt->execute(['db' => $db]))
 			{
 				return false;
@@ -134,11 +137,11 @@ class Common{
 			$stmt->bindParam(":db_pass", $db_pass, PDO::PARAM_STR);
 			if(!$stmt->execute())
 			{
-				$stmt = $pdo->prepare("DROP DATABASE `$db`;");
+				$stmt = $pdo->prepare("DROP DATABASE $db;");
 				$stmt->execute();
 				return false;
 			}
-			$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
+			$stmt = $pdo->prepare("GRANT ALL ON $db.* TO :db_user@'%';");
 			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
 			$stmt->execute();
 			return true;
@@ -161,7 +164,7 @@ class Common{
 			return false;
 		}
 		
-		$stmt1 = $pdo->prepare('UPDATE db_account SET `db_pass` = ? WHERE `db_user` = ?');
+		$stmt1 = $pdo->prepare('UPDATE db_account SET db_pass = ? WHERE db_user = ?');
 		if ( ! $stmt1->execute([$db_pass, $db_user]))
 		{
 			return false;
@@ -184,13 +187,13 @@ class Common{
 			return false;
 		}
 
-		$stmt1 = $pdo_account->prepare("DROP DATABASE `$db`");
+		$stmt1 = $pdo_account->prepare("DROP DATABASE $db");
 		if ( ! $stmt1->execute())
 		{
 			return false;
 		}
 
-		$dstmt = $pdo_account->prepare('DELETE FROM `db_account` WHERE id = ?');
+		$dstmt = $pdo_account->prepare('DELETE FROM db_account WHERE id = ?');
 		if ( ! $dstmt->execute([$dbid]))
 		{
 			return false;
@@ -340,7 +343,7 @@ class Common{
 			$stmt = $mspdo->prepare("DROP LOGIN $dbuser");
 			if(!$stmt->execute()) return false;
 			
-			$dstmt = $pdo_account->prepare("DELETE FROM `db_account_for_mssql` WHERE id = ?");
+			$dstmt = $pdo_account->prepare("DELETE FROM db_account_for_mssql WHERE id = ?");
 			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
 			if(!$dstmt->execute(array($dbid))) return false;
 			return true;
@@ -351,7 +354,7 @@ class Common{
 				// $dsn2 = 'mysql:host=localhost:3307';
 				$pdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
 				$db = trim($pdo->quote($db), "'\"");
-				$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
+				$stmt = $pdo->prepare("CREATE DATABASE $db;");
 				if(!$stmt->execute())
 				{
 					return false;
@@ -361,11 +364,11 @@ class Common{
 				$stmt->bindParam(":db_pass", $db_pass, PDO::PARAM_STR);
 				if(!$stmt->execute())
 				{
-					$stmt = $pdo->prepare("DROP DATABASE `$db`;");
+					$stmt = $pdo->prepare("DROP DATABASE $db;");
 					$stmt->execute();
 					return false;
 				}
-				$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
+				$stmt = $pdo->prepare("GRANT ALL ON $db.* TO :db_user@'%';");
 				$stmt->bindParam(":db_user", $db_user, PDO::PARAM_STR);
 				if(!$stmt->execute())
 				{
@@ -428,13 +431,13 @@ class Common{
 			return false;
 		}
 
-		$stmt1 = $mapdo->prepare("DROP DATABASE `$db`");
+		$stmt1 = $mapdo->prepare("DROP DATABASE $db");
 		if ( ! $stmt1->execute())
 		{
 			return false;
 		}
 
-		$dstmt = $pdo_account->prepare('DELETE FROM `db_account_for_mariadb` WHERE id = ?');
+		$dstmt = $pdo_account->prepare('DELETE FROM db_account_for_mariadb WHERE id = ?');
 		// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
 		if ( ! $dstmt->execute([$dbid]))
 		{

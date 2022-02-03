@@ -11,7 +11,7 @@ if ( $action=='onoff' )
     $stsp = $_POST['stopped']==0? "停止" : "起動";
     $sitename = $_POST['sitename'];
     $msg = "WEBサイト「".$sitename ."」を".$stsp."しました";
-    $qry = "UPDATE web_account SET `stopped` = ? WHERE `id` = ?";
+    $qry = "UPDATE web_account SET stopped = ? WHERE id = ?";
 
     if ( ! $commons->doThis($qry,[$stopped,$act_id]) )
     {
@@ -28,7 +28,7 @@ if ( $action=='onoff' )
     $stsp = $_POST['appstopped']==0? "停止" : "起動";
     $sitename = $_POST['sitename'];
     $msg = "アプリケーションプールを".$stsp."しました";
-    $qry = "UPDATE web_account SET `appstopped` = ? WHERE `id` = ?";
+    $qry = "UPDATE web_account SET appstopped = ? WHERE id = ?";
     if ( ! $commons->doThis($qry,[$appstopped,$act_id]) )
     {
         require_once("views/admin/share/various/information/index.php");

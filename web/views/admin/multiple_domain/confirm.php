@@ -22,10 +22,10 @@ if ( $action === 'new' )
     $msg = "サイトの追加が完了しました";
     $msgsession ="msg";
     
-    $insert_q = "INSERT INTO web_account (`domain`, `password`, `user`, `plan`, `customer_id`,`dns`,`app_version`,`origin_id`) VALUES (?, ?, ?, ?, ?, ?,?,?)";
-    $insert_ftp = "INSERT INTO db_ftp (`ftp_user`, `ftp_pass`, `domain`, `permission`) VALUES (?, ?, ?, ?)";
-    $insert_waf = "INSERT INTO waf (`domain`, `usage`, `display`) VALUES (?, ?, ?)";
-    $insert_mail = "INSERT INTO add_email (`domain`, `email`, `password`) VALUES ( ?, ?, ?)";
+    $insert_q = "INSERT INTO web_account (domain, password, [user], [plan], customer_id,dns,app_version,origin_id) VALUES (?, ?, ?, ?, ?, ?,?,?)";
+    $insert_ftp = "INSERT INTO db_ftp (ftp_user, ftp_pass, domain, permission) VALUES (?, ?, ?, ?)";
+    $insert_waf = "INSERT INTO waf (domain, usage, display) VALUES (?, ?, ?)";
+    $insert_mail = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 
     if (
         !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $webadminID,$dns,$app_version,$webrootid]) ||
@@ -37,7 +37,7 @@ if ( $action === 'new' )
             require_once("views/admin/share.php");
             die("");
     }
-    $query_origin = "SELECT * FROM web_account WHERE `customer_id` = '$_COOKIE[admin]' and `origin`=1";
+    $query_origin = "SELECT * FROM web_account WHERE customer_id = '$_COOKIE[admin]' and origin=1";
     $origin= $commons->getRow($query_origin);
     $origin_user= $origin['user'];
     $ip=IP;
@@ -57,7 +57,7 @@ if ( $action === 'new' )
     $msgsession = $_POST['stopped']==0? "msgdel" : "msg";
     $msg = $_POST['stopped']==0? $webdomain."を停止しました" : $webdomain."を起動しました";
 
-    $qry = "UPDATE web_account SET `stopped` = '$stopped' WHERE `id` = ?";
+    $qry = "UPDATE web_account SET stopped = '$stopped' WHERE id = ?";
     if( ! $commons->doThis($qry,[$act_id])){
             require_once("views/admin/share.php");
             die("");
@@ -77,7 +77,7 @@ if ( $action === 'new' )
 
     $msgsession = $_POST['appstopped']==0? "msgdel" : "msg";
     $msg = $_POST['appstopped']==0? $webdomain."を停止しました" : $webdomain."を起動しました";
-    $qry = "UPDATE web_account SET `appstopped` = '$appstopped' WHERE `id` = ?";
+    $qry = "UPDATE web_account SET appstopped = '$appstopped' WHERE id = ?";
     if ( ! $commons->doThis($qry,[$act_id])){
             require_once("views/admin/share.php");
             die("");
@@ -100,7 +100,7 @@ if ( $action === 'new' )
     "<br>ＤＮＳの追加まで今しばらくお待ちください".
     "<br>弊社よりＤＮＳ追加作業後連絡させていただきます" : 
     "$sitename.winserver.ne.jpを削除しました";
-    $qry = "UPDATE web_account SET `sitebinding` = '$sitebinding' WHERE `id` = $act_id";
+    $qry = "UPDATE web_account SET sitebinding = '$sitebinding' WHERE id = $act_id";
     if ( ! $commons->doThis($qry))
     {
             require_once("views/admin/share.php");

@@ -48,7 +48,7 @@ $msg = "jb message";
                 $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body); 
                 $cmd = "changeplan";
 
-                $qry = "UPDATE vps_account SET `plan_update` = ? WHERE `id` = ?";
+                $qry = "UPDATE vps_account SET plan_update = ? WHERE id = ?";
                 if( ! $commons->doThis($qry,[$plan,$webid]) ){
                         // require_once("views/admin/share.php");
                         die("error");

@@ -4,7 +4,8 @@ $limit = 10;
 $table = 'add_email';  
 $params = [$webdomain];
 require_once('views/pagination/start.php');
-$query = "SELECT * FROM $table where domain = ? LIMIT $start, $limit";
+$query = "SELECT * FROM $table where domain = ?  ORDER BY id
+                            OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
 $getAllRow = $commons->getAllRow($query, $params);
 ?>
     <div id="layoutSidenav">

@@ -13,7 +13,7 @@ if ( $switch=='usage')
 {
 	$onoff = (int)$waf['usage']==1? 0 : 1;
 	$msg = (int)$waf['usage']==1? '利用設定をオフにしました' : '利用設定をONにしました';
-	$usage_query = "UPDATE waf SET `usage`='$onoff' WHERE `domain`=?";
+	$usage_query = "UPDATE waf SET usage='$onoff' WHERE domain=?";
 	if ( !$commons->doThis($usage_query,[$webdomain]))
 	{
 		$error = "Usage cannot be change";
@@ -24,7 +24,7 @@ if ( $switch=='usage')
 {
 	$onoff = (int)$waf['display']==1? 0 : 1;
 	$msg = (int)$waf['display']==1? '表示切替をオフにしました' : '表示切替をONにしました';
-	 $display_query = "UPDATE waf SET `display`='$onoff' WHERE `domain`=?";
+	 $display_query = "UPDATE waf SET display='$onoff' WHERE domain=?";
 	if ( !$commons->doThis($display_query, [$webdomain]))
 	{
 		$error = "Display cannot be change";

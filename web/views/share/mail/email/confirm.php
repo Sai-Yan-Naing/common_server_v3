@@ -12,7 +12,7 @@ $action =$_POST['action'];
 if ( isset($_POST['action']) and $_POST['action'] === 'new')
 {
 	$mail_pass_word=$_POST['mail_pass_word'];
-	$insert_q = "INSERT INTO add_email (`domain`, `email`, `password`) VALUES ( ?, ?, ?)";
+	$insert_q = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 	if ( ! $commons->doThis($insert_q,[$webdomain, $email, $mail_pass_word]))
 	{
 		$error  = "Email Cannot be add.";

@@ -19,7 +19,8 @@
                             $limit = 10;
                             $table = 'web_account';  
                             require_once('views/pagination/start.php');
-                            $query = "SELECT * FROM $table WHERE `customer_id` = ? && `removal` is null LIMIT $start, $limit";
+                            $query = "SELECT * FROM $table WHERE customer_id = ? AND removal is null ORDER BY id
+                            OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
                             $commons = new Common;
                             $multidomain=$commons->getAllRow($query,[$webadminID]);
                         ?>
@@ -97,8 +98,8 @@
                             <div></div>
                             <div class='ml-auto'>
                                 <?php 
-                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE `customer_id` = ? && `removal` is null";
-                                    // SELECT COUNT(*) FROM web_account WHERE `customer_id` = 'D000123' && `removal` is null
+                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE customer_id = ? AND removal is null";
+                                    // SELECT COUNT(*) FROM web_account WHERE customer_id = 'D000123' && removal is null
                                     $params = [$webadminID];
                                     $page_url = '/admin?page=';
                                     require_once('views/pagination/end.php')

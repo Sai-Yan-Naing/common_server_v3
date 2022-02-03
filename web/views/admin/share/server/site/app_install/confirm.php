@@ -27,9 +27,9 @@ if($app_name ==="WORDPRESS")
         require_once("views/admin/share/server/site/app_install/index.php");
         die("");
     }
-    $insert_q = "INSERT INTO db_account (`domain`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES (?, ?, ?, ?, ?)";
+    $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
 
-    $insert_app = "INSERT INTO app (`domain`, `site_name`, `app_name`, `app_version`, `root`, `url`,`user_name`, `password`, `db_name`, `db_user`, `db_pass`) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
+    $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
 
     if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
     {
@@ -86,9 +86,9 @@ if($app_name ==="WORDPRESS")
         require_once("views/admin/share/server/site/app_install/index.php");
         die("");
     }
-    $insert_q = "INSERT INTO db_account (`domain`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES (?, ?, ?, ?, ?)";
+    $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
 
-    $insert_app = "INSERT INTO app (`domain`, `site_name`, `app_name`, `app_version`, `root`, `url`,`user_name`, `password`, `db_name`, `db_user`, `db_pass`) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
+    $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
 
     if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
     {

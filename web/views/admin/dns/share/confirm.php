@@ -6,7 +6,7 @@ $webid = $_GET['webid'];
 $type = $_POST['type'];
 $sub = $_POST['sub'];
 $target = $_POST['target'];
-$query = 'SELECT * FROM web_account WHERE `id` = :web_id';
+$query = 'SELECT * FROM web_account WHERE id = :web_id';
 $getDns = $commons->getRow($query, ['web_id' => $webid]);
 $domain = $getDns['domain'];
 if ($action === 'new')
@@ -47,7 +47,7 @@ elseif ($action === 'delete')
     $msgsession ="msgdel";
 }
 
-$qry = 'UPDATE web_account SET `dns` = :dns WHERE `id` = :id';
+$qry = 'UPDATE web_account SET dns = :dns WHERE id = :id';
 if ( ! $commons->doThis($qry, ['dns' => $result, 'id' => $getDns['id']]))
 {
 	$error = 'Cannot insert dns';

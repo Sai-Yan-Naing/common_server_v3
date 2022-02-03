@@ -56,7 +56,7 @@
                                 <div></div>
                                 <div class='ml-auto'>
                                     <?php 
-                                        $paginatecount = "SELECT COUNT(*) FROM $table WHERE `domain` = ?";
+                                        $paginatecount = "SELECT COUNT(*) FROM $table WHERE domain = ?";
                                         $page_url = '/share/server?setting=site&tab=app_install&act=index&page=';
                                         require_once('views/pagination/end.php')
                                     ?>

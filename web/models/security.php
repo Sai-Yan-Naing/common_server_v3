@@ -13,7 +13,7 @@ class Security
 
 	function getSecurity($domain)
 	{
-		$stmt = $this->pdo->prepare('SELECT * FROM `waf` WHERE `domain`=?');
+		$stmt = $this->pdo->prepare('SELECT * FROM waf WHERE domain=?');
 		$stmt->execute([$domain]);
 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $data;
@@ -23,7 +23,7 @@ class Security
 	{
 		try
 		{
-			$stmt = $this->pdo->prepare('UPDATE waf SET `usage` =? where `domain`=?');
+			$stmt = $this->pdo->prepare('UPDATE waf SET usage =? where domain=?');
 			if ( ! $stmt->execute([$status, $domain]))
 			{
 				return false;
@@ -40,7 +40,7 @@ class Security
 
 	function wafDisplay($domain, $status)
 	{
-		$stmt = $this->pdo->prepare('UPDATE waf SET `display` =? where `domain`=?');
+		$stmt = $this->pdo->prepare('UPDATE waf SET display =? where domain=?');
 		if ( ! $stmt->execute([$status, $domain]))
 		{
 			return false;

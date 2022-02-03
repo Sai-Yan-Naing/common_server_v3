@@ -4,7 +4,8 @@ $limit = 10;
 $table = 'db_ftp';  
 $params = [$webdomain];
 require_once('views/pagination/start.php');
-$query = "SELECT * FROM $table WHERE domain=? LIMIT $start, $limit";
+$query = "SELECT * FROM $table WHERE domain=?  ORDER BY id
+                            OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
 $getAllRow=$commons->getAllRow($query,$params);
 ?>
     <div id="layoutSidenav">

@@ -19,7 +19,8 @@
                             $limit = 10;  
                             $table = 'vps_account';
                             require_once('views/pagination/start.php'); 
-                            $query = "SELECT * from $table where customer_id=? && `removal` is null LIMIT $start, $limit";
+                            $query = "SELECT * from $table where customer_id=? AND removal is null  ORDER BY id
+                            OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
                             $commons = new Common;
                             $getAllRow = $commons->getAllRow($query,[$webadminID]);
                         ?>
@@ -84,7 +85,7 @@
                             <div></div>
                             <div class='ml-auto'>
                                 <?php 
-                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE `customer_id` = ? && `removal` is null";
+                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE customer_id = ? AND removal is null";
                                     $params = [$webadminID];
                                     $page_url = '/admin?main=vps&page=';
                                     require_once('views/pagination/end.php')

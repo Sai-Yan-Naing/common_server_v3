@@ -18,7 +18,7 @@ $db_pass = $_POST["db_pass"];
             require_once("views/share/server/site/app_install/index.php");
             die("");
         }
-        $insert_q = "INSERT INTO db_account (`domain`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES (?, ?, ?, ?, ?)";
+        $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
 
 		if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
 		{

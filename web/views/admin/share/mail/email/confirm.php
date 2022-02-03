@@ -16,7 +16,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	$msg = "メールアドレス「".$email."@".$webdomain."」を追加しました";
 	$msgsession ="msg";
 	$mail_pass_word=$_POST['mail_pass_word'];
-	$insert_q = "INSERT INTO add_email (`domain`, `email`, `password`) VALUES ( ?, ?, ?)";
+	$insert_q = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 	if ( ! $commons->doThis($insert_q,[$webdomain, $email, $mail_pass_word]))
 	{
 		$error  = "Email Cannot be add.";

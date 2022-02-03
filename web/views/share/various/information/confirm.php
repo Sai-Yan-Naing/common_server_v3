@@ -7,7 +7,7 @@ if ( $action=='onoff' )
     $stopped = $_POST['stopped']==0? 1 : 0;
     $startstop = $_POST['stopped']==0? "stop" : "start";
     $sitename = $_POST['sitename'];
-    $qry = "UPDATE web_account SET `stopped` = ? WHERE `id` = ?";
+    $qry = "UPDATE web_account SET stopped = ? WHERE id = ?";
     if ( ! $commons->doThis($qry,[$stopped,$act_id]) )
     {
             require_once("views/share/various/information/index.php");
@@ -21,7 +21,7 @@ if ( $action=='onoff' )
     $appstopped = $_POST['appstopped']==0? 1 : 0;
     $startstop = $_POST['appstopped']==0? "stop" : "start";
     $sitename = $_POST['sitename'];
-    $qry = "UPDATE web_account SET `appstopped` = ? WHERE `id` = ?";
+    $qry = "UPDATE web_account SET appstopped = ? WHERE id = ?";
     if ( ! $commons->doThis($qry,[$appstopped,$act_id]) )
     {
         require_once("views/share/various/information/index.php");

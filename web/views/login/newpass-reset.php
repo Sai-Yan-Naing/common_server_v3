@@ -16,7 +16,7 @@ if($password !== $cpassword)
 
 if (filter_var($domainid, FILTER_VALIDATE_IP))
 {
-    $webroot_acc = $commons->doThis("UPDATE vps_account SET `password` = '$pass_encrypted 'WHERE `ip` ='$domainid'");
+    $webroot_acc = $commons->doThis("UPDATE vps_account SET password = '$pass_encrypted 'WHERE ip ='$domainid'");
     if ($webroot_acc)
     {
         header("location: /login");
@@ -27,7 +27,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
     }
 } elseif ( is_valid_domain_name ($domainid))
 {
-    $webroot_acc = $commons->doThis("UPDATE web_account SET `password` = '$pass_encrypted 'WHERE `domain` ='$domainid'");
+    $webroot_acc = $commons->doThis("UPDATE web_account SET password = '$pass_encrypted 'WHERE domain ='$domainid'");
     if ($webroot_acc)
     {
         header("location: /login");
@@ -38,7 +38,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
     }
 } else
 {
-    $webroot_acc = $commons->doThis("UPDATE customer SET `password` = '$pass_encrypted 'WHERE `user_id` ='$domainid'");
+    $webroot_acc = $commons->doThis("UPDATE customer SET password = '$pass_encrypted 'WHERE user_id ='$domainid'");
     if ($webroot_acc)
     {
         header("location: /login");

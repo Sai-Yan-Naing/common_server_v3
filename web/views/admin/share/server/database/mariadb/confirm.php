@@ -19,7 +19,7 @@ $msg = "jp message";
 			require_once("views/admin/share/server/database/mariadb/index.php");
 			die("");
 		}
-        $insert_q = "INSERT INTO db_account_for_mariadb (`domain`, `db_name`, `db_user`, `db_count`, `db_pass`) VALUES (?, ?, ?, ?, ?)";
+        $insert_q = "INSERT INTO db_account_for_mariadb (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
 
 		if( ! $commons->doThis($insert_q,[$webdomain,$db_name,$db_user, 1, $db_pass])) {
 			$error = "cannot add db account";

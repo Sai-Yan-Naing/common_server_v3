@@ -13,7 +13,8 @@
                                 $limit = 10;  
                                 $table = 'app';
                                 require_once('views/pagination/start.php');
-                                $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ? LIMIT $start, $limit",[$webdomain]);
+                                $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ?  ORDER BY id
+                            OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY",[$webdomain]);
                             ?>
                             <div class="tab-content">
                                 <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
@@ -56,7 +57,7 @@
                             <div></div>
                             <div class='ml-auto'>
                                 <?php 
-                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE `domain` = ?";
+                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE domain = ?";
                                     $params = [$webdomain];
                                     $page_url = '/admin/share/server?setting=site&tab=app_install&act=index&webid='.$webid.'&page=';
                                     require_once('views/pagination/end.php')

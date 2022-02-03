@@ -206,6 +206,7 @@ function allValidate() {
           }
         });
         $fail = $ajax.fail(function () {
+          $("#" + $(element).attr("id") + "-error").remove();
           $(element).after(
             '<span id="' +
               $(element).attr("id") +
