@@ -11776,7 +11776,9 @@ a{
 
 ul.manual li{
   list-style: none;
-  height: 30px;
+  /* height: 30px; */
+  font-size: 20px;
+  padding: 5px;
 }
 
 /* ul.manual li::before{
@@ -11785,6 +11787,7 @@ ul.manual li{
 .cmanual
 {
   scroll-padding-top:300px;
+  display: none;
 
 }
 .cmanual h1{
@@ -11799,4 +11802,7 @@ ul.manual li{
 .cmanual p{
   color: black;
   font-size: unset;
+}
+.cmanual img{
+  width: 100%;
 }
