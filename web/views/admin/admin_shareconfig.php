@@ -36,6 +36,7 @@ $weborigin = $web_acc['origin'];
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$_COOKIE['admin']]);
 $webrootid = $webroot_acc['id'];
 $webadminID = $webroot_acc['customer_id'];
+$web_server_id = $webroot_acc['web_server_id'];
 $webrootuser = $webroot_acc['user'];
 $webrootdomain = $webroot_acc['domain'];
 $webrootpass = $webroot_acc['password'];
@@ -49,7 +50,14 @@ $webrootblacklist = $webroot_acc['blacklist'];
 
 $setting = $_GET['setting'];
 
+$web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
+$gethost = $commons->getRow($web_server);
+$web_host = $gethost['ip'];
+$web_user = $gethost['username'];
+$web_password = $gethost['password'];
+
 $webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webrootuser; 
 
 $pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
 $pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';
+

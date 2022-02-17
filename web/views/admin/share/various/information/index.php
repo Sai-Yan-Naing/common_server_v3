@@ -16,7 +16,7 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                     <div class="server-info">
                                             <div class="mb-1 d-flex">
                                                 <label for="con-server" class="col-sm-3 col-form-label">接続サーバー</label>
-                                                <div class="col-sm-8"><span class="col-form-label"><?= IP ?></span></div>
+                                                <div class="col-sm-8"><span class="col-form-label"><?= $web_host ?></span></div>
                                             </div>
                                             <div class="mb-1 d-flex">
                                                 <label for="status" class="col-sm-3 col-form-label">ステータス</label>

@@ -25,7 +25,7 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                     <span>FTPサーバー</span>
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <span><?= IP ?></span>
+                                                    <span><?= $web_host ?></span>
                                                 </div>
                                             </div>
 
