@@ -26,24 +26,26 @@
                         <?php
                         
                             $dir = ROOT_PATH.$webpath;
+
                             $directories = array();
                             $files_list  = array();
-                            $files = scandir($dir);
-                            foreach ($files as $file)
+                            // $files = scandir($dir);
+                            // echo "<pre>";
+                            $files = get_dirlist($web_host,$web_user,$web_password,$dir);
+                            // print_r($files);
+                            foreach ($files as $key=>$file)
                             {
-                            if (($file != '.') && ($file != '..'))
-                            {
-                                if (is_dir($dir.'/'.$file))
+                                if ($file['mode']=='d')
                                 {
-                                    $directories[]  = $file;
+                                    $directories[$key]  = $file;
 
                                 }else{
-                                    $files_list[]    = $file;
+                                    $files_list[$key]    = $file;
 
                                 }
+                                // echo "<pre>";
+                                // print_r($file);
                             }
-                            }
-
                         ?>
                         
                             <!-- Tab panes -->
@@ -64,25 +66,25 @@
                                     foreach ($directories as $key => $value):
                                     ?>
                                         <tr>
-                                        <td class="folder_click" foldername="<?= $value ?>" style="cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">
+                                        <td class="folder_click" foldername="<?= $value['name'] ?>" style="cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">
                                             <div class="d-flex">
                                                 <i class="far fa-folder  nav-tab-icon"></i> 
-                                                <span class="ml-2 mt-1"><?= $value ?></span>
+                                                <span class="ml-2 mt-1"><?= $value['name'] ?></span>
                                             </div>
                                         </td>
-                                        <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
-                                        <td><?= filetype($dir.'/'.$value)?></td>
-                                        <td><?php echo sizeFormat(folderSize($dir.'/'.$value)) ?></td>
+                                        <td><?= $value['lasttime'] ?></td>
+                                        <td>Dir</td>
+                                        <td><?php echo $value['length'] ?></td>
                                         <td class="d-flex">
                                             <div class="col-sm-12">
                                                 <span class=""></span>
-                                                <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value['name'] ?>" action="zip">
                                                 圧縮
                                                 </button>
-                                                <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="rename">名前変更
+                                                <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="rename">名前変更
                                                 </button>
-                                                <?php if ( $dir.'/'.$value !== $dir.'/web'):?>
-                                                <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="delete">
+                                                <?php if ( $webpath.'/'.$value['name'] !== $webpath.'/web'):?>
+                                                <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ['name']?>" action="delete">
                                                 削除
                                                 </button>
                                                 <?php endif; ?>
@@ -97,40 +99,40 @@
                                     
                                     $url = $protocol . $_SERVER['HTTP_HOST'];
                                     foreach ($files_list as $key => $value):
-                                        $extension = getFileExt($dir.'/'.$value);
+                                        $extension = $value['extension'];
                                         ?>
                                         <tr>
                                         
-                                        <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext)){ echo 'data-target="#common_dialog"'; } ?> file_name="<?= $value ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>">
+                                        <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext)){ echo 'data-target="#common_dialog"'; } ?> file_name="<?= $value['name'] ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>">
                                         <div class="d-flex">
-                                            <i class="far fa-file nav-tab-icon"></i><span class="ml-2 mt-1"><?= $value ?></span>
+                                            <i class="far fa-file nav-tab-icon"></i><span class="ml-2 mt-1"><?= $value['name'] ?></span>
                                         </div></td>
                                         
-                                        <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
-                                        <td><?= filetype($dir.'/'.$value)?></td>
-                                        <td path="E:\webroot\LocalUser" file="<?=$value?>">
-                                            <?php echo sizeFormat(filesize($dir.'/'.$value)) ?>
+                                        <td><?= $value['lasttime'] ?></td>
+                                        <td>File</td>
+                                        <td path="E:\webroot\LocalUser" file="<?=$value['name']?>">
+                                            <?php echo sizeFormat($value['length']) ?>
                                         </td>
                                         <td class="d-flex" >
                                             <div class="col-sm-12 ">
-                                                <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value['name'] ?>" action="zip">
                                                 圧縮
                                                 </button>
                                                 <?php 
-                                                if(getFileExt($dir.'/'.$value)=="zip")
+                                                if($value['extension']=="zip")
                                                 {?>
-                                                    <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=unzip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                    <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=unzip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value['name'] ?>" action="zip">
                                                     解凍
                                                 </button>
                                                 <?php 
                                                 }
                                                 ?>
-                                                <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="rename">名前変更
+                                                <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="rename">名前変更
                                                 </button>
-                                                <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="delete">
+                                                <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="delete">
                                                 削除
                                                 </button>
-                                                <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value?>&common_path=" class="btn download_file">
+                                                <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value['name']?>&common_path=" class="btn download_file">
                                                 <i class="fa fa-download"></i>
                                                 </a>
                                             </div>

@@ -52,31 +52,36 @@ function copy_paste($src, $dst)
 
 	closedir($dir);
 }
-
-function folderSize($dir)
+function sharebackup($web_host,$web_user,$web_password,$src,$user,$date,$action)
 {
-	$count_size = 0;
-	$count = 0;
-	$dir_array = scandir($dir);
-	foreach ($dir_array as $key => $filename)
-	{
-		if ($filename !== '..' && $filename !== '.')
-		{
-			if (is_dir($dir.'/'.$filename))
-			{
-				$new_folder_size = folderSize($dir.'/'.$filename);
-				$count_size = $count_size + $new_folder_size;
-			}
-			elseif (is_file($dir.'/'.$filename))
-			{
-				$count_size = $count_size + filesize($dir.'/'.$filename);
-				$count++;
-			}
-		}
-	}
-
-	return $count_size;
+    $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/backup.ps1" '.$action.' '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($src).' '.$user.' '.$date);
+        return $shell;
 }
+
+// function folderSize($dir)
+// {
+// 	$count_size = 0;
+// 	$count = 0;
+// 	$dir_array = scandir($dir);
+// 	foreach ($dir_array as $key => $filename)
+// 	{
+// 		if ($filename !== '..' && $filename !== '.')
+// 		{
+// 			if (is_dir($dir.'/'.$filename))
+// 			{
+// 				$new_folder_size = folderSize($dir.'/'.$filename);
+// 				$count_size = $count_size + $new_folder_size;
+// 			}
+// 			elseif (is_file($dir.'/'.$filename))
+// 			{
+// 				$count_size = $count_size + filesize($dir.'/'.$filename);
+// 				$count++;
+// 			}
+// 		}
+// 	}
+
+// 	return $count_size;
+// }
 
 function sizeFormat($bytes)
 {
@@ -125,6 +130,13 @@ function sizeFormat($bytes)
             }
         } 
     } 
+
+    function folderSize($web_host,$web_user,$web_password,$dir='')
+    {
+        // return 'dd';
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/getdirsize.ps1" size '.$web_host.' '.$web_user.' '.$web_password.' '.ROOT_PATH.$dir);
+        return $shell;
+    }
 
     /*Delete Folder*/
     function deleteBackup($dir){  
@@ -210,6 +222,47 @@ function sizeFormat($bytes)
           return false;
       }
 
+      function newDir($web_host,$web_user,$web_password,$dir)
+      {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/dir_file.ps1" newdir '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir));
+        return $shell;
+      }
+
+      function newFile($web_host,$web_user,$web_password,$dir)
+      {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/dir_file.ps1" newfile '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir));
+        return $shell;
+      }
+
+      function deleteDir($web_host,$web_user,$web_password,$dir)
+      {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/dir_file.ps1" deletedir '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir));
+        return $shell;
+      }
+
+      function renameDir($web_host,$web_user,$web_password,$newdir,$olddir)
+      {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/dir_file.ps1" renamedir '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($newdir).' '.escapeshellarg($olddir));
+        return $shell;
+      }
+
+      function comFile($web_host,$web_user,$web_password,$dir,$fname)
+      {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/dir_file.ps1" zip '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir).' '.escapeshellarg($fname));
+        return $shell;
+      }
+
+      function uncomFile($web_host,$web_user,$web_password,$dir,$fname)
+      {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/dir_file.ps1" unzip '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir).' '.escapeshellarg($fname));
+        return $shell;
+      }
+       function copyFile($web_host,$web_user,$web_password,$dir1,$dir2)
+      {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/dir_file.ps1" copy '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir1).' '.escapeshellarg($dir2));
+        return $shell;
+      }
+
       function delete_directory($dirname) {
          if (is_dir($dirname))
            $dir_handle = opendir($dirname);
@@ -250,12 +303,12 @@ function sizeFormat($bytes)
         return true;
     }
 
-    function addBassman($user,$bassmen_setting)
+    function addBassman($web_host,$web_user,$web_password,$user,$bassmen_setting)
     {
-        $bassmam_file = getFile($user."/bassman/Bassman.setting");
-        if(file_exists($bassmam_file)) {
-            unlink($bassmam_file);
-        } 
+        $bassmam_file = get_File($web_host,$web_user,$web_password,$user."/bassman/Bassman.setting");
+        // if(file_exists($bassmam_file)) {
+        //     unlink($bassmam_file);
+        // } 
         $temp = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
         $temp .= '<bassman reloadkey="">'."\n";
         foreach(json_decode($bassmen_setting) as $bass_key => $bass_value)
@@ -268,7 +321,8 @@ function sizeFormat($bytes)
             $temp.="\t</area>\n";
         }
         $temp .= '</bassman>'."\n";
-        putFile($user."/bassman/Bassman.setting",$temp);
+        // putFile($user."/bassman/Bassman.setting",$temp);
+        put_File($web_host,$web_user,$web_password,$user."/bassman/Bassman.setting",$temp);
 
     }
     function getFile($file)
@@ -276,10 +330,22 @@ function sizeFormat($bytes)
         $file = file_get_contents(ROOT_PATH.$file);
         return $file;
     }
+
+    function get_File($web_host,$web_user,$web_password,$dir='')
+    {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/getdirlist.ps1" openfile '.$web_host.' '.$web_user.' '.$web_password.' '.$dir);
+        return $shell;
+    }
     function putFile($file,$value)
     {
         $file = file_put_contents(ROOT_PATH.$file,$value);
         return true;  
+    }
+
+    function put_File($web_host,$web_user,$web_password,$dir='',$value='')
+    {
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/getdirlist.ps1" putfile '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir).' '.escapeshellarg(escapecmd($value)));
+        return $shell;
     }
     
     // file list
@@ -298,9 +364,89 @@ function sizeFormat($bytes)
         return $directories;
     }
 
-    function getPhpVersion()
+    function get_dirlist($web_host,$web_user,$web_password,$dir='')
     {
-        return fileList(PHP_ROOT_PATH);
+        // return fileList(PHP_ROOT_PATH);
+
+
+        $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/getdirlist.ps1" dirlist '.$web_host.' '.$web_user.' '.$web_password.' '.$dir);
+        $shell = array_filter(preg_split ('/\n/', $shell));
+        $shell = array_filter($shell, function($value) {
+                   return strpos($value, 'PSComputerName') === false;
+                });
+        $shell = array_filter($shell, function($value) {
+                   return strpos($value, 'RunspaceId ') === false;
+                });
+        // return $shell;
+        $temp=array();
+        $index = 0;
+        foreach ($shell as $key => $value) {
+            if(strpos($value, 'Name           :') !== false)
+            {
+                $temp[$index] = str_replace("Name           : ","",$value);
+            }elseif (strpos($value, 'LastWriteTime  : ') !== false)
+            {
+                $temp[$index] = str_replace("LastWriteTime  : ","",$value);
+            }elseif (strpos($value, 'Mode           : ') !== false)
+            {
+                $temp[$index] = str_replace('-','',str_replace("Mode           : ","",$value));
+            }elseif (strpos($value, 'Length         : ') !== false)
+            {
+                $temp[$index] = str_replace("Length         : ","",$value);
+            }else{
+                $temp[$index] = str_replace('.','',str_replace("Extension      : ","",$value));
+            }
+            $index ++;
+        }
+        // $shell = implode("`,`",$shell);
+        $index=1;
+        $count=0;
+        $temp1=array();
+        // return $temp;
+        // return count($temp);
+        for ($i =0; $i<= count($temp)-1;$i++) {
+            if($index<=5){
+                
+                if($index==1 && $count==0)
+                {
+                    $temp1[$count]['name']=$temp[$i];
+                }elseif ($index==2) {
+                    $temp1[$count]['lasttime']=$temp[$i];
+                }elseif ($index==3) {
+                    $temp1[$count]['mode']=$temp[$i];
+                }elseif ($index==4) {
+                    $temp1[$count]['length']=$temp[$i];
+                }else{
+                    $temp1[$count]['extension']=$temp[$i];
+                }
+                $index ++;
+            }else{
+                $count ++;
+                $index =2;
+                $temp1[$count]['name']=$temp[$i];
+            }
+        }
+        return $temp1;
+    }
+
+    function getPhpVersion($web_host,$web_user,$web_password,$dir='C:\Program Files\PHP')
+    {
+        // return fileList(PHP_ROOT_PATH);
+
+        // return system('pwsh -File Get-ChildItem -Name C:\Program Files\PHP');
+
+         $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/getdirlist.ps1" phpversion '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir));
+        return $shell = preg_split ('/\n/', $shell);
+    }
+
+    function getDirlist($web_host,$web_user,$web_password,$dir='')
+    {
+        // return 'hello';
+
+        // return system('pwsh -File Get-ChildItem -Name C:\Program Files\PHP');
+
+         $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/dir_file.ps1" dirlist '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir));
+        return $shell = array_filter(preg_split ('/\n/', $shell));
     }
 
     function domainChecker($domain)
@@ -319,56 +465,59 @@ function createFile($file)
 	fclose($myfile);
 	// return "created new File";
 }
-function uploadFile($dir,$file)
+function uploadFile($web_host,$web_user,$web_password,$dir,$file)
 {
-	$target_dir = $dir;
-	$target_file = $target_dir . basename($file["name"]);
-	$uploadOk = 1;
-	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+	// $target_dir = $dir;
+	// $target_file = $target_dir . basename($file["name"]);
+	// $uploadOk = 1;
+	// $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-	// Check if image file is a actual image or fake image
-	// if(isset($_POST["submit"])) {
-	  // $check = getimagesize($file["tmp_name"]);
-	  // if($check !== false) {
-	  //   echo "File is an image - " . $check["mime"] . ".";
-	  //   $uploadOk = 1;
-	  // } else {
-	  //   echo "File is not an image.";
-	  //   $uploadOk = 0;
-	  // }
+	// // Check if image file is a actual image or fake image
+	// // if(isset($_POST["submit"])) {
+	//   // $check = getimagesize($file["tmp_name"]);
+	//   // if($check !== false) {
+	//   //   echo "File is an image - " . $check["mime"] . ".";
+	//   //   $uploadOk = 1;
+	//   // } else {
+	//   //   echo "File is not an image.";
+	//   //   $uploadOk = 0;
+	//   // }
+	// // }
+
+	// // Check if file already exists
+	// // if (file_exists($target_file)) {
+	// //   echo "Sorry, file already exists.";
+	// //   $uploadOk = 0;
+	// //   die();
+	// // }
+
+	// // Check file size
+	// // if ($file["size"] > 500000) {
+	// //   echo "Sorry, your file is too large.";
+	// //   $uploadOk = 0;
+	// // }
+
+	// // Allow certain file formats
+	// // if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+	// // && $imageFileType != "gif" ) {
+	// //   echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	// //   $uploadOk = 0;
+	// // }
+
+	// // Check if $uploadOk is set to 0 by an error
+	// if ($uploadOk == 0) {
+	//   echo "Sorry, your file was not uploaded.";
+	// // if everything is ok, try to upload file
+	// } else {
+	//   if (move_uploaded_file($file["tmp_name"], $target_file)) {
+	//     // echo "The file ". htmlspecialchars( basename( $file["name"])). " has been uploaded.";
+	//   } else {
+	//     echo "Sorry, there was an error uploading your file.";
+	//   }
 	// }
-
-	// Check if file already exists
-	// if (file_exists($target_file)) {
-	//   echo "Sorry, file already exists.";
-	//   $uploadOk = 0;
-	//   die();
-	// }
-
-	// Check file size
-	// if ($file["size"] > 500000) {
-	//   echo "Sorry, your file is too large.";
-	//   $uploadOk = 0;
-	// }
-
-	// Allow certain file formats
-	// if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	// && $imageFileType != "gif" ) {
-	//   echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	//   $uploadOk = 0;
-	// }
-
-	// Check if $uploadOk is set to 0 by an error
-	if ($uploadOk == 0) {
-	  echo "Sorry, your file was not uploaded.";
-	// if everything is ok, try to upload file
-	} else {
-	  if (move_uploaded_file($file["tmp_name"], $target_file)) {
-	    // echo "The file ". htmlspecialchars( basename( $file["name"])). " has been uploaded.";
-	  } else {
-	    echo "Sorry, there was an error uploading your file.";
-	  }
-	}
+    echo $dir=$dir."/".$file['tmp_name'];
+    die;
+    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/upload.ps1" upload '.$web_host.' '.$web_user.' '.$web_password.' '.$dir);
 }
 
 function flash($name, $text = '' )
@@ -382,4 +531,14 @@ function flash($name, $text = '' )
         $_SESSION[$name] = $text;
     }
     return '';
+}
+
+function escapecmd($value)
+{
+    // $value ='"hello"';
+    $value = str_replace('"', "`dbq;", $value);
+    $value = preg_replace('/\n/', "`n", $value);
+    $value = str_replace(" ", "`sp;", $value);
+    $value = str_replace("!", "`ex;", $value);
+    return $value;
 }

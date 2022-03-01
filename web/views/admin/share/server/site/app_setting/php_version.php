@@ -1,6 +1,7 @@
 <?php
 require_once("views/admin/admin_shareconfig.php");
 $webappversion = json_decode($webappversion);
+// print_r(getPhpVersion($web_host,$web_user,$web_password));
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
@@ -16,7 +17,7 @@ $webappversion = json_decode($webappversion);
           <div class="col-sm-10">
             <select name="version" id="php_version" class="form-control">
             <?php
-                foreach(getPhpVersion() as $phpkey=>$phpvalue) : ?>
+                foreach(getPhpVersion($web_host,$web_user,$web_password) as $phpkey=>$phpvalue) : ?>
 
                 <option value="<?=$phpvalue?>" <?php if($phpvalue==$webappversion->app->php){ echo "selected";} ?>><?=$phpvalue?></option>
 

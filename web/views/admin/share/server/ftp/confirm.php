@@ -74,8 +74,8 @@ if ( $weborigin!=1)
 }
 // Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser." ".$per." ".$action." ".$originuser);
 
-echo ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/ftp.ps1" ftp '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.' '.$per. ' '.$action.' '.$originuser);
-die;
+Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/ftp.ps1" ftp '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.' '.$per. ' '.$action.' '.$originuser);
+// die;
 
 flash($msgsession,$msg);
 header("location: /admin/share/server?setting=ftp&tab=tab&act=index&webid=$webid$pagy");

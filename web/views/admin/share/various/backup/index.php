@@ -41,8 +41,10 @@ $get_backup = $backup->checkScheduler($webdomain);
                                     </div>
                                     <div id="changeBackup">
                                     <?php
-                                        $file = showFolder($dirname);
-                                        if($file):
+                                        
+                                        $query = "SELECT * FROM share_backup WHERE domain=?";
+                                        $getRow = $commons->getRow($query,[$webdomain]);
+                                        if(count($getRow[id])>0):
                                     ?>
                                         <table class="table mt-3 table-bordered">
                                             <tr>
@@ -51,10 +53,10 @@ $get_backup = $backup->checkScheduler($webdomain);
                                                 <th class="border-dark">作業</th>
                                             </tr>
                                             <tr>
-                                                <td class="border-dark"><?= $file ?></td>
-                                                <td class="border-dark"><?= date("Y-m-d h:i:sA", filemtime($dirname.$file)) ?></td>
+                                                <td class="border-dark"><?= $getRow['name'] ?></td>
+                                                <td class="border-dark"><?= $getRow['date'] ?></td>
                                                 <td class="border-dark">
-                                                    <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/various?setting=backup&cron=<?=$file?>&act=restore&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">リストア</a>
+                                                    <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/various?setting=backup&cron=<?=$getRow['name']?>&act=restore&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">リストア</a>
                                                     <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/various?setting=backup&cron=<?=$file?>&act=delete&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                 </td>
                                             </tr>

@@ -5,8 +5,8 @@ class Common{
 
 	function __construct()
 	{
-		// $this->pdo = new PDO(DSN, ROOT, ROOT_PASS);
-			$this->pdo = new PDO(DBDSN1, DBROOT1, DBROOT_PASS1);
+		// $this->pdo = new PDO(DBDSN, DBROOT, DBROOT_PASS);
+			$this->pdo = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 			$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	}
 
@@ -202,7 +202,7 @@ class Common{
 		return true;
 	}
 
-	function importWP($sql, $db_name, $db_username, $pass)
+	function importWP($web_host,$sql, $db_name, $db_username, $pass)
 	{
 		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db_name))
 		{
@@ -211,7 +211,8 @@ class Common{
 
 		try
 		{
-			$pdo_account = new PDO('mysql:host=localhost:3310;dbname='.$db_name, $db_username, $pass);
+			// die($sql);
+			$pdo_account = new PDO('mysql:host='.$web_host.':3310;dbname='.$db_name, $db_username, $pass);
 			// echo $pdo_account->exec($sql);
 			if ($pdo_account->exec($sql) === 0)
 			{
@@ -238,6 +239,9 @@ class Common{
 			// $dsn = constant("SQLSERVER_" . $version . "_DSN");
 			// $user = constant("SQLSERVER_" . $version . "_USER");
 			// $pass = constant("SQLSERVER_" . $version . "_PASS");
+		// 	echo SQLSERVER_2016_DSN;
+		// 	echo SQLSERVER_2016_USER;
+		// 	echo SQLSERVER_2016_PASS;
 		// die('no ok');
 			try {
 				
@@ -292,7 +296,7 @@ class Common{
 				return true;
 			} catch (PDOException $e) {
 				$error_message = $e->getMessage();
-				die("test");
+				die("error");
 				// require("views/allerror.php");
 				if (!is_null($stmt)) { $stmt->closeCursor(); }
 				$pdo = NULL;
@@ -309,7 +313,7 @@ class Common{
 			
 
 			try {
-			  $conn = new PDO(DSN, ROOT, ROOT_PASS);
+			  $conn = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 				  // set the PDO error mode to exception
 				  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -336,7 +340,7 @@ class Common{
 		// return $dbid.$dbuser.$db;
 			// $dsn2 = 'mysql:host=localhost:3307';
 			$mspdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
-			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			$pdo_account = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 			$stmt1 = $mspdo->prepare("DROP DATABASE $db");
 			if(!$stmt1->execute()) return false;
 			
@@ -385,14 +389,14 @@ class Common{
 			// $dsn2 = 'mysql:host=localhost:3307';
 			$mapdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
 			$stmt = $mapdo->prepare("ALTER USER '$dbuser'@'%' IDENTIFIED BY '$dbpass';");
-			if(!$stmt->execute())
-			{
-				return false;
-			}
+			// if(!$stmt->execute())
+			// {
+			// 	return false;
+			// }
 			$mapdo = NULL;
 
 			try {
-			  $conn = new PDO(DSN, ROOT, ROOT_PASS);
+			  $conn = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 				  // set the PDO error mode to exception
 				  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -424,7 +428,7 @@ class Common{
 		// return $dbid.$dbuser.$db;
 		// $dsn2 = 'mysql:host=localhost:3307';
 		$mapdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
-		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+		$pdo_account = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 		$stmt = $mapdo->prepare("DROP USER :dbuser@'%'");
 		if ( ! $stmt->execute(['dbuser' => $dbuser]))
 		{

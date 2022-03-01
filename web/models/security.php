@@ -8,7 +8,7 @@ class Security
 
 	function __construct()
 	{
-		$this->pdo = new PDO(DSN, ROOT, ROOT_PASS);
+		$this->pdo = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 	}
 
 	function getSecurity($domain)

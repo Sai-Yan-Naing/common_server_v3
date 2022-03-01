@@ -40,6 +40,13 @@
                             <tbody>
                                 <?php 
                                     foreach($multidomain as $domain):
+
+                                        $web_server = "SELECT * FROM web_server_config WHERE id=$domain[web_server_id]";
+                                            $gethost = $commons->getRow($web_server);
+                                            $web_host = $gethost['ip'];
+                                            $web_user = $gethost['username'];
+                                            $web_password = $gethost['password'];
+
                                 ?>
                                 <tr class="row">
                                     <td class="tb-width-2"><a href="http://<?=$domain[domain]?>" target="_blank" class="text-dark"><?=$domain['domain']?></a></td>
@@ -47,7 +54,7 @@
                                         <a href="/admin/share/server?setting=site&tab=app_install&act=index&webid=<?=$domain[id]?>" target="_blank" class="btn btn-sm btn-outline-info">設定</a>
                                     </td>
                                     <td class="tb-width">
-                                        <span><?php if($domain['origin'] !=1 ){ echo sizeFormat(folderSize("E:/webroot/LocalUser/".$webrootuser."/".$domain['user']));}else{echo sizeFormat(folderSize("E:/webroot/LocalUser/".$domain['user']));} ?></span>
+                                        <span><?php //if($domain['origin'] !=1 ){ echo sizeFormat(folderSize($web_host,$web_user,$web_password,$webrootuser."/".$domain['user']));}else{echo sizeFormat(folderSize($web_host,$web_user,$web_password,$domain['user']));} ?></span>
                                     </td>
                                     <td class="tb-width-1">
                                         <form action="" method = "post">

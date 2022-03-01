@@ -39,7 +39,7 @@
                                                 <td class="border-dark"><?= $app['app_name'] ?></td>
                                                 <td class="border-dark"><?= $app['app_version'] ?></td>
                                                 <td class="border-dark"><a href="/admin/share/server?setting=filemanager&tab=tab&act=index&webid=<?=$webid?>">/<?= $webuser ?>/<?= $app['root']?></a></td>
-                                                <td class="border-dark"><a href="<?= $app['url'] ?><?= ($app['app_name']=="WORDPRESS")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/login":"/html")?>" target="_blank"><?= $app['url'] ?></a></td>
+                                                <td class="border-dark"><a href="<?= $app['url'] ?><?= ($app['app_name']=="WORDPRESS")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/$app[root]/login":"/html")?>" target="_blank"><?= $app['url'] ?></a></td>
                                                 <td class="border-dark"><?= $app['user_name'] ?></td>
                                                 <td class="border-dark"><?= $app['password'] ?></td>
                                                 <td class="border-dark"><?= $app['db_name'] ?></td>

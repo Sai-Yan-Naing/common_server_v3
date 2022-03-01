@@ -6,7 +6,7 @@ $dir = ROOT_PATH.$webpath.'/';
 if (isset($_POST['foldername']))
 {
     $foldername = $_POST['foldername'];
-    echo filepath($dir,$foldername,$webid);
+    echo filepath($web_host,$web_user,$web_password,$dir,$foldername,$webid);
     die;
 } elseif (isset($_POST['action']) and $_POST['action']==='rename')
 {
@@ -18,8 +18,11 @@ if (isset($_POST['foldername']))
 	{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}
-    rename($_dir.$_POST['old'],$_dir.$_POST['rename']);
-	echo filepath($dir,$_POST['common_path'],$webid);
+	$newdir = $_dir.$_POST['rename'];
+	$olddir = $_dir.$_POST['old'];
+	renameDir($web_host,$web_user,$web_password,$newdir,$olddir);
+    // pathrename($_dir.$_POST['old'],$_dir.$_POST['rename']);
+	echo filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
 	die();
 } elseif ($_POST['action'] ==='delete_file')
 {
@@ -31,8 +34,9 @@ if (isset($_POST['foldername']))
 		$_dir=$dir;
 	}
     // echo $_dir.$_POST['delete_file'];
-	unlink($_dir.$_POST['delete_file']);
-	filepath($dir,$_POST['common_path'],$webid);
+	// unlink($_dir.$_POST['delete_file']);
+	deleteDir($web_host,$web_user,$web_password,$_dir.$_POST['delete_file']);
+	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 }elseif ($_POST['action'] ==='delete_dir')
 {
@@ -42,8 +46,9 @@ if (isset($_POST['foldername']))
 	}else{
 		$_dir=$dir;
 	}
-	delete_directory($_dir.$_POST['delete_dir']);;
-	filepath($dir,$_POST['common_path'],$webid);
+	// delete_directory($_dir.$_POST['delete_dir']);;
+	deleteDir($web_host,$web_user,$web_password,$_dir.$_POST['delete_dir']);
+	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 } elseif ( $_POST['action'] ==='new_dir')
 {
@@ -53,8 +58,11 @@ if (isset($_POST['foldername']))
 	}else{
 		$_dir=$dir;
 	}
-	mkdir($_dir.$_POST['new_dir']);
-	filepath($dir,$_POST['common_path'],$webid);
+	// mkdir($_dir.$_POST['new_dir']);
+// 	echo $_dir.$_POST['new_dir']);
+// die;
+	newDir($web_host,$web_user,$web_password,$_dir.$_POST['new_dir']);
+	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 } elseif ( $_POST['action'] ==='new_file')
 {
@@ -64,8 +72,11 @@ if (isset($_POST['foldername']))
 	}else{
 		$_dir=$dir;
 	}
-	createFile($_dir.$_POST['new_file']);
-	filepath($dir,$_POST['common_path'],$webid);
+	// createFile($_dir.$_POST['new_file']);
+// 	echo $_dir.$_POST['new_dir']);
+// die;
+	newFile($web_host,$web_user,$web_password,$_dir.$_POST['new_file']);
+	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 } elseif ( $_POST['action'] ==='upload')
 {
@@ -75,8 +86,10 @@ if (isset($_POST['foldername']))
 	}else{
 		$_dir=$dir;
 	}
-	uploadFile($_dir,$_FILES['upload']);
-	filepath($dir,$_POST['common_path'],$webid);
+	// echo $webpath.'/'.$_FILES['upload'];
+	// uploadFile($_dir,$_FILES['upload']);
+	// uploadFile($web_host,'ftpaccess','welcome123!',$webpath,$_FILES['upload']);
+	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 } elseif ( $_POST['action'] ==='zip')
 {
@@ -88,8 +101,9 @@ if (isset($_POST['foldername']))
 	}
     // echo $_dir.$_POST['zip'].'dd'.$_POST['zip'];
     // die;
-	compressed($_dir,$_POST['zip'],$_POST['zip']);
-	filepath($dir,$_POST['common_path'],$webid);
+	// compressed($_dir,$_POST['zip'],$_POST['zip']);
+	comFile($web_host,$web_user,$web_password,$_dir,$_POST['zip']);
+	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 } elseif ( $_POST['action'] ==='unzip')
 {
@@ -101,8 +115,9 @@ if (isset($_POST['foldername']))
 	}
     // echo $_dir.$_POST['zip'].'dd'.$_dir;
     // die;
-	uncompressed($_dir.$_POST['zip'],$_dir);
-	filepath($dir,$_POST['common_path'],$webid);
+	// uncompressed($_dir.$_POST['zip'],$_dir);
+	uncomFile($web_host,$web_user,$web_password,$_dir,$_POST['zip']);
+	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 } elseif ( isset($_GET['download']))
 {
@@ -112,9 +127,11 @@ if (isset($_POST['foldername']))
 	}else{
 		$_dir=$dir;
 	}
-    // echo $_dir.$_GET['download'];
+    // echo $webpath.$_GET['download'];
     // die;
-	download($_dir.$_GET['download'],$_GET['download']);
+    filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
+	// download($webpath.$_GET['download'],$_GET['download']);
+	// download($web_host,'ftpaccess','welcome123!',$webpath.'/'.$_GET['download']);
 	// header("Location: filemanager.php");
 } elseif ( isset($_POST['file_name']) and $_POST['action']==='open_file')
 {
@@ -125,7 +142,8 @@ if (isset($_POST['foldername']))
 	{
 		$_dir=$dir;
 	}
-	open_file($_dir,$_POST['file_name'],$webid);
+	open_file($web_host,$web_user,$web_password,$_dir,$_POST['file_name'],$webid);
+	// get_File($web_host,$web_user,$web_password,$_dir.$_POST['file_name']);
 	die();
 } elseif ( isset($_POST['text_editor_open']) and $_POST['action']==='save_file' )
 {
@@ -135,15 +153,17 @@ if (isset($_POST['foldername']))
 	}else{
 		$_dir=$dir;
 	}
-	echo save_file($_dir.$_POST['openfile_name'],$_POST['text_editor_open'],$webid);
+	echo save_file($web_host,$web_user,$web_password,$_dir.$_POST['openfile_name'],$_POST['text_editor_open'],$webid);
+		die;
 	// die($_dir.$_POST['openfile_name']);
 }
 
-function save_file($file,$data,$webid)
+function save_file($web_host,$web_user,$web_password,$file,$data,$webid)
 {
 	// $dir = 'E:\\webroot\\LocalUser\\';
 	// file_put_contents($dir.$file, $data);
-	file_put_contents($file, $data);
+	// file_put_contents($file, $data);
+    put_File($web_host,$web_user,$web_password,$file,$data);
 	return "successfully saved";
 }
 
@@ -168,24 +188,15 @@ class FlxZipArchive extends ZipArchive
  } 
 }
 
-function open_file($dir,$file_name, $webid)
+function open_file($web_host,$web_user,$web_password,$dir,$file_name, $webid)
 {
 	$file = $dir.$file_name;
 
 	// check if form has been submitted
-	if (isset($_POST['text']))
-	{
-	    // save the text contents
-	    file_put_contents($file, $_POST['text']);
-
-	    // redirect to form again
-	    // header(sprintf('Location: %s', $url));
-	    // printf('<a href="%s">Moved</a>.', htmlspecialchars($url));
-	    // exit();
-	}
 
 	// read the textfile
-	$text = file_get_contents($file);
+	// $text = file_get_contents($file);
+	$text = get_File($web_host,$web_user,$web_password,$dir.$file_name);
 	?>
 
 		<div class="modal-header">
@@ -204,25 +215,9 @@ function open_file($dir,$file_name, $webid)
 
 <?php
 }
-
-function download($file,$download)
+function download($web_host,$web_user,$web_password,$dir)
 {
-	$filename=$download;
-	
-	$len = filesize($file); // Calculate File Size
-	ob_clean();
-	header("Pragma: public");
-	header("Expires: 0");
-	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-	header("Cache-Control: public"); 
-	header("Content-Description: File Transfer");
-	header("Content-Type:application/pdf"); // Send type of file
-	$header="Content-Disposition: attachment; filename=$filename;"; // Send File Name
-	header($header );
-	header("Content-Transfer-Encoding: binary");
-	header("Content-Length: ".$len); // Send File Size
-	@readfile($file);
-	exit;
+	shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/upload.ps1" upload '.$web_host.' '.$web_user.' '.$web_password.' '.$dir);
 }
 
 function compressed($dir,$origin,$name)
@@ -274,7 +269,7 @@ function uncompressed($from, $to)
 	$zip->close();
 }
 
-function filepath($dir,$foldername,$webid)
+function filepath($web_host,$web_user,$web_password,$dir,$foldername,$webid)
 {
 		if ( $foldername==="" || $foldername===null)
 		{
@@ -282,50 +277,54 @@ function filepath($dir,$foldername,$webid)
 		}else{
 			$dir    = $dir.$foldername.'/';
 		}
-		
+		// return $dir;
 		// return $dir;
         // $myfiles = array_diff(scandir($dir,1), array('.', '..')); 
 
         // $dir = '/master/files';
         $directories = array();
         $files_list  = array();
-        $files = scandir($dir);
-        foreach($files as $file)
-		{
-           if ( ($file !== '.') && ($file !== '..'))
-		   {
-              if ( is_dir($dir.'/'.$file))
-			  {
-                 $directories[]  = $file;
-              }else{
-                 $files_list[]    = $file;
-              }
-           }
+        // $files = scandir($dir);
+        // echo "<pre>";
+        $files = get_dirlist($web_host,$web_user,$web_password,$dir);
+        // print_r($files);
+        foreach ($files as $key=>$file)
+        {
+            if ($file['mode']=='d')
+            {
+                $directories[$key]  = $file;
+
+            }else{
+                $files_list[$key]    = $file;
+
+            }
+            // echo "<pre>";
+            // print_r($file);
         }
         foreach ($directories as $key => $value) {
             ?>
     
     <tr>
                                                 <td class="folder_click" foldername="<?php if ( $foldername!==null)
-												{ echo $foldername.'/'.$value;}else{echo $value;} ?>" style="cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">
+												{ echo $foldername.'/'.$value['name'];}else{echo $value['name'];} ?>" style="cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">
                                                     <div class="d-flex">
 														<i class="far fa-folder  nav-tab-icon"></i> 
-														<span class="ml-2 mt-1"><?= $value ?></span>
+														<span class="ml-2 mt-1"><?= $value['name'] ?></span>
 													</div>
                                                 </td>
-                                                <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
-                                                <td><?= filetype($dir.'/'.$value)?></td>
-                                                <td><?php echo sizeFormat(folderSize($dir.'/'.$value)) ?></td>
+                                                <td><?= $value['lasttime'] ?></td>
+                                                <td>Dir</td>
+                                                <td><?php echo $value['length'] ?></td>
                                                 <td class="d-flex" >
                                                     <div class=" col-sm-12">
                                                         <span class=""></span>
-                                                        <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                        <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value['name'] ?>" action="zip">
                                                         圧縮
                                                         </button>
-                                                        <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="rename">名前変更
+                                                        <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="rename">名前変更
                                                         </button>
-														<?php if ( $dir.'/'.$value !== $dir.'/web'):?>
-                                                        <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="delete">
+														<?php if ( $webpath.'/'.$value !== $webpath.'/web'):?>
+                                                        <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="delete">
                                                         削除
                                                         </button>
                                                 		<?php endif; ?>
@@ -340,40 +339,40 @@ function filepath($dir,$foldername,$webid)
                                             
                                             $url = $protocol . $_SERVER['HTTP_HOST'];
                                             foreach ($files_list as $key => $value) {
-                                                $extension = getFileExt($dir.'/'.$value);
+                                                $extension = $value['extension'];
                                                 ?>
                                                 <tr>
                                                 
                                                 <td class="open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext))
-												{ echo 'data-target="#common_dialog"'; } ?> file_name="<?= $value ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"><div class="d-flex">
-												<i class="far fa-file nav-tab-icon"></i><span class="ml-2 mt-1"><?= $value ?></span>
+												{ echo 'data-target="#common_dialog"'; } ?> file_name="<?= $value['name'] ?>"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"><div class="d-flex">
+												<i class="far fa-file nav-tab-icon"></i><span class="ml-2 mt-1"><?= $value['name'] ?></span>
 												</div></td>
                                                 
-                                                <td><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></td>
-                                                <td><?= filetype($dir.'/'.$value)?></td>
-                                                <td path="E:\webroot\LocalUser" file="<?=$value?>">
-                                                    <?php echo sizeFormat(filesize($dir.'/'.$value)) ?>
+                                                <td><?= $value['lasttime'] ?></td>
+                                                <td>File</td>
+                                                <td path="E:\webroot\LocalUser" file="<?=$value['name']?>">
+                                                    <?php echo sizeFormat($value['length']) ?>
                                                 </td>
                                                 <td class="d-flex" >
                                                     <div class="col-sm-12 ">
-                                                        <button class="btn common_dialog_fm  btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                        <button class="btn common_dialog_fm  btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=zip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value['name'] ?>" action="zip">
                                                         圧縮
                                                         </button>
                                                         <?php 
-                                                        if ( getFileExt($dir.'/'.$value)==="zip")
+                                                        if ($value['extension']==="zip")
                                                         {?>
-                                                            <button class="btn common_dialog_fm  btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=unzip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value ?>" action="zip">
+                                                            <button class="btn common_dialog_fm  btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=unzip&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  uniquename="<?= $value['name'] ?>" action="zip">
                                                             解凍
                                                         </button>
                                                         <?php 
                                                         }
                                                         ?>
-                                                        <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="rename">名前変更
+                                                        <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="rename">名前変更
                                                         </button>
-                                                        <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value ?>" action="delete">
+                                                        <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_file&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="delete">
                                                         削除
                                                         </button>
-                                                        <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value?>" class="btn download_file">
+                                                        <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value['name']?>" class="btn download_file">
                                                         <i class="fa fa-download"></i>
                                                         </a>
                                                     </div>

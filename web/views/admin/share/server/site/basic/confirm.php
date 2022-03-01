@@ -14,7 +14,9 @@ if ( isset($_POST['action']))
 		$code = $status_code;
 		$url_spec= $_POST['url_spec'];
         $temp['ID-'.$status_code] = ["url"=>$url_spec,"stopped"=>$status,"statuscode"=>$status_code];
-		echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
+		// echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
+		Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:/scripts/commons/errorpages.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '. $webuser." ". $code." ". $status_code." ".$url_spec." ".$status." new");
+		// die;
 		$msg = "「エラーページ ".$code."」 を追加しました";
 	} elseif ( $_POST['action'] === "edit")
 	{
@@ -30,7 +32,8 @@ if ( isset($_POST['action']))
 		
 		$msg = "「エラーページ ".$code."」 を編集しました";
 				
-		echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status." edit");
+		// echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status." edit");
+		Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/errorpages.ps1" edit '.$web_host.' '.$web_user.' '.$web_password.' '. $webuser." ". $code." ". $status_code." ".$url_spec." ".$status." edit");
 		// echo $code;
 		// echo "<br>".$status_code;
 		// die();
@@ -39,9 +42,14 @@ if ( isset($_POST['action']))
 		 $action= $_POST['action'];
 		 $act_id= $_POST['act_id'];
 		$code = $temp[$act_id]['statuscode'];
-		echo $msg = "「エラーページ ".$code."」を削除しました";
+		$msg = "「エラーページ ".$code."」を削除しました";
 		unset($temp[$act_id]);
+		$status_code ='noneed';
+		$url_spec ='noneed';
+		$status =0;
 		// echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
+		Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/errorpages.ps1" delete '.$web_host.' '.$web_user.' '.$web_password.' '. $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
+		// die();
 	} else
 	{
 		$action= $_POST['action'];
@@ -57,7 +65,9 @@ if ( isset($_POST['action']))
 		$msg = "「エラーページ ".$code."」 を".$msg."にしました";
 		// echo $code;
 		// die();
-		echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
+		// echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
+		echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/errorpages.ps1" onoff '.$web_host.' '.$web_user.' '.$web_password.' '. $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
+		// die;
 	}
 
     $result = json_encode($temp);

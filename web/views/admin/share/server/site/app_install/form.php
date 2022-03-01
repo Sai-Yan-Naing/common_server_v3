@@ -24,7 +24,8 @@
         <label for="version" class="col-sm-3 col-form-label">バージョン</label>
         <div class="col-sm-8" id="version">
             <?php
-            foreach ($values=app_version("WORDPRESS") as $key => $value) {
+            echo(getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS"));
+            foreach ($values=getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS") as $key => $value) {
             ?>
                 <div class="form-check-inline">
                 <label class="form-check-label">

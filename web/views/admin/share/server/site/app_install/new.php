@@ -12,12 +12,12 @@
             <div class="col-sm-8">
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="change/app_version">Word Press
+                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="/admin/share/server?setting=site&tab=app_install&act=app_version&webid=13">Word Press
                     </label>
                 </div>
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="ECCUBE" name="app" gourl="change/app_version">EC-CUBE
+                    <input type="radio" class="form-check-input app" value="ECCUBE" name="app" gourl="/admin/share/server?setting=site&tab=app_install&act=app_version&webid=13">EC-CUBE
                     </label>
                 </div>
             </div>
@@ -32,7 +32,8 @@
             <label for="version" class="col-sm-3 col-form-label">バージョン</label>
             <div class="col-sm-8" id="version">
                 <?php
-                foreach ($values=app_version("WORDPRESS") as $key => $value):
+            // print_r(getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS"));
+                foreach ($values=getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS") as $key => $value):
                 ?>
                     <div class="form-check-inline">
                         <label class="form-check-label">

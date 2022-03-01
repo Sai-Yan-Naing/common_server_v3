@@ -18,7 +18,8 @@ if ( $action=='onoff' )
             require_once("views/admin/share/various/information/index.php");
             die("");
     }
-    echo shell_exec("%windir%\system32\inetsrv\appcmd.exe $startstop sites $sitename");
+    // echo shell_exec("%windir%\system32\inetsrv\appcmd.exe $startstop sites $sitename");
+    shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" site '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
     // die;
 } elseif ($action=='apponoff')
 {
@@ -34,7 +35,9 @@ if ( $action=='onoff' )
         require_once("views/admin/share/various/information/index.php");
             die("");
     }
-    echo shell_Exec("%windir%\system32\inetsrv\appcmd.exe $startstop  apppool /apppool.name:$sitename");
+    // echo shell_Exec("%windir%\system32\inetsrv\appcmd.exe $startstop  apppool /apppool.name:$sitename");
+    
+    shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" app '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
 }
 flash($msgsession,$msg);
 header("location: /admin/share/various?setting=information&act=index&webid=$webid");

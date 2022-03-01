@@ -55,6 +55,28 @@ $gethost = $commons->getRow($web_server);
 $web_host = $gethost['ip'];
 $web_user = $gethost['username'];
 $web_password = $gethost['password'];
+$web_mydbuser = $gethost['mydbuser'];
+$web_mydbpass = $gethost['mydbpass'];
+$web_madbuser = $gethost['madbuser'];
+$web_madbpass = $gethost['madbpass'];
+$web_msdbuser = $gethost['msdbuser'];
+$web_msdbpass = $gethost['msdbpass'];
+
+define("MYROOT", $web_mydbuser);
+define("MYROOT_PASS", $web_mydbpass);
+define("MYDSN", 'mysql:host='.$web_host.':3310;dbname=japan_system');
+
+define("MAROOT", $web_madbuser);
+define("MAROOT_PASS", $web_madbpass);
+define("MADSN", 'mysql:host='.$web_host.':3307');
+
+// const SQLSERVER_2016_DSN = "sqlsrv:Server=localhost;Database=master";
+// const SQLSERVER_2016_USER = "tester";
+// const SQLSERVER_2016_PASS = "welcome123!";
+
+define("SQLSERVER_2016_USER", $web_msdbuser);
+define("SQLSERVER_2016_PASS", $web_msdbpass);
+define("SQLSERVER_2016_DSN", 'sqlsrv:Server='.$web_host.';Database=master');
 
 $webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webrootuser; 
 

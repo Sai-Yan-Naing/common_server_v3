@@ -7,8 +7,10 @@ $msgsession ="msg";
     {
         $file = $webpath."/web/web.config";
         $value = $_POST['web_config'];
-        putFile($file,$value);
-        webconfigset($webpath);
+        // putFile($file,$value);
+        // webconfigset($webpath);
+        put_File($web_host,$web_user,$web_password,ROOT_PATH.$file,$value);
+        webconfig_set($web_host,$web_user,$web_password,$webpath);
         die();
     }
 
@@ -16,15 +18,22 @@ $msgsession ="msg";
     {
         $file = $webpath."/web/.user.ini";
         $value = $_POST['php_ini'];
-        putFile($file,$value);
-        phpiniset($webpath);
+        // putFile($file,$value);
+        // phpiniset($webpath);
+        // put_File($web_host,$web_user,$web_password);
+        put_File($web_host,$web_user,$web_password,ROOT_PATH.$file,$value);
+        phpini_set($web_host,$web_user,$web_password,$webpath);
         die();
     }
 
     if ( isset($_GET['apply']) && $_GET['apply'] ==='dotnet_version')
     {
         $version = $_POST['version'];
-        shell_exec("%systemroot%\system32\inetsrv\APPCMD set apppool $webuser /managedRuntimeVersion:$version");
+        // shell_exec("%systemroot%\system32\inetsrv\APPCMD set apppool $webuser /managedRuntimeVersion:$version");
+
+        shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/dotnet/dotnet.ps1" change '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$version);
+        // die;
+
         $webappversion->app->dotnet=$version;
         $temp=$webappversion;
         $result=json_encode($temp);
@@ -39,9 +48,14 @@ $msgsession ="msg";
     if ( isset($_GET['apply']) && $_GET['apply'] ==='php_version')
     {
         $version = $_POST['version'];
-        $exec = "e:/scripts/php_version/php_version_change.bat $webuser $version";
+        // $exec = "e:/scripts/php_version/php_version_change.bat $webuser $version";
 
-        echo shell_exec($exec);
+        // echo shell_exec($exec);
+
+
+        shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/php_version/phpversion.ps1" change '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$version);
+        // die;
+
         $webappversion->app->php=$version;
         $temp=$webappversion;
         $result=json_encode($temp);
@@ -62,6 +76,18 @@ function phpiniset($webuser)
 function webconfigset($webuser)
 {?>
     <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= getFile($webuser."/web/web.config")?>
+                                        </textarea>
+<?php }
+?>
+<?php
+function phpini_set($web_host,$web_user,$web_password,$webuser)
+{?>
+    <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= get_File($web_host,$web_user,$web_password,ROOT_PATH.$webuser."/web/.user.ini")?>
+                                        </textarea>
+<?php }
+function webconfig_set($web_host,$web_user,$web_password,$webuser)
+{?>
+    <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= get_File($web_host,$web_user,$web_password,ROOT_PATH.$webuser."/web/web.config")?>
                                         </textarea>
 <?php }
 ?>

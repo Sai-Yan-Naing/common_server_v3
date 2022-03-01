@@ -15,10 +15,11 @@ $msg = "jp message";
 		
 		if ( ! $commons->addMariaUserAndDB($db_name, $db_user, $db_pass) )
 		{
-			$error = "Something errors";
+			echo $error = "Something errors";
 			require_once("views/admin/share/server/database/mariadb/index.php");
 			die("");
 		}
+		// die;
         $insert_q = "INSERT INTO db_account_for_mariadb (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
 
 		if( ! $commons->doThis($insert_q,[$webdomain,$db_name,$db_user, 1, $db_pass])) {

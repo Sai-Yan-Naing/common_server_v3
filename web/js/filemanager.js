@@ -120,6 +120,12 @@ $(document).on("click", ".open_file", function () {
         common_path: $common_path,
         action: "open_file",
       },
+     beforeSend: function(){
+     document.getElementById("display_dialog").innerHTML = $('#common_modal_loading').html();
+   },
+   // complete: function(){
+   //   stoploading();
+   // },
       success: function (data) {
         document.getElementById("display_dialog").innerHTML = data;
       },

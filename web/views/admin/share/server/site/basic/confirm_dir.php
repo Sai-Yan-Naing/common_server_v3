@@ -4,7 +4,7 @@ require_once("views/admin/admin_shareconfig.php");
     $for = $_GET['for'];
     $temp = json_decode($webbasicsetting,true);
     $bass_dir = $_POST['bass_dir'];
-    $dir_path=$webrootuser.'/'.$webuser.'/'.$bass_dir;
+    $dir_path=$webpath.'/'.$bass_dir;
     $msg = "jp message";
     $msgsession ="msg";
     if ($for==='dir')
@@ -14,7 +14,10 @@ require_once("views/admin/admin_shareconfig.php");
             $msg = "BASIC認証「".$bass_dir."」を作成しました";
             $temp["ID-".time()]["url"] =$bass_dir;
             $temp["ID-".time()]["user"] =null;
-            createDir($dir_path);
+            // createDir($dir_path);
+            // echo $dir_path;
+            newDir($web_host,$web_user,$web_password,ROOT_PATH.$dir_path);
+            // die;
             // $temp
         }else{
             $msg = "BASIC認証「".$temp[$_POST['dir_id']]['url']."」を削除しました";
@@ -22,6 +25,7 @@ require_once("views/admin/admin_shareconfig.php");
             // echo ROOT_PATH.$dir_path;
             // die();
             // delete_directory(ROOT_PATH.$dir_path);
+            deleteDir($web_host,$web_user,$web_password,ROOT_PATH.$dir_path);
         }
     } elseif ($for==='user')
     {
@@ -63,7 +67,7 @@ require_once("views/admin/admin_shareconfig.php");
     }
     $_SESSION['error'] = false;
     $_SESSION['message'] = 'Success';
-    addBassman($webrootuser.'/'.$webuser,$result);
+    addBassman($web_host,$web_user,$web_password,ROOT_PATH.$webpath,$result);
     flash($msgsession,$msg);
     header("location: /admin/share/server?setting=site&tab=basic&act=index&webid=$webid");
     die();

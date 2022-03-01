@@ -33,7 +33,7 @@ class Backup
 
 	function checkScheduler($domain)
 	{
-			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			$pdo_account = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 			$stmt1 = $pdo_account->prepare('SELECT * FROM backup_data WHERE domain = ?');
 			$stmt1->execute(array($domain));
 			$data = $stmt1->fetch(PDO::FETCH_ASSOC);

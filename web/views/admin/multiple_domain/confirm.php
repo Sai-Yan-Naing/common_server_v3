@@ -51,9 +51,12 @@ if ( $action === 'new' )
 
     // shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/addsite.ps1" '.$webdomain.' '.$user.' '.$password.' '.$ip. ' '.$origin_user);
 
-    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/new.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$webdomain.' '.$user.' '.$password.' '.$web_host. ' '.$origin_user);
+     shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/new.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$webdomain.' '.$user.' '.$password.' '.$web_host. ' '.$origin_user);
 
-    $commons->mail_server($webdomain,'winserverroot','welcome123!','new','noexist');
+    // $commons->mail_server($webdomain,'winserverroot','welcome123!','new','noexist');
+
+    shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" new '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$password.' '.$user);
+
     // die;
 } elseif ( $action === 'onoff')
 {

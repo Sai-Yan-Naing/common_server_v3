@@ -42,6 +42,8 @@ if ( $action=='new')
 	}
 }
 
-Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/blockip/blockip.ps1" '. $site." ".$ip.' '.$action);
+// Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/blockip/blockip.ps1" '. $site." ".$ip.' '.$action);
+echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/blockip.ps1" ip '.$web_host.' '.$web_user.' '.$web_password.' '.$site.' '.$ip.' '.$action);
+// die;
 flash($msgsession,$msg);
 header("location:/admin/share/server?setting=security&tab=ip&act=index&webid=$webid");

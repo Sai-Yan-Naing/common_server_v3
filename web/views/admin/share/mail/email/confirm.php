@@ -23,6 +23,8 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 		require_once('views/admin/share/mail/index.php');
 		die("");
 	}
+echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" newuser '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$email);
+// die;
 } elseif ( isset($_POST['action']) and $_POST['action'] === 'edit') {
 	$mail_pass_word=$_POST['mail_pass_word'];
 	$act_id=$_POST['act_id'];
@@ -37,6 +39,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	$getRow = $commons->getRow($query,[$act_id]);
 	$msg = "メールアドレス「".$getRow['email']."@".$webdomain."」のパスワードを変更しました";;
 	$msgsession ="msg";
+echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" edit '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$getRow['email']);
 }else {
 	$act_id=$_POST['act_id'];
 	$query = "SELECT * FROM add_email WHERE id=?";
@@ -50,9 +53,10 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 		require_once('views/admin/share/mail/index.php');
 		die();
 	}
+echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" delete '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$getRow['email'].' '.$getRow['email']);
 }
 
-$commons->mail_server($webdomain,$email,$mail_pass_word,$action,$isexist);
+// $commons->mail_server($webdomain,$email,$mail_pass_word,$action,$isexist);
 flash($msgsession,$msg);
 header("location: /admin/share/mail?setting=email&tab=tab&act=index&webid=$webid");
 
