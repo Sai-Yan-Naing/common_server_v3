@@ -1,6 +1,6 @@
 <?php
 require_once('views/admin/admin_vpsconfig.php');
-$plan_q = "SELECT plan FROM vps_account Where id=?";
+$plan_q = "SELECT [plan] FROM vps_account Where id=?";
 $getpln = $commons->getRow($plan_q,[$webid]);
 ?>
 <!-- Modal Header -->

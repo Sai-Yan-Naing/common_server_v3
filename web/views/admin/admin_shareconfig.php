@@ -17,10 +17,13 @@ $webadminID = $_COOKIE['admin'];
 $admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=?",[$webadminID]);
 $webadminID = $admin_acc['user_id'];
 $webadminName = $admin_acc['name'];
+$webadminweb = explode(",",$admin_acc['web']);
+$webadminplanid = $admin_acc['plan_id'];
 
 $web_acc = $commons->getRow("SELECT * FROM web_account WHERE id=? AND customer_id=?",[$_GET['webid'],$_COOKIE['admin']]);
 $webid = $web_acc['id'];
 $webadminID = $web_acc['customer_id'];
+$web_server_id = $web_acc['web_server_id'];
 $webuser = $web_acc['user'];
 $webdomain = $web_acc['domain'];
 $webpass = $web_acc['password'];
@@ -36,7 +39,7 @@ $weborigin = $web_acc['origin'];
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$_COOKIE['admin']]);
 $webrootid = $webroot_acc['id'];
 $webadminID = $webroot_acc['customer_id'];
-$web_server_id = $webroot_acc['web_server_id'];
+$webroot_server_id = $webroot_acc['web_server_id'];
 $webrootuser = $webroot_acc['user'];
 $webrootdomain = $webroot_acc['domain'];
 $webrootpass = $webroot_acc['password'];
@@ -61,10 +64,30 @@ $web_madbuser = $gethost['madbuser'];
 $web_madbpass = $gethost['madbpass'];
 $web_msdbuser = $gethost['msdbuser'];
 $web_msdbpass = $gethost['msdbpass'];
+$web_ftp = $gethost['ftp_user'];
+$web_ftppass = $gethost['ftp_pass'];
+
+$webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webadminplanid]);
+$webplnname = $webroot_plan['name'];
+$webplnsite = $webroot_plan['site'];
+$webplnwebcapacity = $webroot_plan['web_capacity'];
+$webplnmailuser = $webroot_plan['mail_user'];
+$webplnmysqldb = $webroot_plan['mysql_db'];
+$webplnmysqldbnum = $webroot_plan['mysql_db_num'];
+$webplnmariadb = $webroot_plan['maria_db'];
+$webplnmariadbnum = $webroot_plan['maria_db_num'];
+$webplnmssqldb = $webroot_plan['mssql_db'];
+$webplnmssqldbnum = $webroot_plan['mssql_db_num'];
+$webplnmssqlcap = $webroot_plan['mssql_db_capacity'];
+
+$webplnftp = $webroot_plan['ftp'];
+$webplnftpnum = $webroot_plan['ftp_num'];
+
+$webplnbackup = $webroot_plan['back_up'];
 
 define("MYROOT", $web_mydbuser);
 define("MYROOT_PASS", $web_mydbpass);
-define("MYDSN", 'mysql:host='.$web_host.':3310;dbname=japan_system');
+define("MYDSN", 'mysql:host='.$web_host.':3310');
 
 define("MAROOT", $web_madbuser);
 define("MAROOT_PASS", $web_madbpass);

@@ -23,9 +23,11 @@ $getAllRow = $commons->getAllRow($query, $params);
                                             <div class="col-sm-3">
                                                 <span>メールアドレス</span>
                                             </div>
+                                            <?php if( (int)$webplnmailuser >= count($getAllRow ) || $webplnmailuser=='unlimited'):?>
                                             <div class="col-sm-9">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/mail?setting=email&tab=tab&act=new&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>メールアドレス追加</button>
                                             </div>
+                                            <?php endif; ?>
                                         </div>
                                         <table class="table table-bordered">
                                                 <tr>

@@ -93,7 +93,7 @@ $getAllRow=$commons->getAllRow($query);
                                     <input type="hidden" name="act" value="site_guard_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                Site Gird Server Edition追加
+                                                Site Guard Server Edition追加
                                             </div>
                                             <div class="col-sm-3">
                                                 <span>月額</span>

@@ -33,7 +33,7 @@
                                         <input type="password" class="form-control" name="password" placeholder="12～40文字、英数記号大小文字組み合わせ">
                                     </div>
                                     <div class="col-sm-3">
-                                        <button type="submit" class="btn btn-sm btn-outline-info form-control">変更</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-info form-control vpsrebtn">変更</button>
                                     </div>
                                 </div>
                                 </form>

@@ -252,3 +252,69 @@ function dnsexceed5($url) {
   });
   return $status;
 }
+
+$(document).ready(function(){
+  $param = $('#checkvps').attr('checkvps');
+  // console.log($param)
+  if (typeof $param !== 'undefined') {
+    checkvps()
+  setInterval(function(){ 
+                checkvps();
+            }, 8000);
+}
+})
+
+function checkvps()
+{
+  $.ajax({
+    type: "POST",
+    async: false,
+    contentType: "application/json",
+    dataType: "json",
+    url: '/checkvps-active?param='+$param,
+    success: function (data) {
+      console.log(data)
+      if(data.reboot==1){
+        $('button.vpsrebtn').prop('disabled', true);
+        $('.switch').attr('data-toggle','');
+        $('.switch').css({'cursor':'default'})
+        $('.slider').css({'cursor':'default'})
+        $('a.vpsrebtn').css({'pointer-events':'none'})
+        // console.log(data)
+      }else{
+        if(data.active==1){
+          $('button.vpsrebtn').prop('disabled', false);
+          $('a.vpsrebtn').css({'pointer-events':''})
+        }else{
+          $('button.vpsrebtn').prop('disabled', true);
+          $('a.vpsrebtn').css({'pointer-events':'none'})
+        }
+        
+        $('.switch').attr('data-toggle','modal');
+        $('.switch').css({'cursor':'pointer'})
+        $('.slider').css({'cursor':'pointer'})
+        
+
+      }
+    },
+  });
+}
+
+function exceedwebcap($gourl) {
+            $url = document.URL.split("/");
+            $url = $url[0] + "//" + $url[2];
+            $res = false;
+
+            
+                $.ajax({
+                    type: "POST",
+                    url: $url + "/" + $gourl,
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                      $res=data.status;
+                    },
+                  });
+                return $res;
+            }

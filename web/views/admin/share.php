@@ -6,7 +6,30 @@
             <div class="container-fluid px-4">
                     <?php require_once('views/admin/title.php') ?>
                     <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                        <h4 class="mb-4">契約サービス</h4>
+                        <div class="d-flex">
+                            <h4 class="mb-4">契約サービス</h4>
+                            <?php 
+                        // echo $webcapacity = folderSize($web_host,$web_user,$web_password,$webrootuser); 
+                        // $capt = array('30GB'=>32212254720,'50GB'=>53687091200,'100GB'=>107374182400,'200GB'=>214748364800,'300GB'=>322122547200,'400GB'=>429496729600);
+
+                        // echo $webplnwebcapacity;
+                        // echo $capt[$webplnwebcapacity.'GB']
+                        // $webcapacity = 107374182400;
+                            // 1073741824 1GB in byte
+                        if($webcapacity > ($webplnwebcapacity*1073741824)): ?>
+
+                            <p class="ml-5 text-warning">
+                                Warning Message
+                            </p>
+                        <?php
+                        endif;
+
+                        ?>
+                            
+                        </div>
+                        
+
+
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/admin" onclick="loading()">共用サーバー</a>
@@ -31,6 +54,7 @@
                                     <th class="tb-width-2">契約ドメイン</th>
                                     <th class="tb-width">サイト設定</th>
                                     <th class="tb-width">使用容量</th>
+                                    <th class="tb-width">Web server</th>
                                     <th class="tb-width-1">サイト</th>
                                     <th class="tb-width-1">アプリケーションプール</th>
                                     <th class="tb-width">エイリアス</th>
@@ -54,8 +78,9 @@
                                         <a href="/admin/share/server?setting=site&tab=app_install&act=index&webid=<?=$domain[id]?>" target="_blank" class="btn btn-sm btn-outline-info">設定</a>
                                     </td>
                                     <td class="tb-width">
-                                        <span><?php //if($domain['origin'] !=1 ){ echo sizeFormat(folderSize($web_host,$web_user,$web_password,$webrootuser."/".$domain['user']));}else{echo sizeFormat(folderSize($web_host,$web_user,$web_password,$domain['user']));} ?></span>
+                                        <span><?php //if($domain['origin'] !=1 ){ echo sizeFormat(folderSize($web_host,$web_user,$web_password,$webrootuser."/".$domain['user']));}else{echo sizeFormat($webcapacity);} ?></span>
                                     </td>
+                                    <td class="tb-width"><?= $gethost['name']?></td>
                                     <td class="tb-width-1">
                                         <form action="" method = "post">
                                             <input type="hidden" name="app" value="site">
@@ -96,7 +121,9 @@
                         </table>
                         </div>
                         <div class="row justify-content-center hbtn">
+                            <?php if( (int)$webplnsite > count($multidomain ) || $webplnsite=='unlimited'):?>
                                 <div class="col-md-3"><button class="btn btn-outline-info form-control common_dialog" gourl="/admin/multiple_domain?act=new" data-toggle="modal" data-target="#common_dialog">マルチドメイン追加</button></div>
+                            <?php endif; ?>
                                 <div class="col-md-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">ドメイン取得/移管</a></div>
                                 <div class="col-md-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
                                 <div class="col-md-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>

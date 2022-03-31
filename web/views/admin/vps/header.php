@@ -30,6 +30,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     </head>
     <body class="sb-nav-fixed">
+        <span style="display:none" id="checkvps" checkvps=<?=$webid?>></span>
     <nav class="sb-topnav navbar navbar-expand" style="height: 75px;">
             <!-- <a class="navbar-brand ps-3" href="/admin/vps/server?tab=connection&act=index&webid=<?=$webid?>"><h2><span style="font-size:2em;">W</span>inserver</h2></a> -->
             <div class="navbar-brand ps-3"></div>

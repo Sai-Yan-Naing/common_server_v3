@@ -62,6 +62,8 @@ class Common{
 		}
 	}
 
+	
+
 	function addMyUserAndDB($db, $db_user, $db_pass)
 	{
 		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
@@ -234,8 +236,9 @@ class Common{
 		return false;
 	}
 
-		function addMsUserAndDB($version, $db, $db_user, $db_pass){
+		function addMsUserAndDB($version, $db, $db_user, $db_pass, $cap=""){
 			$version="2016";
+			$cap = ($cap*1024).'MB';
 			// $dsn = constant("SQLSERVER_" . $version . "_DSN");
 			// $user = constant("SQLSERVER_" . $version . "_USER");
 			// $pass = constant("SQLSERVER_" . $version . "_PASS");
@@ -293,6 +296,9 @@ class Common{
 					$stmt->execute();
 					return false;
 				}
+				$stmt = $pdo->prepare("ALTER DATABASE [$db] MODIFY FILE ( NAME = $db, MAXSIZE = $cap )");
+				$result = $stmt->execute();
+				$stmt->closeCursor();
 				return true;
 			} catch (PDOException $e) {
 				$error_message = $e->getMessage();

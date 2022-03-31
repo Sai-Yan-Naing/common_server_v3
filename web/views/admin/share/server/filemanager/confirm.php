@@ -6,6 +6,7 @@ $dir = ROOT_PATH.$webpath.'/';
 if (isset($_POST['foldername']))
 {
     $foldername = $_POST['foldername'];
+    // echo $dir.$foldername;
     echo filepath($web_host,$web_user,$web_password,$dir,$foldername,$webid);
     die;
 } elseif (isset($_POST['action']) and $_POST['action']==='rename')
@@ -87,8 +88,8 @@ if (isset($_POST['foldername']))
 		$_dir=$dir;
 	}
 	// echo $webpath.'/'.$_FILES['upload'];
-	// uploadFile($_dir,$_FILES['upload']);
-	// uploadFile($web_host,'ftpaccess','welcome123!',$webpath,$_FILES['upload']);
+	// uploadFile($webpath,$_FILES['upload']);
+	uploadFile($web_host,$web_ftp,$web_ftppass,$webpath,$_FILES['upload']);
 	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 } elseif ( $_POST['action'] ==='zip')
@@ -123,15 +124,16 @@ if (isset($_POST['foldername']))
 {
 	if ( $_GET['common_path']!==null and $_GET['common_path']!=='')
 	{
-		$_dir=$dir.$_GET['common_path'].'/';
-	}else{
-		$_dir=$dir;
+		$webpath=$webpath.'/'.$_GET['common_path'].'/';
 	}
-    // echo $webpath.$_GET['download'];
+    // echo $webpath;
+    // // echo $_GET['common_path'];
     // die;
-    filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
+    // filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
 	// download($webpath.$_GET['download'],$_GET['download']);
-	// download($web_host,'ftpaccess','welcome123!',$webpath.'/'.$_GET['download']);
+	download($web_host,$web_ftp,$web_ftppass,$webpath,$_GET['download']);
+    // filepath($web_host,$web_user,$web_password,$dir,$_GET['common_path'],$webid);
+    // die();
 	// header("Location: filemanager.php");
 } elseif ( isset($_POST['file_name']) and $_POST['action']==='open_file')
 {
@@ -142,6 +144,8 @@ if (isset($_POST['foldername']))
 	{
 		$_dir=$dir;
 	}
+	// echo $_dir.$_POST['file_name'];
+	// echo $web_host.$web_user.$web_password;
 	open_file($web_host,$web_user,$web_password,$_dir,$_POST['file_name'],$webid);
 	// get_File($web_host,$web_user,$web_password,$_dir.$_POST['file_name']);
 	die();
@@ -215,10 +219,7 @@ function open_file($web_host,$web_user,$web_password,$dir,$file_name, $webid)
 
 <?php
 }
-function download($web_host,$web_user,$web_password,$dir)
-{
-	shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/upload.ps1" upload '.$web_host.' '.$web_user.' '.$web_password.' '.$dir);
-}
+
 
 function compressed($dir,$origin,$name)
 {
@@ -323,6 +324,7 @@ function filepath($web_host,$web_user,$web_password,$dir,$foldername,$webid)
                                                         </button>
                                                         <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="rename">名前変更
                                                         </button>
+                                                        
 														<?php if ( $webpath.'/'.$value !== $webpath.'/web'):?>
                                                         <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="delete">
                                                         削除
@@ -373,8 +375,8 @@ function filepath($web_host,$web_user,$web_password,$dir,$foldername,$webid)
                                                         削除
                                                         </button>
                                                         <a href="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>&download=<?=$value['name']?>" class="btn download_file">
-                                                        <i class="fa fa-download"></i>
-                                                        </a>
+                                                <i class="fa fa-download"></i>
+                                                </a>
                                                     </div>
                                                 </td>
                                                 </tr>

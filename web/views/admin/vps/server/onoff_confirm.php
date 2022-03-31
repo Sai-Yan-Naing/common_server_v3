@@ -10,7 +10,7 @@ if ( $act == "onoff"){
     $action=$webactive==1?"shutdown":"startup";
     // die('hello');
     // echo $status.$action.$act_id;
-    $update_q = "UPDATE vps_account SET active='$status' WHERE id='$webid'";
+    $update_q = "UPDATE vps_account SET active='$status', reboot=1 WHERE id='$webid'";
     if ( ! $commons->doThis($update_q,[$status,$webid]))
     {
     echo $error="cannot update vps";

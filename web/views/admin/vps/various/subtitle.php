@@ -18,7 +18,7 @@
             <br><br>
             <span>Firewall設定 </span>
         </a>
-        <a href="/admin/vps/various?setting=load_status&tab=load_status&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='load_status')?"active":"text-dark"?>" onclick="loading()">
+        <a href="/admin/vps/various?setting=load_status&tab=load_status&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='load_status')?"active":"text-dark"?> vpsrebtn" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='load_status')?"load_status1":"load_status"?>.png" alt="site.png">
             <br><br>
             <span>負荷状況確認</span>
@@ -28,12 +28,12 @@
             <br><br>
             <span>オプション追加</span>
         </a>
-        <a href="/admin/vps/various?setting=easy_install&tab=easy_install&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='easy_install')?"active":"text-dark"?>" onclick="loading()">
+        <a href="/admin/vps/various?setting=easy_install&tab=easy_install&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='easy_install')?"active":"text-dark"?> vpsrebtn" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='easy_install')?"easy_install1":"easy_install"?>.png" alt="site.png">
             <br><br>
             <span>簡単インストール</span>
         </a>
-        <a href="/admin/vps/various?setting=backup&tab=backup&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='backup')?"active":"text-dark"?>" onclick="loading()">
+        <a href="/admin/vps/various?setting=backup&tab=backup&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='backup')?"active":"text-dark"?> vpsrebtn" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='backup')?"backup1":"backup"?>.png" alt="site.png">
             <br><br>
             <span>バックアップ</span>

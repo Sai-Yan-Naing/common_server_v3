@@ -3,6 +3,7 @@ $(document).on("click", ".folder_click", function () {
   $foldername = $(this).attr("foldername");
   $this = $(this);
   $filepath = $foldername.split("/");
+  // alert($filepath);
   $_path = "";
   $webid = $this.attr("webid");
   $url = document.URL.split("/");
@@ -12,7 +13,7 @@ $(document).on("click", ".folder_click", function () {
   $result = $.ajax({
     type: "POST",
     url: $url,
-    // async:false,
+    async:false,
      beforeSend: function(){
      loading();
    },
@@ -56,12 +57,12 @@ $(document).on("click", ".folder_click", function () {
     $("#dir_path").html($path);
     $("#common_path").attr("path", $foldername);
     $(".download_file").each(function (i, obj) {
-      $temp = $(this).attr("href");
-      $(this).attr("href", $temp + "&common_path=" + $_path);
+      $temp = $(this).attr("gourl");
+      $(this).attr("gourl", $temp + "&common_path=" + $_path);
     });
   });
   // stoploading();
-  // alert('done')
+  // alert($_path)
 });
 
 $(document).on("click", ".common_dialog_fm", function () {
@@ -175,6 +176,14 @@ $(document).on("submit", "#fm_fun", function () {
       alert("Empty File cannot upload");
       return false;
     }
+    $gourl = "admin/share/server?setting=filemanager&tab=tab&act=validatecap";
+        $exceedwebcap = '容量がいっぱいになっているため、ファイル/フォルダの追加ができません。サイトデータを削除いただき追加を行ってください。';
+    if(exceedwebcap($gourl))
+     {
+          document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
+          $('#exceedwebcap').html($exceedwebcap)
+          return;
+     }
     $size = $("#upload_")[0].files[0].size;
     if ($size > 2097152) {
       alert("File size is greater than 2MB");
@@ -221,13 +230,63 @@ $(document).on("submit", "#fm_fun", function () {
     success: function (data) {
       document.getElementById("changebody").innerHTML = data;
       $(".download_file").each(function (i, obj) {
-        $temp = $(this).attr("href");
-        $(this).attr("href", $temp + "&common_path=" + $common_path);
+        $temp = $(this).attr("gourl");
+        $(this).attr("gourl", $temp + "&common_path=" + $common_path);
       });
     },
   });
   return false;
 });
+
+$(document).on('keyup','#new_dir,#new_file',function(){
+  if($(this).val() != "" && $(this) != null)
+  {
+    $(this).next().hide();
+    console.log('hide')
+  }else{
+    $(this).next().show();
+    console.log('show')
+  }
+})
+
+
+// $(document).on("click", ".download_file", function () {
+//   $gourl = $(this).attr("gourl");
+//   $url = document.URL.split("/");
+//   $url = $url[0] + "//" + $url[2] + $gourl;
+//   //   $uniquename = $(this).attr("uniquename");
+//   $this = $(this);
+//   $common_path = $("#common_path").attr("path");
+//   console.log($url);
+//   console.log($common_path);
+
+//   $.ajax({
+//     type: "POST",
+//     url: $url,
+//     // data: {'common_path':'test'},
+//     contentType: false,
+//     cache: false,
+//     processData: false,
+//     beforeSend: function () {
+//       $("#common_dialog").modal("hide");
+//      loading();
+//       //   alert("error");
+//       //   return false;
+//       // $("#err").fadeOut();
+//     },
+//    complete: function(){
+//      stoploading();
+//    },
+//     success: function (data) {
+//       document.getElementById("changebody").innerHTML = data;
+//       $(".download_file").each(function (i, obj) {
+//         $temp = $(this).attr("gourl");
+//         $(this).attr("gourl", $temp + "&common_path=" + $common_path);
+//       });
+//     },
+//   });
+//   return false;
+// });
 
 $(document).on('keyup','#new_dir,#new_file',function(){
   if($(this).val() != "" && $(this) != null)

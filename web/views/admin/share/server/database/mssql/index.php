@@ -1,6 +1,6 @@
 <?php require_once('views/admin/share/header.php'); ?>
 <?php 
-$limit = 2;
+$limit = 10;
 $table = 'db_account_for_mssql';  
 require_once('views/pagination/start.php');
 $query = "SELECT * FROM $table where domain = ?  ORDER BY id
@@ -20,9 +20,11 @@ $getAllRow = $commons->getAllRow($query, [$webdomain]);
                                 <div class="tab-content">
                                     <div class="active">
                                         <div class="d-flex mt-3 mb-3">
+                                            <?php if( $webplnmssqldb == 'yes' && ((int)$webplnmssqldbnum > count($getAllRow ) || $webplnmssqldbnum=='unlimited')):?>
                                             <div class="ml-3">
                                             <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mssql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
+                                            <?php endif; ?>
                                             <div class="ml-3">
                                                 <a  href="https://docs.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15" target="_blank" class="btn btn-link"><u>MSSQLmanagement Studioダウンロードリンク</u></a>
                                             </div>

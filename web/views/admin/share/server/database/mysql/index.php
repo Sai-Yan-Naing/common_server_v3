@@ -7,7 +7,16 @@ require_once('views/pagination/start.php');
 $query = "SELECT * FROM $table where domain = ?  ORDER BY id
                             OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
 $getAllRow = $commons->getAllRow($query, $params);
+
+$query1 = "SELECT * FROM $table where domain = ?";
+$getAllRow1 = $commons->getAllRow($query1, $params);
+
+$query2 = "SELECT * FROM db_account_for_mariadb where domain = ?";
+$getAllRow2 = $commons->getAllRow($query2, $params);
+
 ?>
+
+
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
             <div id="layoutSidenav_content">
@@ -21,9 +30,11 @@ $getAllRow = $commons->getAllRow($query, $params);
                                 <div class="tab-content">
                                     <div class="active">
                                         <div class="d-flex mt-3 mb-3">
+                                            <?php if( $webplnmariadb == 'yes' && ((int)$webplnmariadbnum > (count($getAllRow1 )+ count($getAllRow2 )) || $webplnmariadbnum=='unlimited')):?>
                                             <div class="ml-3">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mysql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
+                                            <?php endif; ?>
                                             <div class="ml-3">
                                                 <a href="<?=MYMANAGER?>" target="_blank" class="btn btn-link"><u>MYSQL マネージャー</u></a>
                                             </div>

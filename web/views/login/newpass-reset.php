@@ -38,7 +38,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
     }
 } else
 {
-    $webroot_acc = $commons->doThis("UPDATE customer SET password = '$pass_encrypted 'WHERE user_id ='$domainid'");
+    $webroot_acc = $commons->doThis("UPDATE customer SET password = '$pass_encrypted' WHERE user_id ='$domainid'");
     if ($webroot_acc)
     {
         header("location: /login");

@@ -7,7 +7,7 @@
                     <?php require_once('views/admin/vps/title.php') ?>
                     <?php require_once('views/admin/vps/server/subtitle.php') ?>
                     <?php
-                    $plan = "SELECT plan FROM vps_account Where id=?";
+                    $plan = "SELECT [plan] FROM vps_account Where id=?";
                     $getpln = $commons->getRow($plan,[$webid]);
                     $plan_ = $getpln['plan'];
                     $query = "SELECT spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
@@ -59,7 +59,7 @@
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-5">
                                             <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/vps/server?tab=basic&act=spec&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">プラン変更依頼</button>
-                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/vps/server?tab=basic&act=osreinstall&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">OS初期化</button>
+                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog vpsrebtn" gourl="/admin/vps/server?tab=basic&act=osreinstall&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">OS初期化</button>
                                         </div>
                                         <div class="col-sm-4"></div>
                                     </div>
