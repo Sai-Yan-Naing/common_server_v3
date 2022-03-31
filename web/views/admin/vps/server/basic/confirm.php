@@ -13,6 +13,8 @@ $msgsession =  "msg";
 $msg = "jb message";
     if ( isset($_POST['action']) )
     {
+        
+        $msg = "プラン変更依頼が完了しました。";
         $plan = $_POST['spec'];
         $query = "SELECT spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
         inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
@@ -57,6 +59,13 @@ $msg = "jb message";
 
         } else
         {
+            $update_q = "UPDATE vps_account SET reboot=1 WHERE id='$webid'";
+            if ( ! $commons->doThis($update_q,[$status,$webid]))
+            {
+                echo $error="cannot update vps";
+                require_once('views/admin/vps.php');
+                die();
+            }
                 $msgsession =  "msg";
 		$msg = "OS初期化が完了しました";
                 // $vm_storage = 60*1024*1048576;

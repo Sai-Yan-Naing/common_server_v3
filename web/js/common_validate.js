@@ -305,6 +305,9 @@ function allValidate() {
         $("#" + $(element).attr("id") + "-error").remove();
       },
       rules: {
+        web_server: {
+          required: true,
+        },
         domain: {
           required: true,
           domain: true,
@@ -338,6 +341,9 @@ function allValidate() {
       },
       // Specify validation error messages
       messages: {
+        web_server: {
+          required: "Web Serverを入力してください",
+        },
         domain: {
           required: "ドメイン名を入力してください",
         },
@@ -359,10 +365,22 @@ function allValidate() {
       },
       submitHandler: function (form) {
         // return false;
-        loading();
-        form.submit();
+        
+        // form.submit();
+        $gourl = "admin/multiple_domain?act=validatecap";
+        $exceedwebcap = '容量がいっぱいになっているため、サイトの追加ができません。サイトデータを削除いただき追加を行ってください。';
+        if(exceedwebcap($gourl))
+        {
+          document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
+          $('#exceedwebcap').html($exceedwebcap)
+        }else{
+          loading();
+          form.submit()
+        }
       },
     });
+
+    
 
     // end multiple domain
     // for add Contact Us Form
@@ -529,8 +547,18 @@ function allValidate() {
         },
       },
       submitHandler: function (form) {
-        loading();
-        form.submit();
+        // loading();
+        // form.submit();
+        $gourl = "/admin/share/server?setting=site&tab=app_install&act=validatecap";
+        $exceedwebcap = '容量がいっぱいになっているため、アプリケーションの追加ができません。サイトデータを削除いただき追加を行ってください。';
+        if(exceedwebcap($gourl))
+        {
+          document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
+          $('#exceedwebcap').html($exceedwebcap)
+        }else{
+          loading();
+          form.submit()
+        }
       },
     });
 

@@ -1,4 +1,21 @@
 <?php
+function cpu_usage1($webvmhost_ip,$webvmhost_user,$webvmhost_password)
+    {
+        $load = null;
+        $cmd = "cpu";
+        $host_ip = $webvmhost_ip;
+        $host_user = $webvmhost_user;
+        $host_password = $webvmhost_password;
+
+        if (stristr(PHP_OS, "win"))
+        {
+            $cmd = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\loadstatus\loadstatus.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password);
+            $shell = explode('LoadPercentage ',$cmd);
+            return (int)$shell[1];
+        }
+
+        return $load;
+    }
     function cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name)
     {
         $load = null;

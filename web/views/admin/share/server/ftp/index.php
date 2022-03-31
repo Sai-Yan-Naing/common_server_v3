@@ -41,9 +41,12 @@ $getAllRow=$commons->getAllRow($query,$params);
                                             <div class="col-sm-3">
                                                 <span>FTPアカウント</span>
                                             </div>
+
+                                            <?php if( $webplnftp == 'yes' && ((int)$webplnmssqldbnum >= count($getAllRow ) || $webplnmssqldbnum=='unlimited')):?>
                                             <div class="col-sm-9">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ＦＴＰユーザー追加</button>
                                             </div>
+                                            <?php endif; ?>
                                         </div>
                                         <table class="table table-bordered">
                                                 <tr>

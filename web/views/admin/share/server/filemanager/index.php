@@ -31,6 +31,7 @@
                             $files_list  = array();
                             // $files = scandir($dir);
                             // echo "<pre>";
+                            // echo $web_host;
                             $files = get_dirlist($web_host,$web_user,$web_password,$dir);
                             // print_r($files);
                             foreach ($files as $key=>$file)

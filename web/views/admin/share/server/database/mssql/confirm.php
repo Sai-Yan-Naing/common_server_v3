@@ -14,7 +14,7 @@ $msg = "jp message";
 		$db_name = $_POST["db_name"];
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の追加が完了しました ";
-		if ( ! $commons->addMsUserAndDB($version="",$db_name, $db_user, $db_pass))
+		if ( ! $commons->addMsUserAndDB($version="",$db_name, $db_user, $db_pass, $webplnmssqlcap))
         {
             $error = "Something error";
             require_once("views/admin/share/server/site/app_install/index.php");

@@ -43,9 +43,9 @@ $disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                                             ディスク読み書き
                                             </div>
                                             <div class="col-sm-6">
-                                                Average of Read/Write Disk : <span id="disk_read_usage" gourl="/admin/vps/various?setting=load_status&tab=load_status&act=usage1&case=disk_read&webid=<?=$webid?>"><?= $disk_read ?>%</span>
+                                                Disk Queue Length : <span id="disk_read_usage" gourl="/admin/vps/various?setting=load_status&tab=load_status&act=usage1&case=disk_read&webid=<?=$webid?>"><?= $disk_read ?></span>
                                                 <div class="progress">
-                                                    <div class="progress-bar <?php if($disk_read<=60){ echo 'bg-success';}else if($disk_read>60 and $disk_read<80){ echo 'bg-warning';}else{echo 'bg-danger';} ?>" id="disk_read" style="width:<?= $disk_read ?>%"></div>
+                                                    <div class="progress-bar <?php if($disk_read<=60){ echo 'bg-success';}else if($disk_read>60 and $disk_read<80){ echo 'bg-warning';}else{echo 'bg-danger';} ?>" id="disk_read" style="width:<?= $disk_read ?>"></div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-2">
@@ -75,13 +75,13 @@ $disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
             $url3=$("#disk_read_usage").attr("gourl");
             setInterval(function(){ 
                 usage('cpu',$url1);
-            }, 4000);
+            }, 15000);
             setInterval(function(){
                 usage('memory',$url2);
-            }, 14000)
+            }, 15000)
             setInterval(function(){
                 usage('disk_read',$url3);
-            }, 4000)
+            }, 15000)
         });
 
         function usage($var,$gourl)
@@ -95,7 +95,12 @@ $disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                 success: function(data){
                     // if($var=='cpu')
                     // {
+                        
+                        if($var=='disk_read'){
+                           $("#"+$var+"_usage").html(data); 
+                       }else{
                         $("#"+$var+"_usage").html(data+ ' %');
+                       }
                         $("#"+$var).css({"width":data+"%"})
                         $("#"+$var).removeClass();
                         if(data<=60)

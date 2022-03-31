@@ -9,9 +9,11 @@
             <br><br>
             <span>ご契約情報  </span>
         </a>
+        <?php if( $webplnbackup == 'yes'):?>
         <a href="/admin/share/various?setting=backup&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='backup')?"active":"text-dark"?>" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='backup')?"backup1":"backup"?>.png" alt="site.png">
             <br><br>
             <span>⾃動バックアップ</span>
         </a>
+        <?php endif; ?>
 </div>

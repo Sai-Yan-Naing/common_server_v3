@@ -54,3 +54,10 @@
       </div>
     </div>
   </div>
+
+  <div class="modal-content" id="exceedwebcap_dialog" style="display:none">
+	  	  <div class="modal-body text-center" id='exceedwebcap'></div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">OK</button>
+        </div>
+      </div>

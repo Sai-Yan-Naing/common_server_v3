@@ -22,9 +22,10 @@ if ( $action  === 'delete')
 {
 	$status=$getvps['active'] == 1?0:1;
 	$action=$getvps['active'] == 1?"shutdown":"startup";
+	// $reboot=1;
 	// die('hello');
 	// echo $status.$action.$act_id;
-	$update_q = "UPDATE vps_account SET active= ? WHERE id= ? ";
+	$update_q = "UPDATE vps_account SET active= ?, reboot=1 WHERE id= ? ";
 	if ( ! $commons->doThis($update_q,[$status,$act_id]))
 	{
 		$error="cannot update vps";

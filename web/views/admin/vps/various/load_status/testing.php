@@ -11,7 +11,7 @@ $memoryTotal = null;
         $vm_name = $webvm_name;
         $vm_user = JAPANSYS;
         $vm_pass = JAPANSYS_PASS;
-        $vm_action = "disk_rw";
+        $vm_action = "cpu";
         echo ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
 // if(isset($_GET['case']) && $_GET['case']=='cpu')
 // {
@@ -40,7 +40,7 @@ echo "</pre>";
 $shell1 = explode("FreePhysicalMemory ",$shell1);
 
 echo"<pre> gg" ;
-// print_r($shell1);
+print_r($shell1);
 echo "</pre>";
 // // echo round((100 - ((int)$shell1[1] * 1024 * 100 / (int)$shell[1])),2);
 // echo "<br>";

@@ -467,57 +467,62 @@ function createFile($file)
 }
 function uploadFile($web_host,$web_user,$web_password,$dir,$file)
 {
-	// $target_dir = $dir;
-	// $target_file = $target_dir . basename($file["name"]);
-	// $uploadOk = 1;
-	// $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    // return 'ok';
+	$ftp = $web_host;
+        $username = $web_user;
+        $pwd = $web_password;
+        $filename = $file['name'];
+        $tmp = $file['tmp_name'];
+       
+        $connect = ftp_connect($ftp)or die("Unable to connect to host");
+        ftp_login($connect,$username,$pwd)or die("Authorization Failed");
+        // echo "Connected!<br/>";
+        ftp_pasv($connect, true);
 
-	// // Check if image file is a actual image or fake image
-	// // if(isset($_POST["submit"])) {
-	//   // $check = getimagesize($file["tmp_name"]);
-	//   // if($check !== false) {
-	//   //   echo "File is an image - " . $check["mime"] . ".";
-	//   //   $uploadOk = 1;
-	//   // } else {
-	//   //   echo "File is not an image.";
-	//   //   $uploadOk = 0;
-	//   // }
-	// // }
+       
+        if(!$filename)
+            {
+                // echo"Please select a file";
+            }
+        else
+            {
+                ftp_put($connect,$dir.'/'.$filename,$tmp,FTP_ASCII)or die("Unable to upload");
+                        // echo"File successfully uploaded to FTP";
+            }
+}
 
-	// // Check if file already exists
-	// // if (file_exists($target_file)) {
-	// //   echo "Sorry, file already exists.";
-	// //   $uploadOk = 0;
-	// //   die();
-	// // }
+function download($web_host,$web_user,$web_password,$dir,$dfile)
+{
+        $ftp = $web_host;
+        $username = $web_user;
+        $pwd = $web_password;
+        $filename = $dfile;
+        $file = "E:\webroot\LocalUser\\temp\\$filename";
+       
+        $connect = ftp_connect($ftp)or die("Unable to connect to host");
+        ftp_login($connect,$username,$pwd)or die("Authorization Failed");
+        "Connected!<br/>";
+        ftp_pasv($connect, true);
+        ftp_get($connect, $file, $dir.'/'.$dfile, FTP_ASCII);
 
-	// // Check file size
-	// // if ($file["size"] > 500000) {
-	// //   echo "Sorry, your file is too large.";
-	// //   $uploadOk = 0;
-	// // }
+        $file = "E:\webroot\LocalUser\\temp\\$filename";
 
-	// // Allow certain file formats
-	// // if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-	// // && $imageFileType != "gif" ) {
-	// //   echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-	// //   $uploadOk = 0;
-	// // }
-
-	// // Check if $uploadOk is set to 0 by an error
-	// if ($uploadOk == 0) {
-	//   echo "Sorry, your file was not uploaded.";
-	// // if everything is ok, try to upload file
-	// } else {
-	//   if (move_uploaded_file($file["tmp_name"], $target_file)) {
-	//     // echo "The file ". htmlspecialchars( basename( $file["name"])). " has been uploaded.";
-	//   } else {
-	//     echo "Sorry, there was an error uploading your file.";
-	//   }
-	// }
-    echo $dir=$dir."/".$file['tmp_name'];
-    die;
-    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/upload.ps1" upload '.$web_host.' '.$web_user.' '.$web_password.' '.$dir);
+        // echo $filename=$filename;
+    
+    echo $len = filesize($file); // Calculate File Size
+    ob_clean();
+    header("Pragma: public");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    header("Cache-Control: public"); 
+    header("Content-Description: File Transfer");
+    header("Content-Type:application/pdf"); // Send type of file
+    $header="Content-Disposition: attachment; filename=$filename;"; // Send File Name
+    header($header );
+    header("Content-Transfer-Encoding: binary");
+    header("Content-Length: ".$len); // Send File Size
+    @readfile($file);
+    exit;
 }
 
 function flash($name, $text = '' )

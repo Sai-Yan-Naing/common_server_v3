@@ -51,5 +51,7 @@ switch ($request['path'])
 	case '/domainChecker' : include 'views/domain_checker.php'; break;
 	case '/testing' : include 'views/testing.php'; break;
 
+	case '/checkvps-active' : include 'views/checkvps.php'; break;
+
 	default: http_response_code(404); include'views/404.php'; break;
 }

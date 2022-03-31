@@ -3,6 +3,7 @@
 <?php require_once('sidebar.php');?>
     <div id="layoutSidenav_content">
         <main class="main-page">
+            <span style="display:none" id="checkvps" checkvps='all'></span>
             <div class="container-fluid px-4">
                     <?php require_once('views/admin/title.php') ?>
                     <div class="shadow-lg p-3 mb-5 bg-white rounded">

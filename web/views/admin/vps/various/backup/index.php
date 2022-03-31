@@ -15,14 +15,7 @@ $getvps=$commons->getRow($query,[$webip]);
                                 <div class="tab-content">
                                     <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
                                         <h6>バックアップ</h6>
-                                        <div class="form-group row">
-                                            <div class="col-sm-4">
-                                                <label for="" class="col-form-label">手動バックアップ</label>
-                                            </div>
-                                            <div class="col-sm-7">
-                                            <button class="btn btn-info btn-sm  common_dialog" gourl="/admin/vps/various?setting=backup&tab=backup&act=new&webid=<?= $webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>バックアップを実施</button>
-                                            </div>
-                                        </div> 
+                                        
                                         <div class="form-group row">
                                             <div class="col-sm-4">
                                                 <label for="" class="col-form-label">自動バックアップ</label>
@@ -40,6 +33,14 @@ $getvps=$commons->getRow($query,[$webip]);
                                                 </form>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-4">
+                                                <label for="" class="col-form-label">手動バックアップ</label>
+                                            </div>
+                                            <div class="col-sm-7">
+                                            <button class="btn btn-info btn-sm  common_dialog" gourl="/admin/vps/various?setting=backup&tab=backup&act=new&webid=<?= $webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>バックアップを実施</button>
+                                            </div>
+                                        </div> 
                                         <div id="changeBackup">
                                         <table class="table mt-3 table-bordered">
                                             <tr>

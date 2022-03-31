@@ -10,7 +10,7 @@ if ( $action === 'new' )
     $password1 = hash_hmac('sha256', $password, PASS_KEY);
     $user = $_POST['ftp_user'];
     
-    $web_server_id = 1;
+    $web_server_id = $_POST['web_server'];;
 
     $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
     $gethost = $commons->getRow($web_server);
@@ -55,7 +55,9 @@ if ( $action === 'new' )
 
     // $commons->mail_server($webdomain,'winserverroot','welcome123!','new','noexist');
 
-    shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" new '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$password.' '.$user);
+    $size = $webplnmail*1073741824;
+
+    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" new '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$password.' '.$user.' '.$size);
 
     // die;
 } elseif ( $action === 'onoff')
