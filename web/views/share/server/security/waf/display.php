@@ -4,17 +4,16 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain= ? ", [$webdomain]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">WAF設定</h4>
+  <h4 class="modal-title">WAF表示切替 </h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=security&tab=waf&act=confirm" method="post" id="onoff" onsubmit='loading()'>
+  <form action="/share/server?setting=security&tab=waf&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit='loading()'>
     <input type="hidden" name="switch" value="display">
     <input type="hidden" name="onoff" value="<?= (int)$waf['display']==1? 0 : 1 ?>">
-    <?= (int)$waf['display'] == 1 ? "停止" : "起動" ?>しますか ?
-      
+    「表示切替」を<?= (int)$waf['display'] == 1 ? "停止" : "起動" ?>しますか？
   </form>
 </div>
 <!-- Modal footer -->

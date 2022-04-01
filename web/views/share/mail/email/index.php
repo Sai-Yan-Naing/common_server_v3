@@ -1,7 +1,12 @@
 <?php require_once('views/share/header.php'); ?>
 <?php 
- $query = "SELECT * FROM add_email WHERE domain=?";
- $getAllRow=$commons->getAllRow($query,[$webdomain]);
+$limit = 10;
+$table = 'add_email';  
+$params = [$webdomain];
+require_once('views/pagination/start.php');
+$query = "SELECT * FROM $table where domain = ?  ORDER BY id
+                            OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
+$getAllRow = $commons->getAllRow($query, $params);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/share/sidebar.php');?>
@@ -18,15 +23,17 @@
                                             <div class="col-sm-3">
                                                 <span>メールアドレス</span>
                                             </div>
+                                            <?php if( (int)$webplnmailuser >= count($getAllRow ) || $webplnmailuser=='unlimited'):?>
                                             <div class="col-sm-9">
-                                                <button class="btn btn-info btn-sm common_dialog" gourl="/share/mail?setting=email&tab=tab&act=new" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>メールアドレス追加</button>
+                                                <button class="btn btn-info btn-sm common_dialog" gourl="/share/mail?setting=email&tab=tab&act=new&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>メールアドレス追加</button>
                                             </div>
+                                            <?php endif; ?>
                                         </div>
                                         <table class="table table-bordered">
                                                 <tr>
                                                     <th class="font-weight-bold border-dark">登録メールアドレス</th>
                                                     <th class="font-weight-bold border-dark">パスワード</th>
-                                                    <th class="font-weight-bold border-dark">Action</th>
+                                                    <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
                                                 <?php 
                                                     foreach ($getAllRow as $key => $mail): 
@@ -44,6 +51,16 @@
                                     </div>
                                 </div>
                                 <!-- end content -->
+                                <div class="d-flex mt-3">
+                                    <div></div>
+                                    <div class='ml-auto'>
+                                        <?php 
+                                            $paginatecount = "SELECT COUNT(*) FROM $table  where domain = ?";
+                                            $page_url = "/share/mail?setting=email&tab=tab&act=index&webid=".$webid."&page=";
+                                            require_once('views/pagination/end.php')
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
                     </div>
                 </main>

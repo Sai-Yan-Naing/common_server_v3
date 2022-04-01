@@ -3,6 +3,8 @@ require_once('views/share_config.php');
 $permission=$_POST['permission'];
 $action = $_POST['action'];
 // die($action);
+$msg = "jp message";
+$msgsession ="msg";
 $per = "";
 if (in_array("F", $permission))
 {
@@ -21,6 +23,10 @@ if ( $action=='new')
 	
 	$ftp_pass=$_POST['ftp_pass'];
     $permission = implode(",",$permission);
+	
+	$msg = "FTPユーザー 「".$ftp_user."」 の追加が完了しました";
+	$msgsession ="msg";
+
     $insert_q = "INSERT INTO db_ftp (ftp_user, ftp_pass, domain, permission) VALUES ('$ftp_user', '$ftp_pass', '$webdomain', '$permission')";
 	if ( !$commons->doThis($insert_q))
 	{
@@ -42,6 +48,8 @@ if ( $action=='new')
 		require_once('views/share/server/ftp/index.php');
 		die();
 	 }
+	 $msg = "FTPユーザー 「".$ftp_user."」 を変更しました";
+	 $msgsession ="msg";
 }else
 {
 	$act_id=$_POST['act_id'];
@@ -55,12 +63,20 @@ if ( $action=='new')
 		require_once('views/share/server/ftp/index.php');
 		die();
 	}
+	
+	$msg = "FTPユーザー 「".$ftp_user."」 を削除しました";
+	$msgsession ="msg";
 }
 $originuser = '';
 if ( $weborigin!=1)
 {
 	$originuser = $webrootuser;
 }
-Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser." ".$per." ".$action." ".$originuser);
-header("location: /share/server?setting=ftp&tab=tab&act=index");
+// Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser." ".$per." ".$action." ".$originuser);
+
+Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/ftp.ps1" ftp '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.' '.$per. ' '.$action.' '.$originuser);
+// die;
+
+flash($msgsession,$msg);
+header("location: /share/server?setting=ftp&tab=tab&act=index$pagy");
 ?>

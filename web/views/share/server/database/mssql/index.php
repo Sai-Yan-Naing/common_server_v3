@@ -1,7 +1,11 @@
 <?php require_once('views/share/header.php'); ?>
 <?php 
-$query = "SELECT * FROM db_account_for_mssql where domain = ?";
-$getAllRow = $commons->getAllRow($query,[$webdomain]);
+$limit = 10;
+$table = 'db_account_for_mssql';  
+require_once('views/pagination/start.php');
+$query = "SELECT * FROM $table where domain = ?  ORDER BY id
+                            OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
+$getAllRow = $commons->getAllRow($query, [$webdomain]);
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/share/sidebar.php');?>
@@ -15,15 +19,14 @@ $getAllRow = $commons->getAllRow($query,[$webdomain]);
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div class="active">
-                                        <div class="row mt-3 mb-3">
-                                            <div class="col-sm-3">
-                                                <span>データベース</span>
+                                        <div class="d-flex mt-3 mb-3">
+                                            <?php if( $webplnmssqldb == 'yes' && ((int)$webplnmssqldbnum > count($getAllRow ) || $webplnmssqldbnum=='unlimited')):?>
+                                            <div class="ml-3">
+                                            <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
-                                            <div class="col-sm-3">
-                                            <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=new"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <a class="btn btn-info btn-sm" href="/share/server?setting=database&tab=mssql&act=manager" target="_blank"><span class="mr-2"><i class="fas fa-plus-square"></i></span>MSSQL マネージャー</a>
+                                            <?php endif; ?>
+                                            <div class="ml-3">
+                                                <a  href="https://docs.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15" target="_blank" class="btn btn-link"><u>MSSQLmanagement Studioダウンロードリンク</u></a>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">
@@ -42,16 +45,27 @@ $getAllRow = $commons->getAllRow($query,[$webdomain]);
                                                     <td class="border-dark"><?php echo $db['db_user']; ?></td>
                                                     <td class="border-dark"><?php echo $db['db_pass']; ?></td>
                                                     <td class="border-dark">
-                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=edit&act_id=<?= $db['id'] ?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
-                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=delete&act_id=<?= $db['id'] ?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                        <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=edit&act_id=<?= $db['id'] ?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
+                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=database&tab=mssql&act=delete&act_id=<?= $db['id'] ?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
-                                                    <td class="border-dark">情報</td>
+                                                    <td class="border-dark"><?=$web_host?></td>
                                                 </tr>
                                                 <?php endforeach; ?>
                                         </table>
                                     </div>
                                 </div>
                                 <!-- end content -->
+                                <div class="d-flex mt-3">
+                                    <div></div>
+                                    <div class='ml-auto'>
+                                        <?php 
+                                            $paginatecount = "SELECT COUNT(*) FROM $table  where domain = ?";
+                                            $params = [$webdomain];
+                                            $page_url = '/share/server?setting=database&tab=mssql&act=index&webid='.$webid.'&page=';
+                                            require_once('views/pagination/end.php')
+                                        ?>
+                                    </div>
+                                </div>
                             </div>
                     </div>
                 </main>

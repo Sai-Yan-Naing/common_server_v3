@@ -4,20 +4,28 @@ require_once("views/share_config.php");
     $for = $_GET['for'];
     $temp = json_decode($webbasicsetting,true);
     $bass_dir = $_POST['bass_dir'];
-    $dir_path=$webrootuser.'/'.$webuser.'/'.$bass_dir;
+    $dir_path=$webpath.'/'.$bass_dir;
+    $msg = "jp message";
+    $msgsession ="msg";
     if ($for==='dir')
     {
         if ($action === 'new')
         {
+            $msg = "BASIC認証「".$bass_dir."」を作成しました";
             $temp["ID-".time()]["url"] =$bass_dir;
             $temp["ID-".time()]["user"] =null;
-            createDir($dir_path);
+            // createDir($dir_path);
+            // echo $dir_path;
+            newDir($web_host,$web_user,$web_password,ROOT_PATH.$dir_path);
+            // die;
             // $temp
         }else{
+            $msg = "BASIC認証「".$temp[$_POST['dir_id']]['url']."」を削除しました";
             unset($temp[$_POST['dir_id']]);
             // echo ROOT_PATH.$dir_path;
             // die();
             // delete_directory(ROOT_PATH.$dir_path);
+            deleteDir($web_host,$web_user,$web_password,ROOT_PATH.$dir_path);
         }
     } elseif ($for==='user')
     {
@@ -27,8 +35,12 @@ require_once("views/share_config.php");
             $bass_user = $_POST['bass_user'];
             $bass_pass = $_POST['bass_pass'];
             $temp[$dir_id]['user']["ID-".time()] = ['bass_user'=>$bass_user,'bass_pass'=>$bass_pass];
+            $msg = "認証ユーザー 「".$bass_user."」 を作成しました";
         } elseif ($action==='delete')
         {
+            $act_id = $_POST['act_id'];
+            $bass_user = $temp[$dir_id]['user'][$act_id]['bass_user'];
+            $msg = "認証ユーザー 「".$bass_user."」 を削除しました";
             $act_id = $_POST['act_id'];
             unset($temp[$dir_id]['user'][$act_id]);
             
@@ -37,6 +49,7 @@ require_once("views/share_config.php");
             $bass_pass = $_POST['bass_pass'];
             $act_id = $_POST['act_id'];
             $temp[$dir_id]['user'][$act_id]['bass_pass'] = $bass_pass;
+            $msg = "認証ユーザー「".$bass_user."」のパスワードの変更が完了しました";
         }
         
     }
@@ -54,8 +67,7 @@ require_once("views/share_config.php");
     }
     $_SESSION['error'] = false;
     $_SESSION['message'] = 'Success';
-    addBassman($webrootuser.'/'.$webuser,$result);
+    addBassman($web_host,$web_user,$web_password,ROOT_PATH.$webpath,$result);
+    flash($msgsession,$msg);
     header("location: /share/server?setting=site&tab=basic&act=index");
     die();
-
-?>

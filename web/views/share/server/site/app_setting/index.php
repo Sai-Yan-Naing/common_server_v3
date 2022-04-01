@@ -19,10 +19,12 @@
                                 <div class="col-10">
                                     <div>
                                         <label>/<?=$webuser?>/web/web.config</label>
-                                        <label><button class="btn btn-sm  common_dialog" gourl="/share/server?setting=site&tab=app_setting&act=web.config"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
+                                        <label><button class="btn btn-sm  common_dialog" gourl="/share/server?setting=site&tab=app_setting&act=web.config&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
                                     </div>
                                     <div id="webconfig_">
-                                        <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= getFile($webpath."/web/web.config")?>
+                                        <!-- <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= getFile($webpath."/web/web.config")?>
+                                        </textarea> -->
+                                        <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= get_File($web_host,$web_user,$web_password,ROOT_PATH.$webpath."/web/web.config")?>
                                         </textarea>
                                     </div>
                                 </div>
@@ -32,16 +34,18 @@
                                     <div><label>PHP設定</label></div>
                                     <div>
                                         <label>PHPバージョン <?=$webappversion->app->php?></label>
-                                        <label><button class="btn btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_setting&act=php_version"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
+                                        <label><button class="btn btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_setting&act=php_version&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
                                     </div>
                                 </div>
                                 <div class="col-10">
                                     <div>
                                         <label>/<?=$webuser?>/web/.user.ini</label>
-                                        <label><button class="btn btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_setting&act=.user.ini"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
+                                        <label><button class="btn btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_setting&act=.user.ini&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
                                     </div>
                                     <div id="phpini_">
-                                        <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= getFile($webpath."/web/.user.ini")?>
+                                        <!-- <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= getFile($webpath."/web/.user.ini")?>
+                                        </textarea> -->
+                                        <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= get_File($web_host,$web_user,$web_password,ROOT_PATH.$webpath."/web/.user.ini")?>
                                         </textarea>
                                     </div>
                                 </div>
@@ -51,7 +55,7 @@
                                     <div><label>ASP.NET設定</label></div>
                                     <div>
                                         <label>.NETバージョン <?=$webappversion->app->dotnet?></label>
-                                        <label><button class="btn btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_setting&act=dotnet_version"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
+                                        <label><button class="btn btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_setting&act=dotnet_version&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
                                     </div>
                                 </div>
                             </div>

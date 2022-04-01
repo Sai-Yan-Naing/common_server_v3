@@ -19,9 +19,9 @@
             <br><br>
             <span>WEBメール</span>
         </a>
-        <a href="/share/mail?setting=list&tab=null&act=index" class="subtitle pt-4 pb-4 <?=($setting==='list')?"active":"text-dark"?>">
+        <!-- <a href="/share/mail?setting=list&tab=null&act=index" class="subtitle pt-4 pb-4 <?=($setting==='list')?"active":"text-dark"?>">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting==='list')?"maillist1":"maillist"?>.png" alt="site.png">
             <br><br>
             <span>メーリングリスト</span>
-        </a>
+        </a> -->
 </div>

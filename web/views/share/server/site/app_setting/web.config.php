@@ -1,14 +1,15 @@
 <?php require_once("views/share_config.php"); ?>
     <div class="modal-header">
-        <button type="button" class="btn btn-outline-info mr-3" form="web_config_fm" id="web_config_btn" gourl="/share/server?setting=site&tab=app_setting&act=confirm&apply=web.config">保存</button>
+        <button type="button" class="btn btn-outline-info mr-3" form="web_config_fm" id="web_config_btn" gourl="/share/server?setting=site&tab=app_setting&act=confirm&apply=web.config&webid=<?=$webid?>">保存</button>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <form action="/share/server?setting=site&tab=app_setting&act=confirm" method="post" id="web_config_fm" onsubmit="loading()">
+        <form action="/share/server?setting=site&tab=app_setting&act=confirm&webid=<?=$webid?>" method="post" id="web_config_fm" onsubmit="loading()">
             <div class="form-group">
-            <textarea class="text-white bg-dark web" name="web_config" id="webconfig" rows="25"><?php echo htmlspecialchars(getFile($webpath."/web/web.config")) ?></textarea>
+            <!-- <textarea class="text-white bg-dark web" name="web_config" id="webconfig" rows="25"><?php echo htmlspecialchars(getFile($webpath."/web/web.config")) ?></textarea> -->
+            <textarea class="text-white bg-dark web" name="web_config" id="webconfig" rows="25"><?php echo htmlspecialchars(ROOT_PATH.get_File($web_host,$web_user,$web_password,$webpath."/web/web.config")) ?></textarea>
             </div>
         </form>
     </div>

@@ -15,7 +15,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain =? ",[$webdomain]);
                                 <div class="tab-content">
                                     <div id="waf" class="pr-3 pl-3 tab-pane active"><br>
                                         <div class="form-group row">
-                                            <span class="col">WAF設定</span>
+                                            <span class="col">WAF利用設定</span>
                                             <?php
                                                 if ( isset($error)):?>
                                             <span class="col error"><?= $error ?></span>
@@ -26,7 +26,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain =? ",[$webdomain]);
                                         </div>
                                         <div class="form-group">
                                             <label for="usage-setting" class="col-sm-2 col-form-label">利用設定</label>
-                                            <label class="switch text-white common_dialog" gourl="/share/server?setting=security&tab=waf&act=usage"  data-toggle="modal" data-target="#common_dialog">
+                                            <label class="switch text-white common_dialog" gourl="/share/server?setting=security&tab=waf&act=usage&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                 <input type="checkbox" <?= (int)$waf['usage']==1? "checked":""  ?>>
                                                 <span class="slider <?= (int)$waf['usage']==1? "slideron":"slideroff"  ?>"></span>
                                                 <span class="handle <?= (int)$waf['usage']==1? "handleon":"handleoff"  ?>"></span>
@@ -35,7 +35,7 @@ $waf = $commons->getRow("SELECT * FROM waf WHERE domain =? ",[$webdomain]);
                                         </div>
                                         <div class="form-group">
                                             <label for="display-switch" class="col-sm-2 col-form-label">表示切替</label>
-                                            <label class="switch text-white common_dialog" gourl="/share/server?setting=security&tab=waf&act=display"  data-toggle="modal" data-target="#common_dialog">
+                                            <label class="switch text-white common_dialog" gourl="/share/server?setting=security&tab=waf&act=display&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                 <input type="checkbox" <?= (int)$waf['display']==1? "checked":""  ?>>
                                                 <span class="slider <?= (int)$waf['display']==1? "slideron":"slideroff"  ?>"></span>
                                                 <span class="handle <?= (int)$waf['display']==1? "handleon":"handleoff"  ?>"></span>

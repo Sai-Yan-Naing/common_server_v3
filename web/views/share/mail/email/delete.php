@@ -7,7 +7,7 @@ $getRow = $commons->getRow($query);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Delete Email</h4>
+  <h4 class="modal-title">メールアドレス削除</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
@@ -17,7 +17,7 @@ $getRow = $commons->getRow($query);
 		<input type="hidden" name="action" value="delete">
 		<input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
 		<input type="hidden" name="email" value="<?= $getRow['email'] ?>">
-		Are you sure to delete <b style="color: red"><?= htmlspecialchars($getRow['email'], ENT_QUOTES) ?>@<?= htmlspecialchars($webdomain, ENT_QUOTES) ?> </b> ?
+		<b style="color: red"><?= htmlspecialchars($getRow['email'], ENT_QUOTES) ?>@<?= htmlspecialchars($webdomain, ENT_QUOTES) ?></b>を削除しますか？
 	    
 	</form>
 </div>

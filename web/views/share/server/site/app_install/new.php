@@ -6,18 +6,18 @@
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-    <form action="/share/server?setting=site&tab=app_install&act=confirm" method="post" id="app_install_form">
+    <form action="/share/server?setting=site&tab=app_install&act=confirm&webid=<?=$webid?>" method="post" id="app_install_form">
         <div class="row">
             <label for="application" class="col-sm-3 col-form-label">アプリケーション</label>
             <div class="col-sm-8">
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="change/app_version">Word Press
+                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="/share/server?setting=site&tab=app_install&act=app_version&webid=13">Word Press
                     </label>
                 </div>
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="ECCUBE" name="app" gourl="change/app_version">EC-CUBE
+                    <input type="radio" class="form-check-input app" value="ECCUBE" name="app" gourl="/share/server?setting=site&tab=app_install&act=app_version&webid=13">EC-CUBE
                     </label>
                 </div>
             </div>
@@ -32,7 +32,8 @@
             <label for="version" class="col-sm-3 col-form-label">バージョン</label>
             <div class="col-sm-8" id="version">
                 <?php
-                foreach ($values=app_version("WORDPRESS") as $key => $value):
+            // print_r(getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS"));
+                foreach ($values=getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS") as $key => $value):
                 ?>
                     <div class="form-check-inline">
                         <label class="form-check-label">
@@ -62,7 +63,7 @@
             <div class="col-sm-6">
                 <label for="username" class="col-form-label">ユーザー名</label>
                 <div class="">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="1～255文字、半角英数小文字と_-.@">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="4～50文字、半角英数字と_-.@">
                 </div>
             </div>
             <div class="col-sm-6">
@@ -76,7 +77,7 @@
             <div class="col-sm-6">
                 <label for="password" class="col-form-label">パスワード</label>
                 <div class="">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="8～32文字、半角英数記号の組み合わせ">
                 </div>
             </div>
         </div>

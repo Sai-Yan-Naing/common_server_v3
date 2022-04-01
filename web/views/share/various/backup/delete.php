@@ -8,9 +8,9 @@ require_once('views/share_config.php');
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-	<form action="/share/various?setting=backup&act=confirm" method = "post" id="autobackup" onsubmit="loading()">
+	<form action="/share/various?setting=backup&act=confirm&webid=<?=$webid?>" method = "post" id="autobackup" onsubmit="loading()">
         <input type="hidden" name="action" value="delete">
-        <b style="color: red"><?=$webdomain ?> </b> をバックアップ削除しますか？
+        「<b style="color: red"><?=$webdomain ?> </b>（<?=$_GET['cron']?>）」を削除しますか？
     </form>
 </div>
 <!-- Modal footer -->
