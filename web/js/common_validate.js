@@ -311,7 +311,7 @@ function allValidate() {
         domain: {
           required: true,
           domain: true,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         web_dir: {
@@ -327,7 +327,7 @@ function allValidate() {
           allowspecialchar: true,
           minlength: 1,
           maxlength: 20,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         password: {
@@ -486,7 +486,7 @@ function allValidate() {
           nospecialchar: true,
           minlength: 1,
           maxlength: 60,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         db_user: {
@@ -496,7 +496,7 @@ function allValidate() {
           nospecialchar: true,
           minlength: 1,
           maxlength: 32,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         db_pass: {
@@ -586,7 +586,7 @@ function allValidate() {
           allowspecialchar: true,
           minlength: 1,
           maxlength: 20,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         ftp_pass: {
@@ -704,7 +704,7 @@ function allValidate() {
           nospecialchar: true,
           minlength: 1,
           maxlength: 60,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         db_user: {
@@ -714,7 +714,7 @@ function allValidate() {
           nospecialchar: true,
           minlength: 1,
           maxlength: 32,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         db_pass: {
@@ -772,7 +772,7 @@ function allValidate() {
           allowspecialchar:true,
           minlength: 1,
           maxlength: 20,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         ftp_pass: {
@@ -838,7 +838,7 @@ function allValidate() {
           // nospecialchar: true,
           minlength: 1,
           maxlength: 30,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         mail_pass_word: {

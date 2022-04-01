@@ -20,6 +20,7 @@ if ( isset($_GET['action']) and $_GET['action']=='iisinstall')
     $msg = 'Already installed iis';
     if($web_iis==0){
         shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
+        $msg = "iis successfully installed ";
     }
     
 } else
@@ -41,21 +42,21 @@ if ( isset($_GET['action']) and $_GET['action']=='iisinstall')
         $qry = "UPDATE vps_account SET mssql_16 = ? WHERE id = ?";
         if($web_mssql_2016==1){
             $msgsession = 'msg';
-            $msg = 'Already installed iis';
+            $msg = "Already installed MSSQL version $vm_action";
             $install = false;
         }
     }elseif ($vm_action==2017){
         $qry = "UPDATE vps_account SET mssql_17 = ? WHERE id = ?";
         if($web_mssql_2017==1){
-            $msgsession = 'msg';
-            $msg = 'Already installed iis';
+            $msgsession = "msg";
+            $msg = "Already installed MSSQL version $vm_action";
             $install = false;
         }
     }else{
         $qry = "UPDATE vps_account SET mssql_19 = ? WHERE id = ?";
         if($web_mssql_2019==1){
-            $msgsession = 'msg';
-            $msg = 'Already installed iis';
+            $msgsession = "msg";
+            $msg = "Already installed MSSQL version $vm_action";
             $install = false;
         }
     }

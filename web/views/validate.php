@@ -28,17 +28,17 @@ if($table !=='none')
     }
 }
 // for error page
-if ( $remark === 'error_file' )
-{
-    // $status['status'] =ROOT_PATH.$webpath.'/web/'.$checker;
-    //     echo json_encode($status);
-    //     die();
-    $checkresult = $check->errorFile(ROOT_PATH.$webpath.'/web/'.$checker);
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
+// if ( $remark === 'error_file' )
+// {
+//     // $status['status'] =ROOT_PATH.$webpath.'/web/'.$checker;
+//     //     echo json_encode($status);
+//     //     die();
+//     $checkresult = $check->errorFile(ROOT_PATH.$webpath.'/web/'.$checker);
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
     
-}
+// }
 
 if ( $remark === 'domain' )
 {
@@ -52,89 +52,89 @@ if ( $remark === 'domain' )
     
 }
 
-if ( $remark === 'winuser' )
-{
-    $checkresult = $check->winUser($checker);
-    if ( $checkresult )
-    {
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
-    }
+// if ( $remark === 'winuser' )
+// {
+//     $checkresult = $check->winUser($checker);
+//     if ( $checkresult )
+//     {
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
+//     }
     
-}
+// }
 
-if ( $remark === 'mydbname' )
-{
-    $checkresult = $check->mysqlDatabase($checker);
-    if ( $checkresult )
-    {
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
-    }
+// if ( $remark === 'mydbname' )
+// {
+//     $checkresult = $check->mysqlDatabase($checker);
+//     if ( $checkresult )
+//     {
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
+//     }
     
-}
+// }
 
-if ( $remark === 'mydbuser')
-{
-    $checkresult = $check->mysqlUser($checker);
-    if ( $checkresult)
-    {
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
-    }
+// if ( $remark === 'mydbuser')
+// {
+//     $checkresult = $check->mysqlUser($checker);
+//     if ( $checkresult)
+//     {
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
+//     }
     
-}
+// }
 
-if ( $remark === 'msdbname')
-{
-    $checkresult = $check->mssqlDatabase($checker);
-    if ( $checkresult)
-    {
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
-    }
+// if ( $remark === 'msdbname')
+// {
+//     $checkresult = $check->mssqlDatabase($checker);
+//     if ( $checkresult)
+//     {
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
+//     }
     
-}
+// }
 
-if ( $remark === 'msdbuser')
-{
-    $checkresult = $check->mssqlUser($checker);
-    if ( $checkresult)
-    {
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
-    }
+// if ( $remark === 'msdbuser')
+// {
+//     $checkresult = $check->mssqlUser($checker);
+//     if ( $checkresult)
+//     {
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
+//     }
     
-}
+// }
 
-if ( $remark === 'madbname')
-{
-    $checkresult = $check->mariadDatabase($checker);
-    if ( $checkresult)
-    {
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
-    }
+// if ( $remark === 'madbname')
+// {
+//     $checkresult = $check->mariadDatabase($checker);
+//     if ( $checkresult)
+//     {
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
+//     }
     
-}
+// }
 
-if ( $remark === 'madbuser')
-{
-    $checkresult = $check->mariadbUser($checker);
-    if ( $checkresult)
-    {
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
-    }
+// if ( $remark === 'madbuser')
+// {
+//     $checkresult = $check->mariadbUser($checker);
+//     if ( $checkresult)
+//     {
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
+//     }
     
-}
+// }
 
 $status['status'] =false;
 echo json_encode($status);

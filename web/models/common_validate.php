@@ -9,9 +9,9 @@ class CommonValidate
 		// $this->pdo = new PDO(DSN, ROOT, ROOT_PASS);
 		$this->pdo = new PDO(DBDSN1, DBROOT1, DBROOT_PASS1);
 		$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$this->mdpdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
-		$this->mspdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
-		$this->mspdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		// $this->mdpdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
+		// $this->mspdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
+		// $this->mspdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	}
 
 	function winUser ($checker)
