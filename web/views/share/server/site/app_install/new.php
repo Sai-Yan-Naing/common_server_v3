@@ -88,7 +88,7 @@
             <div class="col-sm-6">
                 <label for="db-name" class="col-form-label">データベース名</label>
                 <div>
-                    <input type="text" class="form-control" id="db_name" name="db_name" placeholder="データベース名" column="db_user" table="db_account" remark="mydbname">
+                    <input type="text" class="form-control" id="db_name" name="db_name" placeholder="データベース名" column="db_name" table="db_account" remark="mydbname">
                     <!-- <label for="db_name" id="db_name_ex_error" class="error"></label> -->
                 </div>
             </div>
