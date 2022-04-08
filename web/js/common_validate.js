@@ -160,6 +160,7 @@ function allValidate() {
           $ext='?webid='+$permission.data('webid');
         }else if($permission.data('permission')=='admin')
         {
+          $('#user_permission').data('webser',$('#web_server').val())
           $ext='?webid=admin&webser='+$permission.data('webser');
         }else if($permission.data('permission')=='share')
         {
