@@ -45,6 +45,7 @@
                 </li>
             </ul>
         </nav>
+        <div class="d-none" id='user_permission' data-permission="admin" data-webser="admin"></div>
         <?php 
         function call_ass()
         {

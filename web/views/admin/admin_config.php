@@ -30,18 +30,41 @@ $webrootdns = $webroot_acc['dns'];
 $webrootbasicsetting = $webroot_acc['basic_setting'];
 $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
-
+if(isset($_GET['webser']))
+{
+	$web_server_id = $_GET['webser'];
+}
 $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
 $gethost = $commons->getRow($web_server);
 $web_host = $gethost['ip'];
 $web_user = $gethost['username'];
 $web_password = $gethost['password'];
+$web_mydbuser = $gethost['mydbuser'];
+$web_mydbpass = $gethost['mydbpass'];
+$web_madbuser = $gethost['madbuser'];
+$web_madbpass = $gethost['madbpass'];
+$web_msdbuser = $gethost['msdbuser'];
+$web_msdbpass = $gethost['msdbpass'];
+$web_ftp = $gethost['ftp_user'];
+$web_ftppass = $gethost['ftp_pass'];
 
 $webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webadminplanid]);
 $webplnname = $webroot_plan['name'];
 $webplnsite = $webroot_plan['site'];
 $webplnwebcapacity = $webroot_plan['web_capacity'];
 $webplnmail = $webroot_plan['mail_capacity'];
+
+define("MYROOT", $web_mydbuser);
+define("MYROOT_PASS", $web_mydbpass);
+define("MYDSN", 'mysql:host='.$web_host.':3310');
+
+define("MAROOT", $web_madbuser);
+define("MAROOT_PASS", $web_madbpass);
+define("MADSN", 'mysql:host='.$web_host.':3307');
+
+define("SQLSERVER_2016_USER", $web_msdbuser);
+define("SQLSERVER_2016_PASS", $web_msdbpass);
+define("SQLSERVER_2016_DSN", 'sqlsrv:Server='.$web_host.';Database=master');
 
 $pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
 $pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';

@@ -436,7 +436,7 @@ function sizeFormat($bytes)
         // return system('pwsh -File Get-ChildItem -Name C:\Program Files\PHP');
 
          $shell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/getdirlist.ps1" phpversion '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($dir));
-        return $shell = preg_split ('/\n/', $shell);
+        return $shell = array_filter(preg_split ('/\n/', $shell));
     }
 
     function getDirlist($web_host,$web_user,$web_password,$dir='')

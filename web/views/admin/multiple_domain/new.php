@@ -14,7 +14,7 @@
             <label for="domain" class="col-sm-2 col-form-label">Web Server</label>
             <div class="col-sm-8">
                 <select class="form-select" name="web_server" id="web_server" required>
-                      <option value="">Select Web Server</option>
+                      <!-- <option value="">Select Web Server</option> -->
                       <?php 
                             foreach($webadminweb as $value):
                                 $web_server = "SELECT * FROM web_server_config WHERE id='$value'";

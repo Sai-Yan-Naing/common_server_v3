@@ -17,6 +17,7 @@ $webappversion = json_decode($webappversion);
           <div class="col-sm-10">
             <select name="version" id="php_version" class="form-control">
             <?php
+
                 foreach(getPhpVersion($web_host,$web_user,$web_password) as $phpkey=>$phpvalue) : ?>
 
                 <option value="<?=$phpvalue?>" <?php if($phpvalue==$webappversion->app->php){ echo "selected";} ?>><?=$phpvalue?></option>

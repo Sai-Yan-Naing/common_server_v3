@@ -114,6 +114,7 @@ function cpu_usage1($webvmhost_ip,$webvmhost_user,$webvmhost_password)
         if (stristr(PHP_OS, "win"))
         {
             $shell =shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
+            $shell = ($shell/10)*100;
             return round($shell,2);
         }
 

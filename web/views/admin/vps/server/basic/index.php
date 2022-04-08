@@ -52,7 +52,7 @@
                                     <div class="form-group row">
                                         <label for="" class="col-sm-3 col-form-label">CPU</label>
                                         <div class="col-sm-8">
-                                            <span><label for=""><?= $spec['core']  ?></label> プラン</span>
+                                            <span><label for=""><?= $spec['core']  ?></label> コア</span>
                                         </div>
                                     </div>
                                     <div class="form-group row">

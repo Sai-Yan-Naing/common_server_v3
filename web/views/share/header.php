@@ -43,6 +43,7 @@
                 </li>
             </ul>
         </nav>
+        <div class="d-none" id='user_permission' data-permission="share" data-webser="share"></div>
         <?php 
         function call_ass()
         {

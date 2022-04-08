@@ -17,10 +17,10 @@ if ( isset($_GET['action']) and $_GET['action']=='iisinstall')
             die("error");
     }
     $msgsession = 'msg';
-    $msg = 'Already installed iis';
+    $msg = 'IISはインストール済みです。';
     if($web_iis==0){
         shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
-        $msg = "iis successfully installed ";
+        $msg = "IISのインストールが完了しました。";
     }
     
 } else
@@ -36,27 +36,27 @@ if ( isset($_GET['action']) and $_GET['action']=='iisinstall')
 // echo $;
 // die;
     $msgsession = 'msg';
-    $msg = "MSSQL version $vm_action successfully installed ";
+    $msg = "SQLサーバー $vm_action のインストールが完了しました。";
     $install = true;
     if($vm_action==2016){
         $qry = "UPDATE vps_account SET mssql_16 = ? WHERE id = ?";
         if($web_mssql_2016==1){
             $msgsession = 'msg';
-            $msg = "Already installed MSSQL version $vm_action";
+            $msg = "SQLサーバー $vm_action はインストール済みです";
             $install = false;
         }
     }elseif ($vm_action==2017){
         $qry = "UPDATE vps_account SET mssql_17 = ? WHERE id = ?";
         if($web_mssql_2017==1){
             $msgsession = "msg";
-            $msg = "Already installed MSSQL version $vm_action";
+            $msg = "SQLサーバー $vm_action はインストール済みです";
             $install = false;
         }
     }else{
         $qry = "UPDATE vps_account SET mssql_19 = ? WHERE id = ?";
         if($web_mssql_2019==1){
             $msgsession = "msg";
-            $msg = "Already installed MSSQL version $vm_action";
+            $msg = "SQLサーバー $vm_action はインストール済みです";
             $install = false;
         }
     }

@@ -41,13 +41,10 @@ $getAllRow=$commons->getAllRow($query);
                                             <div class="col-sm-3">
                                                 <input type="text" class="form-control" name="request" placeholder="個">
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <span>月額</span>
                                             </div>
-                                            <div class="col-sm-2">
-                                                <span>円</span>
-                                            </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <button type="submit" class="btn btn-sm btn-outline-info">依頼</button>
                                             </div>
                                         </div>
@@ -61,13 +58,10 @@ $getAllRow=$commons->getAllRow($query);
                                             <div class="col-sm-3">
                                                 <input type="text" class="form-control" name="request" placeholder="個">
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <span>月額</span>
                                             </div>
-                                            <div class="col-sm-2">
-                                                <span>円</span>
-                                            </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <button type="submit" class="btn btn-sm btn-outline-info">依頼</button>
                                             </div>
                                         </div>
@@ -76,7 +70,7 @@ $getAllRow=$commons->getAllRow($query);
                                     <input type="hidden" name="act" value="window_server_license">
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                Windows Server Security追加
+                                                セキュリティソフト追加
                                             </div>
                                             <div class="col-sm-3">
                                                 <span>年額</span>

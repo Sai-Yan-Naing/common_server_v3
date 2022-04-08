@@ -46,6 +46,7 @@
                 </li>
             </ul>
         </nav>
+        <div class="d-none" id='user_permission' data-permission="adminshare" data-webid="<?=$webid?>"></div>
         <?php 
         function call_ass()
         {
