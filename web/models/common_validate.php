@@ -2,23 +2,27 @@
 class CommonValidate
 {
 	public $pdo;
-	public $mdpdo;
+	public $mypdo;
+	public $mapdo;
 	public $mspdo;
 	function __construct ()
 	{
 		// $this->pdo = new PDO(DSN, ROOT, ROOT_PASS);
-		$this->pdo = new PDO(DBDSN1, DBROOT1, DBROOT_PASS1);
+		$this->pdo = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 		$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$this->mdpdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
+		$this->mypdo = new PDO(MYDSN, MYROOT, MYROOT_PASS);
+		$this->mapdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
 		$this->mspdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
 		$this->mspdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	}
 
-	function winUser ($checker)
+	function winUser ($checker,$web_host,$web_user,$web_password)
 	{
-		$getshell = shell_exec('wmic useraccount get name');
-		// $result = array_map('strtolower',$myArray);
+		// return $web_host.$web_user.$web_password;
+		$getshell = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/getuserlist.ps1" users '.$web_host.' '.$web_user.' '.$web_password.' '.escapeshellarg($checker));
+		// $getshell = shell_exec('wmic useraccount get name');
 		$getshell = array_map('strtolower', preg_replace('/\s+/', '', explode("\n", explode('\n', $getshell)[0])));
+		// $getshell = ['administrator','japansys','winserverroot','']
 		if ( in_array (strtolower($checker), $getshell))
 		{
 			return true;
@@ -27,7 +31,7 @@ class CommonValidate
 		return false;
 	}
 
-	function checkInDb ($table, $column, $checker)
+	function checkInDb ($table, $column, $checker, $web_server_id=null)
 	{
 		// @todo この処理は暫定。正しく存在するテーブルかカラムかをチェックしなければならない。
 		// if ( ! (ctype_alnum($table) && ctype_alnum($column))) column can contain underscore( _ )
@@ -35,8 +39,18 @@ class CommonValidate
 		{
 			return false;
 		}
+		$addition =null;
+		if($web_server_id!=null)
+		{
+			$addition = "and web_account.web_server_id= $web_server_id";
+		}
 
-		$query = "SELECT $column FROM $table WHERE $column = :checker";
+			$query = "SELECT $table.$column FROM $table INNER JOIN web_account on $table.domain = web_account.domain where $table.$column = :checker $addition";
+		if($table =='web_account')
+		{
+			$query = "SELECT $table.$column FROM $table where $table.$column = :checker and web_account.web_server_id= $web_server_id";
+		}
+		
 		$stmt1 = $this->pdo->prepare($query);
 		$stmt1->execute(['checker' => $checker]);
 		$data = $stmt1->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +66,7 @@ class CommonValidate
 	function mysqlUser ( $checker )
 	{
 		$query = 'SELECT User FROM mysql.user where user = :checker';
-		$stmt1 = $this->pdo->prepare($query);
+		$stmt1 = $this->mypdo->prepare($query);
 		$stmt1->execute(['checker' => $checker]);
 		$data = $stmt1->fetch(PDO::FETCH_ASSOC);
 		// return $data;
@@ -67,7 +81,7 @@ class CommonValidate
 	function mysqlDatabase ( $checker )
 	{
 		$query = 'SHOW DATABASES LIKE :checker';
-		$stmt1 = $this->pdo->prepare($query);
+		$stmt1 = $this->mypdo->prepare($query);
 		$stmt1->execute(['checker' => $checker]);
 		$data = $stmt1->fetch(PDO::FETCH_ASSOC);
 		// return $data;
@@ -81,12 +95,12 @@ class CommonValidate
 
 	function mariadbUser ( $checker )
 	{
-		$query = 'SELECT User FROM mysql.user where user=:checker';
-		$stmt1 = $this->mdpdo->prepare($query);
+		$query = 'SELECT User FROM mysql.user where user = :checker';
+		$stmt1 = $this->mapdo->prepare($query);
 		$stmt1->execute(['checker' => $checker]);
 		$data = $stmt1->fetch(PDO::FETCH_ASSOC);
 		// return $data;
-		if( count ( $data['User'] ) > 0)
+		if ( count( $data['User'])>0 )
 		{
 			return true;
 		}
@@ -97,7 +111,7 @@ class CommonValidate
 	function mariadDatabase ($checker)
 	{
 		$query = 'SHOW DATABASES LIKE :checker';
-		$stmt1 = $this->mdpdo->prepare($query);
+		$stmt1 = $this->mapdo->prepare($query);
 		$stmt1->execute(['checker' => $checker]);
 		$data = $stmt1->fetch(PDO::FETCH_ASSOC);
 		// return $data;
@@ -159,5 +173,18 @@ class CommonValidate
 		}
 
 		return false;
+	}
+
+	function checkappdb($db_dsn,$db_user,$db_pass)
+	{
+		try {
+			  $conn = new PDO($db_dsn, $db_user, $db_pass);
+			  // set the PDO error mode to exception
+			  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			  // echo "Connected successfully";
+			  return false;
+			} catch(PDOException $e) {
+			  return true;
+			}
 	}
 }

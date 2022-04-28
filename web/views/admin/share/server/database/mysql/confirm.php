@@ -53,6 +53,13 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mysql/index.php");
 				die("");
 		}
+		$delete_q = "DELETE FROM db_account WHERE id='$act_id'";
+		if ( !$commons->doThis($delete_q))
+		{
+			require_once("views/admin/share/server/database/mysql/index.php");
+			die("");
+		}
+
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の削除が完了しました";
 	}

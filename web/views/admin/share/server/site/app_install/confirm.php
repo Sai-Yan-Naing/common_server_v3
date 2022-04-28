@@ -1,4 +1,5 @@
 <?php
+// die();
 require_once("views/admin/admin_shareconfig.php");
 $app_name = $_POST["app"];
 $app_version = $_POST["app-version"];
@@ -21,29 +22,34 @@ $msg = "jp message";
 $msgsession ="msg";
 if($app_name ==="WORDPRESS")
 {
-    if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+    if($_POST['dbexist']=='new')
     {
-        $error = "Something error";
-        require_once("views/admin/share/server/site/app_install/index.php");
-        die("");
-    }
-    $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
+        // die('exist');
+        if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+        {
+            $error = "Something error";
+            require_once("views/admin/share/server/site/app_install/index.php");
+            die("");
+        }
 
+        $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
+
+        if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
+        {
+            $error = "cannot add db account";
+                require_once("views/admin/share/server/site/app_install/index.php");
+                die("");
+        }
+    }
     $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
-
-    if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
-    {
-        $error = "cannot add db account";
-            require_once("views/admin/share/server/site/app_install/index.php");
-            die("");
-    }
-
     if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
-    {
-        $error = "cannot add db account";
-            require_once("views/admin/share/server/site/app_install/index.php");
-            die("");
-    }
+        {
+            $error = "cannot add db account";
+                require_once("views/admin/share/server/site/app_install/index.php");
+                die("");
+        }
+    // die('new');
+    
     // die;
     $src = APP_PATH."$app_name/$app_version";
     $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
@@ -82,22 +88,26 @@ if($app_name ==="WORDPRESS")
     // die('ok');
 }else{
     // echo 'hello';
-    if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+    if($_POST['dbexist']=='new')
     {
-        $error = "Something error";
-        require_once("views/admin/share/server/site/app_install/index.php");
-        die("");
+        if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+        {
+            $error = "Something error";
+            require_once("views/admin/share/server/site/app_install/index.php");
+            die("");
+        }
+        $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
+        if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
+        {
+            $error = "cannot add db account";
+                require_once("views/admin/share/server/site/app_install/index.php");
+                die("");
+        }
     }
-    $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
 
     $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
 
-    if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
-    {
-        $error = "cannot add db account";
-            require_once("views/admin/share/server/site/app_install/index.php");
-            die("");
-    }
+    
     if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
     {
         $error = "cannot add db account";

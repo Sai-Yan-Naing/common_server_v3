@@ -32,8 +32,11 @@
             <label for="version" class="col-sm-3 col-form-label">バージョン</label>
             <div class="col-sm-8" id="version">
                 <?php
+                $wpapp = ['5.6.2','5.6.3','5.7.1'];
             // print_r(getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS"));
-                foreach ($values=getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS") as $key => $value):
+                // foreach ($values=getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS") as $key => $value):
+                foreach ($values=$wpapp as $key => $value):
+
                 ?>
                     <div class="form-check-inline">
                         <label class="form-check-label">
@@ -88,7 +91,7 @@
             <div class="col-sm-6">
                 <label for="db-name" class="col-form-label">データベース名</label>
                 <div>
-                    <input type="text" class="form-control" id="db_name" name="db_name" placeholder="データベース名" column="db_user" table="db_account" remark="mydbname">
+                    <input type="text" class="form-control" id="db_name" name="db_name" placeholder="データベース名" column="db_name" table="db_account" remark="checkappdb">
                     <!-- <label for="db_name" id="db_name_ex_error" class="error"></label> -->
                 </div>
             </div>
@@ -96,7 +99,7 @@
                 <div class="col-sm-3"></div>
                 <label for="db_user" class="col-form-label">ユーザー名</label>
                 <div>
-                    <input type="text" class="form-control" id="db_user" name="db_user" placeholder="ユーザー名" column="db_user" table="db_account" remark="mydbuser">
+                    <input type="text" class="form-control" id="db_user" name="db_user" placeholder="ユーザー名" column="db_user" table="db_account" remark="checkappdb">
                     <!-- <label for="db_user" id="db_user_ex_error" class="error"></label> -->
                 </div>
             </div>
@@ -109,7 +112,12 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" name="dbexist" id='dbexist' value='new'>
     </form>
+    <div class="d-none error" id='checkappdb'>
+            指定されたDBに入力されたユーザーでログインすることができません。
+            <br>正しいパスワードもしくは正しいユーザー名を入力してください。
+    </div>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">

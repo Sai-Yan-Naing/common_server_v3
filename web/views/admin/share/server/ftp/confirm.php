@@ -73,7 +73,8 @@ if ( $weborigin!=1)
 	$originuser = $webrootuser;
 }
 // Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser." ".$per." ".$action." ".$originuser);
-
+// echo $per;
+// die;
 Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/ftp.ps1" ftp '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.' '.$per. ' '.$action.' '.$originuser);
 // die;
 

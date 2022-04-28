@@ -12,15 +12,12 @@
                                 <div class="tab-content">
                                     <div id="ip-restriction" class=" pr-3 pl-3 pb-3 tab-pane active"><br>
                                         <div class="row">
-                                            <div class="col-sm-3">
-                                                <span>IPアクセス制限</span>
-                                            </div>
                                             <div class="col-sm-9">
-                                                <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=security&tab=ip&act=new" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ブラックリストに追加</button>
+                                                <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=security&tab=ip&act=new&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ブラックリストに追加</button>
                                             </div>
                                         </div>
                                         <div class="mt-4">
-                                            <div class="d-flex mb-2">
+                                            <div class="row mb-2">
                                                 <div class="col-sm-3">ブラックリスト</div>
                                                 <div class="text-danger col-sm-6"><span class="text-center"><?php if (isset($error)) {
                                                     echo $error;
@@ -29,9 +26,9 @@
                                             <table class="table table-bordered">
                                                 <tr>
                                                     <th class="font-weight-bold border-dark">IP</th>
-                                                    <th class="font-weight-bold border-dark">subnetMask</th>
-                                                    <th class="font-weight-bold border-dark">Status</th>
-                                                    <th class="font-weight-bold border-dark">Action</th>
+                                                    <th class="font-weight-bold border-dark">サブネットマスク</th>
+                                                    <th class="font-weight-bold border-dark">状況</th>
+                                                    <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
                                                     <?php
                                                     $webblacklist = json_decode($webblacklist);
@@ -41,7 +38,7 @@
                                                         <td class="border-dark"><?= $value->ip ?></td>
                                                         <td class="border-dark"><?= $value->mask ?></td>
                                                         <td class="border-dark"><span class='text-danger'><?=$value->status?></span></td>
-                                                        <td class="border-dark"><button class="pr-2 btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=security&tab=ip&act=delete&act_id=<?= $key ?>"  data-toggle="modal" data-target="#common_dialog">削除</button></td> 
+                                                        <td class="border-dark"><button class="pr-2 btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=security&tab=ip&act=delete&act_id=<?= $key ?>&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">削除</button></td> 
                                                     </tr>
                                                     <?php
                                                         }

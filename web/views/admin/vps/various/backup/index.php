@@ -21,7 +21,7 @@ $getvps=$commons->getRow($query,[$webip]);
                                                 <label for="" class="col-form-label">自動バックアップ</label>
                                             </div>
                                             <div class="col-sm-7">
-                                                <form action="" method = "post" class="ml-2">
+                                                <form action="" method = "post">
                                                     <input type="hidden" name="action" value="onoff">
                                                     <input type="hidden" name="key" value="<?=$key;?>">
                                                     <label class="switch text-white common_dialog" gourl="/admin/vps/various?setting=backup&tab=backup&act=autobackup&webid=<?= $webid?>"  data-toggle="modal" data-target="#common_dialog">

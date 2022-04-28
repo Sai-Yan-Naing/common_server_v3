@@ -1,3 +1,4 @@
+
 <?php
     $url = $_SERVER['REQUEST_URI'];
     $url= explode('/',$url);

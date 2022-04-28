@@ -14,13 +14,13 @@ $commons = new Common;
 // echo $_COOKIE['admin'];
 $webadminID = $_COOKIE['admin'];
 
-$admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=?",[$webadminID]);
+$admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=? ",[$webadminID]);
 $webadminID = $admin_acc['user_id'];
 $webadminName = $admin_acc['name'];
 $webadminweb = explode(",",$admin_acc['web']);
 $webadminplanid = $admin_acc['plan_id'];
 
-$web_acc = $commons->getRow("SELECT * FROM web_account WHERE id=? AND customer_id=?",[$_GET['webid'],$_COOKIE['admin']]);
+$web_acc = $commons->getRow("SELECT * FROM web_account WHERE id=? AND customer_id=? and removal IS NULL",[$_GET['webid'],$_COOKIE['admin']]);
 $webid = $web_acc['id'];
 $webadminID = $web_acc['customer_id'];
 $web_server_id = $web_acc['web_server_id'];

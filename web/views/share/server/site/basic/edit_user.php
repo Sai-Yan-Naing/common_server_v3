@@ -14,7 +14,7 @@ $temp = json_decode($webbasicsetting);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=site&tab=basic&act=confirm_dir&for=user" method="post" id="basic_adduser_create" onsubmit="loading()">
+  <form action="/share/server?setting=site&tab=basic&act=confirm_dir&for=user&webid=<?=$webid?>" method="post" id="basic_adduser_create">
     <input type="hidden" name="action" value="edit">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
     <input type="hidden" name="dir_id" value="<?= $dir_id ?>">
@@ -35,7 +35,7 @@ $temp = json_decode($webbasicsetting);
       <div class="row justify-content-center">
           <label for="bass_pass" class="col-sm-2 text-right p-2">パスワード</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" column="bass_pass" id="bass_pass" name="bass_pass" placeholder="8～70文字、半角英数記号の組み合わせ" value="<?= $temp->$dir_id->user->$act_id->bass_pass ?>">
+            <input type="password" class="form-control" column="bass_pass" id="bass_pass" name="bass_pass" placeholder="6～127文字、半角英数記号の組み合わせ" value="<?= $temp->$dir_id->user->$act_id->bass_pass ?>">
           </div>
       </div>
   </form>
@@ -43,5 +43,5 @@ $temp = json_decode($webbasicsetting);
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="basic_adduser_create">作成</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="basic_adduser_create">変更</button>
 </div>

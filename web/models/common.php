@@ -195,11 +195,13 @@ class Common{
 			return false;
 		}
 
-		$dstmt = $pdo_account->prepare('DELETE FROM db_account WHERE id = ?');
-		if ( ! $dstmt->execute([$dbid]))
-		{
-			return false;
-		}
+		// $dstmt = $pdo_account->prepare('DELETE FROM db_account WHERE id = ?');
+		// if ( ! $dstmt->execute([$dbid]))
+		// {
+		// 	echo $dbid;
+		// 	die('error');
+		// 	return false;
+		// }
 
 		return true;
 	}
@@ -353,15 +355,17 @@ class Common{
 			$stmt = $mspdo->prepare("DROP LOGIN $dbuser");
 			if(!$stmt->execute()) return false;
 			
-			$dstmt = $pdo_account->prepare("DELETE FROM db_account_for_mssql WHERE id = ?");
-			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
-			if(!$dstmt->execute(array($dbid))) return false;
+			// $dstmt = $pdo_account->prepare("DELETE FROM db_account_for_mssql WHERE id = ?");
+			// // $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+			// if(!$dstmt->execute(array($dbid))) return false;
 			return true;
 	}
 
 	function addMariaUserAndDB($db, $db_user, $db_pass){
 			try {
 				// $dsn2 = 'mysql:host=localhost:3307';
+				// echo $db.$db_user.$db_pass;
+				// die();
 				$pdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
 				$db = trim($pdo->quote($db), "'\"");
 				$stmt = $pdo->prepare("CREATE DATABASE $db;");
@@ -387,6 +391,7 @@ class Common{
 				return true;
 			} catch (PDOException $e) {
 				$conn = NULL;
+				// die('error');
 				return false;
 			}
 		}
@@ -447,12 +452,12 @@ class Common{
 			return false;
 		}
 
-		$dstmt = $pdo_account->prepare('DELETE FROM db_account_for_mariadb WHERE id = ?');
-		// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
-		if ( ! $dstmt->execute([$dbid]))
-		{
-			return false;
-		}
+		// $dstmt = $pdo_account->prepare('DELETE FROM db_account_for_mariadb WHERE id = ?');
+		// // $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+		// if ( ! $dstmt->execute([$dbid]))
+		// {
+		// 	return false;
+		// }
 
 		return true;
 	}

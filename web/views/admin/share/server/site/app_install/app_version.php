@@ -5,7 +5,14 @@ require_once("views/admin/admin_shareconfig.php");
 if ( isset($_POST['app']) && $_POST['app']==='WORDPRESS' || $_POST['app'] === "ECCUBE" )
 {
 	$app = $_POST['app'];
-	 foreach ($values = getDirlist($web_host,$web_user,$web_password,"G:\application/$app") as $key => $value) 
+  $webapp = ['5.6.2','5.6.3','5.7.1'];
+  if($app=='ECCUBE')
+  {
+    $webapp = ['eccube3','eccube-4.1'];
+	 
+  }
+  // foreach ($values = getDirlist($web_host,$web_user,$web_password,"G:\application/$app") as $key => $value) 
+  foreach ($values=$webapp as $key => $value)
    {
     ?>
         <div class="form-check-inline">

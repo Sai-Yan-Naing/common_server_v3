@@ -154,11 +154,23 @@ function allValidate() {
         $url = document.URL.split("/");
         $url = $url[0] + "//" + $url[2];
         $ext='';
-        if($(element).attr("remark")=='error_file')
+        $permission = $('#user_permission');
+        if($permission.data('permission')=='adminshare')
         {
-          $webid=$(element).attr("webid");
-          $ext='?webid='+$webid;
+          $ext='?webid='+$permission.data('webid');
+        }else if($permission.data('permission')=='admin')
+        {
+          $('#user_permission').data('webser',$('#web_server').val())
+          $ext='?webid=admin&webser='+$permission.data('webser');
+        }else if($permission.data('permission')=='share')
+        {
+          $ext='?webid=share';
         }
+        // if($(element).attr("remark")=='error_file')
+        // {
+        //   $webid=$(element).attr("webid");
+        //   $ext='?webid='+$webid;
+        // }
         // sessionStorage.setItem("result", false);
         // console.log($url + "saiyanaing");
         var $ajax = $.ajax({
@@ -170,7 +182,7 @@ function allValidate() {
             $(element).after(
               '<label id="' +
                 $(element).attr("id") +
-                '-error" class="error">' +
+                '-error" class="text-primary">' +
                 "Loading......</label>"
             );
           },
@@ -185,6 +197,7 @@ function allValidate() {
         $done = $ajax.done(function (data) {
           $("#" + $(element).attr("id") + "-error").remove();
           console.log(data.status + "back end");
+          // return;
           if (data["status"]) {
             $(element).after(
               '<label id="' +
@@ -219,6 +232,7 @@ function allValidate() {
       },
       ""
     );
+
 
     $.validator.addMethod(
       "noalreadyexist",
@@ -311,7 +325,7 @@ function allValidate() {
         domain: {
           required: true,
           domain: true,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         web_dir: {
@@ -327,7 +341,7 @@ function allValidate() {
           allowspecialchar: true,
           minlength: 1,
           maxlength: 20,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         password: {
@@ -486,7 +500,6 @@ function allValidate() {
           nospecialchar: true,
           minlength: 1,
           maxlength: 60,
-          // alreadyexist: true,
           onkeyup: false,
         },
         db_user: {
@@ -496,7 +509,6 @@ function allValidate() {
           nospecialchar: true,
           minlength: 1,
           maxlength: 32,
-          // alreadyexist: true,
           onkeyup: false,
         },
         db_pass: {
@@ -549,6 +561,18 @@ function allValidate() {
       submitHandler: function (form) {
         // loading();
         // form.submit();
+        // console(checkappdb());
+        if (checkappdb()=='ok') {
+            $('#dbexist').val('exist');
+          }else if(checkappdb()=='doesnotmatch'){
+            $('#checkappdb').removeClass("d-none");
+            return;
+          }else{
+            $('#dbexist').val('new');
+          }
+
+          $('#checkappdb').addClass("d-none");
+        // return;
         $gourl = "/admin/share/server?setting=site&tab=app_install&act=validatecap";
         $exceedwebcap = '容量がいっぱいになっているため、アプリケーションの追加ができません。サイトデータを削除いただき追加を行ってください。';
         if(exceedwebcap($gourl))
@@ -561,7 +585,65 @@ function allValidate() {
         }
       },
     });
+function checkappdb()
+{
+  $db_name = $('#db_name').val();
+  $db_user = $('#db_user').val();
+  $db_pass = $('#db_pass').val();
+  let result = '';
+      $url = document.URL.split("/");
+      $url = $url[0] + "//" + $url[2];
+      $ext='';
+      $permission = $('#user_permission');
+      if($permission.data('permission')=='adminshare')
+      {
+        $ext='?webid='+$permission.data('webid');
+      }else if($permission.data('permission')=='admin')
+      {
+        $ext='?webid=admin&webser='+$permission.data('webser');
+      }else if($permission.data('permission')=='share')
+      {
+        $ext='?webid=share';
+      }
+  var $ajax = $.ajax({
+          type: "POST",
+          url: $url + "/validate"+$ext,
+          async: false,
+          dataType: "JSON",
+          data: {
+            db_name: $db_name,
+            db_user: $db_user,
+            db_pass: $db_pass,
+            remark: 'checkappdb',
+          },
+        });
+        // $("#" + $(element).attr("id") + "-error").remove();
+        $done = $ajax.done(function (data) {
+          // $("#" + $(element).attr("id") + "-error").remove();
+          // console.log(data.status + "back end");
+          // return;
+          // if (data["status"]==true) {
+          //   $('#checkappdb').removeClass("d-none");
+          //   result = false;
+          // }else if(data["status"]=='doesnotmatch'){
 
+          // } else {
+          //   $('#checkappdb').removeClass("d-none");
+          //   result = true;
+          // }
+            result = data["status"];
+        });
+        // $fail = $ajax.fail(function () {
+        //   $(element).after(
+        //     '<span id="' +
+        //       $(element).attr("id") +
+        //       '-error" class="error">Internal server error</span>'
+        //   );
+        //   result = false;
+        // });
+        // console.log(result + " result");
+        return result;
+}
     // end app_install_form
 
     // for add dir_path_create
@@ -586,7 +668,7 @@ function allValidate() {
           allowspecialchar: true,
           minlength: 1,
           maxlength: 20,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         ftp_pass: {
@@ -704,7 +786,7 @@ function allValidate() {
           nospecialchar: true,
           minlength: 1,
           maxlength: 60,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         db_user: {
@@ -714,7 +796,7 @@ function allValidate() {
           nospecialchar: true,
           minlength: 1,
           maxlength: 32,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         db_pass: {
@@ -723,6 +805,7 @@ function allValidate() {
           nowhitespace: true,
           minlength: 8,
           maxlength: 64,
+          allowspecialchar3: true,
         },
       },
       // Specify validation error messages
@@ -772,7 +855,7 @@ function allValidate() {
           allowspecialchar:true,
           minlength: 1,
           maxlength: 20,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         ftp_pass: {
@@ -838,7 +921,7 @@ function allValidate() {
           // nospecialchar: true,
           minlength: 1,
           maxlength: 30,
-          // alreadyexist: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         mail_pass_word: {

@@ -7,7 +7,7 @@
 				<?php require_once('views/share/title.php') ?>
                     <div class="shadow-lg p-3 mb-5 bg-white rounded">
                     	<h3>お問合せ</h3>
-						<form action="/share/contactus?act=confirm" class="mt-3" id="contactus_form" method="post">
+						<form action="/share/contactus?act=confirm&webid=<?=$webid?>" class="mt-3" id="contactus_form" method="post">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="mb-3">
@@ -23,7 +23,7 @@
 										<input type="text" class="form-control" id="email" placeholder="メールアドレスを入力してください" name="email">
 									</div>
 								</div>
-								<div style="text-align:center" class="col-md-1">
+								<div style=" text-align:center" class="col-md-1">
 									<span class="ver"></span>
 								</div>
 								<div class="col-md-5">

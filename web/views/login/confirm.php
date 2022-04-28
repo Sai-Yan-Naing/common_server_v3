@@ -28,7 +28,7 @@ if (filter_var($domainid, FILTER_VALIDATE_IP))
     }
 } elseif ( is_valid_domain_name ($domainid))
 {
-    $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE domain=? and password=?",[$domainid,$pass_encrypted]);
+    $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE domain=? and password=? and removal IS NULL",[$domainid,$pass_encrypted]);
     if ( $webroot_acc != null)
     {
         setcookie("share_user", $domainid);

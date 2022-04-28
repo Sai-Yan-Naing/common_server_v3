@@ -9,7 +9,7 @@ $webappversion = json_decode($webappversion);
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-  <form action="/share/server?setting=site&tab=app_setting&act=confirm&apply=dotnet_version" method="post" id="dotnet" onsubmit="loading()">
+  <form action="/share/server?setting=site&tab=app_setting&act=confirm&apply=dotnet_version&webid=<?=$webid?>" method="post" id="dotnet" onsubmit="loading()">
     <input type="hidden" name="action" value="new">
       <div class="row justify-content-center">
           <label for="dotnet_v" class="col-sm-2 text-right p-2">.NETバージョン</label>

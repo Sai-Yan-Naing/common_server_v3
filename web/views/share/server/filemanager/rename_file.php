@@ -9,9 +9,9 @@ require_once('views/share_config.php');
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=filemanager&tab=tab&act=confirm" method="post" id="fm_fun" style="position:relative" fun="file">
+  <form action="/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="fm_fun" style="position:relative" fun="file">
     <input type="hidden" name="action" value="rename">
-    <label>Name:</label>
+    <label>ファイル名:</label>
     <input type="hidden" name="old" id="old">
     <input type="text" class="form-control" name="rename" id="rename" file="file">
   </form>

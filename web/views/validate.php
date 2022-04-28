@@ -1,25 +1,32 @@
 <?php
 header('Content-Type: application/json');
 $remark = $_POST['remark'];
-if(isset($_COOKIE['admin']) and $remark == 'error_file')
+if(isset($_COOKIE['admin']) and isset($_GET['webid']) && $_GET['webid'] !='admin')
 {
     require_once("views/admin/admin_shareconfig.php");
-}elseif(isset($_COOKIE['share_user']) and $remark == 'error_file')
+     // echo json_encode(['status'=>SQLSERVER_2016_DSN]);
+     // die;
+}else if(isset($_COOKIE['admin']) and $_GET['webid']=='admin')
+{
+    require_once("views/admin/admin_config.php");
+}else if(isset($_COOKIE['share_user']))
 {
     require_once('views/share_config.php');
 }else{
     require 'config/all.php';
 }
+
 require 'models/common_validate.php';
 $table = $_POST['table'];
 $column = $_POST['column'];
 $checker = $_POST['checker'];
 $status = ['table'=>$table,'column'=>$column,'chekcer'=>$checker,'remark'=>$remark];
 $check = new CommonValidate;
-// echo $checkresult = $check->checkInDb('web_account', 'user', 'saiyannaing');
+// echo json_encode(['status'=>$web_mydbuser]);
+//      die;
 if($table !=='none')
 {
-    $checkresult = $check->checkInDb($table, $column, $checker);
+    $checkresult = $check->checkInDb($table, $column, $checker, $web_server_id);
     if ( $checkresult )
     {
         $status['status'] =$checkresult;
@@ -28,17 +35,17 @@ if($table !=='none')
     }
 }
 // for error page
-if ( $remark === 'error_file' )
-{
-    // $status['status'] =ROOT_PATH.$webpath.'/web/'.$checker;
-    //     echo json_encode($status);
-    //     die();
-    $checkresult = $check->errorFile(ROOT_PATH.$webpath.'/web/'.$checker);
-        $status['status'] =$checkresult;
-        echo json_encode($status);
-        die();
+// if ( $remark === 'error_file' )
+// {
+//     // $status['status'] =ROOT_PATH.$webpath.'/web/'.$checker;
+//     //     echo json_encode($status);
+//     //     die();
+//     $checkresult = $check->errorFile(ROOT_PATH.$webpath.'/web/'.$checker);
+//         $status['status'] =$checkresult;
+//         echo json_encode($status);
+//         die();
     
-}
+// }
 
 if ( $remark === 'domain' )
 {
@@ -51,10 +58,10 @@ if ( $remark === 'domain' )
     }
     
 }
-
 if ( $remark === 'winuser' )
 {
-    $checkresult = $check->winUser($checker);
+     
+    $checkresult = $check->winUser($checker,$web_host,$web_user,$web_password);
     if ( $checkresult )
     {
         $status['status'] =$checkresult;
@@ -126,6 +133,9 @@ if ( $remark === 'madbname')
 
 if ( $remark === 'madbuser')
 {
+    // $status['status'] ='hello';
+    //     echo json_encode($status);
+    // die();
     $checkresult = $check->mariadbUser($checker);
     if ( $checkresult)
     {
@@ -133,6 +143,36 @@ if ( $remark === 'madbuser')
         echo json_encode($status);
         die();
     }
+    
+}
+
+if ( $remark === 'checkappdb')
+{
+    
+    $db_name = $_POST['db_name'];
+    $db_user= $_POST['db_user'];
+    $db_pass= $_POST['db_pass'];
+    $db_dsn = "mysql:host=$web_host:3310;dbname=$db_name";
+    // $status['status'] =$db_dsn;
+    //     echo json_encode($status);
+    // die();
+    
+    if($check->mysqlDatabase($db_name) || $check->mysqlUser($db_user))
+    {
+        $checkresult = $check->checkappdb($db_dsn,$db_user,$db_pass);
+        if ( $checkresult == false)
+        {
+            // $status['status'] ='hello';
+            // echo json_encode($status);
+            $status['status'] ='ok';
+            echo json_encode($status);
+            die();
+        }
+        $status['status'] ='doesnotmatch';
+            echo json_encode($status);
+            die;
+    }
+    
     
 }
 

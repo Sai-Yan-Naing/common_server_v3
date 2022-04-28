@@ -12,7 +12,7 @@ $getRow = $commons->getRow($query,[$act_id]);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=ftp&tab=tab&act=confirm" method="post" id="ftp_create">
+  <form action="/share/server?setting=ftp&tab=tab&act=confirm&webid=<?=$webid?><?=$pagy?>" method="post" id="ftp_create">
     <input type="hidden" name="action" value="edit">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
       <div class="form-group row">
@@ -25,7 +25,7 @@ $getRow = $commons->getRow($query,[$act_id]);
       <div class="form-group row">
           <label for="ftp_pass" class="col-sm-4 col-form-label">パスワード</label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" value="<?= $getRow['ftp_pass'] ?>" placeholder="8～70文字、半角英数記号の組み合わせ">
+            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" value="<?= $getRow['ftp_pass'] ?>" placeholder="6～127文字、半角英数記号の組み合わせ">
                 <label for="ftp_pass" id="ftp_pass_error" class="error"></label>
           </div>
       </div>

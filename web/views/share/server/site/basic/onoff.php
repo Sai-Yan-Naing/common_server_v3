@@ -11,10 +11,10 @@ $error_page = json_decode($weberrorpages);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=site&tab=basic&act=confirm" method="post" id="onoff" onsubmit="loading()">
+  <form action="/share/server?setting=site&tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="onoff">
     <input type="hidden" name="act_id" value="<?= $act_id ?>">
-    エラー設定を<?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?>にしますか
+    エラー設定「<?= $_GET['errorcode']?>」を<?= $error_page->$act_id->stopped==1?  "OFF":"ON"  ?>にしますか?
   </form>
 </div>
 <!-- Modal footer -->

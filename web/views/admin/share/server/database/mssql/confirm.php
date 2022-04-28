@@ -56,6 +56,12 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mssql/index.php");
 				die("");
 		}
+		$delete_q = "DELETE FROM db_account_for_mssql WHERE id='$act_id'";
+		if ( !$commons->doThis($delete_q))
+		{
+			require_once("views/admin/share/server/database/mssql/index.php");
+			die("");
+		}
 	}
 	flash($msgsession,$msg);
 	header("Location: /admin/share/server?setting=database&tab=mssql&act=index&webid=$webid$pagy");

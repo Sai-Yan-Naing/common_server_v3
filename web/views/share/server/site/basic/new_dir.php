@@ -8,7 +8,7 @@ require_once("views/share_config.php");
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-  <form action="/share/server?setting=site&tab=basic&act=confirm_dir&for=dir" method="post" id="bass_dir_create" onsubmit="loading()">
+  <form action="/share/server?setting=site&tab=basic&act=confirm_dir&for=dir&webid=<?=$webid?>" method="post" id="bass_dir_create">
     <input type="hidden" name="action" value="new">
       <div class="row justify-content-center">
           <label for="bass_dir" class="col-sm-2 text-right p-2">対象ディレクトリ</label>

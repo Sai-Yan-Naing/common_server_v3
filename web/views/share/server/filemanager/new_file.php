@@ -9,10 +9,11 @@ require_once('views/share_config.php');
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/share/server?setting=filemanager&tab=tab&act=confirm" method="post" id="fm_fun" style="position:relative" fun="file">
+  <form action="/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="fm_fun" style="position:relative" fun="file">
     <input type="hidden" name="action" value="new_file">
-    <label>Name:</label>
-    <input type="text" class="form-control" name="new_file" file="file">
+    <label>ファイル名：</label>
+    <input type="text" class="form-control" name="new_file" file="file" id="new_file">
+    <label class="error" style="display: none;" id="new_file_error">ファイル名を入力してください</label>
   </form>
 </div>
 <!-- Modal footer -->

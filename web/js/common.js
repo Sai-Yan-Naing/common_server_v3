@@ -318,3 +318,7 @@ function exceedwebcap($gourl) {
                   });
                 return $res;
             }
+
+$(document).on('change','#web_server',function() {
+  $('#user_permission').data('webser',$(this).val())
+})

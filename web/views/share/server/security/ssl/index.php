@@ -11,14 +11,14 @@
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
-                                        <form action="/share/server?setting=security&tab=ssl&act=confirm" method="post" id="free-ssl">
+                                        <form action="/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="free-ssl">
                                             <div class="form-group row">
                                                 <span class="col">無料SSL設定</span>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="common-name" class="col-sm-2 col-form-label">コモンネーム</label>
+                                                <label for="name" class="col-sm-2 col-form-label">コモンネーム</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="common-name" name="common_name" placeholder="例：www.assistup.co.jp">
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder="例：www.assistup.co.jp">
                                                 </div>
                                             </div>
                                             
@@ -49,20 +49,24 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="form-group row">
+                                            <!-- <div class="form-group row">
                                                 <label for="department" class="col-sm-2 col-form-label">部署名（ＯＵ）</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="department" name="department" placeholder="例：System Development Section">
                                                 </div>
+                                            </div> -->
+                                            
+                                            <div class="form-group row">
+                                                <span class="text-danger notice-msg col-sm-10">半角にてご入力ください。全角では入力できません。</span>
                                             </div>
                                             
                                             <div class="form-group row">
-                                                <span class="text-danger notice-msg col-sm-10">入力項目については半角英数字にてご入力ください。全角では入力できません。</span>
+                                                <span class="text-danger notice-msg col-sm-10">SSLの反映にはお時間がかかります。しばらく待ってからご確認をお願い致します。</span>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6"></div>
                                                 <div class="col-sm-3 mal-auto">
-                                                    <button class="btn btn-outline-info btn-sm common_dialog btn-block" type="submit" data-toggle="modal" data-target="#common_modal" gourl="/share/servers/sites/basic?act=new&error_pages">登録</button>
+                                                    <button class="btn btn-outline-info btn-sm common_dialog btn-block" type="submit" data-toggle="modal" data-target="#common_modal" gourl="/share/servers/sites/basic?act=new&webid=<?=$webid?>&error_pages">登録</button>
                                                 </div>
                                                 <div class="col-sm-3"></div>
                                             </div>

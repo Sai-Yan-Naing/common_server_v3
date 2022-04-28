@@ -39,7 +39,7 @@ $getRow = $commons->getRow($query);
     	</div>
         <div class="form-group row mr-2 justify-content-center">
             <label for="mail_pass_word"  class="col-sm-3 form-label">パスワード</label>
-            <input type="password" class="form-control col-sm-6" name="mail_pass_word" value="<?= $getRow['password'] ?>" id="mail_pass_word" placeholder="8～70文字、半角英数記号の組み合わせ">
+            <input type="password" class="form-control col-sm-6" name="mail_pass_word" value="<?= $getRow['password'] ?>" id="mail_pass_word" placeholder="8～30文字、半角英数記号の組み合わせ">
             <label class="col-sm-3"  for="mail_pass_word"></label>
             <label for="mail_pass_word" id="mail_pass_word_error" class="error  col-sm-6"></label>
         </div>

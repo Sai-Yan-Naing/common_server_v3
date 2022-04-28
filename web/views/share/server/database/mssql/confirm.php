@@ -7,10 +7,14 @@ $action = $_POST["action"];
 
 $db_user = $_POST["db_user"];
 $db_pass = $_POST["db_pass"];
-	if ( $action=="new")
+$msgsession =  "msg";
+$msg = "jp message";
+	if ( $action== "new")
 	{
 		$db_name = $_POST["db_name"];
-		if ( ! $commons->addMsUserAndDB($version="",$db_name, $db_user, $db_pass))
+		$msgsession =  "msg";
+		$msg = "DB 「".$db_name."」 の追加が完了しました ";
+		if ( ! $commons->addMsUserAndDB($version="",$db_name, $db_user, $db_pass, $webplnmssqlcap))
         {
             $error = "Something error";
             require_once("views/share/server/site/app_install/index.php");
@@ -26,6 +30,13 @@ $db_pass = $_POST["db_pass"];
 				require_once("views/share/server/database/mssql/index.php");
 				die("");
 			}
+
+			$delete_q = "DELETE FROM db_account_for_mssql WHERE id='$act_id'";
+		if ( !$commons->doThis($delete_q))
+		{
+			require_once("views/admin/share/server/database/mssql/index.php");
+			die("");
+		}
 		
 	}elseif ($action=="edit") 
 	{
@@ -35,10 +46,16 @@ $db_pass = $_POST["db_pass"];
 				require_once("views/share/server/database/mssql/index.php");
 				die("");
 		}
+		$query = "SELECT * FROM db_account_for_mssql WHERE db_user=?";
+		$getRow = $commons->getRow($query,[$db_user]);
+		$msgsession =  "msg";
+		$msg = "DB 「".$getRow['db_user']."」 パスワードを変更しました";
 	}else
 	{
 		$act_id = $_POST['act_id'];
 		$db_name = $_POST['db_name'];
+		$msgsession =  "msg";
+		$msg = "DB 「".$db_name."」 の削除が完了しました";
 		// die($act_id.$db_user.$db_name);
 		if(!$commons->deleteMssqlDB($act_id,$db_user,$db_name))
 		{
@@ -47,7 +64,8 @@ $db_pass = $_POST["db_pass"];
 				die("");
 		}
 	}
-	header("Location: /share/server?setting=database&tab=mssql&act=index");
+	flash($msgsession,$msg);
+	header("Location: /share/server?setting=database&tab=mssql&act=index$pagy");
 	die("");
 	
 ?>
