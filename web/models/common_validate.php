@@ -11,7 +11,7 @@ class CommonValidate
 		$this->pdo = new PDO(DBDSN, DBROOT, DBROOT_PASS);
 		$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		$this->mypdo = new PDO(MYDSN, MYROOT, MYROOT_PASS);
-		// $this->mapdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
+		$this->mapdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
 		$this->mspdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
 		$this->mspdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	}
@@ -31,7 +31,7 @@ class CommonValidate
 		return false;
 	}
 
-	function checkInDb ($table, $column, $checker)
+	function checkInDb ($table, $column, $checker, $web_server_id=null)
 	{
 		// @todo この処理は暫定。正しく存在するテーブルかカラムかをチェックしなければならない。
 		// if ( ! (ctype_alnum($table) && ctype_alnum($column))) column can contain underscore( _ )
@@ -39,8 +39,18 @@ class CommonValidate
 		{
 			return false;
 		}
+		$addition =null;
+		if($web_server_id!=null)
+		{
+			$addition = "and web_account.web_server_id= $web_server_id";
+		}
 
-		$query = "SELECT $column FROM $table WHERE $column = :checker";
+			$query = "SELECT $table.$column FROM $table INNER JOIN web_account on $table.domain = web_account.domain where $table.$column = :checker $addition";
+		if($table =='web_account')
+		{
+			$query = "SELECT $table.$column FROM $table where $table.$column = :checker and web_account.web_server_id= $web_server_id";
+		}
+		
 		$stmt1 = $this->pdo->prepare($query);
 		$stmt1->execute(['checker' => $checker]);
 		$data = $stmt1->fetch(PDO::FETCH_ASSOC);

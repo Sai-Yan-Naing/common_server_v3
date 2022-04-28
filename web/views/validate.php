@@ -26,7 +26,7 @@ $check = new CommonValidate;
 //      die;
 if($table !=='none')
 {
-    $checkresult = $check->checkInDb($table, $column, $checker);
+    $checkresult = $check->checkInDb($table, $column, $checker, $web_server_id);
     if ( $checkresult )
     {
         $status['status'] =$checkresult;
@@ -119,32 +119,32 @@ if ( $remark === 'msdbuser')
     
 }
 
-// if ( $remark === 'madbname')
-// {
-//     $checkresult = $check->mariadDatabase($checker);
-//     if ( $checkresult)
-//     {
-//         $status['status'] =$checkresult;
-//         echo json_encode($status);
-//         die();
-//     }
+if ( $remark === 'madbname')
+{
+    $checkresult = $check->mariadDatabase($checker);
+    if ( $checkresult)
+    {
+        $status['status'] =$checkresult;
+        echo json_encode($status);
+        die();
+    }
     
-// }
+}
 
-// if ( $remark === 'madbuser')
-// {
-//     // $status['status'] ='hello';
-//     //     echo json_encode($status);
-//     // die();
-//     $checkresult = $check->mariadbUser($checker);
-//     if ( $checkresult)
-//     {
-//         $status['status'] =$checkresult;
-//         echo json_encode($status);
-//         die();
-//     }
+if ( $remark === 'madbuser')
+{
+    // $status['status'] ='hello';
+    //     echo json_encode($status);
+    // die();
+    $checkresult = $check->mariadbUser($checker);
+    if ( $checkresult)
+    {
+        $status['status'] =$checkresult;
+        echo json_encode($status);
+        die();
+    }
     
-// }
+}
 
 if ( $remark === 'checkappdb')
 {

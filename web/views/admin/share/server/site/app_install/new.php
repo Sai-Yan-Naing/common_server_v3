@@ -32,8 +32,11 @@
             <label for="version" class="col-sm-3 col-form-label">バージョン</label>
             <div class="col-sm-8" id="version">
                 <?php
+                $wpapp = ['5.6.2','5.6.3','5.7.1'];
             // print_r(getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS"));
-                foreach ($values=getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS") as $key => $value):
+                // foreach ($values=getDirlist($web_host,$web_user,$web_password,"G:\application\WORDPRESS") as $key => $value):
+                foreach ($values=$wpapp as $key => $value):
+
                 ?>
                     <div class="form-check-inline">
                         <label class="form-check-label">

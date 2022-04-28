@@ -30,6 +30,13 @@ $msg = "jp message";
 				require_once("views/share/server/database/mssql/index.php");
 				die("");
 			}
+
+			$delete_q = "DELETE FROM db_account_for_mssql WHERE id='$act_id'";
+		if ( !$commons->doThis($delete_q))
+		{
+			require_once("views/admin/share/server/database/mssql/index.php");
+			die("");
+		}
 		
 	}elseif ($action=="edit") 
 	{

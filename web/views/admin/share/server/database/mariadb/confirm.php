@@ -7,16 +7,17 @@ $db_user = $_POST["db_user"];
 $db_pass = $_POST["db_pass"];
 $msgsession =  "msg";
 $msg = "jp message";
+// die('test');
 	if ( $action === "new")
 	{
+		// die('test');
 		$db_name = $_POST["db_name"];
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の追加が完了しました ";
-		
 		if ( ! $commons->addMariaUserAndDB($db_name, $db_user, $db_pass) )
 		{
 			echo $error = "Something errors";
-			require_once("views/admin/share/server/database/mariadb/index.php");
+			// require_once("views/admin/share/server/database/mariadb/index.php");
 			die("");
 		}
 		// die;
@@ -27,6 +28,7 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
 			}
+			// die('test');
 	} elseif ($action === "edit") {
 		if (!$commons->changeMariaPassword($db_user,$db_pass))
 		{
@@ -48,6 +50,12 @@ $msg = "jp message";
 			$error = "Something errors";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
+		}
+		$delete_q = "DELETE FROM db_account_for_mariadb WHERE id='$act_id'";
+		if ( !$commons->doThis($delete_q))
+		{
+			require_once("views/admin/share/server/database/mariadb/index.php");
+			die("");
 		}
 	}
 	flash($msgsession,$msg);

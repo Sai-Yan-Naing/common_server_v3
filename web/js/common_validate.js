@@ -805,6 +805,7 @@ function checkappdb()
           nowhitespace: true,
           minlength: 8,
           maxlength: 64,
+          allowspecialchar3: true,
         },
       },
       // Specify validation error messages

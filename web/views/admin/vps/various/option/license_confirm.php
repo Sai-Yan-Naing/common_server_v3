@@ -5,24 +5,31 @@ require_once("views/admin/admin_vpsconfig.php");
     if (isset($_POST['act']))
     {
         $act = $_POST['act'];
+        /*echo */$pln = $_POST['pln'];
+        $query = "SELECT [pln],[plan_name],[price] FROM service_db.dbo.price_tbl
+                                where [PRICE_TBL].pln ='$pln' and [PRICE_TBL].type ='02' and [PRICE_TBL].service ='99'  ORDER BY [pln] ASC";
+        $getspec = $commons->getSpec($query);
+        $price = $getspec[0]['price'];
+        // print_r($getspec);
        if ($act == "sql_license")
        {
-        echo $request ="SQL Server Web Edition追加 1 月額";
+        /*echo */$request ="SQL Server ".$_POST['request']." Web Edition追加 $price 円";
        } elseif ($act == "rdl")
        {
-        echo $request ="Remote Desktop License追加 ".$_POST['request']." 月額";
+        $price = $price * $_POST['request'];
+        /*echo */$request ="Remote Desktop License追加 ".$_POST['request']." 個 $price 円";
        } elseif ($act == "office_l")
        {
-        echo $request ="OFFICE追加 ".$_POST['request']." 月額";
+        /*echo */$request ="OFFICE追加 ".$_POST['request']." $price 円";
        }elseif ($act == "window_server_license")
        {
-        echo $request ="Windows Server Security追加 1 年額";
+        /*echo */$request ="Windows Server Security追加 $price 円";
        } elseif ($act == "site_guard_license")
        {
-        echo $request ="Site Gird Server Edition追加 1 月額";
+        /*echo */$request ="Site Gird Server Edition追加 $price 円";
        } else
        {
-        echo $request ="SSL証明書追加 1 年額";
+        /*echo */$request ="SSL証明書追加 $price 円";
        }
         // echo $request = $_POST['request'];
         // die('');
@@ -33,6 +40,9 @@ require_once("views/admin/admin_vpsconfig.php");
         $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body);
         $_SESSION['error'] = false;
         $_SESSION['message'] = 'Success';
+        $msgsession =  "msg";
+        $msg = "オプションの追加依頼をお受けいたしました";
+        flash($msgsession,$msg);
         header("location:/admin/vps/various?setting=option&tab=license&act=license&webid=$webid");
         die();
     }

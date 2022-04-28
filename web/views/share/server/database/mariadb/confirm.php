@@ -49,6 +49,12 @@ $msg = "jp message";
 				require_once("views/share/server/database/mariadb/index.php");
 				die("");
 		}
+		$delete_q = "DELETE FROM db_account_for_mariadb WHERE id='$act_id'";
+		if ( !$commons->doThis($delete_q))
+		{
+			require_once("views/admin/share/server/database/mariadb/index.php");
+			die("");
+		}
 	}
 	flash($msgsession,$msg);
 	header("Location: /share/server?setting=database&tab=mariadb&act=index$pagy");

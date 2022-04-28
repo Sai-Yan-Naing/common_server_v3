@@ -191,6 +191,9 @@ if ( $action === 'new' )
             require_once("views/admin/share.php");
             die("");
     }
+    $sitename = $getRow['user'];
+    $startstop = 'stop';
+    shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" sitedelete '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
 }
 flash($msgsession,$msg);
 
