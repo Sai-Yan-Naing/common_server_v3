@@ -10,7 +10,8 @@ if ( $action === 'new' )
     $password1 = hash_hmac('sha256', $password, PASS_KEY);
     $user = $_POST['ftp_user'];
     
-    $web_server_id = $_POST['web_server'];;
+    $web_server_id = $_POST['web_server'];
+    $contract = $_POST['contractid'];
 
     $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
     $gethost = $commons->getRow($web_server);
@@ -36,7 +37,7 @@ if ( $action === 'new' )
     $insert_mail = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 
     if (
-        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $web_server_id, $webadminID,$dns,$app_version,$webrootid]) ||
+        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $web_server_id, $webadminID,$dns,$app_version,$contract]) ||
         !$commons->doThis($insert_ftp,[$user, $password, $webdomain, 'F,R,W']) ||
         !$commons->doThis($insert_waf,[$webdomain, 0, 0]) ||
         !$commons->doThis($insert_mail,[$webdomain, 'root', $password])
@@ -45,7 +46,7 @@ if ( $action === 'new' )
             require_once("views/admin/share.php");
             die("");
     }
-    $query_origin = "SELECT * FROM web_account WHERE customer_id = '$_COOKIE[admin]' and origin=1";
+    $query_origin = "SELECT * FROM web_account WHERE customer_id = '$_COOKIE[admin]' and origin=1 and id='$contract'";
     $origin= $commons->getRow($query_origin);
     $origin_user= $origin['user'];
 

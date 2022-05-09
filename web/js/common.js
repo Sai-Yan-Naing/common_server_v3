@@ -321,4 +321,5 @@ function exceedwebcap($gourl) {
 
 $(document).on('change','#web_server',function() {
   $('#user_permission').data('webser',$(this).val())
+  $(this).prev().val($('option:selected', this).data('webserver'))
 })

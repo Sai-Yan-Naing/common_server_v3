@@ -7,6 +7,7 @@
 <!-- Modal body -->
 <div class="modal-body">
     <form action="/admin/share/server?setting=site&tab=app_install&act=confirm&webid=<?=$webid?>" method="post" id="app_install_form">
+        <input type="hidden" name="action" value="new">
         <div class="row">
             <label for="application" class="col-sm-3 col-form-label">アプリケーション</label>
             <div class="col-sm-8">
