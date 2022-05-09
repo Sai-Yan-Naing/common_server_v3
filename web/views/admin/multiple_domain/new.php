@@ -6,21 +6,25 @@
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-
+<?php 
+$contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$webadminID]);
+?>
     <form action="/admin/multiple_domain?act=confirm" method="post" id="add_multiple_domain" class="form-content">
         <input type="hidden" name="token" value="<?php echo $token ;?>">
         <input type="hidden" name="action" value="new">
         <div class="form-group row">
             <label for="domain" class="col-sm-2 col-form-label">Web Server</label>
             <div class="col-sm-8">
+                <input type="hidden" name="contractid" value="<?= $contracts[0]['id'] ?>">
                 <select class="form-select" name="web_server" id="web_server" required>
                       <!-- <option value="">Select Web Server</option> -->
                       <?php 
-                            foreach($webadminweb as $value):
-                                $web_server = "SELECT * FROM web_server_config WHERE id='$value'";
-                                $gethost = $commons->getRow($web_server);
+                      
+                            foreach($contracts as $value):
+                                // $web_server = "SELECT * FROM web_server_config WHERE id='$value'";
+                                // $gethost = $commons->getRow($web_server);
                       ?>
-                      <option value="<?= $value ?>"><?=$gethost['name']?></option>
+                      <option value="<?= $value['web_server_id'] ?>" data-webserver="<?= $value['id'] ?>"><?=$value['domain']?></option>
                       <?php 
                   endforeach;
                       ?>
