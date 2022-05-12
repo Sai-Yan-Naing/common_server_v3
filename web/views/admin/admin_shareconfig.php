@@ -35,6 +35,7 @@ $webbasicsetting = $web_acc['basic_setting'];
 $webappversion = $web_acc['app_version'];
 $webblacklist = $web_acc['blacklist'];
 $weborigin = $web_acc['origin'];
+$webssl = $web_acc['ssl'];
 // for root site
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$_COOKIE['admin']]);
 $webrootid = $webroot_acc['id'];

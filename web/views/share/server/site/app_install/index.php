@@ -32,6 +32,7 @@
                                                 <th class="border-dark">データベース</th>
                                                 <th class="border-dark">DBユーザー</th>
                                                 <th class="border-dark">DBパスワード</th>
+                                                <th class="font-weight-bold border-dark">操作</th>
                                             </tr>
                                             <?php foreach($getAll as $app){ ?>
                                             <tr>
@@ -45,6 +46,9 @@
                                                 <td class="border-dark"><?= $app['db_name'] ?></td>
                                                 <td class="border-dark"><?= $app['db_user'] ?></td>
                                                 <td class="border-dark"><?= $app['db_pass'] ?></td>
+                                                    <td class="border-dark">
+                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_install&act=delete&act_id=<?=$app['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                    </td>
                                             </tr>
                                             <?php } ?>
                                         </table>

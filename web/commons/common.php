@@ -545,3 +545,50 @@ function escapecmd($value)
     $value = str_replace("!", "`ex;", $value);
     return $value;
 }
+
+
+function sslexp($domain)
+{
+    $domain_name = $domain;
+
+    $stream_context = stream_context_create(array(
+      'ssl' => array('capture_peer_cert' => true)
+    ));
+    $resource = stream_socket_client(
+      'ssl://' . $domain_name . ':443',
+      $errno,
+      $errstr,
+      30,
+      STREAM_CLIENT_CONNECT,
+      $stream_context
+    );
+    $cont = stream_context_get_params($resource);
+    $parsed = openssl_x509_parse($cont['options']['ssl']['peer_certificate']);
+
+    if(strpos($parsed['subject']['CN'], $domain_name) !== false){
+      $datetime1 = date('Y/m/d', $parsed['validTo_time_t']);
+      $datetime2 = Date('Y/m/d');
+      
+      // Function call to find date difference
+      $dateDiff = dateDiffInDays($datetime1, $datetime2);
+      
+      // Display the result
+      // printf("Difference between two dates: "
+      //    . $dateDiff . " Days ");
+      return $dateDiff;
+    }else{
+      echo 'not contract.'; 
+    }
+
+
+}
+
+function dateDiffInDays($date1, $date2) 
+  {
+      // Calculating the difference in timestamps
+      $diff = strtotime($date2) - strtotime($date1);
+  
+      // 1 day = 24 hours
+      // 24 * 60 * 60 = 86400 seconds
+      return abs(round($diff / 86400));
+  }

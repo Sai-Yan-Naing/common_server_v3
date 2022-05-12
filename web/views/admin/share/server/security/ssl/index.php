@@ -10,8 +10,29 @@
                             <?php require_once("views/admin/share/server/$setting/tab.php") ?>
                                 <!-- start -->
                                 <div class="tab-content">
+                                    <?php
+                                        if ((int)$webssl==1):
+                                    ?>
+                                    <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
+                                        <table class="table table-borderless">
+                                            <tr>
+                                                <th>Valid Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            <tr>
+                                                <td><?= sslexp($webdomain); ?> Days</td>
+                                                <td>
+                                                    <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog">Renew</a>
+                                                    <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" >削除</a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <?php
+                                        else:
+                                    ?>
                                     <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
                                         <form action="/admin/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="free-ssl">
+                                            <input type="hidden" name="action" value="new">
                                             <div class="form-group row">
                                                 <span class="col">無料SSL設定</span>
                                             </div>
@@ -89,6 +110,8 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <?php endif;
+                                    ?>
                                 </div>
                                 <!-- end content -->
                             </div>

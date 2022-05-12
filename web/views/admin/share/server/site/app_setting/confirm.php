@@ -62,7 +62,7 @@ $msgsession ="msg";
         // print_r($result);
         $query_dir = "UPDATE web_account SET app_version='$result' WHERE id='$webid'";
         $commons->doThis($query_dir);
-        $msg = "PHPバージョン 「".$version."」 を変更しました";
+        $msg = "PHPバージョンを「".$version."」 に変更しました";
         flash($msgsession,$msg);
         header("location: /admin/share/server?setting=site&tab=app_setting&act=index&webid=$webid");
     }

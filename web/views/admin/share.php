@@ -108,7 +108,7 @@
                             <div class="col-md-3">
                                 <i class="fa <?= ($a==1)? 'fa-caret-down':'fa-caret-right'?>" aria-hidden="true"></i>
                                 <?= $main_domain['domain'] ?>[<?= $webroot_plan['name'] ?>]</div>
-                            <div class="ml-auto col-md-3">マルチドメイ: <?= $sites[$main_domain['id']] ?>/<?= $webroot_plan['site'] ?></div>
+                            <div class="ml-auto col-md-3">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $webroot_plan['site'] ?></div>
                             <div class="col-md-3">MySQL/Mariadb: <?= $mysqltotal + $masqltotal ?>/<?= $webroot_plan['mysql_db_num'] ?></div>
                             <div class="col-md-3">MSSQL: <?= $mssqltotal ?>/<?= $webroot_plan['mssql_db_num'] ?></div>
                         </div>

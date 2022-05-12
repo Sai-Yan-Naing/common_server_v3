@@ -13,7 +13,7 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
         <input type="hidden" name="token" value="<?php echo $token ;?>">
         <input type="hidden" name="action" value="new">
         <div class="form-group row">
-            <label for="domain" class="col-sm-2 col-form-label">Web Server</label>
+            <label for="domain" class="col-sm-2 col-form-label">主契約ドメイン</label>
             <div class="col-sm-8">
                 <input type="hidden" name="contractid" value="<?= $contracts[0]['id'] ?>">
                 <select class="form-select" name="web_server" id="web_server" required>
@@ -32,7 +32,7 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
             </div>
         </div>
         <div class="form-group row">
-            <label for="domain" class="col-sm-2 col-form-label">ドメイン名</label>
+            <label for="domain" class="col-sm-2 col-form-label">追加ドメイン</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control checkit" id="domain" column="domain" table="web_account" remark="" name="domain" placeholder="ドメイン名">
             </div>

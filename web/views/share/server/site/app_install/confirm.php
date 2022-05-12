@@ -2,6 +2,7 @@
 // die();
 require_once("views/share_config.php");
 $app_name = $_POST["app"];
+$action = $_POST["action"];
 $app_version = $_POST["app-version"];
 $url = $_POST["url"];
 $site_name = $_POST["site_name"];
@@ -20,183 +21,198 @@ unset($root_url[2]);
 $root_url = implode("/",$root_url);
 $msg = "jp message";
 $msgsession ="msg";
-if($app_name ==="WORDPRESS")
-{
-    if($_POST['dbexist']=='new')
+if ( $action=='new'){
+    if($app_name ==="WORDPRESS")
     {
-        if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+        if($_POST['dbexist']=='new')
         {
-            $error = "Something error";
-            require_once("views/share/server/site/app_install/index.php");
-            die("");
-        }
-        $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
-
-        if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
-        {
-            $error = "cannot add db account";
+            if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+            {
+                $error = "Something error";
                 require_once("views/share/server/site/app_install/index.php");
                 die("");
-        }
+            }
+            $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
 
+            if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
+            {
+                $error = "cannot add db account";
+                    require_once("views/share/server/site/app_install/index.php");
+                    die("");
+            }
+
+            
+        }
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
+            {
+                $error = "cannot add db account";
+                    require_once("views/share/server/site/app_install/index.php");
+                    die("");
+            }
         
-    }
-    $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
-    if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
-        {
-            $error = "cannot add db account";
-                require_once("views/share/server/site/app_install/index.php");
-                die("");
-        }
-    
-    // die;
-    $src = APP_PATH."$app_name/$app_version";
-    $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
-    copyFile($web_host,$web_user,$web_password,$src, $dst);
-    // die;
-    // copy(APP_CONFIG_PATH.'wordpress/wp-config.php', $dst.'/wp-config.php');
-    $path_to_file = 'E:/app_config/wordpress/wp-config.php';
-    $file_contents = file_get_contents($path_to_file);
-    $file_contents = str_replace("db_host",'localhost:3310',$file_contents);
-    $file_contents = str_replace("wp_dbname",$db_name,$file_contents);
-    $file_contents = str_replace("wp_username",$db_user,$file_contents);
-    $file_contents = str_replace("wp_password",$db_pass,$file_contents);
-    // file_put_contents($path_to_file,$file_contents);
-    put_File($web_host,$web_user,$web_password,$dst.'/wp-config.php',$file_contents);
-    // die;
-    // for sql
-    // copy(APP_CONFIG_PATH.'wordpress/replace_wp_db.sql', $dst.'/replace_wp_db.sql');
-    $sql_file = 'E:/app_config/wordpress/replace_wp_db.sql';
-    $sql_contents = file_get_contents($sql_file);
-    $sql_contents = str_replace("replace_wp_dbname",$db_name,$sql_contents);
-    $sql_contents = str_replace("replace_wp_site_title",$site_name,$sql_contents);
-    $sql_contents = str_replace("replace_wp_username",$user_name,$sql_contents);
-    $sql_contents = str_replace("replace_wp_password",md5($password),$sql_contents);
-    $sql_contents = str_replace("replace_wp_email@gmail.com",$email,$sql_contents);
-    $sql_contents = str_replace("replace_wp_url",$url,$sql_contents);
-    // file_put_contents($sql_file,$sql_contents);
-    // put_File($web_host,$web_user,$web_password,$dst.'/replace_wp_db.sql',$file_contents);
-    // die();
-    // $import = file_get_contents($sql_file);
-// die('ok');
-    if ( ! $commons->importWP($web_host,$sql_contents,$db_name,$db_user,$db_pass))
-    {
-        echo "import fail";
-    }  
-    $msg = "インストールが完了しました";
+        // die;
+        $src = APP_PATH."$app_name/$app_version";
+        $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
+        copyFile($web_host,$web_user,$web_password,$src, $dst);
+        // die;
+        // copy(APP_CONFIG_PATH.'wordpress/wp-config.php', $dst.'/wp-config.php');
+        $path_to_file = 'E:/app_config/wordpress/wp-config.php';
+        $file_contents = file_get_contents($path_to_file);
+        $file_contents = str_replace("db_host",'localhost:3310',$file_contents);
+        $file_contents = str_replace("wp_dbname",$db_name,$file_contents);
+        $file_contents = str_replace("wp_username",$db_user,$file_contents);
+        $file_contents = str_replace("wp_password",$db_pass,$file_contents);
+        // file_put_contents($path_to_file,$file_contents);
+        put_File($web_host,$web_user,$web_password,$dst.'/wp-config.php',$file_contents);
+        // die;
+        // for sql
+        // copy(APP_CONFIG_PATH.'wordpress/replace_wp_db.sql', $dst.'/replace_wp_db.sql');
+        $sql_file = 'E:/app_config/wordpress/replace_wp_db.sql';
+        $sql_contents = file_get_contents($sql_file);
+        $sql_contents = str_replace("replace_wp_dbname",$db_name,$sql_contents);
+        $sql_contents = str_replace("replace_wp_site_title",$site_name,$sql_contents);
+        $sql_contents = str_replace("replace_wp_username",$user_name,$sql_contents);
+        $sql_contents = str_replace("replace_wp_password",md5($password),$sql_contents);
+        $sql_contents = str_replace("replace_wp_email@gmail.com",$email,$sql_contents);
+        $sql_contents = str_replace("replace_wp_url",$url,$sql_contents);
+        // file_put_contents($sql_file,$sql_contents);
+        // put_File($web_host,$web_user,$web_password,$dst.'/replace_wp_db.sql',$file_contents);
+        // die();
+        // $import = file_get_contents($sql_file);
     // die('ok');
-}else{
-    // echo 'hello';
-
-    if($_POST['dbexist']=='new')
-    {
-        if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+        if ( ! $commons->importWP($web_host,$sql_contents,$db_name,$db_user,$db_pass))
         {
-            $error = "Something error";
-            require_once("views/share/server/site/app_install/index.php");
-            die("");
-        }
-        $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
-        if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
-        {
-            $error = "cannot add db account";
-                require_once("views/share/server/site/app_install/index.php");
-                die("");
-        }
-    }
-    
-
-    $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
-
-    
-    if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
-    {
-        $error = "cannot add db account";
-            require_once("views/share/server/site/app_install/index.php");
-            die("");
-    }
-    
-    $src = APP_PATH."$app_name/$app_version";
-    $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
-    copyFile($web_host,$web_user,$web_password,$src, $dst);
-    // die();
-    if ($app_version=="eccube3")
-    {
-        // $clone = 'git clone https://github.com/Sai-Yan-Naing/eccube3.git '.$dst;
-        // shell_exec($clone);
-        // copy_paste($src, $dst);
-        // echo $dst;
-        $ECCUBE_AUTH_MAGIC = 'u5pCrNa6eNpJU8lDKX7WvyeO8P0out2Y';
-        $salt = 'Uo3KLGFImXPsOYFrQ2TjwRj80Kv9ciYc';
-        $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
-        $path_to_file = 'E:\app_config\configec3\eccube/config.yml';
-        $file_contents = file_get_contents($path_to_file);
-        $file_contents = str_replace("ec_strv_name",$site_name,$file_contents);
-        // file_put_contents($path_to_file,$file_contents);
-        put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/config.yml',$file_contents);
-        $path_to_file = 'E:\app_config\configec3\eccube/database.yml';
-        $file_contents = file_get_contents($path_to_file);
-        $file_contents = str_replace("ec_strv_dbname",$db_name,$file_contents);
-        $file_contents = str_replace("ec_strv_dbuser",$db_user,$file_contents);
-        $file_contents = str_replace("ec_strv_dbpass",$db_pass,$file_contents);
-        // file_put_contents($path_to_file,$file_contents);
-        put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/database.yml',$file_contents);
-        
-        $path_to_file = 'E:\app_config\configec3\eccube/path.yml';
-        $file_contents = file_get_contents($path_to_file);
-        $file_contents = str_replace("ec_strv_dir",$root_url,$file_contents);
-        $file_contents = str_replace("ec_strv_rootpath",$dst ,$file_contents);
-        $file_contents = str_replace("dir_path",$root_url ,$file_contents);
-        // file_put_contents($path_to_file,$file_contents);
-        put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/path.yml',$file_contents);
-        
-        $sql_file = 'E:\app_config\configec3\eccube/config.sql';
-        // print_r($sql_file);
-        $file_contents = file_get_contents($sql_file);
-        $file_contents = str_replace("ec_strv_db",$db_name,$file_contents);
-        $file_contents = str_replace("ec_strv_email@gmail.com",$email,$file_contents);
-        $file_contents = str_replace("ec_strv_name",$site_name,$file_contents);
-        $file_contents = str_replace("ec_strv_id",$user_name,$file_contents);
-        $import = str_replace("ec_strv_pass",$user_pass,$file_contents);
-        // file_put_contents($sql_file,$file_contents);
-        // put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/config.sql',$file_contents);
+            echo "import fail";
+        }  
+        $msg = "インストールが完了しました";
         // die('ok');
     }else{
-        // echo $dst;
-        // $clone = 'git clone https://github.com/Sai-Yan-Naing/eccube4.1.git '.$dst;
-        // shell_exec($clone);
-        $env = 'E:\app_config\config4/.env';
-        $ECCUBE_AUTH_MAGIC = 'Mt7yAMxp69mUX3XHKkn1IXPjWMR8XUjn';
-        $salt = 'CDJnBUsIOymOfp7pZqPGgJ8waBHkvkmN';
-        $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
+        // echo 'hello';
 
-        $file_contents = file_get_contents($env);
-        $file_contents = str_replace("e4replace_dbuser",$db_user,$file_contents);
-        $file_contents = str_replace("e4replace_dbpass",$db_pass,$file_contents);
-        $file_contents = str_replace("e4replace_dbname",$db_name,$file_contents);
-        $file_contents = str_replace("e4replace_dir",$root_url,$file_contents);
-        // file_put_contents($env,$file_contents);
-        put_File($web_host,$web_user,$web_password,$dst.'/.env',$file_contents);
+        if($_POST['dbexist']=='new')
+        {
+            if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+            {
+                $error = "Something error";
+                require_once("views/share/server/site/app_install/index.php");
+                die("");
+            }
+            $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
+            if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
+            {
+                $error = "cannot add db account";
+                    require_once("views/share/server/site/app_install/index.php");
+                    die("");
+            }
+        }
+        
 
-        $sql_file = 'E:\app_config\config4/config.sql';
-        $file_contents = file_get_contents($sql_file);
-        $file_contents = str_replace("e4replace_dbname",$db_name,$file_contents);
-        $file_contents = str_replace("e4replace_email@gmail.com",$email,$file_contents);
-        $file_contents = str_replace("e4replace_sitename",$site_name,$file_contents);
-        $file_contents = str_replace("e4replace_id",$user_name,$file_contents);
-        $import = str_replace("e4replace_pass",$user_pass,$file_contents);
-        // file_put_contents($sql_file,$file_contents);
-        // put_File($web_host,$web_user,$web_password,$dst.'/config.sql',$file_contents);
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
+
+        
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
+        {
+            $error = "cannot add db account";
+                require_once("views/share/server/site/app_install/index.php");
+                die("");
+        }
+        
+        $src = APP_PATH."$app_name/$app_version";
+        $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
+        copyFile($web_host,$web_user,$web_password,$src, $dst);
         // die();
+        if ($app_version=="eccube3")
+        {
+            // $clone = 'git clone https://github.com/Sai-Yan-Naing/eccube3.git '.$dst;
+            // shell_exec($clone);
+            // copy_paste($src, $dst);
+            // echo $dst;
+            $ECCUBE_AUTH_MAGIC = 'u5pCrNa6eNpJU8lDKX7WvyeO8P0out2Y';
+            $salt = 'Uo3KLGFImXPsOYFrQ2TjwRj80Kv9ciYc';
+            $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
+            $path_to_file = 'E:\app_config\configec3\eccube/config.yml';
+            $file_contents = file_get_contents($path_to_file);
+            $file_contents = str_replace("ec_strv_name",$site_name,$file_contents);
+            // file_put_contents($path_to_file,$file_contents);
+            put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/config.yml',$file_contents);
+            $path_to_file = 'E:\app_config\configec3\eccube/database.yml';
+            $file_contents = file_get_contents($path_to_file);
+            $file_contents = str_replace("ec_strv_dbname",$db_name,$file_contents);
+            $file_contents = str_replace("ec_strv_dbuser",$db_user,$file_contents);
+            $file_contents = str_replace("ec_strv_dbpass",$db_pass,$file_contents);
+            // file_put_contents($path_to_file,$file_contents);
+            put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/database.yml',$file_contents);
+            
+            $path_to_file = 'E:\app_config\configec3\eccube/path.yml';
+            $file_contents = file_get_contents($path_to_file);
+            $file_contents = str_replace("ec_strv_dir",$root_url,$file_contents);
+            $file_contents = str_replace("ec_strv_rootpath",$dst ,$file_contents);
+            $file_contents = str_replace("dir_path",$root_url ,$file_contents);
+            // file_put_contents($path_to_file,$file_contents);
+            put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/path.yml',$file_contents);
+            
+            $sql_file = 'E:\app_config\configec3\eccube/config.sql';
+            // print_r($sql_file);
+            $file_contents = file_get_contents($sql_file);
+            $file_contents = str_replace("ec_strv_db",$db_name,$file_contents);
+            $file_contents = str_replace("ec_strv_email@gmail.com",$email,$file_contents);
+            $file_contents = str_replace("ec_strv_name",$site_name,$file_contents);
+            $file_contents = str_replace("ec_strv_id",$user_name,$file_contents);
+            $import = str_replace("ec_strv_pass",$user_pass,$file_contents);
+            // file_put_contents($sql_file,$file_contents);
+            // put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/config.sql',$file_contents);
+            // die('ok');
+        }else{
+            // echo $dst;
+            // $clone = 'git clone https://github.com/Sai-Yan-Naing/eccube4.1.git '.$dst;
+            // shell_exec($clone);
+            $env = 'E:\app_config\config4/.env';
+            $ECCUBE_AUTH_MAGIC = 'Mt7yAMxp69mUX3XHKkn1IXPjWMR8XUjn';
+            $salt = 'CDJnBUsIOymOfp7pZqPGgJ8waBHkvkmN';
+            $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
+
+            $file_contents = file_get_contents($env);
+            $file_contents = str_replace("e4replace_dbuser",$db_user,$file_contents);
+            $file_contents = str_replace("e4replace_dbpass",$db_pass,$file_contents);
+            $file_contents = str_replace("e4replace_dbname",$db_name,$file_contents);
+            $file_contents = str_replace("e4replace_dir",$root_url,$file_contents);
+            // file_put_contents($env,$file_contents);
+            put_File($web_host,$web_user,$web_password,$dst.'/.env',$file_contents);
+
+            $sql_file = 'E:\app_config\config4/config.sql';
+            $file_contents = file_get_contents($sql_file);
+            $file_contents = str_replace("e4replace_dbname",$db_name,$file_contents);
+            $file_contents = str_replace("e4replace_email@gmail.com",$email,$file_contents);
+            $file_contents = str_replace("e4replace_sitename",$site_name,$file_contents);
+            $file_contents = str_replace("e4replace_id",$user_name,$file_contents);
+            $import = str_replace("e4replace_pass",$user_pass,$file_contents);
+            // file_put_contents($sql_file,$file_contents);
+            // put_File($web_host,$web_user,$web_password,$dst.'/config.sql',$file_contents);
+            // die();
+        }
+        
+        // $import = file_get_contents($sql_file);
+        $msg = "インストールが完了しました";
+        // if ( ! $commons->importWP($import,$db_name,$db_user,$db_pass))
+        if ( ! $commons->importWP($web_host,$import,$db_name,$db_user,$db_pass))
+        {
+            echo "import fail";
+        }  
+    }
+
+}elseif ($action=='delete') {
+    $act_id=$_POST['act_id'];
+    $site_name=$_POST['site_name'];
+    $delete_q = "DELETE FROM app WHERE id='$act_id'";
+    if ( !$commons->doThis($delete_q))
+    {
+        echo $error="Cannot delete app";
+        die();
     }
     
-    // $import = file_get_contents($sql_file);
-    $msg = "インストールが完了しました";
-    // if ( ! $commons->importWP($import,$db_name,$db_user,$db_pass))
-    if ( ! $commons->importWP($web_host,$import,$db_name,$db_user,$db_pass))
-    {
-        echo "import fail";
-    }  
+    $msg = "「".$site_name."」 を削除しました";
+    $msgsession ="msg";
 }
 // die('no');
 flash($msgsession,$msg);
