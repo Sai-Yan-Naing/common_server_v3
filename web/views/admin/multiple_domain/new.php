@@ -15,16 +15,17 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
         <div class="form-group row">
             <label for="domain" class="col-sm-2 col-form-label">主契約ドメイン</label>
             <div class="col-sm-8">
-                <input type="hidden" name="contractid" value="<?= $contracts[0]['id'] ?>">
+                <input type="hidden" name="contractid" value="">
                 <select class="form-select" name="web_server" id="web_server" required>
-                      <!-- <option value="">Select Web Server</option> -->
+                      <option value="">Select contract domain</option>
                       <?php 
                       
                             foreach($contracts as $value):
-                                // $web_server = "SELECT * FROM web_server_config WHERE id='$value'";
-                                // $gethost = $commons->getRow($web_server);
+                                $sitelimit = "SELECT * FROM web_account WHERE origin_id='$value[id]' and removal IS NULL";
+                                $gethost = $commons->getAllRow($sitelimit);
+                                $plan_t = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$value['plan']]);
                       ?>
-                      <option value="<?= $value['web_server_id'] ?>" data-webserver="<?= $value['id'] ?>"><?=$value['domain']?></option>
+                      <option value="<?= $value['web_server_id'] ?>" data-webserver="<?= $value['id'] ?>" <?= (count($gethost)+1>=(int)$plan_t['site'])?'disabled':''; ?>><?=$value['domain']?></option>
                       <?php 
                   endforeach;
                       ?>

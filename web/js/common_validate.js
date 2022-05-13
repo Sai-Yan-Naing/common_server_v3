@@ -160,6 +160,10 @@ function allValidate() {
           $ext='?webid='+$permission.data('webid');
         }else if($permission.data('permission')=='admin')
         {
+          $("#" + $(element).attr("id") + "-error").remove();
+          if($('#web_server').val()==''){
+            return true;
+          }
           $('#user_permission').data('webser',$('#web_server').val())
           $ext='?webid=admin&webser='+$permission.data('webser');
         }else if($permission.data('permission')=='share')
@@ -578,11 +582,17 @@ function allValidate() {
           $gourl = "/admin/share/server?setting=site&tab=app_install&act=validatecap";
           $exceedwebcap = '容量がいっぱいになっているため、アプリケーションの追加ができません。サイトデータを削除いただき追加を行ってください。';
         // return;
+        $("#incompat_Cancel").click(function () {
+                        $("#incompat_dialog").modal("hide");
+                        $("#common_dialog").modal("show");
+                        $("#common_dialog").css({'overflow-y':'auto'})
+                    });
         if(exceedwebcap($gourl))
               {
                 document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
                 $('#exceedwebcap').html($exceedwebcap)
               }else{
+
                 if($app=='ECCUBE' && ($version=='eccube3' && $phpv=='v5.6.37'))
                   {
                     document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE3.0の対応バージョンではないため、5.6.xに変更します。';
@@ -594,6 +604,7 @@ function allValidate() {
                         loading();
                         form.submit()
                     });
+
                   }else if($app=='ECCUBE' && $version=='eccube-4.1' || ( $phpv=='v5.6.37' || $phpv=='v7.2.9' || $phpv=='v7.3.0')){
                     document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE4.1の対応バージョンではないため、7.4.xに変更します。';
                     $("#common_dialog").modal("hide");

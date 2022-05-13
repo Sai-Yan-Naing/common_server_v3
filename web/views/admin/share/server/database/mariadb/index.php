@@ -26,7 +26,7 @@ $getAllRow2 = $commons->getAllRow($query2, [$webdomain]);
                                 <div class="tab-content">
                                     <div class="active">
                                         <div class="d-flex mt-3 mb-3">
-                                            <?php if( $webplnmariadb == 'yes' && ((int)$webplnmariadbnum > (count($getAllRow1 )+ count($getAllRow2 )) || $webplnmariadbnum=='unlimited')):?>
+                                            <?php if( $webplnmariadb == 'yes' && ((int)$webplnmariadbnum > (count($getAllRow1 ) + count($getAllRow2 )) || $webplnmariadbnum=='unlimited')):?>
                                             <div class="ml-3">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mariadb&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>

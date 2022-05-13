@@ -27,9 +27,13 @@ $webbasicsetting = $web_acc['basic_setting'];
 $webappversion = $web_acc['app_version'];
 $webblacklist = $web_acc['blacklist'];
 $weborigin = $web_acc['origin'];
+$weborigin_id = $web_acc['origin_id'];
 $webssl = $web_acc['ssl'];
+$webmysql_cnt = $web_acc['mysql_cnt'];
+$webmssql_cnt = $web_acc['mssql_cnt'];
+$webmariadb_cnt = $web_acc['mariadb_cnt'];
 // for root site
-$webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ? and removal IS NULL",[1,$webadminID]);
+$webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ? AND id =? and removal IS NULL",[1,$webadminID,$weborigin_id]]);
 $webrootid = $webroot_acc['id'];
 $webadminID = $webroot_acc['customer_id'];
 $webroot_server_id = $webroot_acc['web_server_id'];

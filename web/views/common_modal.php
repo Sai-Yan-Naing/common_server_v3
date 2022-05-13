@@ -62,20 +62,12 @@
         </div>
       </div>
 
-      <!-- <div class="modal-content" id="incompat_dialog" style="display:none">
-	  	  <div class="modal-body text-center" id='incompat'>hid</div>
-        <div class="modal-footer d-flex justify-content-center">
-          <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-          <button type="button" class="btn btn-outline-info btn-sm" id="incompat_Confirm">OK</button>
-        </div>
-      </div> -->
-
       <div class="modal fade" id="incompat_dialog" data-keyboard="true" data-backdrop="static">
 		    <div class="modal-dialog modal-xl">
 		      <div class="modal-content" >
 			  	  <div class="modal-body text-center" id="incompatdisplay_dialog"></div>
 		        <div class="modal-footer d-flex justify-content-center">
-		          <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
+		          <button type="button" class="btn btn-outline-info btn-sm" id="incompat_Cancel">キャンセル</button>
 		          <button type="button" class="btn btn-outline-info btn-sm" id="incompat_Confirm">OK</button>
 		        </div>
 		      </div>

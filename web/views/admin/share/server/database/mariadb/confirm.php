@@ -28,7 +28,14 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
 			}
-			// die('test');
+		$maridb_cnt +=1;
+		$sql = "UPDATE web_account SET mariadb_cnt='$maridb_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mariadb/index.php");
+				die("");
+			}
+		die('test');
 	} elseif ($action === "edit") {
 		if (!$commons->changeMariaPassword($db_user,$db_pass))
 		{
