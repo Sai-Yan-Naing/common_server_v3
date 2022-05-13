@@ -1,5 +1,5 @@
 <?php
-// die();
+die();
 require_once("views/admin/admin_shareconfig.php");
 $app_name = $_POST["app"];
 $action = $_POST["action"];

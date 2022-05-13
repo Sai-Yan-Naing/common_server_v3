@@ -44,6 +44,7 @@
             </ul>
         </nav>
         <div class="d-none" id='user_permission' data-permission="share" data-webser="share"></div>
+        <div class="d-none" id='webphp' data-version="<?=$getphpv->app->php?>"></div>
         <?php 
         function call_ass()
         {

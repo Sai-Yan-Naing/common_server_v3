@@ -561,7 +561,10 @@ function allValidate() {
       submitHandler: function (form) {
         // loading();
         // form.submit();
-        // console(checkappdb());
+        $app = $("input[name='app']:checked").val();
+        $version = $("input[name='app-version']:checked").val();
+        $phpv = $('#webphp').data('version');
+        
         if (checkappdb()=='ok') {
             $('#dbexist').val('exist');
           }else if(checkappdb()=='doesnotmatch'){
@@ -572,17 +575,44 @@ function allValidate() {
           }
 
           $('#checkappdb').addClass("d-none");
+          $gourl = "/admin/share/server?setting=site&tab=app_install&act=validatecap";
+          $exceedwebcap = '容量がいっぱいになっているため、アプリケーションの追加ができません。サイトデータを削除いただき追加を行ってください。';
         // return;
-        $gourl = "/admin/share/server?setting=site&tab=app_install&act=validatecap";
-        $exceedwebcap = '容量がいっぱいになっているため、アプリケーションの追加ができません。サイトデータを削除いただき追加を行ってください。';
         if(exceedwebcap($gourl))
-        {
-          document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
-          $('#exceedwebcap').html($exceedwebcap)
-        }else{
-          loading();
-          form.submit()
-        }
+              {
+                document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
+                $('#exceedwebcap').html($exceedwebcap)
+              }else{
+                if($app=='ECCUBE' && ($version=='eccube3' && $phpv=='v5.6.37'))
+                  {
+                    document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE3.0の対応バージョンではないため、5.6.xに変更します。';
+                    $("#common_dialog").modal("hide");
+                    $("#incompat_dialog").modal("show");
+                    $("#incompat_Confirm").click(function () {
+                        $("#incompat_dialog").modal("hide");
+                        $("#app_install_form").attr("data-send", "ready");
+                        loading();
+                        form.submit()
+                    });
+                  }else if($app=='ECCUBE' && $version=='eccube-4.1' || ( $phpv=='v5.6.37' || $phpv=='v7.2.9' || $phpv=='v7.3.0')){
+                    document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE4.1の対応バージョンではないため、7.4.xに変更します。';
+                    $("#common_dialog").modal("hide");
+                    $("#incompat_dialog").modal("show");
+                    $("#incompat_Confirm").click(function () {
+                        $("#incompat_dialog").modal("hide");
+                        $("#app_install_form").attr("data-send", "ready");
+                        loading();
+                        form.submit()
+                    });
+                  }else{
+                    loading();
+                    form.submit()
+                  }
+                
+              }
+        
+          
+        
       },
     });
 function checkappdb()
