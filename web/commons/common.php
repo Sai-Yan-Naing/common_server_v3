@@ -567,15 +567,7 @@ function sslexp($domain)
 
     if(strpos($parsed['subject']['CN'], $domain_name) !== false){
       $datetime1 = date('Y/m/d', $parsed['validTo_time_t']);
-      $datetime2 = Date('Y/m/d');
-      
-      // Function call to find date difference
-      $dateDiff = dateDiffInDays($datetime1, $datetime2);
-      
-      // Display the result
-      // printf("Difference between two dates: "
-      //    . $dateDiff . " Days ");
-      return $dateDiff;
+      return $datetime1;
     }else{
       echo 'not contract.'; 
     }

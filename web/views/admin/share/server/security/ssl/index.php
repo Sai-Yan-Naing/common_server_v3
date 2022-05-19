@@ -1,4 +1,5 @@
 <?php require_once('views/admin/share/header.php'); ?>
+<?php $webssl = json_decode($webssl); ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
             <div id="layoutSidenav_content">
@@ -11,21 +12,86 @@
                                 <!-- start -->
                                 <div class="tab-content">
                                     <?php
-                                        if ((int)$webssl==1):
+                                        if ((int)count($webssl)!=0):
                                     ?>
                                     <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
-                                        <table class="table table-borderless">
-                                            <tr>
-                                                <th>Valid Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            <tr>
-                                                <td><?= sslexp($webdomain); ?> Days</td>
-                                                <td>
-                                                    <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog">Renew</a>
-                                                    <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" >削除</a></td>
-                                            </tr>
-                                        </table>
+                                        <form action="/admin/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="free-ssl">
+                                            <input type="hidden" name="action" value="edit">
+                                            <div class="form-group row">
+                                                <span class="col">無料SSL設定</span>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="name" class="col-sm-2 col-form-label">コモンネーム</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="common_name" name="common_name" placeholder="例：www.assistup.co.jp" value="<?= $webssl->ssl->common_name ?>">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label for="country" class="col-sm-2 col-form-label">COUNTRY</label>
+                                                <div class="col-sm-8 country-jp">
+                                                    <span>ＪＰ</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="prefecture " class="col-sm-2 col-form-label">都道府県（Ｓ）</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="prefecture" name="prefecture" placeholder="例：Osaka" value="<?= $webssl->ssl->prefecture ?>">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label for="municipality" class="col-sm-2 col-form-label">市区町村（Ｌ）</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="municipality" name="municipality" placeholder="例：Osaka-si" value="<?= $webssl->ssl->municipality ?>">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label for="organization" class="col-sm-2 col-form-label">組織名（Ｏ）</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="organization" name="organization" placeholder="例：assistup Inc. " value="<?= $webssl->ssl->organization ?>">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label for="organization" class="col-sm-2 col-form-label">有効期限</label>
+                                                <div class="col-sm-8">
+                                                    <label><?= sslexp($webdomain) ?>（<?= dateDiffInDays(sslexp($webdomain), Date('Y/m/d'));?>日ごとに自動更新されます）</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-3"></div>
+                                                <div class="col-sm-6 mal-auto">
+                                                    <button class="btn btn-outline-info btn-sm common_dialog " type="submit" data-toggle="modal" data-target="#common_modal" gourl="">更新</button>
+                                                    <button class="btn btn-outline-danger btn-sm " type="submit"  form="ssl-delete">削除</button>
+                                                </div>
+                                                <div class="col-sm-3"></div>
+                                            </div>
+                                        </form>
+
+                                            <form action="/admin/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="ssl-delete">
+                                            <input type="hidden" name="action" value="delete">
+                                                
+                                            </form>
+
+                                            <div class="form-group row">
+                                                <span class="col">有料SSL設定</span>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="ssl-list" class="col-sm-2 col-form-label">有料SSL</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control">
+                                                        <option>オプションで申し込んでいているSSL種別を記載</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="exp-date" class="col-sm-2 col-form-label">SSL有効期限</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" readonly class="form-control" id="exp-date" name="exp_date" value=" 2020/10/8">
+                                                </div>
+                                            </div>
                                     </div>
                                     <?php
                                         else:
@@ -39,7 +105,7 @@
                                             <div class="form-group row">
                                                 <label for="name" class="col-sm-2 col-form-label">コモンネーム</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="name" name="name" placeholder="例：www.assistup.co.jp">
+                                                    <input type="text" class="form-control" id="common_name" name="common_name" placeholder="例：www.assistup.co.jp">
                                                 </div>
                                             </div>
                                             

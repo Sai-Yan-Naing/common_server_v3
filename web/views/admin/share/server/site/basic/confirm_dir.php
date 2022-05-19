@@ -4,7 +4,7 @@ require_once("views/admin/admin_shareconfig.php");
     $for = $_GET['for'];
     $temp = json_decode($webbasicsetting,true);
     $bass_dir = $_POST['bass_dir'];
-    $dir_path=$webpath.'/'.$bass_dir;
+    $dir_path=$webpath.'/web/'.$bass_dir;
     $msg = "jp message";
     $msgsession ="msg";
     if ($for==='dir')

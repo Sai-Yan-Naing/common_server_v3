@@ -25,7 +25,7 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
                                 $gethost = $commons->getAllRow($sitelimit);
                                 $plan_t = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$value['plan']]);
                       ?>
-                      <option value="<?= $value['web_server_id'] ?>" data-webserver="<?= $value['id'] ?>" <?= (count($gethost)+1>=(int)$plan_t['site'])?'disabled':''; ?>><?=$value['domain']?></option>
+                      <option value="<?= $value['web_server_id'] ?>" data-webserver="<?= $value['id'] ?>" <?= (count($gethost)+1>=(int)$plan_t['site'])?'disabled':''; ?> title="Something"><?=$value['domain']?></option>
                       <?php 
                   endforeach;
                       ?>
@@ -57,3 +57,30 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
   <button type="submit" class="btn btn-outline-info btn-sm" form="add_multiple_domain">作成</button>
 </div>
+<div id="disabledopt" style="display:none;">I will show on hover</div>
+<style type="text/css">
+    select#web_server option:disabled {
+color:#f0f0f5
+}
+</style>
+
+<script type="text/javascript">
+    
+$("#web_server").change(function(event) {
+  $.each($(this).find('option'), function(key, value) {
+    $(value).removeClass('disable');
+  })
+  $('option:selected').addClass('disable');
+
+});
+
+$("#web_server").tooltip({
+  placement: 'right',
+  trigger: 'hover',
+  container: 'body',
+  title: function(e) {
+    return $(this).find('.disable').attr('title');
+  }
+});
+
+</script>
