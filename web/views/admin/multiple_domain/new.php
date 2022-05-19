@@ -25,7 +25,7 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
                                 $gethost = $commons->getAllRow($sitelimit);
                                 $plan_t = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$value['plan']]);
                       ?>
-                      <option value="<?= $value['web_server_id'] ?>" data-webserver="<?= $value['id'] ?>" <?= (count($gethost)+1>=(int)$plan_t['site'])?'disabled':''; ?> title="Something"><?=$value['domain']?></option>
+                      <option value="<?= $value['web_server_id'] ?>" data-webserver="<?= $value['id'] ?>" <?= (count($gethost)+1>=(int)$plan_t['site'])?'disabled':''; ?> title="データベース数が上限に達しています。"><?=$value['domain']?></option>
                       <?php 
                   endforeach;
                       ?>
@@ -60,7 +60,7 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
 <div id="disabledopt" style="display:none;">I will show on hover</div>
 <style type="text/css">
     select#web_server option:disabled {
-color:#f0f0f5
+color:#cccccc
 }
 </style>
 
