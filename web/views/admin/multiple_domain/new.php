@@ -17,7 +17,7 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
             <div class="col-sm-8">
                 <input type="hidden" name="contractid" value="">
                 <select class="form-select" name="web_server" id="web_server" required>
-                      <option value="">Select contract domain</option>
+                      <option value="">主契約ドメインを選択</option>
                       <?php 
                       
                             foreach($contracts as $value):
