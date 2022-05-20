@@ -22,7 +22,8 @@ if($action =='new')
 	$query = "UPDATE web_account SET ssl='$webssl' WHERE id='$webid'";
 	$commons->doThis($query);
 // die;
-	#Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser);
+	echo shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' new');
+	// die();
 }elseif($action =='edit'){
 
 	$common_name = $_POST['common_name'];
@@ -43,6 +44,7 @@ if($action =='new')
 	// $webssl = 1;
 	$query = "UPDATE web_account SET ssl='$webssl' WHERE id='$webid'";
 	$commons->doThis($query);
+	shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' delete');
 }
 
 // die;
