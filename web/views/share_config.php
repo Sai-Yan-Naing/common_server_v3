@@ -15,7 +15,7 @@ $commons = new Common;
 $web_acc = $commons->getRow("SELECT * FROM web_account WHERE domain= ?", [$_COOKIE['share_user']]);
 $webid = $web_acc['id'];
 $webadminID = $web_acc['customer_id'];
-$web_server_id = $web_acc['web_server_id'];
+echo $web_server_id = $web_acc['web_server_id'];
 $webuser = $web_acc['user'];
 $webdomain = $web_acc['domain'];
 $webpass = $web_acc['password'];
@@ -33,10 +33,13 @@ $webmysql_cnt = $web_acc['mysql_cnt'];
 $webmssql_cnt = $web_acc['mssql_cnt'];
 $webmariadb_cnt = $web_acc['mariadb_cnt'];
 // for root site
+
+if($weborigin !=1)
+{
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ? AND id =? and removal IS NULL",[1,$webadminID,$weborigin_id]);
 $webrootid = $webroot_acc['id'];
 $webadminID = $webroot_acc['customer_id'];
-$webroot_server_id = $webroot_acc['web_server_id'];
+$web_server_id = $webroot_acc['web_server_id'];
 $webrootuser = $webroot_acc['user'];
 $webrootdomain = $webroot_acc['domain'];
 $webrootpass = $webroot_acc['password'];
@@ -47,10 +50,11 @@ $webrootdns = $webroot_acc['dns'];
 $webrootbasicsetting = $webroot_acc['basic_setting'];
 $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
+}
 
 $setting = $_GET['setting'];
 
-$web_server_id = ( $weborigin != 1 )? $web_server_id : $webroot_server_id; 
+// $web_server_id = ( $weborigin != 1 )? $web_server_id : $web_server_id; 
 
 $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
 $gethost = $commons->getRow($web_server);
@@ -106,7 +110,8 @@ define("SQLSERVER_2016_USER", $web_msdbuser);
 define("SQLSERVER_2016_PASS", $web_msdbpass);
 define("SQLSERVER_2016_DSN", 'sqlsrv:Server='.$web_host.';Database=master');
 
-$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webrootuser; 
+$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webuser;
+// die(); 
 
 $pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
 $pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';
