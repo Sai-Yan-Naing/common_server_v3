@@ -10,7 +10,7 @@ $msg = "jp message";
 // die('test');
 	if ( $action === "new")
 	{
-		// die('test');
+		// die($webmariadb_cnt);
 		$db_name = $_POST["db_name"];
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の追加が完了しました ";
@@ -28,14 +28,13 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
 			}
-		$maridb_cnt +=1;
-		$sql = "UPDATE web_account SET mariadb_cnt='$maridb_cnt' WHERE domain='$webdomain'";
+		$webmariadb_cnt +=1;
+		$sql = "UPDATE web_account SET mariadb_cnt='$webmariadb_cnt' WHERE domain='$webdomain'";
 		if( ! $commons->doThis($sql)) {
 			$error = "cannot add db account";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
 			}
-		die('test');
 	} elseif ($action === "edit") {
 		if (!$commons->changeMariaPassword($db_user,$db_pass))
 		{
@@ -64,6 +63,18 @@ $msg = "jp message";
 			require_once("views/admin/share/server/database/mariadb/index.php");
 			die("");
 		}
+		if ( $webmariadb_cnt<=0)
+		{
+			$webmariadb_cnt=0;
+		}else{
+			$webmariadb_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mariadb_cnt='$webmariadb_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mariadb/index.php");
+				die("");
+			}
 	}
 	flash($msgsession,$msg);
 	header("Location: /admin/share/server?setting=database&tab=mariadb&act=index&webid=$webid$pagy");

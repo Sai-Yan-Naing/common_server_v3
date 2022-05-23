@@ -30,6 +30,14 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mssql/index.php");
 				die("");
 			}
+
+			$webmssql_cnt +=1;
+		$sql = "UPDATE web_account SET mssql_cnt='$webmssql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mysql/index.php");
+				die("");
+			}
 		
 	}elseif ($action=="edit") 
 	{
@@ -61,6 +69,17 @@ $msg = "jp message";
 		{
 			require_once("views/admin/share/server/database/mssql/index.php");
 			die("");
+		}
+		if ( $webmssql_cnt<=0)
+		{
+			$webmssql_cnt=0;
+		}else{
+			$webmssql_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mssql_cnt='$webmssql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mariadb/index.php");
 		}
 	}
 	flash($msgsession,$msg);

@@ -56,6 +56,7 @@
 
                             }
                             $a = 1;
+
                             foreach($contracts as $main_domain):
                                 $site = 0;
                                 $sites=[];
@@ -70,10 +71,6 @@
                                 $mssqlcount = [];
                                 $mssqltotal =0;
                                 $mdomain =$main_domain['domain'];
-                                // echo $subdomain;
-                                // $web_server = "SELECT count(id) FROM db_account WHERE domain='$mdomain'";
-                                // $mgethost = $commons->getCount($web_server);
-                                                // print_r($gethost);
                                 foreach($multidomain as $domain){
                                     if($main_domain['id'] == $domain['id'] || $main_domain['id']==$domain['origin_id'])
                                     {
@@ -99,10 +96,6 @@
                                     }
 
                                 }
-                                // echo $subdomain;
-                                // $web_server = "SELECT count(id) FROM db_account WHERE domain='$mdomain'";
-                                //                 $gethost = $commons->getCount($web_server);
-                                                // print_r($masqlcount);
                         ?>
                         <div class="d-flex contract-domain <?= ($a==1)? '':'main-contract'?>">
                             <div class="col-md-3">

@@ -31,6 +31,13 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mysql/index.php");
 				die("");
 			}
+			$webmysql_cnt +=1;
+		$sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mysql/index.php");
+				die("");
+			}
 	} elseif ( $action=="edit") 
 	{
 		if( ! $commons->changeMysqlPassword($db_user,$db_pass))
@@ -59,6 +66,18 @@ $msg = "jp message";
 			require_once("views/admin/share/server/database/mysql/index.php");
 			die("");
 		}
+		if ( $webmysql_cnt<=0)
+		{
+			$webmysql_cnt=0;
+		}else{
+			$webmysql_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mariadb/index.php");
+		}
+				
 
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の削除が完了しました";

@@ -41,6 +41,8 @@ $webmysql_cnt = $web_acc['mysql_cnt'];
 $webmssql_cnt = $web_acc['mssql_cnt'];
 $webmariadb_cnt = $web_acc['mariadb_cnt'];
 // for root site
+if($weborigin !=1)
+{
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ? AND id =? and removal IS NULL",[1,$_COOKIE['admin'],$weborigin_id]);
 $webrootid = $webroot_acc['id'];
 $webadminID = $webroot_acc['customer_id'];
@@ -55,7 +57,7 @@ $webrootdns = $webroot_acc['dns'];
 $webrootbasicsetting = $webroot_acc['basic_setting'];
 $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
-
+}
 $setting = $_GET['setting'];
 
 $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
@@ -106,7 +108,8 @@ define("SQLSERVER_2016_USER", $web_msdbuser);
 define("SQLSERVER_2016_PASS", $web_msdbpass);
 define("SQLSERVER_2016_DSN", 'sqlsrv:Server='.$web_host.';Database=master');
 
-$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webrootuser; 
+$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webuser;
+// die(); 
 
 $pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
 $pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';
