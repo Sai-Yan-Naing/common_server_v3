@@ -605,7 +605,7 @@ function allValidate() {
                         form.submit()
                     });
 
-                  }else if($app=='ECCUBE' && $version=='eccube-4.1' || ( $phpv=='v5.6.37' || $phpv=='v7.2.9' || $phpv=='v7.3.0')){
+                  }else if($app=='ECCUBE' && $version=='eccube-4.1' && ( $phpv=='v5.6.37' || $phpv=='v7.2.9' || $phpv=='v7.3.0')){
                     document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE4.1の対応バージョンではないため、7.4.xに変更します。';
                     $("#common_dialog").modal("hide");
                     $("#incompat_dialog").modal("show");

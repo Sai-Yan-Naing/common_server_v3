@@ -43,8 +43,10 @@ if ( $action=='new'){
 
             
         }
-        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
-        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
+        $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
+        $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?)";
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass,$getdbid['id']]))
             {
                 $error = "cannot add db account";
                     require_once("views/share/server/site/app_install/index.php");
@@ -107,11 +109,12 @@ if ( $action=='new'){
             }
         }
         
-
-        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?)";
+        $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
+        $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?)";
 
         
-        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass]))
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id']]))
         {
             $error = "cannot add db account";
                 require_once("views/share/server/site/app_install/index.php");
@@ -205,6 +208,29 @@ if ( $action=='new'){
     $act_id=$_POST['act_id'];
     $site_name=$_POST['site_name'];
     $delete_q = "DELETE FROM app WHERE id='$act_id'";
+    $dbquery = "SELECT * FROM app WHERE id='$act_id'";
+    $getdb = $commons->getRow($dbquery);
+    $dbid = $getdb['db_id'];
+    $db_user = $getdb['db_user'];
+    $db_name = $getdb['db_name'];
+    $delete_db = "DELETE FROM db_account WHERE id='$dbid'";
+    $dbcount = "SELECT count(id) FROM db_account WHERE id='$dbid'";
+    $getdb1 = $commons->getCount($dbcount);
+    if($getdb1==1)
+    {
+
+        if(!$commons->deleteMysqlDB($dbid,$db_user,$db_name))
+        {
+            
+            echo $error="Cannot delete app";
+            die();
+        }
+        if ( !$commons->doThis($delete_db))
+        {
+            echo $error="Cannot delete app";
+            die();
+        }
+    }
     if ( !$commons->doThis($delete_q))
     {
         echo $error="Cannot delete app";
