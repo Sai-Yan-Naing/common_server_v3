@@ -15,7 +15,7 @@ $commons = new Common;
 $web_acc = $commons->getRow("SELECT * FROM web_account WHERE domain= ?", [$_COOKIE['share_user']]);
 $webid = $web_acc['id'];
 $webadminID = $web_acc['customer_id'];
-echo $web_server_id = $web_acc['web_server_id'];
+$web_server_id = $web_acc['web_server_id'];
 $webuser = $web_acc['user'];
 $webdomain = $web_acc['domain'];
 $webpass = $web_acc['password'];
@@ -39,7 +39,7 @@ if($weborigin !=1)
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ? AND id =? and removal IS NULL",[1,$webadminID,$weborigin_id]);
 $webrootid = $webroot_acc['id'];
 $webadminID = $webroot_acc['customer_id'];
-$web_server_id = $webroot_acc['web_server_id'];
+$webroot_server_id = $webroot_acc['web_server_id'];
 $webrootuser = $webroot_acc['user'];
 $webrootdomain = $webroot_acc['domain'];
 $webrootpass = $webroot_acc['password'];
@@ -54,7 +54,7 @@ $webrootblacklist = $webroot_acc['blacklist'];
 
 $setting = $_GET['setting'];
 
-// $web_server_id = ( $weborigin != 1 )? $web_server_id : $web_server_id; 
+$web_server_id = ( $weborigin != 1 )? $webroot_server_id : $web_server_id; 
 
 $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
 $gethost = $commons->getRow($web_server);
