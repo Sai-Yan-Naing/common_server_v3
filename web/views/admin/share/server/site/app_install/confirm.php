@@ -19,6 +19,17 @@ unset($root_url[0]);
 unset($root_url[1]);
 unset($root_url[2]);
 $root_url = implode("/",$root_url);
+
+if ($root_url==null) {
+    $url = explode("/", $url);
+    unset($url[3]);
+    $url = implode("/",$url);
+    $src = APP_PATH."$app_name/$app_version/*";
+    $dst = ROOT_PATH.$webpath.'/web/';
+}else{
+    $src = APP_PATH."$app_name/$app_version";
+    $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
+}
 $msg = "jp message";
 $msgsession ="msg";
 if ( $action=='new'){
@@ -55,8 +66,6 @@ if ( $action=='new'){
         // die('new');
         
         // die;
-        $src = APP_PATH."$app_name/$app_version";
-        $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
         copyFile($web_host,$web_user,$web_password,$src, $dst);
         // die;
         // copy(APP_CONFIG_PATH.'wordpress/wp-config.php', $dst.'/wp-config.php');
@@ -120,8 +129,8 @@ if ( $action=='new'){
                 die("");
         }
         
-        $src = APP_PATH."$app_name/$app_version";
-        $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
+        // $src = APP_PATH."$app_name/$app_version/*";
+        // $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
         copyFile($web_host,$web_user,$web_password,$src, $dst);
         // die();
         if ($app_version=="eccube3")

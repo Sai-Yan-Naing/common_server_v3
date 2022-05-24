@@ -14,11 +14,26 @@ $db_name = $_POST["db_name"];
 $db_user = $_POST["db_user"];
 $db_pass = $_POST["db_pass"];
 
+
 $root_url = explode("/", $url);
+
+// print_r($root_url);
 unset($root_url[0]);
 unset($root_url[1]);
 unset($root_url[2]);
 $root_url = implode("/",$root_url);
+
+if ($root_url==null) {
+    $url = explode("/", $url);
+    unset($url[3]);
+    $url = implode("/",$url);
+    echo $src = APP_PATH."$app_name/$app_version/*";
+    echo $dst = ROOT_PATH.$webpath.'/web/';
+}else{
+    echo $src = APP_PATH."$app_name/$app_version";
+    echo $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
+}
+// die();
 $msg = "jp message";
 $msgsession ="msg";
 if ( $action=='new'){
@@ -41,6 +56,14 @@ if ( $action=='new'){
                     die("");
             }
 
+
+            $webmysql_cnt +=1;
+            $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+            if( ! $commons->doThis($sql)) {
+                $error = "cannot add db account";
+                    die("");
+                }
+
             
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
@@ -54,8 +77,8 @@ if ( $action=='new'){
             }
         
         // die;
-        $src = APP_PATH."$app_name/$app_version";
-        $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
+        // $src = APP_PATH."$app_name/$app_version/*";
+        // $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
         copyFile($web_host,$web_user,$web_password,$src, $dst);
         // die;
         // copy(APP_CONFIG_PATH.'wordpress/wp-config.php', $dst.'/wp-config.php');
@@ -107,6 +130,14 @@ if ( $action=='new'){
                     require_once("views/share/server/site/app_install/index.php");
                     die("");
             }
+
+
+            $webmysql_cnt +=1;
+        $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+        if( ! $commons->doThis($sql)) {
+            $error = "cannot add db account";
+                die("");
+            }
         }
         
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
@@ -121,16 +152,12 @@ if ( $action=='new'){
                 die("");
         }
         
-        $src = APP_PATH."$app_name/$app_version";
-        $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
+        // $src = APP_PATH."$app_name/$app_version/*";
+        // $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
         copyFile($web_host,$web_user,$web_password,$src, $dst);
         // die();
         if ($app_version=="eccube3")
         {
-            // $clone = 'git clone https://github.com/Sai-Yan-Naing/eccube3.git '.$dst;
-            // shell_exec($clone);
-            // copy_paste($src, $dst);
-            // echo $dst;
             $ECCUBE_AUTH_MAGIC = 'u5pCrNa6eNpJU8lDKX7WvyeO8P0out2Y';
             $salt = 'Uo3KLGFImXPsOYFrQ2TjwRj80Kv9ciYc';
             $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
@@ -236,10 +263,23 @@ if ( $action=='new'){
         echo $error="Cannot delete app";
         die();
     }
+
+
+        if ( $webmysql_cnt<=0)
+        {
+            $webmysql_cnt=0;
+        }else{
+            $webmysql_cnt -=1;
+        }
+        $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+        if( ! $commons->doThis($sql)) {
+            $error = "cannot update db account";
+            die;
+        }
     
     $msg = "「".$site_name."」 を削除しました";
     $msgsession ="msg";
 }
-// die('no');
+die('no');
 flash($msgsession,$msg);
 header("location: /share/server?setting=site&tab=app_install&act=index");

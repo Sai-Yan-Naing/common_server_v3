@@ -31,12 +31,13 @@ $msg = "jp message";
 				die("");
 			}
 
-			$delete_q = "DELETE FROM db_account_for_mssql WHERE id='$act_id'";
-		if ( !$commons->doThis($delete_q))
-		{
-			require_once("views/admin/share/server/database/mssql/index.php");
-			die("");
-		}
+			$webmssql_cnt +=1;
+		$sql = "UPDATE web_account SET mssql_cnt='$webmssql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/share/server/database/mysql/index.php");
+				die("");
+			}
 		
 	}elseif ($action=="edit") 
 	{
@@ -63,9 +64,26 @@ $msg = "jp message";
 				require_once("views/share/server/database/mssql/index.php");
 				die("");
 		}
+		$delete_q = "DELETE FROM db_account_for_mssql WHERE id='$act_id'";
+		if ( !$commons->doThis($delete_q))
+		{
+			require_once("views/share/server/database/mssql/index.php");
+			die("");
+		}
+		if ( $webmssql_cnt<=0)
+		{
+			$webmssql_cnt=0;
+		}else{
+			$webmssql_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mssql_cnt='$webmssql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/share/server/database/mariadb/index.php");
+		}
 	}
 	flash($msgsession,$msg);
-	header("Location: /share/server?setting=database&tab=mssql&act=index$pagy");
+	header("Location: /share/server?setting=database&tab=mssql&act=index&webid=$webid$pagy");
 	die("");
 	
 ?>

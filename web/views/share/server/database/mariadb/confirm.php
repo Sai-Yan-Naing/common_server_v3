@@ -27,6 +27,15 @@ $msg = "jp message";
 				require_once("views/share/server/database/mariadb/index.php");
 				die("");
 			}
+
+		$webmariadb_cnt +=1;
+		$sql = "UPDATE web_account SET mariadb_cnt='$webmariadb_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mariadb/index.php");
+				die("");
+			}
+
 	} elseif ($action === "edit") {
 		if (!$commons->changeMariaPassword($db_user,$db_pass))
 		{
@@ -55,6 +64,19 @@ $msg = "jp message";
 			require_once("views/admin/share/server/database/mariadb/index.php");
 			die("");
 		}
+
+		if ( $webmariadb_cnt<=0)
+		{
+			$webmariadb_cnt=0;
+		}else{
+			$webmariadb_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mariadb_cnt='$webmariadb_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mariadb/index.php");
+				die("");
+			}
 	}
 	flash($msgsession,$msg);
 	header("Location: /share/server?setting=database&tab=mariadb&act=index$pagy");
