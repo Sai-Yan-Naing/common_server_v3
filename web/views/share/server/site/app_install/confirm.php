@@ -280,6 +280,6 @@ if ( $action=='new'){
     $msg = "「".$site_name."」 を削除しました";
     $msgsession ="msg";
 }
-die('no');
+// die('no');
 flash($msgsession,$msg);
 header("location: /share/server?setting=site&tab=app_install&act=index");
