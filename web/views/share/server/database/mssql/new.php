@@ -16,15 +16,15 @@ require_once('views/share_config.php');
             </div>
             <div class="col-sm-10">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" id="typeofdb">
-                    <label class="btn btn-outline-info">
+                    <!-- <label class="btn btn-outline-info">
                         <input type="radio" name="type" id="mysql" value="MYSQL" autocomplete="off" checked> MYSQL
-                    </label>
-                    <label class="btn btn-outline-info active">
-                        <input type="radio" name="type" id="mssql" value="MSSQL" autocomplete="off"> MSSQL
-                    </label>
-                    <label class="btn btn-outline-info">
+                    </label> -->
+                    <!-- <label class="btn btn-outline-info active"> -->
+                        <input type="hidden" name="type" id="mssql" value="MSSQL" autocomplete="off"> MSSQL
+                    <!-- </label> -->
+                    <!-- <label class="btn btn-outline-info">
                         <input type="radio" name="type" id="mariadb" value="MARIADB" autocomplete="off"> MARIADB
-                    </label>
+                    </labe -->l>
                 </div>
             </div>
         </div>

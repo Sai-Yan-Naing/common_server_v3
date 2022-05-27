@@ -36,6 +36,7 @@ if($action =='new')
 	// $webssl = 2;
 	$query = "UPDATE web_account SET ssl='$webssl' WHERE id='$webid'";
 	$commons->doThis($query);
+	shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' renew');
 
 	}else{
 	$temp1 = [];

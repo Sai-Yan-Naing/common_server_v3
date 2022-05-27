@@ -53,6 +53,12 @@ if ( $action=='new'){
                     require_once("views/admin/share/server/site/app_install/index.php");
                     die("");
             }
+            $webmysql_cnt +=1;
+            $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+            if( ! $commons->doThis($sql)) {
+                $error = "cannot add db account";
+                    die("");
+                }
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
@@ -116,6 +122,13 @@ if ( $action=='new'){
                     require_once("views/admin/share/server/site/app_install/index.php");
                     die("");
             }
+
+            $webmysql_cnt +=1;
+            $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+            if( ! $commons->doThis($sql)) {
+                $error = "cannot add db account";
+                    die("");
+                }
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
@@ -242,6 +255,18 @@ if ( $action=='new'){
     {
         echo $error="Cannot delete app";
         die();
+    }
+
+    if ( $webmysql_cnt<=0)
+    {
+        $webmysql_cnt=0;
+    }else{
+        $webmysql_cnt -=1;
+    }
+    $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+    if( ! $commons->doThis($sql)) {
+        $error = "cannot update db account";
+        die;
     }
     
     $msg = "「".$site_name."」 を削除しました";
