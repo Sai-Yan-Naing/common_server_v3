@@ -1,12 +1,15 @@
 <?php
 header('Content-Type: application/json');
 $remark = $_POST['remark'];
-if(isset($_COOKIE['admin']) and isset($_GET['webid']) && $_GET['webid'] !='admin')
+$status =[];
+            
+if(isset($_COOKIE['admin']) and isset($_GET['webper']) && $_GET['webper'] =='admin' and isset($_GET['webid']))
 {
+// $status['status'] ='test';
+//             echo json_encode($status);
+//             die();
     require_once("views/admin/admin_shareconfig.php");
-     // echo json_encode(['status'=>SQLSERVER_2016_DSN]);
-     // die;
-}else if(isset($_COOKIE['admin']) and $_GET['webid']=='admin')
+}else if(isset($_COOKIE['admin']) and $_GET['webper']=='admin')
 {
     require_once("views/admin/admin_config.php");
 }else if(isset($_COOKIE['share_user']))
@@ -171,14 +174,19 @@ if ( $remark === 'checkappdb')
         $status['status'] ='doesnotmatch';
             echo json_encode($status);
             die;
-    }
-    
-    
+    }  
 }
+
+
+    if ( $remark === 'checkdblimit')
+    {
+        $qid = ( $weborigin != 1 )? $weborigin_id : $webid;
+        $checkresult = $check->checkdblimit($qid,$webplnmariadbnum,$webplnmariadb);
+        $status['status'] =$checkresult;
+            echo json_encode($status);
+            die;
+    }
 
 $status['status'] =false;
 echo json_encode($status);
 die();
-// $status =["table"=>$table,"column"=>$column,"checker"=>$checker];
-// echo json_encode($status);
-// die();

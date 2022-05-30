@@ -157,7 +157,7 @@ function allValidate() {
         $permission = $('#user_permission');
         if($permission.data('permission')=='adminshare')
         {
-          $ext='?webid='+$permission.data('webid');
+          $ext='?webper=admin&webid='+$permission.data('webid');
         }else if($permission.data('permission')=='admin')
         {
           $("#" + $(element).attr("id") + "-error").remove();
@@ -165,10 +165,10 @@ function allValidate() {
             return true;
           }
           $('#user_permission').data('webser',$('#web_server').val())
-          $ext='?webid=admin&webser='+$permission.data('webser');
+          $ext='?webper=admin&webser='+$permission.data('webser');
         }else if($permission.data('permission')=='share')
         {
-          $ext='?webid=share';
+          $ext='?webper=share';
         }
         // if($(element).attr("remark")=='error_file')
         // {
@@ -575,6 +575,13 @@ function allValidate() {
             $('#checkappdb').removeClass("d-none");
             return;
           }else{
+            // return;
+            $('#checkdblimit').addClass("d-none");
+            if (checkdblimit()) {
+              $('#checkdblimit').removeClass("d-none");
+                return;
+              }
+              // return;
             $('#dbexist').val('new');
           }
 
@@ -638,13 +645,13 @@ function checkappdb()
       $permission = $('#user_permission');
       if($permission.data('permission')=='adminshare')
       {
-        $ext='?webid='+$permission.data('webid');
+        $ext='?webper=admin&webid='+$permission.data('webid');
       }else if($permission.data('permission')=='admin')
       {
-        $ext='?webid=admin&webser='+$permission.data('webser');
+        $ext='?webper=admin&webser='+$permission.data('webser');
       }else if($permission.data('permission')=='share')
       {
-        $ext='?webid=share';
+        $ext='?webper=share';
       }
   var $ajax = $.ajax({
           type: "POST",
@@ -660,29 +667,41 @@ function checkappdb()
         });
         // $("#" + $(element).attr("id") + "-error").remove();
         $done = $ajax.done(function (data) {
-          // $("#" + $(element).attr("id") + "-error").remove();
-          // console.log(data.status + "back end");
-          // return;
-          // if (data["status"]==true) {
-          //   $('#checkappdb').removeClass("d-none");
-          //   result = false;
-          // }else if(data["status"]=='doesnotmatch'){
-
-          // } else {
-          //   $('#checkappdb').removeClass("d-none");
-          //   result = true;
-          // }
             result = data["status"];
         });
-        // $fail = $ajax.fail(function () {
-        //   $(element).after(
-        //     '<span id="' +
-        //       $(element).attr("id") +
-        //       '-error" class="error">Internal server error</span>'
-        //   );
-        //   result = false;
-        // });
-        // console.log(result + " result");
+        return result;
+}
+function checkdblimit()
+{
+  let result = '';
+      $url = document.URL.split("/");
+      $url = $url[0] + "//" + $url[2];
+      $ext='';
+      $permission = $('#user_permission');
+      if($permission.data('permission')=='adminshare')
+      {
+        $ext='?webper=admin&webid='+$permission.data('webid');
+      }else if($permission.data('permission')=='admin')
+      {
+        $ext='?webper=admin&webser='+$permission.data('webser');
+      }else if($permission.data('permission')=='share')
+      {
+        $ext='?webper=share';
+      }
+  var $ajax = $.ajax({
+          type: "POST",
+          url: $url + "/validate"+$ext,
+          async: false,
+          dataType: "JSON",
+          data: {
+            remark: 'checkdblimit',
+          },
+        });
+        // $("#" + $(element).attr("id") + "-error").remove();
+        $done = $ajax.done(function (data) {
+          console.log(data)
+            result = data["status"];
+        });
         return result;
 }
     // end app_install_form

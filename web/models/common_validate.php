@@ -187,4 +187,28 @@ class CommonValidate
 			  return true;
 			}
 	}
+
+	function checkdblimit($qid,$webplnmariadbnum,$webplnmariadb)
+	{
+		$query = "SELECT mysql_cnt,mariadb_cnt,mssql_cnt FROM web_account where (origin_id = ? or id= ?)  and removal IS NULL";
+
+		$stmt1 = $this->pdo->prepare($query);
+		$stmt1->execute([$qid,$qid]);
+		$data = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+		$getalldbcount = $data;
+		$totalmysql =0;
+		$totalmssql =0;
+		$totalmariasql =0;
+		foreach($getalldbcount as $value){
+		    $totalmysql +=$value['mysql_cnt'];
+		    $totalmssql +=$value['mssql_cnt'];
+		    $totalmariasql +=$value['mariadb_cnt'];
+		}
+		$totalmyma = (int)$totalmysql + (int)$totalmariasql;
+		    $result = true;
+		if( $webplnmariadb == 'yes' && ((int)$webplnmariadbnum > $totalmyma || $webplnmariadbnum=='unlimited')){
+				$result = false;
+		    }
+		 return $result;
+	}
 }

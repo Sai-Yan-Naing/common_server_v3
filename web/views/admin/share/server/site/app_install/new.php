@@ -88,6 +88,9 @@
         <div class="row">
             <label for="database" class="col-form-label">データベース</label>
         </div>
+        <div class="d-none error text-center" id='checkdblimit'>
+                データベース数が上限に達しています
+        </div>
         <div class="row">
             <div class="col-sm-6">
                 <label for="db-name" class="col-form-label">データベース名</label>
