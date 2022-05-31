@@ -11,10 +11,10 @@
                             <?php require_once("views/share/server/$setting/tab.php") ?>
                                 <!-- start -->
                                 <div class="tab-content">
+                                    <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
                                     <?php
                                         if ((int)count($webssl)!=0):
                                     ?>
-                                    <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
                                         <form action="/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="free-ssl">
                                             <input type="hidden" name="action" value="edit">
                                             <div class="form-group row">
@@ -69,34 +69,13 @@
                                                 <div class="col-sm-3"></div>
                                             </div>
                                         </form>
-
-                                            <form action="/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="ssl-delete">
+                                        <form action="/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="ssl-delete">
                                             <input type="hidden" name="action" value="delete">
                                                 
-                                            </form>
-
-                                            <div class="form-group row">
-                                                <span class="col">有料SSL設定</span>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="ssl-list" class="col-sm-2 col-form-label">有料SSL</label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control">
-                                                        <option>オプションで申し込んでいているSSL種別を記載</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="exp-date" class="col-sm-2 col-form-label">SSL有効期限</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control" id="exp-date" name="exp_date" value=" 2020/10/8">
-                                                </div>
-                                            </div>
-                                    </div>
+                                        </form>
                                     <?php
                                         else:
                                     ?>
-                                    <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
                                         <form action="/share/server?setting=security&tab=ssl&act=confirm&webid=<?=$webid?>" method="post" id="free-ssl">
                                             <input type="hidden" name="action" value="new">
                                             <div class="form-group row">
@@ -157,27 +136,34 @@
                                                 </div>
                                                 <div class="col-sm-3"></div>
                                             </div>
-                                            <div class="form-group row">
-                                                <span class="col">有料SSL設定</span>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="ssl-list" class="col-sm-2 col-form-label">有料SSL</label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control">
-                                                        <option>オプションで申し込んでいているSSL種別を記載</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="exp-date" class="col-sm-2 col-form-label">SSL有効期限</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" readonly class="form-control" id="exp-date" name="exp_date" value=" 2020/10/8">
-                                                </div>
-                                            </div>
                                         </form>
-                                    </div>
                                     <?php endif;
                                     ?>
+                                    <?php 
+                                            $query = "select plan_name,str_date from customer_db.dbo.option_tbl inner join  service_db.dbo.PRICE_TBL on PRICE_TBL.service ='99' and PRICE_TBL.type = '02' and PRICE_TBL.pln = option_tbl.plan_no where option_tbl.plan_id = ?";
+                                            $getssl = $commons->getRow($query,[3]);
+                                            if (count($getssl)>1) {
+                                            
+                                        ?>
+                                        <div class="form-group row">
+                                            <span class="col">有料SSL設定</span>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="ssl-list" class="col-sm-2 col-form-label">有料SSL</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control" value="<?=$getssl['plan_name']?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="exp-date" class="col-sm-2 col-form-label">SSL有効期限</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" readonly class="form-control" id="exp-date" name="exp_date" value="<?=$getssl['str_date']?>">
+                                            </div>
+                                        </div>
+                                        <?php 
+                                        }
+                                    ?>
+                                    </div>
                                 </div>
                                 <!-- end content -->
                             </div>
