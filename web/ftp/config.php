@@ -17,7 +17,7 @@ class ftpclient
 		$this->con = ftp_connect($this->host, 21) or die("Could not connect to $this->host");
 		if($this->con) {
 			$login = ftp_login($this->con, $this->user, $this->pass);
-			ftp_pasv($this->con, true) or die("Passive mode failed");
+			ftp_pasv($this->con, false) or die("Passive mode failed");
 			if($login){
 				//echo "<br>logged in successfully!";
 				}else {
@@ -30,23 +30,13 @@ class ftpclient
 	{
 		//echo $this->con->isDir($dir);
 		$filelist = ftp_rawlist($this->con, $dir);
-
-		foreach ($filelist as $line)
-		{
-		    $tokens = explode(" ", $line);
-		    $name = $tokens[count($tokens) - 1];
-		    $type = $tokens[0][0];
-
-		    if ($type == 'd')
-		    {
-		        echo "$name\n";
-		    }
+		$temp = [];
+		foreach($filelist as $key=>$dirlist){
+			// foreach(explode(' ', $dirlist) as $k=>$d){
+				// $temp[$key] = preg_split ('/\n/',$dirlist);
+			// }
 		}
-		$contents = ftp_mlsd($this->con, $dir);
-
-		// output $contents
-		var_dump($contents);
-		//print_r(array_values(array_filter($filelist)));
+		print_r($temp);
 		// die();
 	}
 

@@ -35,7 +35,8 @@
                             // $ftpclient->rawDirList('web');
                             // die();
                             $files = get_dirlist($web_host,$web_user,$web_password,$dir);
-                            // print_r($files);
+                            // print_r($files);die();
+
                             foreach ($files as $key=>$file)
                             {
                                 if ($file['mode']=='d')
