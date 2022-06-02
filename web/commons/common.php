@@ -463,6 +463,23 @@ function createFile($file)
 	fclose($myfile);
 	// return "created new File";
 }
+function ftpgetfile($web_host,$web_user,$web_password,$dir)
+{
+    // return 'ok';
+        $ftp = $web_host;
+        $username = $web_user;
+        $pwd = $web_password;
+        $filename = $file['name'];
+        $tmp = $file['tmp_name'];
+       
+        $connect = ftp_connect($ftp)or die("Unable to connect to host");
+        ftp_login($connect,$username,$pwd)or die("Authorization Failed");
+        // echo "Connected!<br/>";
+        ftp_pasv($connect, true);
+
+       
+        
+}
 function uploadFile($web_host,$web_user,$web_password,$dir,$file)
 {
     // return 'ok';

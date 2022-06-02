@@ -34,11 +34,11 @@
                                 <?php if ( strpos($url[1],'admin') !==false && strpos($url[3],'manual') !==false ): echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'; endif ?>
                             </a>
                             
-                            <a class="nav-link active" href="/admin/share/contactus?act=index&webid=<?=$webid?>" onclick="loading()">
+                            <!-- <a class="nav-link active" href="/admin/share/contactus?act=index&webid=<?=$webid?>" onclick="loading()">
                                 <div class="sb-nav-link-icon"><img src="/img/sidebar/contactus.png" alt="" class="nav-tab-icon"></div>
                                 お問合せ
                                 <?php if ( $url[1]=='admin' && $url[2]=='share' && strpos($url[3],'contactus') !==false):echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>';endif; ?>
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                     <!-- <div class="sb-sidenav-footer">

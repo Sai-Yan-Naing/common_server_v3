@@ -325,7 +325,7 @@ function filepath($web_host,$web_user,$web_password,$dir,$foldername,$webid)
                                                         <button class="btn common_dialog_fm btn-outline-info btn-sm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=rename_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="rename">名前変更
                                                         </button>
                                                         
-														<?php if ( $webpath.'/'.$value !== $webpath.'/web'):?>
+														<?php if ( $webpath.'/'.$value['name'] !== $webpath.'/web'):?>
                                                         <button class="btn btn-outline-danger btn-sm common_dialog_fm" gourl="/admin/share/server?setting=filemanager&tab=tab&act=delete_dir&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" uniquename="<?= $value['name'] ?>" action="delete">
                                                         削除
                                                         </button>

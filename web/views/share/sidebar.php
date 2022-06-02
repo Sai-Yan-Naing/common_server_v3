@@ -34,11 +34,11 @@
                         マニュアル
                     </a>
                     
-                    <a class="nav-link active" href="/share/contactus?act=index" onclick="loading()">
+                    <!-- <a class="nav-link active" href="/share/contactus?act=index" onclick="loading()">
                         <div class="sb-nav-link-icon"><img src="/img/sidebar/contactus.png" alt="" class="nav-tab-icon"></div>
                         お問合せ
                         <?php if($url[1]=='share' && strpos($url[2],'contactus') !==false){echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>';} ?>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </nav>

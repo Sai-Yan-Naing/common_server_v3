@@ -8,6 +8,7 @@ require_once("models/common.php");
 require_once("models/backup.php");
 require_once("commons/common.php");
 require_once('mails/mail.php');
+require_once('ftp/config.php');
 require_once('views/admin/admin_sharevalidate.php');
 $webmailer = new Mailer;
 $commons = new Common;
@@ -71,8 +72,11 @@ $web_madbuser = $gethost['madbuser'];
 $web_madbpass = $gethost['madbpass'];
 $web_msdbuser = $gethost['msdbuser'];
 $web_msdbpass = $gethost['msdbpass'];
-$web_ftp = $gethost['ftp_user'];
-$web_ftppass = $gethost['ftp_pass'];
+
+$web_ftpserver = "SELECT top 1 * FROM db_ftp WHERE domain='$webdomain'";
+$ftphost = $commons->getRow($web_ftpserver);
+$web_ftp = $ftphost['ftp_user'];
+$web_ftppass = $ftphost['ftp_pass'];
 
 $webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webadminplanid]);
 $webplnname = $webroot_plan['name'];

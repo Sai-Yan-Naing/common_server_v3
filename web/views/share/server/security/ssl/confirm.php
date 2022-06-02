@@ -10,6 +10,14 @@ $sitename = $webuser;
 $action = $_POST['action'];
 if($action =='new')
 {
+	if(!domainChecker($webdomain))
+	{
+		$msg = "domain is invalid. you cannot install ssl.";
+		$msgsession ="msg";
+		flash($msgsession,$msg);
+		header("location: /share/server?setting=security&tab=ssl&act=index&webid=$webid");
+		die;
+	}
 	$common_name = $_POST['common_name'];
 	$prefecture = $_POST['prefecture'];
 	$municipality = $_POST['municipality'];

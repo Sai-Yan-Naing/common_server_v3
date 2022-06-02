@@ -13,6 +13,12 @@
                                 <div class="tab-content">
                         <div id="oyo-setting" class="active pr-3 pl-3 tab-pane">
                             <div class="row mt-3">
+                                <?php 
+                                print_r($ftphost);
+                                echo $dir = ROOT_PATH.$webpath;
+                                echo $web_ftp.$web_ftppass;
+                                    echo ftpgetfile($web_host,$web_ftp,$web_ftppass,$dir);
+                                 ?>
                                 <div class="col-2">
                                     <div><label>Web.config 設定</label></div>
                                 </div>
