@@ -135,6 +135,7 @@ $(document).on("click", "#web_config_btn", function () {
       // alert(data);
       // console.log(data)
       $("#webconfig_").html(data);
+      alert("保存完了しました");
     },
   });
 });
@@ -157,6 +158,7 @@ $(document).on("click", "#php_ini_btn", function () {
       // alert(data);
       // console.log(data)
       $("#phpini_").html(data);
+      alert("保存完了しました");
     },
   });
 });
