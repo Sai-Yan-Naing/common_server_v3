@@ -169,26 +169,31 @@ $(document).on("submit", "#fm_fun", function () {
   $common_path = $("#common_path").attr("path");
   $formdata = new FormData(this);
   $formdata.append("common_path", $common_path);
-  console.log($url);
-  console.log($formdata);
+  // let searchParams = new URLSearchParams(window.location.search)
+  // searchParams.has('webid'); 
+  // let webid = searchParams.get('webid');
+  // console.log(webid);
+  // console.log($url);
+  // console.log($formdata);
+  // return;
   if ($(this).attr("fun") == "upload") {
     if ($("#upload_").val() == "" || $("#upload_").val() == null) {
       alert("Empty File cannot upload");
       return false;
     }
-    $gourl = "admin/share/server?setting=filemanager&tab=tab&act=validatecap";
-        $exceedwebcap = '容量がいっぱいになっているため、ファイル/フォルダの追加ができません。サイトデータを削除いただき追加を行ってください。';
-    if(exceedwebcap($gourl))
-     {
-          document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
-          $('#exceedwebcap').html($exceedwebcap)
-          return;
-     }
-    $size = $("#upload_")[0].files[0].size;
-    if ($size > 2097152) {
-      alert("File size is greater than 2MB");
-      return false;
-    }
+    // $gourl = "admin/share/server?setting=filemanager&tab=tab&act=validatecap&webid="+webid;
+    //     $exceedwebcap = '容量がいっぱいになっているため、ファイル/フォルダの追加ができません。サイトデータを削除いただき追加を行ってください。';
+    // if(exceedwebcap($gourl))
+    //  {
+    //       document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
+    //       $('#exceedwebcap').html($exceedwebcap)
+    //       return;
+    //  }
+    // $size = $("#upload_")[0].files[0].size;
+    // if ($size > 2097152) {
+    //   alert("File size is greater than 2MB");
+    //   return false;
+    // }
   }
   if ($("input[type=text]").val() == "" || $("input[type=text]") == null) {
     if ($(this).attr("fun") == "file") {

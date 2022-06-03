@@ -463,31 +463,59 @@ function createFile($file)
 	fclose($myfile);
 	// return "created new File";
 }
-function ftpgetfile($web_host,$web_user,$web_password,$dir)
+function ftpgetfile($web_host,$web_user,$web_password,$dir,$dfile)
+{
+    $now =strtotime("now").'-'.$web_user;
+        $ftp = $web_host;
+        $username = $web_user;
+        $pwd = $web_password;
+        $filename = $dfile;
+        $tempdir = "E:\webroot\LocalUser\\temp\\$now";
+        $tempfile = "E:\webroot\LocalUser\\temp\\$now\\$filename";
+        mkdir("$tempdir");
+        $connect = ftp_connect($ftp)or die("Unable to connect to host");
+        ftp_login($connect,$username,$pwd)or die("Authorization Failed");
+        "Connected!<br/>";
+        ftp_pasv($connect, true);
+        ftp_get($connect, $tempfile, $dir.'/'.$dfile, FTP_ASCII);
+        $openfile = file_get_contents($tempfile);
+        delete_directory($tempdir);
+        return $openfile;
+}
+function ftpsavefile($web_host,$web_user,$web_password,$dir,$fname,$data)
+{
+    $now =strtotime("now").'-'.$web_user;
+        $ftp = $web_host;
+        $username = $web_user;
+        $pwd = $web_password;
+        $filename = $fname;
+        $tempdir = "E:\webroot\LocalUser\\temp\\$now";
+        $tempfile = "E:\webroot\LocalUser\\temp\\$now\\$filename";
+        mkdir("$tempdir");
+
+        file_put_contents($tempfile,$data);
+
+        $connect = ftp_connect($ftp)or die("Unable to connect to host");
+        ftp_login($connect,$username,$pwd)or die("Authorization Failed");
+        "Connected!<br/>";
+        ftp_pasv($connect, true);
+        ftp_put($connect,$dir.'/'.$filename,$tempfile,FTP_ASCII)or die("Unable to upload");
+        delete_directory($tempdir);
+        return true;
+}
+function uploadFile($web_host,$web_user,$web_password,$dir,$file)
 {
     // return 'ok';
+	   $now =strtotime("now").'-'.$web_user;
         $ftp = $web_host;
         $username = $web_user;
         $pwd = $web_password;
         $filename = $file['name'];
         $tmp = $file['tmp_name'];
-       
-        $connect = ftp_connect($ftp)or die("Unable to connect to host");
-        ftp_login($connect,$username,$pwd)or die("Authorization Failed");
-        // echo "Connected!<br/>";
-        ftp_pasv($connect, true);
-
-       
-        
-}
-function uploadFile($web_host,$web_user,$web_password,$dir,$file)
-{
-    // return 'ok';
-	$ftp = $web_host;
-        $username = $web_user;
-        $pwd = $web_password;
-        $filename = $file['name'];
-        $tmp = $file['tmp_name'];
+        $tempdir = "E:\webroot\LocalUser\\temp\\$now";
+        $tempfile = "E:\webroot\LocalUser\\temp\\$now\\$filename";
+        mkdir("$tempdir");
+        move_uploaded_file($tmp,$tempfile);
        
         $connect = ftp_connect($ftp)or die("Unable to connect to host");
         ftp_login($connect,$username,$pwd)or die("Authorization Failed");
@@ -501,30 +529,31 @@ function uploadFile($web_host,$web_user,$web_password,$dir,$file)
             }
         else
             {
-                ftp_put($connect,$dir.'/'.$filename,$tmp,FTP_ASCII)or die("Unable to upload");
+                ftp_put($connect,$dir.'/'.$filename,$tempfile,FTP_ASCII)or die("Unable to upload");
                         // echo"File successfully uploaded to FTP";
             }
+        delete_directory($tempdir);
 }
 
 function download($web_host,$web_user,$web_password,$dir,$dfile)
 {
+        $now =strtotime("now").'-'.$web_user;
         $ftp = $web_host;
         $username = $web_user;
         $pwd = $web_password;
         $filename = $dfile;
-        $file = "E:\webroot\LocalUser\\temp\\$filename";
-       
+        $tempdir = "E:\webroot\LocalUser\\temp\\$now";
+        $tempfile = "E:\webroot\LocalUser\\temp\\$now\\$filename";
+        mkdir("$tempdir");
         $connect = ftp_connect($ftp)or die("Unable to connect to host");
         ftp_login($connect,$username,$pwd)or die("Authorization Failed");
         "Connected!<br/>";
         ftp_pasv($connect, true);
-        ftp_get($connect, $file, $dir.'/'.$dfile, FTP_ASCII);
-
-        $file = "E:\webroot\LocalUser\\temp\\$filename";
+        ftp_get($connect, $tempfile, $dir.'/'.$dfile, FTP_ASCII);
 
         // echo $filename=$filename;
     
-    echo $len = filesize($file); // Calculate File Size
+    echo $len = filesize($tempfile); // Calculate File Size
     ob_clean();
     header("Pragma: public");
     header("Expires: 0");
@@ -536,7 +565,9 @@ function download($web_host,$web_user,$web_password,$dir,$dfile)
     header($header );
     header("Content-Transfer-Encoding: binary");
     header("Content-Length: ".$len); // Send File Size
-    @readfile($file);
+    @readfile($tempfile);
+
+    delete_directory($tempdir);
     exit;
 }
 

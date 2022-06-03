@@ -29,9 +29,9 @@
                         <?php if($url[1]=='share' && strpos($url[2],'various') !==false){echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>';} ?>
                     </a>
 
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link active" href="/share/manual?act=index" onclick="loading()">
                         <div class="sb-nav-link-icon"><img src="/img/sidebar/manual.png" alt="" class="nav-tab-icon"></div>
-                        マニュアル
+                        <?php if($url[1]=='share' && strpos($url[2],'manual') !==false){echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>';} ?>
                     </a>
                     
                     <!-- <a class="nav-link active" href="/share/contactus?act=index" onclick="loading()">

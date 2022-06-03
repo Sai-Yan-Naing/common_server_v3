@@ -89,7 +89,7 @@ if (isset($_POST['foldername']))
 	}
 	// echo $webpath.'/'.$_FILES['upload'];
 	// uploadFile($webpath,$_FILES['upload']);
-	uploadFile($web_host,$web_ftp,$web_ftppass,$webpath,$_FILES['upload']);
+	uploadFile($web_host,$web_ftp,$web_ftppass,$_POST['common_path'],$_FILES['upload']);
 	filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
     die;
 } elseif ( $_POST['action'] ==='zip')
@@ -131,7 +131,7 @@ if (isset($_POST['foldername']))
     // die;
     // filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
 	// download($webpath.$_GET['download'],$_GET['download']);
-	download($web_host,$web_ftp,$web_ftppass,$webpath,$_GET['download']);
+	download($web_host,$web_ftp,$web_ftppass,$_POST['common_path'],$_GET['download']);
     // filepath($web_host,$web_user,$web_password,$dir,$_GET['common_path'],$webid);
     // die();
 	// header("Location: filemanager.php");
@@ -146,8 +146,9 @@ if (isset($_POST['foldername']))
 	}
 	// echo $_dir.$_POST['file_name'];
 	// echo $web_host.$web_user.$web_password;
-	open_file($web_host,$web_user,$web_password,$_dir,$_POST['file_name'],$webid);
-	// get_File($web_host,$web_user,$web_password,$_dir.$_POST['file_name']);
+	// open_file($web_host,$web_user,$web_password,$_dir,$_POST['file_name'],$webid);
+	open_file($web_host,$web_ftp,$web_ftppass,$_POST['common_path'],$_POST['file_name'],$webid);
+	// ftpgetfile($web_host,$web_ftp,$web_ftppass,$_POST['common_path'].$_POST['file_name']);
 	die();
 } elseif ( isset($_POST['text_editor_open']) and $_POST['action']==='save_file' )
 {
@@ -157,17 +158,17 @@ if (isset($_POST['foldername']))
 	}else{
 		$_dir=$dir;
 	}
-	echo save_file($web_host,$web_user,$web_password,$_dir.$_POST['openfile_name'],$_POST['text_editor_open'],$webid);
+	echo save_file($web_host,$web_ftp,$web_ftppass,$_POST['common_path'],$_POST['openfile_name'],$_POST['text_editor_open'],$webid);
 		die;
 	// die($_dir.$_POST['openfile_name']);
 }
 
-function save_file($web_host,$web_user,$web_password,$file,$data,$webid)
+function save_file($web_host,$web_user,$web_password,$file,$fname,$data,$webid)
 {
 	// $dir = 'E:\\webroot\\LocalUser\\';
 	// file_put_contents($dir.$file, $data);
 	// file_put_contents($file, $data);
-    put_File($web_host,$web_user,$web_password,$file,$data);
+    ftpsavefile($web_host,$web_user,$web_password,$file,$fname,$data);
 	return "successfully saved";
 }
 
@@ -200,7 +201,7 @@ function open_file($web_host,$web_user,$web_password,$dir,$file_name, $webid)
 
 	// read the textfile
 	// $text = file_get_contents($file);
-	$text = get_File($web_host,$web_user,$web_password,$dir.$file_name);
+	$text = ftpgetfile($web_host,$web_user,$web_password,$dir,$file_name);
 	?>
 
 		<div class="modal-header">
