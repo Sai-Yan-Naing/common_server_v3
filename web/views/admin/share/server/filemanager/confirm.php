@@ -131,7 +131,8 @@ if (isset($_POST['foldername']))
     // die;
     // filepath($web_host,$web_user,$web_password,$dir,$_POST['common_path'],$webid);
 	// download($webpath.$_GET['download'],$_GET['download']);
-	download($web_host,$web_ftp,$web_ftppass,$_POST['common_path'],$_GET['download']);
+	// echo $_POST['common_path'];
+	download($web_host,$web_ftp,$web_ftppass,$_GET['common_path'],$_GET['download']);
     // filepath($web_host,$web_user,$web_password,$dir,$_GET['common_path'],$webid);
     // die();
 	// header("Location: filemanager.php");

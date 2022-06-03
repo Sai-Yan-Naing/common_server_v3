@@ -9,8 +9,9 @@ $msgsession ="msg";
         $value = $_POST['web_config'];
         // putFile($file,$value);
         // webconfigset($webpath);
-        put_File($web_host,$web_user,$web_password,ROOT_PATH.$file,$value);
-        webconfig_set($web_host,$web_user,$web_password,$webpath);
+        //put_File($web_host,$web_user,$web_password,ROOT_PATH.$file,$value);
+        ftpsavefile($web_host,$web_ftp,$web_ftppass,'web','web.config',$value);
+        webconfig_set($web_host,$web_ftp,$web_ftppass);
         die();
     }
 
@@ -22,7 +23,7 @@ $msgsession ="msg";
         // phpiniset($webpath);
         // put_File($web_host,$web_user,$web_password);
         put_File($web_host,$web_user,$web_password,ROOT_PATH.$file,$value);
-        phpini_set($web_host,$web_user,$web_password,$webpath);
+        phpini_set($web_host,$web_ftp,$web_ftppass);
         die();
     }
 
@@ -80,14 +81,14 @@ function webconfigset($webuser)
 <?php }
 ?>
 <?php
-function phpini_set($web_host,$web_user,$web_password,$webuser)
+function phpini_set($web_host,$web_ftp,$web_ftppass)
 {?>
-    <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= get_File($web_host,$web_user,$web_password,ROOT_PATH.$webuser."/web/.user.ini")?>
+    <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= htmlspecialchars(ftpgetfile($web_host,$web_ftp,$web_ftppass,'web','.user.ini'))?>
                                         </textarea>
 <?php }
-function webconfig_set($web_host,$web_user,$web_password,$webuser)
+function webconfig_set($web_host,$web_ftp,$web_ftppass)
 {?>
-    <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= get_File($web_host,$web_user,$web_password,ROOT_PATH.$webuser."/web/web.config")?>
+    <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= htmlspecialchars(ftpgetfile($web_host,$web_ftp,$web_ftppass,'web','web.config'))?>
                                         </textarea>
 <?php }
 ?>

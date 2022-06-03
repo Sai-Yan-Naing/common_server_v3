@@ -529,7 +529,7 @@ function uploadFile($web_host,$web_user,$web_password,$dir,$file)
             }
         else
             {
-                ftp_put($connect,$dir.'/'.$filename,$tempfile,FTP_ASCII)or die("Unable to upload");
+                ftp_put($connect,$dir.'/'.$filename,$tempfile,FTP_BINARY )or die("Unable to upload");
                         // echo"File successfully uploaded to FTP";
             }
         delete_directory($tempdir);

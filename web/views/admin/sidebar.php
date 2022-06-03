@@ -15,7 +15,7 @@ $url= explode('/',$url);
                     <?php if(strpos($url[1],'admin') !==false && ($url[2]==null || strpos($url[2],'domain-transfer') !==false || strpos($url[2],'add-server') !==false || strpos($url[2],'dns') !==false ) ){echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>';} ?>
                 </a>
                 
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="https://www.winserver.ne.jp/mypage-login" target="_blank">
                     <div class="sb-nav-link-icon"><div class="sb-nav-link-icon"><span style="font-size: x-large;"><i class="fa fa-user" aria-hidden="true"></i></span></div></div>
                     ご契約情報
                 </a>

@@ -30,10 +30,13 @@
                             $directories = array();
                             $files_list  = array();
                             // $files = scandir($dir);
-                            // echo "<pre>";
-                            // echo $web_host;
+                            // $ftpclient = new ftpclient('203.137.93.207',"ckmtestt5","welcome123!");
+                            // // echo "<pre>";
+                            // $ftpclient->rawDirList('web');
+                            // die();
                             $files = get_dirlist($web_host,$web_user,$web_password,$dir);
-                            // print_r($files);
+                            // print_r($files);die();
+
                             foreach ($files as $key=>$file)
                             {
                                 if ($file['mode']=='d')
@@ -94,7 +97,7 @@
                                         </tr>
                                         <?php 
                                     endforeach;
-                                    $ext = array('html','css','php','js', 'txt' , 'config' , 'sql', 'ini');
+                                    $ext = array('html','css','php','js', 'txt' , 'config' , 'sql', 'ini','gitignore','env');
         
                                     $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
                                     

@@ -97,7 +97,7 @@
                                         </tr>
                                         <?php 
                                     endforeach;
-                                    $ext = array('html','css','php','js', 'txt' , 'config' , 'sql', 'ini');
+                                    $ext = array('html','css','php','js', 'txt' , 'config' , 'sql', 'ini', 'gitignore','env');
         
                                     $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
                                     

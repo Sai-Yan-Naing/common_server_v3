@@ -8,8 +8,7 @@
     <div class="modal-body">
         <form action="/admin/share/server?setting=site&tab=app_setting&act=confirm&webid=<?=$webid?>" method="post" id="web_config_fm" onsubmit="loading()">
             <div class="form-group">
-            <!-- <textarea class="text-white bg-dark web" name="web_config" id="webconfig" rows="25"><?php echo htmlspecialchars(getFile($webpath."/web/web.config")) ?></textarea> -->
-            <textarea class="text-white bg-dark web" name="web_config" id="webconfig" rows="25"><?php echo htmlspecialchars(get_File($web_host,$web_user,$web_password,ROOT_PATH.$webpath."/web/web.config")) ?></textarea>
+            <textarea class="text-white bg-dark web" name="web_config" id="webconfig" rows="25"><?php echo htmlspecialchars(ftpgetfile($web_host,$web_ftp,$web_ftppass,'web','web.config')) ?></textarea>
             </div>
         </form>
     </div>

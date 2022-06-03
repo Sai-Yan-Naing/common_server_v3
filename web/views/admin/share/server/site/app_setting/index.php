@@ -28,10 +28,7 @@
                                         <label><button class="btn btn-sm  common_dialog" gourl="/admin/share/server?setting=site&tab=app_setting&act=web.config&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
                                     </div>
                                     <div id="webconfig_">
-                                        <!-- <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= getFile($webpath."/web/web.config")?>
-                                        </textarea> -->
-                                        <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= get_File($web_host,$web_user,$web_password,ROOT_PATH.$webpath."/web/web.config")?>
-                                        </textarea>
+                                        <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= ftpgetfile($web_host,$web_ftp,$web_ftppass,'web','web.config')?>                                        </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -49,9 +46,7 @@
                                         <label><button class="btn btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=app_setting&act=.user.ini&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><i class="fas fa-edit text-warning"></i></button></label>
                                     </div>
                                     <div id="phpini_">
-                                        <!-- <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= getFile($webpath."/web/.user.ini")?>
-                                        </textarea> -->
-                                        <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= get_File($web_host,$web_user,$web_password,ROOT_PATH.$webpath."/web/.user.ini")?>
+                                        <textarea type="text" class="form-control" rows="5" cols="30" readonly><?= ftpgetfile($web_host,$web_ftp,$web_ftppass,'web','.user.ini')?>
                                         </textarea>
                                     </div>
                                 </div>

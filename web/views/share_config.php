@@ -70,6 +70,11 @@ $web_msdbpass = $gethost['msdbpass'];
 $web_ftp = $gethost['ftp_user'];
 $web_ftppass = $gethost['ftp_pass'];
 
+$web_ftpserver = "SELECT top 1 * FROM db_ftp WHERE domain='$webdomain'";
+$ftphost = $commons->getRow($web_ftpserver);
+$web_ftp = $ftphost['ftp_user'];
+$web_ftppass = $ftphost['ftp_pass'];
+
 $admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=?",[$webadminID]);
 $webadminID = $admin_acc['user_id'];
 $webadminName = $admin_acc['name'];

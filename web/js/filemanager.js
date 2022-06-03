@@ -56,10 +56,12 @@ $(document).on("click", ".folder_click", function () {
     }
     $("#dir_path").html($path);
     $("#common_path").attr("path", $foldername);
+    $common_path = $("#common_path").attr("path");
     $(".download_file").each(function (i, obj) {
-      $temp = $(this).attr("gourl");
-      $(this).attr("gourl", $temp + "&common_path=" + $_path);
-    });
+        $temp = $(this).attr("href");
+        $(this).attr("href", $temp + "&common_path=" + $common_path);
+        console.log($temp)
+      });
   });
   // stoploading();
   // alert($_path)
@@ -106,6 +108,8 @@ $(document).on("click", ".open_file", function () {
     "config",
     "sql",
     "ini",
+    "gitignore",
+    'env'
   ];
   $url = document.URL.split("/");
   $url = $url[0] + "//" + $url[2];
@@ -235,8 +239,8 @@ $(document).on("submit", "#fm_fun", function () {
     success: function (data) {
       document.getElementById("changebody").innerHTML = data;
       $(".download_file").each(function (i, obj) {
-        $temp = $(this).attr("gourl");
-        $(this).attr("gourl", $temp + "&common_path=" + $common_path);
+        $temp = $(this).attr("href");
+        $(this).attr("href", $temp + "&common_path=" + $common_path);
       });
     },
   });
