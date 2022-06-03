@@ -79,8 +79,11 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                     ?>
                                                     </td>
                                                     <td class="border-dark">
+                                                        <?php
+                                                        if($key==0):?>
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=edit&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=delete&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                    <?php endif;?>
                                                     </td>
                                                 </tr>
                                                 <?php
