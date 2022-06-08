@@ -24,11 +24,16 @@ $getAllRow = $commons->getAllRow($query, $params);
                                                 <span>メールアドレス</span>
                                             </div>
                                             <?php if( (int)$webplnmailuser >= count($getAllRow ) || $webplnmailuser=='unlimited'):?>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-9 d-flex">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/mail?setting=email&tab=tab&act=new&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>メールアドレス追加</button>
+                                                <button class="btn btn-info btn-sm ml-2" form='email_export' type='submit'><span class="mr-2"><i class="fas fa-plus-square"></i></span>Export as CSV</button>
+                                                <button class="btn btn-info btn-sm common_dialog ml-2" gourl="/admin/share/mail?setting=email&tab=tab&act=import&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>Import from CSV</button>
                                             </div>
                                             <?php endif; ?>
                                         </div>
+                                        <form id='email_export' action="/admin/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post">
+                                            <input type="hidden" name="action" value="export">
+                                        </form>
                                         <table class="table table-bordered">
                                                 <tr>
                                                     <th class="font-weight-bold border-dark">登録メールアドレス</th>
