@@ -234,7 +234,7 @@ echo '<pre>';
 		require_once('views/admin/share/mail/index.php');
 		die();
 	}
-// echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" delete '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$getRow['email'].' '.$getRow['email']);
+echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" delete '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$getRow['email'].' '.$getRow['email']);
 }
 
 // $commons->mail_server($webdomain,$email,$mail_pass_word,$action,$isexist);
