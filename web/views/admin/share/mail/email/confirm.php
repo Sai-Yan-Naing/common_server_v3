@@ -145,7 +145,7 @@ echo '<pre>';
 				print_r($updatefromcsv);
 				echo 'update';
 				print_r($insertfromcsv);
-				die;
+				// die;
 				// $uni = array_unique($unique);
 				// if (count($uni)<count($unique)) {
 				// 	$dup = true;
