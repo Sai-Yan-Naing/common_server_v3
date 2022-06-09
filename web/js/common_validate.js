@@ -97,7 +97,7 @@ function allValidate() {
       function (value) {
         // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
         
-        var regex = /^[! A-Za-z0-9_@./#&+-]*$/;
+        var regex = /^[! A-Za-z0-9_@.#&+-]*$/;
         if (regex.test(value)) {
           return true;
         }

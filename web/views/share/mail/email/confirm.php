@@ -76,7 +76,7 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
      	 $query = "SELECT * FROM add_email where domain = ? ";
 		 $getAllRow = $commons->getAllRow($query, [$webdomain]);
 echo '<pre>';
-		 print_r($getAllRow);
+		 // print_r($getAllRow);
      	 while (($row = fgetcsv($file)) !== false) {
 			  try {
 			    if (count($row)<2) {
@@ -97,58 +97,56 @@ echo '<pre>';
 			// echo 'intersect';
 			$msg = 'cannot import without any user';
 			if (count($temp)>0) {
-				$duplicate = [];
-				$duplicate1 = [];
+				$insertfromcsv = [];
+				$updatefromcsv = [];
 				$unique = [];
 				$dup = false;
-				$string = '';
+				$invalid = [];
 
 				for ($i=0; $i < count($temp) ; $i++) { 
 					$unique[$i]= $temp[$i]['email'];
-					// array to string
-					// if ($string=='' || $string==null) {
-					// 	$string = $temp[$i]['email'].'pe&pe'.$temp[$i]['password'];
-					// }else
-					// $string += ','.$temp[$i]['email'].'pe&pe'.$temp[$i]['password'];
-					
+					if (preg_match("/\s/", $temp[$i]['email']) || !preg_match("/^[A-Za-z0-9_.#&+-]+$/", $temp[$i]['email']) || preg_match("/\s/", $temp[$i]['password']) || !preg_match("/^[!A-Za-z0-9_@.#&+-]*$/", $temp[$i]['password']) ){
+						$dup = true;
+					    //Email address is invalid.
+					    $invalid[$i]['email'] = $temp[$i]['email'];
+					    $invalid[$i]['password'] = $temp[$i]['password'];
+					}
 					for ($j=0; $j <count($getAllRow); $j++) { 
 						if ($temp[$i]['email']==$getAllRow[$j]['email']) {
-							$duplicate1[$i]['id'] = $getAllRow[$j]['id'];
-							$duplicate1[$i]['email'] = $getAllRow[$j]['email'];
-							$duplicate1[$i]['password'] = $temp[$i]['password'];
+							$updatefromcsv[$i]['id'] = $getAllRow[$j]['id'];
+							$updatefromcsv[$i]['email'] = $getAllRow[$j]['email'];
+							$updatefromcsv[$i]['password'] = $temp[$i]['password'];
 						}
 							
 					}
 				}
-				$duplicate = $temp;
+				$insertfromcsv = $temp;
 				$dupcsv = [];
-				foreach ($duplicate1 as $key => $value) {
-					unset($duplicate[$key]);	
+				foreach ($updatefromcsv as $key => $value) {
+					unset($insertfromcsv[$key]);	
 				}
-				foreach ($duplicate as $key => $value) {
-					$dupcsv[$key] = $duplicate[$key]['email'];	
+				foreach ($insertfromcsv as $key => $value) {
+					$dupcsv[$key] = $insertfromcsv[$key]['email'];	
 				}
 				$unique = array_unique($dupcsv);
 
-				$test = array_diff_assoc($dupcsv, $unique);
+				$diffarr = array_diff_assoc($dupcsv, $unique);
 
 				foreach ($unique as $key => $value) { 
-					foreach ($test as $key1 => $value1) {
+					foreach ($diffarr as $key1 => $value1) {
 						if ($value==$value1) {
-							echo $key;
-							echo 'hey';
-							unset($duplicate[$key]);
+							unset($insertfromcsv[$key]);
 						}
 					}
 				}
 				// 	print_r($unique);
-				// 	print_r($test);
-				// // print_r($test);
+				// 	print_r($diffarr);
+				print_r($invalid);
 				// echo 'unique';
 				// print_r($dupcsv);
-				// print_r($duplicate1);
-				// echo 'update';
-				// print_r($duplicate);
+				print_r($updatefromcsv);
+				echo 'update';
+				print_r($insertfromcsv);
 				// die;
 				// $uni = array_unique($unique);
 				// if (count($uni)<count($unique)) {
@@ -156,11 +154,28 @@ echo '<pre>';
 				// }
 
 				if ($dup) {
-					$msg = 'cannot import duplicate mail user';
+					$msg = '<span class=error>';
+					$msg .= 'cannot import invalid mail user or password<br>';
+					foreach ($invalid as $key => $value) {
+						$msg .=  $value['email'].' and '.$value['password'].'<br>';
+					}
+					$msg .= '</span>';
+					
 				}else {
 					$msg = 'sucessfull import';
 
-						foreach ($duplicate as $key => $row) {
+					$incsv = 'ne@to@rev,';
+					$upcsv = 'ne@to@rev,';
+
+					
+						foreach ($insertfromcsv as $key => $row) {
+							// echo $row['email'];
+							if ($incsv=='ne@to@rev,') {
+								$incsv .=$row['email'].'pe1@2pe'.$row['password'];
+							}else{
+								$incsv .= ','.$row['email'].'pe1@2pe'.$row['password'];
+							}
+							
 
 							$insert_q = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 							if ( ! $commons->doThis($insert_q,[$webdomain, $row['email'],  $row['password']]))
@@ -170,7 +185,14 @@ echo '<pre>';
 							}
 						}
 
-						foreach ($duplicate1 as $key => $row) {
+						foreach ($updatefromcsv as $key => $row) {
+
+							if ($upcsv=='ne@to@rev,') {
+								$upcsv .= $row['email'].'pe1@2pe'.$row['password'];
+							}else{
+								$upcsv .= ','.$row['email'].'pe1@2pe'.$row['password'];
+							}
+							
 
 							$update_q = "UPDATE add_email SET password=? WHERE id=?";
 							if ( ! $commons->doThis($update_q,[$row['password'],  $row['id']]))
@@ -179,14 +201,18 @@ echo '<pre>';
 								die("ddd");
 							}
 						}
-						// echo $string;
-					// 	echo shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." '".json_encode($temp)."'");
-					// 	echo ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." '".json_encode($temp)."'");
+						// echo $incsv;
+						// echo '<br>';
+						// echo 'update';
+						// echo '<br>';
+						// echo $upcsv;
+						shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." ".$incsv." ".$upcsv);
+						// echo ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." '".json_encode($temp)."'");
 					// die();
 				}
 
 			}
-			// print_r($duplicate);
+			// print_r($insertfromcsv);
 			// die();
 			  
      }
