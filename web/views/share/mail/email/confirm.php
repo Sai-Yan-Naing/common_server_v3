@@ -92,6 +92,11 @@ echo '<pre>';
 			    $temp[$i]['password'] =$row[1];
 			  } catch (Exception $ex) { echo $ex->getmessage(); }
 			}
+			foreach ($temp as $key => $value) {
+				if ($value['email'] ==null && $value['email'] ==null) {
+					unset($temp[$key]);
+				}
+			}
 			$temp = array_values($temp);
 			// print_r($temp);
 			// echo 'intersect';
