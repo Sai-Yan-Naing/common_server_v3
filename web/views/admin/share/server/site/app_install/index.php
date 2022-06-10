@@ -13,7 +13,7 @@
                                 $limit = 10;  
                                 $table = 'app';
                                 require_once('views/pagination/start.php');
-                                $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ?  ORDER BY id
+                                $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ? and remove =0  ORDER BY id
                             OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY",[$webdomain]);
                             ?>
                             <div class="tab-content">

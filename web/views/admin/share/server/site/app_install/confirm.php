@@ -227,7 +227,7 @@ if ( $action=='new'){
 }elseif ($action=='delete') {
     $act_id=$_POST['act_id'];
     $site_name=$_POST['site_name'];
-    $delete_q = "DELETE FROM app WHERE id='$act_id'";
+    $delete_q = "UPDATE app SET remove=1 WHERE id='$act_id'";
     $dbquery = "SELECT * FROM app WHERE id='$act_id'";
     $getdb = $commons->getRow($dbquery);
     $dbid = $getdb['db_id'];
