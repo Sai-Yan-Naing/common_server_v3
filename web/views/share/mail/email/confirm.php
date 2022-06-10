@@ -110,7 +110,7 @@ echo '<pre>';
 
 				for ($i=0; $i < count($temp) ; $i++) { 
 					$unique[$i]= $temp[$i]['email'];
-					if (preg_match("/\s/", $temp[$i]['email']) || !preg_match("/^[A-Za-z0-9_.#&+-]+$/", $temp[$i]['email']) || preg_match("/\s/", $temp[$i]['password']) || !preg_match("/^[!A-Za-z0-9_@.#&+-]*$/", $temp[$i]['password']) ){
+					if (preg_match("/\s/", $temp[$i]['email']) || !preg_match("/^[A-Za-z0-9_.#&+-]+$/", $temp[$i]['email']) || preg_match("/\s/", $temp[$i]['password']) || !preg_match("/^[!A-Za-z0-9_@.#&+-]{8,30}$/", $temp[$i]['password']) ){
 						$dup = true;
 					    //Email address is invalid.
 					    $invalid[$i]['email'] = $temp[$i]['email'];
