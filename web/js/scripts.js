@@ -24,3 +24,15 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+$(document).on('submit','#email_import',function () {
+    if ($("#upload_").val() == "" || $("#upload_").val() == null) {
+      alert("Empty File cannot upload");
+      return false;
+    }
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+        if (!regex.test($("#upload_").val().toLowerCase())) {
+            alert("file must be csv file");
+            return false;
+        }
+})

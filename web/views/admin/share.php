@@ -77,18 +77,21 @@
                                         $site += 1; 
                                         $sites[$main_domain['id']] = $site;
                                         $subdomain = $domain['domain'];
-                                        $db_account = "SELECT count(id) FROM db_account WHERE domain='$subdomain'";
-                                         $mycount = $commons->getCount($db_account);
+                                        // $db_account = "SELECT count(id) FROM db_account WHERE domain='$subdomain'";
+                                         // $mycount = $commons->getCount($db_account);
+                                         $mycount = $domain['mysql_cnt'];
                                          $mysqlcount[$domain['id']] = $mycount;
                                          $mysqltotal +=$mycount;
 
-                                         $madb_account = "SELECT count(id) FROM db_account_for_mariadb WHERE domain='$subdomain'";
-                                         $macount = $commons->getCount($madb_account);
+                                         // $madb_account = "SELECT count(id) FROM db_account_for_mariadb WHERE domain='$subdomain'";
+                                         // $macount = $commons->getCount($madb_account);
+                                         $macount = $domain['mariadb_cnt'];
                                          $masqlcount[$domain['id']] = $macount;
                                          $masqltotal +=$macount;
 
-                                         $msdb_account = "SELECT count(id) FROM db_account_for_mssql WHERE domain='$subdomain'";
-                                         $mscount = $commons->getCount($msdb_account);
+                                         // $msdb_account = "SELECT count(id) FROM db_account_for_mssql WHERE domain='$subdomain'";
+                                         // $mscount = $commons->getCount($msdb_account);
+                                         $mscount = $domain['mssql_cnt'];
                                          $mssqlcount[$domain['id']] = $mscount;
                                          $mssqltotal +=$mscount;
 

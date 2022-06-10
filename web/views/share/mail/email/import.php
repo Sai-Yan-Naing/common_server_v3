@@ -14,7 +14,7 @@ require_once('views/share_config.php');
         <div class="form-group">
             <label class="ps_absolute">ファイルをドラッグ＆ドロップしてください</label>
 		    <div style="position: relative; height: 200px">
-		        <input type="file" class="form-control" name="file" id="upload_">
+		        <input type="file" class="form-control" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="upload_">
 		    </div>
             
         </div>
