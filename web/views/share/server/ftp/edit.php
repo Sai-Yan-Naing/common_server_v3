@@ -18,7 +18,7 @@ $getRow = $commons->getRow($query,[$act_id]);
       <div class="form-group row">
           <label for="ftp_user" class="col-sm-4 col-form-label">FTPユーザー</label>
           <div class="col-sm-8">
-            <input type="hidden" class="form-control" readonly value="<?= $getRow['ftp_user'] ?>" name="ftp_user" placeholder="1-14文字、半角英数字">
+            <input type="hidden" class="form-control" readonly value="<?= $getRow['ftp_user'] ?>" name="ftp_user" placeholder="1～14文字、半角英数字">
             <label for=""><?= $getRow['ftp_user'] ?></label>
           </div>
       </div>

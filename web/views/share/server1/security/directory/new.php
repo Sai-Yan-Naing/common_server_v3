@@ -19,7 +19,7 @@ require_once('views/share_config.php');
       <div class="row justify-content-center">
           <label for="ftp_user" class="col-sm-2 text-right p-2">ユーザー名</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="ftp_user" name="ftp_user" placeholder="1-14文字、半角英数字"  column="ftp_user"  table="sub_ftp" remark="winuser"><i class="fas fa-folder text-warning fa-lg" style="font-size: 2.33em; display:none;"></i>
+            <input type="text" class="form-control" id="ftp_user" name="ftp_user" placeholder="1～14文字、半角英数字"  column="ftp_user"  table="sub_ftp" remark="winuser"><i class="fas fa-folder text-warning fa-lg" style="font-size: 2.33em; display:none;"></i>
           </div>
       </div>
       <div class="row justify-content-center">

@@ -27,7 +27,7 @@ $act_id = $_GET['act_id'];
 		<div class="row justify-content-center">
 			<label for="sub" class="col-sm-2 text-right p-2">ホスト名</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" id="sub" name="sub" placeholder="1-14文字、半角英数字" value="<?= htmlspecialchars($dns->$act_id->sub, ENT_QUOTES); ?>">
+				<input type="text" class="form-control" id="sub" name="sub" placeholder="1～14文字、半角英数字" value="<?= htmlspecialchars($dns->$act_id->sub, ENT_QUOTES); ?>">
 			</div>
 		</div>
 		<div class="row justify-content-center">

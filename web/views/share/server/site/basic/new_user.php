@@ -24,7 +24,7 @@ $temp_key = $_GET['dir_id'];
       <div class="row justify-content-center">
           <label for="bass_user" class="col-sm-2 text-right p-2">ユーザー名</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" column="bass_user" id="bass_user" name="bass_user" placeholder="1-20文字、半角英数字">
+            <input type="text" class="form-control" column="bass_user" id="bass_user" name="bass_user" placeholder="1～20文字、半角英数字">
           </div>
       </div>
       <div class="row justify-content-center">

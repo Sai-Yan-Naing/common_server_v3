@@ -17,7 +17,7 @@ $error_page = json_decode($weberrorpages);
 	      <div class="form-group row">
 	          <label for="status_code" class="col-sm-4">ステータスコード</label>
 	          <div class="col-sm-8">
-	            <input type="text" class="form-control" id="status_code" name="status_code" value="<?=$error_page->$act_id->statuscode?>" placeholder="1-14文字、半角英数字">
+	            <input type="text" class="form-control" id="status_code" name="status_code" value="<?=$error_page->$act_id->statuscode?>" placeholder="1～14文字、半角英数字">
 	          </div>
 	      </div>
 	      <div class="form-group row">

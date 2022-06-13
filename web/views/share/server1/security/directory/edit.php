@@ -25,7 +25,7 @@ $getRow = $commons->getRow($query);
       <div class="row justify-content-center">
           <label for="ftp_user" class="col-sm-2 text-right p-2">ユーザー名</label>
           <div class="col-sm-10">
-            <input type="hidden" class="form-control" readonly column="ftp_user" id="ftp_user" name="ftp_user" placeholder="1-14文字、半角英数字" value="<?=$getRow['ftp_user'] ?>">
+            <input type="hidden" class="form-control" readonly column="ftp_user" id="ftp_user" name="ftp_user" placeholder="1～14文字、半角英数字" value="<?=$getRow['ftp_user'] ?>">
             <label for=""><?=$getRow['ftp_user'] ?></label>
           </div>
       </div>

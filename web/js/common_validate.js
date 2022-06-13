@@ -1186,8 +1186,8 @@ function checkdblimit()
         },
         authcode: {
           required: "AuthCodeを入力してください",
-          minlength: "AuthCodeは4-16文字以内で入力してください",
-          maxlength: "AuthCodeは4-16文字以内で入力してください",
+          minlength: "AuthCodeは4～16文字以内で入力してください",
+          maxlength: "AuthCodeは4～16文字以内で入力してください",
         },
       },
       submitHandler: function (form) {

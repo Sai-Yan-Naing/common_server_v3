@@ -41,7 +41,7 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
         <div class="form-group row">
             <label for="ftp_user" class="col-sm-2 col-form-label">FTPユーザー名</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="ftp_user" name="ftp_user" column="ftp_user"  table="db_ftp" remark="winuser" placeholder="1～20文字、半角英数小文字と_-.@">
+                <input type="text" class="form-control" id="ftp_user" name="ftp_user" column="ftp_user"  table="db_ftp" remark="winuser" placeholder="1～20文字、半角英数小文字と_-.">
             </div>
         </div>
         <div class="form-group row">

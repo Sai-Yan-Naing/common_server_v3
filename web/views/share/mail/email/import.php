@@ -2,32 +2,39 @@
 require_once('views/share_config.php');
 ?>
 <!-- Modal Header -->
-<div class="modal-header">
-  <h4 class="modal-title">Import mail user from csv</h4>
-  <button type="button" class="close" data-dismiss="modal">&times;</button>
+<div class="modal-header" style="display: block;">
+  <div class="d-flex mb-2">
+    <h4 class="modal-title">アップロード</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+  </div>
+  <button class="btn btn-info btn-sm ml-2" form='email_export' type='submit'><span class="mr-2"><i class="fas fa-plus-square"></i></span>Export as CSV</button>
+
 </div>
+<form id='email_export' action="/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post">
+    <input type="hidden" name="action" value="export">
+</form>
 <!-- Modal body -->
 <div class="modal-body">
-	<form action="/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="email_import"  style="position:relative"  enctype="multipart/form-data">
+  <form action="/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="email_import"  style="position:relative"  enctype="multipart/form-data">
 
-		<input type="hidden" name="action" value="import">
+    <input type="hidden" name="action" value="import">
         <div class="form-group">
-            <label class="ps_absolute">ファイルをドラッグ＆ドロップしてください</label>
-		    <div style="position: relative; height: 200px">
-		        <input type="file" class="form-control" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="upload_">
-		    </div>
+            <div class="ps_absolute" id="ps_absolute">ファイルをドラッグ＆ドロップしてください</div>
+          <div style="position: relative; height: 200px">
+              <input type="file" class="form-control" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="upload_csv">
+          </div>
             
         </div>
-	</form>
+  </form>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer  d-flex justify-content-center">
   <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">キャンセル</button>
-  <button type="submit" class="btn btn-outline-info btn-sm" form="email_import">Import</button>
+  <button type="submit" class="btn btn-outline-info btn-sm" form="email_import">アップロード</button>
 </div>
 
 <style type="text/css">
-      #upload_{
+      #upload_csv{
         position: absolute;
         margin: 0;
         padding: 0;
@@ -46,7 +53,7 @@ require_once('views/share_config.php');
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 200px;
+        /*height: 200px;*/
         border: 3px solid green; 
         font-weight: bold;
       }

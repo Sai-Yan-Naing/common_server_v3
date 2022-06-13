@@ -51,18 +51,22 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
     header('Content-Disposition: attachment; filename=mailuserlist.csv'); 
     $output = fopen("php://output", "w");  
     fputcsv($output, array(
+        mb_convert_encoding('No', "ISO-2022-JP", "UTF-8"), 
         mb_convert_encoding('Mail User', "ISO-2022-JP", "UTF-8"), 
         mb_convert_encoding('Password', "ISO-2022-JP","UTF-8")
     ));
-	$query = "SELECT email, password FROM add_email where domain = ? ";
-	$getAllRow = $commons->getAllRow($query, [$webdomain]);
-	// print_r($getAllRow);
-	foreach($getAllRow as $row)  
-      {  
-           fputcsv($output, $row);  
-      }  
+	// $query = "SELECT email, password FROM add_email where domain = ? ";
+	// $getAllRow = $commons->getAllRow($query, [$webdomain]);
+	// // print_r($getAllRow);
+	// foreach($getAllRow as $row)  
+ //      {  
+ //           fputcsv($output, $row);  
+ //      } 
+
+ fputcsv($output, array('1','defaultuser','defaultpass')); 
+
       fclose($output);
-      $msg = 'sucessfull export';
+      // $msg = 'sucessfull export';
       die();
 }elseif ( isset($_POST['action']) and $_POST['action'] === 'import')
 {
@@ -88,8 +92,9 @@ echo '<pre>';
 			    	continue;
 			    }
 			    $i++;
-			    $temp[$i]['email'] =$row[0];
-			    $temp[$i]['password'] =$row[1];
+			    $temp[$i]['no'] =$row[0];
+			    $temp[$i]['email'] =$row[1];
+			    $temp[$i]['password'] =$row[2];
 			  } catch (Exception $ex) { echo $ex->getmessage(); }
 			}
 			foreach ($temp as $key => $value) {
@@ -98,9 +103,9 @@ echo '<pre>';
 				}
 			}
 			$temp = array_values($temp);
-			// print_r($temp);
+			print_r($temp);
 			// echo 'intersect';
-			$msg = 'cannot import without any user';
+			$msg = 'CSVファイルには少なくとも1件以上のメールアドレスを入力してください';
 			if (count($temp)>0) {
 				$insertfromcsv = [];
 				$updatefromcsv = [];
@@ -113,23 +118,26 @@ echo '<pre>';
 					if (preg_match("/\s/", $temp[$i]['email']) || !preg_match("/^[A-Za-z0-9_.#&+-]+$/", $temp[$i]['email']) || preg_match("/\s/", $temp[$i]['password']) || !preg_match("/^[!A-Za-z0-9_@.#&+-]{8,30}$/", $temp[$i]['password']) ){
 						$dup = true;
 					    //Email address is invalid.
+					    $invalid[$i]['no'] = $temp[$i]['no'];
 					    $invalid[$i]['email'] = $temp[$i]['email'];
 					    $invalid[$i]['password'] = $temp[$i]['password'];
 					}
 					for ($j=0; $j <count($getAllRow); $j++) { 
 						if ($temp[$i]['email']==$getAllRow[$j]['email']) {
-							$updatefromcsv[$i]['id'] = $getAllRow[$j]['id'];
-							$updatefromcsv[$i]['email'] = $getAllRow[$j]['email'];
+							$updatefromcsv[$i]['no'] = $temp[$i]['no'];
+							$updatefromcsv[$i]['email'] = $temp[$i]['email'];
 							$updatefromcsv[$i]['password'] = $temp[$i]['password'];
+							$dup = true;
 						}
 							
 					}
 				}
 				$insertfromcsv = $temp;
 				$dupcsv = [];
-				foreach ($updatefromcsv as $key => $value) {
-					unset($insertfromcsv[$key]);	
-				}
+				$dupincsv = [];
+				// foreach ($updatefromcsv as $key => $value) {
+				// 	unset($insertfromcsv[$key]);	
+				// }
 				foreach ($insertfromcsv as $key => $value) {
 					$dupcsv[$key] = $insertfromcsv[$key]['email'];	
 				}
@@ -137,37 +145,66 @@ echo '<pre>';
 
 				$diffarr = array_diff_assoc($dupcsv, $unique);
 
-				foreach ($unique as $key => $value) { 
+				foreach ($insertfromcsv as $key => $value) { 
 					foreach ($diffarr as $key1 => $value1) {
-						if ($value==$value1) {
-							unset($insertfromcsv[$key]);
+						if ($value['email']==$value1) {
+						    $dupincsv[$key]['no'] = $insertfromcsv[$key]['no'];
+						    $dupincsv[$key]['email'] = $insertfromcsv[$key]['email'];
+						    $dupincsv[$key]['password'] = $insertfromcsv[$key]['password'];
 						}
 					}
 				}
-				// 	print_r($unique);
-				// 	print_r($diffarr);
+					print_r($unique);
+					print_r($diffarr);
+					print_r($dupincsv);
+				echo 'invalid';
 				print_r($invalid);
 				// echo 'unique';
 				// print_r($dupcsv);
+				echo 'updatefromcsv';
 				print_r($updatefromcsv);
-				echo 'update';
 				print_r($insertfromcsv);
 				// die;
 				// $uni = array_unique($unique);
 				// if (count($uni)<count($unique)) {
 				// 	$dup = true;
 				// }
+				$invmsg = '';
+				if (count($invalid)>0) {
+					$dup = true;
+					$invmsg .= 'CSVファイル内に無効なメールアドレスまたはパスワードが含まれています<br>';
+						foreach ($invalid as $key => $value) {
+						 	$invmsg .= '[ '. $value['no'].' ] '. $value['email'].' and '.$value['password'].'<br>';
+						 } 
+				}
+				$dbmsg = '';
+				if (count($updatefromcsv)>0) {
+					$dup = true;
+					$dbmsg .= 'CSVファイル内に登録済みのユーザーと重複するメールアドレスがあります<br>';
+						foreach ($updatefromcsv as $key => $value) {
+						 	$dbmsg .= '[ '. $value['no'].' ] '. $value['email'].' and '.$value['password'].'<br>';
+						 } 
+				}
+				$csvmsg = '';
+				if (count($dupincsv)>0) {
+					$dup = true;
+					$csvmsg .= 'CSVファイルの中に重複するメールアドレスがあります<br>';
+						foreach ($dupincsv as $key => $value) {
+						 	$csvmsg .= '[ '. $value['no'].' ] '. $value['email'].' and '.$value['password'].'<br>';
+						 }
+				}
+				
+				
 
 				if ($dup) {
 					$msg = '<span class=error>';
-					$msg .= 'cannot import invalid mail user or password<br>';
-					foreach ($invalid as $key => $value) {
-						$msg .=  $value['email'].' and '.$value['password'].'<br>';
-					}
+					$msg .= $invmsg;
+					$msg .= $dbmsg;
+					$msg .= $csvmsg;
 					$msg .= '</span>';
 					
 				}else {
-					$msg = 'sucessfull import';
+					$msg = 'アップロード完了';
 
 					$incsv = 'ne@to@rev,';
 					$upcsv = 'ne@to@rev,';
@@ -190,22 +227,22 @@ echo '<pre>';
 							}
 						}
 
-						foreach ($updatefromcsv as $key => $row) {
+						// foreach ($updatefromcsv as $key => $row) {
 
-							if ($upcsv=='ne@to@rev,') {
-								$upcsv .= $row['email'].'pe1@2pe'.$row['password'];
-							}else{
-								$upcsv .= ','.$row['email'].'pe1@2pe'.$row['password'];
-							}
+						// 	if ($upcsv=='ne@to@rev,') {
+						// 		$upcsv .= $row['email'].'pe1@2pe'.$row['password'];
+						// 	}else{
+						// 		$upcsv .= ','.$row['email'].'pe1@2pe'.$row['password'];
+						// 	}
 							
 
-							$update_q = "UPDATE add_email SET password=? WHERE id=?";
-							if ( ! $commons->doThis($update_q,[$row['password'],  $row['id']]))
-							{
-								$error  = "Email cannot import.";
-								die("ddd");
-							}
-						}
+						// 	$update_q = "UPDATE add_email SET password=? WHERE id=?";
+						// 	if ( ! $commons->doThis($update_q,[$row['password'],  $row['id']]))
+						// 	{
+						// 		$error  = "Email cannot import.";
+						// 		die("ddd");
+						// 	}
+						// }
 						// echo $incsv;
 						// echo '<br>';
 						// echo 'update';

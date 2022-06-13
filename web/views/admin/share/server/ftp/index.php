@@ -41,12 +41,9 @@ $getAllRow=$commons->getAllRow($query,$params);
                                             <div class="col-sm-3">
                                                 <span>FTPアカウント</span>
                                             </div>
-
-                                            <?php if( $webplnftp == 'yes' && ((int)$webplnmssqldbnum >= count($getAllRow ) || $webplnmssqldbnum=='unlimited')):?>
                                             <div class="col-sm-9">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ＦＴＰユーザー追加</button>
                                             </div>
-                                            <?php endif; ?>
                                         </div>
                                         <table class="table table-bordered">
                                                 <tr>
@@ -55,8 +52,9 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                     <th class="font-weight-bold border-dark">書き込み権限</th>
                                                     <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
-                                                <?php 
-                                                    foreach ($getAllRow as $key => $ftp):
+                                                <?php
+                                                // print_r($getAllRow); 
+                                                    foreach ($getAllRow as $key1 => $ftp):
                                                 ?>
                                                 <tr>
                                                     <td class="border-dark"><?php echo htmlspecialchars($ftp['ftp_user'], ENT_QUOTES); ?></td>
@@ -79,9 +77,9 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                     ?>
                                                     </td>
                                                     <td class="border-dark">
-                                                        <?php
-                                                        if($key==0):?>
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=edit&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
+                                                    <?php
+                                                    if($key1 !=0):?>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=delete&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     <?php endif;?>
                                                     </td>
