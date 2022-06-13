@@ -46,8 +46,12 @@ $(document).on("change", "#upload_csv", function (e) {
     if ($("#upload_csv").val() == '') {
         $('.ps_absolute').html('ファイルをドラッグ＆ドロップしてください');
         $('.ps_absolute').next().css({'height':200})
+        $('.ps_absolute').removeClass('align-items-baseline')
+        $('#common_dialog').children().removeClass('modal-dialog-scrollable')
         return false;
     }
+
+    $('.ps_absolute').addClass('align-items-baseline')
   var regex = /([ a-zA-Z0-9!@#$%^&*()_+-=,.?])+(.csv)$/;
         if (!regex.test($("#upload_csv").val().toLowerCase())) {
             alert("file must be csv file");
@@ -88,7 +92,7 @@ $(document).on("change", "#upload_csv", function (e) {
         }
         $tableend = $tablestart+ $thead + $tbody  + $tr+'</tbody></table>';
         $('.ps_absolute').html($tableend);
-    $height = $('.ps_absolute').find('table').height()
+    $height = $('.modal-body').height()
     $('.ps_absolute').next().css({'height':$height + 10})
     };
     reader.readAsText(e.target.files.item(0));
