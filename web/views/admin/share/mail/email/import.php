@@ -7,7 +7,7 @@ require_once('views/admin/admin_shareconfig.php');
     <h4 class="modal-title">アップロード</h4>
     <button type="button" class="close" data-dismiss="modal">&times;</button>
   </div>
-  <button class="btn btn-info btn-sm ml-2" form='email_export' type='submit'><span class="mr-2"><i class="fas fa-plus-square"></i></span>Export as CSV</button>
+  <button class="btn btn-info btn-sm ml-2" form='email_export' type='submit'><span class="mr-2"><i class="fas fa-plus-square"></i></span>テンプレートをダウンロード</button>
 
 </div>
 <form id='email_export' action="/admin/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post">
