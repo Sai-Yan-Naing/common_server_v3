@@ -43,11 +43,16 @@ $(document).on('click','.common_dialog',function () {
 
 
 $(document).on("change", "#upload_csv", function (e) {
-  var ext = $("input#upload_csv").val().split(".").pop().toLowerCase();
-    if($.inArray(ext, ["csv"]) == -1) {
-    alert('Upload CSV');
-    return false;
-    } 
+    if ($("#upload_csv").val() == '') {
+        $('.ps_absolute').html('ファイルをドラッグ＆ドロップしてください');
+        $('.ps_absolute').next().css({'height':200})
+        return false;
+    }
+  var regex = /([ a-zA-Z0-9!@#$%^&*()_+-=,.?])+(.csv)$/;
+        if (!regex.test($("#upload_csv").val().toLowerCase())) {
+            alert("file must be csv file");
+            return false;
+        }
     if (e.target.files != undefined) {
     var reader = new FileReader();
     reader.onload = function(e) {
