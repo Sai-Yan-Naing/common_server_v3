@@ -62,8 +62,8 @@ if ( $action=='new'){
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
-        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?)";
-        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id']]))
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id, remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'], 0]))
             {
                 $error = "cannot add db account";
                     require_once("views/admin/share/server/site/app_install/index.php");
@@ -132,10 +132,10 @@ if ( $action=='new'){
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
-        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?)";
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id,remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
 
         
-        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id']]))
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'],0]))
         {
             $error = "cannot add db account";
                 require_once("views/admin/share/server/site/app_install/index.php");
