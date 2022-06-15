@@ -17,7 +17,8 @@ $getRow = $commons->getRow($query,[$act_id]);
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <input type="hidden" name="site_name" value="<?= $getRow['site_name'] ?>">
     <b style="color: red"><?= $getRow['site_name'] ?> </b>を削除しますか？
-      
+    <br>
+    データベース<b style="color: red"><?= $getRow['db_name'] ?> </b>も削除されます？ 
   </form>
 </div>
 <!-- Modal footer -->
