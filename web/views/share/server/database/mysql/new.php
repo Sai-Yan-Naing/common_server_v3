@@ -17,7 +17,7 @@ require_once('views/share_config.php');
             <div class="col-sm-10">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" id="typeofdb">
                     <!-- <label class="btn btn-outline-info active"> -->
-                        <input type="hidden" name="type" id="mysql" value="MYSQL" autocomplete="off" checked> MYSQL
+                        <input type="hidden" name="type" id="mysql" value="MYSQL" autocomplete="off" checked> MySQL
                     <!-- </label> -->
                     <!-- <label class="btn btn-outline-info">
                         <input type="radio" name="type" id="mssql" value="MSSQL" autocomplete="off"> MSSQL

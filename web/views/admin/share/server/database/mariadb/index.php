@@ -46,7 +46,7 @@ if( $webplnmariadb == 'yes' && ((int)$webplnmariadbnum > $totalmyma || $webplnma
                                                 <button class="btn btn-<?= $btncolor?> btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mariadb&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" <?= $btndisable?>><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
                                             <div class="ml-3">
-                                                <a  href="<?=MDMANAGER?>" target="_blank" class="btn btn-link"><u>MARIADB マネージャー</u></a>
+                                                <a  href="<?=MDMANAGER?>" target="_blank" class="btn btn-link"><u>MariaDB マネージャー</u></a>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">

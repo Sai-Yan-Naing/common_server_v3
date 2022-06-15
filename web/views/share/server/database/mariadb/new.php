@@ -23,7 +23,7 @@ require_once('views/share_config.php');
                         <input type="radio" name="type" id="mssql" value="MSSQL" autocomplete="off"> MSSQL
                     </label> -->
                     <!-- <label class="btn btn-outline-info active"> -->
-                        <input type="hidden" name="type" id="mariadb" value="MARIADB" autocomplete="off" checked> MARIADB
+                        <input type="hidden" name="type" id="mariadb" value="MARIADB" autocomplete="off" checked> MariaDB
                     <!-- </label> -->
                 </div>
             </div>

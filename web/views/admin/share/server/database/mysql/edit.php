@@ -21,7 +21,7 @@ $getRow = $commons->getRow($query,[$act_id]);
                             <span>データベース種別</span>
                         </div>
                         <div class="col-sm-8">
-                            MYSQL
+                            MySQL
                         </div>
                     </div>
                     <div class="form-group row">

@@ -20,7 +20,7 @@ $getRow = $commons->getRow($query);
                             <span>データベース種別</span>
                         </div>
                         <div class="col-sm-10">
-                            MARIADB
+                            MariaDB
                         </div>
                     </div>
                     <div class="form-group row">
