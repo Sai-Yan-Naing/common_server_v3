@@ -105,7 +105,7 @@
                                 <i class="fa <?= ($a==1)? 'fa-caret-down':'fa-caret-right'?>" aria-hidden="true"></i>
                                 <?= $main_domain['domain'] ?>[<?= $webroot_plan['name'] ?>]</div>
                             <div class="ml-auto col-md-3">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $webroot_plan['site'] ?></div>
-                            <div class="col-md-3">MySQL/Mariadb: <?= $mysqltotal + $masqltotal ?>/<?= $webroot_plan['maria_db_num'] ?></div>
+                            <div class="col-md-3">MySQL/MariaDB: <?= $mysqltotal + $masqltotal ?>/<?= $webroot_plan['maria_db_num'] ?></div>
                             <div class="col-md-3">MSSQL: <?= $mssqltotal ?>/<?= $webroot_plan['mssql_db_num'] ?></div>
                         </div>
                         <div class="sub-domain" style=" display:<?= ($a==1)? '':'none'?>">
@@ -115,7 +115,7 @@
                                         <th class="tb-width-2">契約ドメイン</th>
                                         <th class="tb-width">サイト設定</th>
                                         <th class="tb-width">使用容量</th>
-                                        <th class="tb-width">MySQL/Mariadb</th>
+                                        <th class="tb-width">MySQL/MariaDB</th>
                                         <th class="tb-width">MSSQL</th>
                                         <th class="tb-width-1">サイト</th>
                                         <th class="tb-width-1">アプリケーションプール</th>
