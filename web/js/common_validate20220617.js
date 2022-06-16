@@ -83,7 +83,7 @@ function allValidate() {
     $.validator.addMethod(
       "nospecialchar",
       function (value) {
-        var regex = /[!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?]+/;
+        var regex = /[!#$%^&*()+\=\[\]{};':"\\|,<>\/?]+/;
         if (!regex.test(value)) {
           return true;
         }
@@ -120,18 +120,18 @@ function allValidate() {
     );
 
     
-    // $.validator.addMethod(
-    //   "allowspecialchar3",
-    //   function (value) {
-    //     // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
+    $.validator.addMethod(
+      "allowspecialchar3",
+      function (value) {
+        // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
         
-    //     var regex = /^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{6,30}$/
-    //     if (regex.test(value)) {
-    //       return true;
-    //     }
-    //   },
-    //   "英大文字・英小文字・数字・記号のうち3種類を含む必要があります"
-    // );
+        var regex = /^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{6,127}$/
+        if (regex.test(value)) {
+          return true;
+        }
+      },
+      "英大文字・英小文字・数字・記号のうち3種類を含む必要があります"
+    );
 
     // allow specail char (-_!#^~)
     $.validator.addMethod(
@@ -140,19 +140,6 @@ function allValidate() {
         var regex = /[@$%&*()+\=\[\]{};':"\\|,.<>\/?]+/;
         // var regex = /[-_!#^~]+/;
         if (!regex.test(value)) {
-          return true;
-        }
-      },
-      "特殊文字は使用できません"
-    );
-    // allow (~!@#$%^&*_-+=`|\(){}[]:;"'<>,.?/)
-    //-_~!@#$%^&*+=`|\(){}[\]:;"'<>,.?/
-    $.validator.addMethod(
-      "allowspecialchar3",
-      function (value) {
-        var regex = /[A-Za-z0-9-_~!@#$%^&*+=`|\(){}[\]:;"'<>,.?/]+/;
-        // var regex = /[-_!#^~]+/;
-        if (regex.test(value)) {
           return true;
         }
       },
@@ -363,10 +350,10 @@ function allValidate() {
         },
         password: {
           required: true,
-          // numberalphabet: true,
+          numberalphabet: true,
           nowhitespace: true,
-          minlength: 8,
-          maxlength: 30,
+          minlength: 6,
+          maxlength: 127,
           allowspecialchar3: true,
         },
       },
@@ -505,10 +492,10 @@ function allValidate() {
         password: {
           required: true,
           // numberalphabet: true,
-          allowspecialchar3: true,
+          allowspecialchar1: true,
           nowhitespace: true,
           minlength: 8,
-          maxlength: 30,
+          maxlength: 32,
         },
         db_name: {
           required: true,
@@ -533,7 +520,7 @@ function allValidate() {
           numberalphabet: true,
           nowhitespace: true,
           minlength: 8,
-          maxlength: 30,
+          maxlength: 64,
         },
       },
       // Specify validation error messages
@@ -556,8 +543,8 @@ function allValidate() {
         },
         password: {
           required: "パスワードを入力してください",
-          minlength: "8～3文字、半角英数字記号",
-          maxlength: "8～3文字、半角英数字記号",
+          minlength: "8～32文字、半角英数字記号",
+          maxlength: "8～32文字、半角英数字記号",
         },
         db_name: {
           required: "データベース名を入力してください",
@@ -571,8 +558,8 @@ function allValidate() {
         },
         db_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～64文字、半角英数字記号",
+          maxlength: "8～64文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {
@@ -748,8 +735,8 @@ function checkdblimit()
           required: true,
           // numberalphabet: true,
           nowhitespace: true,
-          minlength: 8,
-          maxlength: 30,
+          minlength: 6,
+          maxlength: 127,
           allowspecialchar3: true,
         },
       },
@@ -877,7 +864,7 @@ function checkdblimit()
           numberalphabet: true,
           nowhitespace: true,
           minlength: 8,
-          maxlength: 30,
+          maxlength: 64,
           allowspecialchar3: true,
         },
       },
@@ -895,8 +882,8 @@ function checkdblimit()
         },
         db_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～64文字、半角英数字記号",
+          maxlength: "8～64文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {
@@ -935,8 +922,8 @@ function checkdblimit()
           required: true,
           // numberalphabet: true,
           nowhitespace: true,
-          minlength: 8,
-          maxlength: 30,
+          minlength: 6,
+          maxlength: 127,
           allowspecialchar3: true,
         },
         "permission[]": {
@@ -1120,8 +1107,8 @@ function checkdblimit()
           required: true,
           // numberalphabet: true,
           nowhitespace: true,
-          minlength: 8,
-          maxlength: 30,
+          minlength: 6,
+          maxlength: 127,
           allowspecialchar3:true,
 
         },

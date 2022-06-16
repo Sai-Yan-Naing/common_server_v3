@@ -24,6 +24,7 @@
         <!-- <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> -->
         <script type="text/javascript" src="<?= call_ass() ?>js/jquery.validate.min.js"></script>
         <script src="<?= call_ass() ?>js/scripts.js"></script>
+        <script src="<?= call_ass() ?>js/csvtoarray.js"></script>
         <script src="<?= call_ass() ?>js/common.js"></script>
         <script src="<?= call_ass() ?>js/common_validate.js"></script>
         <!-- toastr -->

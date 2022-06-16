@@ -109,7 +109,7 @@ $(document).on("click", ".open_file", function () {
     "sql",
     "ini",
     "gitignore",
-    'env'
+    'env',
   ];
   $url = document.URL.split("/");
   $url = $url[0] + "//" + $url[2];

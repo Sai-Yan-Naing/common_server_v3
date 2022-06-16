@@ -63,8 +63,8 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
  //           fputcsv($output, $row);  
  //      } 
 
- fputcsv($output, array('1','example1','examplepass1'));  
- fputcsv($output, array('2','example2','examplepass2'));  
+ fputcsv($output, array('1','example1','f9Fa)qw&'));  
+ fputcsv($output, array('2','example2','dD8T,NP&'));  
 
       fclose($output);
       // $msg = 'sucessfull export';

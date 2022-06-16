@@ -47,7 +47,8 @@ $contracts = $commons->getAllRow("SELECT * FROM web_account WHERE origin =? AND 
         <div class="form-group row">
             <label for="password" class="col-sm-2 col-form-label">パスワード</label>
             <div class="col-sm-8">
-                <input type="password" class="form-control" id="password" name="password" placeholder="6～127文字、半角英数字記号の組み合わせ">
+                <input type="password" class="form-control" id="password" name="password" placeholder="8～30文字、半角英数字記号の組み合わせ">
+                <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
             </div>
         </div>
     </form>

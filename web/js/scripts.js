@@ -67,25 +67,28 @@ $(document).on("change", "#upload_csv", function (e) {
         $tbody = '<tbody>';
         $tr = '';
         $th ='';
-        var lines = e.target.result.split('\n');
-        lines = lines.filter(item => item);
+        var csv = e.target.result;
+        var lines = $.csv.toArrays(csv);
         for (i = 0; i < lines.length; ++i)
         {
+            if (lines[i].length == 0) {
+                continue;
+            }
             //console.log(lines[i].split(',')[0])
-            lines[i] = lines[i].replace(/"/g, '');
-            var row = lines[i].split(',')
+            // lines[i] = lines[i].replace(/"/g, '');
+            // var row = lines[i].split(',')
             // console.log(row[0])
             if (i == 0) {
-                for (var j = 0; j < row.length; j++) {
-                    $th +='<th>'+row[j]+'</th>';
+                for (var j = 0; j < lines[i].length; j++) {
+                    $th +='<th>'+lines[i][j]+'</th>';
                 }
                 $thead += $th +'</tr></thead>';
                 
             }else{
                 $tr +='<tr>';
                 $td ='';
-                for (var k = 0; k < row.length; k++) {
-                    $td +='<td>'+row[k]+'</td>';
+                for (var k = 0; k < lines[i].length; k++) {
+                    $td +='<td>'+lines[i][k]+'</td>';
                 }
                 $tr += $td +'</tr>';
             }
@@ -100,3 +103,14 @@ $(document).on("change", "#upload_csv", function (e) {
     
     return false;
 });
+
+
+  $(document).on('click',".toggle-password",function() {
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+      input.attr("type", "text");
+    } else {
+      input.attr("type", "password");
+    }
+  });
