@@ -78,7 +78,7 @@ $totalmyma = (int)$totalmysql + (int)$totalmariasql;
                                                 <tr>
                                                     <td class="border-dark"><?php echo $db['db_name']; ?></td>
                                                     <td class="border-dark"><?php echo $db['db_user']; ?></td>
-                                                    <td class="border-dark" toggle='star'><span class="d-none"><?php echo htmlspecialchars($db['db_pass'], ENT_QUOTES); ?></span><span class="star">********</span>
+                                                    <td class="border-dark" toggle='star'><span class="d-none"><?php echo htmlspecialchars($db['db_pass'], ENT_QUOTES); ?></span><span class="star" style='margin-top:5px'>********</span>
                                                     <span class="fa fa-fw fa-eye fa-eye-slash tbfield-icon tbtoggle-password"></span></td>
                                                     <td class="border-dark">
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mysql&act=edit&act_id=<?= $db['id'] ?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">編集</a>

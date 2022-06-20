@@ -41,7 +41,6 @@ $getAllRow=$commons->getAllRow($query,$params);
                                             <div class="col-sm-3">
                                                 <span>FTPアカウント</span>
                                             </div>
-
                                             <div class="col-sm-9">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=ftp&tab=tab&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ＦＴＰユーザー追加</button>
                                             </div>
@@ -51,14 +50,16 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                     <th class="font-weight-bold border-dark">FTP ユーザー名</th>
                                                     <th class="font-weight-bold border-dark">パスワード</th>
                                                     <th class="font-weight-bold border-dark">書き込み権限</th>
+                                                    <th class="font-weight-bold border-dark">ディレクトリパス</th>
                                                     <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
-                                                <?php 
+                                                <?php
+                                                // print_r($getAllRow); 
                                                     foreach ($getAllRow as $key1 => $ftp):
                                                 ?>
                                                 <tr>
                                                     <td class="border-dark"><?php echo htmlspecialchars($ftp['ftp_user'], ENT_QUOTES); ?></td>
-                                                    <td class="border-dark" toggle='star'><span class="d-none"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></span><span class="star">********</span>
+                                                    <td class="border-dark" toggle='star'><span class="d-none"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></span><span class="star" style='margin-top:5px'>********</span>
                                                     <span class="fa fa-fw fa-eye fa-eye-slash tbfield-icon tbtoggle-password"></span></td>
                                                     <td class="border-dark">
                                                     <?php 
@@ -77,13 +78,13 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                         endforeach;
                                                     ?>
                                                     </td>
+                                                    <td class="border-dark"><?php echo htmlspecialchars($ftp['dir_path'], ENT_QUOTES); ?></td>
                                                     <td class="border-dark">
-                                                        
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/share/server?setting=ftp&tab=tab&act=edit&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
                                                     <?php
                                                     if($key1 !=0):?>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=ftp&tab=tab&act=delete&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
-                                                        <?php endif;?>
+                                                    <?php endif;?>
                                                     </td>
                                                 </tr>
                                                 <?php

@@ -50,6 +50,7 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                     <th class="font-weight-bold border-dark">FTP ユーザー名</th>
                                                     <th class="font-weight-bold border-dark">パスワード</th>
                                                     <th class="font-weight-bold border-dark">書き込み権限</th>
+                                                    <th class="font-weight-bold border-dark">ディレクトリパス</th>
                                                     <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
                                                 <?php
@@ -58,7 +59,7 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                 ?>
                                                 <tr>
                                                     <td class="border-dark"><?php echo htmlspecialchars($ftp['ftp_user'], ENT_QUOTES); ?></td>
-                                                    <td class="border-dark" toggle='star'><span class="d-none"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></span><span class="star">********</span>
+                                                    <td class="border-dark" toggle='star'><span class="d-none"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></span><span class="star" style='margin-top:5px'>********</span>
                                                     <span class="fa fa-fw fa-eye fa-eye-slash tbfield-icon tbtoggle-password"></span></td>
                                                     <td class="border-dark">
                                                     <?php 
@@ -77,6 +78,7 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                         endforeach;
                                                     ?>
                                                     </td>
+                                                    <td class="border-dark"><?php echo htmlspecialchars($ftp['dir_path'], ENT_QUOTES); ?></td>
                                                     <td class="border-dark">
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=edit&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
                                                     <?php

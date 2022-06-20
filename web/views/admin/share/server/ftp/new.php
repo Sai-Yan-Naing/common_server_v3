@@ -18,6 +18,12 @@ require_once('views/admin/admin_shareconfig.php');
           </div>
       </div>
       <div class="form-group row">
+          <label for="ftp_pass" class="col-sm-4 col-form-label">ディレクトリパス</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" column="dir_path" id="dir_path" name="dir_path" placeholder="example"><i class="fas fa-folder text-warning fa-lg" style="font-size: 2.33em; display:none;"></i>
+          </div>
+      </div>
+      <div class="form-group row">
           <label for="ftp_pass" class="col-sm-4 col-form-label">パスワード</label>
           <div class="col-sm-8">
             <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" placeholder="8～30文字、半角英数記号の組み合わせ">
@@ -34,10 +40,10 @@ require_once('views/admin/admin_shareconfig.php');
               <div class="form-group">
                   <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" id="full_control" name="permission[]" value="F">フルコントロール
+                <input type="hidden" class="form-check-input" id="full_control" name="permission[]" value="F">フルコントロール
               </label>
             </div>
-            <div class="form-check-inline">
+            <!-- <div class="form-check-inline">
               <label class="form-check-label">
                 <input type="checkbox" class="form-check-input permission" name="permission[]" value="R">読み
               </label>
@@ -48,7 +54,7 @@ require_once('views/admin/admin_shareconfig.php');
               </label>
             </div>
                   <label for="permission" id="permission_error" class="error"></label>
-              </div>
+              </div> -->
           </div>
       </div>
   </form>
