@@ -18,6 +18,7 @@ require_once('views/share_config.php');
   <form action="/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="email_import"  style="position:relative"  enctype="multipart/form-data">
 
     <input type="hidden" name="action" value="import">
+    <input type="hidden" name="error" id="importerror" value="false">
         <div class="form-group">
             <div class="ps_absolute" id="ps_absolute">ファイルをドラッグ＆ドロップしてください</div>
           <div style="position: relative; height: 200px">

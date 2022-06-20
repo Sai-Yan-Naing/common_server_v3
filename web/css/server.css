@@ -946,3 +946,9 @@ span {
   margin-right: 6px;
   z-index: 2;
 }
+
+.tbfield-icon {
+  float: right;
+  margin-top: 7px;
+  z-index: 2;
+}

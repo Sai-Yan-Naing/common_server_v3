@@ -61,7 +61,8 @@ $totalmyma = (int)$totalmysql + (int)$totalmariasql;
                                                 <tr>
                                                     <td class="border-dark"><?php echo htmlspecialchars($db['db_name'], ENT_QUOTES); ?></td>
                                                     <td class="border-dark"><?php echo htmlspecialchars($db['db_user'], ENT_QUOTES); ?></td>
-                                                    <td class="border-dark"><?php echo htmlspecialchars($db['db_pass'], ENT_QUOTES); ?></td>
+                                                    <td class="border-dark" toggle='star'><span class="d-none"><?php echo htmlspecialchars($db['db_pass'], ENT_QUOTES); ?></span><span class="star">********</span>
+                                                    <span class="fa fa-fw fa-eye fa-eye-slash tbfield-icon tbtoggle-password"></span></td>
                                                     <td class="border-dark">
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/share/server?setting=database&tab=mariadb&act=edit&act_id=<?= $db['id']?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=database&tab=mariadb&act=delete&act_id=<?= $db['id']?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</a>

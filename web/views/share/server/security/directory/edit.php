@@ -33,7 +33,7 @@ $getRow = $commons->getRow($query);
           <label for="ftp_pass" class="col-sm-2 text-right p-2">パスワード</label>
           <div class="col-sm-10">
             <input type="password" class="form-control" column="ftp_pass" id="ftp_pass" name="ftp_pass" placeholder="8～30文字、半角英数記号の組み合わせ" value="<?=$getRow['ftp_pass'] ?>">
-            <span toggle="#ftp_pass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            <span toggle="#ftp_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
           </div>
       </div>
   </form>

@@ -82,7 +82,7 @@
                 <label for="password" class="col-form-label">パスワード</label>
                 <div class="">
                     <input type="password" class="form-control" id="password" name="password" placeholder="8～30文字、半角英数記号の組み合わせ">
-                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    <span toggle="#password" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
                 <label for="db_pass" class="col-form-label">パスワード</label>
                 <div>
                     <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～70文字、半角英数字記号">
-                    <span toggle="#db_pass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    <span toggle="#db_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
                 </div>
             </div>
         </div>

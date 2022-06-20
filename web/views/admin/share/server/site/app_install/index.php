@@ -13,7 +13,7 @@
                                 $limit = 10;  
                                 $table = 'app';
                                 require_once('views/pagination/start.php');
-                                $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ? and remove =0  ORDER BY id
+                                $getAll= $commons->getAllRow("SELECT * FROM $table WHERE domain= ? and remove = 0  ORDER BY id
                             OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY",[$webdomain]);
                             ?>
                             <div class="tab-content">
@@ -42,10 +42,12 @@
                                                 <td class="border-dark"><a href="/admin/share/server?setting=filemanager&tab=tab&act=index&webid=<?=$webid?>">/<?= $webuser ?>/<?= $app['root']?></a></td>
                                                 <td class="border-dark"><a href="<?= $app['url'] ?><?= ($app['app_name']=="WORDPRESS")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/$app[root]/login":"/html")?>" target="_blank"><?= $app['url'] ?></a></td>
                                                 <td class="border-dark"><?= $app['user_name'] ?></td>
-                                                <td class="border-dark"><?= $app['password'] ?></td>
+                                                <td class="border-dark" toggle='star'><span class="d-none"><?= $app['password'] ?></span><span class="star">********</span>
+                                                    <span class="fa fa-fw fa-eye fa-eye-slash tbfield-icon tbtoggle-password"></span></td>
                                                 <td class="border-dark"><?= $app['db_name'] ?></td>
                                                 <td class="border-dark"><?= $app['db_user'] ?></td>
-                                                <td class="border-dark"><?= $app['db_pass'] ?></td>
+                                                <td class="border-dark" toggle='star'><span class="d-none"><?= $app['db_pass'] ?></span><span class="star">********</span>
+                                                    <span class="fa fa-fw fa-eye fa-eye-slash tbfield-icon tbtoggle-password"></span></td>
                                                     <td class="border-dark">
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=app_install&act=delete&act_id=<?=$app['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </td>
@@ -61,7 +63,7 @@
                             <div></div>
                             <div class='ml-auto'>
                                 <?php 
-                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE domain = ?";
+                                    $paginatecount = "SELECT COUNT(*) FROM $table WHERE domain = ? and remove = 0";
                                     $params = [$webdomain];
                                     $page_url = '/admin/share/server?setting=site&tab=app_install&act=index&webid='.$webid.'&page=';
                                     require_once('views/pagination/end.php')

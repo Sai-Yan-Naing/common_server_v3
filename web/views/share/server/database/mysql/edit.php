@@ -35,7 +35,7 @@ $getRow = $commons->getRow($query,[$act_id]);
                         <label for="db_pass" class="col-sm-4 col-form-label">パスワード</label>
                         <div class="col-sm-8">
                           <input type="password" class="form-control" id="db_pass" value="<?= $getRow['db_pass'] ?>" name="db_pass" placeholder="8～70文字、半角英数記号の組み合わせ">
-                          <span toggle="#db_pass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                          <span toggle="#db_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
                         </div>
                     </div>
                </form>

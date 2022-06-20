@@ -33,6 +33,6 @@ if ( $action  === 'delete')
 		die();
 	}
 }
-shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
+shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
 header("location: /admin?main=vps$pagy");
 ?>
