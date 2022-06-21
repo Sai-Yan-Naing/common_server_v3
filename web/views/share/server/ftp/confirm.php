@@ -35,6 +35,7 @@ if ( $action=='new')
 		require_once('views/share/server/ftp/index.php');
 		die();
 	}
+	$dir_path = 'web\\'.$dir_path;
 	if (isset($dir_path) && $dir_path !='') {
 	  echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'\\'.$dir_path.' F new '.$originuser);
 	}
@@ -53,6 +54,7 @@ if ( $action=='new')
 		require_once('views/share/server/ftp/index.php');
 		die();
 	 }
+	 $dir_path = 'web\\'.$dir_path;
 	 if (isset($dir_path) && $dir_path !='') {
 	  echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" edit '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'\\'.$dir_path.' F edit '.$originuser);
 	}
@@ -71,6 +73,7 @@ if ( $action=='new')
 		require_once('views/share/server/ftp/index.php');
 		die();
 	}
+	$dir_path = 'web\\';
 	if (isset($dir_path) && $dir_path !='') {
 	  echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" delete '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' noneed '.$webuser.'\\'.$dir_path.' noneed delete '.$originuser);
 	}
@@ -86,9 +89,9 @@ if ( $weborigin!=1)
 // Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser." ".$per." ".$action." ".$originuser);
 // echo $per;
 // die;
-if ($dir_path =='') {
-  Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/ftp.ps1" ftp '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.' '.$per. ' '.$action.' '.$originuser);
-}
+//if ($dir_path =='') {
+//   Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/ftp.ps1" ftp '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.' '.$per. ' '.$action.' '.$originuser);
+// }
 
 // die;
 

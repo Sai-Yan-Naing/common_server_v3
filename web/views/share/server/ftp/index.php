@@ -59,8 +59,11 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                 ?>
                                                 <tr>
                                                     <td class="border-dark"><?php echo htmlspecialchars($ftp['ftp_user'], ENT_QUOTES); ?></td>
-                                                    <td class="border-dark" toggle='star'><span class="d-none"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></span><span class="star" style='margin-top:5px'>********</span>
-                                                    <span class="fa fa-fw fa-eye fa-eye-slash tbfield-icon tbtoggle-password"></span></td>
+                                                    <td class="border-dark"><div toggle='star' class="d-flex"><div class="col-sm-8">
+                                                        <span class="d-none workbreakall"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></span><span class="star workbreakall" style='margin-top:5px'>********</span>
+                                                        </div>
+                                                        <div class="ml-auto col-sm-2">
+                <span class="fa fa-fw fa-eye fa-eye-slash tbtoggle-password"></span></div></td>
                                                     <td class="border-dark">
                                                     <?php 
                                                         $permissions = explode(',',$ftp['permission']);

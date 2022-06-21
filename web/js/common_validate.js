@@ -106,12 +106,15 @@ function allValidate() {
     );
 
     // allow !#$%&'()*+-./:;<=>?@[]^_`{|}~
+    // for mail user
     $.validator.addMethod(
       "allowspecialchar2",
       function (value) {
         // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
-        
+        //\ / : ? " < > | @ % * $ & -
         var regex = /^[ A-Za-z0-9_./#&+-]*$/;
+        // var regex = /^[ A-Za-z0-9_./#&+-]*$/;
+        // var regex = /^[A-Za-z0-9\/:?"<>|@%*$&-]*$/;
         if (regex.test(value)) {
           return true;
         }

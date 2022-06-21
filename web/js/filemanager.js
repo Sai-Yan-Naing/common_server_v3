@@ -23,8 +23,20 @@ $(document).on("click", ".folder_click", function () {
     data: { foldername: $foldername },
   });
   $done = $result.done(function (data) {
+    $back = [''];
+    if ($filepath.length>1) {
+      $back = $filepath.slice(0,-1)
+    }
+    $return =$back.join("/")
     document.getElementById("changebody").innerHTML = data;
     $path =
+      '<li class="nav-item">' +
+      '<a class="nav-link folder_click text-white mr-3" foldername="' +
+      $return +
+      '"  style="padding: 5px 0; cursor:pointer;"  gourl="' +
+      $gourl +
+      '" webid="'+$webid+'">戻る</a>' +
+      "</li>"+
       '<li class="nav-item">' +
       '<a class="nav-link folder_click text-white" foldername="' +
       $_path +

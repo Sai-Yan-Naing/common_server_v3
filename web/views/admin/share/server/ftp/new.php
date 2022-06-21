@@ -30,7 +30,8 @@ require_once('views/admin/admin_shareconfig.php');
             <span toggle="#ftp_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
           </div>
       </div>
-      <div class="row">
+      <input type="hidden" class="form-check-input" id="full_control" name="permission[]" value="F">
+      <!-- <div class="row">
           <div class="col-sm-4">
               <div class="form-group">
                   <span>接続許可ディレクトリ</span>
@@ -43,7 +44,7 @@ require_once('views/admin/admin_shareconfig.php');
                 <input type="hidden" class="form-check-input" id="full_control" name="permission[]" value="F">フルコントロール
               </label>
             </div>
-            <!-- <div class="form-check-inline">
+            <div class="form-check-inline">
               <label class="form-check-label">
                 <input type="checkbox" class="form-check-input permission" name="permission[]" value="R">読み
               </label>
@@ -54,9 +55,9 @@ require_once('views/admin/admin_shareconfig.php');
               </label>
             </div>
                   <label for="permission" id="permission_error" class="error"></label>
-              </div> -->
+              </div>
           </div>
-      </div>
+      </div> -->
   </form>
 </div>
 <!-- Modal footer -->

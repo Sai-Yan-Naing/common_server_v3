@@ -170,45 +170,59 @@ $(document).on("change", "#upload_csv", function (e) {
       input.attr("type", "password");
     }
   });
-
+window.addEventListener('resize', () => {
+  $.each($(".tbtoggle-password"), function( index, value ) {
+        var div = $(this).parent().parent();
+      if (div.attr("toggle") == "text") {
+        var height = div.children().children().height();
+        div.children().css({'height':height})
+    } else {
+      var height = div.children().children().next().height();
+        div.children().css({'height':height})
+    }
+    });
+})
   $(document).ready(function(){
     $.each($(".tbtoggle-password"), function( index, value ) {
-      var td = $(this).parent();
-        var total = td.width();
-        var serventy = ((total/100) * 70).toFixed(3);
-        $(this).prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
-        var height = $(this).prev().height();
-        var width = $(this).prev().width();
-        var tdheight = td.height();
-        td.css({'height':height+tdheight})
+        var div = $(this).parent().parent();
+      $(this).parent().prev().children().addClass('d-none')
+      $(this).parent().prev().children().next().removeClass('d-none')
+      // $(this).parent().prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
+      var height = div.children().children().next().height();
+        // var width = $(this).prev().width();
+      //   var tdheight = td.height();
+        div.children().css({'height':height})
     });
   })
 
   $(document).on('click',".tbtoggle-password",function() {
     $(this).toggleClass("fa-eye fa-eye-slash");
-    var td = $(this).parent();
+    var td = $(this).parent().parent().parent();
+    var div = $(this).parent().parent();
     var total = td.width();
     var serventy = ((total/100) * 70).toFixed(3);
     // console.log(total)
-    // console.log(serventy)
-    td.css({'height':'auto'})
-    if (td.attr("toggle") == "star") {
-      td.attr("toggle", "text");
-      $(this).prev().addClass('d-none')
-      $(this).prev().prev().removeClass('d-none')
-      $(this).prev().prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
-      var height = $(this).prev().prev().height();
-        var width = $(this).prev().prev().width();
-        var tdheight = td.height();
-        td.css({'height':height+tdheight})
+    console.log(div.attr("toggle"))
+    // td.css({'height':'auto'})
+    console.log($(this).parent().prev().children().attr("class"))
+    if (div.attr("toggle") == "star") {
+      div.attr("toggle", "text");
+
+      $(this).parent().prev().children().removeClass('d-none')
+      $(this).parent().prev().children().next().addClass('d-none')
+      // $(this).parent().prev().prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
+      var height = div.children().children().height();
+        // var width = $(this).prev().prev().width();
+      //   var tdheight = td.height();
+        div.children().css({'height':height})
     } else {
-      td.attr("toggle", "star");
-      $(this).prev().removeClass('d-none')
-      $(this).prev().prev().addClass('d-none')
-      $(this).prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
-      var height = $(this).prev().height();
-        var width = $(this).prev().width();
-        var tdheight = td.height();
-        td.css({'height':height+tdheight})
+      div.attr("toggle", "star");
+      $(this).parent().prev().children().addClass('d-none')
+      $(this).parent().prev().children().next().removeClass('d-none')
+      // $(this).parent().prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
+      var height = div.children().children().next().height();
+        // var width = $(this).prev().width();
+      //   var tdheight = td.height();
+        div.children().css({'height':height})
     }
   });

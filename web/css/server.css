@@ -947,8 +947,12 @@ span {
   z-index: 2;
 }
 
-.tbfield-icon {
+/*.tbfield-icon {
   float: right;
   margin-top: 7px;
   z-index: 2;
+}*/
+.workbreakall{
+    position: absolute;
+    word-break: break-all;
 }

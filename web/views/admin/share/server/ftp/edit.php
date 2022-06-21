@@ -37,7 +37,8 @@ $getRow = $commons->getRow($query,[$act_id]);
                 <label for="ftp_pass" id="ftp_pass_error" class="error"></label>
           </div>
       </div>
-      <div class="row">
+      <input type="hidden" class="form-check-input" id="full_control" name="permission[]" value="F">
+      <!-- <div class="row">
           <div class="col-sm-4">
               <div class="form-group">
                   <span>接続許可ディレクトリ</span>
@@ -50,7 +51,7 @@ $getRow = $commons->getRow($query,[$act_id]);
                 <input type="hidden" class="form-check-input" id="full_control" name="permission[]" <?php if ( in_array("F", explode(",",$getRow['permission']))) : echo "checked"; endif ?> value="F">フルコントロール
               </label>
             </div>
-            <!-- <div class="form-check-inline">
+            <div class="form-check-inline">
               <label class="form-check-label">
                 <input type="checkbox" class="form-check-input permission" name="permission[]" value="R" <?php if ( in_array("R", explode(",",$getRow['permission']))) : echo "checked";endif ?>>読み
               </label>
@@ -61,9 +62,9 @@ $getRow = $commons->getRow($query,[$act_id]);
               </label>
             </div>
                   <label for="permission" id="permission_error" class="error"></label>
-              </div> -->
+              </div>
           </div>
-      </div>
+      </div> -->
   </form>
 </div>
 <!-- Modal footer -->
