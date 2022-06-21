@@ -37,7 +37,7 @@ $(document).on('submit','#email_import',function () {
         }
         console.log($('#importerror').val())
         if ($('#importerror').val()=='true') {
-            alert("email in csv is not correct");
+            alert('アップロードいただいたCSVが要件に満たしておりません。パスワードは、英字大文字　英字小文字　数字　記号の４種類から最低3つの組み合わせとなります。メールのユーザーについては1～30文字、「\ / : ? " < > | @ % * $ &」以外の記号をご利用いただくことができます。');
             return false;
         }
 })
@@ -80,6 +80,11 @@ $(document).on("change", "#upload_csv", function (e) {
         $th ='';
         var csv = e.target.result;
         var lines = $.csv.toArrays(csv);
+        if (lines.length > 1) {
+                alert('Empty csv file')
+                csvformaterror()
+                return false;
+            } 
         for (i = 0; i < lines.length; ++i)// remove empty array
         {
             if (lines[i].length > 3) {
@@ -125,14 +130,15 @@ $(document).on("change", "#upload_csv", function (e) {
                     //(/\s/.test(lines[i][k]) && regex.test(lines[i][2]))|| 
                     if (k == 2) {
                         $error = '';
-                        // var regex = /[\u3000-\u303F]|[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[\u2605-\u2606]|[\u2190-\u2195]|\u203B/g
+                        var regex1 = /[\u3000-\u303F]|[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[\u2605-\u2606]|[\u2190-\u2195]|\u203B/g
                         var regex = /^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{8,30}$/;
+                        console.log(regex1.test(lines[i][2]) + 'test')
                         // console.log(regex.test(lines[i][2]) + 'test')
                         // if (/\s/.test(lines[i][k]) || regex.test(lines[i][2]) || (lines[i][2].length<8 || lines[i][2].length> 30)) {
                         //     $error = 'error';
                         //     $haserror = true;
                         // }
-                        if (/\s/.test(lines[i][k]) || !regex.test(lines[i][2])) {
+                        if (/\s/.test(lines[i][k]) || regex1.test(lines[i][2]) || !regex.test(lines[i][2])) {
                             $error = 'error';
                             $haserror = true;
                         }
@@ -165,16 +171,44 @@ $(document).on("change", "#upload_csv", function (e) {
     }
   });
 
+  $(document).ready(function(){
+    $.each($(".tbtoggle-password"), function( index, value ) {
+      var td = $(this).parent();
+        var total = td.width();
+        var serventy = ((total/100) * 70).toFixed(3);
+        $(this).prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
+        var height = $(this).prev().height();
+        var width = $(this).prev().width();
+        var tdheight = td.height();
+        td.css({'height':height+tdheight})
+    });
+  })
+
   $(document).on('click',".tbtoggle-password",function() {
     $(this).toggleClass("fa-eye fa-eye-slash");
     var td = $(this).parent();
+    var total = td.width();
+    var serventy = ((total/100) * 70).toFixed(3);
+    // console.log(total)
+    // console.log(serventy)
+    td.css({'height':'auto'})
     if (td.attr("toggle") == "star") {
       td.attr("toggle", "text");
       $(this).prev().addClass('d-none')
       $(this).prev().prev().removeClass('d-none')
+      $(this).prev().prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
+      var height = $(this).prev().prev().height();
+        var width = $(this).prev().prev().width();
+        var tdheight = td.height();
+        td.css({'height':height+tdheight})
     } else {
       td.attr("toggle", "star");
       $(this).prev().removeClass('d-none')
       $(this).prev().prev().addClass('d-none')
+      $(this).prev().css({'position':'absolute','width':serventy,'word-break':'break-all'})
+      var height = $(this).prev().height();
+        var width = $(this).prev().width();
+        var tdheight = td.height();
+        td.css({'height':height+tdheight})
     }
   });
