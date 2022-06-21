@@ -80,11 +80,11 @@ $(document).on("change", "#upload_csv", function (e) {
         $th ='';
         var csv = e.target.result;
         var lines = $.csv.toArrays(csv);
-        if (lines.length > 1) {
-                alert('Empty csv file')
-                csvformaterror()
-                return false;
-            } 
+        // if (lines.length > 1) {
+        //         alert('Empty csv file')
+        //         csvformaterror()
+        //         return false;
+        //     } 
         for (i = 0; i < lines.length; ++i)// remove empty array
         {
             if (lines[i].length > 3) {
