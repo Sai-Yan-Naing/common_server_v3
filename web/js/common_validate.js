@@ -107,21 +107,41 @@ function allValidate() {
 
     // allow !#$%&'()*+-./:;<=>?@[]^_`{|}~
     // for mail user
-    $.validator.addMethod(
+    // $.validator.addMethod(
+    //   "allowspecialchar2",
+    //   function (value) {
+    //     // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
+    //     //\ / : ? " < > | @ % * $ & -
+    //     // var regex = /^[ A-Za-z0-9_./#&+-]*$/;
+    //     // var regex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g;
+    //     var regex1 = /^[a-zA-Z0-9/:?"<>|@%*$&-]+$/g;
+    //     var regex = /^[a-zA-Z0-9]+$/g;
+    //     // var regex = /^[A-Za-z0-9\/:?"<>|@%*$&-]*$/;
+
+    //     test = regex1.test(value);
+    //     var gg = typeof test
+    //     // if (regex1.test(value)===true) {
+    //       // return regex1.test(value);
+    //     // }
+
+    //     console.log(test)
+    //     console.log(gg)
+    //     return false;
+    //   },
+    //   "特殊文字は使用できませんaa"
+    // );
+$.validator.addMethod(
       "allowspecialchar2",
       function (value) {
         // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
-        //\ / : ? " < > | @ % * $ & -
-        var regex = /^[ A-Za-z0-9_./#&+-]*$/;
-        // var regex = /^[ A-Za-z0-9_./#&+-]*$/;
-        // var regex = /^[A-Za-z0-9\/:?"<>|@%*$&-]*$/;
-        if (regex.test(value)) {
+        
+        var regex = /[\/:?"<>|@%*$&-]/;
+        if (!regex.test(value)) {
           return true;
-        }
+        }else return false;
       },
       "特殊文字は使用できません"
     );
-
     
     $.validator.addMethod(
       "allowspecialchar3",
