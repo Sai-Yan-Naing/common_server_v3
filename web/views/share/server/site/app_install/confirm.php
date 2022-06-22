@@ -176,7 +176,7 @@ if ( $action=='new'){
             
             $path_to_file = 'E:\app_config\configec3\eccube/path.yml';
             $file_contents = file_get_contents($path_to_file);
-            $file_contents = str_replace("ec_strv_dir",$root_url,$file_contents);
+            //$file_contents = str_replace("ec_strv_dir",$root_url,$file_contents);
             $file_contents = str_replace("ec_strv_rootpath",$dst ,$file_contents);
             $file_contents = str_replace("dir_path",$root_url ,$file_contents);
             // file_put_contents($path_to_file,$file_contents);
