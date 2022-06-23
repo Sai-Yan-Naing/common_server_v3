@@ -21,8 +21,11 @@ $root_url = explode("/", $url);
 unset($root_url[0]);
 unset($root_url[1]);
 unset($root_url[2]);
-$root_url = implode("/",$root_url);
-
+if ($root_url[3] !='') {
+    $root_url = implode("/",$root_url).'/';
+}else{
+    $root_url ='';
+}
 if ($root_url==null) {
     $url = explode("/", $url);
     unset($url[3]);

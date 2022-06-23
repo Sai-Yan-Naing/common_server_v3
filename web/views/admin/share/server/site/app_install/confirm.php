@@ -18,8 +18,11 @@ $root_url = explode("/", $url);
 unset($root_url[0]);
 unset($root_url[1]);
 unset($root_url[2]);
-$root_url = implode("/",$root_url);
-
+if ($root_url[3] !='') {
+    $root_url = implode("/",$root_url).'/';
+}else{
+    $root_url ='';
+}
 if ($root_url==null) {
     $url = explode("/", $url);
     unset($url[3]);
@@ -200,7 +203,7 @@ if ( $action=='new'){
             $file_contents = str_replace("e4replace_dbuser",$db_user,$file_contents);
             $file_contents = str_replace("e4replace_dbpass",$db_pass,$file_contents);
             $file_contents = str_replace("e4replace_dbname",$db_name,$file_contents);
-            $file_contents = str_replace("e4replace_dir",$root_url,$file_contents);
+            //$file_contents = str_replace("e4replace_dir",$root_url,$file_contents);
             // file_put_contents($env,$file_contents);
             put_File($web_host,$web_user,$web_password,$dst.'/.env',$file_contents);
 
