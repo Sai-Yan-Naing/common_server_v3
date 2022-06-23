@@ -10,9 +10,9 @@
                         <!-- start -->
                         <nav class="navbar navbar-expand-sm" style="border-bottom: 2px solid #09CAE3;">
                             <ul class="navbar-nav mr-auto" id='dir_path'>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                 <button class="folder_click btn btn-info btn-sm mr-3" foldername="" style="padding: 5px 10px; cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">上へ移動</button>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                 <a class="nav-link folder_click text-white" foldername="" style="padding: 5px 0; cursor: pointer;"  gourl="/admin/share/server?setting=filemanager&tab=tab&act=confirm&webid=<?=$webid?>"  webid="<?=$webid?>">Home</a>
                                 </li>

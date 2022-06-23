@@ -3,7 +3,7 @@ $(document).on("click", ".folder_click", function () {
   $foldername = $(this).attr("foldername");
   $this = $(this);
   $filepath = $foldername.split("/");
-  // alert($filepath);
+  
   $_path = "";
   $webid = $this.attr("webid");
   $url = document.URL.split("/");
@@ -27,16 +27,20 @@ $(document).on("click", ".folder_click", function () {
     if ($filepath.length>1) {
       $back = $filepath.slice(0,-1)
     }
+    console.log($foldername);
     $return =$back.join("/")
-    document.getElementById("changebody").innerHTML = data;
-    $path =
-      '<li class="nav-item">' +
+    $join = '';
+    if ($foldername !='') {
+      $join = '<li class="nav-item">' +
       '<button class="folder_click btn btn-info btn-sm mr-3" foldername="' +
       $return +
       '"  style="padding: 5px 10px; cursor:pointer;"  gourl="' +
       $gourl +
       '" webid="'+$webid+'">上へ移動</button>' +
-      "</li>"+
+      "</li>";
+    }
+    document.getElementById("changebody").innerHTML = data;
+    $path =$join+
       '<li class="nav-item">' +
       '<a class="nav-link folder_click text-white" foldername="' +
       $_path +
@@ -72,11 +76,9 @@ $(document).on("click", ".folder_click", function () {
     $(".download_file").each(function (i, obj) {
         $temp = $(this).attr("href");
         $(this).attr("href", $temp + "&common_path=" + $common_path);
-        console.log($temp)
+        // console.log($temp)
       });
   });
-  // stoploading();
-  // alert($_path)
 });
 
 $(document).on("click", ".common_dialog_fm", function () {
