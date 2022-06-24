@@ -35,7 +35,7 @@ $temp = json_decode($webbasicsetting);
       <div class="row justify-content-center">
           <label for="bass_pass" class="col-sm-2 text-right p-2">パスワード</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" column="bass_pass" id="bass_pass" name="bass_pass" placeholder="8～70文字、半角英数記号の組み合わせ" value="<?= $temp->$dir_id->user->$act_id->bass_pass ?>">
+            <input type="password" class="form-control" column="bass_pass" id="bass_pass" name="bass_pass" placeholder=" 8～30文字、半角英数記号の組み合わせ" value="<?= $temp->$dir_id->user->$act_id->bass_pass ?>">
           </div>
       </div>
   </form>

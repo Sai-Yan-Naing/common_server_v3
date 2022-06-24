@@ -20,7 +20,7 @@ require_once('views/share_config.php');
       <div class="form-group row">
           <label for="ftp_pass" class="col-sm-4 col-form-label">パスワード</label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" placeholder="8～70文字、半角英数記号の組み合わせ">
+            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" placeholder=" 8～30文字、半角英数記号の組み合わせ">
           </div>
       </div>
       <div class="row">

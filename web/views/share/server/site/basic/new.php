@@ -19,7 +19,7 @@ require_once("views/share_config.php");
 	      <div class="form-group row">
 	          <label for="url" class="col-sm-4 col-form-label">URL指定</label>
 	          <div class="col-sm-8">
-	            <input type="text" class="form-control" id="url_spec" name="url_spec" placeholder="8～70文字、半角英数記号の組み合わせ" column="none"  table="none" remark="error_file" webid="<?=$webid?>">
+	            <input type="text" class="form-control" id="url_spec" name="url_spec" placeholder=" 8～30文字、半角英数記号の組み合わせ" column="none"  table="none" remark="error_file" webid="<?=$webid?>">
 	            <span style="color:gray;">eg: /errors/404.html</span>
 	          </div>
 	      </div>
