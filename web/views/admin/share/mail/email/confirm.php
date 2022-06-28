@@ -44,29 +44,20 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" edit '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$getRow['email']);
 }elseif ( isset($_POST['action']) and $_POST['action'] === 'export')
 {
-	mb_language("japanese");
-	mb_internal_encoding("UTF-8");
-	header('Content-Encoding: UTF-8');
-	header('Content-Type: text/csv; charset=utf-8');  
-    header('Content-Disposition: attachment; filename=mailuserlist.csv'); 
-    $output = fopen("php://output", "w");  
-    fputcsv($output, array(
-        mb_convert_encoding('No', "ISO-2022-JP", "UTF-8"), 
-        mb_convert_encoding('Mail User', "ISO-2022-JP", "UTF-8"), 
-        mb_convert_encoding('Password', "ISO-2022-JP","UTF-8")
-    ));
-	// $query = "SELECT email, password FROM add_email where domain = ? ";
-	// $getAllRow = $commons->getAllRow($query, [$webdomain]);
-	// // print_r($getAllRow);
-	// foreach($getAllRow as $row)  
- //      {  
- //           fputcsv($output, $row);  
- //      } 
-
-  fputcsv($output, array('1','example1','f9Fa)qw&'));  
- fputcsv($output, array('2','example2','dD8T,NP&')); 
-
-      fclose($output);
+	$file = 'views/mail_template.csv';
+	$len = filesize($file); // Calculate File Size
+    ob_clean();
+    header("Pragma: public");
+    header("Expires: 0");
+    header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+    header("Cache-Control: public"); 
+    header("Content-Description: File Transfer");
+    header("Content-Type:application/pdf"); // Send type of file
+    $header="Content-Disposition: attachment; filename=mail_template.csv;"; // Send File Name
+    header($header );
+    header("Content-Transfer-Encoding: binary");
+    header("Content-Length: ".$len); // Send File Size
+    @readfile($file);
       // $msg = 'sucessfull export';
       die();
 }elseif ( isset($_POST['action']) and $_POST['action'] === 'import')

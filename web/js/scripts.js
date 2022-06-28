@@ -84,7 +84,18 @@ $(document).on("change", "#upload_csv", function (e) {
         //         alert('Empty csv file')
         //         csvformaterror()
         //         return false;
-        //     } 
+        //     }
+        var index =0;
+        for (k=0; k<lines.length; ++k){
+
+            if(lines[k][0]=='No' && lines[k][1]=='Mail User' && lines[k][2]=='Password')
+            {
+                break;
+            }
+            delete lines[k]
+        } 
+        lines = lines.filter(val => val)
+        console.log(lines)
         for (i = 0; i < lines.length; ++i)// remove empty array
         {
             if (lines[i].length > 3) {
@@ -121,7 +132,7 @@ $(document).on("change", "#upload_csv", function (e) {
                     if (k == 1) {
                         // console.log(/^[A-Za-z0-9_./#&+-]*$/.test(lines[i][1]))
                         $error = '';
-                        if (/[ \/:?"<>|@%*$&-]/.test(lines[i][k])) {
+                        if (/[ \\/:?"<>|@%*$&-]/.test(lines[i][k])) {
                             $haserror = true;
                             $error = 'error';
                         }

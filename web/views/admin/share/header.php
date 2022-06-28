@@ -22,6 +22,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/encoding-japanese/1.0.30/encoding.js" type="text/javascript"></script>
         <script type="text/javascript" src="<?= call_ass() ?>js/jquery.validate.min.js"></script>
         <script src="<?= call_ass() ?>js/scripts.js"></script>
         <script src="<?= call_ass() ?>js/csvtoarray.js"></script>

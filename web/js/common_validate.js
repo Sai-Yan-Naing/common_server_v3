@@ -135,7 +135,7 @@ $.validator.addMethod(
       function (value) {
         // var regex = /^[A-Za-z0-9!#$%&'()*+-./:;<=>?@[]^_`{|}~]*$/;
         
-        var regex = /[\/:?"<>|@%*$&-]/;
+        var regex = /[\\/:?"<>|@%*$&-]/;
         if (!regex.test(value)) {
           return true;
         }else return false;
