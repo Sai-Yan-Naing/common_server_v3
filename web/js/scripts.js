@@ -37,7 +37,7 @@ $(document).on('submit','#email_import',function () {
         }
         console.log($('#importerror').val())
         if ($('#importerror').val()=='true') {
-            alert('アップロードいただいたCSVが要件に満たしておりません。パスワードは、英字大文字　英字小文字　数字　記号の４種類から最低3つの組み合わせとなります。メールのユーザーについては1～30文字、「\ / : ? " < > | @ % * $ &」以外の記号をご利用いただくことができます。');
+            alert('アップロードいただいたCSVが要件を満たしておりません。要件詳細はマニュアルをご覧ください。');
             return false;
         }
 })
@@ -64,8 +64,8 @@ $(document).on("change", "#upload_csv", function (e) {
     $('.ps_absolute').addClass('align-items-baseline')
   var regex = /([ a-zA-Z0-9!@#$%^&*()_+-=,.?])+(.csv)$/;
         if (!regex.test($("#upload_csv").val().toLowerCase())) {
-            alert("アップロードいただいたCSVが要件を満たしておりません。要件詳細はマニュアルをご覧ください。");
             csvformaterror()
+            alert("アップロードいただいたCSVが要件を満たしておりません。要件詳細はマニュアルをご覧ください。");
             return false;
         }
     if (e.target.files != undefined) {
@@ -99,8 +99,8 @@ $(document).on("change", "#upload_csv", function (e) {
         for (i = 0; i < lines.length; ++i)// remove empty array
         {
             if (lines[i].length > 3) {
-                alert('アップロードいただいたCSVが要件を満たしておりません。要件詳細はマニュアルをご覧ください。')
                 csvformaterror()
+                alert('アップロードいただいたCSVが要件を満たしておりません。要件詳細はマニュアルをご覧ください。')
                 return false;
             } 
 
