@@ -52,7 +52,7 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
     header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
     header("Cache-Control: public"); 
     header("Content-Description: File Transfer");
-    header("Content-Type:application/pdf"); // Send type of file
+    header("Content-Type:application/octet-stream"); // Send type of file
     $header="Content-Disposition: attachment; filename=mail_template.csv;"; // Send File Name
     header($header );
     header("Content-Transfer-Encoding: binary");

@@ -560,7 +560,7 @@ function download($web_host,$web_user,$web_password,$dir,$dfile)
     header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
     header("Cache-Control: public"); 
     header("Content-Description: File Transfer");
-    header("Content-Type:application/pdf"); // Send type of file
+    header("Content-Type:application/octet-stream"); // Send type of file
     $header="Content-Disposition: attachment; filename=$filename;"; // Send File Name
     header($header );
     header("Content-Transfer-Encoding: binary");
