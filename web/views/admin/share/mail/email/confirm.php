@@ -71,7 +71,7 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
      	 if ($file === false) { exit("Failed to open uploaded CSV file"); }
      	 $query = "SELECT * FROM add_email where domain = ? ";
 		 $getAllRow = $commons->getAllRow($query, [$webdomain]);
-echo '<pre>';
+// echo '<pre>';
 		 // print_r($getAllRow);
      	 while (($row = fgetcsv($file)) !== false) {
 			  try {
@@ -89,6 +89,14 @@ echo '<pre>';
 			    $temp[$i]['password'] =$row[2];
 			  } catch (Exception $ex) { echo $ex->getmessage(); }
 			}
+			print_r($temp);
+			foreach ($temp as $key => $value) {
+				unset($temp[$key]);
+				if ($value['no'] =='No' && $value['email'] =='Mail User' && $value['password']=='Password') {
+					break;
+				}
+				
+			}
 			foreach ($temp as $key => $value) {
 				if ($value['email'] ==null && $value['email'] ==null) {
 					unset($temp[$key]);
@@ -96,6 +104,7 @@ echo '<pre>';
 			}
 			$temp = array_values($temp);
 			print_r($temp);
+			// die();
 			// echo 'intersect';
 			$msg = 'CSVファイルには少なくとも1件以上のメールアドレスを入力してください';
 			if (count($temp)>0) {

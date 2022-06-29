@@ -32,7 +32,7 @@ $(document).on('submit','#email_import',function () {
     }
     var regex = /([ a-zA-Z0-9!@#$%^&*()_+-=,.?])+(.csv)$/;
         if (!regex.test($("#upload_csv").val().toLowerCase())) {
-            alert("file must be csv file");
+            alert("アップロードいただいたCSVが要件を満たしておりません。要件詳細はマニュアルをご覧ください。");
             return false;
         }
         console.log($('#importerror').val())
@@ -64,7 +64,7 @@ $(document).on("change", "#upload_csv", function (e) {
     $('.ps_absolute').addClass('align-items-baseline')
   var regex = /([ a-zA-Z0-9!@#$%^&*()_+-=,.?])+(.csv)$/;
         if (!regex.test($("#upload_csv").val().toLowerCase())) {
-            alert("file must be csv file");
+            alert("アップロードいただいたCSVが要件を満たしておりません。要件詳細はマニュアルをご覧ください。");
             csvformaterror()
             return false;
         }
@@ -99,7 +99,7 @@ $(document).on("change", "#upload_csv", function (e) {
         for (i = 0; i < lines.length; ++i)// remove empty array
         {
             if (lines[i].length > 3) {
-                alert('csv format error')
+                alert('アップロードいただいたCSVが要件を満たしておりません。要件詳細はマニュアルをご覧ください。')
                 csvformaterror()
                 return false;
             } 
