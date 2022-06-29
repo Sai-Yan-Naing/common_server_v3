@@ -1,7 +1,7 @@
 <?php
 // echo $_POST['action'];
 // die();
-require_once('views/admin_shareconfig.php');
+require_once('views/share_config.php');
 $email=$_POST['email'];
 
 $query = "SELECT * FROM add_email WHERE domain='$webdomain'";
