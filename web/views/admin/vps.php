@@ -15,6 +15,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="/admin?main=vps" onclick="loading()">VPS/デスクトップ</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin?main=surveillance&act=index" onclick="loading()">監視</a>
+                            </li>
                         </ul>
                         <?php 
                             $limit = 10;  

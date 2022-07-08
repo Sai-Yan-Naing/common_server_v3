@@ -1,7 +1,8 @@
 <?php 
 require_once('views/admin/vps/header.php');
 require_once('views/admin/vps/various/load_status/usage.php');
-$cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name); $memory_usage = memory_usage(true,$webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
+$cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name); 
+$memory_usage = memory_usage(true,$webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
 $disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
  ?>
     <div id="layoutSidenav">

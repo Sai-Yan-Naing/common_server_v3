@@ -22,50 +22,49 @@
                                     <div class="mt-4 table-responsive">
                                             <?php foreach($getAll as $app){ ?>
                                                 <table class="table table-bordered">
-                                                    <thead>
                                                         <tr>
-                                                            <th class="app-header"><i class="fa fa-caret-right mr-2" aria-hidden="true"></i> サイト名</th>
-                                                            <td><?= $app['site_name'] ?></td>
-                                                            <th>アプリケーション</th>
-                                                            <td><?= $app['app_name'] ?></td>
-                                                            <th>バージョン</th>
-                                                            <td><?= $app['app_version'] ?></td>
-                                                            <th>操作</th>
-                                                            <td>
+                                                            <th class="app-header" width="10%"><i class="fa fa-caret-right mr-2" aria-hidden="true"></i> サイト名</th>
+                                                            <th width="10%"><?= $app['site_name'] ?></th>
+                                                            <th width="20%">アプリケーション</th>
+                                                            <th width="10%"><?= $app['app_name'] ?></th>
+                                                            <th width="15%">バージョン</th>
+                                                            <th width="10%"><?= $app['app_version'] ?></th>
+                                                            <th width="10%">操作</th>
+                                                            <th width="15%">
                                                                 <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=app_install&act=delete&act_id=<?=$app['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
-                                                            </td>
+                                                            </th>
                                                         </tr>
-                                                    </thead>
                                                     <tbody style="display:none" class="app-body">
+                                                        <tr><td colspan="8" style="border: none;"></td></tr>
                                                         <tr>
-                                                            <th colspan="2">ドキュメントルート</th>
-                                                            <th>URL</th>
-                                                            <th>ユーザー名</th>
-                                                            <th>パスワード</th>
-                                                            <th>データベース</th>
-                                                            <th>DBユーザー</th>
-                                                            <th>DBパスワード</th>
+                                                            <th colspan="2" width="20%">ドキュメントルート</th>
+                                                            <th width="20%">URL</th>
+                                                            <th width="10%">ユーザー名</th>
+                                                            <th width="15%">パスワード</th>
+                                                            <th width="10%">データベース</th>
+                                                            <th width="10%">DBユーザー</th>
+                                                            <th width="15%">DBパスワード</th>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="2"><a href="/admin/share/server?setting=filemanager&tab=tab&act=index&webid=<?=$webid?>">/<?= $webuser ?>/<?= $app['root']?></a></td>
-                                                            <td>
+                                                            <td colspan="2" width="20%"><a href="/admin/share/server?setting=filemanager&tab=tab&act=index&webid=<?=$webid?>">/<?= $webuser ?>/<?= $app['root']?></a></td>
+                                                            <td width="20%">
                                                                 <a href="<?= $app['url'] ?><?= ($app['app_name']=="WORDPRESS")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/admin/login":"/admin")?>" target="_blank"><?= $app['url'] ?><?= ($app['app_name']=="WORDPRESS")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/admin/login":"/admin")?></a>
                                                             </td>
-                                                            <td>
+                                                            <td width="10%">
                                                                 <?= $app['user_name'] ?>
                                                             </td>
-                                                            <td>
+                                                            <td width="15%">
                                                                 <div toggle='star' class="d-flex"><div class="col-sm-8">
                                                         <span class="d-none workbreakall"><?php echo htmlspecialchars($app['password'], ENT_QUOTES); ?></span><span class="star workbreakall" style='margin-top:5px'>********</span>
                                                         </div>
                                                         <div class="ml-auto col-sm-2">
                 <span class="fa fa-fw fa-eye fa-eye-slash tbtoggle-password"></span></div>
                                                             </td>
-                                                            <td>
+                                                            <td width="10%">
                                                                 <?= $app['db_name'] ?>
                                                             </td>
-                                                            <td><?= $app['db_user'] ?></td>
-                                                            <td>
+                                                            <td width="10%"><?= $app['db_user'] ?></td>
+                                                            <td width="15%">
                                                                 <div toggle='star' class="d-flex"><div class="col-sm-8">
                                                         <span class="d-none workbreakall"><?php echo htmlspecialchars($app['db_pass'], ENT_QUOTES); ?></span><span class="star workbreakall" style='margin-top:5px'>********</span>
                                                         </div>

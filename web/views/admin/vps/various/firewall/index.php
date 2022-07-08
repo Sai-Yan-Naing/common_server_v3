@@ -22,17 +22,17 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                             <div class="col-sm-3">
                                             <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_rdp&webid=<?=$webid?>" id="change_rdp" method="post">
-                                                <input type="text" class="form-control" name="port">
+                                                <input type="text" required class="form-control" name="port">
                                             </form>
                                             </div>
                                             <div class="col-sm-2">
                                             <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="change_rdp">変更</button>
                                             </div>
                                             <div class="col-sm-2">
-                                            <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=default_rdp&webid=<?=$webid?>" id="default_rdp" method="post">
+                                            <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_rdp&webid=<?=$webid?>" id="change_rdpd" method="post">
                                                 <input type="hidden" class="form-control" name="port" value="3389">
                                             </form>
-                                            <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="default_rdp">デフォルトに戻す</button>
+                                            <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="change_rdpd">デフォルトに戻す</button>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -41,17 +41,17 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                             <div class="col-sm-3">
                                             <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_rdip&webid=<?=$webid?>" id="change_rdip" method="post">
-                                                <input type="text" class="form-control" name="ip">
+                                                <input type="text" required class="form-control" name="ip">
                                             </form>
                                             </div>
                                             <div class="col-sm-2">
                                             <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="change_rdip">変更</button>
                                             </div>
                                             <div class="col-sm-2">
-                                            <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=default_rdip&webid=<?=$webid?>" id="default_rdip" method="post">
+                                            <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_rdip&webid=<?=$webid?>" id="change_rdipd" method="post">
                                                 <input type="hidden" class="form-control" name="ip" value="any">
                                             </form>
-                                            <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="default_rdip">デフォルトに戻す</button>
+                                            <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="change_rdipd">デフォルトに戻す</button>
                                             </div>
                                         </div>
                                         <div class="mb-4">
@@ -64,17 +64,17 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                             <div class="col-sm-3">
                                             <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_httprdp&webid=<?=$webid?>" id="change_httprdp" method="post">
-                                                <input type="text" class="form-control" name="port">
+                                                <input type="text" required class="form-control" name="port">
                                             </form>
                                             </div>
                                             <div class="col-sm-2">
                                             <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="change_httprdp">変更</button>
                                             </div>
                                             <div class="col-sm-2">
-                                            <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=default_httprdp&webid=<?=$webid?>" id="default_httprdp" method="post">
+                                            <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_httprdp&webid=<?=$webid?>" id="change_httprdpd" method="post">
                                                 <input type="hidden" class="form-control" name="port" value="80">
                                             </form>
-                                            <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="default_httprdp">デフォルトに戻す</button>
+                                            <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="change_httprdpd">デフォルトに戻す</button>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -83,17 +83,17 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                             <div class="col-sm-3">
                                             <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_httprdip&webid=<?=$webid?>" id="change_httprdip" method="post">
-                                                <input type="text" class="form-control" name="ip">
+                                                <input type="text" required class="form-control" name="ip">
                                             </form>
                                             </div>
                                             <div class="col-sm-2">
                                             <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="change_httprdip">変更</button>
                                             </div>
                                             <div class="col-sm-2">
-                                            <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=default_httprdip&webid=<?=$webid?>" id="default_httprdip" method="post">
+                                            <form onsubmit="loading()" action="/admin/vps/various?setting=firewall&tab=firewall&act=confirm&action=change_httprdip&webid=<?=$webid?>" id="change_httprdipd" method="post">
                                                 <input type="hidden" class="form-control" name="ip" value="any">
                                             </form>
-                                            <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="default_httprdip">デフォルトに戻す</button>
+                                            <button  type="submit" class="btn btn-sm btn-outline-info vpsrebtn" form="change_httprdipd">デフォルトに戻す</button>
                                             </div>
                                         </div>
                                     </div>
