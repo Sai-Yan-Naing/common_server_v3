@@ -19,7 +19,7 @@ $admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=? ",[$webadm
 $webadminID = $admin_acc['user_id'];
 $webadminName = $admin_acc['name'];
 $webadminweb = explode(",",$admin_acc['web']);
-$webadminplanid = $admin_acc['plan_id'];
+// $webadminplanid = $admin_acc['plan_id'];
 
 $web_acc = $commons->getRow("SELECT * FROM web_account WHERE id=? AND customer_id=? and removal IS NULL",[$_GET['webid'],$_COOKIE['admin']]);
 $webid = $web_acc['id'];
@@ -41,6 +41,7 @@ $webssl = $web_acc['ssl'];
 $webmysql_cnt = $web_acc['mysql_cnt'];
 $webmssql_cnt = $web_acc['mssql_cnt'];
 $webmariadb_cnt = $web_acc['mariadb_cnt'];
+$webplan = $web_acc['plan'];
 // for root site
 if($weborigin !=1)
 {
@@ -58,6 +59,7 @@ $webrootdns = $webroot_acc['dns'];
 $webrootbasicsetting = $webroot_acc['basic_setting'];
 $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
+$webplan = $webroot_acc['plan'];
 }
 $setting = $_GET['setting'];
 
@@ -78,7 +80,7 @@ $ftphost = $commons->getRow($web_ftpserver);
 $web_ftp = $ftphost['ftp_user'];
 $web_ftppass = $ftphost['ftp_pass'];
 
-$webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webadminplanid]);
+$webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webplan]);
 $webplnname = $webroot_plan['name'];
 $webplnsite = $webroot_plan['site'];
 $webplnwebcapacity = $webroot_plan['web_capacity'];
