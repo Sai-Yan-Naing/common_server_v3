@@ -31,13 +31,13 @@ if ( $action === 'new' )
     $msg = "サイトの追加が完了しました";
     $msgsession ="msg";
 
-    $insert_q = "INSERT INTO web_account (domain, password, [user], [plan],web_server_id, customer_id,dns,app_version,origin_id) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
+    $insert_q = "INSERT INTO web_account (domain, password, [user], [plan],web_server_id, customer_id,dns,app_version,origin_id,mail_cnt) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)";
     $insert_ftp = "INSERT INTO db_ftp (ftp_user, ftp_pass, domain, permission) VALUES (?, ?, ?, ?)";
     $insert_waf = "INSERT INTO waf (domain, usage, display) VALUES (?, ?, ?)";
     $insert_mail = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 
     if (
-        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $web_server_id, $webadminID,$dns,$app_version,$contract]) ||
+        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $web_server_id, $webadminID,$dns,$app_version,$contract,1]) ||
         !$commons->doThis($insert_ftp,[$user, $password, $webdomain, 'F,R,W']) ||
         !$commons->doThis($insert_waf,[$webdomain, 0, 0]) ||
         !$commons->doThis($insert_mail,[$webdomain, 'root', $password])

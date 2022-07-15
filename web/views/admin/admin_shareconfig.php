@@ -41,6 +41,7 @@ $webssl = $web_acc['ssl'];
 $webmysql_cnt = $web_acc['mysql_cnt'];
 $webmssql_cnt = $web_acc['mssql_cnt'];
 $webmariadb_cnt = $web_acc['mariadb_cnt'];
+$webmail_cnt = $web_acc['mail_cnt'];
 $webplan = $web_acc['plan'];
 // for root site
 if($weborigin !=1)

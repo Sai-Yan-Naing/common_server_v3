@@ -25,6 +25,13 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 		require_once('views/share/mail/index.php');
 		die("");
 	}
+	$webmail_cnt +=1;
+		$sql = "UPDATE web_account SET mail_cnt='$webmail_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add mail account";
+				require_once("views/share/mail/index.php");
+				die("");
+			}
 echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" newuser '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$email);
 // die;
 } elseif ( isset($_POST['action']) and $_POST['action'] === 'edit') {
@@ -167,9 +174,18 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 				print_r($insertfromcsv);
 				// die;
 				// $uni = array_unique($unique);
-				// if (count($uni)<count($unique)) {
-				// 	$dup = true;
-				// }
+				$qid = ( $weborigin != 1 )? $weborigin_id : $webid;
+				$query3 = "SELECT mail_cnt FROM web_account where (origin_id = ? or id= ?)  and removal IS NULL";
+				$getalldbcount = $commons->getAllRow($query3, [$qid,$qid]);
+				$mail_cnt =0;
+				foreach($getalldbcount as $value){
+				    $mail_cnt +=$value['mail_cnt'];
+				}
+				$mailmsg = '';
+				if (count($insertfromcsv) + $mail_cnt>$webplnmailuser) {
+					$dup = true;
+					$mailmsg .= 'mail user limited';
+				}
 				$invmsg = '';
 				if (count($invalid)>0) {
 					$dup = true;
@@ -202,6 +218,7 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 					$msg .= $invmsg;
 					$msg .= $dbmsg;
 					$msg .= $csvmsg;
+					$msg .= $mailmsg;
 					$msg .= '</span>';
 					
 				}else {
@@ -226,6 +243,13 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 								$error  = "Email cannot import.";
 								die("");
 							}
+							$webmail_cnt +=1;
+							$sql = "UPDATE web_account SET mail_cnt='$webmail_cnt' WHERE domain='$webdomain'";
+							if( ! $commons->doThis($sql)) {
+								$error = "cannot add mail account";
+									require_once("views/share/mail/index.php");
+									die("");
+								}
 						}
 
 						// foreach ($updatefromcsv as $key => $row) {
@@ -272,6 +296,17 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 		require_once('views/share/mail/index.php');
 		die();
 	}
+	if ( $webmail_cnt<=0)
+		{
+			$webmail_cnt=0;
+		}else{
+			$webmail_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mail_cnt='$webmail_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add mail account";
+				require_once("views/share/mail/index.php");
+		}
 echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" delete '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$getRow['email'].' '.$getRow['email']);
 }
 

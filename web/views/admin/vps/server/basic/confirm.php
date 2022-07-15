@@ -15,6 +15,7 @@ $msg = "jb message";
     {
         
         $msg = "プラン変更依頼が完了しました。";
+        $changedate = $_POST['changedate'];
         $plan = $_POST['spec'];
         $query = "SELECT spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
         inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
@@ -49,13 +50,12 @@ $msg = "jb message";
                 $body = preg_replace('/\\\\/','', $body); //Strip backslashes
                 $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body); 
                 $cmd = "changeplan";
-
-                $qry = "UPDATE vps_account SET plan_update = ? WHERE id = ?";
+                $qry = "UPDATE vps_account SET plan_update = ?, changedate = '$changedate' WHERE id = ?";
                 if( ! $commons->doThis($qry,[$plan,$webid]) ){
                         // require_once("views/admin/share.php");
                         die("error");
                 }
-                // shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu);
+                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vps_basicsetting\changeplan.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$changedate);
 
         } else
         {

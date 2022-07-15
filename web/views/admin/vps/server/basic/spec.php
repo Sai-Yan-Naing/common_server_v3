@@ -79,10 +79,14 @@ foreach($getspecs as $getspec)
             </label>
         </div>
         <?php endif;endforeach; ?>
+    </div>
+    <div>
+        <input type="date" name="changedate" class="form-control" form='updateplan' required>
+    </div>
+
         <form action="/admin/vps/server?tab=basic&act=confirm&webid=<?= $webid ?>" method="post" id="updateplan">
         <input type="hidden" name="action" value="updateplan">
         </form>
-    </div>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">

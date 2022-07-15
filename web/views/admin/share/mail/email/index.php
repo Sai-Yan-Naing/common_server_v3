@@ -7,6 +7,13 @@ require_once('views/pagination/start.php');
 $query = "SELECT * FROM $table where domain = ?  ORDER BY id
                             OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
 $getAllRow = $commons->getAllRow($query, $params);
+$qid = ( $weborigin != 1 )? $weborigin_id : $webid;
+$query3 = "SELECT mail_cnt FROM web_account where (origin_id = ? or id= ?)  and removal IS NULL";
+$getalldbcount = $commons->getAllRow($query3, [$qid,$qid]);
+$mail_cnt =0;
+foreach($getalldbcount as $value){
+    $mail_cnt +=$value['mail_cnt'];
+}
 ?>
     <div id="layoutSidenav">
         <?php require_once('views/admin/share/sidebar.php');?>
@@ -23,7 +30,7 @@ $getAllRow = $commons->getAllRow($query, $params);
                                             <div class="col-sm-3">
                                                 <span>メールアドレス</span>
                                             </div>
-                                            <?php if( (int)$webplnmailuser >= count($getAllRow ) || $webplnmailuser=='unlimited'):?>
+                                            <?php if( (int)$webplnmailuser > $mail_cnt || $webplnmailuser=='unlimited'):?>
                                             <div class="col-sm-9 d-flex">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/mail?setting=email&tab=tab&act=new&webid=<?= $webid?>" data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>メールアドレス追加</button>
                                                 <!-- <button class="btn btn-info btn-sm ml-2" form='email_export' type='submit'><span class="mr-2"><i class="fas fa-plus-square"></i></span>Export as CSV</button> -->

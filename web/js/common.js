@@ -182,8 +182,13 @@ $(document).on("change", ".spec_change", function () {
 
 $(document).on("submit", "#updateplan", function () {
   var isValid = $("input[name=spec]").is(":checked");
+  var changedate = $('input[name=changedate').val();
   if ( ! isValid) {
     alert("Please select plan")
+    return false;
+  };
+  if ( changedate=='') {
+    alert("Please select plan change date")
     return false;
   };
   loading();

@@ -73,6 +73,8 @@
                                 $msount = 0;
                                 $mssqlcount = [];
                                 $mssqltotal =0;
+                                $mailcount = [];
+                                $mailtotal =0;
                                 $mdomain =$main_domain['domain'];
                                 foreach($multidomain as $domain){
                                     if($main_domain['id'] == $domain['id'] || $main_domain['id']==$domain['origin_id'])
@@ -98,18 +100,23 @@
                                          $mssqlcount[$domain['id']] = $mscount;
                                          $mssqltotal +=$mscount;
 
+                                         $mcount = $domain['mail_cnt'];
+                                         $mailcount[$domain['id']] = $mcount;
+                                         $mailtotal +=$mcount;
+
                                         // echo 'hello';
                                     }
 
                                 }
                         ?>
                         <div class="d-flex contract-domain <?= ($a==1)? '':'main-contract'?>">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <i class="fa <?= ($a==1)? 'fa-caret-down':'fa-caret-right'?>" aria-hidden="true"></i>
                                 <?= $main_domain['domain'] ?>[<?= $webroot_plan['name'] ?>]</div>
-                            <div class="ml-auto col-md-3">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $webroot_plan['site'] ?></div>
-                            <div class="col-md-3">MySQL/MariaDB: <?= $mysqltotal + $masqltotal ?>/<?= $webroot_plan['maria_db_num'] ?></div>
-                            <div class="col-md-3">MSSQL: <?= $mssqltotal ?>/<?= $webroot_plan['mssql_db_num'] ?></div>
+                            <div class="ml-auto col-md-2">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $webroot_plan['site'] ?></div>
+                            <div class="col-md-2">MySQL/MariaDB: <?= $mysqltotal + $masqltotal ?>/<?= $webroot_plan['maria_db_num'] ?></div>
+                            <div class="col-md-2">MSSQL: <?= $mssqltotal ?>/<?= $webroot_plan['mssql_db_num'] ?></div>
+                            <div class="col-md-2">Mail: <?= $mailtotal ?>/<?= $webplnmailuser ?></div>
                         </div>
                         <div class="sub-domain" style=" display:<?= ($a==1)? '':'none'?>">
                             <table class="table table-borderless">
@@ -136,6 +143,9 @@
                                                 $web_host = $gethost['ip'];
                                                 $web_user = $gethost['username'];
                                                 $web_password = $gethost['password'];
+
+                                                $mydbcount = $mysqlcount[$domain['id']]+$masqlcount[$domain['id']];
+                                                $msdbcount = $mssqlcount[$domain['id']];
                                             
 
                                     ?>
@@ -147,8 +157,8 @@
                                         <td class="tb-width">
                                             <span><?php //if($domain['origin'] !=1 ){ echo sizeFormat(folderSize($web_host,$web_user,$web_password,$webrootuser."/".$domain['user']));}else{echo sizeFormat($webcapacity);} ?></span>
                                         </td>
-                                        <td class="tb-width"><?= $mysqlcount[$domain['id']]+$masqlcount[$domain['id']]?></td>
-                                        <td class="tb-width"><?= $mssqlcount[$domain['id']]?></td>
+                                        <td class="tb-width"><?= ($mydbcount>0) ? $mydbcount : 0 ; ?></td>
+                                        <td class="tb-width"><?= ($msdbcount>0) ? $msdbcount : 0 ;?></td>
                                         <td class="tb-width-1">
                                             <form action="" method = "post">
                                                 <input type="hidden" name="app" value="site">

@@ -101,11 +101,14 @@ $disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                     // {
                         
                         if($var=='disk_read'){
+                            $shell = (data/10)*100;
                            $("#"+$var+"_usage").html(data); 
+                           $("#"+$var).css({"width":$shell+"%"})
                        }else{
                         $("#"+$var+"_usage").html(data+ ' %');
-                       }
                         $("#"+$var).css({"width":data+"%"})
+                       }
+                        
                         $("#"+$var).removeClass();
                         if(data<=60)
                         {

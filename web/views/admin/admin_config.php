@@ -54,6 +54,7 @@ $webplnname = $webroot_plan['name'];
 $webplnsite = $webroot_plan['site'];
 $webplnwebcapacity = $webroot_plan['web_capacity'];
 $webplnmail = $webroot_plan['mail_capacity'];
+$webplnmailuser = $webroot_plan['mail_user'];
 
 define("MYROOT", $web_mydbuser);
 define("MYROOT_PASS", $web_mydbpass);
