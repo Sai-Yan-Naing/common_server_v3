@@ -81,7 +81,7 @@ foreach($getspecs as $getspec)
         <?php endif;endforeach; ?>
     </div>
     <div>
-        <input type="date" name="changedate" class="form-control" form='updateplan' required>
+        <input type="datetime-local" name="changedate" class="form-control" form='updateplan' required>
     </div>
 
         <form action="/admin/vps/server?tab=basic&act=confirm&webid=<?= $webid ?>" method="post" id="updateplan">
