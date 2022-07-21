@@ -32,7 +32,7 @@ $getAllRow=$commons->getAllRow($query);
                                             </div>
                                             <div class="col-sm-3">
                                                 <select name="request"  class="form-control" required id="sqlserver">
-                                                    <option value="">Please select sql server</option>
+                                                    <option value="">SQLサーバーのバージョンをご選択下さい</option>
                                                     <option value="2016" data-price="<?=$getspec[8]['price']?>" data-pln="<?=$getspec[8]['pln']?>">2016</option>
                                                     <option value="2017" data-price="<?=$getspec[9]['price']?>" data-pln="<?=$getspec[9]['pln']?>">2017</option>
                                                     <option value="2019" data-price="<?=$getspec[10]['price']?>" data-pln="<?=$getspec[10]['pln']?>">2019</option>
@@ -95,7 +95,7 @@ $getAllRow=$commons->getAllRow($query);
 
                                             <div class="col-sm-3 input-group">
                                                 <select name="request"  class="form-control" required id="office">
-                                                    <option value="">Please select OFFICE追加</option>
+                                                    <option value="">Officeのバージョンをご選択下さい</option>
                                                     <option value="Microsoft Office 2013 Standard" data-price="<?=$getspec[1]['price']?>" data-pln="<?=$getspec[1]['pln']?>">Microsoft Office 2013 Standard</option>
                                                     <option value="Microsoft Office 2013 Professional" data-price="<?=$getspec[3]['price']?>" data-pln="<?=$getspec[3]['pln']?>">Microsoft Office 2013 Professional</option>
                                                     <option value="Microsoft Office 2016 Standard" data-price="<?=$getspec[4]['price']?>" data-pln="<?=$getspec[4]['pln']?>">Microsoft Office 2016 Standard</option>

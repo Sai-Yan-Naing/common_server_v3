@@ -83,7 +83,7 @@
                         <div class="row justify-content-center hbtn">
                                 <div class="col-lg-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">ドメイン取得/移管</a></div>
                                 <div class="col-lg-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
-                                <div class="col-lg-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>
+                                <div class="col-lg-3"><a href="/admin/dns?tab=vps&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>
                         </div>
                         <div class="d-flex mt-3">
                             <div></div>

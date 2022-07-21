@@ -30,7 +30,8 @@
                                 <h6>PASSWORD変更</h6>
                                 <div class="form-group row">
                                     <div class="col-sm-4">
-                                        <input type="password" class="form-control" name="password" placeholder="12～40文字、英数記号大小文字組み合わせ">
+                                        <input type="password" class="form-control" name="password" placeholder="12～40文字、英数記号大小文字組み合わせ" id="password">      
+                <span toggle="#password" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
                                     </div>
                                     <div class="col-sm-3">
                                         <button type="submit" class="btn btn-sm btn-outline-info form-control vpsrebtn">変更</button>

@@ -41,7 +41,7 @@ require_once("views/admin/admin_vpsconfig.php");
         $_SESSION['error'] = false;
         $_SESSION['message'] = 'Success';
         $msgsession =  "msg";
-        $msg = "オプションの追加依頼をお受けいたしました";
+        $msg = "オプションの追加依頼をお受けいたしました <br>弊社より費用について御案内いたしますのでお待ちください。<br>費用の御案内については弊社営業時間内となります。<br>平日　9：00-12：00/13：00-17：00";
         flash($msgsession,$msg);
         header("location:/admin/vps/various?setting=option&tab=license&act=license&webid=$webid");
         die();

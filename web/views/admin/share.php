@@ -110,7 +110,7 @@
                                 }
                         ?>
                         <div class="d-flex contract-domain <?= ($a==1)? '':'main-contract'?>">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <i class="fa <?= ($a==1)? 'fa-caret-down':'fa-caret-right'?>" aria-hidden="true"></i>
                                 <?= $main_domain['domain'] ?>[<?= $webroot_plan['name'] ?>]</div>
                             <div class="ml-auto col-md-2">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $webroot_plan['site'] ?></div>
