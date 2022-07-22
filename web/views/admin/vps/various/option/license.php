@@ -95,14 +95,14 @@ $getAllRow=$commons->getAllRow($query);
 
                                             <div class="col-sm-3 input-group">
                                                 <select name="request"  class="form-control" required id="office">
-                                                    <option value="">Officeのバージョンをご選択下さい</option>
-                                                    <option value="Microsoft Office 2013 Standard" data-price="<?=$getspec[1]['price']?>" data-pln="<?=$getspec[1]['pln']?>">Microsoft Office 2013 Standard</option>
-                                                    <option value="Microsoft Office 2013 Professional" data-price="<?=$getspec[3]['price']?>" data-pln="<?=$getspec[3]['pln']?>">Microsoft Office 2013 Professional</option>
-                                                    <option value="Microsoft Office 2016 Standard" data-price="<?=$getspec[4]['price']?>" data-pln="<?=$getspec[4]['pln']?>">Microsoft Office 2016 Standard</option>
-                                                    <option value="Microsoft Office 2016 Professional" data-price="<?=$getspec[5]['price']?>" data-pln="<?=$getspec[5]['pln']?>">Microsoft Office 2016 Professional</option>
-                                                    <option value="Microsoft 365 Apps for Business" data-price="<?=$getspec[11]['price']?>" data-pln="<?=$getspec[11]['pln']?>">Microsoft 365 Apps for Business</option>
-                                                    <option value="Microsoft 365 Business Standard" data-price="<?=$getspec[13]['price']?>" data-pln="<?=$getspec[13]['pln']?>">Microsoft 365 Business Standard</option>
-                                                    <option value="Microsoft 365 Apps for Enterprise" data-price="<?=$getspec[12]['price']?>" data-pln="<?=$getspec[12]['pln']?>">Microsoft 365 Apps for Enterprise</option>
+                                                    <option value="" data-pname="月額">Officeのバージョンをご選択下さい</option>
+                                                    <!-- <option value="Microsoft Office 2013 Standard" data-price="<?=$getspec[1]['price']?>" data-pln="<?=$getspec[1]['pln']?>" data-pname="月額">Microsoft Office 2013 Standard</option>
+                                                    <option value="Microsoft Office 2013 Professional" data-price="<?=$getspec[3]['price']?>" data-pln="<?=$getspec[3]['pln']?>" data-pname="月額">Microsoft Office 2013 Professional</option> -->
+                                                    <option value="Microsoft Office 2016 Standard" data-price="<?=$getspec[4]['price']?>" data-pln="<?=$getspec[4]['pln']?>" data-pname="月額">Microsoft Office 2016 Standard</option>
+                                                    <option value="Microsoft Office 2016 Professional" data-price="<?=$getspec[5]['price']?>" data-pln="<?=$getspec[5]['pln']?>" data-pname="月額">Microsoft Office 2016 Professional</option>
+                                                    <!-- <option value="Microsoft 365 Apps for Business" data-price="<?=$getspec[11]['price']?>" data-pln="<?=$getspec[11]['pln']?>" data-pname="月額">Microsoft 365 Apps for Business</option> -->
+                                                    <option value="Microsoft 365 Business Standard" data-price="<?=$getspec[13]['price']?>" data-pln="<?=$getspec[13]['pln']?>" data-pname="年額">Microsoft 365 Business Standard</option>
+                                                    <option value="Microsoft 365 Apps for Enterprise" data-price="<?=$getspec[12]['price']?>" data-pln="<?=$getspec[12]['pln']?>" data-pname="年額">Microsoft 365 Apps for Enterprise</option>
                                                 </select>
                                                   <div class="input-group-append">
                                                     <span class="input-group-text">個</span>
@@ -220,10 +220,12 @@ $getAllRow=$commons->getAllRow($query);
         $value=0;
         if($(this).val() !='')
         $value = $('option:selected', this).data('price');
+        $pname = $('option:selected', this).data('pname');
         $pln = $('option:selected', this).data('pln');
         $("#office_l").val($pln);
-        console.log($value)
+        // console.log($pname)
         $(this).parent().next().next().next().children('.total').html($value+ ' 円')
+        $(this).parent().next().next().children().html($pname)
     })
      $(document).on('change','.paid_price',function(){
         $value = $(this).val();

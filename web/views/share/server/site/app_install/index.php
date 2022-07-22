@@ -24,11 +24,11 @@
                                                 <table class="table table-bordered">
                                                         <tr>
                                                             <th class="app-header" width="10%"><i class="fa fa-caret-right mr-2" aria-hidden="true"></i> サイト名</th>
-                                                            <th width="10%"><?= $app['site_name'] ?></th>
+                                                            <td width="10%"><?= $app['site_name'] ?></td>
                                                             <th width="20%">アプリケーション</th>
-                                                            <th width="10%"><?= $app['app_name'] ?></th>
+                                                            <td width="10%"><?= $app['app_name'] ?></td>
                                                             <th width="15%">バージョン</th>
-                                                            <th width="10%"><?= $app['app_version'] ?></th>
+                                                            <td width="10%"><?= $app['app_version'] ?></td>
                                                             <th width="10%">操作</th>
                                                             <th width="15%">
                                                                 <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_install&act=delete&act_id=<?=$app['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>

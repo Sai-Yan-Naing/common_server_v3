@@ -18,6 +18,23 @@
 								</li>
 							</ul>
 						</div>
+						<div class="col-sm-2 text-right p-2"><label>契約サービス</label></div>
+						<div class="col-sm-10">
+							<div class="card">
+								<div class="card-body">
+									<table class="table table-borderless">
+										<thead>
+											<tr class="row">
+												<th class="font-weight-bold col-sm-2">なし</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+									
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="back-button"><a href="/admin?main=vps" onclick="loading()"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
 				</div>
