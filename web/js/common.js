@@ -179,7 +179,20 @@ $(document).on("change", ".spec_change", function () {
   $(".spec_change").parent().removeClass("bg-primary text-white");
   $(this).parent().addClass("bg-primary text-white");
 });
-
+$(document).on('click','.selectos',function() {
+        $('#allos').addClass('d-none')
+        $os = $(this).data('os');
+        if ($os=='wins') {
+            $('#wins').removeClass('d-none')
+        }else if($os=='ubuntu'){
+            $('#ubuntu').removeClass('d-none')
+        }
+    })
+$(document).on('click','.osback',function() {
+        $('#allos').removeClass('d-none')
+        $('#wins').addClass('d-none')
+        $('#ubuntu').addClass('d-none')
+    })
 $(document).on("submit", "#updateplan", function () {
   var isValid = $("input[name=spec]").is(":checked");
   var changedate = $('input[name=changedate').val();
