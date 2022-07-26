@@ -98,7 +98,7 @@ $getAllRow=$commons->getAllRow($query);
 
                                             <div class="col-sm-3">
                                                 <select name="request"  class="form-control" required id="office">
-                                                    <option value="" data-pname="月額" data-value='0'>Officeのバージョンをご選択下さい</option>
+                                                    <option value="" data-pname="月額" data-mon='0' data-price='0'>Officeのバージョンをご選択下さい</option>
                                                     <!-- <option value="Microsoft Office 2013 Standard" data-price="<?=$getspec[1]['price']?>" data-pln="<?=$getspec[1]['pln']?>" data-pname="月額">Microsoft Office 2013 Standard</option>
                                                     <option value="Microsoft Office 2013 Professional" data-price="<?=$getspec[3]['price']?>" data-pln="<?=$getspec[3]['pln']?>" data-pname="月額">Microsoft Office 2013 Professional</option> -->
                                                     <option value="Microsoft Office 2016 Standard" data-price="<?=$getspec[4]['price']?>" data-pln="<?=$getspec[4]['pln']?>" data-pname="月額" data-mon='1'>Microsoft Office 2016 Standard</option>
