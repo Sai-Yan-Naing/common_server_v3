@@ -92,7 +92,7 @@ $getpln = $commons->getRow($plan_q,[$webid]);
                     <input type="radio" name="spec" form="updateplan" value="window" class="spec_change d-none">
                     <div class="card-body">
                         <div class="row">
-                            <div class=""><img src="/img/osicon/win.png" alt="" class="nav-tab-icon"></div>
+                            <div class=""><img src="/img/osicon/ubuntu.png" alt="" class="nav-tab-icon"></div>
                         </div>
                     </div>
                     <div class="card-header">
@@ -105,7 +105,7 @@ $getpln = $commons->getRow($plan_q,[$webid]);
                     <input type="radio" name="spec" form="updateplan" value="window" class="spec_change d-none">
                     <div class="card-body">
                         <div class="row">
-                            <div class=""><img src="/img/osicon/win.png" alt="" class="nav-tab-icon"></div>
+                            <div class=""><img src="/img/osicon/ubuntu.png" alt="" class="nav-tab-icon"></div>
                         </div>
                     </div>
                     <div class="card-header">
