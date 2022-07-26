@@ -62,11 +62,13 @@ $getAllRow=$commons->getAllRow($query);
                                             <!-- <div class="col-sm-3">
                                                 <input type="text" class="form-control" name="request" placeholder="個">
                                             </div> -->
-                                            <div class="col-sm-3 input-group">
-                                                <input type="number" class="form-control paid_price" name="request" placeholder="個" value="0" min='0'>
-                                                  <div class="input-group-append">
-                                                    <span class="input-group-text">個</span>
-                                                  </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control paid_price" name="request" placeholder="個" value="0" min='0'>
+                                                      <div class="input-group-append">
+                                                        <span class="input-group-text">個</span>
+                                                      </div>
+                                                </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 <span>1個/<?=$getspec[0]['price']?> 円</span>
@@ -85,6 +87,7 @@ $getAllRow=$commons->getAllRow($query);
                                     <form onsubmit="loading()" action="/admin/vps/various?setting=option&tab=license&act=license_confirm&webid=<?=$webid?>" method="post" id="office_license">
                                     <input type="hidden" name="act" value="office_l">
                                     <input type="hidden" name="pln" id="office_l">
+                                    <input type="hidden" name="mon">
                                         <div class="form-group row">
                                             <div class="col-sm-2">
                                                 OFFICE追加
@@ -93,24 +96,33 @@ $getAllRow=$commons->getAllRow($query);
                                                 <input type="text" class="form-control" name="request" placeholder="個">
                                             </div> -->
 
-                                            <div class="col-sm-3 input-group">
+                                            <div class="col-sm-3">
                                                 <select name="request"  class="form-control" required id="office">
-                                                    <option value="" data-pname="月額">Officeのバージョンをご選択下さい</option>
+                                                    <option value="" data-pname="月額" data-value='0'>Officeのバージョンをご選択下さい</option>
                                                     <!-- <option value="Microsoft Office 2013 Standard" data-price="<?=$getspec[1]['price']?>" data-pln="<?=$getspec[1]['pln']?>" data-pname="月額">Microsoft Office 2013 Standard</option>
                                                     <option value="Microsoft Office 2013 Professional" data-price="<?=$getspec[3]['price']?>" data-pln="<?=$getspec[3]['pln']?>" data-pname="月額">Microsoft Office 2013 Professional</option> -->
-                                                    <option value="Microsoft Office 2016 Standard" data-price="<?=$getspec[4]['price']?>" data-pln="<?=$getspec[4]['pln']?>" data-pname="月額">Microsoft Office 2016 Standard</option>
-                                                    <option value="Microsoft Office 2016 Professional" data-price="<?=$getspec[5]['price']?>" data-pln="<?=$getspec[5]['pln']?>" data-pname="月額">Microsoft Office 2016 Professional</option>
+                                                    <option value="Microsoft Office 2016 Standard" data-price="<?=$getspec[4]['price']?>" data-pln="<?=$getspec[4]['pln']?>" data-pname="月額" data-mon='1'>Microsoft Office 2016 Standard</option>
+                                                    <option value="Microsoft Office 2016 Professional" data-price="<?=$getspec[5]['price']?>" data-pln="<?=$getspec[5]['pln']?>" data-pname="月額" data-mon='1'>Microsoft Office 2016 Professional</option>
                                                     <!-- <option value="Microsoft 365 Apps for Business" data-price="<?=$getspec[11]['price']?>" data-pln="<?=$getspec[11]['pln']?>" data-pname="月額">Microsoft 365 Apps for Business</option> -->
-                                                    <option value="Microsoft 365 Business Standard" data-price="<?=$getspec[13]['price']?>" data-pln="<?=$getspec[13]['pln']?>" data-pname="年額">Microsoft 365 Business Standard</option>
-                                                    <option value="Microsoft 365 Apps for Enterprise" data-price="<?=$getspec[12]['price']?>" data-pln="<?=$getspec[12]['pln']?>" data-pname="年額">Microsoft 365 Apps for Enterprise</option>
+                                                    <option value="Microsoft 365 Business Standard" data-price="<?=$getspec[13]['price']?>" data-pln="<?=$getspec[13]['pln']?>" data-pname="年額" data-mon='12'>Microsoft 365 Business Standard</option>
+                                                    <option value="Microsoft 365 Apps for Enterprise" data-price="<?=$getspec[12]['price']?>" data-pln="<?=$getspec[12]['pln']?>" data-pname="年額" data-mon='12'>Microsoft 365 Apps for Enterprise</option>
                                                 </select>
-                                                  <div class="input-group-append">
-                                                    <span class="input-group-text">個</span>
-                                                  </div>
                                             </div>
 
                                             <div class="col-sm-2">
-                                                <span></span>
+                                                <div class="input-group">
+                                                    <select name="numoffice" required class="form-control
+                                                ">
+                                                        <option value="">select</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                      <div class="input-group-append">
+                                                        <span class="input-group-text">個</span>
+                                                      </div>
+                                                </div>
                                             </div>
 
                                             <div class="col-sm-2">
@@ -222,10 +234,28 @@ $getAllRow=$commons->getAllRow($query);
         $value = $('option:selected', this).data('price');
         $pname = $('option:selected', this).data('pname');
         $pln = $('option:selected', this).data('pln');
+        $mon = $('option:selected', this).data('mon');
+        $num = $('select[name=numoffice]').val();
+        $('input[name=mon]').val($mon);
+        if ($num=='') {
+            $num=0
+        }
         $("#office_l").val($pln);
-        // console.log($pname)
-        $(this).parent().next().next().next().children('.total').html($value+ ' 円')
+        $total = $value*$num*$mon;
+        
+        // console.log($num)
+        $(this).parent().next().next().next().children('.total').html($total+ ' 円')
         $(this).parent().next().next().children().html($pname)
+    })
+    $(document).on('change','select[name=numoffice]',function(){
+        $num = $(this).val()
+        $value = $('#office option:selected').data('price')
+        $mon = $('#office option:selected').data('mon')
+        if ($num=='') {
+            $num=0
+        }
+        $total = $value*$num*$mon;
+        $('#office').parent().next().next().next().children('.total').html($total+ ' 円')
     })
      $(document).on('change','.paid_price',function(){
         $value = $(this).val();

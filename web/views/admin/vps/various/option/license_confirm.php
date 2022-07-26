@@ -20,7 +20,9 @@ require_once("views/admin/admin_vpsconfig.php");
         /*echo */$request ="Remote Desktop License追加 ".$_POST['request']." 個 $price 円";
        } elseif ($act == "office_l")
        {
+        $price = $price*$_POST['numoffice']*$_POST['mon'];
         /*echo */$request ="OFFICE追加 ".$_POST['request']." $price 円";
+        // die();
        }elseif ($act == "window_server_license")
        {
         /*echo */$request ="Windows Server Security追加 $price 円";
