@@ -11,7 +11,7 @@ $timestamp = date("Y/m/d :h:m:s");
 $msgsession =  "msg";
 $msg = "お問合せが完了しました<br>弊社より回答させていただきますので今しばらくお待ちください";
 
-$subject ='ウィンサーバー';
+$subject ='【ウィンサーバー-お問い合わせフォーム】問い合わせがありました。';
 $body = file_get_contents('views/mailer/admin/contactus/user.php');
 $body = str_replace('$message', $message, $body);
 $body = str_replace('$phone', $phone, $body);

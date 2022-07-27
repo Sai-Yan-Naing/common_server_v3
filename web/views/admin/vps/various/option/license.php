@@ -259,10 +259,10 @@ $getAllRow=$commons->getAllRow($query);
     })
      $(document).on('change','.paid_price',function(){
         $value = $(this).val();
-        $price = $(this).parent().next().next().children().data('price');
+        $price = $(this).parent().parent().next().next().children().data('price');
         $total = $value*$price;
         console.log($price)
-        $(this).parent().next().next().next().children('.total').html($total+ ' 円')
+        $(this).parent().parent().next().next().next().children('.total').html($total+ ' 円')
      })
 
  </script>
