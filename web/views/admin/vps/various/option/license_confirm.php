@@ -35,9 +35,10 @@ require_once("views/admin/admin_vpsconfig.php");
        }
         // echo $request = $_POST['request'];
         // die('');
-        $subject ='=?UTF-8?B?'.base64_encode('Request License').'?=';
+        $subject ='=?UTF-8?B?'.base64_encode('【Winserver】オプションの追加依頼完了').'?=';
         $body = file_get_contents('views/mailer/admin/vps/license_option.php');
-        $body = str_replace('$request', $request, $body);
+        $body = str_replace('$name', $webadminName, $body);
+        $body = str_replace('$cost', $price, $body);
         $body = preg_replace('/\\\\/','', $body); //Strip backslashes
         $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body);
         $_SESSION['error'] = false;

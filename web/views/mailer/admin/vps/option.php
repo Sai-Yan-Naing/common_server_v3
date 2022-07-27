@@ -1,17 +1,23 @@
 <html>
+<head>
+    <?php header("Content-Type: text/html; charset=UTF-8"); ?>
+</head>
     <body>
-        <p>$name様</p>
-        <br>
-        <p>オプションの追加依頼をお受けいたしました。</p>
-        <br>
-        <p>該当部分のみ表示</p>
-        <p>メモリ追加 : $memory GB $mprice 円</p>
-        <p>コア追加 : $cpu コア $cprice 円</p>
-        <p>ディスク追加 : $disk GB $dprice 円</p>
-        <p>IPアドレス追加 : $ip_address 個 $iprice 円</p>
-        <p>仮想スイッチ追加: $virtual_switch 個 $vprice 円</p>
-        <p>Total: $total 円</p>
-        <p>費用の御案内を弊社より行わせていただきますので</p>
-        <p>今しばらくお待ちいただきますようよろしくお願いいたします。</p>
+        <p>Name: $name様</p>
+        <p>お世話になっております</p>
+        <p>ウィンサーバー　サポート担当です</p>
+        <p>オプションの追加依頼をお受けしましたので</p>
+        <p>オプションの追加費用を弊社よりご案内させていただきます</p>
+        <p>オプション追加費用：$cost円</p>
+        <p>╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋</p>
+        <p>Windows Server専門のホスティングサービス</p>
+        <p>Winserver（ウィンサーバー）</p>
+        <p>--------------------------</p>
+        <p>アシストアップ株式会社</p>
+        <p>大阪市中央区久太郎町3-6-8 御堂筋ダイワビル8F</p>
+        <p>TEL：0120-951-168　FAX：06-6121-7525</p>
+        <p>mailto:support@winserver.ne.jp</p>
+        <p>https://www.winserver.ne.jp/</p>
+        <p>╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋</p>
     </body>
 </html>
