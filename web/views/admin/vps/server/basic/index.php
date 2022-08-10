@@ -28,7 +28,7 @@
                                     <div class="form-group row">
                                         <label for="" class="col-sm-3 col-form-label">OS</label>
                                         <div class="col-sm-8">
-                                            <span>Windows server 2019</span>
+                                            <span><?= $web_osname?></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">

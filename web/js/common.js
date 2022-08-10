@@ -179,6 +179,13 @@ $(document).on("change", ".spec_change", function () {
   $(".spec_change").parent().removeClass("bg-primary text-white");
   $(this).parent().addClass("bg-primary text-white");
 });
+
+$(document).on("change", ".os_change", function () {
+  $(".os_change").parent().removeClass("bg-primary text-white");
+  $('input[name=osname]').val($(this).data('name'))
+  $(this).parent().addClass("bg-primary text-white");
+});
+
 $(document).on('click','.selectos',function() {
         $('#allos').addClass('d-none')
         $os = $(this).data('os');
