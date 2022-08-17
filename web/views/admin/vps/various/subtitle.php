@@ -16,7 +16,7 @@
         <a href="/admin/vps/various?setting=firewall&tab=firewall&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='firewall')?"active":"text-dark"?>" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='firewall')?"firewall1":"firewall"?>.png" alt="site.png">
             <br><br>
-            <span>Firewall設定 </span>
+            <span><?php if($web_os=='wins'):?>Firewall設定<?php else: ?>terminal <?php endif;?></span>
         </a>
         <?php if($web_os=='wins'){?>
         <a href="/admin/vps/various?setting=load_status&tab=load_status&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='load_status')?"active":"text-dark"?> vpsrebtn" onclick="loading()">

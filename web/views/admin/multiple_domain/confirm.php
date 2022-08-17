@@ -192,6 +192,15 @@ if ( $action === 'new' )
             require_once("views/admin/share.php");
             die("");
     }
+    $subject = 'サブドメイン「'.$getRow['domain'].'」が削除されました';
+    $body = $webrootdomain.'['.$webplnname.']<br>';
+    $body .= 'サブドメイン「'.$getRow['domain'].'」<br>';
+    $body .= '削除されました';
+    if ( ! $webmailer->sendMail(TO, TONAME, $subject, $body))
+    {
+        echo $error = 'Cannot send email';
+        die();
+    }
     $sitename = $getRow['user'];
     $startstop = 'stop';
     shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" sitedelete '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);

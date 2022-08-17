@@ -1106,7 +1106,7 @@ function checkdblimit()
           required: true,
           numberalphabet: true,
           nowhitespace: true,
-          maxlength: 70,
+          maxlength: 30,
           minlength: 8,
         },
       },
@@ -1119,7 +1119,7 @@ function checkdblimit()
         },
         target: {
           required: "IP/ドメインを入力してください",
-          maxlength: "ホスト名は70文字以内にしてください",
+          maxlength: "ホスト名は30文字以内にしてください",
           minlength: "IP/ドメインは8文字以上にしてください",
         },
       },

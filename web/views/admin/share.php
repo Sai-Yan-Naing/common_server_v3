@@ -45,7 +45,9 @@
                             $limit = 20;
                             $table = 'web_account';  
                             require_once('views/pagination/start.php');
-                            $query = "SELECT * FROM $table WHERE customer_id = ? AND removal is null ORDER BY id
+                            $query = "SELECT web_account.*,plan_tbl.id as planid,name,site,web_capacity,mail_capacity,mail_user,mysql_db,mysql_db_num,mysql_db_capacity,maria_db,maria_db_num,
+maria_db_capacity,mssql_db,mssql_db_num,mssql_db_capacity,waf,wp,dotnet,dotnetcore,asp,php,python,
+free_ssl,original_ssl,fixed_ip,ftp,ftp_num,back_up,forein_ip,commercial_sale,resale FROM web_account INNER JOIN plan_tbl on web_account.[plan] =plan_tbl.id WHERE customer_id = ? AND removal is null ORDER BY web_account.id
                             OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
                             $commons = new Common;
                             $multidomain=$commons->getAllRow($query,[$webadminID]);
@@ -58,6 +60,9 @@
                                 }
 
                             }
+                            // echo '<pre>';
+                            // print_r($multidomain);
+                            // die();
                             $a = 1;
 
                             foreach($contracts as $main_domain):
@@ -112,11 +117,11 @@
                         <div class="d-flex contract-domain <?= ($a==1)? '':'main-contract'?>">
                             <div class="col-md-4">
                                 <i class="fa <?= ($a==1)? 'fa-caret-down':'fa-caret-right'?>" aria-hidden="true"></i>
-                                <?= $main_domain['domain'] ?>[<?= $webroot_plan['name'] ?>]</div>
-                            <div class="ml-auto col-md-2">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $webroot_plan['site'] ?></div>
-                            <div class="col-md-2">MySQL/MariaDB: <?= $mysqltotal + $masqltotal ?>/<?= $webroot_plan['maria_db_num'] ?></div>
-                            <div class="col-md-2">MSSQL: <?= $mssqltotal ?>/<?= $webroot_plan['mssql_db_num'] ?></div>
-                            <div class="col-md-2">Mail: <?= $mailtotal ?>/<?= $webplnmailuser ?></div>
+                                <?= $main_domain['domain'] ?>[<?= $main_domain['name'] ?>]</div>
+                            <div class="ml-auto col-md-2">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $main_domain['site'] ?></div>
+                            <div class="col-md-2">MySQL/MariaDB: <?= $mysqltotal + $masqltotal ?>/<?= $main_domain['maria_db_num'] ?></div>
+                            <div class="col-md-2">MSSQL: <?= $mssqltotal ?>/<?= $main_domain['mssql_db_num'] ?></div>
+                            <div class="col-md-2">Mail: <?= $mailtotal ?>/<?= $main_domain['mail_user'] ?></div>
                         </div>
                         <div class="sub-domain" style=" display:<?= ($a==1)? '':'none'?>">
                             <table class="table table-borderless">

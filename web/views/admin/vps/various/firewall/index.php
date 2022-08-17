@@ -1,5 +1,6 @@
 <?php require_once('views/admin/vps/header.php'); ?>
 <?php 
+if($web_os=='wins'):
 $query = "SELECT * FROM db_ftp WHERE domain='$webdomain'";
 $getAllRow=$commons->getAllRow($query);
 ?>
@@ -104,4 +105,23 @@ $getAllRow=$commons->getAllRow($query);
                 </main>
             </div>
         </div> 
+
+<?php else: ?>
+    <div id="layoutSidenav">
+        <?php require_once('views/admin/vps/sidebar.php');?>
+            <div id="layoutSidenav_content">
+                <main class="main-page">
+                        <div class="container-fluid px-4">
+                                <?php require_once('views/admin/vps/title.php') ?>
+                                <?php require_once('views/admin/vps/various/subtitle.php') ?>
+                                <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                                    <div class="contract">
+                                        testing terminal
+                                    </div>
+                                </div>
+                        </div>
+                </main>
+            </div>
+    </div>
+<?php endif; ?>
  <?php require_once("views/admin/vps/footer.php"); ?>
