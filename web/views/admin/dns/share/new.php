@@ -33,7 +33,7 @@ $getRow = $commons->getRow($query, ['webid' => $webid]);
 		<div class="row justify-content-center">
 			<label for="target" class="col-sm-2 text-right p-2">IP/ドメイン</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" column="target" id="target" name="target" placeholder=" 8～30文字、半角英数記号の組み合わせ">
+				<input type="text" class="form-control" column="target" id="target" name="target" placeholder="8～30文字、半角英数記号">
 			</div>
 		</div>
 	</form>

@@ -1119,8 +1119,8 @@ function checkdblimit()
         },
         target: {
           required: "IP/ドメインを入力してください",
-          maxlength: "ホスト名は30文字以内にしてください",
-          minlength: "IP/ドメインは8文字以上にしてください",
+          maxlength: "8～30文字、半角英数記号",
+          minlength: "8～30文字、半角英数記号",
         },
       },
       submitHandler: function (form) {
