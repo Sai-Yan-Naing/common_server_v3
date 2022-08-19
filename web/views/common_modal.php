@@ -43,6 +43,15 @@
     </div>
   </div>
 
+  <div id="loadingmodal">
+  	<div class="d-flex align-items-center">
+						  <strong>Loading...</strong>
+						  <div class="spinner-grow text-muted"></div>
+						  <div class="spinner-grow text-primary"></div>
+						  <div class="spinner-grow text-success"></div>
+		</div>
+  </div>
+
   <div class="modal fade" id="excommon_dialog" data-keyboard="true" data-backdrop="static">
     <div class="modal-dialog modal-xl">
       <div class="modal-content" id="exdisplay_dialog">

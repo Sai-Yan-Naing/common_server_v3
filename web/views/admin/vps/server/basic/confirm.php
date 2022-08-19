@@ -63,12 +63,12 @@ $msg = "jb message";
 
         } else
         {
-            $os = $_POST['osversion'];
-            $temp = explode("-",$os);
-            $os = $temp[0];
-            $osversion = $temp[1];
+            $os = $_POST['os'];
+            // $temp = explode("-",$os);
+            // $os = $temp[0];
+            // $osversion = $temp[1];
             $osname = $_POST['osname'];
-            $update_q = "UPDATE vps_account SET reboot=1, osname='$osname', os='$os', osversion='$osversion' WHERE id='$webid'";
+            $update_q = "UPDATE vps_account SET reboot=1, osname='$osname' WHERE id='$webid'";
             if ( ! $commons->doThis($update_q,[$status,$webid]))
             {
                 echo $error="cannot update vps";
@@ -78,7 +78,9 @@ $msg = "jb message";
                 $msgsession =  "msg";
 		$msg = "OS初期化が完了しました";
                 // $vm_storage = 60*1024*1048576;
-                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu.' '.$ipaddress.' '.$gateway.' '.$os.'-'.$osversion);
+        $osname = str_replace(" ","-",$osname);
+                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu.' '.$ipaddress.' '.$gateway.' '.$os.' '.$osname);
+                
         }
     }
     flash($msgsession,$msg);

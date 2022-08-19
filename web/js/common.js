@@ -189,16 +189,31 @@ $(document).on("change", ".os_change", function () {
 $(document).on('click','.selectos',function() {
         $('#allos').addClass('d-none')
         $os = $(this).data('os');
-        if ($os=='wins') {
-            $('#wins').removeClass('d-none')
-        }else if($os=='ubuntu'){
-            $('#ubuntu').removeClass('d-none')
-        }
+        $('#osfilelist').removeClass('d-none')
+        $gourl = $(this).attr("gourl");
+        $url = document.URL.split("/");
+        $url = $url[0] + "//" + $url[2];
+        $url = $url + $gourl;
+        console.log($url);
+        $.ajax({
+          type: "POST",
+          url: $url,
+    beforeSend: function () {
+      document.getElementById("osresult").innerHTML = $('#loadingmodal').html();
+    },
+          data: { os: $os },
+          // cache : false,
+          // processData: false,
+          success: function (data) {
+            // alert(data);
+            // console.log(data)
+            $("#osresult").html(data);
+          },
+        });
     })
 $(document).on('click','.osback',function() {
         $('#allos').removeClass('d-none')
-        $('#wins').addClass('d-none')
-        $('#ubuntu').addClass('d-none')
+        $('#osfilelist').addClass('d-none')
     })
 $(document).on("submit", "#updateplan", function () {
   var isValid = $("input[name=spec]").is(":checked");
