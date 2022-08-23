@@ -43,7 +43,7 @@ require_once('views/share_config.php');
         <div class="form-group row">
             <label for="db_pass" class="col-sm-2 col-form-label">パスワード</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～30文字、半角英数字記号">
+              <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～30文字、半角英数字記号の組み合わせ">
               <span toggle="#db_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
             </div>
         </div>

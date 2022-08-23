@@ -87,7 +87,7 @@
         <div class="col-sm-3"></div>
         <label for="db_pass" class="col-sm-3 col-form-label">パスワード</label>
         <div class="col-sm-6">
-            <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder=" 8～30文字、半角英数字記号">
+            <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder=" 8～30文字、半角英数字記号の組み合わせ">
         </div>
     </div>
     <div class="form-group row">

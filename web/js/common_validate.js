@@ -596,8 +596,8 @@ $.validator.addMethod(
         },
         password: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号の組み合わせ",
+          maxlength: "8～30文字、半角英数字記号の組み合わせ",
         },
         db_name: {
           required: "データベース名を入力してください",
@@ -936,8 +936,8 @@ function checkdblimit()
         },
         db_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号の組み合わせ",
+          maxlength: "8～30文字、半角英数字記号の組み合わせ",
         },
       },
       submitHandler: function (form) {
@@ -1119,8 +1119,8 @@ function checkdblimit()
         },
         target: {
           required: "IP/ドメインを入力してください",
-          maxlength: "8～30文字、半角英数記号",
-          minlength: "8～30文字、半角英数記号",
+          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {

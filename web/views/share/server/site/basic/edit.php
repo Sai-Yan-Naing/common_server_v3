@@ -23,7 +23,7 @@ $error_page = json_decode($weberrorpages);
 	      <div class="form-group row">
 	          <label for="url" class="col-sm-4 col-form-label">URL指定</label>
 	          <div class="col-sm-8">
-	            <input type="text" class="form-control" id="url_spec" name="url_spec" value="<?=$error_page->$act_id->url?>" placeholder=" 8～30文字、半角英数記号の組み合わせ">
+	            <input type="text" class="form-control" id="url_spec" name="url_spec" value="<?=$error_page->$act_id->url?>" placeholder="8～30文字、半角英数字記号">
 	          </div>
 	      </div>
 	  </form>
