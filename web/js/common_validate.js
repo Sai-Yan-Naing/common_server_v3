@@ -428,8 +428,8 @@ $.validator.addMethod(
         },
         password: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号の組み合わせ",
+          maxlength: "8～30文字、半角英数字記号の組み合わせ",
         },
       },
       submitHandler: function (form) {
@@ -805,8 +805,8 @@ function checkdblimit()
         },
         ftp_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号の組み合わせ",
+          maxlength: "8～30文字、半角英数字記号の組み合わせ",
         },
       },
       submitHandler: function (form) {
@@ -1000,8 +1000,8 @@ function checkdblimit()
         },
         ftp_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号の組み合わせ",
+          maxlength: "8～30文字、半角英数字記号の組み合わせ",
         },
         "permission[]": {
           required: "いずれかの権限を選択してください。",
@@ -1065,8 +1065,8 @@ function checkdblimit()
         },
         mail_pass_word: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号の組み合わせ",
+          maxlength: "8～30文字、半角英数字記号の組み合わせ",
         },
       },
       submitHandler: function (form) {
@@ -1315,6 +1315,8 @@ function checkdblimit()
         url_spec: {
           required: true,
           nowhitespace:true,
+          minlength: 8,
+          maxlength: 30,
           // noalreadyexist: true,
         },
       },
@@ -1329,6 +1331,8 @@ function checkdblimit()
         },
         url_spec: {
           required: "有効なURLを入力してください",
+          minlength: "8～30文字、半角英数字記号",
+          maxlength: "8～30文字、半角英数字記号",
         },
       },
       submitHandler: function (form) {
