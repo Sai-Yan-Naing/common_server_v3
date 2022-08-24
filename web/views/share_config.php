@@ -34,6 +34,7 @@ $webmssql_cnt = $web_acc['mssql_cnt'];
 $webmariadb_cnt = $web_acc['mariadb_cnt'];
 $webplan = $web_acc['plan'];
 $webmail_cnt = $web_acc['mail_cnt'];
+$webplanbackup = $web_acc['pback_up'];
 // for root site
 
 if($weborigin !=1)

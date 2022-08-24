@@ -611,8 +611,8 @@ $.validator.addMethod(
         },
         db_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号",
-          maxlength: "8～30文字、半角英数字記号",
+          minlength: "8～30文字、半角英数字記号の組み合わせ",
+          maxlength: "8～30文字、半角英数字記号の組み合わせ",
         },
       },
       submitHandler: function (form) {
