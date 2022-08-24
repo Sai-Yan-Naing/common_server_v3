@@ -20,7 +20,7 @@ require_once("views/share_config.php");
 	          <label for="url" class="col-sm-4 col-form-label">URL指定</label>
 	          <div class="col-sm-8">
 	            <input type="text" class="form-control" id="url_spec" name="url_spec" placeholder=" 8～30文字、半角英数字記号" column="none"  table="none" remark="error_file" webid="<?=$webid?>">
-	            <span style="color:gray;">eg: /errors/404.html</span>
+	            <span style="color:gray; display: block;">eg: /errors/404.html</span>
 	          </div>
 	      </div>
 	  </form>
