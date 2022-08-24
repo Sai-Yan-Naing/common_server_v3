@@ -35,6 +35,7 @@ $webmariadb_cnt = $web_acc['mariadb_cnt'];
 $webplan = $web_acc['plan'];
 $webmail_cnt = $web_acc['mail_cnt'];
 $webplanbackup = $web_acc['pback_up'];
+$webpmssql = $web_acc['pmssql'];
 // for root site
 
 if($weborigin !=1)

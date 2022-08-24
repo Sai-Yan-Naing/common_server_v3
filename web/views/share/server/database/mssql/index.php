@@ -24,7 +24,7 @@ $totalmyma = (int)$totalmysql + (int)$totalmariasql;
     $btndisable = 'disabled';
     $titledsb = "データベース数が上限に達しています。";
     $btncolor = "secondary";
-    if( $webplnmssqldb == 'yes' && ((int)$webplnmssqldbnum > $totalmssql || $webplnmssqldbnum=='unlimited')){
+    if( ( $webplnmssqldb == 'yes' || (int)$webpmssql>0)  && ((int)$webplnmssqldbnum  + (int)$webpmssql > $totalmssql || $webplnmssqldbnum=='unlimited')){
         $btndisable = '';
         $titledsb = "";
         $btncolor = "info";

@@ -23,7 +23,7 @@ $totalmyma = (int)$totalmysql + (int)$totalmariasql;
     $btndisable = 'disabled';
     $titledsb = "データベース数が上限に達しています。";
     $btncolor = "secondary";
-    if( $webplnmssqldb == 'yes' && ((int)$webplnmssqldbnum > $totalmssql || $webplnmssqldbnum=='unlimited')){
+    if( ( $webplnmssqldb == 'yes' || (int)$webpmssql>0) && ((int)$webplnmssqldbnum + (int)$webpmssql > $totalmssql || $webplnmssqldbnum=='unlimited')){
         $btndisable = '';
         $titledsb = "";
         $btncolor = "info";
@@ -46,7 +46,7 @@ $totalmyma = (int)$totalmysql + (int)$totalmariasql;
                                             <button class="btn btn-<?= $btncolor?> btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mssql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"  <?= $btndisable?>><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
                                             <div class="ml-3">
-                                                <a  href="https://docs.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15" target="_blank" class="btn btn-link"><u>MSSQLmanagement Studioダウンロードリンク</u></a>
+                                                <a  href="https://docs.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15" target="_blank" class="btn btn-link"><u><?php echo $webpmssql; ?>MSSQLmanagement Studioダウンロードリンク</u></a>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">

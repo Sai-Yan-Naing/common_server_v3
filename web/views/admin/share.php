@@ -120,7 +120,7 @@ free_ssl,original_ssl,fixed_ip,ftp,ftp_num,back_up,forein_ip,commercial_sale,res
                                 <?= $main_domain['domain'] ?>[<?= $main_domain['name'] ?>]</div>
                             <div class="ml-auto col-md-2">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $main_domain['site'] ?></div>
                             <div class="col-md-2">MySQL/MariaDB: <?= $mysqltotal + $masqltotal ?>/<?= $main_domain['maria_db_num'] ?></div>
-                            <div class="col-md-2">MSSQL: <?= $mssqltotal ?>/<?= $main_domain['mssql_db_num'] ?></div>
+                            <div class="col-md-2">MSSQL: <?= $mssqltotal ?>/<?= $main_domain['mssql_db_num'] + (int) $main_domain['pmssql']?></div>
                             <div class="col-md-2">Mail: <?= $mailtotal ?>/<?= $main_domain['mail_user'] ?></div>
                         </div>
                         <div class="sub-domain" style=" display:<?= ($a==1)? '':'none'?>">
