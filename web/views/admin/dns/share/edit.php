@@ -33,7 +33,7 @@ $act_id = $_GET['act_id'];
 		<div class="row justify-content-center">
 			<label for="target" class="col-sm-2 text-right p-2">IP/ドメイン</label>
 			<div class="col-sm-10">
-				<input type="text" class="form-control" column="target" id="target" name="target" placeholder=" 8～30文字、半角英数記号の組み合わせ" value="<?= htmlspecialchars($dns->$act_id->target, ENT_QUOTES); ?>">
+				<input type="text" class="form-control" column="target" id="target" name="target" placeholder="8～30文字、半角英数字記号の組み合わせ" value="<?= htmlspecialchars($dns->$act_id->target, ENT_QUOTES); ?>">
 			</div>
 		</div>
 	</form>

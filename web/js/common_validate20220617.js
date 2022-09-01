@@ -1123,8 +1123,8 @@ function checkdblimit()
         },
         bass_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数記号の組み合わせ",
-          maxlength: "8～30文字、半角英数記号の組み合わせ",
+          minlength: "8～30文字、半角英数字記号の組み合わせ",
+          maxlength: "8～30文字、半角英数字記号の組み合わせ",
         },
       },
       submitHandler: function (form) {

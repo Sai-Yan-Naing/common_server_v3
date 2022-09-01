@@ -36,7 +36,7 @@ require_once('views/share_config.php');
         <div class="form-group row mr-2 ">
             <div class="col-sm-6">
             <label for="mail_pass_word"  class="form-label">パスワード</label>
-                <input type="password" class="form-control" name="mail_pass_word" id="mail_pass_word" placeholder="8～30文字、半角英数記号の組み合わせ">
+                <input type="password" class="form-control" name="mail_pass_word" id="mail_pass_word" placeholder="8～30文字、半角英数字記号の組み合わせ">
                 <span toggle="#mail_pass_word" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
             </div>
             <div class="col-sm-2">

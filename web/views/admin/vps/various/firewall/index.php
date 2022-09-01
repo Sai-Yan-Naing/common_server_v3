@@ -1,6 +1,7 @@
 <?php require_once('views/admin/vps/header.php'); ?>
 <?php 
-if($web_os=='wins'):
+header("Access-Control-Allow-Origin: *");
+if($web_os=='windows'):
 $query = "SELECT * FROM db_ftp WHERE domain='$webdomain'";
 $getAllRow=$commons->getAllRow($query);
 ?>
@@ -115,8 +116,10 @@ $getAllRow=$commons->getAllRow($query);
                                 <?php require_once('views/admin/vps/title.php') ?>
                                 <?php require_once('views/admin/vps/various/subtitle.php') ?>
                                 <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                                    <div class="contract">
-                                        testing terminal
+                                    <div class="contract" id='sshterminal'>
+                                        <script type="module" src="server.js">
+                                            
+                                        </script>
                                     </div>
                                 </div>
                         </div>
@@ -125,3 +128,4 @@ $getAllRow=$commons->getAllRow($query);
     </div>
 <?php endif; ?>
  <?php require_once("views/admin/vps/footer.php"); ?>
+
