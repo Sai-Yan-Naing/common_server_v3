@@ -13,7 +13,7 @@
             <div class="col-sm-8">
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="/admin/share/server?setting=site&tab=app_install&act=app_version&webid=13">Word Press
+                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="/admin/share/server?setting=site&tab=app_install&act=app_version&webid=13">WordPress
                     </label>
                 </div>
                 <div class="form-check-inline">

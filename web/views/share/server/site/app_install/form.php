@@ -4,7 +4,7 @@
         <div class="col-sm-8">
             <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="change/app_version">Word Press
+                <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="change/app_version">WordPress
             </label>
             </div>
             <div class="form-check-inline">
