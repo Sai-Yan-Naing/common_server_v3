@@ -40,7 +40,7 @@ if ($root_url==null) {
 $msg = "jp message";
 $msgsession ="msg";
 if ( $action=='new'){
-    if($app_name ==="WORDPRESS")
+    if($app_name ==="WordPress")
     {
         if($_POST['dbexist']=='new')
         {

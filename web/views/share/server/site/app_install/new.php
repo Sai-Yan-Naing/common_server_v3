@@ -13,12 +13,12 @@
             <div class="col-sm-8">
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="/share/server?setting=site&tab=app_install&act=app_version&webid=13">WordPress
+                    <input type="radio" class="form-check-input app" value="WordPress" name="app" checked gourl="/share/server?setting=site&tab=app_install&act=app_version&webid=13">WordPress
                     </label>
                 </div>
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="ECCUBE" name="app" gourl="/share/server?setting=site&tab=app_install&act=app_version&webid=13">EC-CUBE
+                    <input type="radio" class="form-check-input app" value="EC-CUBE" name="app" gourl="/share/server?setting=site&tab=app_install&act=app_version&webid=13">EC-CUBE
                     </label>
                 </div>
             </div>
