@@ -5,7 +5,7 @@
             <span><?=$webdomain?></span>
         </a>
         <a href="/admin/share/server?setting=site&tab=app_install&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='site')?"active":"text-dark"?>" onclick="loading()">
-            <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='site')?"ftp1":"ftp"?>.png" alt="site.png">
+            <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='site')?"server1":"server"?>.png" alt="site.png">
             <br><br>
             <span>サイト設定 </span>
         </a>
