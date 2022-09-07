@@ -18,7 +18,7 @@ if($os=='windows'){
      echo ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_ini.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$webip.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$vm_change_action.' '.$vm_fw. ' '.$os);
 }
 
- // die('ok');
+ die('ok');
 header("location: /admin/vps/server?tab=connection&act=index&webid=$webid");
 
 ?>
