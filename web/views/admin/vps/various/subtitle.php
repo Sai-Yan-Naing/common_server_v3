@@ -16,9 +16,9 @@
         <a href="/admin/vps/various?setting=firewall&tab=firewall&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='firewall')?"active":"text-dark"?>" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='firewall')?"firewall1":"firewall"?>.png" alt="site.png">
             <br><br>
-            <span><?php if($web_os=='wins'):?>Firewall設定<?php else: ?>terminal <?php endif;?></span>
+            <span><?php if($web_os=='windows'):?>Firewall設定<?php else: ?>terminal <?php endif;?></span>
         </a>
-        <?php if($web_os=='wins'){?>
+        <?php if($web_os=='windows'){?>
         <a href="/admin/vps/various?setting=load_status&tab=load_status&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='load_status')?"active":"text-dark"?> vpsrebtn" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='load_status')?"load_status1":"load_status"?>.png" alt="site.png">
             <br><br>
@@ -30,7 +30,7 @@
             <br><br>
             <span>オプション追加</span>
         </a>
-        <?php if($web_os=='wins'){?>
+        <?php if($web_os=='windows'){?>
         <a href="/admin/vps/various?setting=easy_install&tab=easy_install&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='easy_install')?"active":"text-dark"?> vpsrebtn" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='easy_install')?"easy_install1":"easy_install"?>.png" alt="site.png">
             <br><br>
