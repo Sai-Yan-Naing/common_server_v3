@@ -116,16 +116,28 @@ $getAllRow=$commons->getAllRow($query);
                                 <?php require_once('views/admin/vps/title.php') ?>
                                 <?php require_once('views/admin/vps/various/subtitle.php') ?>
                                 <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                                    <div class="contract" id='sshterminal'>
-                                        <script type="module" src="server.js">
-                                            
-                                        </script>
+                                    <div class="contract" id='terminal' style="height: 500px;">
+                                        
                                     </div>
                                 </div>
                         </div>
                 </main>
             </div>
     </div>
+
+    <script type="text/javascript">
+    // In body tag
+    $('#terminal').terminal({
+        iam: function (name) {
+            this.echo('Hello, ' + name +
+                '. Welcome to GeeksForGeeks');
+        }
+    }, {
+        greetings: 'Welcome to Winserver Web terminal'
+    });
+
+    </script>
+
 <?php endif; ?>
  <?php require_once("views/admin/vps/footer.php"); ?>
 

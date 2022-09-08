@@ -14,8 +14,13 @@
             <span class="text-dark ">Server Status </span>
         </a>
         <a href="/admin/vps/various?setting=firewall&tab=firewall&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='firewall')?"active":"text-dark"?>" onclick="loading()">
+            <?php if($web_os=='windows'):?>
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='firewall')?"firewall1":"firewall"?>.png" alt="site.png">
-            <br><br>
+            <?php else: ?>
+                <div style="font-size: 22px;"><i class="fa fa-terminal" aria-hidden="true"></i></div>
+            <?php endif;?>
+            
+            <br>
             <span><?php if($web_os=='windows'):?>Firewall設定<?php else: ?>terminal <?php endif;?></span>
         </a>
         <?php if($web_os=='windows'){?>
