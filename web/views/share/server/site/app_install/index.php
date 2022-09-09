@@ -21,22 +21,14 @@
                                 <button class="btn btn-info btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_install&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>アプリケーション追加</button>
                                     <div class="mt-4 table-responsive">
                                             <?php foreach($getAll as $app){ ?>
-                                                <table class="table table-bordered">
-                                                        <tr>
-                                                            <th class="app-header" width="10%"><i class="fa fa-caret-right mr-2" aria-hidden="true"></i> サイト名</th>
-                                                            <td width="10%"><?= $app['site_name'] ?></td>
-                                                            <th width="20%">アプリケーション</th>
-                                                            <td width="10%"><?= $app['app_name'] ?></td>
-                                                            <th width="15%">バージョン</th>
-                                                            <td width="10%"><?= $app['app_version'] ?></td>
-                                                            <th width="10%">操作</th>
-                                                            <th width="15%">
-                                                                <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/share/server?setting=site&tab=app_install&act=delete&act_id=<?=$app['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
-                                                            </th>
-                                                        </tr>
-                                                    <tbody style="display:none" class="app-body">
-                                                        <tr><td colspan="8" style="border: none;"></td></tr>
-                                                        <tr>
+                                                <div class="d-flex border p-2">
+                                                    <div class="app-header col-sm-9 "><b style="cursor:pointer"><i class="fa fa-caret-right mr-2" aria-hidden="true"></i>サイト名:<?= $app['site_name'] ?> 【 <?=$app['app_name'].$app['app_version'] ?> 】</b></div>
+                                                    <div class="col-sm-3">
+                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog float-right" gourl="/admin/share/server?setting=site&tab=app_install&act=delete&act_id=<?=$app['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-bordered app-body" style="display: none;">
+                                                    <tr>
                                                             <th colspan="2" width="20%">ドキュメントルート</th>
                                                             <th width="20%">URL</th>
                                                             <th width="10%">ユーザー名</th>
@@ -45,10 +37,11 @@
                                                             <th width="10%">DBユーザー</th>
                                                             <th width="15%">DBパスワード</th>
                                                         </tr>
+                                                    <tbody>
                                                         <tr>
-                                                            <td colspan="2" width="20%"><a href="/share/server?setting=filemanager&tab=tab&act=index&webid=<?=$webid?>">/<?= $webuser ?>/<?= $app['root']?></a></td>
+                                                            <td colspan="2" width="20%"><a href="/admin/share/server?setting=filemanager&tab=tab&act=index&webid=<?=$webid?>">/<?= $webuser ?>/<?= $app['root']?></a></td>
                                                             <td width="20%">
-                                                                <a href="<?= $app['url'] ?><?= ($app['app_name']=="WordPress")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/login":"/admin")?>" target="_blank"><?= $app['url'] ?><?= ($app['app_name']=="WordPress")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/login":"/admin")?></a>
+                                                                <a href="<?= $app['url'] ?><?= ($app['app_name']=="WordPress")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/admin/login":"/admin")?>" target="_blank"><?= $app['url'] ?><?= ($app['app_name']=="WordPress")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/admin/login":"/admin")?></a>
                                                             </td>
                                                             <td width="10%">
                                                                 <?= $app['user_name'] ?>
@@ -98,17 +91,18 @@
         </div>
     </div> 
 
+
 <script>
     $(document).on('click','.app-header',function(){
         $this = $(this);
-        $(this).parent().parent().next(".app-body").slideToggle(function() {
-        if($this.parent().parent().next('.app-body').is(':hidden'))
+        $(this).parent().next(".app-body").slideToggle(function() {
+        if($this.parent().next('.app-body').is(':hidden'))
         {
-            $this.children('').removeClass('fa-caret-down')
-            $this.children('').addClass('fa-caret-right')
+            $this.children('').children('').removeClass('fa-caret-down')
+            $this.children('').children('').addClass('fa-caret-right')
         }else{
-            $this.children('').removeClass('fa-caret-right')
-            $this.children('').addClass('fa-caret-down')
+            $this.children('').children('').removeClass('fa-caret-right')
+            $this.children('').children('').addClass('fa-caret-down')
         }
         });
     })
