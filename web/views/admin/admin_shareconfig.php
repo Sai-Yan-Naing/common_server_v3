@@ -45,6 +45,7 @@ $webmail_cnt = $web_acc['mail_cnt'];
 $webplan = $web_acc['plan'];
 $webplanbackup = $web_acc['pback_up'];
 $webpmssql = $web_acc['pmssql'];
+$mailserverid= $web_acc['mailserver'];
 // for root site
 if($weborigin !=1)
 {
@@ -63,6 +64,7 @@ $webrootbasicsetting = $webroot_acc['basic_setting'];
 $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
 $webplan = $webroot_acc['plan'];
+$mailserverid= $webroot_acc['mailserver'];
 }
 $setting = $_GET['setting'];
 
@@ -96,10 +98,19 @@ $webplnmssqldb = $webroot_plan['mssql_db'];
 $webplnmssqldbnum = $webroot_plan['mssql_db_num'];
 $webplnmssqlcap = $webroot_plan['mssql_db_capacity'];
 
+$getmailserver = $commons->getRow("SELECT * FROM mailserver WHERE id= ?",[$mailserverid]);
+$mailserverip = $getmailserver['ip'];
+$mailserveruser = $getmailserver['username'];
+$mailserverpass = $getmailserver['password'];
+
 $webplnftp = $webroot_plan['ftp'];
 $webplnftpnum = $webroot_plan['ftp_num'];
 
 $webplnbackup = $webroot_plan['back_up'];
+
+define("MAILIP", $mailserverip);
+define("MAILUSER", $mailserveruser );
+define("MAILPASS", $mailserverpass);
 
 define("MYROOT", $web_mydbuser);
 define("MYROOT_PASS", $web_mydbpass);

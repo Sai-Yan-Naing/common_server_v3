@@ -13,13 +13,19 @@ if ( $action === 'new' )
     $web_server_id = $_POST['web_server'];
     $contract = $_POST['contractid'];
 
+    $getmailserver = $commons->getRow("
+    select mailserver.ip,mailserver.username,mailserver.password from web_account inner join mailserver on mailserver.id =web_account.mailserver where web_account.id= ?",[$contract]);
+    $mailserverip = $getmailserver['ip'];
+    $mailserveruser = $getmailserver['username'];
+    $mailserverpass = $getmailserver['password'];
+// die;
     $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
     $gethost = $commons->getRow($web_server);
     $web_host = $gethost['ip'];
     $web_user = $gethost['username'];
     $web_password = $gethost['password'];
     
-    $temp["ID1-".time()] = ['type'=>'A','sub'=>'mail','target'=>MAILIP];
+    $temp["ID1-".time()] = ['type'=>'A','sub'=>'mail','target'=>$mailserverip];
     $temp["ID2-".time()] = ['type'=>'A','sub'=>'www','target'=>$web_host];
     $temp["ID3-".time()] = ['type'=>'A','sub'=>'','target'=>$web_host];
     $temp["ID4-".time()] = ['type'=>'MX','sub'=>'','target'=>'mail.'.$webdomain];
@@ -58,7 +64,7 @@ if ( $action === 'new' )
 
     $size = $webplnmail*1073741824;
 
-    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" new '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$password.' '.$user.' '.$size);
+    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" new '.$mailserverip.' '.$mailserveruser.' '.$mailserverpass.' '.$webdomain.' '.$password.' '.$user.' '.$size);
 
     // die;
 } elseif ( $action === 'onoff')
