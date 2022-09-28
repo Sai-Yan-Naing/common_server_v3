@@ -1,0 +1,3 @@
+duplicate sensor
+
+http://202.218.224.38/api/duplicateobject.htm?id=2054&name=sensor&targetid=2053&username=prtgadmin&password=BUHdfUtbGG4XWPT

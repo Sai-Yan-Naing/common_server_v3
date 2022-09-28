@@ -150,7 +150,7 @@ $(document).on("click", ".open_file", function () {
       },
     });
   } else {
-    alert("This file is unsupported format.");
+    alert("このファイルはファイルマネージャー上では確認できない拡張子です。");
   }
 });
 
