@@ -190,8 +190,10 @@ if ( $action === 'new' )
     $act_id = $_POST['act_id'];
     $query = "SELECT * FROM web_account WHERE id='$act_id'";
     $getRow = $commons->getRow($query);
-    $rquery = "SELECT * FROM web_account WHERE id='$getRow[origin_id]'";
+    $rquery = "SELECT web_account.domain,plan_tbl.name FROM web_account INNER JOIN plan_tbl on plan_tbl.id=web_account.[plan] WHERE web_account.id='$getRow[origin_id]'";
     $rgetRow = $commons->getRow($rquery);
+    // print_r($rgetRow);
+    // die;
     $sitebinding = $_POST['sitebinding']==0? 1 : 0;
     $msgsession = "msgdel";
     $msg = $getRow['domain']."を削除しました";
@@ -201,7 +203,7 @@ if ( $action === 'new' )
             die("");
     }
     $subject = 'サブドメイン「'.$getRow['domain'].'」が削除されました';
-    $body = $rgetRow['domain'].'['.$webplnname.']<br>';
+    $body = $rgetRow['domain'].'['.$rgetRow['name'].']<br>';
     $body .= 'サブドメイン「'.$getRow['domain'].'」<br>';
     $body .= '削除されました';
     if ( ! $webmailer->sendMail(TO, TONAME, $subject, $body))
