@@ -199,7 +199,7 @@ if ( $action === 'new' )
             die("");
     }
     $subject = 'サブドメイン「'.$getRow['domain'].'」が削除されました';
-    $body = $webrootdomain.'['.$webplnname.']<br>';
+    $body = $getRow['domain'].'['.$webplnname.']<br>';
     $body .= 'サブドメイン「'.$getRow['domain'].'」<br>';
     $body .= '削除されました';
     if ( ! $webmailer->sendMail(TO, TONAME, $subject, $body))
