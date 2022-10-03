@@ -647,13 +647,13 @@ $.validator.addMethod(
                         $("#common_dialog").modal("show");
                         $("#common_dialog").css({'overflow-y':'auto'})
                     });
-        if(exceedwebcap($gourl))
-              {
-                document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
-                $('#exceedwebcap').html($exceedwebcap)
-              }else{
+        // if(exceedwebcap($gourl))
+        //       {
+        //         document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
+        //         $('#exceedwebcap').html($exceedwebcap)
+        //       }else{
 
-                if($app=='ECCUBE' && ($version=='eccube3' && $phpv=='v5.6.37'))
+                if($app=='EC-CUBE' && ($version=='eccube3' && $phpv=='v5.6.37'))
                   {
                     document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE3.0の対応バージョンではないため、5.6.xに変更します。';
                     $("#common_dialog").modal("hide");
@@ -665,7 +665,7 @@ $.validator.addMethod(
                         form.submit()
                     });
 
-                  }else if($app=='ECCUBE' && $version=='eccube-4.1' && ( $phpv=='v5.6.37' || $phpv=='v7.2.9' || $phpv=='v7.3.0')){
+                  }else if($app=='EC-CUBE' && $version=='eccube-4.1' && ( $phpv=='v5.6.37' || $phpv=='v7.2.9' || $phpv=='v7.3.0')){
                     document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE4.1の対応バージョンではないため、7.4.xに変更します。';
                     $("#common_dialog").modal("hide");
                     $("#incompat_dialog").modal("show");
@@ -680,7 +680,7 @@ $.validator.addMethod(
                     form.submit()
                   }
                 
-              }
+              // }
         
           
         
