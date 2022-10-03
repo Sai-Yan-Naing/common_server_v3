@@ -168,6 +168,20 @@ $.validator.addMethod(
       },
       "特殊文字は使用できません"
     );
+
+    // allow specail char (-_.)
+    $.validator.addMethod(
+      "allowspecialchar5",
+      function (value) {
+        var regex = /[!#@$%&*()+\=\[\]{};':"\\|,<>\/?^~]+/;
+        var regex1 = /^[! A-Za-z0-9_@./#&+-]*$/;
+        // var regex = /[-_!#^~]+/;
+        if (!regex.test(value) && regex1.test(value)) {
+          return true;
+        }
+      },
+      "1～20文字、半角英数小文字と_-.のみ利用可能です"
+    );
     $.validator.addMethod(
       "noallowfullwidth",
       function (value) {
@@ -389,10 +403,10 @@ $.validator.addMethod(
         },
         ftp_user: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
           // nospecialchar: true,
-          allowspecialchar: true,
+          allowspecialchar5: true,
           minlength: 1,
           maxlength: 20,
           alreadyexist: true,
@@ -428,8 +442,8 @@ $.validator.addMethod(
         },
         password: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号の組み合わせ",
-          maxlength: "8～30文字、半角英数字記号の組み合わせ",
+          minlength: "パスワードは8文字以上にしてください",
+          maxlength: "パスワードは30文字以内にしてください",
         },
       },
       submitHandler: function (form) {
@@ -596,8 +610,8 @@ $.validator.addMethod(
         },
         password: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号の組み合わせ",
-          maxlength: "8～30文字、半角英数字記号の組み合わせ",
+          minlength: "パスワードは8文字以上にしてください",
+          maxlength: "パスワードは30文字以内にしてください",
         },
         db_name: {
           required: "データベース名を入力してください",
@@ -611,8 +625,8 @@ $.validator.addMethod(
         },
         db_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号の組み合わせ",
-          maxlength: "8～30文字、半角英数字記号の組み合わせ",
+          minlength: "パスワードは8文字以上にしてください",
+          maxlength: "パスワードは30文字以内にしてください",
         },
       },
       submitHandler: function (form) {
@@ -776,9 +790,9 @@ function checkdblimit()
         },
         ftp_user: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
-          allowspecialchar: true,
+          allowspecialchar5: true,
           minlength: 1,
           maxlength: 20,
           alreadyexist: true,
@@ -805,8 +819,8 @@ function checkdblimit()
         },
         ftp_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号の組み合わせ",
-          maxlength: "8～30文字、半角英数字記号の組み合わせ",
+          minlength: "パスワードは8文字以上にしてください",
+          maxlength: "パスワードは30文字以内にしてください",
         },
       },
       submitHandler: function (form) {
@@ -936,8 +950,8 @@ function checkdblimit()
         },
         db_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号の組み合わせ",
-          maxlength: "8～30文字、半角英数字記号の組み合わせ",
+          minlength: "パスワードは8文字以上にしてください",
+          maxlength: "パスワードは30文字以内にしてください",
         },
       },
       submitHandler: function (form) {
@@ -963,10 +977,10 @@ function checkdblimit()
       rules: {
         ftp_user: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
           // nospecialchar: true,
-          allowspecialchar:true,
+          allowspecialchar5:true,
           minlength: 1,
           maxlength: 20,
           alreadyexist: true,
@@ -1000,8 +1014,8 @@ function checkdblimit()
         },
         ftp_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号の組み合わせ",
-          maxlength: "8～30文字、半角英数字記号の組み合わせ",
+          minlength: "パスワードは8文字以上にしてください",
+          maxlength: "パスワードは30文字以内にしてください",
         },
         "permission[]": {
           required: "いずれかの権限を選択してください。",
@@ -1065,8 +1079,8 @@ function checkdblimit()
         },
         mail_pass_word: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号の組み合わせ",
-          maxlength: "8～30文字、半角英数字記号の組み合わせ",
+          minlength: "パスワードは8文字以上にしてください",
+          maxlength: "パスワードは30文字以内にしてください",
         },
       },
       submitHandler: function (form) {
@@ -1180,8 +1194,8 @@ function checkdblimit()
         },
         bass_pass: {
           required: "パスワードを入力してください",
-          minlength: "8～30文字、半角英数字記号の組み合わせ",
-          maxlength: "8～30文字、半角英数字記号の組み合わせ",
+          minlength: "パスワードは8文字以上にしてください",
+          maxlength: "パスワードは30文字以内にしてください",
         },
       },
       submitHandler: function (form) {
