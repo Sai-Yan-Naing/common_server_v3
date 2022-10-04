@@ -691,7 +691,7 @@ $.validator.addMethod(
                     });
                   }else{
                     loading();
-                    // form.submit()
+                    form.submit()
                   }
                 
               // }
