@@ -25,7 +25,7 @@ require_once("views/admin/admin_shareconfig.php");
             // echo ROOT_PATH.$dir_path;
             // die();
             // delete_directory(ROOT_PATH.$dir_path);
-            deleteDir($web_host,$web_user,$web_password,ROOT_PATH.$dir_path);
+            // deleteDir($web_host,$web_user,$web_password,ROOT_PATH.$dir_path);
         }
     } elseif ($for==='user')
     {

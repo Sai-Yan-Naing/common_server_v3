@@ -667,9 +667,9 @@ $.validator.addMethod(
         //         $('#exceedwebcap').html($exceedwebcap)
         //       }else{
 
-                if($app=='EC-CUBE' && ($version=='eccube3' && $phpv=='v5.6.37'))
+                if($app=='EC-CUBE' && $version=='eccube3' && ( $phpv=='v7.4.13' || $phpv=='v7.2.9' || $phpv=='v7.3.0'))
                   {
-                    document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE3.0の対応バージョンではないため、5.6.xに変更します。';
+                    document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE3の対応バージョンではないため、5.6.37に変更します。';
                     $("#common_dialog").modal("hide");
                     $("#incompat_dialog").modal("show");
                     $("#incompat_Confirm").click(function () {
@@ -679,8 +679,8 @@ $.validator.addMethod(
                         form.submit()
                     });
 
-                  }else if($app=='EC-CUBE' && $version=='eccube-4.1' && ( $phpv=='v5.6.37' || $phpv=='v7.2.9' || $phpv=='v7.3.0')){
-                    document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE4.1の対応バージョンではないため、7.4.xに変更します。';
+                  }else if($app=='EC-CUBE' && $version=='eccube-4.1' && ( $phpv=='v5.6.37' || $phpv=='v7.2.9')){
+                    document.getElementById("incompatdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE4.1の対応バージョンではないため、7.4.13に変更します。';
                     $("#common_dialog").modal("hide");
                     $("#incompat_dialog").modal("show");
                     $("#incompat_Confirm").click(function () {
@@ -1167,9 +1167,10 @@ function checkdblimit()
       rules: {
         bass_user: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
-          allowspecialchar: true,
+          // nospecialchar: true,
+          allowspecialchar5: true,
           maxlength: 20,
           minlength: 1
         },

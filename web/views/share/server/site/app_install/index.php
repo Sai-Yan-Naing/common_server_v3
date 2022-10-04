@@ -24,7 +24,7 @@
                                                 <div class="d-flex border p-2">
                                                     <div class="app-header col-sm-9 "><b style="cursor:pointer"><i class="fa fa-caret-right mr-2" aria-hidden="true"></i>サイト名:<?= $app['site_name'] ?> 【 <?=$app['app_name'].$app['app_version'] ?> 】</b></div>
                                                     <div class="col-sm-3">
-                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog float-right" gourl="/admin/share/server?setting=site&tab=app_install&act=delete&act_id=<?=$app['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                        <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog float-right" gourl="/share/server?setting=site&tab=app_install&act=delete&act_id=<?=$app['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
                                                     </div>
                                                 </div>
                                                 <table class="table table-bordered app-body" style="display: none;">
@@ -39,7 +39,7 @@
                                                         </tr>
                                                     <tbody>
                                                         <tr>
-                                                            <td colspan="2" width="20%"><a href="/admin/share/server?setting=filemanager&tab=tab&act=index&webid=<?=$webid?>">/<?= $webuser ?>/<?= $app['root']?></a></td>
+                                                            <td colspan="2" width="20%"><a href="/share/server?setting=filemanager&tab=tab&act=index&webid=<?=$webid?>">/<?= $webuser ?>/<?= $app['root']?></a></td>
                                                             <td width="20%">
                                                                 <a href="<?= $app['url'] ?><?= ($app['app_name']=="WordPress")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/admin/login":"/admin")?>" target="_blank"><?= $app['url'] ?><?= ($app['app_name']=="WordPress")? "/wp-admin/":(($app['app_version']=="eccube-4.1")?"/admin/login":"/admin")?></a>
                                                             </td>

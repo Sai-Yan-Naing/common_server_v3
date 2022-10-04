@@ -193,6 +193,18 @@ if ( $action=='new'){
             $file_contents = str_replace("ec_strv_name",$site_name,$file_contents);
             $file_contents = str_replace("ec_strv_id",$user_name,$file_contents);
             $import = str_replace("ec_strv_pass",$user_pass,$file_contents);
+            if(isset($update) and $update=='update'){
+                $version = 'v5.6.37';
+                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/php_version/phpversion.ps1" change '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$version);
+                // die;
+
+                $webappversion->app->php=$version;
+                $temp=$webappversion;
+                $result=json_encode($temp);
+                // print_r($result);
+                $query_dir = "UPDATE web_account SET app_version='$result' WHERE id='$webid'";
+                $commons->doThis($query_dir);
+            }
             // file_put_contents($sql_file,$file_contents);
             // put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/config.sql',$file_contents);
             // die('ok');
@@ -220,6 +232,18 @@ if ( $action=='new'){
             $file_contents = str_replace("e4replace_sitename",$site_name,$file_contents);
             $file_contents = str_replace("e4replace_id",$user_name,$file_contents);
             $import = str_replace("e4replace_pass",$user_pass,$file_contents);
+            if(isset($update) and $update=='update'){
+                $version = 'v7.4.13';
+                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/php_version/phpversion.ps1" change '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$version);
+                // die;
+
+                $webappversion->app->php=$version;
+                $temp=$webappversion;
+                $result=json_encode($temp);
+                // print_r($result);
+                $query_dir = "UPDATE web_account SET app_version='$result' WHERE id='$webid'";
+                $commons->doThis($query_dir);
+            }
             // file_put_contents($sql_file,$file_contents);
             // put_File($web_host,$web_user,$web_password,$dst.'/config.sql',$file_contents);
             // die();

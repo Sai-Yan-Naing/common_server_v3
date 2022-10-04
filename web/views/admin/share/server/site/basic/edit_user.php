@@ -29,7 +29,7 @@ $temp = json_decode($webbasicsetting);
       <div class="row justify-content-center">
           <label for="bass_user" class="col-sm-2 text-right p-2">ユーザー名</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" column="bass_user" readonly id="bass_user" name="bass_user" placeholder="1～14文字、半角英数字" value="<?= $temp->$dir_id->user->$act_id->bass_user ?>">
+            <input type="text" class="form-control" column="bass_user" readonly id="bass_user" name="bass_user" placeholder="1～20文字、半角英数小文字と_-." value="<?= $temp->$dir_id->user->$act_id->bass_user ?>">
           </div>
       </div>
       <div class="row justify-content-center">
