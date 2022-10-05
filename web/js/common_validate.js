@@ -591,7 +591,7 @@ $.validator.addMethod(
           nowhitespace: true,
           nospecialchar2: true,
           minlength: 1,
-          maxlength: 60,
+          maxlength: 64,
           onkeyup: false,
         },
         db_user: {
@@ -935,7 +935,7 @@ function checkdblimit()
           nowhitespace: true,
           nospecialchar2: true,
           minlength: 1,
-          maxlength: 60,
+          maxlength: 64,
           alreadyexist: true,
           onkeyup: false,
         },
