@@ -93,7 +93,7 @@
             <div class="col-sm-6">
                 <label for="db-name" class="col-form-label">データベース名</label>
                 <div>
-                    <input type="text" class="form-control" id="db_name" name="db_name" placeholder="データベース名" column="db_name" table="db_account" remark="checkappdb">
+                    <input type="text" class="form-control" id="db_name" name="db_name" placeholder="1～64文字、半角英数字と_-" column="db_name" table="db_account" remark="checkappdb">
                     <!-- <label for="db_name" id="db_name_ex_error" class="error"></label> -->
                 </div>
             </div>
@@ -101,7 +101,7 @@
                 <div class="col-sm-3"></div>
                 <label for="db_user" class="col-form-label">ユーザー名</label>
                 <div>
-                    <input type="text" class="form-control" id="db_user" name="db_user" placeholder="ユーザー名" column="db_user" table="db_account" remark="checkappdb">
+                    <input type="text" class="form-control" id="db_user" name="db_user" placeholder="1～32文字、半角英数字と._-" column="db_user" table="db_account" remark="checkappdb">
                     <!-- <label for="db_user" id="db_user_ex_error" class="error"></label> -->
                 </div>
             </div>
