@@ -93,7 +93,7 @@ function allValidate() {
     $.validator.addMethod(
       "nospecialchar1",
       function (value) {
-        var regex = /[!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?]+/;
+        var regex = /[!@#$%^&*()+\=\[\]{};':"\\|,<>\/?]+/;
         var regex1 = /^[! A-Za-z0-9_@./#&+-]*$/;
         if (!regex.test(value) && regex1.test(value)) {
           return true;
@@ -104,7 +104,7 @@ function allValidate() {
     $.validator.addMethod(
       "nospecialchar2",
       function (value) {
-        var regex = /[!@#$%^&*()+\=\[\]{};':"\\|,<>\/?]+/;
+        var regex = /[!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?]+/;
         var regex1 = /^[! A-Za-z0-9_@./#&+-]*$/;
         if (!regex.test(value) && regex1.test(value)) {
           return true;
