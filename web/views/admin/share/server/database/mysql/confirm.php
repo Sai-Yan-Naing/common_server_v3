@@ -17,8 +17,7 @@ $msg = "jp message";
 		if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
         {
             echo $error = "Something error";
-			die;
-            require_once("views/admin/share/server/site/app_install/index.php");
+            require_once("views/admin/share/server/database/mysql/index.php");
             die("");
         }
         // die;

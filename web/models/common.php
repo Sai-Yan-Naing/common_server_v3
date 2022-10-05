@@ -65,10 +65,10 @@ class Common{
 
 	function addMyUserAndDB($db, $db_user, $db_pass)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		// {
+		// 	return false;
+		// }
 
 		try
 		{
@@ -112,10 +112,10 @@ class Common{
 
 	function addMyUserAndDB1($db, $db_user, $db_pass)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		// {
+		// 	return false;
+		// }
 
 		try
 		{
@@ -176,10 +176,10 @@ class Common{
 
 	function deleteMysqlDB($dbid, $dbuser, $db)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		// {
+		// 	return false;
+		// }
 
 		$pdo_account = new PDO(MYDSN, MYROOT, MYROOT_PASS);
 		$stmt = $pdo_account->prepare("DROP USER :dbuser@'%'");
@@ -207,10 +207,10 @@ class Common{
 
 	function importWP($web_host,$sql, $db_name, $db_username, $pass)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db_name))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db_name))
+		// {
+		// 	return false;
+		// }
 
 		try
 		{
@@ -430,10 +430,10 @@ class Common{
 
 	function deleteMariaDB($dbid, $dbuser, $db)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		// {
+		// 	return false;
+		// }
 
 		// return $dbid.$dbuser.$db;
 		// $dsn2 = 'mysql:host=localhost:3307';

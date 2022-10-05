@@ -17,7 +17,7 @@ $msg = "jp message";
 		if ( ! $commons->addMariaUserAndDB($db_name, $db_user, $db_pass) )
 		{
 			echo $error = "Something errors";
-			// require_once("views/admin/share/server/database/mariadb/index.php");
+			require_once("views/admin/share/server/database/mariadb/index.php");
 			die("");
 		}
 		// die;
