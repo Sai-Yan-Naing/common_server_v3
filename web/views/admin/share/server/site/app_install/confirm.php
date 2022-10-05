@@ -159,7 +159,7 @@ if ( $action=='new'){
             // copy_paste($src, $dst);
             // echo $dst;
             $ECCUBE_AUTH_MAGIC = 'u5pCrNa6eNpJU8lDKX7WvyeO8P0out2Y';
-            $salt = 'Uo3KLGFImXPsOYFrQ2TjwRj80Kv9ciYc';
+            $salt = 'HRBidly19qChoa6H2LIKr6CElktVjNLo';
             $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
             $path_to_file = 'E:\app_config\configec3\eccube/config.yml';
             $file_contents = file_get_contents($path_to_file);
