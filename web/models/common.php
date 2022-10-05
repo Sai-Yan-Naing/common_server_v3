@@ -52,7 +52,6 @@ class Common{
 				die('error2');
 				return false;
 			}
-
 			return true;
 		}
 		catch (PDOException $e)

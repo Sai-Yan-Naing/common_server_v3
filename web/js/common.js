@@ -296,6 +296,12 @@ function dnsexceed5($url) {
 }
 
 $(document).ready(function(){
+  var pageURL = $(location).attr("href");
+  
+  if(!pageURL.includes("/vps/")){
+ return false;
+  }
+ 
   $param = $('#checkvps').attr('checkvps');
   // console.log($param)
   if (typeof $param !== 'undefined') {

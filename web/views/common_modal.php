@@ -76,6 +76,7 @@
 		      <div class="modal-content" >
 			  	  <div class="modal-body text-center" id="incompatdisplay_dialog"></div>
 		        <div class="modal-footer d-flex justify-content-center">
+				<input type="hidden" name="update" value="update" form="app_install_form">
 		          <button type="button" class="btn btn-outline-info btn-sm" id="incompat_Cancel">キャンセル</button>
 		          <button type="button" class="btn btn-outline-info btn-sm" id="incompat_Confirm">OK</button>
 		        </div>

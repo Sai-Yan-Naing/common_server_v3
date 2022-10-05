@@ -1,3 +1,29 @@
 duplicate sensor
 
 http://202.218.224.38/api/duplicateobject.htm?id=2054&name=sensor&targetid=2053&username=prtgadmin&password=BUHdfUtbGG4XWPT
+
+/api/duplicateobject.htm?id=id_of_sensor_to_clone&name=new_name&targetid=id_of_target_device
+
+href="/controls/sensoroverview.htm?id=
+
+duplicate devices
+/api/duplicateobject.htm?id=id_of_device_to_clone&name=new_name&host=new_hostname_or_ip&targetid=id_of_target_group
+
+/api/duplicateobject.htm?id=2053&name=ggserver&host=192.168.1.1&targetid=2052&username=prtgadmin&password=BUHdfUtbGG4XWPT
+
+value="/device.htm?id=
+
+duplicate group
+/api/duplicateobject.htm?id=id_of_group_to_clone&name=new_name&targetid=id_of_target_group
+
+/api/duplicateobject.htm?id=2052&name=newgroup&targetid=1&username=prtgadmin&password=BUHdfUtbGG4XWPT
+value="/group.htm?id=
+
+
+/api/duplicateobject.htm?id=2121&name=148_server&targetid=1&username=prtgadmin&password=BUHdfUtbGG4XWPT
+res = 2125
+/api/duplicateobject.htm?id=2122&name=148_device&host=202.218.224.148&targetid=2125
+res = 2126
+
+/api/duplicateobject.htm?id=2124&name=148ping&targetid=2126
+

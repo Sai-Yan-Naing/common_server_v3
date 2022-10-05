@@ -13,7 +13,10 @@ $db_name = $_POST["db_name"];
 // $db_user = 'ec313_dbuser';
 $db_user = $_POST["db_user"];
 $db_pass = $_POST["db_pass"];
-
+if(isset($_POST["update"])){
+    $update = $_POST['update'];
+}
+$webappversion = json_decode($webappversion);
 $root_url = explode("/", $url);
 unset($root_url[0]);
 unset($root_url[1]);
@@ -156,7 +159,7 @@ if ( $action=='new'){
             // copy_paste($src, $dst);
             // echo $dst;
             $ECCUBE_AUTH_MAGIC = 'u5pCrNa6eNpJU8lDKX7WvyeO8P0out2Y';
-            $salt = 'Uo3KLGFImXPsOYFrQ2TjwRj80Kv9ciYc';
+            $salt = 'HRBidly19qChoa6H2LIKr6CElktVjNLo';
             $user_pass= hash_hmac('sha256',$password.':'.$ECCUBE_AUTH_MAGIC,$salt);
             $path_to_file = 'E:\app_config\configec3\eccube/config.yml';
             $file_contents = file_get_contents($path_to_file);
@@ -187,6 +190,18 @@ if ( $action=='new'){
             $file_contents = str_replace("ec_strv_name",$site_name,$file_contents);
             $file_contents = str_replace("ec_strv_id",$user_name,$file_contents);
             $import = str_replace("ec_strv_pass",$user_pass,$file_contents);
+            if(isset($update) and $update=='update'){
+                $version = 'v5.6.37';
+                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/php_version/phpversion.ps1" change '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$version);
+                // die;
+
+                $webappversion->app->php=$version;
+                $temp=$webappversion;
+                $result=json_encode($temp);
+                // print_r($result);
+                $query_dir = "UPDATE web_account SET app_version='$result' WHERE id='$webid'";
+                $commons->doThis($query_dir);
+            }
             // file_put_contents($sql_file,$file_contents);
             // put_File($web_host,$web_user,$web_password,$dst.'/app/config/eccube/config.sql',$file_contents);
             // die('ok');
@@ -217,6 +232,18 @@ if ( $action=='new'){
             // file_put_contents($sql_file,$file_contents);
             // put_File($web_host,$web_user,$web_password,$dst.'/config.sql',$file_contents);
             // die();
+            if(isset($update) and $update=='update'){
+                $version = 'v7.4.13';
+                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/php_version/phpversion.ps1" change '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$version);
+                // die;
+
+                $webappversion->app->php=$version;
+                $temp=$webappversion;
+                $result=json_encode($temp);
+                // print_r($result);
+                $query_dir = "UPDATE web_account SET app_version='$result' WHERE id='$webid'";
+                $commons->doThis($query_dir);
+            }
         }
         
         // $import = file_get_contents($sql_file);
