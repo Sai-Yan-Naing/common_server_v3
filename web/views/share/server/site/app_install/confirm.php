@@ -16,6 +16,7 @@ $db_pass = $_POST["db_pass"];
 if(isset($_POST["update"])){
     $update = $_POST['update'];
 }
+$webappversion = json_decode($webappversion);
 
 $root_url = explode("/", $url);
 
