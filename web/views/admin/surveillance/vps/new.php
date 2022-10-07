@@ -130,7 +130,7 @@ $ping = json_decode($getmails['ping'],true)
                                 <div class="col-md-4 col-sm-6">
                                 </div>
                                 <div class="mr-2 col-md-4 col-sm-6">
-                                    <button type="submit" class="btn btn-outline-info btn-sm form-control" form="email_create">保存</button>
+                                    <button type="submit" class="btn btn-outline-info btn-sm form-control" form="sensor">保存</button>
                                 </div>
                                 <div class="col-md-4 col-sm-6">
                                 </div>
