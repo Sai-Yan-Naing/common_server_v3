@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('mails/mail.php');
 $servername = "202.218.224.21";
 $username = "tester";
@@ -52,13 +53,19 @@ print_r($getsensor);
 print_r($getsensor->Alarms);
 echo 'sensor';
 print_r($getsensor->UpSens);
-if($getsensor->Alarms==1){
-    $subject = 'server is shutting down';
-}else{
+if($getsensor->UpSens==1){
+    $stop = true;
     $subject = 'server is started';
+}else{
+    $stop = false;
+    $_SESSION['pingmail'] = true;
+    $subject = 'server is shutting down';
 }
 
-if($send){
+if($_SESSION['pingmail']){// send mail
+    if($stop){
+        $_SESSION['pingmail'] = false;
+    }
     foreach($mail as $val){
         if ( ! $webmailer->sendMail($val['mail'], TONAME, $subject, $body))
         {

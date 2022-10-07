@@ -76,7 +76,7 @@ $(document).ready(function(){
     $gourl = '/admin?main=surveillance&act=getapi&tab=vps&webid=5';
     setInterval(function(){ 
         usage('cpu',$gourl);
-    }, 600000);
+    }, 15000);
 });
 
 function usage($var,$gourl)
@@ -88,6 +88,8 @@ function usage($var,$gourl)
                 url: $url+$gourl,
                 data: {},
                 success: function(data){
+                    
+                    
                 }
             });
         }
