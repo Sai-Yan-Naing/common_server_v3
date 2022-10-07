@@ -126,6 +126,15 @@ $ping = json_decode($getmails['ping'],true)
                                 <div class="col-2">ﾊﾟｽﾜｰﾄ</div>
                                 <div class="col-3"><input type="text" class="form-control form-control-sm" name=""></div>
                             </div>
+                            <div class="d-flex mt-3 col-6 col-sm-12">
+                                <div class="col-md-4 col-sm-6">
+                                </div>
+                                <div class="mr-2 col-md-4 col-sm-6">
+                                    <button type="submit" class="btn btn-outline-info btn-sm form-control" form="email_create">保存</button>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                </div>
+                            </div>
                         </div>
                         <div class="back-button"><a href="/admin?main=surveillance&act=index" onclick="loading()"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
                 </div>
