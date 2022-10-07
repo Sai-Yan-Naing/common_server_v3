@@ -77,14 +77,16 @@ if($action=='new'){
     $temp2['device'] = $arr['device'];
     $temp2['sensor'] = $arr['sensor'];
     // if($arr['device']==null){
-    //     $api_url = 'https://dummy.restapiexample.com/api/v1/employees';
+        $api_url = 'http://202.218.224.38/api/pause.htm?id=2127&tabid=1&action='.$ping.'&username=prtgadmin&password=BUHdfUtbGG4XWPT';
 
-    //     // Read JSON file
-    //     $json_data = file_get_contents($api_url);
+        // Read JSON file
+        $json_data = file_get_contents($api_url);
 
-    //     // Decode JSON data into PHP array
-    //     $response_data = json_decode($json_data);
+        // Decode JSON data into PHP array
+        $response_data = json_decode($json_data);
     // }
+    print_r($response_data);
+    // die();
     $insert_q = "UPDATE monitor_mail SET type = ?, ping=? where domain_ip=? and  type ='$type'";
     // echo '<pre>';
     print_r($temp2);

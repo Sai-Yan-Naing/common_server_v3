@@ -48,7 +48,7 @@ class CommonValidate
 			$query = "SELECT $table.$column FROM $table INNER JOIN web_account on $table.domain = web_account.domain where $table.$column = :checker $addition";
 		if($table =='web_account')
 		{
-			$query = "SELECT $table.$column FROM $table where $table.$column = :checker and web_account.web_server_id= $web_server_id";
+			$query = "SELECT $table.$column FROM $table where $table.$column = :checker and web_account.web_server_id= $web_server_id  and removal IS NULL";
 		}
 		
 		$stmt1 = $this->pdo->prepare($query);

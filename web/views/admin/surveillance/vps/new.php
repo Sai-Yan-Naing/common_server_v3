@@ -69,18 +69,7 @@ $ping = json_decode($getmails['ping'],true)
                                 </div>
                             </div>
                             <div class="d-flex mt-3 col-6 col-sm-12">
-                                <div class="mr-2 col-2">HTTP監視</div>
-                                <div class="col-2">
-                                    <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=security&tab=getmails&act=usage&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog11">
-                                        <input type="checkbox" <?= (int)$getmails['usage']==1? "checked":""  ?>>
-                                        <span class="slider <?= (int)$getmails['usage']==1? "slideron":"slideroff"  ?>"></span>
-                                        <span class="handle <?= (int)$getmails['usage']==1? "handleon":"handleoff"  ?>"></span>
-                                        <span class="<?= (int)$getmails['usage']==1? "labelon":"labeloff"  ?>"><?= (int)$getmails['usage']==1? "起動":"停止"  ?></span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="d-flex mt-3 col-6 col-sm-12">
-                                <div class="mr-2 col-2">URL監視</div>
+                                <div class="mr-2 col-2">HTTP監視/URL監視</div>
                                 <div class="col-2">
                                     <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=security&tab=getmails&act=usage&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog11">
                                         <input type="checkbox" <?= (int)$getmails['usage']==1? "checked":""  ?>>

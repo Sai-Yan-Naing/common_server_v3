@@ -54,6 +54,11 @@ echo 'sensor';
 print_r($getsensor->UpSens);
 if($getsensor->Alarms==1){
     $subject = 'server is shutting down';
+}else{
+    $subject = 'server is started';
+}
+
+if($send){
     foreach($mail as $val){
         if ( ! $webmailer->sendMail($val['mail'], TONAME, $subject, $body))
         {

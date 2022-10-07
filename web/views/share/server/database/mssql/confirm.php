@@ -47,6 +47,12 @@ $msg = "jp message";
 				require_once("views/share/server/database/mssql/index.php");
 				die("");
 		}
+		$update = "UPDATE db_account_for_mssql SET db_pass = :db_pass WHERE db_user = :db_user";
+		if ( !$commons->doThis($update,[ 'db_pass' => $db_pass,'db_user' => $db_user]))
+		{
+			require_once("views/share/server/database/mssql/index.php");
+			die("");
+		}
 		$query = "SELECT * FROM db_account_for_mssql WHERE db_user=?";
 		$getRow = $commons->getRow($query,[$db_user]);
 		$msgsession =  "msg";
