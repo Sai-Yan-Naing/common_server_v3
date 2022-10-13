@@ -1092,8 +1092,8 @@ function checkdblimit()
           // nospecialchar: true,
           minlength: 1,
           maxlength: 30,
-          alreadyexist: true,
           formailuser: true,
+          alreadyexist: true,
           onkeyup: false,
         },
         mail_pass_word: {
