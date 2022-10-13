@@ -164,6 +164,26 @@ $.validator.addMethod(
       },
       "特殊文字は使用できません"
     );
+$.validator.addMethod(
+      "formailuser",
+      function (value) {
+        var regex = /[^A-Za-z0-9`~!#^()_+-={}[\];',.]/;
+        if (!regex.test(value)) {
+          return true;
+        }
+      },
+      "記号は`~!#^()_+-={}[];',.のみ利用可能です"
+    );
+$.validator.addMethod(
+      "formailuserpass",
+      function (value) {
+        var regex = /[^A-Za-z0-9!@#$%^&*()_+{}[\]:;"'>,.?/]/;
+        if (!regex.test(value)) {
+          return true;
+        }
+      },
+      `記号は!@#$%^&*()_+{}[]:;"'>,.?/のみ利用可能です`
+    );
     
     $.validator.addMethod(
       "allowspecialchar3",
@@ -1067,21 +1087,23 @@ function checkdblimit()
       rules: {
         email: {
           required: true,
-          allowspecialchar2: true,
-          nowhitespace: true,
+          // allowspecialchar2: true,
+          // nowhitespace: true,
           // nospecialchar: true,
           minlength: 1,
           maxlength: 30,
           alreadyexist: true,
+          formailuser: true,
           onkeyup: false,
         },
         mail_pass_word: {
           required: true,
-          nowhitespace: true,
+          // nowhitespace: true,
+          formailuserpass: true,
           minlength: 8,
           maxlength: 30,
-          noallowfullwidth: true,
-          allowspecialchar3: true,
+          // noallowfullwidth: true,
+          // allowspecialchar3: true,
         },
       },
 

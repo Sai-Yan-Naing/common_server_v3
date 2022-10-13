@@ -98,6 +98,10 @@ if($action=='new'){
             die("Error.");
     }
     // die;
+}else if($action=='saveall'){
+    $ping = $_POST['url'];
+    print_r($ping);
+    // die();
 }
 
 

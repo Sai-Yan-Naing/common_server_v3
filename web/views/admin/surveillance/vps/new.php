@@ -25,38 +25,50 @@ $ping = json_decode($getmails['ping'],true)
                             </li>
                         </ul>
                         <div class="mt-3">
-                        	<label><?= $webip ?>【<?= $webvm_name ?>】</label>
-                        	<form action='/admin?main=surveillance&act=confirm&tab=vps&webid=<?=$webid?>' method="post">
+                        	<label class="mt-3"><?= $webip ?>【<?= $webvm_name ?>】</label>
+                        	<form action='/admin?main=surveillance&act=confirm&tab=vps&webid=<?=$webid?>' method="post" class="mt-3">
+                            <?php $val = json_decode($getmails['mail'],true);?>
+                            <?php if(count($val)<3):?>
                             <input type="hidden" name='action' value="new">
 	                        	<div class="d-flex">
 	                        		<div class="mr-2">通知先</div>
 	                        		<div class="mr-2"><input type="email" name="mail" class="form-control form-control-sm" required></div>
 	                        		<div class="mr-2"><button class="btn btn-info btn-sm">登録</button></div>
 	                        	</div>
+                                <?php endif ?>
 	                        </form>
-
-	                        <table class="table table-bordered mt-3">
-                                <tr>
-                                    <th class="font-weight-bold border-dark">登録メールアドレス</th>
-                                    <th class="font-weight-bold border-dark">操作</th>
-                                </tr>
-                                <?php 
-                                // print_r(json_decode($getmails['mail'],true));
-                                foreach(json_decode($getmails['mail'],true) as $val):
-                                    // print_r(array_keys($val));
-                                    // $key=array_keys($val);
-                                    ?>
-                                <tr>
-                                    <td class="font-weight-bold "><?= $val['mail']?></td>
-                                    <td class="font-weight-bold ">
-                                    	<a href="javascript:;" gourl="/admin?main=surveillance&act=edit&tab=vps&webid=<?=$webid?>&act_id=<?=$val['id']?>" class="btn btn-outline-info btn-sm common_dialog"  data-toggle="modal" data-target="#common_dialog">編集</a>
-                                     	<a href="javascript:;" gourl="/admin?main=surveillance&act=delete&tab=vps&webid=<?=$webid?>&act_id=<?=$val['id']?>" class="btn btn-outline-danger btn-sm common_dialog"  data-toggle="modal" data-target="#common_dialog">削除</a>
-                                     </td>
-                                </tr>
-                                    <?php
-                                    endforeach;
-                                    ?>
-                            </table>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <table class="table table-bordered mt-3">
+                                        <tr>
+                                            <th class="font-weight-bold border-dark p-4">登録メールアドレス</th>
+                                            <th class="font-weight-bold border-dark p-4">操作</th>
+                                        </tr>
+                                        <?php 
+                                        // print_r(json_decode($getmails['mail'],true));
+                                        for($i=0;$i<3;$i++):
+                                            // print_r(array_keys($val));
+                                            // $key=array_keys($val);
+                                            $val = json_decode($getmails['mail'],true);
+                                            ?>
+                                        <tr>
+                                            <td class="font-weight-bold  p-4"><?= $val[$i]['mail']?></td>
+                                            <td class="font-weight-bold p-4">
+                                                <?php if(isset($val[$i]['id'])):?>
+                                                <a href="javascript:;" gourl="/admin?main=surveillance&act=edit&tab=vps&webid=<?=$webid?>&act_id=<?=$val[$i]['id']?>" class="btn btn-outline-info btn-sm common_dialog"  data-toggle="modal" data-target="#common_dialog">編集</a>
+                                                <a href="javascript:;" gourl="/admin?main=surveillance&act=delete&tab=vps&webid=<?=$webid?>&act_id=<?=$val[$i]['id']?>" class="btn btn-outline-danger btn-sm common_dialog"  data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                <?php endif?>
+                                            </td>
+                                        </tr>
+                                            <?php
+                                            endfor;
+                                            ?>
+                                    </table>
+                                </div>
+                            </div>
+	                        
+                        <form id="sensor" method="post" action="/admin?main=surveillance&act=confirm&tab=vps&webid=<?=$webid?>">
+                        <input type="hidden" value="saveall" name="action">
                             <div class="d-flex mt-3 col-6 col-sm-12">
                                 <div class="mr-2 col-2">PING監視</div>
                                 <div class="col-2">
@@ -78,13 +90,13 @@ $ping = json_decode($getmails['ping'],true)
                                         <span class="<?= (int)$getmails['usage']==1? "labelon":"labeloff"  ?>"><?= (int)$getmails['usage']==1? "起動":"停止"  ?></span>
                                     </label>
                                 </div>
-                                <div class="col-5 d-flex"><input type="text" class="form-control form-control-sm mr-1" name=""><span class="clone-input" style="font-size: 25px;margin-top: -5px;"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></div>
+                                <div class="col-5 d-flex"><input type="text" class="form-control form-control-sm mr-1" name="url[]"><span class="clone-input" style="font-size: 25px;margin-top: -5px;"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></div>
                             </div>
                             <div class="d-flex mt-3 col-6 col-sm-12 clone-div" style="">
                                 <div class="mr-2 col-2"></div>
                                 <div class="col-2">
                                 </div>
-                                <div class="col-5 d-flex" ><input type="text" class="form-control form-control-sm mr-1" name=""><span class="delete-clone" style="font-size: 25px;margin-top: -5px;"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></div>
+                                <div class="col-5 d-flex" ><input type="text" class="form-control form-control-sm mr-1"  name="url[]"><span class="delete-clone" style="font-size: 25px;margin-top: -5px;"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></div>
                             </div>
                             <div class="d-flex mt-3 col-6 col-sm-12">
                                 <div class="mr-2 col-2">RDP監視</div>
@@ -135,6 +147,7 @@ $ping = json_decode($getmails['ping'],true)
                                 <div class="col-md-4 col-sm-6">
                                 </div>
                             </div>
+                        </form>
                         </div>
                         <div class="back-button"><a href="/admin?main=surveillance&act=index" onclick="loading()"><button type="button" class="btn btn-outline-info"><i class="fa fa-angle-double-left" aria-hidden="true"></i><span class="ml-3">戻る</span></button></a></div>
                 </div>
