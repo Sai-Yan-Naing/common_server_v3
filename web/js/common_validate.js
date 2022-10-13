@@ -168,7 +168,10 @@ $.validator.addMethod(
       "formailuser",
       function (value) {
         var regex = /[^A-Za-z0-9`~!#^()_+-={}[\];',.]/;
-        if (!regex.test(value)) {
+        var regex1 = value.includes('/')
+        console.log(regex.test(value))
+        console.log(regex1)
+        if (!regex.test(value) &&! regex1) {
           return true;
         }
       },
