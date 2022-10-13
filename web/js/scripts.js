@@ -132,11 +132,12 @@ $(document).on("change", "#upload_csv", function (e) {
                     if (k == 1) {
                         // console.log(/^[A-Za-z0-9_./#&+-]*$/.test(lines[i][1]))
                         var regex = /[^A-Za-z0-9`~!#^()_+-={}[\];',.]/;
-                        $error = '';
                         var regex1 = lines[i][k].includes('/')
-                        if (!regex.test(lines[i][k]) &&! regex1) {
-                          return true;
-                        }
+                        $error = '';
+                        if (regex.test(lines[i][k]) || regex1) {
+                            $haserror = true;
+                            $error = 'error';
+                          }
                         // if (/[ \\/:?"<>|@%*$&-]/.test(lines[i][k])) {
                         //     $haserror = true;
                         //     $error = 'error';
