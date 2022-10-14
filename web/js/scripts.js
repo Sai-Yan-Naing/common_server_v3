@@ -73,7 +73,7 @@ $(document).on("change", "#upload_csv", function (e) {
     reader.onload = function(e) {
         $('#common_dialog').children().addClass('modal-dialog-scrollable')
         $('.ps_absolute').html('')
-        $tablestart = '<table class="table table-borderless">'
+        $tablestart = '<table class="table table-borderless" style="word-break:break-all;">'
         $thead ='<thead><tr>';
         $tbody = '<tbody>';
         $tr = '';
@@ -134,7 +134,7 @@ $(document).on("change", "#upload_csv", function (e) {
                         var regex = /[^A-Za-z0-9`~!#^()_+-={}[\];',.]/;
                         var regex1 = lines[i][k].includes('/')
                         $error = '';
-                        if (regex.test(lines[i][k]) || regex1) {
+                        if (regex.test(lines[i][k]) || regex1 || lines[i][k].length<1 || lines[i][k].length>30) {
                             $haserror = true;
                             $error = 'error';
                           }
@@ -150,7 +150,7 @@ $(document).on("change", "#upload_csv", function (e) {
                         // var regex1 = /[\u3000-\u303F]|[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[\u2605-\u2606]|[\u2190-\u2195]|\u203B/g
                         // var regex = /^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{8,30}$/;
                         var regex = /[^A-Za-z0-9!@#$%^&*()_+{}[\]:;"'>,.?/]/;
-                        if (regex.test(lines[i][2])) {
+                        if (regex.test(lines[i][2]) || lines[i][2].length<8 || lines[i][k].length>30) {
                           $error = 'error';
                             $haserror = true;
                         }

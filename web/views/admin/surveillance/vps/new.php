@@ -4,7 +4,11 @@
 <?php require_once('views/admin/sidebar.php');?>
 <?php 
 $getmails = $commons->getRow("SELECT * FROM monitor_mail WHERE domain_ip=? and type=?",[$webid,'vps']);
-$ping = json_decode($getmails['ping'],true)
+$ping = json_decode($getmails['ping'],true);
+$http = json_decode($getmails['http'],true);
+$url = json_decode($getmails['url'],true);
+$rdp = json_decode($getmails['rdp'],true);
+$sql = json_decode($getmails['sql'],true);
 ?>
     <div id="layoutSidenav_content">
         <main class="main-page">
@@ -83,60 +87,75 @@ $ping = json_decode($getmails['ping'],true)
                             <div class="d-flex mt-3 col-6 col-sm-12">
                                 <div class="mr-2 col-2">HTTP監視/URL監視</div>
                                 <div class="col-2">
-                                    <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=security&tab=getmails&act=usage&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog11">
-                                        <input type="checkbox" <?= (int)$getmails['usage']==1? "checked":""  ?>>
-                                        <span class="slider <?= (int)$getmails['usage']==1? "slideron":"slideroff"  ?>"></span>
-                                        <span class="handle <?= (int)$getmails['usage']==1? "handleon":"handleoff"  ?>"></span>
-                                        <span class="<?= (int)$getmails['usage']==1? "labelon":"labeloff"  ?>"><?= (int)$getmails['usage']==1? "起動":"停止"  ?></span>
+                                    <label class="switch text-white common_dialog" gourl="/admin?main=surveillance&act=http&tab=vps&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
+                                        <input type="checkbox" <?= (int)$http['onoff']==1? "checked":""  ?>>
+                                        <span class="slider <?= (int)$http['onoff']==1? "slideron":"slideroff"  ?>"></span>
+                                        <span class="handle <?= (int)$http['onoff']==1? "handleon":"handleoff"  ?>"></span>
+                                        <span class="<?= (int)$http['onoff']==1? "labelon":"labeloff"  ?>"><?= (int)$http['onoff']==1? "起動":"停止"  ?></span>
                                     </label>
                                 </div>
-                                <div class="col-5 d-flex"><input type="text" class="form-control form-control-sm mr-1" name="url[]"><span class="clone-input" style="font-size: 25px;margin-top: -5px;"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></div>
+                                <div class="col-5 d-flex"><input type="text" class="form-control form-control-sm mr-1" name="url[]" value="<?=$url[0]['value']?>"><span class="clone-input" style="font-size: 25px;margin-top: -5px;"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></div>
                             </div>
+                            <?php
+                            if(count($url)>2){
+                                $display="block";
+                            }else{
+                                $display="none";
+                            }
+                            $i=0;
+                            do{
+                            // for($i=0;$i<count($url);$i++):?>
                             <div class="d-flex mt-3 col-6 col-sm-12 clone-div" style="">
                                 <div class="mr-2 col-2"></div>
                                 <div class="col-2">
                                 </div>
-                                <div class="col-5 d-flex" ><input type="text" class="form-control form-control-sm mr-1"  name="url[]"><span class="delete-clone" style="font-size: 25px;margin-top: -5px;"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></div>
+                                <div class="col-5 d-flex urlclone" ><input type="text" class="form-control form-control-sm mr-1"  name="url[]" value="<?=$url[$i+1]['value']?>"><span class="delete-clone" style="font-size: 25px;margin-top: -5px; display:<?=$display?>;"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></div>
                             </div>
+                            <?php 
+                            // endfor;
+                            $i++; 
+                            }while($i<count($url)); ?>
                             <div class="d-flex mt-3 col-6 col-sm-12">
                                 <div class="mr-2 col-2">RDP監視</div>
                                 <div class="col-2">
-                                    <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=security&tab=getmails&act=usage&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog11">
-                                        <input type="checkbox" <?= (int)$getmails['usage']==1? "checked":""  ?>>
-                                        <span class="slider <?= (int)$getmails['usage']==1? "slideron":"slideroff"  ?>"></span>
-                                        <span class="handle <?= (int)$getmails['usage']==1? "handleon":"handleoff"  ?>"></span>
-                                        <span class="<?= (int)$getmails['usage']==1? "labelon":"labeloff"  ?>"><?= (int)$getmails['usage']==1? "起動":"停止"  ?></span>
+                                    <label class="switch text-white common_dialog" gourl="/admin?main=surveillance&act=rdp&tab=vps&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
+                                        <input type="checkbox" <?= (int)$rdp['onoff']==1? "checked":""  ?>>
+                                        <span class="slider <?= (int)$rdp['onoff']==1? "slideron":"slideroff"  ?>"></span>
+                                        <span class="handle <?= (int)$rdp['onoff']==1? "handleon":"handleoff"  ?>"></span>
+                                        <span class="<?= (int)$rdp['onoff']==1? "labelon":"labeloff"  ?>"><?= (int)$rdp['onoff']==1? "起動":"停止"  ?></span>
                                     </label>
                                 </div>
                                 <div class="col-2">ユーザー名</div>
-                                <div class="col-3"><input type="text" class="form-control form-control-sm" name=""></div>
+                                <div class="col-3"><input type="text" class="form-control form-control-sm" name="username" value="<?=$rdp['username']?>"></div>
                             </div>
                             <div class="d-flex mt-3 col-6 col-sm-12">
                                 <div class="mr-2 col-2"></div>
                                 <div class="col-2">
                                 </div>
                                 <div class="col-2">ﾊﾟｽﾜｰﾄﾞ</div>
-                                <div class="col-3"><input type="text" class="form-control form-control-sm" name=""></div>
+                                <div class="col-3"><input type="password" id="password" class="form-control form-control-sm" name="password" value="<?=$rdp['password']?>">
+                                <span toggle="#password" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span></div>
                             </div>
                             <div class="d-flex mt-3 col-6 col-sm-12">
                                 <div class="mr-2 col-2">SQL監視</div>
                                 <div class="col-2">
-                                    <label class="switch text-white common_dialog" gourl="/admin/share/server?setting=security&tab=getmails&act=usage&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog11">
-                                        <input type="checkbox" <?= (int)$getmails['usage']==1? "checked":""  ?>>
-                                        <span class="slider <?= (int)$getmails['usage']==1? "slideron":"slideroff"  ?>"></span>
-                                        <span class="handle <?= (int)$getmails['usage']==1? "handleon":"handleoff"  ?>"></span>
-                                        <span class="<?= (int)$getmails['usage']==1? "labelon":"labeloff"  ?>"><?= (int)$getmails['usage']==1? "起動":"停止"  ?></span>
+                                    <label class="switch text-white common_dialog" gourl="/admin?main=surveillance&act=sql&tab=vps&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog">
+                                        <input type="checkbox" <?= (int)$sql['onoff']==1? "checked":""  ?>>
+                                        <span class="slider <?= (int)$sql['onoff']==1? "slideron":"slideroff"  ?>"></span>
+                                        <span class="handle <?= (int)$sql['onoff']==1? "handleon":"handleoff"  ?>"></span>
+                                        <span class="<?= (int)$sql['onoff']==1? "labelon":"labeloff"  ?>"><?= (int)$sql['onoff']==1? "起動":"停止"  ?></span>
                                     </label>
                                 </div>
                                 <div class="col-2">ユーザー名</div>
-                                <div class="col-3"><input type="text" class="form-control form-control-sm" name=""></div>
+                                <div class="col-3"><input type="text" class="form-control form-control-sm" name="db_user"  value="<?=$sql['db_user']?>"></div>
                             </div>
                             <div class="d-flex mt-3 col-6 col-sm-12">
                                 <div class="mr-2 col-2"></div>
                                 <div class="col-2">
                                 </div>
                                 <div class="col-2">ﾊﾟｽﾜｰﾄ</div>
-                                <div class="col-3"><input type="text" class="form-control form-control-sm" name=""></div>
+                                <div class="col-3"><input type="password" class="form-control form-control-sm" name="db_pass" id="db_pass"  value="<?=$sql['db_pass']?>">
+                                <span toggle="#db_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span></div>
                             </div>
                             <div class="d-flex mt-3 col-6 col-sm-12">
                                 <div class="col-md-4 col-sm-6">
@@ -161,9 +180,16 @@ require_once('views/admin/surveillance/vps/footer.php');
 <script>
 $(document).on('click','.clone-input',function(){
 	$(this).parent().parent().next('.clone-div').clone().insertAfter('.clone-div:last');
+    $('.clone-div:last').children('.urlclone').children('input').val('');
+    if($('.clone-div').length>1){
+        $('.delete-clone').show()
+    }
 
 });
 $(document).on('click','.delete-clone', function(){
 	$(this).parent().parent().remove();
+    if($('.clone-div').length<2){
+        $('.delete-clone').hide()
+    }
 })
 </script>
