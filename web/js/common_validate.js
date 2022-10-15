@@ -90,6 +90,28 @@ function allValidate() {
       },
       "特殊文字は使用できません"
     );
+    $.validator.addMethod(
+      "nospecialchar1",
+      function (value) {
+        var regex = /[!@#$%^&*()+\=\[\]{};':"\\|,<>\/?]+/;
+        var regex1 = /^[! A-Za-z0-9_@./#&+-]*$/;
+        if (!regex.test(value) && regex1.test(value)) {
+          return true;
+        }
+      },
+      "1～32文字、半角英数字と._-"
+    );
+    $.validator.addMethod(
+      "nospecialchar2",
+      function (value) {
+        var regex = /[!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?]+/;
+        var regex1 = /^[! A-Za-z0-9_@./#&+-]*$/;
+        if (!regex.test(value) && regex1.test(value)) {
+          return true;
+        }
+      },
+      "1～64文字、半角英数字と_-"
+    );
 
     // allow !#$%&'()*+-./:;<=>?@[]^_`{|}~
     $.validator.addMethod(
@@ -141,6 +163,29 @@ $.validator.addMethod(
         }else return false;
       },
       "特殊文字は使用できません"
+    );
+$.validator.addMethod(
+      "formailuser",
+      function (value) {
+        var regex = /[^A-Za-z0-9`~!#^()_+-={}[\];',.]/;
+        var regex1 = value.includes('/')
+        console.log(regex.test(value))
+        console.log(regex1)
+        if (!regex.test(value) &&! regex1) {
+          return true;
+        }
+      },
+      "記号は`~!#^()_+-={}[];',.のみ利用可能です"
+    );
+$.validator.addMethod(
+      "formailuserpass",
+      function (value) {
+        var regex = /[^A-Za-z0-9!@#$%^&*()_+{}[\]:;"'>,.?/]/;
+        if (!regex.test(value)) {
+          return true;
+        }
+      },
+      `記号は!@#$%^&*()_+{}[]:;"'>,.?/のみ利用可能です`
     );
     
     $.validator.addMethod(
@@ -565,18 +610,18 @@ $.validator.addMethod(
         },
         db_name: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
-          nospecialchar: true,
+          nospecialchar2: true,
           minlength: 1,
-          maxlength: 60,
+          maxlength: 64,
           onkeyup: false,
         },
         db_user: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
-          nospecialchar: true,
+          nospecialchar1: true,
           minlength: 1,
           maxlength: 32,
           onkeyup: false,
@@ -615,13 +660,13 @@ $.validator.addMethod(
         },
         db_name: {
           required: "データベース名を入力してください",
-          minlength: "1～64文字、半角英数字記号",
-          maxlength: "1～64文字、半角英数字記号",
+          minlength: "1～64文字、半角英数字と_-",
+          maxlength: "1～64文字、半角英数字と_-",
         },
         db_user: {
           required: "ユーザー名を入力してください",
-          minlength: "1～32文字、半角英数字記号",
-          maxlength: "1～32文字、半角英数字記号",
+          minlength: "1～32文字、半角英数字と._-",
+          maxlength: "1～32文字、半角英数字と._-",
         },
         db_pass: {
           required: "パスワードを入力してください",
@@ -909,19 +954,19 @@ function checkdblimit()
       rules: {
         db_name: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
-          nospecialchar: true,
+          nospecialchar2: true,
           minlength: 1,
-          maxlength: 60,
+          maxlength: 64,
           alreadyexist: true,
           onkeyup: false,
         },
         db_user: {
           required: true,
-          numberalphabet: true,
+          // numberalphabet: true,
           nowhitespace: true,
-          nospecialchar: true,
+          nospecialchar1: true,
           minlength: 1,
           maxlength: 32,
           alreadyexist: true,
@@ -940,13 +985,13 @@ function checkdblimit()
       messages: {
         db_name: {
           required: "データベース名を入力してください",
-          minlength: "1～60文字、半角英数字記号",
-          maxlength: "1～60文字、半角英数字記号",
+          minlength: "1～64文字、半角英数字と_-",
+          maxlength: "1～64文字、半角英数字と_-",
         },
         db_user: {
           required: "ユーザー名を入力してください",
-          minlength: "1～32文字、半角英数字記号",
-          maxlength: "1～32文字、半角英数字記号",
+          minlength: "1～32文字、半角英数字と._-",
+          maxlength: "1～32文字、半角英数字と._-",
         },
         db_pass: {
           required: "パスワードを入力してください",
@@ -1045,21 +1090,23 @@ function checkdblimit()
       rules: {
         email: {
           required: true,
-          allowspecialchar2: true,
-          nowhitespace: true,
+          // allowspecialchar2: true,
+          // nowhitespace: true,
           // nospecialchar: true,
           minlength: 1,
           maxlength: 30,
+          formailuser: true,
           alreadyexist: true,
           onkeyup: false,
         },
         mail_pass_word: {
           required: true,
-          nowhitespace: true,
+          // nowhitespace: true,
+          formailuserpass: true,
           minlength: 8,
           maxlength: 30,
-          noallowfullwidth: true,
-          allowspecialchar3: true,
+          // noallowfullwidth: true,
+          // allowspecialchar3: true,
         },
       },
 

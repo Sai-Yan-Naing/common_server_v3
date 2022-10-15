@@ -27,3 +27,11 @@ res = 2126
 
 /api/duplicateobject.htm?id=2124&name=148ping&targetid=2126
 
+pause
+/api/pause.htm?id=objectid&pausemsg=yourmessage&action=0
+/api/pauseobjectfor.htm?id=objectid&pausemsg=yourmessage&duration=x
+
+resume
+/api/pause.htm?id=objectid&action=1
+http://202.218.224.38/api/pause.htm?id=2127&action=1&username=prtgadmin&password=BUHdfUtbGG4XWPT
+

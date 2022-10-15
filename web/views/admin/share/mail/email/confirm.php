@@ -17,7 +17,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 {
 	$msg = "メールアドレス「".$email."@".$webdomain."」を追加しました";
 	$msgsession ="msg";
-	$mail_pass_word=$_POST['mail_pass_word'];
+	$mail_pass_word=htmlspecialchars($_POST['mail_pass_word'], ENT_QUOTES);
 	$insert_q = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 	if ( ! $commons->doThis($insert_q,[$webdomain, $email, $mail_pass_word]))
 	{
@@ -35,7 +35,7 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" newuser '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$email);
 // die;
 } elseif ( isset($_POST['action']) and $_POST['action'] === 'edit') {
-	$mail_pass_word=$_POST['mail_pass_word'];
+	$mail_pass_word=htmlspecialchars($_POST['mail_pass_word'], ENT_QUOTES);
 	$act_id=$_POST['act_id'];
 	$update_q = "UPDATE add_email SET password='$mail_pass_word'WHERE id=? and domain=? ";
 	 if ( ! $commons->doThis($update_q,[$act_id,$webdomain]))
@@ -192,7 +192,7 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 					$dup = true;
 					$invmsg .= 'CSVファイル内に無効なメールアドレスまたはパスワードが含まれています<br>';
 						foreach ($invalid as $key => $value) {
-						 	$invmsg .= '[ '. $value['no'].' ] '. $value['email'].' and '.$value['password'].'<br>';
+						 	$invmsg .= htmlspecialchars('[ '. $value['no'].' ] '. $value['email'].' and '.$value['password']).'<br>';
 						 } 
 				}
 				$dbmsg = '';
@@ -200,7 +200,7 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 					$dup = true;
 					$dbmsg .= 'CSVファイル内に登録済みのユーザーと重複するメールアドレスがあります<br>';
 						foreach ($updatefromcsv as $key => $value) {
-						 	$dbmsg .= '[ '. $value['no'].' ] '. $value['email'].' and '.$value['password'].'<br>';
+						 	$dbmsg .= htmlspecialchars('[ '. $value['no'].' ] '. $value['email'].' and '.$value['password']).'<br>';
 						 } 
 				}
 				$csvmsg = '';
@@ -208,7 +208,7 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 					$dup = true;
 					$csvmsg .= 'CSVファイルの中に重複するメールアドレスがあります<br>';
 						foreach ($dupincsv as $key => $value) {
-						 	$csvmsg .= '[ '. $value['no'].' ] '. $value['email'].' and '.$value['password'].'<br>';
+						 	$csvmsg .= htmlspecialchars('[ '. $value['no'].' ] '. $value['email'].' and '.$value['password']).'<br>';
 						 }
 				}
 				

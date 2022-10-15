@@ -13,8 +13,8 @@ $getRow = $commons->getRow($query);
 <div class="modal-body">
     <form action="/share/mail?setting=email&tab=tab&act=confirm&webid=<?=$webid?>" method="post" id="email_create">
         <input type="hidden" name="action" value="edit">
-        <input type="hidden" name="email" value="<?= $getRow['email'] ?>">
-        <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
+        <input type="hidden" name="email" value="<?=htmlspecialchars($getRow['email'], ENT_QUOTES) ?>">
+        <input type="hidden" name="act_id" value="<?=htmlspecialchars($getRow['id'], ENT_QUOTES) ?>">
         <div class="form-group row mr-2">
             <span for="email" class="form-label">メールアドレス</span>
             <span  class="col-sm-6 form-label"><span id="change_mail_text"></span><?= htmlspecialchars($getRow['email'], ENT_QUOTES) ?>@<?= htmlspecialchars($webdomain, ENT_QUOTES) ?></span>
@@ -23,7 +23,7 @@ $getRow = $commons->getRow($query);
         <div class="form-group row mr-2">
             <div class="col-md-6">
                 <label for="mail_pass_word"  class="form-label">パスワード</label>
-            <input type="password" class="form-control" name="mail_pass_word" value="<?= $getRow['password'] ?>" id="mail_pass_word" placeholder="8～30文字、半角英数字記号の組み合わせ">
+            <input type="password" class="form-control" name="mail_pass_word" value="<?=$getRow['password'] ?>" id="mail_pass_word" placeholder="8～30文字、半角英数字記号の組み合わせ">
             <span toggle="#mail_pass_word" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
              <label for="mail_pass_word" id="mail_pass_word_error" class="error"></label>
             </div>

@@ -11,8 +11,12 @@ require_once('mails/mail.php');
 require_once('views/share_validate.php');
 $webmailer = new Mailer;
 $commons = new Common;
-
-$web_acc = $commons->getRow("SELECT * FROM web_account WHERE domain= ?", [$_COOKIE['share_user']]);
+$web_acc = $commons->getRow("SELECT * FROM web_account WHERE domain= ? and removal IS NULL", [$_COOKIE['share_user']]);
+if ( $web_acc == null)
+    {
+        $error = "ご契約ID/ドメインまたはパスワードに誤りがあります。";
+        header("location: /login");
+    }
 $webid = $web_acc['id'];
 $webadminID = $web_acc['customer_id'];
 $web_server_id = $web_acc['web_server_id'];

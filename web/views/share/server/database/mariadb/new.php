@@ -31,13 +31,13 @@ require_once('views/share_config.php');
         <div class="form-group row">
             <label for="db_name" class="col-sm-2 col-form-label">データベース名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="db_name" name="db_name"  column="db_name" table="db_account_for_mariadb" remark="madbname" placeholder="1～64文字、半角英数字記号">
+              <input type="text" class="form-control" id="db_name" name="db_name"  column="db_name" table="db_account_for_mariadb" remark="madbname" placeholder="1～64文字、半角英数字と_-">
             </div>
         </div>
         <div class="form-group row">
             <label for="db_user" class="col-sm-2 col-form-label">ユーザー名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="db_user" name="db_user" placeholder="1～32文字、半角英数字記号" column="db_user" table="db_account_for_mariadb" remark="madbuser">
+              <input type="text" class="form-control" id="db_user" name="db_user" placeholder="1～32文字、半角英数字と._-" column="db_user" table="db_account_for_mariadb" remark="madbuser">
             </div>
         </div>
         <div class="form-group row">

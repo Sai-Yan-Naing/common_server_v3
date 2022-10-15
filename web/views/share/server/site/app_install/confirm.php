@@ -13,7 +13,10 @@ $db_name = $_POST["db_name"];
 // $db_user = 'ec313_dbuser';
 $db_user = $_POST["db_user"];
 $db_pass = $_POST["db_pass"];
-
+if(isset($_POST["update"])){
+    $update = $_POST['update'];
+}
+$webappversion = json_decode($webappversion);
 
 $root_url = explode("/", $url);
 

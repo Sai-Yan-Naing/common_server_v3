@@ -53,7 +53,7 @@ foreach($getalldbcount as $value){
                                                 <tr>
                                                     <td class="border-dark"><?= htmlspecialchars($mail['email'], ENT_QUOTES);?>@<?= htmlspecialchars($webdomain, ENT_QUOTES) ?></td>
                                                     <td class="border-dark"><div toggle='star' class="d-flex"><div class="col-sm-8">
-                                                        <span class="d-none workbreakall"><?php echo htmlspecialchars($mail['password'], ENT_QUOTES); ?></span><span class="star workbreakall" style='margin-top:5px'>********</span>
+                                                        <span class="d-none workbreakall"><?php echo $mail['password']; ?></span><span class="star workbreakall" style='margin-top:5px'>********</span>
                                                         </div>
                                                         <div class="ml-auto col-sm-2">
                 <span class="fa fa-fw fa-eye fa-eye-slash tbtoggle-password"></span></div></td>
