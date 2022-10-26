@@ -167,11 +167,11 @@ $.validator.addMethod(
 $.validator.addMethod(
       "formailuser",
       function (value) {
-        var regex = /[^A-Za-z0-9`~!#^()_+-={}[\];',.]/;
+        var regex = /[^A-Za-z0-9`~!#^()_+\-={}[\];',.]/;
         var regex1 = value.includes('/')
         console.log(regex.test(value))
         console.log(regex1)
-        if (!regex.test(value) &&! regex1) {
+        if (!regex.test(value)) {
           return true;
         }
       },
@@ -180,12 +180,15 @@ $.validator.addMethod(
 $.validator.addMethod(
       "formailuserpass",
       function (value) {
-        var regex = /[^A-Za-z0-9!@#$%^&*()_+{}[\]:;"'>,.?/]/;
-        if (!regex.test(value)) {
+        var regex = /[^A-Za-z0-9!@#$%^&*()_+{}[\]:;"'>,.?\/]/; //for symbol 
+
+        var regex1 = /^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{8,30}/ //for  1 number 1 symbol 1 uppercase 1 lowercase
+        if (!regex.test(value) && regex1.test(value)) {
           return true;
         }
       },
-      `記号は!@#$%^&*()_+{}[]:;"'>,.?/のみ利用可能です`
+      // `記号は!@#$%^&*()_+{}[]:;"'>,.?/のみ利用可能です`
+      '英大文字・英小文字・数字・記号のうち3種類を含む必要があります'
     );
     
     $.validator.addMethod(
@@ -1102,9 +1105,9 @@ function checkdblimit()
         mail_pass_word: {
           required: true,
           // nowhitespace: true,
-          formailuserpass: true,
           minlength: 8,
           maxlength: 30,
+          formailuserpass: true,
           // noallowfullwidth: true,
           // allowspecialchar3: true,
         },
@@ -1121,8 +1124,8 @@ function checkdblimit()
         email: {
           onlynumberalphabet: '特殊文字は使用できません',
           required: "メールアドレスを入力してください",
-          minlength: "1～30文字、半角英数字記号",
-          maxlength: "1～30文字、半角英数字記号",
+          minlength: "アカウント名は30文字以内にしてください",
+          maxlength: "アカウント名は30文字以内にしてください",
         },
         mail_pass_word: {
           required: "パスワードを入力してください",

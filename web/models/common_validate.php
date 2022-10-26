@@ -31,7 +31,7 @@ class CommonValidate
 		return false;
 	}
 
-	function checkInDb ($table, $column, $checker, $web_server_id=null)
+	function checkInDb ($table, $column, $checker, $web_server_id=null,$params = [])
 	{
 		// @todo この処理は暫定。正しく存在するテーブルかカラムかをチェックしなければならない。
 		// if ( ! (ctype_alnum($table) && ctype_alnum($column))) column can contain underscore( _ )
@@ -42,7 +42,11 @@ class CommonValidate
 		$addition =null;
 		if($web_server_id!=null)
 		{
-			$addition = "and web_account.web_server_id= $web_server_id";
+			$addition .= " and web_account.web_server_id= $web_server_id";
+		}
+		if($table=='add_email')
+		{
+			$addition .= " and add_email.domain= '$params[domain]'";
 		}
 
 			$query = "SELECT $table.$column FROM $table INNER JOIN web_account on $table.domain = web_account.domain where $table.$column = :checker $addition";
