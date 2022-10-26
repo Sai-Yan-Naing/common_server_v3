@@ -12,6 +12,7 @@ $dev_config = $commons->getRow("SELECT * FROM device_config");
     $temp2 = [];
     $temp3 = [];
     $temp4 = [];
+    $arr_ping = [];
     $arr_rdp = [];
     $arr_http = [];
     $arr_url = [];
@@ -20,13 +21,13 @@ $dev_config = $commons->getRow("SELECT * FROM device_config");
     $arr = json_decode($getmails['dgroup'],true);
     $groupid = $arr['group'];
     $deviceid = $arr['device'];
-    if($getmails['id'] ==null ||count($arr)<1){
+    if($getmails['id'] ==null){
         $gurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_group'].'&name='.$webip.'&targetid='.$dev_config['target_group'].'&username='.$dev_config['username'].'&password='.$dev_config['password'];
         
         $groupid = getclone($gurl);
         // for resume
         $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$groupid.'&tabid=1&action=1&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
+        execute_api($pause);
 
         $durl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_device'].'&name='.$webip.'&host='.$webip.'&targetid='.$groupid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
 
@@ -35,18 +36,65 @@ $dev_config = $commons->getRow("SELECT * FROM device_config");
         
         // for resume
         $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$deviceid.'&tabid=1&action=1&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
+        execute_api($pause);
 
-        $temp4['group']=$groupid;
-        $temp4['device']=$deviceid ;
-        $arr_dgroup=json_encode($temp4);
+        // <!-- for ping sensor  -->
+        $ping = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_ping'].'&name=ping&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+
+        $pingid = getclone($ping);
+
+        // <!-- for sql sensor  -->
+
+        $sqlurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_sql'].'&name=sql&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+
+        $sqlurlid = getclone($sqlurl);
+
+        // <!-- for rdp sensor  -->
+
+        $rdpurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_rdp'].'&name=rdp&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+
+        $rdpurlid = getclone($rdpurl);
+
+
+        // for  sql sensor 
+        $sqlarr['onoff']=0;
+        $sqlarr['sensor']=$sqlurlid;
+        $sqlarr['db_user']='';
+        $sqlarr['db_pass']='';
+        $sqlarr = json_encode($sqlarr);
+        
+        //for mail
+        $mailarr = [];
+        $mailarr = json_encode($mailarr);
+
+        // for ping sensor 
+        $pingarr['ping'] = 0;
+        $pingarr['sensor'] = $pingid;
+        $pingarr=json_encode($pingarr);
+
+        // for http sensor 
+        $httparr['onoff'] = 0;
+        $httparr = json_encode($httparr);
+        // for url 
+        $urlarr = [];
+        $urlarr = json_encode($urlarr);
+
+        // for rdp sensor 
+        $rdparr['onoff']=0;
+        $rdparr['sensor']=$rdpurlid;
+        $rdparr['username']='';
+        $rdparr['password']='';
+        $rdparr = json_encode($rdparr);
+
+        // for devices and group 
+        $dgrouparr['group']=$groupid;
+        $dgrouparr['device']=$deviceid ;
+        $dgrouparr=json_encode($dgrouparr);
+
         $params=[];
         if($getmails['id'] ==null){
-            $insert_q = "INSERT INTO monitor_mail (type, domain_ip, dgroup) VALUES (?, ?, ?)";
-            $params=[$type, $webid, $arr_dgroup];
-        }else{
-            $insert_q = "UPDATE monitor_mail SET dgroup =? where domain_ip=?  and  type =?";
-            $params=[$arr_dgroup , $webid, $type];
+            echo $insert_q = "INSERT INTO monitor_mail (device_id,type, mail, domain_ip, ping, http, url, rdp, sql, dgroup) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $params=[1,$type, $mailarr, $webid, $pingarr, $httparr, $urlarr, $rdparr, $sqlarr, $dgrouparr];
         }
         
         if (!$commons->doThis($insert_q,$params))
@@ -54,6 +102,8 @@ $dev_config = $commons->getRow("SELECT * FROM device_config");
                 die("Error.");
         }
     }
+$getmails = $commons->getRow("SELECT * FROM monitor_mail WHERE domain_ip=? and type=?",[$webid,$type]);
+$dev_config = $commons->getRow("SELECT * FROM device_config");
 if($action=='new'){
     $mail=$_POST['mail'];
     $t = time();
@@ -118,82 +168,40 @@ if($action=='new'){
 }else if($action=='ping'){
     $ping = $_POST['ping']==0? 1 : 0;
     $arr = json_decode($getmails['ping'],true);
-    if(count($arr)>1){
-        $temp2['ping'] = $ping;
-        $temp2['sensor'] = $arr['sensor'];
-    }else{
-        // for sensor 
-        $sqlurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_ping'].'&name=ping&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-
-        $sqlurlid = getclone($sqlurl);
-        $temp2['ping'] = 1;
-        $temp2['sensor'] = $sqlurlid;
-    }
-    
-
-    $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$arr['sensor'].'&tabid=1&action='.$ping.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
-    // die();
+    $arr_ping['ping'] = $ping;
+    $arr_ping['sensor'] = $arr['sensor'];
+    $arr_ping = json_encode($arr_ping);
     $insert_q = "UPDATE monitor_mail SET ping=? where domain_ip=? and  type ='$type'";
-    // echo '<pre>';
-    $insert = json_encode($temp2);
-    if (!$commons->doThis($insert_q,[$insert, $webid]))
+    if (!$commons->doThis($insert_q,[$arr_ping, $webid]))
     {
             die("Error.");
     }
+    $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$arr['sensor'].'&tabid=1&action='.$ping .'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+        execute_api($pause);
     // die;
 }else if($action=='sql'){
     $sql = $_POST['sql']==0? 1 : 0;
     $arr = json_decode($getmails['sql'],true);
-
-    if(count($arr)>0){
-        $arr_sql['onoff']=$sql;
-        $arr_sql['sensor']=$arr['sensor'];
-        $arr_sql['db_user']=$arr['db_user'];
-        $arr_sql['db_pass']=$arr['db_pass'];
-    }else{
-        // for sensor 
-        $sqlurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_sql'].'&name=sql&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-
-        $sqlurlid = getclone($sqlurl);
-        // for resume
-        $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$sqlurlid.'&tabid=1&action=1&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
-        $arr_sql['onoff']=1;
-        $arr_sql['sensor']=$sqlurlid;
-        $arr_sql['db_user']='';
-        $arr_sql['db_pass']='';
-    }
+    $arr_sql['onoff']=$sql;
+    $arr_sql['sensor']=$arr['sensor'];
+    $arr_sql['db_user']=$arr['db_user'];
+    $arr_sql['db_pass']=$arr['db_pass'];
     $arr_sql = json_encode($arr_sql);
+
     $insert_q = "UPDATE monitor_mail SET sql = ? where domain_ip=? and  type ='$type'";
     if (!$commons->doThis($insert_q,[$arr_sql, $webid]))
     {
             die("Error.");
     }
         $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$arr['sensor'].'&tabid=1&action='.$sql.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
+        execute_api($pause);
 }else if($action=='rdp'){
     $rdp = $_POST['rdp']==0? 1 : 0;
     $arr = json_decode($getmails['rdp'],true);
-    if(count($arr)>0){
-        $arr_rdp['onoff']=$rdp;
-        $arr_rdp['sensor']=$arr['sensor'];
-        $arr_rdp['username']=$arr['username'];
-        $arr_rdp['password']=$arr['password'];
-    }else{
-
-        $rdpurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_rdp'].'&name=rdp&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-
-        $rdpurlid = getclone($rdpurl);
-
-        // for resume
-        $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$rdpurlid.'&tabid=1&action=1&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
-        $arr_rdp['onoff']=1;
-        $arr_rdp['sensor']=$rdpurlid;
-        $arr_rdp['username']='';
-        $arr_rdp['password']='';
-    }
+    $arr_rdp['onoff']=$rdp;
+    $arr_rdp['sensor']=$arr['sensor'];
+    $arr_rdp['username']=$arr['username'];
+    $arr_rdp['password']=$arr['password'];
     $arr_rdp = json_encode($arr_rdp);
     $insert_q = "UPDATE monitor_mail SET rdp = ? where domain_ip=? and  type ='$type'";
     if (!$commons->doThis($insert_q,[$arr_rdp, $webid]))
@@ -201,14 +209,13 @@ if($action=='new'){
             die("Error.");
     }
         $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$arr['sensor'].'&tabid=1&action='.$rdp.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
+        execute_api($pause);
 }else if($action=='http'){
     $http = $_POST['http']==0? 1 : 0;
-    $arr = json_decode($getmails['http'],true);
-    $arr['onoff'] = $http;
+    $arr_http['onoff'] = $http;
+    $arr_http = json_encode($arr_http);
     $insert_q = "UPDATE monitor_mail SET http = ? where domain_ip=? and  type ='$type'";
-    $insert = json_encode($arr);
-    if (!$commons->doThis($insert_q,[$insert, $webid]))
+    if (!$commons->doThis($insert_q,[$arr_http, $webid]))
     {
             die("Error.");
     }
@@ -216,7 +223,7 @@ if($action=='new'){
     $arr = json_decode($getmails['url'],true);
     foreach($arr as $val){
         echo $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$val['sensor'].'&tabid=1&action='.$http.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
+        execute_api($pause);
     }
 }else if($action=='saveall'){
     $urls = $_POST['url'];
@@ -226,18 +233,12 @@ if($action=='new'){
     $db_pass = $_POST['db_pass'];
     
     $arr = json_decode($getmails['http'],true);
-    if(count($arr)>0){
-        $arr_http['onoff'] = $arr['onoff'];
-    }else{
-        $arr_http['onoff'] =1;
-    }
-    
-    $arr_http = json_encode($arr_http);
+    $arr_http['onoff'] = $arr['onoff'];
 
     $arr = json_decode($getmails['url'],true);
-    foreach($arr as $val){
+    foreach($arr as $val){//for delete sensor
         $delsensor = 'http://'.$dev_config['ip'].'/api/deleteobject.htm?id='.$val['sensor'].'&approve=1&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        deleteapi($delsensor);
+        execute_api($delsensor);
     }
     foreach (array_filter($urls) as $key => $value) {
         $uurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_http'].'&name=http&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
@@ -245,57 +246,49 @@ if($action=='new'){
         $uurlid = getclone($uurl);
 
         // for resume
-        $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$uurlid.'&tabid=1&action=1&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
+        $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$uurlid.'&tabid=1&action='.$arr_http['onoff'].'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+        execute_api($pause);
+        // replace setting 
+        $replaceurl = 'http://'.$dev_config['ip'].'/api/setobjectproperty.htm?id='.$uurlid.'&name=httpurl&value='.$value.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+        execute_api($replaceurl);
 
         $temp1[]=['sensor'=>$uurlid,'value'=>$value];
     }
         $arr_url=$temp1;
-    
-    $arr_url = json_encode($arr_url);
 
+    // for rdp sensor 
     $arr = json_decode($getmails['rdp'],true);
-    if(count($arr)>0){
-        $arr_rdp['onoff']=$arr['onoff'];
-        $arr_rdp['sensor']=$arr['sensor'];
-    }else{
-
-        $rdpurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_rdp'].'&name=rdp&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-
-        $rdpurlid = getclone($rdpurl);
-
-        // for resume
-        $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$rdpurlid.'&tabid=1&action=1&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
-        $arr_rdp['onoff']=1;
-        $arr_rdp['sensor']=$rdpurlid;
-    }
-    
+    $arr_rdp['onoff']=$arr['onoff'];
+    $arr_rdp['sensor']=$arr['sensor'];
     $arr_rdp['username']=$username;
     $arr_rdp['password']=$password;
-    $arr_rdp = json_encode($arr_rdp);
-
-    $arr = json_decode($getmails['sql'],true);
-
-    if(count($arr)>0){
-        $arr_sql['onoff']=$arr['onoff'];
-        $arr_sql['sensor']=$arr['sensor'];
-    }else{
-        // for sensor 
-        $sqlurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_sql'].'&name=sql&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
-
-        $sqlurlid = getclone($sqlurl);
-        // for resume
-        $pause = 'http://'.$dev_config['ip'].'/api/pause.htm?id='.$sqlurlid.'&tabid=1&action=1&username='.$dev_config['username'].'&password='.$dev_config['password'];
-        pauseresume($pause);
-        $arr_sql['onoff']=1;
-        $arr_sql['sensor']=$sqlurlid;
-    }
-
     
+    $dgroup = json_decode($getmails['dgroup'],true);
+
+    $setp = 'http://'.$dev_config['ip'].'/api/setobjectproperty.htm?id='.$dgroup['device'].'&name=windowslogindomain&value='.$dev_config['ip'].'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+    execute_api($setp);
+    $usernamep = 'http://'.$dev_config['ip'].'/api/setobjectproperty.htm?id='.$dgroup['device'].'&name=windowsloginusername&value='.$username.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+    execute_api($usernamep);
+    $passwordp = 'http://'.$dev_config['ip'].'/api/setobjectproperty.htm?id='.$dgroup['device'].'&name=windowsloginpassword&value='.$password.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+    execute_api($passwordp);
+
+    // for sql 
+    $arr = json_decode($getmails['sql'],true);
+    $arr_sql['onoff']=$arr['onoff'];
+    $arr_sql['sensor']=$arr['sensor'];
     $arr_sql['db_user']=$db_user;
     $arr_sql['db_pass']=$db_pass;
+
+    $dbuserp = 'http://'.$dev_config['ip'].'/api/setobjectproperty.htm?id='.$dgroup['device'].'&name=dbuser&value='.$db_user.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+    execute_api($dbuserp);
+
+    $db_passp = 'http://'.$dev_config['ip'].'/api/setobjectproperty.htm?id='.$dgroup['device'].'&name=dbpassword&value='.$db_pass.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+    execute_api($dbuserp);
+    
+    $arr_http = json_encode($arr_http);
+    $arr_url = json_encode($arr_url);
     $arr_sql = json_encode($arr_sql);
+    $arr_rdp = json_encode($arr_rdp);
 
     $insert_q = "UPDATE monitor_mail SET http = ?, url=?, rdp=?, sql=? where domain_ip=? and  type ='$type'";
     $params = [$arr_http,$arr_url,$arr_rdp,$arr_sql,$webid];
@@ -303,21 +296,11 @@ if($action=='new'){
         {
                 die("Error.");
         }
-    // print_r($arr_http);echo '<br>';
-    // print_r($arr_url);echo '<br>';
-    // print_r($arr_rdp);echo '<br>';
-    // print_r($arr_sql);echo '<br>';
 }
 
-function deleteapi($url)
+function execute_api($url)
 {
-    file_get_contents($url);
-}
-
-function pauseresume($url)
-{
-    // return true;
-    file_get_contents($url);
+    $data = file_get_contents($url);
 }
 
 function getclone($url)

@@ -9,12 +9,14 @@ if(isset($_COOKIE['admin']) and isset($_GET['webper']) && $_GET['webper'] =='adm
 //             echo json_encode($status);
 //             die();
     require_once("views/admin/admin_shareconfig.php");
+    $params =['domain'=>$webdomain];
 }else if(isset($_COOKIE['admin']) and $_GET['webper']=='admin')
 {
     require_once("views/admin/admin_config.php");
 }else if(isset($_COOKIE['share_user']))
 {
     require_once('views/share_config.php');
+    $params =['domain'=>$webdomain];
 }else{
     require 'config/all.php';
 }
@@ -27,9 +29,10 @@ $status = ['table'=>$table,'column'=>$column,'chekcer'=>$checker,'remark'=>$rema
 $check = new CommonValidate;
 // echo json_encode(['status'=>$web_mydbuser]);
 //      die;
+
 if($table !=='none')
 {
-    $checkresult = $check->checkInDb($table, $column, $checker, $web_server_id);
+    $checkresult = $check->checkInDb($table, $column, $checker, $web_server_id,$params);
     if ( $checkresult )
     {
         $status['status'] =$checkresult;

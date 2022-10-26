@@ -71,3 +71,27 @@
 <?php 
 require_once("views/common_modal.php");
 require_once("views/loading.php");
+?>
+<script>
+$(document).ready(function(){
+    $gourl = '/admin?main=surveillance&act=getapi&tab=vps&webid=5';
+    setInterval(function(){ 
+        usage('cpu',$gourl);
+    }, 15000);
+});
+
+function usage($var,$gourl)
+        {
+            $url = document.URL.split('/');
+	        $url=$url[0]+"//"+$url[2];
+            $.ajax({
+                type: "POST",
+                url: $url+$gourl,
+                data: {},
+                success: function(data){
+                    
+                    
+                }
+            });
+        }
+</script>
