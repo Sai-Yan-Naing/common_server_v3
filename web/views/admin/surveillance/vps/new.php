@@ -3,7 +3,8 @@
 <div id="layoutSidenav">
 <?php require_once('views/admin/sidebar.php');?>
 <?php 
-$getmails = $commons->getRow("SELECT monitor_mail.*, vps_account.os FROM monitor_mail inner join vps_account on monitor_mail.domain_ip = vps_account.id WHERE domain_ip=? and type=?",[$webid,'vps']);
+$getmails = $commons->getRow("SELECT monitor_mail.*, vps_account.os,vps_account.sensor_limit,device_config.limit FROM monitor_mail inner join vps_account on monitor_mail.domain_ip = vps_account.id inner join device_config on device_config.id=monitor_mail.device_id WHERE domain_ip=? and type=?",[$webid,'vps']);
+// echo '<pre>';
 // print_r($getmails);
 // die;
 $ping = json_decode($getmails['ping'],true);
@@ -96,17 +97,18 @@ $sql = json_decode($getmails['sql'],true);
                                         <span class="<?= (int)$http['onoff']==1? "labelon":"labeloff"  ?>"><?= (int)$http['onoff']==1? "起動":"停止"  ?></span>
                                     </label>
                                 </div>
-                                <div class="col-5 d-flex"><input type="text" class="form-control form-control-sm mr-1" name="url[]" value="<?=$url[0]['value']?>"><span class="clone-input" style="font-size: 25px;margin-top: -5px;"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></div>
+                                <div class="col-5 d-flex"><input type="text" class="form-control form-control-sm mr-1" name="url[]" value="<?=$url[0]['value']?>"><span class="clone-input" style="font-size: 25px;margin-top: -5px;" data-limit="<?=$getmails['limit']+$getmails['sensor_limit']?>"><i class="fa fa-plus-circle" aria-hidden="true"></i></span></div>
                             </div>
                             <?php
-                            if(count($url)>2){
+                            if(count($url)>1){
                                 $display="block";
                             }else{
                                 $display="none";
                             }
                             $i=0;
                             do{
-                            // for($i=0;$i<count($url);$i++):?>
+                                if($i +2 <= $getmails['limit']+$getmails['sensor_limit']):
+                            ?>
                             <div class="d-flex mt-3 col-6 col-sm-12 clone-div" style="">
                                 <div class="mr-2 col-md-2"></div>
                                 <div class="col-md-2">
@@ -114,7 +116,7 @@ $sql = json_decode($getmails['sql'],true);
                                 <div class="col-5 d-flex urlclone" ><input type="text" class="form-control form-control-sm mr-1 mb-2"  name="url[]" value="<?=$url[$i+1]['value']?>"><span class="delete-clone" style="font-size: 25px;margin-top: -5px; display:<?=$display?>;"><i class="fa fa-minus-circle" aria-hidden="true"></i></span></div>
                             </div>
                             <?php 
-                            // endfor;
+                            endif;
                             $i++; 
                             }while($i<count($url)); ?>
                             <?php if($getmails['os']=='windows'):?>
@@ -183,6 +185,12 @@ require_once('views/admin/surveillance/vps/footer.php');
 ?>
 <script>
 $(document).on('click','.clone-input',function(){
+    $lenght = $(this).data('limit');
+        // console.log($('.clone-div').length + 1)
+    if($('.clone-div').length + 1>=$lenght){
+        alert('Cannot add over limited')
+        return false;
+    }
 	$(this).parent().parent().next('.clone-div').clone().insertAfter('.clone-div:last');
     $('.clone-div:last').children('.urlclone').children('input').val('');
     if($('.clone-div').length>1){

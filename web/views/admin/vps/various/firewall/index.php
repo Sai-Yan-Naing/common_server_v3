@@ -116,7 +116,7 @@ $getAllRow=$commons->getAllRow($query);
                                 <?php require_once('views/admin/vps/title.php') ?>
                                 <?php require_once('views/admin/vps/various/subtitle.php') ?>
                                 <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                                    <div class="contract" id='terminal' style="height: 500px;">
+                                    <div class="contract" id='terminal' style="height: 500px;" gourl="/admin/vps/various?setting=firewall&tab=firewall&act=terminal&webid=<?=$webid?>">
                                         
                                     </div>
                                 </div>
@@ -125,18 +125,22 @@ $getAllRow=$commons->getAllRow($query);
             </div>
     </div>
 
-    <script type="text/javascript">
-    // In body tag
-    $('#terminal').terminal({
-        iam: function (name) {
-            this.echo('Hello, ' + name +
-                '. Welcome to GeeksForGeeks');
-        }
+    <script>
+    $(function() {
+    $('#terminal').terminal(function(command, term) {
+        $gourl = $(this).attr('gourl');
+        $url = document.URL.split("/");
+        $url = $url[0] + "//" + $url[2];
+        $url = $url + $gourl;
+        term.pause();
+        $.post($url, {command: command}).then(function(response) {
+            term.echo(response).resume();
+        });
     }, {
-        greetings: 'Welcome to Winserver Web terminal'
+        greetings: 'W'
     });
-
-    </script>
+});
+  </script>
 
 <?php endif; ?>
  <?php require_once("views/admin/vps/footer.php"); ?>
