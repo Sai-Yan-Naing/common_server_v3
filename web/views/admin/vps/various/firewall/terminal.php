@@ -36,7 +36,6 @@ if(isset($_POST['command'])){
 //         $_SESSION['connected'] = 'connected';
 //     }
 //     if($_SESSION['connected']=='connected'){
-        echo "<br />";
         $command = $_POST['command']." \n";
         fwrite($stdio,$command);
 
@@ -44,7 +43,7 @@ if(isset($_POST['command'])){
 
         while($line = fgets($stdio)) {
                 flush();
-                echo $line."<br />";
+                echo $line;
         }
         
     }
