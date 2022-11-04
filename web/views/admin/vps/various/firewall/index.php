@@ -137,7 +137,7 @@ $getAllRow=$commons->getAllRow($query);
             term.echo(response).resume();
         });
     }, {
-        greetings: 'W'
+        greetings: 'Welcome to Winserver'
     });
 });
   </script>

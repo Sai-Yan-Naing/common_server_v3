@@ -15,8 +15,8 @@ header("Access-Control-Allow-Headers: *");
 ?>
 
 <?php
-if(empty($_SESSION['connected']) || $_SESSION['connected']==''){
-    echo 'hello';
+if(isset($_POST['command'])){
+//     echo 'hello';
         if (!($resource=@ssh2_connect("202.218.224.148"))) {
                 echo "[FAILED]<br />";
                 exit(1);
@@ -33,11 +33,11 @@ if(empty($_SESSION['connected']) || $_SESSION['connected']==''){
                 echo "[FAILED]<br />";
                 exit(1);
         }
-        $_SESSION['connected'] = 'connected';
-    }
-    if($_SESSION['connected']=='connected'){
+//         $_SESSION['connected'] = 'connected';
+//     }
+//     if($_SESSION['connected']=='connected'){
         echo "<br />";
-        $command = "dir \n";
+        $command = $_POST['command']." \n";
         fwrite($stdio,$command);
 
         sleep(1);
@@ -49,5 +49,5 @@ if(empty($_SESSION['connected']) || $_SESSION['connected']==''){
         
     }
 
-        // fclose($stdio);
+        fclose($stdio);
 ?>
