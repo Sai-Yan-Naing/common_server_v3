@@ -135,7 +135,12 @@ if($action=='new'){
         execute_api($delsensor);
     }
     foreach (array_filter($urls) as $key => $value) {
-        $uurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_http'].'&name=http&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
+        $temp = parse_url($value);
+        $rename = $temp['path'].'?'.$temp['query'];
+            if($rename=="?"){
+                $rename = "HTTP";
+            }
+        $uurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_http'].'&name='.$rename.'&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
 
         $uurlid = getclone($uurl);
 
