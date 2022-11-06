@@ -136,8 +136,12 @@ if($action=='new'){
     }
     foreach (array_filter($urls) as $key => $value) {
         $temp = parse_url($value);
-        $rename = $temp['path'].'?'.$temp['query'];
-            if($rename=="?"){
+        // print_r($temp);die;
+        $rename = $temp['path'];
+        if($temp['query']!=''){
+            $rename.='?'.$temp['query'];
+        }
+            if($rename=="?" || $rename=="/?" || $rename=="//?" || $rename=="" || $rename=="/"){
                 $rename = "HTTP";
             }
         $uurl = 'http://'.$dev_config['ip'].'/api/duplicateobject.htm?id='.$dev_config['copy_http'].'&name='.$rename.'&targetid='.$deviceid.'&username='.$dev_config['username'].'&password='.$dev_config['password'];
