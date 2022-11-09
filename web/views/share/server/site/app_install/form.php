@@ -4,12 +4,12 @@
         <div class="col-sm-8">
             <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="change/app_version">Word Press
+                <input type="radio" class="form-check-input app" value="WordPress" name="app" checked gourl="change/app_version">WordPress
             </label>
             </div>
             <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input app" value="ECCUBE" name="app" gourl="change/app_version">EC-CUBE
+                <input type="radio" class="form-check-input app" value="EC-CUBE" name="app" gourl="change/app_version">EC-CUBE
             </label>
             </div>
         </div>
@@ -64,7 +64,7 @@
     <div class="form-group row">
         <label for="password" class="col-sm-3 col-form-label">パスワード</label>
         <div class="col-sm-9">
-            <input type="password" class="form-control" id="password" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+            <input type="password" class="form-control" id="password" name="password" placeholder=" 8～30文字、半角英数字記号の組み合わせ">
         </div>
     </div>
     <div class="form-group row">
@@ -87,7 +87,7 @@
         <div class="col-sm-3"></div>
         <label for="db_pass" class="col-sm-3 col-form-label">パスワード</label>
         <div class="col-sm-6">
-            <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～70文字、半角英数字記号">
+            <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder=" 8～30文字、半角英数字記号の組み合わせ">
         </div>
     </div>
     <div class="form-group row">

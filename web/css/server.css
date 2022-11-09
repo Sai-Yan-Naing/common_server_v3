@@ -937,3 +937,22 @@ span {
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
+
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  margin-right: 6px;
+  z-index: 2;
+}
+
+/*.tbfield-icon {
+  float: right;
+  margin-top: 7px;
+  z-index: 2;
+}*/
+.workbreakall{
+    position: absolute;
+    word-break: break-all;
+}

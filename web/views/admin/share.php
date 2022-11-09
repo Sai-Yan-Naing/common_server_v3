@@ -37,12 +37,17 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/admin?main=vps" onclick="loading()">VPS/デスクトップ</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin?main=surveillance&act=index" onclick="loading()">監視</a>
+                            </li>
                         </ul>
                         <?php  
                             $limit = 20;
                             $table = 'web_account';  
                             require_once('views/pagination/start.php');
-                            $query = "SELECT * FROM $table WHERE customer_id = ? AND removal is null ORDER BY id
+                            $query = "SELECT web_account.*,plan_tbl.id as planid,name,site,web_capacity,mail_capacity,mail_user,mysql_db,mysql_db_num,mysql_db_capacity,maria_db,maria_db_num,
+maria_db_capacity,mssql_db,mssql_db_num,mssql_db_capacity,waf,wp,dotnet,dotnetcore,asp,php,python,
+free_ssl,original_ssl,fixed_ip,ftp,ftp_num,back_up,forein_ip,commercial_sale,resale FROM web_account INNER JOIN plan_tbl on web_account.[plan] =plan_tbl.id WHERE customer_id = ? AND removal is null ORDER BY web_account.id
                             OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
                             $commons = new Common;
                             $multidomain=$commons->getAllRow($query,[$webadminID]);
@@ -55,7 +60,11 @@
                                 }
 
                             }
+                            // echo '<pre>';
+                            // print_r($multidomain);
+                            // die();
                             $a = 1;
+
                             foreach($contracts as $main_domain):
                                 $site = 0;
                                 $sites=[];
@@ -69,48 +78,50 @@
                                 $msount = 0;
                                 $mssqlcount = [];
                                 $mssqltotal =0;
+                                $mailcount = [];
+                                $mailtotal =0;
                                 $mdomain =$main_domain['domain'];
-                                // echo $subdomain;
-                                // $web_server = "SELECT count(id) FROM db_account WHERE domain='$mdomain'";
-                                // $mgethost = $commons->getCount($web_server);
-                                                // print_r($gethost);
                                 foreach($multidomain as $domain){
                                     if($main_domain['id'] == $domain['id'] || $main_domain['id']==$domain['origin_id'])
                                     {
                                         $site += 1; 
                                         $sites[$main_domain['id']] = $site;
                                         $subdomain = $domain['domain'];
-                                        $db_account = "SELECT count(id) FROM db_account WHERE domain='$subdomain'";
-                                         $mycount = $commons->getCount($db_account);
+                                        // $db_account = "SELECT count(id) FROM db_account WHERE domain='$subdomain'";
+                                         // $mycount = $commons->getCount($db_account);
+                                         $mycount = $domain['mysql_cnt'];
                                          $mysqlcount[$domain['id']] = $mycount;
                                          $mysqltotal +=$mycount;
 
-                                         $madb_account = "SELECT count(id) FROM db_account_for_mariadb WHERE domain='$subdomain'";
-                                         $macount = $commons->getCount($madb_account);
+                                         // $madb_account = "SELECT count(id) FROM db_account_for_mariadb WHERE domain='$subdomain'";
+                                         // $macount = $commons->getCount($madb_account);
+                                         $macount = $domain['mariadb_cnt'];
                                          $masqlcount[$domain['id']] = $macount;
                                          $masqltotal +=$macount;
 
-                                         $msdb_account = "SELECT count(id) FROM db_account_for_mssql WHERE domain='$subdomain'";
-                                         $mscount = $commons->getCount($msdb_account);
+                                         // $msdb_account = "SELECT count(id) FROM db_account_for_mssql WHERE domain='$subdomain'";
+                                         // $mscount = $commons->getCount($msdb_account);
+                                         $mscount = $domain['mssql_cnt'];
                                          $mssqlcount[$domain['id']] = $mscount;
                                          $mssqltotal +=$mscount;
+
+                                         $mcount = $domain['mail_cnt'];
+                                         $mailcount[$domain['id']] = $mcount;
+                                         $mailtotal +=$mcount;
 
                                         // echo 'hello';
                                     }
 
                                 }
-                                // echo $subdomain;
-                                // $web_server = "SELECT count(id) FROM db_account WHERE domain='$mdomain'";
-                                //                 $gethost = $commons->getCount($web_server);
-                                                // print_r($masqlcount);
                         ?>
                         <div class="d-flex contract-domain <?= ($a==1)? '':'main-contract'?>">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <i class="fa <?= ($a==1)? 'fa-caret-down':'fa-caret-right'?>" aria-hidden="true"></i>
-                                <?= $main_domain['domain'] ?>[<?= $webroot_plan['name'] ?>]</div>
-                            <div class="ml-auto col-md-3">マルチドメイ: <?= $sites[$main_domain['id']] ?>/<?= $webroot_plan['site'] ?></div>
-                            <div class="col-md-3">MySQL/Mariadb: <?= $mysqltotal + $masqltotal ?>/<?= $webroot_plan['mysql_db_num'] ?></div>
-                            <div class="col-md-3">MSSQL: <?= $mssqltotal ?>/<?= $webroot_plan['mssql_db_num'] ?></div>
+                                <?= $main_domain['domain'] ?>[<?= $main_domain['name'] ?>]</div>
+                            <div class="ml-auto col-md-2">マルチドメイン: <?= $sites[$main_domain['id']] ?>/<?= $main_domain['site'] ?></div>
+                            <div class="col-md-2">MySQL/MariaDB: <?= $mysqltotal + $masqltotal ?>/<?= $main_domain['maria_db_num'] ?></div>
+                            <div class="col-md-2">MSSQL: <?= $mssqltotal ?>/<?= $main_domain['mssql_db_num'] + (int) $main_domain['pmssql']?></div>
+                            <div class="col-md-2">Mail: <?= $mailtotal ?>/<?= $main_domain['mail_user'] ?></div>
                         </div>
                         <div class="sub-domain" style=" display:<?= ($a==1)? '':'none'?>">
                             <table class="table table-borderless">
@@ -119,7 +130,7 @@
                                         <th class="tb-width-2">契約ドメイン</th>
                                         <th class="tb-width">サイト設定</th>
                                         <th class="tb-width">使用容量</th>
-                                        <th class="tb-width">MySQL/Mariadb</th>
+                                        <th class="tb-width">MySQL/MariaDB</th>
                                         <th class="tb-width">MSSQL</th>
                                         <th class="tb-width-1">サイト</th>
                                         <th class="tb-width-1">アプリケーションプール</th>
@@ -137,6 +148,9 @@
                                                 $web_host = $gethost['ip'];
                                                 $web_user = $gethost['username'];
                                                 $web_password = $gethost['password'];
+
+                                                $mydbcount = $mysqlcount[$domain['id']]+$masqlcount[$domain['id']];
+                                                $msdbcount = $mssqlcount[$domain['id']];
                                             
 
                                     ?>
@@ -148,8 +162,8 @@
                                         <td class="tb-width">
                                             <span><?php //if($domain['origin'] !=1 ){ echo sizeFormat(folderSize($web_host,$web_user,$web_password,$webrootuser."/".$domain['user']));}else{echo sizeFormat($webcapacity);} ?></span>
                                         </td>
-                                        <td class="tb-width"><?= $mysqlcount[$domain['id']]+$masqlcount[$domain['id']]?></td>
-                                        <td class="tb-width"><?= $mssqlcount[$domain['id']]?></td>
+                                        <td class="tb-width"><?= ($mydbcount>0) ? $mydbcount : 0 ; ?></td>
+                                        <td class="tb-width"><?= ($msdbcount>0) ? $msdbcount : 0 ;?></td>
                                         <td class="tb-width-1">
                                             <form action="" method = "post">
                                                 <input type="hidden" name="app" value="site">
@@ -194,9 +208,7 @@
                             endforeach;
                         ?>
                         <div class="row justify-content-center hbtn mt-4">
-                            <?php if( (int)$webplnsite > count($multidomain ) || $webplnsite=='unlimited'):?>
                                 <div class="col-md-3"><button class="btn btn-outline-info form-control common_dialog" gourl="/admin/multiple_domain?act=new" data-toggle="modal" data-target="#common_dialog">マルチドメイン追加</button></div>
-                            <?php endif; ?>
                                 <div class="col-md-3"><a href="/admin/domain-transfer?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">ドメイン取得/移管</a></div>
                                 <div class="col-md-3"><a href="/admin/add-server?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">サーバー追加</a></div>
                                 <div class="col-md-3"><a href="/admin/dns?tab=share&act=index" class="btn btn-outline-info form-control" onclick="loading()">DNS情報</a></div>

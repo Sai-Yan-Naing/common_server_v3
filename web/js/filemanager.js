@@ -3,7 +3,7 @@ $(document).on("click", ".folder_click", function () {
   $foldername = $(this).attr("foldername");
   $this = $(this);
   $filepath = $foldername.split("/");
-  // alert($filepath);
+  
   $_path = "";
   $webid = $this.attr("webid");
   $url = document.URL.split("/");
@@ -23,8 +23,24 @@ $(document).on("click", ".folder_click", function () {
     data: { foldername: $foldername },
   });
   $done = $result.done(function (data) {
+    $back = [''];
+    if ($filepath.length>1) {
+      $back = $filepath.slice(0,-1)
+    }
+    console.log($foldername);
+    $return =$back.join("/")
+    $join = '';
+    if ($foldername !='') {
+      $join = '<li class="nav-item">' +
+      '<button class="folder_click btn btn-info btn-sm mr-3" foldername="' +
+      $return +
+      '"  style="padding: 5px 10px; cursor:pointer;"  gourl="' +
+      $gourl +
+      '" webid="'+$webid+'">上へ移動</button>' +
+      "</li>";
+    }
     document.getElementById("changebody").innerHTML = data;
-    $path =
+    $path =$join+
       '<li class="nav-item">' +
       '<a class="nav-link folder_click text-white" foldername="' +
       $_path +
@@ -56,13 +72,13 @@ $(document).on("click", ".folder_click", function () {
     }
     $("#dir_path").html($path);
     $("#common_path").attr("path", $foldername);
+    $common_path = $("#common_path").attr("path");
     $(".download_file").each(function (i, obj) {
-      $temp = $(this).attr("gourl");
-      $(this).attr("gourl", $temp + "&common_path=" + $_path);
-    });
+        $temp = $(this).attr("href");
+        $(this).attr("href", $temp + "&common_path=" + $common_path);
+        // console.log($temp)
+      });
   });
-  // stoploading();
-  // alert($_path)
 });
 
 $(document).on("click", ".common_dialog_fm", function () {
@@ -106,6 +122,8 @@ $(document).on("click", ".open_file", function () {
     "config",
     "sql",
     "ini",
+    "gitignore",
+    'env',
   ];
   $url = document.URL.split("/");
   $url = $url[0] + "//" + $url[2];
@@ -132,7 +150,7 @@ $(document).on("click", ".open_file", function () {
       },
     });
   } else {
-    alert("This file is unsupported format.");
+    alert("このファイルはファイルマネージャー上では確認できない拡張子です。");
   }
 });
 
@@ -169,26 +187,31 @@ $(document).on("submit", "#fm_fun", function () {
   $common_path = $("#common_path").attr("path");
   $formdata = new FormData(this);
   $formdata.append("common_path", $common_path);
-  console.log($url);
-  console.log($formdata);
+  // let searchParams = new URLSearchParams(window.location.search)
+  // searchParams.has('webid'); 
+  // let webid = searchParams.get('webid');
+  // console.log(webid);
+  // console.log($url);
+  // console.log($formdata);
+  // return;
   if ($(this).attr("fun") == "upload") {
     if ($("#upload_").val() == "" || $("#upload_").val() == null) {
       alert("Empty File cannot upload");
       return false;
     }
-    $gourl = "admin/share/server?setting=filemanager&tab=tab&act=validatecap";
-        $exceedwebcap = '容量がいっぱいになっているため、ファイル/フォルダの追加ができません。サイトデータを削除いただき追加を行ってください。';
-    if(exceedwebcap($gourl))
-     {
-          document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
-          $('#exceedwebcap').html($exceedwebcap)
-          return;
-     }
-    $size = $("#upload_")[0].files[0].size;
-    if ($size > 2097152) {
-      alert("File size is greater than 2MB");
-      return false;
-    }
+    // $gourl = "admin/share/server?setting=filemanager&tab=tab&act=validatecap&webid="+webid;
+    //     $exceedwebcap = '容量がいっぱいになっているため、ファイル/フォルダの追加ができません。サイトデータを削除いただき追加を行ってください。';
+    // if(exceedwebcap($gourl))
+    //  {
+    //       document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
+    //       $('#exceedwebcap').html($exceedwebcap)
+    //       return;
+    //  }
+    // $size = $("#upload_")[0].files[0].size;
+    // if ($size > 2097152) {
+    //   alert("File size is greater than 2MB");
+    //   return false;
+    // }
   }
   if ($("input[type=text]").val() == "" || $("input[type=text]") == null) {
     if ($(this).attr("fun") == "file") {
@@ -230,8 +253,8 @@ $(document).on("submit", "#fm_fun", function () {
     success: function (data) {
       document.getElementById("changebody").innerHTML = data;
       $(".download_file").each(function (i, obj) {
-        $temp = $(this).attr("gourl");
-        $(this).attr("gourl", $temp + "&common_path=" + $common_path);
+        $temp = $(this).attr("href");
+        $(this).attr("href", $temp + "&common_path=" + $common_path);
       });
     },
   });

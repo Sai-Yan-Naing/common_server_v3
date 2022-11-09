@@ -14,7 +14,7 @@
 									<a class="nav-link active" aria-current="page" href="" onclick="loading()">共用サーバー</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="" onclick="loading()">VPS/デスクトップ</a>
+									<a class="nav-link" href="/admin/dns?tab=vps&act=index" onclick="loading()">VPS/デスクトップ</a>
 								</li>
 							</ul>
 						</div>

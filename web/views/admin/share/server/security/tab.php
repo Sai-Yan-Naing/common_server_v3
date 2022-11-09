@@ -5,9 +5,9 @@
     <li class="nav-item">
         <a class="nav-link <?= ($tab=='waf') ? 'active':'' ?>" href="/admin/share/server?setting=security&tab=waf&act=index&webid=<?=$webid?>" onclick="loading()">WAF</a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link <?= ($tab=='directory') ? 'active':'' ?>" href="/admin/share/server?setting=security&tab=directory&act=index&webid=<?=$webid?>" onclick="loading()">ディレクトリアクセス</a>
-    </li>
+    </li> -->
     <li class="nav-item">
         <a class="nav-link <?= ($tab=='ip') ? 'active':'' ?>" href="/admin/share/server?setting=security&tab=ip&act=index&webid=<?=$webid?>" onclick="loading()">IPアクセス制限</a>
     </li>

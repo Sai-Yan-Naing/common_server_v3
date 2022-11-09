@@ -6,7 +6,7 @@ $getRow = $commons->getRow($getRow);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">MARIA　DB　削除</h4>
+  <h4 class="modal-title">MariaDB　削除</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

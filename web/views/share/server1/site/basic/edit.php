@@ -17,13 +17,13 @@ $error_page = json_decode($weberrorpages);
 	      <div class="form-group row">
 	          <label for="status_code" class="col-sm-4">ステータスコード</label>
 	          <div class="col-sm-8">
-	            <input type="text" class="form-control" id="status_code" name="status_code" value="<?=$error_page->$act_id->statuscode?>" placeholder="1-14文字、半角英数字">
+	            <input type="text" class="form-control" id="status_code" name="status_code" value="<?=$error_page->$act_id->statuscode?>" placeholder="1～14文字、半角英数字">
 	          </div>
 	      </div>
 	      <div class="form-group row">
 	          <label for="url" class="col-sm-4 col-form-label">URL指定</label>
 	          <div class="col-sm-8">
-	            <input type="text" class="form-control" id="url_spec" name="url_spec" value="<?=$error_page->$act_id->url?>" placeholder="8～70文字、半角英数記号の組み合わせ">
+	            <input type="text" class="form-control" id="url_spec" name="url_spec" value="<?=$error_page->$act_id->url?>" placeholder="8～30文字、半角英数字記号の組み合わせ">
 	          </div>
 	      </div>
 	  </form>

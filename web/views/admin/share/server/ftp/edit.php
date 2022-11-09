@@ -18,18 +18,27 @@ $getRow = $commons->getRow($query,[$act_id]);
       <div class="form-group row">
           <label for="ftp_user" class="col-sm-4 col-form-label">FTPユーザー</label>
           <div class="col-sm-8">
-            <input type="hidden" class="form-control" readonly value="<?= $getRow['ftp_user'] ?>" name="ftp_user" placeholder="1-14文字、半角英数字">
+            <input type="hidden" class="form-control" readonly value="<?= $getRow['ftp_user'] ?>" name="ftp_user" placeholder="1～14文字、半角英数字">
             <label for=""><?= $getRow['ftp_user'] ?></label>
+          </div>
+      </div>
+      <div class="form-group row">
+          <label for="ftp_pass" class="col-sm-4 col-form-label">ディレクトリパス</label>
+          <div class="col-sm-8">
+            <input type="hidden" class="form-control" readonly column="dir_path" id="dir_path" name="dir_path" placeholder="example" value="<?= $getRow['dir_path'] ?>"><i class="fas fa-folder text-warning fa-lg" style="font-size: 2.33em; display:none;"></i>
+            <label for=""><?= $getRow['dir_path'] ?></label>
           </div>
       </div>
       <div class="form-group row">
           <label for="ftp_pass" class="col-sm-4 col-form-label">パスワード</label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" value="<?= $getRow['ftp_pass'] ?>" placeholder="6～127文字、半角英数記号の組み合わせ">
+            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" value="<?= $getRow['ftp_pass'] ?>" placeholder="8～30文字、半角英数字記号の組み合わせ">
+            <span toggle="#ftp_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
                 <label for="ftp_pass" id="ftp_pass_error" class="error"></label>
           </div>
       </div>
-      <div class="row">
+      <input type="hidden" class="form-check-input" id="full_control" name="permission[]" value="F">
+      <!-- <div class="row">
           <div class="col-sm-4">
               <div class="form-group">
                   <span>接続許可ディレクトリ</span>
@@ -39,7 +48,7 @@ $getRow = $commons->getRow($query,[$act_id]);
               <div class="form-group">
                   <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" id="full_control" name="permission[]" <?php if ( in_array("F", explode(",",$getRow['permission']))) : echo "checked"; endif ?> value="F">フルコントロール
+                <input type="hidden" class="form-check-input" id="full_control" name="permission[]" <?php if ( in_array("F", explode(",",$getRow['permission']))) : echo "checked"; endif ?> value="F">フルコントロール
               </label>
             </div>
             <div class="form-check-inline">
@@ -55,7 +64,7 @@ $getRow = $commons->getRow($query,[$act_id]);
                   <label for="permission" id="permission_error" class="error"></label>
               </div>
           </div>
-      </div>
+      </div> -->
   </form>
 </div>
 <!-- Modal footer -->

@@ -4,7 +4,7 @@ require_once("views/share_config.php");
     $for = $_GET['for'];
     $temp = json_decode($webbasicsetting,true);
     $bass_dir = $_POST['bass_dir'];
-    $dir_path=$webpath.'/'.$bass_dir;
+    $dir_path=$webpath.'/web/'.$bass_dir;
     $msg = "jp message";
     $msgsession ="msg";
     if ($for==='dir')
@@ -25,7 +25,7 @@ require_once("views/share_config.php");
             // echo ROOT_PATH.$dir_path;
             // die();
             // delete_directory(ROOT_PATH.$dir_path);
-            deleteDir($web_host,$web_user,$web_password,ROOT_PATH.$dir_path);
+            // deleteDir($web_host,$web_user,$web_password,ROOT_PATH.$dir_path);
         }
     } elseif ($for==='user')
     {

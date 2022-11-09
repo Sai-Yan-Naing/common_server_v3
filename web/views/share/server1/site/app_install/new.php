@@ -12,7 +12,7 @@
             <div class="col-sm-8">
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="change/app_version">Word Press
+                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="change/app_version">WordPress
                     </label>
                 </div>
                 <div class="form-check-inline">
@@ -76,7 +76,7 @@
             <div class="col-sm-6">
                 <label for="password" class="col-form-label">パスワード</label>
                 <div class="">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="8～30文字、半角英数字記号の組み合わせ">
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
             <div class="col-sm-6">
                 <label for="db_pass" class="col-form-label">パスワード</label>
                 <div>
-                    <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～70文字、半角英数字記号">
+                    <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder=" 8～30文字、半角英数字記号">
                 </div>
             </div>
         </div>

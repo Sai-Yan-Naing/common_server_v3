@@ -2,7 +2,7 @@
 
 require_once "commons/common.php";
 
-if ( isset($_POST['app']) && $_POST['app']==='WORDPRESS' || $_POST['app'] === "ECCUBE" )
+if ( isset($_POST['app']) && $_POST['app']==='WordPress' || $_POST['app'] === "EC-CUBE" )
 {
 	$app = $_POST['app'];
 	 foreach ($values = app_version($app) as $key => $value) 

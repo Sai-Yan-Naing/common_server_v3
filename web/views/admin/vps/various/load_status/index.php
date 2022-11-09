@@ -1,7 +1,8 @@
 <?php 
 require_once('views/admin/vps/header.php');
 require_once('views/admin/vps/various/load_status/usage.php');
-$cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name); $memory_usage = memory_usage(true,$webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
+$cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name); 
+$memory_usage = memory_usage(true,$webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
 $disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
  ?>
     <div id="layoutSidenav">
@@ -43,7 +44,7 @@ $disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                                             ディスク読み書き
                                             </div>
                                             <div class="col-sm-6">
-                                                Disk Queue Length : <span id="disk_read_usage" gourl="/admin/vps/various?setting=load_status&tab=load_status&act=usage1&case=disk_read&webid=<?=$webid?>"><?= $disk_read ?></span>
+                                                Disk Queue Length : <span id="disk_read_usage" gourl="/admin/vps/various?setting=load_status&tab=load_status&act=usage1&case=disk_read&webid=<?=$webid?>"><?= round($disk_read,2) ?></span>
                                                 <div class="progress">
                                                     <div class="progress-bar <?php if($disk_read<=60){ echo 'bg-success';}else if($disk_read>60 and $disk_read<80){ echo 'bg-warning';}else{echo 'bg-danger';} ?>" id="disk_read" style="width:<?= $disk_read ?>" aria-valuenow="<?= $disk_read ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
@@ -100,11 +101,14 @@ $disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                     // {
                         
                         if($var=='disk_read'){
-                           $("#"+$var+"_usage").html(data); 
+                            $shell = (data/10)*100;
+                           $("#"+$var+"_usage").html(parseFloat(data).toFixed(2)); 
+                           $("#"+$var).css({"width":$shell+"%"})
                        }else{
                         $("#"+$var+"_usage").html(data+ ' %');
-                       }
                         $("#"+$var).css({"width":data+"%"})
+                       }
+                        
                         $("#"+$var).removeClass();
                         if(data<=60)
                         {

@@ -13,13 +13,19 @@ if ( $action === 'new' )
     $web_server_id = $_POST['web_server'];
     $contract = $_POST['contractid'];
 
+    $getmailserver = $commons->getRow("
+    select mailserver.ip,mailserver.username,mailserver.password from web_account inner join mailserver on mailserver.id =web_account.mailserver where web_account.id= ?",[$contract]);
+    $mailserverip = $getmailserver['ip'];
+    $mailserveruser = $getmailserver['username'];
+    $mailserverpass = $getmailserver['password'];
+// die;
     $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
     $gethost = $commons->getRow($web_server);
     $web_host = $gethost['ip'];
     $web_user = $gethost['username'];
     $web_password = $gethost['password'];
     
-    $temp["ID1-".time()] = ['type'=>'A','sub'=>'mail','target'=>MAILIP];
+    $temp["ID1-".time()] = ['type'=>'A','sub'=>'mail','target'=>$mailserverip];
     $temp["ID2-".time()] = ['type'=>'A','sub'=>'www','target'=>$web_host];
     $temp["ID3-".time()] = ['type'=>'A','sub'=>'','target'=>$web_host];
     $temp["ID4-".time()] = ['type'=>'MX','sub'=>'','target'=>'mail.'.$webdomain];
@@ -31,13 +37,13 @@ if ( $action === 'new' )
     $msg = "サイトの追加が完了しました";
     $msgsession ="msg";
 
-    $insert_q = "INSERT INTO web_account (domain, password, [user], [plan],web_server_id, customer_id,dns,app_version,origin_id) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)";
+    $insert_q = "INSERT INTO web_account (domain, password, [user], [plan],web_server_id, customer_id,dns,app_version,origin_id,mail_cnt) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)";
     $insert_ftp = "INSERT INTO db_ftp (ftp_user, ftp_pass, domain, permission) VALUES (?, ?, ?, ?)";
     $insert_waf = "INSERT INTO waf (domain, usage, display) VALUES (?, ?, ?)";
     $insert_mail = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 
     if (
-        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $web_server_id, $webadminID,$dns,$app_version,$contract]) ||
+        !$commons->doThis($insert_q,[$webdomain, $password1, $user, 1, $web_server_id, $webadminID,$dns,$app_version,$contract,1]) ||
         !$commons->doThis($insert_ftp,[$user, $password, $webdomain, 'F,R,W']) ||
         !$commons->doThis($insert_waf,[$webdomain, 0, 0]) ||
         !$commons->doThis($insert_mail,[$webdomain, 'root', $password])
@@ -58,7 +64,7 @@ if ( $action === 'new' )
 
     $size = $webplnmail*1073741824;
 
-    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" new '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$password.' '.$user.' '.$size);
+    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" new '.$mailserverip.' '.$mailserveruser.' '.$mailserverpass.' '.$webdomain.' '.$password.' '.$user.' '.$size);
 
     // die;
 } elseif ( $action === 'onoff')
@@ -184,6 +190,10 @@ if ( $action === 'new' )
     $act_id = $_POST['act_id'];
     $query = "SELECT * FROM web_account WHERE id='$act_id'";
     $getRow = $commons->getRow($query);
+    $rquery = "SELECT web_account.domain,plan_tbl.name FROM web_account INNER JOIN plan_tbl on plan_tbl.id=web_account.[plan] WHERE web_account.id='$getRow[origin_id]'";
+    $rgetRow = $commons->getRow($rquery);
+    // print_r($rgetRow);
+    // die;
     $sitebinding = $_POST['sitebinding']==0? 1 : 0;
     $msgsession = "msgdel";
     $msg = $getRow['domain']."を削除しました";
@@ -191,6 +201,15 @@ if ( $action === 'new' )
     if(!$commons->doThis($del_query)){
             require_once("views/admin/share.php");
             die("");
+    }
+    $subject = 'サブドメイン「'.$getRow['domain'].'」が削除されました';
+    $body = $rgetRow['domain'].'['.$rgetRow['name'].']<br>';
+    $body .= 'サブドメイン「'.$getRow['domain'].'」<br>';
+    $body .= '削除されました';
+    if ( ! $webmailer->sendMail(TO, TONAME, $subject, $body))
+    {
+        echo $error = 'Cannot send email';
+        die();
     }
     $sitename = $getRow['user'];
     $startstop = 'stop';

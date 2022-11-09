@@ -28,7 +28,7 @@
                                     <div class="form-group row">
                                         <label for="" class="col-sm-3 col-form-label">OS</label>
                                         <div class="col-sm-8">
-                                            <span>Windows server 2019</span>
+                                            <span><?= $web_osname?></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -59,7 +59,7 @@
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-5">
                                             <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/vps/server?tab=basic&act=spec&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">プラン変更依頼</button>
-                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog vpsrebtn" gourl="/admin/vps/server?tab=basic&act=osreinstall&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">OS初期化</button>
+                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog vpsrebtn" gourl="/admin/vps/server?tab=basic&act=os&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">OS初期化</button>
                                         </div>
                                         <div class="col-sm-4"></div>
                                     </div>

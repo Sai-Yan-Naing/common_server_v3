@@ -10,14 +10,14 @@ $msg = "jp message";
 // die('test');
 	if ( $action === "new")
 	{
-		// die('test');
+		// die($webmariadb_cnt);
 		$db_name = $_POST["db_name"];
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の追加が完了しました ";
 		if ( ! $commons->addMariaUserAndDB($db_name, $db_user, $db_pass) )
 		{
 			echo $error = "Something errors";
-			// require_once("views/admin/share/server/database/mariadb/index.php");
+			require_once("views/admin/share/server/database/mariadb/index.php");
 			die("");
 		}
 		// die;
@@ -28,13 +28,26 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
 			}
-			// die('test');
+		$webmariadb_cnt +=1;
+		$sql = "UPDATE web_account SET mariadb_cnt='$webmariadb_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mariadb/index.php");
+				die("");
+			}
 	} elseif ($action === "edit") {
 		if (!$commons->changeMariaPassword($db_user,$db_pass))
 		{
 			$error = "Something errors";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
+		}
+		
+		$update = "UPDATE db_account_for_mariadb SET db_pass = :db_pass WHERE db_user = :db_user";
+		if ( !$commons->doThis($update,[ 'db_pass' => $db_pass,'db_user' => $db_user]))
+		{
+			require_once("views/admin/share/server/database/mariadb/index.php");
+			die("");
 		}
 		$query = "SELECT * FROM db_account_for_mariadb WHERE db_user=?";
 		$getRow = $commons->getRow($query,[$db_user]);
@@ -57,6 +70,18 @@ $msg = "jp message";
 			require_once("views/admin/share/server/database/mariadb/index.php");
 			die("");
 		}
+		if ( $webmariadb_cnt<=0)
+		{
+			$webmariadb_cnt=0;
+		}else{
+			$webmariadb_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mariadb_cnt='$webmariadb_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/admin/share/server/database/mariadb/index.php");
+				die("");
+			}
 	}
 	flash($msgsession,$msg);
 	header("Location: /admin/share/server?setting=database&tab=mariadb&act=index&webid=$webid$pagy");

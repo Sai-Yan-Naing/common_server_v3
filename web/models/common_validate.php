@@ -31,7 +31,7 @@ class CommonValidate
 		return false;
 	}
 
-	function checkInDb ($table, $column, $checker, $web_server_id=null)
+	function checkInDb ($table, $column, $checker, $web_server_id=null,$params = [])
 	{
 		// @todo この処理は暫定。正しく存在するテーブルかカラムかをチェックしなければならない。
 		// if ( ! (ctype_alnum($table) && ctype_alnum($column))) column can contain underscore( _ )
@@ -42,13 +42,17 @@ class CommonValidate
 		$addition =null;
 		if($web_server_id!=null)
 		{
-			$addition = "and web_account.web_server_id= $web_server_id";
+			$addition .= " and web_account.web_server_id= $web_server_id";
+		}
+		if($table=='add_email')
+		{
+			$addition .= " and add_email.domain= '$params[domain]'";
 		}
 
 			$query = "SELECT $table.$column FROM $table INNER JOIN web_account on $table.domain = web_account.domain where $table.$column = :checker $addition";
 		if($table =='web_account')
 		{
-			$query = "SELECT $table.$column FROM $table where $table.$column = :checker and web_account.web_server_id= $web_server_id";
+			$query = "SELECT $table.$column FROM $table where $table.$column = :checker and web_account.web_server_id= $web_server_id  and removal IS NULL";
 		}
 		
 		$stmt1 = $this->pdo->prepare($query);
@@ -186,5 +190,29 @@ class CommonValidate
 			} catch(PDOException $e) {
 			  return true;
 			}
+	}
+
+	function checkdblimit($qid,$webplnmariadbnum,$webplnmariadb)
+	{
+		$query = "SELECT mysql_cnt,mariadb_cnt,mssql_cnt FROM web_account where (origin_id = ? or id= ?)  and removal IS NULL";
+
+		$stmt1 = $this->pdo->prepare($query);
+		$stmt1->execute([$qid,$qid]);
+		$data = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+		$getalldbcount = $data;
+		$totalmysql =0;
+		$totalmssql =0;
+		$totalmariasql =0;
+		foreach($getalldbcount as $value){
+		    $totalmysql +=$value['mysql_cnt'];
+		    $totalmssql +=$value['mssql_cnt'];
+		    $totalmariasql +=$value['mariadb_cnt'];
+		}
+		$totalmyma = (int)$totalmysql + (int)$totalmariasql;
+		    $result = true;
+		if( $webplnmariadb == 'yes' && ((int)$webplnmariadbnum > $totalmyma || $webplnmariadbnum=='unlimited')){
+				$result = false;
+		    }
+		 return $result;
 	}
 }

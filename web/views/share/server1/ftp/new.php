@@ -14,13 +14,13 @@ require_once('views/share_config.php');
       <div class="form-group row">
           <label for="ftp_user" class="col-sm-4">FTPユーザー</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="ftp_user" name="ftp_user" placeholder="1-14文字、半角英数字" column="ftp_user"  table="db_ftp" remark="winuser">
+            <input type="text" class="form-control" id="ftp_user" name="ftp_user" placeholder="1～14文字、半角英数字" column="ftp_user"  table="db_ftp" remark="winuser">
           </div>
       </div>
       <div class="form-group row">
           <label for="ftp_pass" class="col-sm-4 col-form-label">パスワード</label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" placeholder="8～70文字、半角英数記号の組み合わせ">
+            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" placeholder="8～30文字、半角英数字記号の組み合わせ">
           </div>
       </div>
       <div class="row">

@@ -16,34 +16,35 @@ require_once('views/admin/admin_shareconfig.php');
             </div>
             <div class="col-sm-10">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons" id="typeofdb">
-                    <label class="btn btn-outline-info active">
-                        <input type="radio" name="type" id="mysql" value="MYSQL" autocomplete="off" checked> MYSQL
-                    </label>
-                    <label class="btn btn-outline-info">
+                    <!-- <label class="btn btn-outline-info active"> -->
+                        <input type="hidden" name="type" id="mysql" value="MYSQL" autocomplete="off" checked> MySQL
+                    <!-- </label> -->
+                    <!-- <label class="btn btn-outline-info">
                         <input type="radio" name="type" id="mssql" value="MSSQL" autocomplete="off"> MSSQL
                     </label>
                     <label class="btn btn-outline-info">
                         <input type="radio" name="type" id="mariadb" value="MARIADB" autocomplete="off"> MARIADB
-                    </label>
+                    </label> -->
                 </div>
             </div>
         </div>
         <div class="form-group row">
             <label for="db_name" class="col-sm-2 col-form-label">データベース名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="db_name" name="db_name" placeholder="1～64文字、半角英数字記号"  column="db_name" table="db_account" remark="mydbname">
+              <input type="text" class="form-control" id="db_name" name="db_name" placeholder="1～64文字、半角英数字と_-"  column="db_name" table="db_account" remark="mydbname">
             </div>
         </div>
         <div class="form-group row">
             <label for="db_user" class="col-sm-2 col-form-label">ユーザー名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="db_user" name="db_user" placeholder="1～32文字、半角英数字記号"  column="db_user" table="db_account" remark="mydbuser">
+              <input type="text" class="form-control" id="db_user" name="db_user" placeholder="1～32文字、半角英数字と._-"  column="db_user" table="db_account" remark="mydbuser">
             </div>
         </div>
         <div class="form-group row">
             <label for="db_pass" class="col-sm-2 col-form-label">パスワード</label>
             <div class="col-sm-10">
-              <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～64文字、半角英数字記号">
+              <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～30文字、半角英数字記号の組み合わせ">
+              <span toggle="#db_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
             </div>
         </div>
     </form>

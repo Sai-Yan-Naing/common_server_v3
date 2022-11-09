@@ -9,7 +9,7 @@
             <br><br>
             <span>ご契約情報  </span>
         </a>
-        <?php if( $webplnbackup == 'yes'):?>
+        <?php if( $webplnbackup == 'yes' || $webplanbackup=='yes'):?>
         <a href="/share/various?setting=backup&act=index&webid=<?=$webid?>" class="subtitle pt-4 pb-4 <?=($setting=='backup')?"active":"text-dark"?>" onclick="loading()">
             <img src="<?= call_ass() ?>img/subtitle/<?=($setting=='backup')?"backup1":"backup"?>.png" alt="site.png">
             <br><br>

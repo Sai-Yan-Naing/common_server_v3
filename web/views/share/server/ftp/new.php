@@ -14,16 +14,24 @@ require_once('views/share_config.php');
       <div class="form-group row">
           <label for="ftp_user" class="col-sm-4">FTPユーザー</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="ftp_user" name="ftp_user" placeholder="1-20文字、半角英数字" column="ftp_user"  table="db_ftp" remark="winuser">
+            <input type="text" class="form-control" id="ftp_user" name="ftp_user" placeholder="1～20文字、半角英数小文字と_-." column="ftp_user"  table="db_ftp" remark="winuser">
+          </div>
+      </div>
+      <div class="form-group row">
+          <label for="ftp_pass" class="col-sm-4 col-form-label">ディレクトリパス</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" column="dir_path" id="dir_path" name="dir_path" placeholder="example"><i class="fas fa-folder text-warning fa-lg" style="font-size: 2.33em; display:none;"></i>
           </div>
       </div>
       <div class="form-group row">
           <label for="ftp_pass" class="col-sm-4 col-form-label">パスワード</label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" placeholder="6～127文字、半角英数記号の組み合わせ">
+            <input type="password" class="form-control" id="ftp_pass" name="ftp_pass" placeholder="8～30文字、半角英数字記号の組み合わせ">
+            <span toggle="#ftp_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
           </div>
       </div>
-      <div class="row">
+      <input type="hidden" class="form-check-input" id="full_control" name="permission[]" value="F">
+      <!-- <div class="row">
           <div class="col-sm-4">
               <div class="form-group">
                   <span>接続許可ディレクトリ</span>
@@ -33,7 +41,7 @@ require_once('views/share_config.php');
               <div class="form-group">
                   <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" id="full_control" name="permission[]" value="F">フルコントロール
+                <input type="hidden" class="form-check-input" id="full_control" name="permission[]" value="F">フルコントロール
               </label>
             </div>
             <div class="form-check-inline">
@@ -49,7 +57,7 @@ require_once('views/share_config.php');
                   <label for="permission" id="permission_error" class="error"></label>
               </div>
           </div>
-      </div>
+      </div> -->
   </form>
 </div>
 <!-- Modal footer -->

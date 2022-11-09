@@ -43,6 +43,9 @@ $web_ssms = $web_acc["ssms"];
 $web_mssql_2016 = $web_acc["mssql_16"];
 $web_mssql_2017 = $web_acc["mssql_17"];
 $web_mssql_2019 = $web_acc["mssql_19"];
+$web_os = $web_acc["os"];
+$web_osversion = $web_acc["osversion"];
+$web_osname = $web_acc["osname"];
 
 $pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
 $pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';

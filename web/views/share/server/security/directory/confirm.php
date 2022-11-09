@@ -24,15 +24,15 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 		require_once('views/share/server/security/directory/index.php');
 		die();
 	}
-	// if ( !createDir($webpath.'/web/'.$dir_path))
+	// if ( !createDir($webpath.'\\web\\'.$dir_path))
 	// {
 	// 	$error=$ftp_user." cannot create directory.";
 	// 	require_once('views/share/server/security/directory/index.php');
 	// 	die();
 	// }
-	// Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser.'/web/'.$dir_path." F"." new ".$originuser);
+	// Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser.'\\web\\'.$dir_path." F"." new ".$originuser);
 
-	echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'/web/'.$dir_path.' F new '.$originuser);
+	echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'\\web\\'.$dir_path.' F new '.$originuser);
 	// die();
 
 }elseif ( isset($_POST['action']) and $_POST['action']==='edit')
@@ -49,8 +49,8 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 		require_once('views/share/server/security/directory/index.php');
 		die();
 	 }
-	 // Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser.'/web/'.$dir_path." F"." edit ".$originuser);
-	 echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" edit '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'/web/'.$dir_path.' F edit '.$originuser);	
+	 // Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." ".$ftp_pass." ".$webuser.'\\web\\'.$dir_path." F"." edit ".$originuser);
+	 echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" edit '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'\\web\\'.$dir_path.' F edit '.$originuser);	
 }else
 {
 	$act_id=$_POST['act_id'];
@@ -64,11 +64,11 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 		require_once('views/share/server/security/directory/index.php');
 		die();
 	}
-	// Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." "."noneed"." ".$webuser.'/web/'.$dir_path." "."noneed"." delete ".$originuser);
-	 echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" delete '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' noneed '.$webuser.'/web/'.$dir_path.' noneed delete '.$originuser);
+	// Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/ftp/add_ftp.ps1" '. $ftp_user." "."noneed"." ".$webuser.'\\web\\'.$dir_path." "."noneed"." delete ".$originuser);
+	 echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" delete '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' noneed '.$webuser.'\\web\\'.$dir_path.' noneed delete '.$originuser);
 	 // die;
 
-	// $dirname = ROOT_PATH.$webpath."/web/".$dir_path;
+	// $dirname = ROOT_PATH.$webpath."\\web\\".$dir_path;
 	// if ( is_dir($dirname))
 	// {
  //          //Directory does not exist, so lets create it.

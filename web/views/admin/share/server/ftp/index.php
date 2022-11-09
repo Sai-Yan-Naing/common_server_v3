@@ -41,46 +41,58 @@ $getAllRow=$commons->getAllRow($query,$params);
                                             <div class="col-sm-3">
                                                 <span>FTPアカウント</span>
                                             </div>
-
-                                            <?php if( $webplnftp == 'yes' && ((int)$webplnmssqldbnum >= count($getAllRow ) || $webplnmssqldbnum=='unlimited')):?>
                                             <div class="col-sm-9">
+                                                <?php 
+
+                                                    if($webplan>3):
+                                                ?>
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ＦＴＰユーザー追加</button>
+                                            <?php endif?>
                                             </div>
-                                            <?php endif; ?>
                                         </div>
                                         <table class="table table-bordered">
                                                 <tr>
                                                     <th class="font-weight-bold border-dark">FTP ユーザー名</th>
                                                     <th class="font-weight-bold border-dark">パスワード</th>
-                                                    <th class="font-weight-bold border-dark">書き込み権限</th>
+                                                    <!-- <th class="font-weight-bold border-dark">書き込み権限</th> -->
+                                                    <th class="font-weight-bold border-dark">ディレクトリパス</th>
                                                     <th class="font-weight-bold border-dark">操作</th>
                                                 </tr>
-                                                <?php 
-                                                    foreach ($getAllRow as $key => $ftp):
+                                                <?php
+                                                // print_r($getAllRow); 
+                                                    foreach ($getAllRow as $key1 => $ftp):
                                                 ?>
                                                 <tr>
                                                     <td class="border-dark"><?php echo htmlspecialchars($ftp['ftp_user'], ENT_QUOTES); ?></td>
-                                                    <td class="border-dark"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></td>
-                                                    <td class="border-dark">
+                                                    <td class="border-dark"><div toggle='star' class="d-flex"><div class="col-sm-8">
+                                                        <span class="d-none workbreakall"><?php echo htmlspecialchars($ftp['ftp_pass'], ENT_QUOTES); ?></span><span class="star workbreakall" style='margin-top:5px'>********</span>
+                                                        </div>
+                                                        <div class="ml-auto col-sm-2">
+                <span class="fa fa-fw fa-eye fa-eye-slash tbtoggle-password"></span></div></td>
+                                                    <!-- <td class="border-dark">
                                                     <?php 
-                                                        $permissions = explode(',',$ftp['permission']);
-                                                        foreach ($permissions as $key=>$permission):
-                                                            if ( $permission == 'F'):
-                                                                echo "フルコントロール";
-                                                            elseif ( $permission == 'R'):
-                                                                echo "読み";
-                                                            else:
-                                                                echo "書き";
-                                                            endif;
-                                                            if(count($permissions) > $key + 1):
-                                                                echo ',';
-                                                             endif;
-                                                        endforeach;
+                                                        // $permissions = explode(',',$ftp['permission']);
+                                                        // foreach ($permissions as $key=>$permission):
+                                                        //     if ( $permission == 'F'):
+                                                        //         echo "フルコントロール";
+                                                        //     elseif ( $permission == 'R'):
+                                                        //         echo "読み";
+                                                        //     else:
+                                                        //         echo "書き";
+                                                        //     endif;
+                                                        //     if(count($permissions) > $key + 1):
+                                                        //         echo ',';
+                                                        //      endif;
+                                                        // endforeach;
                                                     ?>
-                                                    </td>
+                                                    </td> -->
+                                                    <td class="border-dark"><?php echo htmlspecialchars($ftp['dir_path'], ENT_QUOTES); ?></td>
                                                     <td class="border-dark">
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=edit&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
+                                                    <?php
+                                                    if($key1 !=0):?>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=delete&act_id=<?=$ftp['id']?>&webid=<?=$webid?><?=$pagy?>"   data-toggle="modal" data-target="#common_dialog">削除</a>
+                                                    <?php endif;?>
                                                     </td>
                                                 </tr>
                                                 <?php

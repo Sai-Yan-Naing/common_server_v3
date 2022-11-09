@@ -8,12 +8,39 @@ $query = "SELECT * FROM $table where domain = ?  ORDER BY id
                             OFFSET $start ROWS FETCH FIRST $limit ROWS ONLY";
 $getAllRow = $commons->getAllRow($query, $params);
 
-$query1 = "SELECT * FROM $table where domain = ?";
-$getAllRow1 = $commons->getAllRow($query1, $params);
+// $query1 = "SELECT * FROM $table where domain = ?";
+// $getAllRow1 = $commons->getAllRow($query1, $params);
 
-$query2 = "SELECT * FROM db_account_for_mariadb where domain = ?";
-$getAllRow2 = $commons->getAllRow($query2, $params);
+// $query2 = "SELECT * FROM db_account_for_mariadb where domain = ?";
+// $getAllRow2 = $commons->getAllRow($query2, $params);
 
+$qid = ( $weborigin != 1 )? $weborigin_id : $webid;
+
+$query3 = "SELECT mysql_cnt,mariadb_cnt,mssql_cnt,domain FROM web_account where (origin_id = ? or id= ?)  and removal IS NULL";
+
+
+$getalldbcount = $commons->getAllRow($query3, [$qid,$qid]);
+$totalmysql =0;
+$totalmssql =0;
+$totalmariasql =0;
+foreach($getalldbcount as $value){
+    $totalmysql +=$value['mysql_cnt'];
+    $totalmssql +=$value['mssql_cnt'];
+    $totalmariasql +=$value['mariadb_cnt'];
+}
+$totalmyma = (int)$totalmysql + (int)$totalmariasql;
+    $btndisable = 'disabled';
+    $titledsb = "データベース数が上限に達しています。";
+    $btncolor = "secondary";
+    if( $webplnmariadb == 'yes' && ((int)$webplnmariadbnum > $totalmyma || $webplnmariadbnum=='unlimited')){
+        $btndisable = '';
+        $titledsb = "";
+        $btncolor = "info";
+    }
+
+// echo "<pre>";
+//     print_r($getalldbcount);
+//     die();
 ?>
 
 
@@ -30,13 +57,11 @@ $getAllRow2 = $commons->getAllRow($query2, $params);
                                 <div class="tab-content">
                                     <div class="active">
                                         <div class="d-flex mt-3 mb-3">
-                                            <?php if( $webplnmariadb == 'yes' && ((int)$webplnmariadbnum > (count($getAllRow1 )+ count($getAllRow2 )) || $webplnmariadbnum=='unlimited')):?>
-                                            <div class="ml-3">
-                                                <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mysql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
+                                            <div class="ml-3" title='<?= $titledsb?>'>
+                                                <button class="btn btn-<?= $btncolor?> btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mysql&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog" <?= $btndisable?> ><span class="mr-2"><i class="fas fa-plus-square"></i></span>データベース追加</button>
                                             </div>
-                                            <?php endif; ?>
                                             <div class="ml-3">
-                                                <a href="<?=MYMANAGER?>" target="_blank" class="btn btn-link"><u>MYSQL マネージャー</u></a>
+                                                <a href="<?=MYMANAGER?>" target="_blank" class="btn btn-link"><u>MySQL マネージャー</u></a>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">
@@ -53,7 +78,11 @@ $getAllRow2 = $commons->getAllRow($query2, $params);
                                                 <tr>
                                                     <td class="border-dark"><?php echo $db['db_name']; ?></td>
                                                     <td class="border-dark"><?php echo $db['db_user']; ?></td>
-                                                    <td class="border-dark"><?php echo $db['db_pass']; ?></td>
+                                                    <td class="border-dark"><div toggle='star' class="d-flex"><div class="col-sm-8">
+                                                        <span class="d-none workbreakall"><?php echo htmlspecialchars($db['db_pass'], ENT_QUOTES); ?></span><span class="star workbreakall" style='margin-top:5px'>********</span>
+                                                        </div>
+                                                        <div class="ml-auto col-sm-2">
+                <span class="fa fa-fw fa-eye fa-eye-slash tbtoggle-password"></span></div></td>
                                                     <td class="border-dark">
                                                         <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mysql&act=edit&act_id=<?= $db['id'] ?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">編集</a>
                                                         <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=database&tab=mysql&act=delete&act_id=<?= $db['id'] ?>&webid=<?=$webid?><?=$pagy?>"  data-toggle="modal" data-target="#common_dialog">削除</a>

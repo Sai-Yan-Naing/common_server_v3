@@ -108,7 +108,11 @@ $error_pages = json_decode($weberrorpages);
                                                                     ?>
                                                                     <tr>
                                                                         <td class=""><?= $user_value->bass_user ?></td>
-                                                                        <td class=""><?= $user_value->bass_pass ?></td>
+                                                                        <td class=""><div toggle='star' class="d-flex"><div class="col-sm-8">
+                                                        <span class="d-none workbreakall"><?= $user_value->bass_pass ?></span><span class="star workbreakall" style='margin-top:5px'>********</span>
+                                                        </div>
+                                                        <div class="ml-auto col-sm-2">
+                <span class="fa fa-fw fa-eye fa-eye-slash tbtoggle-password"></span></div></td>
                                                                         <td class="">
                                                                             <a href="javascript:;" class="btn btn-outline-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=edit_user&dir_id=<?=$main_key?>&act_id=<?=$user_key?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">編集</a>
                                                                             <a href="javascript:;" class="btn btn-outline-danger btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=delete_user&dir_id=<?=$main_key?>&act_id=<?=$user_key?>&webid=<?=$webid?>"   data-toggle="modal" data-target="#common_dialog">削除</a>

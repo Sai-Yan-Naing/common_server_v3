@@ -8,6 +8,7 @@ require_once("models/common.php");
 require_once("models/backup.php");
 require_once("commons/common.php");
 require_once('mails/mail.php');
+require_once('ftp/config.php');
 require_once('views/admin/admin_sharevalidate.php');
 $webmailer = new Mailer;
 $commons = new Common;
@@ -18,7 +19,7 @@ $admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=? ",[$webadm
 $webadminID = $admin_acc['user_id'];
 $webadminName = $admin_acc['name'];
 $webadminweb = explode(",",$admin_acc['web']);
-$webadminplanid = $admin_acc['plan_id'];
+// $webadminplanid = $admin_acc['plan_id'];
 
 $web_acc = $commons->getRow("SELECT * FROM web_account WHERE id=? AND customer_id=? and removal IS NULL",[$_GET['webid'],$_COOKIE['admin']]);
 $webid = $web_acc['id'];
@@ -35,8 +36,20 @@ $webbasicsetting = $web_acc['basic_setting'];
 $webappversion = $web_acc['app_version'];
 $webblacklist = $web_acc['blacklist'];
 $weborigin = $web_acc['origin'];
+$weborigin_id = $web_acc['origin_id'];
+$webssl = $web_acc['ssl'];
+$webmysql_cnt = $web_acc['mysql_cnt'];
+$webmssql_cnt = $web_acc['mssql_cnt'];
+$webmariadb_cnt = $web_acc['mariadb_cnt'];
+$webmail_cnt = $web_acc['mail_cnt'];
+$webplan = $web_acc['plan'];
+$webplanbackup = $web_acc['pback_up'];
+$webpmssql = $web_acc['pmssql'];
+$mailserverid= $web_acc['mailserver'];
 // for root site
-$webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$_COOKIE['admin']]);
+if($weborigin !=1)
+{
+$webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ? AND id =? and removal IS NULL",[1,$_COOKIE['admin'],$weborigin_id]);
 $webrootid = $webroot_acc['id'];
 $webadminID = $webroot_acc['customer_id'];
 $webroot_server_id = $webroot_acc['web_server_id'];
@@ -50,7 +63,9 @@ $webrootdns = $webroot_acc['dns'];
 $webrootbasicsetting = $webroot_acc['basic_setting'];
 $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
-
+$webplan = $webroot_acc['plan'];
+$mailserverid= $webroot_acc['mailserver'];
+}
 $setting = $_GET['setting'];
 
 $web_server = "SELECT * FROM web_server_config WHERE id='$web_server_id'";
@@ -64,10 +79,13 @@ $web_madbuser = $gethost['madbuser'];
 $web_madbpass = $gethost['madbpass'];
 $web_msdbuser = $gethost['msdbuser'];
 $web_msdbpass = $gethost['msdbpass'];
-$web_ftp = $gethost['ftp_user'];
-$web_ftppass = $gethost['ftp_pass'];
 
-$webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webadminplanid]);
+$web_ftpserver = "SELECT top 1 * FROM db_ftp WHERE domain='$webdomain'";
+$ftphost = $commons->getRow($web_ftpserver);
+$web_ftp = $ftphost['ftp_user'];
+$web_ftppass = $ftphost['ftp_pass'];
+
+$webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webplan]);
 $webplnname = $webroot_plan['name'];
 $webplnsite = $webroot_plan['site'];
 $webplnwebcapacity = $webroot_plan['web_capacity'];
@@ -80,10 +98,19 @@ $webplnmssqldb = $webroot_plan['mssql_db'];
 $webplnmssqldbnum = $webroot_plan['mssql_db_num'];
 $webplnmssqlcap = $webroot_plan['mssql_db_capacity'];
 
+$getmailserver = $commons->getRow("SELECT * FROM mailserver WHERE id= ?",[$mailserverid]);
+$mailserverip = $getmailserver['ip'];
+$mailserveruser = $getmailserver['username'];
+$mailserverpass = $getmailserver['password'];
+
 $webplnftp = $webroot_plan['ftp'];
 $webplnftpnum = $webroot_plan['ftp_num'];
 
 $webplnbackup = $webroot_plan['back_up'];
+
+define("MAILIP", $mailserverip);
+define("MAILUSER", $mailserveruser );
+define("MAILPASS", $mailserverpass);
 
 define("MYROOT", $web_mydbuser);
 define("MYROOT_PASS", $web_mydbpass);
@@ -101,7 +128,8 @@ define("SQLSERVER_2016_USER", $web_msdbuser);
 define("SQLSERVER_2016_PASS", $web_msdbpass);
 define("SQLSERVER_2016_DSN", 'sqlsrv:Server='.$web_host.';Database=master');
 
-$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webrootuser; 
+$webpath = ( $weborigin != 1 )? $webrootuser."/".$webuser : $webuser;
+// die(); 
 
 $pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
 $pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';

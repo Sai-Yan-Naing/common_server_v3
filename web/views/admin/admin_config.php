@@ -13,7 +13,7 @@ $admin_acc = $commons->getRow("SELECT * FROM customer WHERE user_id=?",[$webadmi
 $webadminID = $admin_acc['user_id'];
 $webadminName = $admin_acc['name'];
 $webadminweb = explode(",",$admin_acc['web']);
-$webadminplanid = $admin_acc['plan_id'];
+// $webadminplanid = $admin_acc['plan_id'];
 
 // for root site
 $webroot_acc = $commons->getRow("SELECT * FROM web_account WHERE origin =? AND customer_id= ?",[1,$webadminID]);
@@ -30,6 +30,7 @@ $webrootdns = $webroot_acc['dns'];
 $webrootbasicsetting = $webroot_acc['basic_setting'];
 $webrootappversion = $webroot_acc['app_version'];
 $webrootblacklist = $webroot_acc['blacklist'];
+$webplanid = $webroot_acc['plan'];
 if(isset($_GET['webser']))
 {
 	$web_server_id = $_GET['webser'];
@@ -48,11 +49,12 @@ $web_msdbpass = $gethost['msdbpass'];
 $web_ftp = $gethost['ftp_user'];
 $web_ftppass = $gethost['ftp_pass'];
 
-$webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webadminplanid]);
+$webroot_plan = $commons->getRow("SELECT * FROM plan_tbl WHERE id= ?",[$webplanid]);
 $webplnname = $webroot_plan['name'];
 $webplnsite = $webroot_plan['site'];
 $webplnwebcapacity = $webroot_plan['web_capacity'];
 $webplnmail = $webroot_plan['mail_capacity'];
+$webplnmailuser = $webroot_plan['mail_user'];
 
 define("MYROOT", $web_mydbuser);
 define("MYROOT_PASS", $web_mydbpass);

@@ -43,6 +43,15 @@
     </div>
   </div>
 
+  <div id="loadingmodal">
+  	<div class="d-flex align-items-center">
+						  <strong>Loading...</strong>
+						  <div class="spinner-grow text-muted"></div>
+						  <div class="spinner-grow text-primary"></div>
+						  <div class="spinner-grow text-success"></div>
+		</div>
+  </div>
+
   <div class="modal fade" id="excommon_dialog" data-keyboard="true" data-backdrop="static">
     <div class="modal-dialog modal-xl">
       <div class="modal-content" id="exdisplay_dialog">
@@ -61,3 +70,16 @@
           <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">OK</button>
         </div>
       </div>
+
+      <div class="modal fade" id="incompat_dialog" data-keyboard="true" data-backdrop="static">
+		    <div class="modal-dialog modal-xl">
+		      <div class="modal-content" >
+			  	  <div class="modal-body text-center" id="incompatdisplay_dialog"></div>
+		        <div class="modal-footer d-flex justify-content-center">
+				<input type="hidden" name="update" value="update" form="app_install_form">
+		          <button type="button" class="btn btn-outline-info btn-sm" id="incompat_Cancel">キャンセル</button>
+		          <button type="button" class="btn btn-outline-info btn-sm" id="incompat_Confirm">OK</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>

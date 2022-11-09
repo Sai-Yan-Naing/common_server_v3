@@ -24,13 +24,14 @@ $temp_key = $_GET['dir_id'];
       <div class="row justify-content-center">
           <label for="bass_user" class="col-sm-2 text-right p-2">ユーザー名</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" column="bass_user" id="bass_user" name="bass_user" placeholder="1-20文字、半角英数字">
+            <input type="text" class="form-control" column="bass_user" id="bass_user" name="bass_user" placeholder="1～20文字、半角英数小文字と_-.">
           </div>
       </div>
       <div class="row justify-content-center">
           <label for="bass_pass" class="col-sm-2 text-right p-2">パスワード</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" column="bass_pass" id="bass_pass" name="bass_pass" placeholder="6～127文字、半角英数記号の組み合わせ">
+            <input type="password" class="form-control" column="bass_pass" id="bass_pass" name="bass_pass" placeholder="8～30文字、半角英数字記号の組み合わせ">
+            <span toggle="#bass_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
           </div>
       </div>
   </form>

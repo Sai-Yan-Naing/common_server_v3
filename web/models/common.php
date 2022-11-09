@@ -52,7 +52,6 @@ class Common{
 				die('error2');
 				return false;
 			}
-
 			return true;
 		}
 		catch (PDOException $e)
@@ -66,10 +65,10 @@ class Common{
 
 	function addMyUserAndDB($db, $db_user, $db_pass)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		// {
+		// 	return false;
+		// }
 
 		try
 		{
@@ -83,9 +82,10 @@ class Common{
 				die("db already exist");
 			}
 
-			$stmt = $pdo->prepare("CREATE DATABASE $db;");
-			if (!$stmt->execute(['db' => $db]))
+			$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
+			if (!$stmt->execute(['db' => `$db`]))
 			{
+				// die('cannot create database');
 				return false;
 			}
 			$stmt = $pdo->prepare("CREATE USER :db_user@'%' IDENTIFIED BY :db_pass;");
@@ -93,11 +93,11 @@ class Common{
 			$stmt->bindParam(":db_pass", $db_pass, PDO::PARAM_STR);
 			if(!$stmt->execute())
 			{
-				$stmt = $pdo->prepare("DROP DATABASE $db;");
+				$stmt = $pdo->prepare("DROP DATABASE `$db`;");
 				$stmt->execute();
 				return false;
 			}
-			$stmt = $pdo->prepare("GRANT ALL ON $db.* TO :db_user@'%';");
+			$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
 			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
 			$stmt->execute();
 			return true;
@@ -113,24 +113,24 @@ class Common{
 
 	function addMyUserAndDB1($db, $db_user, $db_pass)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		// {
+		// 	return false;
+		// }
 
 		try
 		{
 			$pdo = new PDO(MYDSN, MYROOT, MYROOT_PASS);
 			$db = trim($pdo->quote($db), "'\"");
 			$stmt = $pdo->prepare('SHOW DATABASES LIKE :db');
-			$stmt->execute(['db' => $db]);
+			$stmt->execute(['db' => `$db`]);
 			if ($stmt->fetch(PDO::FETCH_ASSOC))
 			{
 				die("db already exist");
 			}
 
-			$stmt = $pdo->prepare("CREATE DATABASE $db;");
-			if (!$stmt->execute(['db' => $db]))
+			$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
+			if (!$stmt->execute(['db' => `$db`]))
 			{
 				return false;
 			}
@@ -139,11 +139,11 @@ class Common{
 			$stmt->bindParam(":db_pass", $db_pass, PDO::PARAM_STR);
 			if(!$stmt->execute())
 			{
-				$stmt = $pdo->prepare("DROP DATABASE $db;");
+				$stmt = $pdo->prepare("DROP DATABASE `$db`;");
 				$stmt->execute();
 				return false;
 			}
-			$stmt = $pdo->prepare("GRANT ALL ON $db.* TO :db_user@'%';");
+			$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
 			$stmt->bindParam(':db_user', $db_user, PDO::PARAM_STR);
 			$stmt->execute();
 			return true;
@@ -165,22 +165,16 @@ class Common{
 		{
 			return false;
 		}
-		
-		$stmt1 = $pdo->prepare('UPDATE db_account SET db_pass = ? WHERE db_user = ?');
-		if ( ! $stmt1->execute([$db_pass, $db_user]))
-		{
-			return false;
-		}
 
 		return true;
 	}
 
 	function deleteMysqlDB($dbid, $dbuser, $db)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		// {
+		// 	return false;
+		// }
 
 		$pdo_account = new PDO(MYDSN, MYROOT, MYROOT_PASS);
 		$stmt = $pdo_account->prepare("DROP USER :dbuser@'%'");
@@ -189,7 +183,7 @@ class Common{
 			return false;
 		}
 
-		$stmt1 = $pdo_account->prepare("DROP DATABASE $db");
+		$stmt1 = $pdo_account->prepare("DROP DATABASE `$db`");
 		if ( ! $stmt1->execute())
 		{
 			return false;
@@ -208,10 +202,10 @@ class Common{
 
 	function importWP($web_host,$sql, $db_name, $db_username, $pass)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db_name))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db_name))
+		// {
+		// 	return false;
+		// }
 
 		try
 		{
@@ -315,45 +309,31 @@ class Common{
 		}
 		function changeMssqlPassword($dbuser,$dbpass){
 			$pdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
-			$stmt = $pdo->prepare("ALTER LOGIN $dbuser WITH PASSWORD = '$dbpass';");
-			if(!$stmt->execute())
-			return false;
-			
-
-			try {
-			  $conn = new PDO(DBDSN, DBROOT, DBROOT_PASS);
-				  // set the PDO error mode to exception
-				  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-				  $sql = "UPDATE db_account_for_mssql SET db_pass='$dbpass' WHERE db_user='$dbuser'";
-
-				  // Prepare statement
-				  $stmt = $conn->prepare($sql);
-
-				  // execute the query
-				  if(!$stmt->execute())
-				  {
-				  	return false;
-				  }
-				} catch(PDOException $e) {
-					$conn = null;
-				  echo $sql . "<br>" . $e->getMessage();
-				  return false;
-				}
-
-				$conn = null;
+			$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+			$db = trim($pdo->quote($db), "'\"");
+			$stmt = $pdo->prepare("ALTER LOGIN [$dbuser] WITH PASSWORD = '$dbpass';");
+			if(!$stmt->execute()){
+				return false;
+			}
+			$pdo = null;
 			return true;
 	}
 	function deleteMssqlDB($dbid,$dbuser,$db){
 		// return $dbid.$dbuser.$db;
 			// $dsn2 = 'mysql:host=localhost:3307';
 			$mspdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
-			$pdo_account = new PDO(DBDSN, DBROOT, DBROOT_PASS);
-			$stmt1 = $mspdo->prepare("DROP DATABASE $db");
-			if(!$stmt1->execute()) return false;
+			// $pdo_account = new PDO(DBDSN, DBROOT, DBROOT_PASS);
+			$mspdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+			$db = trim($mspdo->quote($db), "'\"");
+			$stmt1 = $mspdo->prepare("DROP DATABASE [$db]");
+			if(!$stmt1->execute()) { 
+				return false;
+			}
 			
-			$stmt = $mspdo->prepare("DROP LOGIN $dbuser");
-			if(!$stmt->execute()) return false;
+			$stmt = $mspdo->prepare("DROP LOGIN [$dbuser]");
+			if(!$stmt->execute()) { 
+				return false;
+			}
 			
 			// $dstmt = $pdo_account->prepare("DELETE FROM db_account_for_mssql WHERE id = ?");
 			// // $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
@@ -368,7 +348,7 @@ class Common{
 				// die();
 				$pdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
 				$db = trim($pdo->quote($db), "'\"");
-				$stmt = $pdo->prepare("CREATE DATABASE $db;");
+				$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
 				if(!$stmt->execute())
 				{
 					return false;
@@ -378,11 +358,11 @@ class Common{
 				$stmt->bindParam(":db_pass", $db_pass, PDO::PARAM_STR);
 				if(!$stmt->execute())
 				{
-					$stmt = $pdo->prepare("DROP DATABASE $db;");
+					$stmt = $pdo->prepare("DROP DATABASE `$db`;");
 					$stmt->execute();
 					return false;
 				}
-				$stmt = $pdo->prepare("GRANT ALL ON $db.* TO :db_user@'%';");
+				$stmt = $pdo->prepare("GRANT ALL ON `$db`.* TO :db_user@'%';");
 				$stmt->bindParam(":db_user", $db_user, PDO::PARAM_STR);
 				if(!$stmt->execute())
 				{
@@ -400,41 +380,20 @@ class Common{
 			// $dsn2 = 'mysql:host=localhost:3307';
 			$mapdo = new PDO(MADSN, MAROOT, MAROOT_PASS);
 			$stmt = $mapdo->prepare("ALTER USER '$dbuser'@'%' IDENTIFIED BY '$dbpass';");
-			// if(!$stmt->execute())
-			// {
-			// 	return false;
-			// }
+			if(!$stmt->execute())
+			{
+				return false;
+			}
 			$mapdo = NULL;
-
-			try {
-			  $conn = new PDO(DBDSN, DBROOT, DBROOT_PASS);
-				  // set the PDO error mode to exception
-				  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-				  $sql = "UPDATE db_account_for_mariadb SET db_pass='$dbpass' WHERE db_user='$dbuser'";
-
-				  // Prepare statement
-				  $stmt = $conn->prepare($sql);
-
-				  // execute the query
-				  if(!$stmt->execute())
-				  {
-				  	return false;
-				  }
-				} catch(PDOException $e) {
-				  return false;
-				}
-
-				$conn = null;
 			return true;
 	}
 
 	function deleteMariaDB($dbid, $dbuser, $db)
 	{
-		if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
-		{
-			return false;
-		}
+		// if ( ! preg_match('/^[a-zA-Z0-9\-_]+$/u', $db))
+		// {
+		// 	return false;
+		// }
 
 		// return $dbid.$dbuser.$db;
 		// $dsn2 = 'mysql:host=localhost:3307';
@@ -446,7 +405,7 @@ class Common{
 			return false;
 		}
 
-		$stmt1 = $mapdo->prepare("DROP DATABASE $db");
+		$stmt1 = $mapdo->prepare("DROP DATABASE `$db`");
 		if ( ! $stmt1->execute())
 		{
 			return false;

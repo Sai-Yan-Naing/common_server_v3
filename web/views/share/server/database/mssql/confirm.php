@@ -31,12 +31,13 @@ $msg = "jp message";
 				die("");
 			}
 
-			$delete_q = "DELETE FROM db_account_for_mssql WHERE id='$act_id'";
-		if ( !$commons->doThis($delete_q))
-		{
-			require_once("views/admin/share/server/database/mssql/index.php");
-			die("");
-		}
+			$webmssql_cnt +=1;
+		$sql = "UPDATE web_account SET mssql_cnt='$webmssql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/share/server/database/mysql/index.php");
+				die("");
+			}
 		
 	}elseif ($action=="edit") 
 	{
@@ -45,6 +46,12 @@ $msg = "jp message";
 			$error = "Something errors";
 				require_once("views/share/server/database/mssql/index.php");
 				die("");
+		}
+		$update = "UPDATE db_account_for_mssql SET db_pass = :db_pass WHERE db_user = :db_user";
+		if ( !$commons->doThis($update,[ 'db_pass' => $db_pass,'db_user' => $db_user]))
+		{
+			require_once("views/share/server/database/mssql/index.php");
+			die("");
 		}
 		$query = "SELECT * FROM db_account_for_mssql WHERE db_user=?";
 		$getRow = $commons->getRow($query,[$db_user]);
@@ -63,9 +70,26 @@ $msg = "jp message";
 				require_once("views/share/server/database/mssql/index.php");
 				die("");
 		}
+		$delete_q = "DELETE FROM db_account_for_mssql WHERE id='$act_id'";
+		if ( !$commons->doThis($delete_q))
+		{
+			require_once("views/share/server/database/mssql/index.php");
+			die("");
+		}
+		if ( $webmssql_cnt<=0)
+		{
+			$webmssql_cnt=0;
+		}else{
+			$webmssql_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mssql_cnt='$webmssql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/share/server/database/mariadb/index.php");
+		}
 	}
 	flash($msgsession,$msg);
-	header("Location: /share/server?setting=database&tab=mssql&act=index$pagy");
+	header("Location: /share/server?setting=database&tab=mssql&act=index&webid=$webid$pagy");
 	die("");
 	
 ?>

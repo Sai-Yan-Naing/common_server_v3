@@ -135,6 +135,7 @@ $(document).on("click", "#web_config_btn", function () {
       // alert(data);
       // console.log(data)
       $("#webconfig_").html(data);
+      alert("保存完了しました");
     },
   });
 });
@@ -157,6 +158,7 @@ $(document).on("click", "#php_ini_btn", function () {
       // alert(data);
       // console.log(data)
       $("#phpini_").html(data);
+      alert("保存完了しました");
     },
   });
 });
@@ -178,10 +180,50 @@ $(document).on("change", ".spec_change", function () {
   $(this).parent().addClass("bg-primary text-white");
 });
 
+$(document).on("change", ".os_change", function () {
+  $(".os_change").parent().removeClass("bg-primary text-white");
+  $('input[name=osname]').val($(this).data('name'))
+  $(this).parent().addClass("bg-primary text-white");
+});
+
+$(document).on('click','.selectos',function() {
+        $('#allos').addClass('d-none')
+        $os = $(this).data('os');
+        $('#osfilelist').removeClass('d-none')
+        $gourl = $(this).attr("gourl");
+        $url = document.URL.split("/");
+        $url = $url[0] + "//" + $url[2];
+        $url = $url + $gourl;
+        console.log($url);
+        $.ajax({
+          type: "POST",
+          url: $url,
+    beforeSend: function () {
+      document.getElementById("osresult").innerHTML = $('#loadingmodal').html();
+    },
+          data: { os: $os },
+          // cache : false,
+          // processData: false,
+          success: function (data) {
+            // alert(data);
+            // console.log(data)
+            $("#osresult").html(data);
+          },
+        });
+    })
+$(document).on('click','.osback',function() {
+        $('#allos').removeClass('d-none')
+        $('#osfilelist').addClass('d-none')
+    })
 $(document).on("submit", "#updateplan", function () {
   var isValid = $("input[name=spec]").is(":checked");
+  var changedate = $('input[name=changedate').val();
   if ( ! isValid) {
     alert("Please select plan")
+    return false;
+  };
+  if ( changedate=='') {
+    alert("Please select plan change date")
     return false;
   };
   loading();
@@ -254,6 +296,12 @@ function dnsexceed5($url) {
 }
 
 $(document).ready(function(){
+  var pageURL = $(location).attr("href");
+  
+  if(!pageURL.includes("/vps/")){
+ return false;
+  }
+ 
   $param = $('#checkvps').attr('checkvps');
   // console.log($param)
   if (typeof $param !== 'undefined') {

@@ -31,6 +31,13 @@ $msg = "jp message";
 				require_once("views/share/server/database/mysql/index.php");
 				die("");
 			}
+			$webmysql_cnt +=1;
+		$sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/share/server/database/mysql/index.php");
+				die("");
+			}
 	} elseif ( $action=="edit") 
 	{
 		if( ! $commons->changeMysqlPassword($db_user,$db_pass))
@@ -38,6 +45,12 @@ $msg = "jp message";
 			$error = "Something errors";
 				require_once("views/share/server/database/mysql/index.php");
 				die("");
+		}
+		$update = "UPDATE db_account SET db_pass = :db_pass WHERE db_user = :db_user";
+		if ( !$commons->doThis($update,[ 'db_pass' => $db_pass,'db_user' => $db_user]))
+		{
+			require_once("views/share/server/database/mysql/index.php");
+			die("");
 		}
 		$query = "SELECT * FROM db_account WHERE db_user=?";
 		$getRow = $commons->getRow($query,[$db_user]);
@@ -56,11 +69,24 @@ $msg = "jp message";
 		$delete_q = "DELETE FROM db_account WHERE id='$act_id'";
 		if ( !$commons->doThis($delete_q))
 		{
-			require_once("views/admin/share/server/database/mysql/index.php");
+			require_once("views/share/server/database/mysql/index.php");
 			die("");
 		}
+		if ( $webmysql_cnt<=0)
+		{
+			$webmysql_cnt=0;
+		}else{
+			$webmysql_cnt -=1;
+		}
+		$sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+		if( ! $commons->doThis($sql)) {
+			$error = "cannot add db account";
+				require_once("views/share/server/database/mariadb/index.php");
+		}
+				
+
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の削除が完了しました";
 	}
 	flash($msgsession,$msg);
-	header("Location: /share/server?setting=database&tab=mysql&act=index$pagy");
+	header("Location: /share/server?setting=database&tab=mysql&act=index&webid=$webid$pagy");

@@ -22,8 +22,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+        
         <script type="text/javascript" src="<?= call_ass() ?>js/jquery.validate.min.js"></script>
         <script src="<?= call_ass() ?>js/scripts.js"></script>
+        <script src="<?= call_ass() ?>js/csvtoarray.js"></script>
         <script src="<?= call_ass() ?>js/common.js"></script>
         <script src="<?= call_ass() ?>js/filemanager.js"></script>
         <script src="<?= call_ass() ?>js/common_validate.js"></script>
@@ -46,7 +48,9 @@
                 </li>
             </ul>
         </nav>
+        <?php $getphpv = json_decode($webappversion); ?>
         <div class="d-none" id='user_permission' data-permission="adminshare" data-webid="<?=$webid?>"></div>
+        <div class="d-none" id='webphp' data-version="<?=$getphpv->app->php?>"></div>
         <?php 
         function call_ass()
         {

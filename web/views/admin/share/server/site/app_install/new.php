@@ -13,12 +13,12 @@
             <div class="col-sm-8">
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="WORDPRESS" name="app" checked gourl="/admin/share/server?setting=site&tab=app_install&act=app_version&webid=13">Word Press
+                    <input type="radio" class="form-check-input app" value="WordPress" name="app" checked gourl="/admin/share/server?setting=site&tab=app_install&act=app_version&webid=13">WordPress
                     </label>
                 </div>
                 <div class="form-check-inline">
                     <label class="form-check-label">
-                    <input type="radio" class="form-check-input app" value="ECCUBE" name="app" gourl="/admin/share/server?setting=site&tab=app_install&act=app_version&webid=13">EC-CUBE
+                    <input type="radio" class="form-check-input app" value="EC-CUBE" name="app" gourl="/admin/share/server?setting=site&tab=app_install&act=app_version&webid=13">EC-CUBE
                     </label>
                 </div>
             </div>
@@ -81,18 +81,22 @@
             <div class="col-sm-6">
                 <label for="password" class="col-form-label">パスワード</label>
                 <div class="">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="8～32文字、半角英数記号の組み合わせ">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="8～30文字、半角英数字記号の組み合わせ">
+                    <span toggle="#password" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
                 </div>
             </div>
         </div>
         <div class="row">
             <label for="database" class="col-form-label">データベース</label>
         </div>
+        <div class="d-none error text-center" id='checkdblimit'>
+                データベース数が上限に達しています
+        </div>
         <div class="row">
             <div class="col-sm-6">
                 <label for="db-name" class="col-form-label">データベース名</label>
                 <div>
-                    <input type="text" class="form-control" id="db_name" name="db_name" placeholder="データベース名" column="db_name" table="db_account" remark="checkappdb">
+                    <input type="text" class="form-control" id="db_name" name="db_name" placeholder="1～64文字、半角英数字と_-" column="db_name" table="db_account" remark="checkappdb">
                     <!-- <label for="db_name" id="db_name_ex_error" class="error"></label> -->
                 </div>
             </div>
@@ -100,7 +104,7 @@
                 <div class="col-sm-3"></div>
                 <label for="db_user" class="col-form-label">ユーザー名</label>
                 <div>
-                    <input type="text" class="form-control" id="db_user" name="db_user" placeholder="ユーザー名" column="db_user" table="db_account" remark="checkappdb">
+                    <input type="text" class="form-control" id="db_user" name="db_user" placeholder="1～32文字、半角英数字と._-" column="db_user" table="db_account" remark="checkappdb">
                     <!-- <label for="db_user" id="db_user_ex_error" class="error"></label> -->
                 </div>
             </div>
@@ -109,7 +113,8 @@
             <div class="col-sm-6">
                 <label for="db_pass" class="col-form-label">パスワード</label>
                 <div>
-                    <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder="8～70文字、半角英数字記号">
+                    <input type="password" class="form-control" id="db_pass" name="db_pass" placeholder=" 8～30文字、半角英数字記号の組み合わせ">
+                    <span toggle="#db_pass" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
                 </div>
             </div>
         </div>

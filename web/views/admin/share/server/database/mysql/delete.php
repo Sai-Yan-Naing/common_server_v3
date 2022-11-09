@@ -6,7 +6,7 @@ $getRow = $commons->getRow($query,[$act_id]);
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">MYSQL　DB　削除</h4>
+  <h4 class="modal-title">MySQL　削除</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->

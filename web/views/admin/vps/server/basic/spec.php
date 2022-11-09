@@ -3,7 +3,7 @@ require_once('views/admin/admin_vpsconfig.php');
 $plan_q = "SELECT * FROM vps_account Where id=?";
 $getpln = $commons->getRow($plan_q,[$webid]);
 $plans = ['42','43','44','45','46','47','48'];
-$query = "SELECT price_tbl.pln,spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
+$query = "SELECT price_tbl.pln,spec_info.value,price_tbl.plan_name, spec_units.[key],price FROM service_db.dbo.price_tbl
 inner join hosting_db.dbo.spec_info on spec_info.price_id = price_tbl.id
 INNER JOIN hosting_db.dbo.spec_units on spec_info.spec_unit_id = spec_units.id AND spec_units.[key] IN ('memory', 'disk_hdd','core') WHERE price_tbl.service = '07' 
 AND  price_tbl.type = '02' AND  price_tbl.pln IN ('42','43','44','45','46','47','48')";
@@ -19,6 +19,7 @@ foreach($getspecs as $getspec)
             // ];
             $specs[$plan]['plan_name'] =$getspec['plan_name'];
             $specs[$plan]['pln'] =$getspec['pln'];
+            $specs[$plan]['price'] =$getspec['price'];
             if ($getspec['key']==='memory')
             {
                 $specs[$plan]['memory'] = $getspec['value'];
@@ -75,14 +76,22 @@ foreach($getspecs as $getspec)
                         <div class="col-6">コア</div>
                         <div class="col-6"><?= htmlspecialchars($spec['core'], ENT_QUOTES); ?> コア</div>
                     </div>
+                    <div class="row">
+                        <div class="col-6">Price</div>
+                        <div class="col-6"><?= htmlspecialchars($spec['price'], ENT_QUOTES); ?> 円</div>
+                    </div>
                 </div>
             </label>
         </div>
         <?php endif;endforeach; ?>
+    </div>
+    <div>
+        <input type="datetime-local" name="changedate" format="YY-mm-dd" class="form-control" form='updateplan' required>
+    </div>
+
         <form action="/admin/vps/server?tab=basic&act=confirm&webid=<?= $webid ?>" method="post" id="updateplan">
         <input type="hidden" name="action" value="updateplan">
         </form>
-    </div>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">
