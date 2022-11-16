@@ -132,23 +132,32 @@ if ( $action === 'new' )
     $act_id = $_POST['act_id'];
     $sitebinding = $_POST['sitebinding']==0? 1 : 0;
     $subject = $_POST['sitebinding']==0? '【Winserver】エイリアスの追加申し込み完了': '【Winserver】エイリアスの削除完了';
+    $query = "SELECT * FROM web_account WHERE id='$act_id'";
+    $getRow = $commons->getRow($query);
 // for powershell
-    $sitename = $_POST['sitename'];
-    $bindDomain = $sitename.'.winserver.ne.jp';
+    $sitename = $getRow['user'];
+    $sitedomain = $getRow['domain'];
+    $webdomain = $getRow['domain'];
+    // $sitename = $_POST['sitename'];
+    $temp = explode('.',$sitedomain);
+    $count = count($temp);
+    unset($temp[$count-1]);
+    $sitedomain = implode(".",$temp);
+    $bindDomain = $sitedomain.'.winserver.ne.jp';
     $ip = IP;
     $checker="http/".$ip.":80:".$bindDomain;
     // $do = $_POST['sitebinding']==0? "+" : "-";
     $do = $_POST['sitebinding']==0? "new" : "remove";
     $msgsession = $_POST['sitebinding']==0? "msg" : "msgdel";
     $msg = $_POST['sitebinding']==0? 
-    "$sitename.winserver.ne.jpを追加しました".
+    "$sitedomain.winserver.ne.jpを追加しました".
     "<br>ＤＮＳの追加まで今しばらくお待ちください".
     "<br>弊社よりＤＮＳ追加作業後連絡させていただきます" : 
-    "$sitename.winserver.ne.jpを削除しました";
+    "$sitedomain.winserver.ne.jpを削除しました";
 
-    $query = "SELECT * FROM web_account WHERE id='$act_id'";
-    $getRow = $commons->getRow($query);
-    $webdomain = $getRow['domain'];
+    // $query = "SELECT * FROM web_account WHERE id='$act_id'";
+    // $getRow = $commons->getRow($query);
+    // $webdomain = $getRow['domain'];
 
 
     $web_server_id = $getRow['web_server_id'];
@@ -159,7 +168,7 @@ if ( $action === 'new' )
     $web_user = $gethost['username'];
     $web_password = $gethost['password'];
 
-    $qry = "UPDATE web_account SET sitebinding = '$sitebinding' WHERE id = $act_id";
+    $qry = "UPDATE web_account SET sitebinding = '$sitebinding' WHERE id = '$act_id'";
     if ( ! $commons->doThis($qry))
     {
             require_once("views/admin/share.php");
