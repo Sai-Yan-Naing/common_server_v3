@@ -180,6 +180,7 @@ if ( $action === 'new' )
         $body = file_get_contents('views/mailer/admin/binding/add.php');
     }
     $body = str_replace('$name', $webadminName, $body);
+    $body = str_replace('$domain', $sitedomain, $body);
 
     if ( ! $webmailer->sendMail($to=TO,$toName=TONAME,$subject,$body))
     {
