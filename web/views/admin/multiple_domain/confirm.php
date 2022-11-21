@@ -141,8 +141,32 @@ if ( $action === 'new' )
     // $sitename = $_POST['sitename'];
     $temp = explode('.',$sitedomain);
     $count = count($temp);
-    unset($temp[$count-1]);
+    if($temp[$count-1]=="net" &&$temp[$count-2]=="happywinds"){
+        unset($temp[$count-1]);
+        unset($temp[$count-2]);
+    }else{
+        unset($temp[$count-1]);
+    }
+    
     $sitedomain = implode(".",$temp);
+    $bindingdomain = $_POST['sitebinding']==0? implode(".",$temp) :NULL;
+
+    $web_server_id = $getRow['web_server_id'];
+// for alias validation 
+// $sitedomain = 'test2mailt.ckmphpdev';
+// echo $act_id;
+if($sitebinding==1){
+    $q = "SELECT count(id) as cid FROM web_account WHERE sitebinding=1 and web_server_id='$web_server_id' And removal is null AND bindingdomain='$sitedomain' and id!='$act_id'";
+    $count = $commons->getRow($q);
+    if($count['cid']>0){
+        $msg ="$sitedomain.winserver.ne.jpを作成することができませんでした。<br> 恐れ入りますが弊社サポートまでお問い合わせからご連絡ください";
+        flash('msg',$msg);
+        header("location: /admin$pagyc");
+        die;
+    }
+}
+    // end alias
+
     $bindDomain = $sitedomain.'.winserver.ne.jp';
     $ip = IP;
     $checker="http/".$ip.":80:".$bindDomain;
@@ -168,7 +192,7 @@ if ( $action === 'new' )
     $web_user = $gethost['username'];
     $web_password = $gethost['password'];
 
-    $qry = "UPDATE web_account SET sitebinding = '$sitebinding' WHERE id = '$act_id'";
+    $qry = "UPDATE web_account SET sitebinding = '$sitebinding',bindingdomain='$bindingdomain' WHERE id = '$act_id'";
     if ( ! $commons->doThis($qry))
     {
             require_once("views/admin/share.php");

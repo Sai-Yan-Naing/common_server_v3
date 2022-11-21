@@ -9,6 +9,7 @@ $target = $_POST['target'];
 $query = 'SELECT * FROM web_account WHERE id = :web_id';
 $getDns = $commons->getRow($query, ['web_id' => $webid]);
 $domain = $getDns['domain'];
+$subject = '【Winserver】DNSレコード追加申請完了';
 if ($action === 'new')
 {
 	$temp = json_decode($getDns['dns'], true);
@@ -19,6 +20,7 @@ if ($action === 'new')
 	"弊社にて作業完了次第、ご連絡させていただきますので<br>".
 	"反映まで今しばらくお待ちください";
     $msgsession ="msg";
+	$body = file_get_contents('views/mailer/admin/dns.php');
 }
 elseif ($action === 'edit')
 {
@@ -32,9 +34,11 @@ elseif ($action === 'edit')
 	"弊社にて作業完了次第、ご連絡させていただきますので<br>".
 	"反映まで今しばらくお待ちください";
     $msgsession ="msg";
+	$body = file_get_contents('views/mailer/admin/dns.php');
 }
 elseif ($action === 'delete')
 {
+	$subject = '【Winserver】DNSレコード削除申請完了';
 	$act_id = $_POST['act_id'];
 	$temp = json_decode($getDns['dns'], true);
 	$type = $temp[$act_id]['type'];
@@ -45,6 +49,7 @@ elseif ($action === 'delete')
 	$msg = "申請が完了しました<br>".
 	"弊社にて作業完了次第、ご連絡させていただきますので反映まで今しばらくお待ちください";
     $msgsession ="msgdel";
+	$body = file_get_contents('views/mailer/admin/dnsdel.php');
 }
 
 $qry = 'UPDATE web_account SET dns = :dns WHERE id = :id';
@@ -57,8 +62,7 @@ if ( ! $commons->doThis($qry, ['dns' => $result, 'id' => $getDns['id']]))
 
 // $subject = '=?UTF-8?B?' . base64_encode('DNS情報変更申請') . '?=';
 // $subject = 'DNS情報変更申請';
-$subject = '【Winserver】DNSレコード追加申請完了';
-$body = file_get_contents('views/mailer/admin/dns.php');
+
 if ($count>5 && $action === 'new')
 {
 	$body = file_get_contents('views/mailer/admin/dns2.php');
