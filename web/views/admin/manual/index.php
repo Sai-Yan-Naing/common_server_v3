@@ -11,9 +11,9 @@
                                 <div class="col-md-3">
                                     <ul class="manual">
                                         <li style="background-color: #09CAE3;"><a href="#controlpanel" class="msetting" style="color:white;"><span class="mr-2">1.</span>Winserverコントロールパネル</a></li>
-                                        <li><a href="#serversetting" class="msetting"><span class="mr-2">2.</span>サーバー設定</a></li>
+                                        <li><a href="#serversetting" class="msetting"><span class="mr-2">2.</span>共用サーバー設定</a></li>
                                         <li><a href="#domainadd" class="msetting"><span class="mr-2">2.1</span>マルチドメイン追加</a></li>
-                                        <li><a href="#domainsetting" class="msetting"><span class="mr-2">2.2</span>ドメイン取得 / 移管</a></li>
+                                        <li><a href="#domainsetting" class="msetting"><span class="mr-2">2.2</span> ドメイン取得/移管</a></li>
                                         <li><a href="#dnsinfo" class="msetting"><span class="mr-2">2.3</span>DNS情報</a></li>
                                     </ul>
                                 </div>
@@ -21,12 +21,12 @@
                                         <div id="controlpanel" class="cmanual" style="display: block;">
                                         <h1>Winserverコントロールパネル</h1>
                                             <p>Winserverコントロールパネルは、Winserverをお使いのお客様のサーバー設定、ご契約情報の確認などを行うための管理パネルです。</p>
-                                            <p>サーバーやサイトの起動停止、プランの変更や各種申請もこちらから行うことができます。</p>
+                                            <p>各契約を展開いただくことで設定いただいたマルチドメインについてそれぞれサーバーやサイトの起動停止、プランの変更や各種申請もこちらから行うことができます。</p>
                                             <img src="/img/manual/control_panel.png" alt="コントロールパネル画面">
                                             <h2>サーバー設定</h2>
                                             <p>サイトの起動・停止、各種設定を行うことができます。</p>
                                             <h2>ご契約情報</h2>
-                                            <p>ご契約情報の確認、変更申請などができます。（？）</p>
+                                            <p>別タブにて弊社マイページが開きます。ご契約状況の確認が可能です。</p>
                                             <h2>マニュアル</h2>
                                             <p>本マニュアルページに遷移します。</p>
                                             <h2>お問合せ</h2>
@@ -46,9 +46,9 @@
                                             <p>土日祝日を除く1営業日以内に記載いただいたメールアドレスにご連絡いたします。</p>
                                     </div>
                                     <div id="serversetting" class="cmanual">
-                                        <h1>サーバー設定</h1>
+                                    <h1>サーバー設定</h1>
                                         <p>サーバー設定ではサイトおよびアプリケーションプールの起動・停止、各種設定を行うことができます。</p>
-                                        <p>各ドメインの使用容量もこちらの画面で確認できます。</p>
+                                        <p>ご利用のマルチドメイン、DB、メールアドレスの数および各ドメインの使用容量もこちらの画面で確認できます。</p>
                                         <img src="/img/manual/control_panel.png" alt="コントロールパネル画面">
                                         <h2>マルチドメイン追加</h2>
                                         <p>マルチドメインの追加が可能です。</p>
@@ -60,24 +60,27 @@
                                         <p>5件目以降のレコードの追加は、1レコードにつき110円/月のオプション料金が加算されます。</p>
                                     </div>
                                     <div id="domainadd" class="cmanual">
-                                        <h1>マルチドメイン追加</h1>
+                                    <h1>マルチドメイン追加</h1>
                                         <p>マルチドメインの追加を行うことができます。</p>
                                         <img src="/img/manual/add_domain.png" alt="マルチドメイン追加画面">
                                         <h2>追加作業</h2>
-                                        <p>ドメイン名、FTPユーザー名、パスワードを入力して「作成」を押下してください。</p>
-                                        <h3>ドメイン名</h3>
+                                        <p>主契約ドメイン、追加ドメイン、FTPユーザー名、パスワードを入力して「作成」を押下してください。</p>
+                                        <h3>主契約ドメイン</h3>
+                                        <p>マルチドメインを追加する主契約ドメインを選択してください。</p>
+                                        <p>データベース数が上限に達している主契約ドメインは選択いただけません。</p>
+                                        <h3>追加ドメイン</h3>
                                         <p>作成希望のドメイン名を入力してください。</p>
                                         <h3>FTPユーザー名</h3>
-                                        <p>1で入力したドメインに接続可能なFTPユーザーを作成します。</p>
+                                        <p>追加するドメインに接続可能なFTPユーザーを作成します。</p>
                                         <p>作成希望のFTPユーザー名を1～20文字で入力してください。</p>
-                                        <p>半角英数字と「'(シングルクォート)」「.(ドット)」「-(ハイフン)」「_(アンダーバー)」「!(エクスクラメーションマーク)」「#(井桁)」「^(ハット)」「~(チルダ)」のみ利用可能です。</p>
+                                        <p>半角英数字と「_(アンダーバー)」「-(ハイフン)」「.(ドット)」のみ利用可能です。</p>
                                         <h3>パスワード</h3>
-                                        <p>希望のパスワードを6-127文字で入力してください。</p>
+                                        <p>希望のパスワードを8～30文字で入力してください。</p>
                                         <p>パスワードは英大文字、英小文字、数字、記号の4種類のうち3種類を含んでいる必要があります。</p>
                                         <p>また、FTPユーザー名を含むパスワードは設定いただけません。</p>
-                                        </div>
-                                        <div id="domainsetting" class="cmanual">
-                                        <h1>ドメイン取得・ドメイン移管</h1>
+                                    </div>
+                                    <div id="domainsetting" class="cmanual">
+                                    <h1>ドメイン取得・ドメイン移管</h1>
                                         <p>ドメインの取得および移管の申請を行うことができます。</p>
                                         <img src="/img/manual/domain.png" alt="ドメイン取得・移管画面">
                                         <h2>ドメイン取得</h2>
@@ -95,7 +98,7 @@
                                         <p>弊社からのご案内をお待ちください。</p>
                                     </div>
                                     <div id="dnsinfo" class="cmanual">
-                                        <h1>DNS情報</h1>
+                                    <h1>DNS情報</h1>
                                         <p>登録済のDNS情報の確認、変更申請、追加申請、削除申請を行うことが出来ます。</p>
                                         <img src="/img/manual/dnsinfo.PNG" alt="DNS情報画面">
                                         <h2>レコード追加</h2>
@@ -126,7 +129,23 @@
         </main>
     </div>
 </div>
-
+<style>
+    h1 {
+      padding: .5em .75em;
+      background-color: #f6f6f6;
+      border-left: 6px solid #ccc;
+      font-size: 32px;
+    }
+    h2 {
+      padding-bottom: .5em;
+      border-bottom: 1px solid #ccc;
+      font-size: 24px;
+    }
+    h3 {
+      font-size: 18px;
+      font-weight:bold;
+    }
+</style>
 <script>
     //  $(document).on('click','.msetting',function(){
     //     $id = $(this).attr("href");
