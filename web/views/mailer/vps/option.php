@@ -1,5 +1,5 @@
 <html>
-    <body>
+    <body style="line-height:12px">
         <p>$name様</p>
         <br>
         <p>オプションの追加依頼をお受けいたしました。</p>

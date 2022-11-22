@@ -2,7 +2,7 @@
     <head>
         <?php header("Content-Type: text/html; charset=UTF-8"); ?>
     </head>
-    <body>
+    <body style="line-height:12px">
         <p>$name様</p>
         <br>
         <p>ドメイン【$domain.happywinds.net】について</p>

@@ -1,5 +1,5 @@
 <html>
-    <body>
+    <body style="line-height:12px">
         <p>$admin様</p>
         <p>下記の内容にてDNSレコード追加申請の受付完了しました。</p>
         <br>

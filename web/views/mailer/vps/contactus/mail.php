@@ -2,7 +2,7 @@
     <head>
         <?php header("Content-Type: text/html; charset=UTF-8"); ?>
     </head>
-    <body>
+    <body style="line-height:12px">
         <p>以下の内容で問い合わせが入っております。</p>
         <p>お問い合わせの内容を確認の上、１営業日以内に返信してください。</p>
         <p>お問合せ内容：$name</p>
