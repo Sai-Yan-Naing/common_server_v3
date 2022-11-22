@@ -159,7 +159,7 @@ if($sitebinding==1){
     $q = "SELECT count(id) as cid FROM web_account WHERE sitebinding=1 and web_server_id='$web_server_id' And removal is null AND bindingdomain='$sitedomain' and id!='$act_id'";
     $count = $commons->getRow($q);
     if($count['cid']>0){
-        $msg ="エイリアス$sitedomain.winserver.ne.jpを作成することができませんでした。<br> 恐れ入りますが弊社サポートまでお問い合わせからご連絡ください";
+        $msg ="エイリアス$sitedomain.winserver.ne.jpを作成することができませんでした。<br> 恐れ入りますが弊社サポートまでお問い合わせからご連絡ください。";
         flash('msg',$msg);
         header("location: /admin$pagyc");
         die;
