@@ -115,6 +115,7 @@ if ( $action=='new'){
         if ( ! $commons->importWP($web_host,$sql_contents,$db_name,$db_user,$db_pass))
         {
             echo "import fail";
+            die;
         }  
         $msg = "インストールが完了しました";
         // die('ok');
