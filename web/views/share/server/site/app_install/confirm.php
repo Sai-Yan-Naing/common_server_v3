@@ -85,7 +85,6 @@ if ( $action=='new'){
         // die;
         // $src = APP_PATH."$app_name/$app_version/*";
         // $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
-        copyFile($web_host,$web_user,$web_password,$src, $dst);
         // die;
         // copy(APP_CONFIG_PATH.'wordpress/wp-config.php', $dst.'/wp-config.php');
         $path_to_file = 'E:/app_config/wordpress/wp-config.php';
@@ -95,7 +94,6 @@ if ( $action=='new'){
         $file_contents = str_replace("wp_username",$db_user,$file_contents);
         $file_contents = str_replace("wp_password",$db_pass,$file_contents);
         // file_put_contents($path_to_file,$file_contents);
-        put_File($web_host,$web_user,$web_password,$dst.'/wp-config.php',$file_contents);
         // die;
         // for sql
         // copy(APP_CONFIG_PATH.'wordpress/replace_wp_db.sql', $dst.'/replace_wp_db.sql');
@@ -114,10 +112,13 @@ if ( $action=='new'){
     // die('ok');
         if ( ! $commons->importWP($web_host,$sql_contents,$db_name,$db_user,$db_pass))
         {
-            echo "import fail";
-            die;
-        }  
-        $msg = "インストールが完了しました";
+            $msg = "import fail";
+        }  else{
+            $msg = "インストールが完了しました";
+            
+        copyFile($web_host,$web_user,$web_password,$src, $dst);
+        put_File($web_host,$web_user,$web_password,$dst.'/wp-config.php',$file_contents);
+        }
         // die('ok');
     }else{
         // echo 'hello';
@@ -258,8 +259,10 @@ if ( $action=='new'){
         // if ( ! $commons->importWP($import,$db_name,$db_user,$db_pass))
         if ( ! $commons->importWP($web_host,$import,$db_name,$db_user,$db_pass))
         {
-            echo "import fail";
-        }  
+            $msg = "import fail";
+        } else{
+            $msg = "インストールが完了しました";
+        } 
     }
 
 }elseif ($action=='delete') {
