@@ -52,6 +52,7 @@ function csvformaterror(){
         $('.ps_absolute').removeClass('align-items-baseline')
         $('#common_dialog').children().removeClass('modal-dialog-scrollable')
         $("#upload_csv").val('')
+        $('#errormsg').html('');
 }
 
 $(document).on("change", "#upload_csv", function (e) {
@@ -95,7 +96,7 @@ $(document).on("change", "#upload_csv", function (e) {
             delete lines[k]
         } 
         lines = lines.filter(val => val)
-        console.log(lines)
+        // console.log(lines)
         for (i = 0; i < lines.length; ++i)// remove empty array
         {
             if (lines[i].length > 3) {
@@ -111,11 +112,6 @@ $(document).on("change", "#upload_csv", function (e) {
         lines = lines.filter(val => val)
         for (i = 0; i < lines.length; ++i)
         {
-            
-            //console.log(lines[i].split(',')[0])
-            // lines[i] = lines[i].replace(/"/g, '');
-            // var row = lines[i].split(',')
-            // console.log(row[0])
             if (i == 0) {
                 for (var j = 0; j < lines[i].length; j++) {
                     $th +='<th>'+lines[i][j]+'</th>';
@@ -160,7 +156,7 @@ $(document).on("change", "#upload_csv", function (e) {
                         //   $error = 'error';
                         //     $haserror = true;
                         // }
-                        console.log(lines[i][2])
+                        // console.log(lines[i][2])
                         // console.log(regex.test(lines[i][2]) + 'test')
                         // if (/\s/.test(lines[i][k]) || regex.test(lines[i][2]) || (lines[i][2].length<8 || lines[i][2].length> 30)) {
                         //     $error = 'error';
@@ -178,15 +174,25 @@ $(document).on("change", "#upload_csv", function (e) {
                 $tr += $td +'</tr>';
             }
         }
+        $errormsg = "赤字で表示されたユーザー名/パスワードは要件を満たしておりません。要件詳細はマニュアルをご確認ください。";
+        if($haserror){
+        $('#errormsg').html($errormsg);
+        }else{
+        $('#errormsg').html('');
+        }
         $('#importerror').val($haserror);
         $tableend = $tablestart+ $thead + $tbody  + $tr+'</tbody></table>';
         $('.ps_absolute').html($tableend);
-    $height = $('.modal-body').height()
+    $height = $('.ps_absolute').children('table').height()
     $('.ps_absolute').next().css({'height':$height + 10})
     };
         reader.readAsText(e.target.files.item(0) , 'Shift-JIS');
     }
     return false;
+});
+$( window ).resize(function() {
+  $height = $('.ps_absolute').children('table').height()
+  $('.ps_absolute').next().css({'height':$height + 10})
 });
 
   $(document).on('click',".toggle-password",function() {

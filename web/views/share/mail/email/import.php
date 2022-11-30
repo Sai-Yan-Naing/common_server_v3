@@ -20,6 +20,9 @@ require_once('views/share_config.php');
     <input type="hidden" name="action" value="import">
     <input type="hidden" name="error" id="importerror" value="false">
         <div class="form-group">
+          <div class="row justify-content-center">
+            <div class="col-6"><div id="errormsg" class="error"></div></div>
+          </div>
             <div class="ps_absolute" id="ps_absolute">ファイルをドラッグ＆ドロップしてください</div>
           <div style="position: relative; height: 200px">
               <input type="file" class="form-control" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" id="upload_csv">
