@@ -9,14 +9,14 @@ if(isset($_COOKIE['admin']) and isset($_GET['webper']) && $_GET['webper'] =='adm
 //             echo json_encode($status);
 //             die();
     require_once("views/admin/admin_shareconfig.php");
-    $params =['domain'=>$webdomain];
+    $params =['domain'=>$webdomain,'webid'=>$webid];
 }else if(isset($_COOKIE['admin']) and $_GET['webper']=='admin')
 {
     require_once("views/admin/admin_config.php");
 }else if(isset($_COOKIE['share_user']))
 {
     require_once('views/share_config.php');
-    $params =['domain'=>$webdomain];
+    $params =['domain'=>$webdomain,'webid'=>$webid];
 }else{
     require 'config/all.php';
 }

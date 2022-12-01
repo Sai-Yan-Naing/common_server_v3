@@ -35,10 +35,10 @@ class CommonValidate
 	{
 		// @todo この処理は暫定。正しく存在するテーブルかカラムかをチェックしなければならない。
 		// if ( ! (ctype_alnum($table) && ctype_alnum($column))) column can contain underscore( _ )
-		if ( ctype_alnum($table) )
-		{
-			return false;
-		}
+		// if ( ctype_alnum($table) )
+		// {
+		// 	return false;
+		// }
 		$addition =null;
 		if($web_server_id!=null)
 		{
@@ -49,7 +49,7 @@ class CommonValidate
 			$addition .= " and add_email.domain= '$params[domain]'";
 		}
 
-			$query = "SELECT $table.$column FROM $table INNER JOIN web_account on $table.domain = web_account.domain where $table.$column = :checker $addition";
+			$query = "SELECT $table.$column FROM $table INNER JOIN web_account on $table.domain = web_account.domain where $table.$column = :checker $addition and web_account.id=$params[webid]";
 		if($table =='web_account')
 		{
 			$query = "SELECT $table.$column FROM $table where $table.$column = :checker and web_account.web_server_id= $web_server_id  and removal IS NULL";

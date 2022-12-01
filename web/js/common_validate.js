@@ -315,13 +315,30 @@ $.validator.addMethod(
           console.log(data.status + "back end");
           // return;
           if (data["status"]) {
-            $(element).after(
+            if($(element).attr("id")=='url'){
+              $(element).after(
+              '<label id="' +
+                $(element).attr("id") +
+                '-error" class="error">' +
+                "既に存在しているURLです。別のURLを指定してください。</label>"
+            );
+            }else if($(element).attr("data")=='db_name1'){
+              $(element).after(
+              '<label id="' +
+                $(element).attr("id") +
+                '-error" class="error">' +
+                "既に他のアプリケーションで使用しているDBです。別のDB名を指定してください</label>"
+            );
+
+            }else{
+              $(element).after(
               '<label id="' +
                 $(element).attr("id") +
                 '-error" class="error">' +
                 $(element).val() +
                 " を取得することができません。別の名前を指定してください。</label>"
-            );
+                );
+            }
             result = false;
           } else {
             $(element).after(
@@ -587,6 +604,8 @@ $.validator.addMethod(
         url: {
           required: true,
           url: true,
+          alreadyexist: true,
+          onkeyup: false,
         },
         site_name: {
           required: true,
@@ -618,6 +637,7 @@ $.validator.addMethod(
           nospecialchar2: true,
           minlength: 1,
           maxlength: 64,
+          alreadyexist: true,
           onkeyup: false,
         },
         db_user: {
@@ -627,6 +647,7 @@ $.validator.addMethod(
           nospecialchar1: true,
           minlength: 1,
           maxlength: 32,
+          alreadyexist: true,
           onkeyup: false,
         },
         db_pass: {
