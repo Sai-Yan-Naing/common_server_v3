@@ -41,6 +41,14 @@ $webmail_cnt = $web_acc['mail_cnt'];
 $webplanbackup = $web_acc['pback_up'];
 $webpmssql = $web_acc['pmssql'];
 $mailserverid= $web_acc['mailserver'];
+$maildomain = explode('.',$webdomain); //for *.happywinds.net
+$mailcount = count($maildomain);
+$maildomain =$maildomain[$mailcount-2].".".$maildomain[$mailcount-1]; 
+if($maildomain=="happywinds.net"){
+    $maildomain= "mail6.happywinds.net";
+}else{
+    $maildomain= "mail.".$webdomain;
+}
 // for root site
 
 if($weborigin !=1)
