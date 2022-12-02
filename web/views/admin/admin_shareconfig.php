@@ -51,8 +51,10 @@ $mailcount = count($maildomain);
 $maildomain =$maildomain[$mailcount-2].".".$maildomain[$mailcount-1]; 
 if($maildomain=="happywinds.net"){
     $maildomain= "mail6.happywinds.net";
+    $smtpdomain= "smtp6.winserver.ne.jp";
 }else{
     $maildomain= "mail.".$webdomain;
+    $smtpdomain= "mail.".$webdomain;
 }
 // for root site
 if($weborigin !=1)

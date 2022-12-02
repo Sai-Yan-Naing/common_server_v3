@@ -15,7 +15,7 @@
                                         <div class="form-group row">
                                             <label for="cserver-name" class="col-sm-3 col-form-label">接続サーバー名</label>
                                             <div class="col-sm-8">
-                                            <span class="col-form-label"><?= htmlspecialchars($maildomain, ENT_QUOTES); ?> </span>
+                                            <span class="col-form-label"><?= htmlspecialchars($smtpdomain, ENT_QUOTES); ?> </span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
