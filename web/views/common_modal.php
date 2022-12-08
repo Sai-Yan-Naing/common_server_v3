@@ -83,3 +83,16 @@
 		      </div>
 		    </div>
 		  </div>
+
+		  <div class="modal fade" id="checkin_dialog" data-keyboard="true" data-backdrop="static">
+		    <div class="modal-dialog modal-xl">
+		      <div class="modal-content" >
+			  	  <div class="modal-body text-center" id="checkindisplay_dialog"></div>
+		        <div class="modal-footer d-flex justify-content-center">
+				<input type="hidden" name="checkin" value="checkin" form="app_install_form">
+		          <button type="button" class="btn btn-outline-info btn-sm" id="checkin_Cancel">キャンセル</button>
+		          <button type="button" class="btn btn-outline-info btn-sm" id="checkin_Confirm">OK</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>

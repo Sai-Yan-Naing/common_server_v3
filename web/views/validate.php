@@ -151,7 +151,6 @@ if ( $remark === 'madbuser')
     }
     
 }
-
 if ( $remark === 'checkappdb')
 {
     
@@ -159,10 +158,27 @@ if ( $remark === 'checkappdb')
     $db_user= $_POST['db_user'];
     $db_pass= $_POST['db_pass'];
     $db_dsn = "mysql:host=$web_host:3310;dbname=$db_name";
-    // $status['status'] =$db_dsn;
+    // $status['status'] ='ok';
     //     echo json_encode($status);
     // die();
-    
+    // $checkresult = $check->checkIn($db_name,$db_user,$params);
+    // // $status['status'] =$checkresult;
+    // // echo json_encode($status);die;
+    // if ( $checkresult )
+    // {
+    //     $status['status'] ='checkin'; //db already exist in other domain
+    //     echo json_encode($status);
+    //     die();
+    // }
+    $checkresult = $check->checkInOther($db_name,$db_user,$params);
+    // $status['status'] =$checkresult;
+    // echo json_encode($status);die;
+    if ( $checkresult )
+    {
+        $status['status'] ='inother'; //db already exist in other domain
+        echo json_encode($status);
+        die();
+    }
     if($check->mysqlDatabase($db_name) || $check->mysqlUser($db_user))
     {
         $checkresult = $check->checkappdb($db_dsn,$db_user,$db_pass);
@@ -179,6 +195,33 @@ if ( $remark === 'checkappdb')
             die;
     }  
 }
+// if ( $remark === 'checkappdb')
+// {
+    
+//     $db_name = $_POST['db_name'];
+//     $db_user= $_POST['db_user'];
+//     $db_pass= $_POST['db_pass'];
+//     $db_dsn = "mysql:host=$web_host:3310;dbname=$db_name";
+//     // $status['status'] =$db_dsn;
+//     //     echo json_encode($status);
+//     // die();
+    
+//     if($check->mysqlDatabase($db_name) || $check->mysqlUser($db_user))
+//     {
+//         $checkresult = $check->checkappdb($db_dsn,$db_user,$db_pass);
+//         if ( $checkresult == false)
+//         {
+//             // $status['status'] ='hello';
+//             // echo json_encode($status);
+//             $status['status'] ='ok';
+//             echo json_encode($status);
+//             die();
+//         }
+//         $status['status'] ='doesnotmatch';
+//             echo json_encode($status);
+//             die;
+//     }  
+// }
 
 
     if ( $remark === 'checkdblimit')

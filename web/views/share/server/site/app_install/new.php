@@ -121,6 +121,9 @@
             指定されたDBに入力されたユーザーでログインすることができません。
             <br>正しいパスワードもしくは正しいユーザー名を入力してください。
     </div>
+    <div class="d-none error" id='inother'>
+    指定されたDBはすでに別のドメインで利用しているため指定することができません
+    </div>
 </div>
 <!-- Modal footer -->
 <div class="modal-footer d-flex justify-content-center">

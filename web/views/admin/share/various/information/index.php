@@ -39,7 +39,7 @@ $getAllRow=$commons->getAllRow($query,[$webdomain]);
                                                 </label>
                                             </div>
                                             <div class="mb-1 d-flex">
-                                                <label for="capacity-used" class="col-sm-3 col-form-label">使用ディスク容量</label>
+                                                <label for="capacity-used" class="col-sm-3">使用ディスク容量</label>
                                                 <!--<div class="col-sm-4" ><progress id="capacity-used" max="100" value="70"> </progress></div>-->
                                                 <!-- <div class="col-sm-4" id="chartContainer" style="height: 300px; width: 100%;"> </div> -->
                                                 <div class="col-sm-4"><span><?php if($weborigin!=1): echo sizeFormat(folderSize($web_host,$web_user,$web_password,$webrootuser."/$webuser"));else:echo sizeFormat(folderSize($web_host,$web_user,$web_password,$webuser));endif; ?></span></div>

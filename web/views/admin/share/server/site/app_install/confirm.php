@@ -68,13 +68,6 @@ if ( $action=='new'){
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
-        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id, remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
-        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'], 0]))
-            {
-                $error = "cannot add db account";
-                    require_once("views/admin/share/server/site/app_install/index.php");
-                    die("");
-            }
         // die('new');
         
         // die;
@@ -111,6 +104,14 @@ if ( $action=='new'){
             copyFile($web_host,$web_user,$web_password,$src, $dst); 
             put_File($web_host,$web_user,$web_password,$dst.'/wp-config.php',$file_contents);
             $msg = "インストールが完了しました";
+            
+            $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id, remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
+            if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'], 0]))
+                {
+                    $error = "cannot add db account";
+                        require_once("views/admin/share/server/site/app_install/index.php");
+                        die("");
+                }
         }
         // die('ok');
     }else{
@@ -140,15 +141,6 @@ if ( $action=='new'){
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
-        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id,remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
-
-        
-        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'],0]))
-        {
-            $error = "cannot add db account";
-                require_once("views/admin/share/server/site/app_install/index.php");
-                die("");
-        }
         
         // $src = APP_PATH."$app_name/$app_version/*";
         // $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
@@ -256,6 +248,15 @@ if ( $action=='new'){
         }  else{
             $msg = "インストールが完了しました";
 
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id,remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
+
+        
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'],0]))
+        {
+            $error = "cannot add db account";
+                require_once("views/admin/share/server/site/app_install/index.php");
+                die("");
+        }
         }
     }
 }elseif ($action=='delete') {

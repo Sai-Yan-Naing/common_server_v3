@@ -704,24 +704,50 @@ $.validator.addMethod(
         $app = $("input[name='app']:checked").val();
         $version = $("input[name='app-version']:checked").val();
         $phpv = $('#webphp').data('version');
-        
-        if (checkappdb()=='ok') {
+        $checkapp = checkappdb();
+        if ($checkapp=='ok') {
             $('#dbexist').val('exist');
-          }else if(checkappdb()=='doesnotmatch'){
+          }else if($checkapp=='doesnotmatch'){
             $('#checkappdb').removeClass("d-none");
             return;
-          }else{
+          }else if($checkapp=='inother'){
+            $('#inother').removeClass("d-none");
+            return;
+          }
+          else if($checkapp=='checkin'){
+          // $('#checkappdb').addClass("d-none");
+          // $('#inother').addClass("d-none");
+          $("#common_dialog").modal("hide");
+            $("#checkinother_dialog").modal("show");
+            document.getElementById("checkinotherdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE3の対応バージョンではないため、5.6.37に変更します。';
+            $("#checkinother_Cancel").click(function () {
+                        $("#checkinother_dialog").modal("hide");
+                        $("#common_dialog").modal("show");
+                        $("#common_dialog").css({'overflow-y':'auto'})
+                    });
+            $("#checkinother_Confirm").click(function () {
+                $("#checkinother_dialog").modal("hide");
+                $("#app_install_form").attr("data-send", "ready");
+                loading();
+                form.submit()
+            });
+                    return ;
+                    // loading();
+                        // form.submit()
+          }
+          else{
             // return;
             $('#checkdblimit').addClass("d-none");
             if (checkdblimit()) {
               $('#checkdblimit').removeClass("d-none");
                 return;
               }
-              // return;
+              return;
             $('#dbexist').val('new');
           }
 
           $('#checkappdb').addClass("d-none");
+          $('#inother').addClass("d-none");
           $gourl = "/admin/share/server?setting=site&tab=app_install&act=validatecap";
           $exceedwebcap = '容量がいっぱいになっているため、アプリケーションの追加ができません。サイトデータを削除いただき追加を行ってください。';
         // return;

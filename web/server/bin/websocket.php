@@ -32,7 +32,7 @@ use MyApp\Servidorsocket;
                 new Servidorsocket()
             )
         ),
-        8065
+        8067
     );
 
     $server->run();

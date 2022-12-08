@@ -142,7 +142,7 @@ $getAllRow=$commons->getAllRow($query);
 // });
 <!-- <script> -->
         var resizeInterval;
-        var wSocket = new WebSocket("ws://202.218.224.21:8065");
+        var wSocket = new WebSocket("ws://21server.capitalknowledge-mm.website:8067");
         // Terminal.applyAddon(attach);  // Apply the `attach` addon
         // Terminal.applyAddon(fit);  //Apply the `fit` addon
         const attachAddon = new AttachAddon.AttachAddon(wSocket);
