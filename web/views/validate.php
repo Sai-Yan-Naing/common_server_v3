@@ -161,15 +161,15 @@ if ( $remark === 'checkappdb')
     // $status['status'] ='ok';
     //     echo json_encode($status);
     // die();
-    // $checkresult = $check->checkIn($db_name,$db_user,$params);
-    // // $status['status'] =$checkresult;
-    // // echo json_encode($status);die;
-    // if ( $checkresult )
-    // {
-    //     $status['status'] ='checkin'; //db already exist in other domain
-    //     echo json_encode($status);
-    //     die();
-    // }
+    $checkresult = $check->checkIn($db_name,$db_user,$params);
+    if ( $checkresult )
+    {
+        $status['status'] ='checkin'; //db already exist in other domain
+        echo json_encode($status);
+        die();
+    }
+    // $status['status'] =$checkresult;
+    // echo json_encode($status);die;
     $checkresult = $check->checkInOther($db_name,$db_user,$params);
     // $status['status'] =$checkresult;
     // echo json_encode($status);die;

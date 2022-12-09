@@ -710,23 +710,25 @@ $.validator.addMethod(
           }else if($checkapp=='doesnotmatch'){
             $('#checkappdb').removeClass("d-none");
             return;
-          }else if($checkapp=='inother'){
-            $('#inother').removeClass("d-none");
-            return;
           }
+          // else if($checkapp=='inother'){
+          //   $('#inother').removeClass("d-none");
+          //   return;
+          // } 
           else if($checkapp=='checkin'){
           // $('#checkappdb').addClass("d-none");
           // $('#inother').addClass("d-none");
           $("#common_dialog").modal("hide");
-            $("#checkinother_dialog").modal("show");
-            document.getElementById("checkinotherdisplay_dialog").innerHTML = '現在のPHPがEC-CUBE3の対応バージョンではないため、5.6.37に変更します。';
-            $("#checkinother_Cancel").click(function () {
-                        $("#checkinother_dialog").modal("hide");
+            $("#checkin_dialog").modal("show");
+          // return ;
+            document.getElementById("checkindisplay_dialog").innerHTML = '指定されたDBはすでに別のドメインで利用しているため指定することができません';
+            $("#checkin_Cancel").click(function () {
+                        $("#checkin_dialog").modal("hide");
                         $("#common_dialog").modal("show");
                         $("#common_dialog").css({'overflow-y':'auto'})
                     });
-            $("#checkinother_Confirm").click(function () {
-                $("#checkinother_dialog").modal("hide");
+            $("#checkin_Confirm").click(function () {
+                $("#checkin_dialog").modal("hide");
                 $("#app_install_form").attr("data-send", "ready");
                 loading();
                 form.submit()
@@ -830,6 +832,7 @@ function checkappdb()
         // $("#" + $(element).attr("id") + "-error").remove();
         $done = $ajax.done(function (data) {
             result = data["status"];
+            console.log(result)
         });
         return result;
 }
