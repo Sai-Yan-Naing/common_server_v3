@@ -711,10 +711,10 @@ $.validator.addMethod(
             $('#checkappdb').removeClass("d-none");
             return;
           }
-          // else if($checkapp=='inother'){
-          //   $('#inother').removeClass("d-none");
-          //   return;
-          // } 
+          else if($checkapp=='inother'){
+            $('#inother').removeClass("d-none");
+            return;
+          } 
           else if($checkapp=='checkin'){
           // $('#checkappdb').addClass("d-none");
           // $('#inother').addClass("d-none");
@@ -744,7 +744,7 @@ $.validator.addMethod(
               $('#checkdblimit').removeClass("d-none");
                 return;
               }
-              return;
+              // return;
             $('#dbexist').val('new');
           }
 

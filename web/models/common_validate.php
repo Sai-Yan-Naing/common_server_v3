@@ -194,14 +194,14 @@ class CommonValidate
 	function checkInOther($db_name,$db_user,$params)
 	{
 		$query = "SELECT count(db_account.id) as cnt FROM db_account INNER JOIN web_account on db_account.domain = web_account.domain
-		where db_account.db_name = '$db_name' or db_account.db_user ='$db_user' and web_account.domain!='$params[webid]'";
+		where (db_account.db_name = '$db_name' or db_account.db_user ='$db_user') and web_account.id!='$params[webid]'";
 		
 		$stmt1 = $this->pdo->prepare($query);
 		$stmt1->execute();
 		$data = $stmt1->fetch(PDO::FETCH_ASSOC);
 		// $data = json_encode($data);
 		// return $data;
-		if( count($data['cnt']) > 0 )
+		if( $data['cnt'] > 0 )
 		{
 			return true;
 		}
@@ -212,14 +212,14 @@ class CommonValidate
 	function checkIn($db_name,$db_user,$params)
 	{
 		$query = "SELECT count(db_account.id) as cnt FROM db_account INNER JOIN web_account on db_account.domain = web_account.domain
-		where db_account.db_name = '$db_name' or db_account.db_user ='$db_user' and web_account.domain='$params[webid]'";
+		where (db_account.db_name = '$db_name' or db_account.db_user ='$db_user') and web_account.id='$params[webid]'";
 		
 		$stmt1 = $this->pdo->prepare($query);
 		$stmt1->execute();
 		$data = $stmt1->fetch(PDO::FETCH_ASSOC);
 		// $data = json_encode($data);
 		// return $data;
-		if( count($data['cnt']) > 0 )
+		if( $data['cnt'] > 0 )
 		{
 			return true;
 		}

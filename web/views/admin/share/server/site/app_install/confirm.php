@@ -42,12 +42,13 @@ if ( $action=='new'){
     $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
     if(isset($_POST['checkin']) and $_POST['checkin']=='checkin'){
-        echo $getdbid['id'];
+        // echo $getdbid['id'];
         if(!$commons->deleteMysqlDB($getdbid['id'],$db_user,$db_name))
         {
+            // echo $getdbid['id'];
             $error = "Something errors";
                 require_once("views/admin/share/server/site/app_install/index");
-                die("");
+                die();
         }
         $delete_q = "DELETE FROM db_account WHERE id='$act_id'";
         if ( !$commons->doThis($delete_q))
