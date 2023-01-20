@@ -405,7 +405,7 @@ $.validator.addMethod(
         $("#" + $(element).attr("id") + "-error").remove();
         $done = $ajax.done(function (data) {
           $("#" + $(element).attr("id") + "-error").remove();
-          console.log(data.status + "back end");
+          // console.log(data.status + "back end");
           if (data["status"]) {
             $(element).after(
               '<label id="' +
@@ -458,7 +458,6 @@ $.validator.addMethod(
         domain: {
           required: true,
           domain: true,
-          alreadyexist: true,
           onkeyup: false,
         },
         web_dir: {
@@ -474,7 +473,6 @@ $.validator.addMethod(
           allowspecialchar5: true,
           minlength: 1,
           maxlength: 20,
-          alreadyexist: true,
           onkeyup: false,
         },
         password: {
@@ -515,16 +513,39 @@ $.validator.addMethod(
         // return false;
         
         // form.submit();
-        $gourl = "admin/multiple_domain?act=validatecap";
-        $exceedwebcap = '容量がいっぱいになっているため、サイトの追加ができません。サイトデータを削除いただき追加を行ってください。';
-        if(exceedwebcap($gourl))
-        {
-          document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
-          $('#exceedwebcap').html($exceedwebcap)
-        }else{
+        // $gourl = "admin/multiple_domain?act=validatecap";
+        // $exceedwebcap = '容量がいっぱいになっているため、サイトの追加ができません。サイトデータを削除いただき追加を行ってください。';
+        // if(exceedwebcap($gourl))
+        // {
+        //   document.getElementById("display_dialog").innerHTML = $('#exceedwebcap_dialog').html();
+        //   $('#exceedwebcap').html($exceedwebcap)
+        // }else{
           loading();
-          form.submit()
-        }
+          $ajax = $.ajax({
+            url: $("#add_multiple_domain").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="domain"){
+                $error = '<label id="domain-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#domain'));
+              }
+              if(data.field=="ftp_user"){
+                $error = '<label id="ftp_user-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#ftp_user'));
+              }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
+        // }
       },
     });
 
@@ -604,7 +625,7 @@ $.validator.addMethod(
         url: {
           required: true,
           url: true,
-          alreadyexist: true,
+          // alreadyexist: true,
           onkeyup: false,
         },
         site_name: {
@@ -832,7 +853,7 @@ function checkappdb()
         // $("#" + $(element).attr("id") + "-error").remove();
         $done = $ajax.done(function (data) {
             result = data["status"];
-            console.log(result)
+            console.log(data)
         });
         return result;
 }
@@ -942,8 +963,29 @@ function checkdblimit()
         },
       },
       submitHandler: function (form) {
+        // loading();
+        // form.submit();
         loading();
-        form.submit();
+          $ajax = $.ajax({
+            url: $("#blockip_create").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="block_ip"){
+                $error = '<label id="block_ip-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#block_ip'));
+              }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
       },
     });
 
@@ -1012,7 +1054,7 @@ function checkdblimit()
           nospecialchar2: true,
           minlength: 1,
           maxlength: 64,
-          alreadyexist: true,
+          // alreadyexist: true,
           onkeyup: false,
         },
         db_user: {
@@ -1022,7 +1064,7 @@ function checkdblimit()
           nospecialchar1: true,
           minlength: 1,
           maxlength: 32,
-          alreadyexist: true,
+          // alreadyexist: true,
           onkeyup: false,
         },
         db_pass: {
@@ -1053,8 +1095,37 @@ function checkdblimit()
         },
       },
       submitHandler: function (form) {
+        // loading();
+        // form.submit();
         loading();
-        form.submit();
+          $ajax = $.ajax({
+            url: $("#database_create").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="db_name"){
+                $error = '<label id="db_name-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#db_name'));
+              }
+              if(data.field=="db_user"){
+                $error = '<label id="db_user-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#db_user'));
+              }
+              // if(data.field=="g5"){
+              //   $error = '<label id="sub-error" class="error">'+data.error+'</label>';
+              //   $($error).insertAfter($('#sub'));
+              // }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
       },
     });
 
@@ -1081,7 +1152,7 @@ function checkdblimit()
           allowspecialchar5:true,
           minlength: 1,
           maxlength: 20,
-          alreadyexist: true,
+          // alreadyexist: true,
           onkeyup: false,
         },
         ftp_pass: {
@@ -1120,8 +1191,33 @@ function checkdblimit()
         },
       },
       submitHandler: function (form) {
+        // loading();
+        // form.submit();
         loading();
-        form.submit();
+          $ajax = $.ajax({
+            url: $("#ftp_create").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="ftp_user"){
+                $error = '<label id="ftp_user-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#ftp_user'));
+              }
+              // if(data.field=="g5"){
+              //   $error = '<label id="sub-error" class="error">'+data.error+'</label>';
+              //   $($error).insertAfter($('#sub'));
+              // }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
       },
     });
 
@@ -1149,7 +1245,7 @@ function checkdblimit()
           minlength: 1,
           maxlength: 30,
           formailuser: true,
-          alreadyexist: true,
+          // alreadyexist: true,
           onkeyup: false,
         },
         mail_pass_word: {
@@ -1184,8 +1280,33 @@ function checkdblimit()
         },
       },
       submitHandler: function (form) {
+        // loading();
+        // form.submit();
         loading();
-        form.submit();
+          $ajax = $.ajax({
+            url: $("#email_create").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="email"){
+                $error = '<label id="email-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#email'));
+              }
+              // if(data.field=="g5"){
+              //   $error = '<label id="sub-error" class="error">'+data.error+'</label>';
+              //   $($error).insertAfter($('#sub'));
+              // }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
       },
     });
 
@@ -1240,13 +1361,38 @@ function checkdblimit()
       submitHandler: function (form) {
             // alert($url)
         // 
-        if(dnsexceed5($url))
-        {
-          finalConfirm(form);
-        }else{
-          form.submit();
-        }
-        // form.submit();
+        // if(dnsexceed5($url))
+        // {
+        //   finalConfirm(form);
+        // }else{
+        //   form.submit();
+        // }
+
+        loading();
+          $ajax = $.ajax({
+            url: $("#dns_create").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="sub"){
+                $error = '<label id="sub-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#sub'));
+              }
+              if(data.field=="g5"){
+                $error = '<label id="sub-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#sub'));
+              }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
       },
     });
     function finalConfirm(form) {
@@ -1300,8 +1446,29 @@ function checkdblimit()
         },
       },
       submitHandler: function (form) {
+        // loading();
+        // form.submit();
         loading();
-        form.submit();
+          $ajax = $.ajax({
+            url: $("#basic_adduser_create").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="bass_user"){
+                $error = '<label id="bass_user-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#bass_user'));
+              }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
       },
     });
 
@@ -1410,8 +1577,29 @@ function checkdblimit()
         },
       },
       submitHandler: function (form) {
+        // loading();
+        // form.submit();
         loading();
-        form.submit();
+          $ajax = $.ajax({
+            url: $("#bass_dir_create").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="bass_dir"){
+                $error = '<label id="bass_dir-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#bass_dir'));
+              }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
       },
     });
 
@@ -1451,8 +1639,29 @@ function checkdblimit()
         },
       },
       submitHandler: function (form) {
+        // loading();
+        // form.submit();
         loading();
-        form.submit();
+          $ajax = $.ajax({
+            url: $("#error_create").attr('action'),
+            type: "POST",
+            dataType: 'json',
+            data: $(form).serialize(),     
+                });
+          $ajax.done(function(data){
+            if(data.status){
+              if(data.field=="status_code"){
+                $error = '<label id="status_code-error" class="error">'+data.error+'</label>';
+                $($error).insertAfter($('#status_code'));
+              }
+            }else{
+              location.reload();
+            }
+            stoploading();
+          })
+          $ajax.fail(function(data){
+            console.log(data)
+          })
       },
     });
 

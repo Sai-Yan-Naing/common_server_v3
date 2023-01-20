@@ -7,23 +7,23 @@
 				<?php require_once('views/admin/title.php') ?>
 				<div class="shadow-lg p-3 mb-5 bg-white rounded">
 					<div class="row justify-content-center">
-						<div class="col-md-8">
+						<div class="col-md-10">
 							<div class="mt-3 mb-3">ドメイン取得</div>
 							<form action="/admin/domain-transfer?tab=share&act=confirm&to=domain_search" method="post" id="domain_search_fm">
-								<div class="form-group row">
-									<label for="domain" class="col-sm-3 col-form-label">ドメイン名</label>
-									<div class="col-sm-6">
-										<input type="text" class="form-control" id="domain_search" name="domain">
+									<div class="row">
+										<label for="domain" class="col-sm-3 col-form-label">ドメイン名</label>
+										<div class="col-sm-7 mb-2">
+											<input type="text" class="form-control" id="domain_search" name="domain">
+										</div>
+										<div class="col-sm-2">
+											<button type="submit" class="btn btn-outline-info col-sm-12" id="domain_checker_btn" disabled>取得申請</button>
+										</div>
 									</div>
-									<div class="col-sm-3">
-										<button type="submit" class="btn btn-outline-info" id="domain_checker_btn" disabled>取得申請</button>
-									</div>
-								</div>
 							</form>
 						</div>
 					</div>
 					<div class="row justify-content-center">
-						<div class="col-md-8">
+						<div class="col-md-10">
 							<div class="mt-3 mb-4">ドメイン移管（他社から弊社に移管）</div>
 							<form action="/admin/domain-transfer?tab=share&act=confirm&to=us" method="post" id="domian_transfer_tous">
 								<div class="form-group row">
@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<div class="row justify-content-center mt-4">
-						<div class="col-md-8">
+						<div class="col-md-10">
 							<div class="mb-3">ドメイン移管（弊社から他社に移管）</div>
 							<form action="/admin/domain-transfer?tab=share&act=confirm&to=other" method="post" id="domian_transfer_to_other">
 								<div class="form-group row">

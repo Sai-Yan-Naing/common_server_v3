@@ -13,11 +13,33 @@ if ( isset($_POST['action']))
 		$status_code= $_POST['status_code'];
 		$code = $status_code;
 		$url_spec= $_POST['url_spec'];
+		$temp1 = json_decode($weberrorpages, true);
+	// print_r($temp1);die;
+		foreach($temp1 as $t){
+			if(in_array($status_code, $t)){
+				$data = ['status'=>true, "field"=>"status_code", "error"=>"$status_code を取得することができません。別の名前を指定してください。"];
+				echo json_encode($data);
+				die;
+			}
+		}
         $temp['ID-'.$status_code] = ["url"=>$url_spec,"stopped"=>$status,"statuscode"=>$status_code];
 		// echo Shell_Exec ("powershell.exe -executionpolicy bypass -NoProfile -File E:/scripts/error_pages/error_pages.ps1 ". $webuser." ". $code." ". $status_code." ".$url_spec." ".$status);
 		Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:/scripts/commons/errorpages.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '. $webuser." ". $code." ". $status_code." ".$url_spec." ".$status." new");
 		// die;
 		$msg = "「エラーページ ".$code."」 を追加しました";
+		$result = json_encode($temp);
+    $query_dir = "UPDATE web_account SET error_pages=? WHERE id=?";
+    if ( !$commons->doThis($query_dir,[$result,$webid]))
+    {
+        $_SESSION['error'] = true;
+        $_SESSION['message'] = 'Cannot Update Error page';
+        require_once('views/admin/share/server/site/basic/index.php');
+        die();
+    }
+		$data = ['status'=>false, "message"=>"ok"];
+		echo json_encode($data);
+		flash($msgsession,$msg);
+		die;
 	} elseif ( $_POST['action'] === "edit")
 	{
 		$action= $_POST['action'];

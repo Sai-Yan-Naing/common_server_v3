@@ -39,44 +39,42 @@ if ($root_url==null) {
 $msg = "jp message";
 $msgsession ="msg";
 if ( $action=='new'){
-    $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
-        $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
-    if(isset($_POST['checkin']) and $_POST['checkin']=='checkin'){
-        // echo $getdbid['id'];
-        if(!$commons->deleteMysqlDB($getdbid['id'],$db_user,$db_name))
-        {
-            // echo $getdbid['id'];
-            $error = "Something errors";
-                require_once("views/admin/share/server/site/app_install/index");
-                die();
-        }
-        $delete_q = "DELETE FROM db_account WHERE id='$act_id'";
-        if ( !$commons->doThis($delete_q))
-        {
-            require_once("views/admin/share/server/site/app_install/index");
-            die("");
-        }
-        if ( $webmysql_cnt<=0)
-        {
-            $webmysql_cnt=0;
-        }else{
-            $webmysql_cnt -=1;
-        }
-        $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
-        if( ! $commons->doThis($sql)) {
-            $error = "cannot add db account";
-                require_once("views/admin/share/server/site/app_install/index");
-        }
-        add_db($webdomain,$db_name, $db_user, $db_pass);
-    }
     if($app_name ==="WordPress")
     {
         if($_POST['dbexist']=='new')
         {
-            add_db($webdomain,$db_name, $db_user, $db_pass);
+            // die('exist');
+            if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+            {
+                $error = "Something error";
+                require_once("views/admin/share/server/site/app_install/index.php");
+                die("");
+            }
+
+            $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
+
+            if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
+            {
+                $error = "cannot add db account";
+                    require_once("views/admin/share/server/site/app_install/index.php");
+                    die("");
+            }
+            $webmysql_cnt +=1;
+            $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+            if( ! $commons->doThis($sql)) {
+                $error = "cannot add db account";
+                    die("");
+                }
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id, remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'], 0]))
+            {
+                $error = "cannot add db account";
+                    require_once("views/admin/share/server/site/app_install/index.php");
+                    die("");
+            }
         // die('new');
         
         // die;
@@ -113,24 +111,44 @@ if ( $action=='new'){
             copyFile($web_host,$web_user,$web_password,$src, $dst); 
             put_File($web_host,$web_user,$web_password,$dst.'/wp-config.php',$file_contents);
             $msg = "インストールが完了しました";
-            
-            $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id, remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
-            if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'], 0]))
-                {
-                    $error = "cannot add db account";
-                        require_once("views/admin/share/server/site/app_install/index.php");
-                        die("");
-                }
         }
         // die('ok');
     }else{
         // echo 'hello';
         if($_POST['dbexist']=='new')
         {
-            add_db($webdomain,$db_name, $db_user, $db_pass);
+            if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
+            {
+                $error = "Something error";
+                require_once("views/admin/share/server/site/app_install/index.php");
+                die("");
+            }
+            $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
+            if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
+            {
+                $error = "cannot add db account";
+                    require_once("views/admin/share/server/site/app_install/index.php");
+                    die("");
+            }
+
+            $webmysql_cnt +=1;
+            $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
+            if( ! $commons->doThis($sql)) {
+                $error = "cannot add db account";
+                    die("");
+                }
         }
         $dbquery = "SELECT id FROM db_account WHERE db_name=? and db_user=? and domain=?";
         $getdbid = $commons->getRow($dbquery,[$db_name, $db_user, $webdomain]);
+        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id,remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
+
+        
+        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'],0]))
+        {
+            $error = "cannot add db account";
+                require_once("views/admin/share/server/site/app_install/index.php");
+                die("");
+        }
         
         // $src = APP_PATH."$app_name/$app_version/*";
         // $dst = ROOT_PATH.$webpath.'/web/'.$root_url;
@@ -238,15 +256,6 @@ if ( $action=='new'){
         }  else{
             $msg = "インストールが完了しました";
 
-        $insert_app = "INSERT INTO app (domain, site_name, app_name, app_version, root, url,user_name, password, db_name, db_user, db_pass, db_id,remove) VALUES (?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)";
-
-        
-        if ( ! $commons->doThis($insert_app,[$webdomain, $site_name, $app_name, $app_version, $root_url, $url,$user_name, $password, $db_name, $db_user, $db_pass, $getdbid['id'],0]))
-        {
-            $error = "cannot add db account";
-                require_once("views/admin/share/server/site/app_install/index.php");
-                die("");
-        }
         }
     }
 }elseif ($action=='delete') {
@@ -300,27 +309,3 @@ if ( $action=='new'){
 // die('no');
 flash($msgsession,$msg);
 header("location: /admin/share/server?setting=site&tab=app_install&act=index&webid=$webid");
-
-function add_db($webdomain,$db_name, $db_user, $db_pass){
-    if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
-            {
-                $error = "Something error";
-                require_once("views/admin/share/server/site/app_install/index.php");
-                die("");
-            }
-
-            $insert_q = "INSERT INTO db_account (domain, db_name, db_user, db_count, db_pass) VALUES (?, ?, ?, ?, ?)";
-
-            if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
-            {
-                $error = "cannot add db account";
-                    require_once("views/admin/share/server/site/app_install/index.php");
-                    die("");
-            }
-            $webmysql_cnt +=1;
-            $sql = "UPDATE web_account SET mysql_cnt='$webmysql_cnt' WHERE domain='$webdomain'";
-            if( ! $commons->doThis($sql)) {
-                $error = "cannot add db account";
-                    die("");
-                }
-}

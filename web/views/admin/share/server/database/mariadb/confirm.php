@@ -14,6 +14,20 @@ $msg = "jp message";
 		$db_name = $_POST["db_name"];
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の追加が完了しました ";
+		$getcount = "SELECT count(db_account_for_mariadb.id) FROM db_account_for_mariadb INNER JOIN web_account on db_account_for_mariadb.domain = web_account.domain where db_account_for_mariadb.db_name = '$db_name' and  db_account_for_mariadb.domain = '$webdomain'";
+		$getindb = $commons->getCount($getcount);
+		if($getindb>0){
+			$data = ['status'=>true, "field"=>"db_name", "error"=>"$db_name を取得することができません。別の名前を指定してください。"];
+			echo json_encode($data);
+			die;
+		}
+		$getcount = "SELECT count(db_account_for_mariadb.id) FROM db_account_for_mariadb INNER JOIN web_account on db_account_for_mariadb.domain = web_account.domain where db_account_for_mariadb.db_user = '$db_user' and  db_account_for_mariadb.domain = '$webdomain'";
+		$getindb = $commons->getCount($getcount);
+		if($getindb>0){
+			$data = ['status'=>true, "field"=>"db_user", "error"=>"$db_user を取得することができません。別の名前を指定してください。"];
+			echo json_encode($data);
+			die;
+		}
 		if ( ! $commons->addMariaUserAndDB($db_name, $db_user, $db_pass) )
 		{
 			echo $error = "Something errors";
@@ -35,6 +49,11 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mariadb/index.php");
 				die("");
 			}
+			
+			$data = ['status'=>false, "message"=>"ok"];
+			echo json_encode($data);
+			flash($msgsession,$msg);
+			die;
 	} elseif ($action === "edit") {
 		if (!$commons->changeMariaPassword($db_user,$db_pass))
 		{
@@ -53,6 +72,11 @@ $msg = "jp message";
 		$getRow = $commons->getRow($query,[$db_user]);
 		$msgsession =  "msg";
 		$msg = "DB 「".$getRow['db_user']."」 パスワードを変更しました";
+		
+		$data = ['status'=>false, "message"=>"ok"];
+		echo json_encode($data);
+		flash($msgsession,$msg);
+		die;
 	}else {
 		$act_id = $_POST['act_id'];
 		$db_name = $_POST['db_name'];

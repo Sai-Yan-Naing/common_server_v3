@@ -27,7 +27,7 @@ $column = $_POST['column'];
 $checker = $_POST['checker'];
 $status = ['table'=>$table,'column'=>$column,'chekcer'=>$checker,'remark'=>$remark];
 $check = new CommonValidate;
-// echo json_encode(['status'=>$web_mydbuser]);
+// echo json_encode(['status'=>"error"]);
 //      die;
 
 if($table !=='none')

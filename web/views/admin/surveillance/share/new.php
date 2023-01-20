@@ -56,8 +56,8 @@ $url = json_decode($getmails['url'],true);
                                                     // $key=array_keys($val);
                                                     ?>
                                                 <tr>
-                                                    <td class="font-weight-bold  p-4 border-dark"><?= $val[$i]['mail']?></td>
-                                                    <td class="font-weight-bold p-4 border-dark">
+                                                    <td  style="padding-top: 12px"  class="border-dark"><?= $val[$i]['mail']?></td>
+                                                    <td class="border-dark">
                                                         <?php if(isset($val[$i]['id'])):?>
                                                         <a href="javascript:;" gourl="/admin?main=surveillance&act=edit&tab=share&webid=<?=$webid?>&act_id=<?=$val[$i]['id']?>" class="btn btn-outline-info btn-sm common_dialog"  data-toggle="modal" data-target="#common_dialog">編集</a>
                                                         <a href="javascript:;" gourl="/admin?main=surveillance&act=delete&tab=share&webid=<?=$webid?>&act_id=<?=$val[$i]['id']?>" class="btn btn-outline-danger btn-sm common_dialog"  data-toggle="modal" data-target="#common_dialog">削除</a>

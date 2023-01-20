@@ -11773,7 +11773,9 @@ a{
   font-size: 22px;
   font-weight: bold;
 }
-
+ul.manual{
+  padding-left: 0px !important;
+}
 ul.manual li{
   list-style: none;
   /* height: 30px; */
@@ -11805,4 +11807,7 @@ ul.manual li{
 }
 .cmanual img{
   width: 100%;
+}
+.border-bt-blue{
+  border-bottom: 2px solid #09CAE3 !important
 }

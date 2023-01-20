@@ -2,9 +2,9 @@
 session_start();
 require_once('config/all.php');
 require_once('models/common.php');
+require_once('models/common_validate.php');
 require_once('commons/common.php');
 require_once('mails/mail.php');
-require_once('views/admin/admin_validate.php');
 // echo $_COOKIE['admin'];
 $webadminID = $_COOKIE['admin'];
 $commons = new Common;
@@ -67,6 +67,6 @@ define("MADSN", 'mysql:host='.$web_host.':3307');
 define("SQLSERVER_2016_USER", $web_msdbuser);
 define("SQLSERVER_2016_PASS", $web_msdbpass);
 define("SQLSERVER_2016_DSN", 'sqlsrv:Server='.$web_host.';Database=master');
-
+$winusers = ['administrator','guest'];
 $pagy = (isset($_GET['page']))?'&page='.$_GET['page']:'';
 $pagyc = (isset($_GET['page']))?'?page='.$_GET['page']:'';

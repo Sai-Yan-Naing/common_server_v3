@@ -7,10 +7,32 @@ if ( $action === 'new' )
 {
     $webdomain = $_POST['domain'];
     $password = $_POST['password'];
+    $getcount = "SELECT count(id) FROM web_account where web_account.domain = '$webdomain' and web_account.web_server_id= $web_server_id  and removal IS NULL";
+    $getindb = $commons->getCount($getcount);
+    if($getindb>0){
+        $data = ['status'=>true,"field"=>"domain", "error"=>$webdomain." を取得することができません。別の名前を指定してください。"];
+        echo json_encode($data);
+        die;
+    }
     $password1 = hash_hmac('sha256', $password, PASS_KEY);
     $user = $_POST['ftp_user'];
     
     $web_server_id = $_POST['web_server'];
+    
+    $getcount = "SELECT count(db_ftp.id) FROM db_ftp INNER JOIN web_account on db_ftp.domain = web_account.domain where db_ftp.ftp_user = '$user' and web_account.web_server_id='$web_server_id'";
+    $getindb = $commons->getCount($getcount);
+    if($getindb>0){
+        $data = ['status'=>true, "field"=>"ftp_user", "error"=>"$user を取得することができません。別の名前を指定してください。"];
+        echo json_encode($data);
+        die;
+    }
+
+    if(in_array($user, $winusers)){
+        $data = ['status'=>true, "field"=>"ftp_user", "error"=>"$user を取得することができません。別の名前を指定してください。"];
+        echo json_encode($data);
+        die;
+    }
+
     $contract = $_POST['contractid'];
 
     $getmailserver = $commons->getRow("
@@ -56,8 +78,6 @@ if ( $action === 'new' )
     $origin= $commons->getRow($query_origin);
     $origin_user= $origin['user'];
 
-    // shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/addsite.ps1" '.$webdomain.' '.$user.' '.$password.' '.$ip. ' '.$origin_user);
-
      shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/new.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$webdomain.' '.$user.' '.$password.' '.$web_host. ' '.$origin_user);
 
     // $commons->mail_server($webdomain,'winserverroot','welcome123!','new','noexist');
@@ -66,7 +86,10 @@ if ( $action === 'new' )
 
     shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" new '.$mailserverip.' '.$mailserveruser.' '.$mailserverpass.' '.$webdomain.' '.$password.' '.$user.' '.$size);
 
-    // die;
+    $data = ['status'=>false, "message"=>"ok"];
+    echo json_encode($data);
+    flash($msgsession,$msg);
+    die;
 } elseif ( $action === 'onoff')
 {
     // die('ok');
@@ -152,9 +175,6 @@ if ( $action === 'new' )
     $bindingdomain = $_POST['sitebinding']==0? implode(".",$temp) :NULL;
 
     $web_server_id = $getRow['web_server_id'];
-// for alias validation 
-// $sitedomain = 'test2mailt.ckmphpdev';
-// echo $act_id;
 if($sitebinding==1){
     $q = "SELECT count(id) as cid FROM web_account WHERE sitebinding=1 and web_server_id='$web_server_id' And removal is null AND bindingdomain='$sitedomain' and id!='$act_id'";
     $count = $commons->getRow($q);
