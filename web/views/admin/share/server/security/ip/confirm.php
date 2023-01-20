@@ -9,6 +9,16 @@ $msgsession ="msg";
 if ( $action=='new')
 {
 	$msg = "ブラックリストに 「".$ip."」 を追加しました";
+	
+	$temp1 = json_decode($webblacklist, true);
+	// print_r($temp1);die;
+	foreach($temp1 as $t){
+		if(in_array($ip, $t)){
+			$data = ['status'=>true, "field"=>"block_ip", "error"=>"$ip を取得することができません。別の名前を指定してください。"];
+			echo json_encode($data);
+			die;
+		}
+	}
 	if ( isExistBlackListIp($site,$ip))
 	{
 		$error = $ip." is already exist.";
@@ -26,6 +36,11 @@ if ( $action=='new')
 		include('views/admin/share/server/security/ip/index.php');
 	  die();
 	}
+	Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/blockip.ps1" ip '.$web_host.' '.$web_user.' '.$web_password.' '.$site.' '.$ip.' '.$action);
+$data = ['status'=>false, "message"=>"ok"];
+echo json_encode($data);
+flash($msgsession,$msg);
+die;
 } else {
 	$msg = "ブラックリストから「".$ip."」 を削除しました";
 	$act_id = $_POST['act_id'];

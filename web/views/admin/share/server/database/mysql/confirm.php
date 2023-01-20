@@ -14,9 +14,23 @@ $msg = "jp message";
 		$db_name = $_POST["db_name"];
 		$msgsession =  "msg";
 		$msg = "DB 「".$db_name."」 の追加が完了しました ";
+		$getcount = "SELECT count(db_account.id) FROM db_account INNER JOIN web_account on db_account.domain = web_account.domain where db_account.db_name = '$db_name' and  db_account.domain = '$webdomain'";
+		$getindb = $commons->getCount($getcount);
+		if($getindb>0){
+			$data = ['status'=>true, "field"=>"db_name", "error"=>"$db_name を取得することができません。別の名前を指定してください。"];
+			echo json_encode($data);
+			die;
+		}
+		$getcount = "SELECT count(db_account.id) FROM db_account INNER JOIN web_account on db_account.domain = web_account.domain where db_account.db_user = '$db_user' and  db_account.domain = '$webdomain'";
+		$getindb = $commons->getCount($getcount);
+		if($getindb>0){
+			$data = ['status'=>true, "field"=>"db_user", "error"=>"$db_user を取得することができません。別の名前を指定してください。"];
+			echo json_encode($data);
+			die;
+		}
 		if ( ! $commons->addMyUserAndDB($db_name, $db_user, $db_pass))
         {
-            echo $error = "Something error";
+             $error = "Something error";
             require_once("views/admin/share/server/database/mysql/index.php");
             die("");
         }
@@ -25,7 +39,7 @@ $msg = "jp message";
 
 		if ( ! $commons->doThis($insert_q,[$webdomain, $db_name, $db_user, 1, $db_pass]))
 		{
-			echo $error = "cannot add db account";
+			 $error = "cannot add db account";
 			die;
 				require_once("views/admin/share/server/database/mysql/index.php");
 				die("");
@@ -37,11 +51,15 @@ $msg = "jp message";
 				require_once("views/admin/share/server/database/mysql/index.php");
 				die("");
 			}
+			$data = ['status'=>false, "message"=>"ok"];
+			echo json_encode($data);
+			flash($msgsession,$msg);
+			die;
 	} elseif ( $action=="edit") 
 	{
 		if( ! $commons->changeMysqlPassword($db_user,$db_pass))
 		{
-			echo $error = "Something errors";
+			 $error = "Something errors";
 				require_once("views/admin/share/server/database/mysql/index.php");
 				die("");
 		}
@@ -55,6 +73,11 @@ $msg = "jp message";
 		$getRow = $commons->getRow($query,[$db_user]);
 		$msgsession =  "msg";
 		$msg = "DB 「".$getRow['db_user']."」 パスワードを変更しました";
+		
+		$data = ['status'=>false, "message"=>"ok"];
+		echo json_encode($data);
+		flash($msgsession,$msg);
+		die;
 	} else
 	{
 		$act_id = $_POST['act_id'];

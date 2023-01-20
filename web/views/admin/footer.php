@@ -19,6 +19,23 @@
         '<div class="modal-footer d-flex justify-content-center">'+
         '<button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">OK</button></div>';
 <?php endif; ?>
+$(document).ready(function(){
+        windowzoom(); 
+})
+ $( window ).resize(function() { 
+   windowzoom();
+ });
+ function windowzoom()
+ {
+        var width = $(window).width();
+        if(width>750){
+                $('#main1').show()
+                $('#main2').hide()
+        }else{
+                $('#main1').hide()
+                $('#main2').show()
+        }
+ }
 </script>
         </body>
 </html>

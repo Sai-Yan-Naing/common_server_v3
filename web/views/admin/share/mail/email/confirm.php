@@ -18,6 +18,15 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 	$msg = "メールアドレス「".$email."@".$webdomain."」を追加しました";
 	$msgsession ="msg";
 	$mail_pass_word=htmlspecialchars($_POST['mail_pass_word'], ENT_QUOTES);
+
+	$getcount = "SELECT count(add_email.id) FROM add_email INNER JOIN web_account on add_email.domain = web_account.domain where add_email.email = '$email' and add_email.domain='$webdomain'";
+    $getindb = $commons->getCount($getcount);
+
+	if($getindb>0){
+        $data = ['status'=>true, "field"=>"email", "error"=>"$email を取得することができません。別の名前を指定してください。"];
+        echo json_encode($data);
+        die;
+    }
 	$insert_q = "INSERT INTO add_email (domain, email, password) VALUES ( ?, ?, ?)";
 	if ( ! $commons->doThis($insert_q,[$webdomain, $email, $mail_pass_word]))
 	{
@@ -33,7 +42,11 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 				die("");
 			}
 echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" newuser '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$email);
-// die;
+
+$data = ['status'=>false, "message"=>"ok"];
+echo json_encode($data);
+flash($msgsession,$msg);
+die;
 } elseif ( isset($_POST['action']) and $_POST['action'] === 'edit') {
 	$mail_pass_word=htmlspecialchars($_POST['mail_pass_word'], ENT_QUOTES);
 	$act_id=$_POST['act_id'];
@@ -48,7 +61,11 @@ echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\sc
 	$getRow = $commons->getRow($query,[$act_id]);
 	$msg = "メールアドレス「".$getRow['email']."@".$webdomain."」のパスワードを変更しました";;
 	$msgsession ="msg";
-echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" edit '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$getRow['email']);
+shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" edit '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$getRow['email']);
+$data = ['status'=>false, "message"=>"ok"];
+    echo json_encode($data);
+    flash($msgsession,$msg);
+    die;
 }elseif ( isset($_POST['action']) and $_POST['action'] === 'export')
 {
 	$file = 'views/mail_template.csv';

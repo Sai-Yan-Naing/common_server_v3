@@ -48,8 +48,8 @@ $sql = json_decode($getmails['sql'],true);
                                 <div class="col-md-6 col-sm-12">
                                     <table class="table table-bordered mt-3">
                                         <tr>
-                                            <th class="font-weight-bold border-dark p-4">登録メールアドレス</th>
-                                            <th class="font-weight-bold border-dark p-4">操作</th>
+                                            <th class="font-weight-bold border-dark p-2">登録メールアドレス</th>
+                                            <th class="font-weight-bold border-dark p-2">操作</th>
                                         </tr>
                                         <?php 
                                         // print_r(json_decode($getmails['mail'],true));
@@ -59,8 +59,8 @@ $sql = json_decode($getmails['sql'],true);
                                             // $key=array_keys($val);
                                             ?>
                                         <tr>
-                                            <td class="font-weight-bold border-dark p-4"><?= $val[$i]['mail']?></td>
-                                            <td class="font-weight-bold border-dark p-4">
+                                            <td style="padding-top: 12px" class="border-dark"><?= $val[$i]['mail']?></td>
+                                            <td class="border-dark">
                                                 <?php if(isset($val[$i]['id'])):?>
                                                 <a href="javascript:;" gourl="/admin?main=surveillance&act=edit&tab=vps&webid=<?=$webid?>&act_id=<?=$val[$i]['id']?>" class="btn btn-outline-info btn-sm common_dialog"  data-toggle="modal" data-target="#common_dialog">編集</a>
                                                 <a href="javascript:;" gourl="/admin?main=surveillance&act=delete&tab=vps&webid=<?=$webid?>&act_id=<?=$val[$i]['id']?>" class="btn btn-outline-danger btn-sm common_dialog"  data-toggle="modal" data-target="#common_dialog">削除</a>

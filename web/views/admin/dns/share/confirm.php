@@ -13,6 +13,19 @@ $subject = '【Winserver】DNSレコード追加申請完了';
 if ($action === 'new')
 {
 	$temp = json_decode($getDns['dns'], true);
+// if(count($temp)>5)
+// {
+//     $data = ['status'=>true, "field"=>"g5", "error"=>""];
+// 			echo json_encode($data);
+// 			die;
+// }
+	foreach($temp as $t){
+		if(in_array($sub, $t)){
+			$data = ['status'=>true, "field"=>"sub", "error"=>"$sub を取得することができません。別の名前を指定してください。"];
+			echo json_encode($data);
+			die;
+		}
+	}
 	$temp['ID-' . time()] = ['type' => $type, 'sub' => $sub, 'target' => $target];
 	$result = json_encode($temp);
 	$count = count(json_decode($result, true));
@@ -21,6 +34,17 @@ if ($action === 'new')
 	"反映まで今しばらくお待ちください";
     $msgsession ="msg";
 	$body = file_get_contents('views/mailer/admin/dns.php');
+	$body = str_replace('$admin', $webadminName, $body);
+$body = str_replace('$sub', $sub, $body);
+$body = str_replace('$domain', $domain, $body);
+$body = str_replace('$target', $target, $body);
+$webmailer->sendMail(TO, TONAME, $subject, $body);
+$qry = 'UPDATE web_account SET dns = :dns WHERE id = :id';
+$commons->doThis($qry, ['dns' => $result, 'id' => $getDns['id']]);
+flash($msgsession,$msg);
+	$data = ['status'=>false, "message"=>"ok"];
+    echo json_encode($data);
+    die;
 }
 elseif ($action === 'edit')
 {

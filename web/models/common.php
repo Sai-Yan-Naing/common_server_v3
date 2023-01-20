@@ -178,16 +178,18 @@ class Common{
 
 		$pdo_account = new PDO(MYDSN, MYROOT, MYROOT_PASS);
 		$stmt = $pdo_account->prepare("DROP USER :dbuser@'%'");
-		if ( ! $stmt->execute(['dbuser' => $dbuser]))
-		{
-			return false;
-		}
+		$stmt->execute(['dbuser' => $dbuser]);
+		// if ( ! $stmt->execute(['dbuser' => $dbuser]))
+		// {
+		// 	return false;
+		// }
 
 		$stmt1 = $pdo_account->prepare("DROP DATABASE `$db`");
-		if ( ! $stmt1->execute())
-		{
-			return false;
-		}
+		$stmt1->execute();
+		// if ( ! $stmt1->execute())
+		// {
+		// 	return false;
+		// }
 
 		// $dstmt = $pdo_account->prepare('DELETE FROM db_account WHERE id = ?');
 		// if ( ! $dstmt->execute([$dbid]))

@@ -9,14 +9,14 @@ if(isset($_COOKIE['admin']) and isset($_GET['webper']) && $_GET['webper'] =='adm
 //             echo json_encode($status);
 //             die();
     require_once("views/admin/admin_shareconfig.php");
-    $params =['domain'=>$webdomain];
+    $params =['domain'=>$webdomain,'webid'=>$webid];
 }else if(isset($_COOKIE['admin']) and $_GET['webper']=='admin')
 {
     require_once("views/admin/admin_config.php");
 }else if(isset($_COOKIE['share_user']))
 {
     require_once('views/share_config.php');
-    $params =['domain'=>$webdomain];
+    $params =['domain'=>$webdomain,'webid'=>$webid];
 }else{
     require 'config/all.php';
 }
@@ -27,7 +27,7 @@ $column = $_POST['column'];
 $checker = $_POST['checker'];
 $status = ['table'=>$table,'column'=>$column,'chekcer'=>$checker,'remark'=>$remark];
 $check = new CommonValidate;
-// echo json_encode(['status'=>$web_mydbuser]);
+// echo json_encode(['status'=>"error"]);
 //      die;
 
 if($table !=='none')
@@ -151,7 +151,6 @@ if ( $remark === 'madbuser')
     }
     
 }
-
 if ( $remark === 'checkappdb')
 {
     
@@ -159,10 +158,25 @@ if ( $remark === 'checkappdb')
     $db_user= $_POST['db_user'];
     $db_pass= $_POST['db_pass'];
     $db_dsn = "mysql:host=$web_host:3310;dbname=$db_name";
-    // $status['status'] =$db_dsn;
+    // $status['status'] ='ok';
     //     echo json_encode($status);
     // die();
     
+    $checkIn = $check->checkIn($db_name,$db_user,$params);
+    $checkinother = $check->checkInOther($db_name,$db_user,$params);
+    if ( $checkIn )
+    {
+        $status['status'] ='checkin'; //db already exist in other domain
+        echo json_encode($status);
+        die();
+    }else if($checkinother){
+        $status['status'] ='inother'; //db already exist in other domain
+        echo json_encode($status);
+        die();
+    }
+
+    // $status['status'] =$checkresult;
+    // echo json_encode($status);die;
     if($check->mysqlDatabase($db_name) || $check->mysqlUser($db_user))
     {
         $checkresult = $check->checkappdb($db_dsn,$db_user,$db_pass);
@@ -179,6 +193,33 @@ if ( $remark === 'checkappdb')
             die;
     }  
 }
+// if ( $remark === 'checkappdb')
+// {
+    
+//     $db_name = $_POST['db_name'];
+//     $db_user= $_POST['db_user'];
+//     $db_pass= $_POST['db_pass'];
+//     $db_dsn = "mysql:host=$web_host:3310;dbname=$db_name";
+//     // $status['status'] =$db_dsn;
+//     //     echo json_encode($status);
+//     // die();
+    
+//     if($check->mysqlDatabase($db_name) || $check->mysqlUser($db_user))
+//     {
+//         $checkresult = $check->checkappdb($db_dsn,$db_user,$db_pass);
+//         if ( $checkresult == false)
+//         {
+//             // $status['status'] ='hello';
+//             // echo json_encode($status);
+//             $status['status'] ='ok';
+//             echo json_encode($status);
+//             die();
+//         }
+//         $status['status'] ='doesnotmatch';
+//             echo json_encode($status);
+//             die;
+//     }  
+// }
 
 
     if ( $remark === 'checkdblimit')

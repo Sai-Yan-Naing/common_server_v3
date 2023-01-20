@@ -1,5 +1,5 @@
 <html>
-    <body>
+    <body style="line-height:12px">
         <p>$name様</p>
         <br>
         <p>下記の内容にてドメインの移管申請の受付完了しました。</p>

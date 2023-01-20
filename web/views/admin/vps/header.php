@@ -31,6 +31,11 @@
         <script src="<?= call_ass() ?>js/common_validate.js"></script>
         <!-- toastr -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <link rel="stylesheet" href="<?= call_ass() ?>node_modules/xterm/css/xterm.css" />
+        <script src="<?= call_ass() ?>node_modules/xterm/lib/xterm.js"></script>
+        <script src="<?= call_ass() ?>node_modules/xterm-addon-attach/lib/xterm-addon-attach.js"></script>
+        <script src="<?= call_ass() ?>node_modules/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
+        <!-- <style> -->
     </head>
     <body class="sb-nav-fixed">
         <span style="display:none" id="checkvps" checkvps=<?=$webid?>></span>

@@ -12,7 +12,7 @@ if($action =='new')
 {
 	if(!domainChecker($webdomain))
 	{
-		$msg = "domain is invalid. you cannot install ssl.";
+		$msg = "domain is invalid. you cannot install ssl.".$webdomain;
 		$msgsession ="msg";
 		flash($msgsession,$msg);
 		header("location: /admin/share/server?setting=security&tab=ssl&act=index&webid=$webid");
@@ -30,8 +30,8 @@ if($action =='new')
 	$query = "UPDATE web_account SET ssl='$webssl' WHERE id='$webid'";
 	$commons->doThis($query);
 // die;
-	echo shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' new');
-	// die();
+	echo  ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' new');
+	die();
 }elseif($action =='edit'){
 
 	$common_name = $_POST['common_name'];

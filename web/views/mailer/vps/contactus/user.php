@@ -2,7 +2,7 @@
 <head>
     <?php header("Content-Type: text/html; charset=UTF-8"); ?>
 </head>
-    <body>
+    <body style="line-height:12px">
         <p>Name: $name様</p>
         <p>この度は、ウィンサーバーにお問い合わせいただき、
 誠にありがとうございます。</p>

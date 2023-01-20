@@ -14,7 +14,7 @@ $error_pages = json_decode($weberrorpages);
                                 <!-- start -->
                                 <div class="tab-content">
                                     <div id="kihon-setting" class="active pr-3 pl-3 tab-pane">
-                                        <div class="row mt-5">
+                                        <div class="row mt-3">
                                             <div class="col-sm-2 font-weight-bold">エラーページ</div>
                                             <div class="col-sm-4">
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=site&tab=basic&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>エラーページ追加</button>

@@ -166,11 +166,11 @@ $(document).on("click", "#php_ini_btn", function () {
 function loading() {
   $("#page-loading").css("display", "block");
   $("#load-body").css("display", "block");
-  console.log('hello')
+  // console.log('hello')
 }
 
 function stoploading() {
-  console.log('shello')
+  // console.log('shello')
   $("#page-loading").css("display", "none");
   $("#load-body").css("display", "none");
 }
