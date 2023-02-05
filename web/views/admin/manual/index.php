@@ -129,6 +129,7 @@
         </main>
     </div>
 </div>
+<?php require_once('views/admin/footer.php'); ?>
 <style>
     h1 {
       padding: .5em .75em;

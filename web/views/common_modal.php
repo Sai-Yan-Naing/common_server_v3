@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <div id="loadingmodal">
+  <div id="loadingmodal" style="display:none">
   	<div class="d-flex align-items-center">
 						  <strong>Loading...</strong>
 						  <div class="spinner-grow text-muted"></div>

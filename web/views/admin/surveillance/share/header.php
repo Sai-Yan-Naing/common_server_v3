@@ -76,7 +76,7 @@ require_once("views/loading.php");
 $(document).ready(function(){
     $gourl = '/admin?main=surveillance&act=getapi&tab=vps&webid=5';
     setInterval(function(){ 
-        usage('cpu',$gourl);
+        //usage('cpu',$gourl);
     }, 15000);
 });
 

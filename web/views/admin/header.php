@@ -31,7 +31,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     </head>
     <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand" style="height: 75px;">
+    <nav class="sb-topnav navbar navbar-expand" style="height: 75px;" id="nav1">
             <!-- <a class="navbar-brand ps-3" href="/admin"><h2><span style="font-size:2em;">W</span>inserver</h2></a> -->
             <div class="navbar-brand ps-3"></div>
             <button class="btn btn-sm order-1 order-lg-0 me-4 me-lg-0 btn-outline-info" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
@@ -46,6 +46,34 @@
                 </li>
             </ul>
         </nav>
+        <div id="nav2" class="d-flex">
+            <div style="width:20px"></div>
+            <h3 class="text-white ms-auto">Winserver Control Panel</h3>
+            <i id="bar" class="fa fa-bars ml-auto bar" style="margin-right:20px;"></i>
+        </div>
+        <div id="panel">
+            <ul>
+                <li>
+                    <a class="nav-link text-dark font-weight-bold" aria-current="page" href="/admin" onclick="loading()">共用サーバー</a>
+                </li>
+                <li>
+                    <a class="nav-link text-dark font-weight-bold" href="/admin?main=vps" onclick="loading()">VPS/デスクトップ</a>
+                </li>
+                <li>
+                <a class="nav-link text-dark font-weight-bold" href="/admin/contactus?act=index" onclick="loading()">
+                                お問合せ
+                                <?php if(strpos($url[1],'admin') !==false && strpos($url[2],'contactus') !==false ){echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>';} ?>
+                            </a>
+                </li>
+                <li>
+                <a class="nav-link"> <form action="<?= call_ass() ?>logout" method="post" >
+					                <input type="hidden" name="user" value="admin">
+					                <button id="logout" type="submit" class="text-center text-dark font-weight-bold logout"  role="button" aria-expanded="false" style="font-size: 15px;">ログアウト</button>
+					            </form>
+                </a>
+                </li>
+            </ul>
+    </div>
         <div class="d-none" id='user_permission' data-permission="admin" data-webser="admin"></div>
         <?php 
         function call_ass()
@@ -64,3 +92,9 @@
  }
 require_once("views/common_modal.php");
 require_once("views/loading.php");
+?>
+<script>
+$(document).ready(function(){
+    windowzoom(); 
+})
+</script>

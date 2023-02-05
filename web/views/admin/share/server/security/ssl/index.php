@@ -57,7 +57,7 @@
                                             <div class="form-group row">
                                                 <label for="organization" class="col-sm-2 col-form-label">有効期限</label>
                                                 <div class="col-sm-8">
-                                                    <label><?= sslexp($webdomain) ?>（<?= dateDiffInDays(sslexp($webdomain), Date('Y/m/d'));?>日後に自動更新されます）</label>
+                                                    <label><?= $webssl->ssl->regdate ?>（<?= dateDiffInDays($webssl->ssl->regdate, Date('Y/m/d'));?>日後に自動更新されます）</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">

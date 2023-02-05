@@ -27,9 +27,9 @@
                                         <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                         <label class="form-check-label" for="inputRememberPassword">ログインを記憶する</label>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="/login?act=forgot-pass">PASSWORDをお忘れの方はこちらから</a>
-                                        <button type="submit" name="post" class="btn btn-info">ログイン</button>
+                                    <div class="row align-items-center justify-content-between mt-4 mb-0" style="padding-right:15px;padding-left:15px">
+                                        <a class="small col-md-6 mb-3" href="/login?act=forgot-pass">PASSWORDをお忘れの方はこちらから</a>
+                                        <button type="submit" name="post" class="btn btn-info col-md-6">ログイン</button>
                                     </div>
                                 </form>
                             </div>
