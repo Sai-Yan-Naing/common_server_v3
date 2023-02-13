@@ -394,7 +394,6 @@ term.onKey(function(key) {
           }
         }
       </script>
-//   </script>
 
 <?php endif; ?>
  <?php require_once("views/admin/vps/footer.php"); ?>

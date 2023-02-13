@@ -9,56 +9,65 @@ $vm_user = JAPANSYS;
 $vm_pass = JAPANSYS_PASS;
 $vm_action = $_GET['action'];
 // $vm_change_action  = WINSERVERROOT;
+//$getvps = $commons->getRow("SELECT * FROM vps_account WHERE ip='$webip'");
+// echo "<pre>";
+// echo $webip;
+//print_r($getvps);
+// json_decode($getvps['rdp'], true);
+$rdp = json_decode($webrdp);
+$web_rdp = json_decode($webhttp_rdp);
+// echo $rdp->rdp->port;
+// print_r($rdp);
+$temp = [];
+// die();
  if($vm_action === "change_rdp")
  {
     $vm_fw = $webrdp;
-    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip= ?";
     $vm_change_action = $_POST['port'];
+    $temp['rdp'] = array('port'=>$vm_change_action,'ip'=>$rdp->rdp->ip);
+    $temp = json_encode($temp);
+    $insert_q = "UPDATE vps_account SET rdp='$temp' WHERE ip= ?";
+    $chport = $vm_change_action;
+    $chip   = $rdp->rdp->ip;
  } elseif ($vm_action === "change_rdip")
  {
     //  die('ok');
     $vm_fw = $webrdp;
-    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip= ?";
     $vm_change_action = $_POST['ip'];
-} elseif ($vm_action === "default_rdp")
-{
-    $vm_fw = $webrdp;
-    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip= ?";
-    $vm_change_action = 3389;
-} elseif ($vm_action === "default_rdip")
-{
-    $vm_fw = $webrdp;
-    $insert_q = "UPDATE vps_account SET rdp='exist' WHERE ip= ?";
-    $vm_change_action = 'any';
+    $temp['rdp'] = array('port'=>$rdp->rdp->port,'ip'=>$vm_change_action);
+    $temp = json_encode($temp);
+    $insert_q = "UPDATE vps_account SET rdp='$temp' WHERE ip= ?";
+    $chport = $rdp->rdp->port;
+    $chip   = $vm_change_action;
 } elseif ($vm_action === "change_httprdp")
 {
     $vm_fw = $webhttp_rdp;
-    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip= ?";
     $vm_change_action = $_POST['port'];
+    $temp['web'] = array('port'=>$vm_change_action,'ip'=>$web_rdp->web->ip);
+    $temp = json_encode($temp);
+    $insert_q = "UPDATE vps_account SET http_rdp='$temp' WHERE ip= ?";
+    $chport = $vm_change_action;
+    $chip   = $web_rdp->web->ip;
 } elseif ($vm_action === "change_httprdip")
 {
     $vm_fw = $webhttp_rdp;
-    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip= ?";
-    $vm_change_action = $_POST['ip'];
-} elseif ($vm_action === "default_httprdp")
-{
-    $vm_fw = $webhttp_rdp;
-    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip='$webip'";
-    $vm_change_action = 80;
-} elseif ($vm_action === "default_httprdip")
-{
-    $vm_fw = $webhttp_rdp;
-    $insert_q = "UPDATE vps_account SET http_rdp='exist' WHERE ip= ?";
-    $vm_change_action = 'any';
-}
 
+    $vm_change_action = $_POST['ip'];
+    $temp['web'] = array('port'=>$web_rdp->web->port,'ip'=>$vm_change_action);
+    $temp = json_encode($temp);
+    $insert_q = "UPDATE vps_account SET http_rdp='$temp' WHERE ip= ?";
+    $chport = $web_rdp->web->port;
+    $chip   = $vm_change_action;
+}
+// echo $temp;
+// die;
 if(!$commons->doThis($insert_q,[$webip]))
 {
     echo $error="cannot update vps";
     die();
 }
-echo shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$vm_change_action.' '.$vm_fw);
-//  die('ok');
-header("location: /vps/various?setting=firewall&tab=firewall&act=index");
+shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_v1.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$chport.' '.$chip);
+ // die('ok');
+header("location: /vps/various?setting=firewall&tab=firewall&act=index&webid=$webid");
 
 ?>

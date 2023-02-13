@@ -13,6 +13,8 @@
         <link href="<?= call_ass() ?>css/server.css" rel="stylesheet" />
         <link href="<?= call_ass() ?>css/switch.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
@@ -24,6 +26,7 @@
         <script src="<?= call_ass() ?>js/common.js"></script>
         <script src="<?= call_ass() ?>js/filemanager.js"></script>
         <script src="<?= call_ass() ?>js/common_validate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     </head>
     <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand" style="height: 75px;">
@@ -59,3 +62,9 @@
   
 require_once("views/common_modal.php");
 require_once("views/loading.php");
+?>
+<script>
+$(document).ready(function(){
+    windowzoom(); 
+})
+</script>

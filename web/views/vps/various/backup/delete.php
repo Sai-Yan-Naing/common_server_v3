@@ -12,7 +12,7 @@ $getRow = $commons->getRow($query);
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/vps/various?setting=backup&tab=backup&act=confirm" method="post" id="onoff" onsubmit="loading()">
+  <form action="/vps/various?setting=backup&tab=backup&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="delete">
     <input type="hidden" name="act_id" value="<?= $getRow['id'] ?>">
     <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->

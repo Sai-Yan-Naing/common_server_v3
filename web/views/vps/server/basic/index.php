@@ -7,7 +7,7 @@
                     <?php require_once('views/vps/title.php') ?>
                     <?php require_once('views/vps/server/subtitle.php') ?>
                     <?php
-                    $plan = "SELECT plan FROM vps_account Where id=?";
+                    $plan = "SELECT [plan] FROM vps_account Where id=?";
                     $getpln = $commons->getRow($plan,[$webid]);
                     $plan_ = $getpln['plan'];
                     $query = "SELECT spec_info.value,price_tbl.plan_name, spec_units.[key] FROM service_db.dbo.price_tbl
@@ -28,7 +28,7 @@
                                     <div class="form-group row">
                                         <label for="" class="col-sm-3 col-form-label">OS</label>
                                         <div class="col-sm-8">
-                                            <span>Windows server 2019</span>
+                                            <span><?= $web_osname?></span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -50,16 +50,16 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label"> cpu</label>
+                                        <label for="" class="col-sm-3 col-form-label">CPU</label>
                                         <div class="col-sm-8">
-                                            <span><label for=""><?= $spec['core']  ?></label> プラン</span>
+                                            <span><label for=""><?= $spec['core']  ?></label> コア</span>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-5">
-                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog" gourl="/vps/server?tab=basic&act=spec" data-toggle="modal" data-target="#common_dialog">プラン変更依頼</button>
-                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog" gourl="/vps/server?tab=basic&act=osreinstall" data-toggle="modal" data-target="#common_dialog">OS初期化</button>
+                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog" gourl="/vps/server?tab=basic&act=spec&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">プラン変更依頼</button>
+                                            <button type="button" name="request" class="btn btn-outline-info btn-sm common_dialog vpsrebtn" gourl="/vps/server?tab=basic&act=os&webid=<?=$webid?>" data-toggle="modal" data-target="#common_dialog">OS初期化</button>
                                         </div>
                                         <div class="col-sm-4"></div>
                                     </div>

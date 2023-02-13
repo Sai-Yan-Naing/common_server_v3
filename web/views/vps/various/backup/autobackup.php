@@ -4,13 +4,13 @@ $getvpsbackup = $commons->getRow("SELECT * FROM vps_backup WHERE ip='$webip'");
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
-  <h4 class="modal-title">Server Auto Backup</h4>
+  <h4 class="modal-title">自動バックアップに変更</h4>
   <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/vps/various?setting=backup&tab=backup&act=confirm" method="post" id="onoff" onsubmit="loading()">
+  <form action="/vps/various?setting=backup&tab=backup&act=confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="auto_backup">
     <?= $getvpsbackup['scheduler']==0? "起動" : "停止"  ?>しますか？
       

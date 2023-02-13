@@ -5,14 +5,15 @@ require_once('views/vps/various/load_status/usage.php');
 $memoryTotal = null;
         $memoryFree = null;
         $cmd = "loadstatus";
-        $host_ip = $webvmhost_ip;
-        $host_user = $webvmhost_user;
-        $host_password = $webvmhost_password;
-        $vm_name = $webvm_name;
-        $vm_user = JAPANSYS;
-        $vm_pass = JAPANSYS_PASS;
-        $vm_action = "loadstatus";
-        // echo ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
+       echo $host_ip = $webvmhost_ip;
+        echo ' '.$host_user = $webvmhost_user;
+        echo ' '.$host_password = $webvmhost_password;
+        echo ' '.$vm_name = $webvm_name;
+        echo ' '.$vm_user = JAPANSYS;
+        echo ' '.$vm_pass = JAPANSYS_PASS;
+        echo ' '.$vm_action = "disk_rw";
+        echo $shell =shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
+        die();
 // if(isset($_GET['case']) && $_GET['case']=='cpu')
 // {
     // die
@@ -23,8 +24,8 @@ $memoryTotal = null;
 // }else{
     // echo memory_usage(true,$webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
 // }
-
-$shell =shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);;
+echo '<br>';
+echo $shell =shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);;
 $shell = trim(preg_replace('/\s\s+/', ' ', $shell));
 $shell = preg_replace('/\s+/', '', $shell);
 $shell = explode("r_r",$shell);
@@ -40,8 +41,8 @@ echo "</pre>";
 $shell1 = explode("FreePhysicalMemory ",$shell1);
 
 echo"<pre> gg" ;
-// print_r($shell1);
+print_r($shell1);
 echo "</pre>";
-// echo round((100 - ((int)$shell1[1] * 1024 * 100 / (int)$shell[1])),2);
-echo "<br>";
-echo (int)$shell1[1] * 100 / (int)$shell[1];
+// // echo round((100 - ((int)$shell1[1] * 1024 * 100 / (int)$shell[1])),2);
+// echo "<br>";
+// echo (int)$shell1[1] * 100 / (int)$shell[1];

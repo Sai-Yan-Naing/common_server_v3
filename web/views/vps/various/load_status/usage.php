@@ -1,4 +1,21 @@
 <?php
+function cpu_usage1($webvmhost_ip,$webvmhost_user,$webvmhost_password)
+    {
+        $load = null;
+        $cmd = "cpu";
+        $host_ip = $webvmhost_ip;
+        $host_user = $webvmhost_user;
+        $host_password = $webvmhost_password;
+
+        if (stristr(PHP_OS, "win"))
+        {
+            $cmd = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\loadstatus\loadstatus.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password);
+            $shell = explode('LoadPercentage ',$cmd);
+            return (int)$shell[1];
+        }
+
+        return $load;
+    }
     function cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name)
     {
         $load = null;
@@ -13,24 +30,7 @@
 
         if (stristr(PHP_OS, "win"))
         {
-            // $shell = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
-            // $shell = explode('LoadPercentage ',$shell);
-            // return $shell[1];
             $cmd = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
-            // $cmd = "wmic cpu get loadpercentage /all";
-            // @exec($cmd, $output);
-
-            // if ($output)
-            // {
-            //     foreach ($output as $line)
-            //     {
-            //         if ($line && preg_match("/^[0-9]+\$/", $line))
-            //         {
-            //             $load = $line;
-            //             break;
-            //         }
-            //     }
-            // }
             $shell = explode('LoadPercentage ',$cmd);
             return (int)$shell[1];
         }
@@ -98,4 +98,26 @@
                 );
             }
         }
+    }
+    function disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name)
+    {
+        $load = null;
+        $cmd = "loadstatus";
+        $host_ip = $webvmhost_ip;
+        $host_user = $webvmhost_user;
+        $host_password = $webvmhost_password;
+        $vm_name = $webvm_name;
+        $vm_user = JAPANSYS;
+        $vm_pass = JAPANSYS_PASS;
+        $vm_action = "disk_rw";
+
+        if (stristr(PHP_OS, "win"))
+        {
+            $shell =shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
+            return $shell;
+            $shell = ($shell/10)*100;
+            return round($shell,2);
+        }
+
+        return $load;
     }

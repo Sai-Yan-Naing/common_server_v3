@@ -9,7 +9,7 @@ require_once('views/vps_config.php');
 <!-- Modal body -->
 <div class="modal-body">
 
-  <form action="/vps/various?setting=<?=$setting?>&tab=<?=$tab?>&act=onoff_confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
+  <form action="/vps/server?tab=<?=$tab?>&act=onoff_confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="onoff">
     <?= $webactive==0? "起動" : "停止"  ?>しますか？
       

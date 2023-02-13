@@ -72,3 +72,9 @@
   
 require_once("views/common_modal.php");
 require_once("views/loading.php");
+?>
+<script>
+$(document).ready(function(){
+    windowzoom(); 
+})
+</script>

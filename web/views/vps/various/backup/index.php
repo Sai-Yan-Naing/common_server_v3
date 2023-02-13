@@ -15,23 +15,16 @@ $getvps=$commons->getRow($query,[$webip]);
                                 <div class="tab-content">
                                     <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
                                         <h6>バックアップ</h6>
-                                        <div class="form-group row">
-                                            <div class="col-sm-4">
-                                                <label for="" class="col-form-label">手動バックアップ</label>
-                                            </div>
-                                            <div class="col-sm-7">
-                                            <button class="btn btn-info btn-sm  common_dialog" gourl="/vps/various?setting=backup&tab=backup&act=new"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>バックアップを実施</button>
-                                            </div>
-                                        </div> 
+                                        
                                         <div class="form-group row">
                                             <div class="col-sm-4">
                                                 <label for="" class="col-form-label">自動バックアップ</label>
                                             </div>
                                             <div class="col-sm-7">
-                                                <form action="" method = "post" class="ml-2">
+                                                <form action="" method = "post">
                                                     <input type="hidden" name="action" value="onoff">
                                                     <input type="hidden" name="key" value="<?=$key;?>">
-                                                    <label class="switch text-white common_dialog" gourl="/vps/various?setting=backup&tab=backup&act=autobackup"  data-toggle="modal" data-target="#common_dialog">
+                                                    <label class="switch text-white common_dialog" gourl="/vps/various?setting=backup&tab=backup&act=autobackup&webid=<?= $webid?>"  data-toggle="modal" data-target="#common_dialog">
                                                         <input type="checkbox" <?= $getvps['scheduler']==1? "checked":""  ?>>
                                                         <span class="slider <?= $getvps['scheduler']==1? "slideron":"slideroff"  ?>"></span>
                                                         <span class="handle <?= $getvps['scheduler']==1? "handleon":"handleoff"  ?>"></span>
@@ -40,12 +33,20 @@ $getvps=$commons->getRow($query,[$webip]);
                                                 </form>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-4">
+                                                <label for="" class="col-form-label">手動バックアップ</label>
+                                            </div>
+                                            <div class="col-sm-7">
+                                            <button class="btn btn-info btn-sm  common_dialog" gourl="/vps/various?setting=backup&tab=backup&act=new&webid=<?= $webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>バックアップを実施</button>
+                                            </div>
+                                        </div> 
                                         <div id="changeBackup">
                                         <table class="table mt-3 table-bordered">
                                             <tr>
                                                 <th class="font-weight-bold border-dark">バックアップデータ</th>
-                                                <th class="font-weight-bold border-dark">Date</th>
-                                                <th class="font-weight-bold border-dark">Action</th>
+                                                <th class="font-weight-bold border-dark">日付</th>
+                                                <th class="font-weight-bold border-dark">操作</th>
                                             </tr>
                                                 <?php 
                                                     $getAllRow=$commons->getAllRow("SELECT * FROM vps_backup WHERE ip='$webip'");

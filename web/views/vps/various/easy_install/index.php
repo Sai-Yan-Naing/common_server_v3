@@ -17,7 +17,7 @@ $getAllRow=$commons->getAllRow($query);
                                 <h6>簡単インストール</h6>
                                 <div class="form-group row">
                                     <div class="col-sm-4">
-                                        <a class="btn btn-outline-info btn-sm my-2" href="/vps/various?setting=easy_install&tab=easy_install&act=confirm&action=iisinstall" onclick="loading()">IIS　インストール</a>
+                                        <a class="btn btn-outline-info btn-lg my-2" href="/vps/various?setting=easy_install&tab=easy_install&act=confirm&action=iisinstall&webid=<?=$webid?>" onclick="loading()">IISインストール</a>
                                     </div>
                                 </div> 
                                 <div class="mb-4">
@@ -29,9 +29,9 @@ $getAllRow=$commons->getAllRow($query);
                                     </div>
                                 </div>   
                                 <div class="form-group row">
-                                    <div class="col-sm-4"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2016">2016</button></div>
-                                    <div class="col-sm-4"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2017">2017</button></div>
-                                    <div class="col-sm-4"><button  type="submit" class="btn btn-sm btn-outline-info" form="sql_2019">2019</button></div>
+                                    <div class="col-lg-3"><button  type="submit" class="btn btn-lg btn-outline-info w-100" form="sql_2016">2016インストール</button></div>
+                                    <div class="col-lg-3"><button  type="submit" class="btn btn-lg btn-outline-info w-100" form="sql_2017">2017インストール</button></div>
+                                    <div class="col-lg-3"><button  type="submit" class="btn btn-lg btn-outline-info w-100" form="sql_2019">2019インストール</button></div>
                                 </div>                          
                             </div>
                         </div>

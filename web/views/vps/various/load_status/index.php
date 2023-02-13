@@ -1,7 +1,9 @@
 <?php 
 require_once('views/vps/header.php');
 require_once('views/vps/various/load_status/usage.php');
-$cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name); $memory_usage = memory_usage(true,$webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
+$cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name); 
+$memory_usage = memory_usage(true,$webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
+$disk_read = disk_read($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_name);
  ?>
     <div id="layoutSidenav">
         <?php require_once('views/vps/sidebar.php');?>
@@ -20,7 +22,7 @@ $cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                                                 CPU
                                             </div>
                                             <div class="col-sm-6">
-                                                Average of cpu usage : <span id="cpu_usage"  gourl="/vps/various?setting=load_status&tab=load_status&act=usage1&case=cpu"><?= $cpu_usage ?>%</span>
+                                                Average of cpu usage : <span id="cpu_usage"  gourl="/vps/various?setting=load_status&tab=load_status&act=usage1&case=cpu&webid=<?=$webid?>"><?= $cpu_usage ?>%</span>
                                                 <div class="progress">
                                                     <div class="progress-bar <?php if($cpu_usage<=60){ echo 'bg-success';}else if($cpu_usage>60 and $cpu_usage<80){ echo 'bg-warning';}else{echo 'bg-danger';} ?>" id="cpu" style="width:<?= $cpu_usage ?>%"></div>
                                                 </div>
@@ -31,7 +33,7 @@ $cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                                             メモリ
                                             </div>
                                             <div class="col-sm-6">
-                                                Average of memory usage : <span id="memory_usage" gourl="/vps/various?setting=load_status&tab=load_status&act=usage1&case=memory"><?= $memory_usage ?>%</span>
+                                                Average of memory usage : <span id="memory_usage" gourl="/vps/various?setting=load_status&tab=load_status&act=usage1&case=memory&webid=<?=$webid?>"><?= $memory_usage ?>%</span>
                                                 <div class="progress">
                                                     <div class="progress-bar <?php if($memory_usage<=60){ echo 'bg-success';}else if($memory_usage>60 and $memory_usage<80){ echo 'bg-warning';}else{echo 'bg-danger';} ?>" id="memory" style="width:<?= $memory_usage ?>%"></div>
                                                 </div>
@@ -42,7 +44,13 @@ $cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                                             ディスク読み書き
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control" name="" readonly placeholder="1.2">
+                                                Disk Queue Length : <span id="disk_read_usage" gourl="/vps/various?setting=load_status&tab=load_status&act=usage1&case=disk_read&webid=<?=$webid?>"><?= round($disk_read,2) ?></span>
+                                                <div class="progress">
+                                                    <div class="progress-bar <?php if($disk_read<=60){ echo 'bg-success';}else if($disk_read>60 and $disk_read<80){ echo 'bg-warning';}else{echo 'bg-danger';} ?>" id="disk_read" style="width:<?= $disk_read ?>" aria-valuenow="<?= $disk_read ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div>0</div><div class="ml-auto">10</div>
+                                                </div>
                                             </div>
                                             <div class="col-sm-2">
                                                 平均10以下であれば問題ありません。
@@ -68,12 +76,16 @@ $cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
         $(document).ready(function(){
             $url1=$("#cpu_usage").attr("gourl");
             $url2=$("#memory_usage").attr("gourl");
+            $url3=$("#disk_read_usage").attr("gourl");
             setInterval(function(){ 
                 usage('cpu',$url1);
-            }, 4000);
+            }, 15000);
             setInterval(function(){
                 usage('memory',$url2);
-            }, 14000)
+            }, 15000)
+            setInterval(function(){
+                usage('disk_read',$url3);
+            }, 15000)
         });
 
         function usage($var,$gourl)
@@ -87,8 +99,16 @@ $cpu_usage = cpu_usage($webvmhost_ip,$webvmhost_user,$webvmhost_password,$webvm_
                 success: function(data){
                     // if($var=='cpu')
                     // {
+                        
+                        if($var=='disk_read'){
+                            $shell = (data/10)*100;
+                           $("#"+$var+"_usage").html(parseFloat(data).toFixed(2)); 
+                           $("#"+$var).css({"width":$shell+"%"})
+                       }else{
                         $("#"+$var+"_usage").html(data+ ' %');
                         $("#"+$var).css({"width":data+"%"})
+                       }
+                        
                         $("#"+$var).removeClass();
                         if(data<=60)
                         {

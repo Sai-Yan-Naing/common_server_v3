@@ -1,6 +1,6 @@
 <?php
 require_once('views/vps_config.php');
-$plan_q = "SELECT plan FROM vps_account Where id=?";
+$plan_q = "SELECT [plan] FROM vps_account Where id=?";
 $getpln = $commons->getRow($plan_q,[$webid]);
 ?>
 <!-- Modal Header -->
@@ -10,11 +10,11 @@ $getpln = $commons->getRow($plan_q,[$webid]);
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-    <form action="/vps/server?tab=basic&act=confirm" method="post" id="osreinstall" onsubmit="loading()">
+    <form action="/vps/server?tab=basic&act=confirm&webid=<?=$webid?>" method="post" id="osreinstall" onsubmit="loading()">
         <input type="hidden" name="action" value="osreinstall">
         <input type="hidden" name="spec" value="<?= $getpln['plan'] ?>">
         <!-- <?= $getRow['domain'] ?>をバックアップしますか？ -->
-        Are you sure to OS初期化 ?
+        OSの初期化を行いますか ?
         
     </form>
 </div>
