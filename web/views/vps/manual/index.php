@@ -1,10 +1,10 @@
-<?php require_once('views/admin/vps/header.php'); ?>
+<?php require_once('views/vps/header.php'); ?>
 <div id="layoutSidenav">
-        <?php require_once('views/admin/vps/sidebar.php');?>
+        <?php require_once('views/vps/sidebar.php');?>
             <div id="layoutSidenav_content">
             <main class="main-page">
                     <div class="container-fluid px-4">
-                            <?php require_once('views/admin/vps/title.php') ?>
+                            <?php require_once('views/vps/title.php') ?>
                             <div class="shadow-lg p-3 mb-5 bg-white rounded">
                                 <!-- start -->
                                 <div class="tab-content">
