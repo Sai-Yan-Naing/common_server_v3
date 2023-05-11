@@ -16,7 +16,7 @@ $url= explode('/',$url);
                     <?php if ( strpos($url[1],'admin') !==false && ($url[2]=="vps" && strpos($url[3],'server') !==false ) ): echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'; endif ?>
                 </a>
                 
-                <a class="nav-link active" href="/admin/vps/various?setting=firewall&tab=firewall&act=index&webid=<?=$webid?>" onclick="loading()">
+                <a class="nav-link active" href="/admin/vps/various?setting=firewall&tab=firewall&act=index&webid=<?=$webid?>" onclick="if(get_state(event,'admin',<?= $webid?>)){ window.location.href = this.href; loading();}">
                     <div class="sb-nav-link-icon"><div class="sb-nav-link-icon"><img src="/img/sidebar/various.png" alt="" class="nav-tab-icon"></div></div>
                     各種設定
                     <?php if ( strpos($url[1],'admin') !==false && ($url[2]=="vps" && strpos($url[3],'various') !==false )) : echo '<span class="ml-2"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>'; endif; ?>

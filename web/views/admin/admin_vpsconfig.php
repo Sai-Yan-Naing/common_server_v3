@@ -31,6 +31,7 @@ $webvmhost_ip = $web_acc['host_ip'];
 $webvmhost_user = $web_acc['host_user'];
 $webvmhost_password = $web_acc['host_password'];
 $webvm_name = $web_acc['instance'];
+$webvm_username = $web_acc['username'];
 $webpass = $web_acc['password'];
 $webactive = $web_acc['active'];
 $webrdp = $web_acc['rdp'];

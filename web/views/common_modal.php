@@ -96,3 +96,24 @@
 		      </div>
 		    </div>
 		  </div>
+
+<div id="serverreboot" style="display: none;" class="modal fade" data-keyboard="true" data-backdrop="static">
+<div class="modal-dialog modal-xl">
+      <div class="modal-content">
+	<!-- Modal Header -->
+	<div class="modal-header">
+		<h4 class="modal-title">Server is shutting down</h4>
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+	</div>
+	<!-- Modal body -->
+	<div class="modal-body">
+		<div class="d-flex align-items-center">
+			Server is not running. Please reboot server.
+		</div>
+	</div>
+	<div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-info btn-sm" data-dismiss="modal">OK</button>
+        </div>
+</div>
+</div>
+</div>

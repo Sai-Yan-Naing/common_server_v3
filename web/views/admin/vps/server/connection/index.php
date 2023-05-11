@@ -10,7 +10,7 @@
                         <!-- start -->
                         <div class="tab-content">
                             <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
-                            <form action="/admin/vps/server?tab=connection&act=confirm&webid=<?=$webid?>" method="post" onsubmit="loading()">
+                            <form action="/admin/vps/server?tab=connection&act=confirm&webid=<?=$webid?>" method="post" onsubmit="loading()" id="passreset">
                                 <div class="form-group row">
                                     <div class="col-sm-4">
                                         <label for="" class="col-form-label">グローバルIPアドレス</label>
@@ -34,7 +34,7 @@
                 <span toggle="#password" class="fa fa-fw fa-eye fa-eye-slash field-icon toggle-password"></span>
                                     </div>
                                     <div class="col-sm-3">
-                                        <button type="submit" class="btn btn-sm btn-outline-info form-control vpsrebtn">変更</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-info form-control vpsrebtn" onclick="if(get_state(event,'admin',<?= $webid?>)){document.getElementById('passreset').submit(); loading();}">変更</button>
                                     </div>
                                 </div>
                                 </form>

@@ -1,5 +1,12 @@
 <?php
-require_once('views/admin/admin_vpsconfig.php');
+require_once('views/admin/vps/get_state1.php');
+?>
+<?php  
+if($state=="Off"){
+  $webactive=1;
+}else if($state=="Running"){
+  $webactive=0;
+}
 ?>
 <!-- Modal Header -->
 <div class="modal-header">
@@ -8,9 +15,9 @@ require_once('views/admin/admin_vpsconfig.php');
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-
   <form action="/admin/vps/server?tab=<?=$tab?>&act=onoff_confirm&webid=<?=$webid?>" method="post" id="onoff" onsubmit="loading()">
     <input type="hidden" name="action" value="onoff">
+    <input type="hidden" name="state" value="<?= $webactive ?>">
     <?= $webactive==0? "起動" : "停止"  ?>しますか？
       
   </form>

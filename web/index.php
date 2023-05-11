@@ -26,6 +26,7 @@ switch ($request['path'])
     case '/admin/vps/various' : include 'views/admin/vps/various/index.php'; break;
     case '/admin/vps/contactus' : include 'views/admin/vps/contactus.php'; break;
     case '/admin/vps/manual' : include 'views/admin/vps/manual/index.php'; break;
+    case '/admin/vps/state' : include 'views/admin/vps/get_state.php'; break;
     // case '/admin/share/mail' : include 'views/admin/share/mail/index.php'; break;
     // case '/admin/share/various' : include 'views/admin/share/various/index.php'; break;
     // case '/admin/share/contactus' : include 'views/admin/share/contactus/index.php'; break;

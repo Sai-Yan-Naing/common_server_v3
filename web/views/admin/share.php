@@ -161,7 +161,7 @@ free_ssl,original_ssl,fixed_ip,ftp,ftp_num,back_up,forein_ip,commercial_sale,res
                                             <a href="/admin/share/server?setting=site&tab=app_install&act=index&webid=<?=$domain[id]?>" target="_blank" class="btn btn-sm btn-outline-info">設定</a>
                                         </td>
                                         <td class="tb-width">
-                                            <span><?php //if($domain['origin'] !=1 ){ echo sizeFormat(folderSize($web_host,$web_user,$web_password,$webrootuser."/".$domain['user']));}else{echo sizeFormat($webcapacity);} ?></span>
+                                            <span><?=$domain['directory_size']?></span>
                                         </td>
                                         <td class="tb-width"><?= ($mydbcount>0) ? $mydbcount : 0 ; ?></td>
                                         <td class="tb-width"><?= ($msdbcount>0) ? $msdbcount : 0 ;?></td>

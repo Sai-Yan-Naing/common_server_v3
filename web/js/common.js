@@ -371,3 +371,35 @@ $(document).on('change','#web_server',function() {
   $('#user_permission').data('webser',$(this).val())
   $(this).prev().val($('option:selected', this).data('webserver'))
 })
+
+function get_state(event,side,id){
+  event.preventDefault();
+  $res = false;
+  if(side=='admin'){
+    $gourl ='/admin/vps/state?webid='+id
+  }
+  $url = document.URL.split("/");
+  $url = $url[0] + "//" + $url[2];
+  $.ajax({
+    type: "POST",
+    url: $url + "/" + $gourl,
+    async:false,
+    contentType: "application/json",
+    dataType: "json",
+    success: function (data) {
+      if(data.state.replace(/\s+/g, '')=='Off'){
+        $("#serverreboot").modal("show");
+        $('.common_dialog').removeAttr('data-toggle');
+        $('.common_dialog').removeAttr('data-target');
+          $('#reboot').attr('data-toggle','modal');
+          $('#reboot').attr('data-target','#common_dialog');
+        $res = false;
+      }else{
+        $('.common_dialog').attr('data-toggle','modal');
+        $('.common_dialog').attr('data-target','#common_dialog');
+        $res = true;
+      }
+    },
+  });
+  return $res;
+}

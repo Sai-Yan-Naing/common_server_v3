@@ -150,7 +150,7 @@ if($web_os=='windows'):
         term.open(terminalContainer);
         term.fit();
 
-        socket = io.connect('https://terminal.winserver.ne.jp/', {query:{ host: '202.218.224.148',username:'administrator',password:'bmbivPanKuQ5AVe' }});
+        socket = io.connect('https://terminal.winserver.ne.jp/', {query:{ host: '<?= $webip ?>',username:'<?= $webvm_username ?>',password:'<?= $webpass ?>' }});
         socket.on("connect", function() {
 
           // Browser -> Backend

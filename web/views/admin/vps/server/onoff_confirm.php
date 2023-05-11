@@ -1,6 +1,7 @@
 <?php
 require_once('views/admin/admin_vpsconfig.php');
 $act = $_POST['action'];
+$webactive = $_POST['state'];
 $host_ip = $webvmhost_ip;
 $host_user = $webvmhost_user;
 $host_password = $webvmhost_password;

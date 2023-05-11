@@ -5,7 +5,7 @@
             <span><?=$webip?></span>
         </a>
         <a class="subtitle pt-4 pb-4">
-            <label class="switch text-white common_dialog text-left m-0" gourl="/admin/vps/server?tab=<?=$tab?>&act=onoff&webid=<?= $webid?>"  data-toggle="modal" data-target="#common_dialog" onsubmit="loading()">
+            <label class="switch text-white common_dialog text-left m-0" gourl="/admin/vps/server?tab=<?=$tab?>&act=onoff&webid=<?= $webid?>"  data-toggle="modal" data-target="#common_dialog" onsubmit="loading()" id="reboot">
                 <input type="checkbox" <?= $webactive!=0? "checked":""  ?>>
                 <span class="slider <?= $webactive!=0? "slideron":"slideroff"  ?>"></span>
                 <span class="handle <?= $webactive!=0? "handleon":"handleoff"  ?>"></span>
