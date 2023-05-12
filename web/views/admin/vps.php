@@ -133,7 +133,7 @@
                         <div class="border-bt-blue">
                             <div class="text-center p-2"><?=$vps['ip'] ?></div>
                             <div class="row">
-                                <div class="col-6">アプリケーションプール</div>
+                                <div class="col-6">Server Status</div>
                                 <div class="col-6">
                                 <form action="/admin/vps-confirm" method = "post">
                                                 <input type="hidden" name="action" value="onoff">
