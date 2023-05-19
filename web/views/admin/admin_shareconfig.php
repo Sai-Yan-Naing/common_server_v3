@@ -46,6 +46,7 @@ $webplan = $web_acc['plan'];
 $webplanbackup = $web_acc['pback_up'];
 $webpmssql = $web_acc['pmssql'];
 $mailserverid= $web_acc['mailserver'];
+$webdirectorysize= $web_acc['directory_size'];
 $maildomain = explode('.',$webdomain); //for *.happywinds.net
 $mailcount = count($maildomain);
 $maildomain =$maildomain[$mailcount-2].".".$maildomain[$mailcount-1]; 

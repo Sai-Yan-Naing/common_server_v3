@@ -8,6 +8,10 @@ $host_user = $getvps['host_user'];
 $host_password = $getvps['host_password'];
 $vm_name = $getvps['instance'];
 $today = date("Y-m-d H:i:s");
+$msg = "jp message";
+$msgsession ="msg";
+$pserr = false;
+$res = 'noerror';
 if ( $action  === 'delete')
 {
 	$action ="delete_vm";
@@ -18,10 +22,12 @@ if ( $action  === 'delete')
 		require_once('views/admin/vps.php');
 		die();
 	}
+	$msg = "server has been deleted";
 } else
 {
 	$status=$getvps['active'] == 1?0:1;
 	$action=$getvps['active'] == 1?"shutdown":"startup";
+	$msg = $getvps['active'] == 1?"server is shutting down":"server is starting";
 	// $reboot=1;
 	// die('hello');
 	// echo $status.$action.$act_id;
@@ -33,6 +39,14 @@ if ( $action  === 'delete')
 		die();
 	}
 }
-shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
+$res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
+if(preg_replace("/\s+/", "", $res)=='error'){
+	$pserr = true;;
+}
+if($pserr){
+$msgsession = 'msg';
+$msg = 'powershellerror';
+}
+flash($msgsession,$msg);
 header("location: /admin?main=vps$pagy");
 ?>

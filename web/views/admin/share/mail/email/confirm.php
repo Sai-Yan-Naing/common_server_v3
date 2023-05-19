@@ -8,6 +8,8 @@ $query = "SELECT * FROM add_email WHERE domain='$webdomain'";
 $isexist='exist';
 $msg = "jp message";
 $msgsession ="msg";
+$pserr = false;
+$res = 'noerror';
 // if ( count($commons->getAllRow($query)) > 0 )
 // {
 //     $isexist='exist';
@@ -41,10 +43,17 @@ if ( isset($_POST['action']) and $_POST['action'] === 'new')
 				require_once("views/admin/share/mail/index.php");
 				die("");
 			}
-echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" newuser '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$email);
+$res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" newuser '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$email);
 
 $data = ['status'=>false, "message"=>"ok"];
 echo json_encode($data);
+if(preg_replace("/\s+/", "", $res)=='error'){
+	$pserr = true;;
+}
+if($pserr){
+$msgsession = 'msg';
+$msg = 'powershellerror';
+}
 flash($msgsession,$msg);
 die;
 } elseif ( isset($_POST['action']) and $_POST['action'] === 'edit') {
@@ -61,9 +70,16 @@ die;
 	$getRow = $commons->getRow($query,[$act_id]);
 	$msg = "メールアドレス「".$getRow['email']."@".$webdomain."」のパスワードを変更しました";;
 	$msgsession ="msg";
-shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" edit '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$getRow['email']);
+$res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" edit '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$getRow['email']);
 $data = ['status'=>false, "message"=>"ok"];
     echo json_encode($data);
+	if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
+if($pserr){
+    $msgsession = 'msg';
+    $msg = 'powershellerror';
+}
     flash($msgsession,$msg);
     die;
 }elseif ( isset($_POST['action']) and $_POST['action'] === 'export')
@@ -291,7 +307,7 @@ $data = ['status'=>false, "message"=>"ok"];
 						// echo 'update';
 						// echo '<br>';
 						// echo $upcsv;
-						shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." ".$incsv." ".$upcsv);
+						$res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." ".$incsv." ".$upcsv);
 						// echo ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." '".json_encode($temp)."'");
 					// die();
 				}
@@ -325,9 +341,15 @@ $data = ['status'=>false, "message"=>"ok"];
 			$error = "cannot add mail account";
 				require_once("views/admin/share/mail/index.php");
 		}
-echo  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" delete '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$getRow['email'].' '.$getRow['email']);
+$res =  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" delete '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$getRow['email'].' '.$getRow['email']);
 }
-
+if(preg_replace("/\s+/", "", $res)=='error'){
+	$pserr = true;;
+}
+if($pserr){
+$msgsession = 'msg';
+$msg = 'powershellerror';
+}
 // $commons->mail_server($webdomain,$email,$mail_pass_word,$action,$isexist);
 flash($msgsession,$msg);
 header("location: /admin/share/mail?setting=email&tab=tab&act=index&webid=$webid");

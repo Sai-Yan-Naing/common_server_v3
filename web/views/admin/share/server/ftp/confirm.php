@@ -5,6 +5,8 @@ $action = $_POST['action'];
 // die($action);
 $msg = "jp message";
 $msgsession ="msg";
+$pserr = false;
+$res = 'noerror';
 $per = "";
 if (in_array("F", $permission))
 {
@@ -43,11 +45,18 @@ if ( $action=='new')
 	}
 	$dir_path = 'web\\'.$dir_path;
 	if (isset($dir_path) && $dir_path !='') {
-	  echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'\\'.$dir_path.' F new '.$originuser);
+	  $res = Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'\\'.$dir_path.' F new '.$originuser);
 	}
 	
 	$data = ['status'=>false, "message"=>"ok"];
     echo json_encode($data);
+	if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
+	if($pserr){
+		$msgsession = 'msg';
+		$msg = 'powershellerror';
+	}
     flash($msgsession,$msg);
     die;
 } elseif ($action=='edit')
@@ -67,12 +76,19 @@ if ( $action=='new')
 	 }
 	 $dir_path = 'web\\'.$dir_path;
 	 if (isset($dir_path) && $dir_path !='') {
-	  Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" edit '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'\\'.$dir_path.' F edit '.$originuser);
+	  $res = Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" edit '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' '.$ftp_pass.' '.$webuser.'\\'.$dir_path.' F edit '.$originuser);
 	}
 	 $msg = "FTPユーザー 「".$ftp_user."」 を変更しました";
 	 $msgsession ="msg";
 	 $data = ['status'=>false, "message"=>"ok"];
     echo json_encode($data);
+	if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
+	if($pserr){
+		$msgsession = 'msg';
+		$msg = 'powershellerror';
+	}
     flash($msgsession,$msg);
     die;
 }else
@@ -90,7 +106,7 @@ if ( $action=='new')
 	}
 	$dir_path = 'web\\';
 	if (isset($dir_path) && $dir_path !='') {
-	  echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" delete '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' noneed '.$webuser.'\\'.$dir_path.' noneed delete '.$originuser);
+	  $res = Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/directory.ps1" delete '.$web_host.' '.$web_user.' '.$web_password.' '.$ftp_user.' noneed '.$webuser.'\\'.$dir_path.' noneed delete '.$originuser);
 	}
 	
 	$msg = "FTPユーザー 「".$ftp_user."」 を削除しました";
@@ -109,7 +125,13 @@ if ( $weborigin!=1)
 // }
 
 // die;
-
+if(preg_replace("/\s+/", "", $res)=='error'){
+	$pserr = true;;
+}
+if($pserr){
+	$msgsession = 'msg';
+	$msg = 'powershellerror';
+}
 flash($msgsession,$msg);
 header("location: /admin/share/server?setting=ftp&tab=tab&act=index&webid=$webid$pagy");
 ?>

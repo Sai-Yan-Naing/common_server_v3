@@ -8,6 +8,8 @@ $dirname = "G:/backup/$webuser/";
 $getbackup = $commons->getRow("select * from backup_data where domain='$webdomain'");
 $msg = "jp message";
 $msgsession ="msg";
+$pserr = false;
+$res = 'noerror';
 $action = $_POST['action'];
 
 if (!$webuser) 
@@ -22,7 +24,7 @@ if (!$webuser)
     	
         // deleteBackup($dirname);
 
-        deleteDir($web_host,$web_user,$web_password,$dirname);
+        $res = deleteDir($web_host,$web_user,$web_password,$dirname);
 
         $query = "DELETE FROM share_backup WHERE domain=?";
             if ( ! $commons->doThis($query,[$webdomain]))
@@ -30,6 +32,9 @@ if (!$webuser)
                 $error  = "Backup Cannot be add.";
                 require_once('views/admin/share/various/backup/index.php');
                 die("");
+            }
+            if(preg_replace("/\s+/", "", $res)=='error'){
+                $pserr = true;
             }
         
     } elseif ( isset($action) and $action=="backup")
@@ -67,8 +72,11 @@ if (!$webuser)
                 die("");
             }
         }
-        sharebackup($web_host,$web_user,$web_password,$src,$webuser,$bkname,$action);
+        $res = sharebackup($web_host,$web_user,$web_password,$src,$webuser,$bkname,$action);
         $msg = $webdomain." のバックアップが完了しました";
+        if(preg_replace("/\s+/", "", $res)=='error'){
+            $pserr = true;
+        }
     } elseif (isset($action) and $action=="restore")
     {
     	// $file = showFolder($dirname);
@@ -83,8 +91,11 @@ if (!$webuser)
      //        deleteBackup($dst);
      //    }
      //    copy_paste($src, $dst);
-        sharebackup($web_host,$web_user,$web_password,$dst,$webuser,$getRow['name'],$action);
+        $res = sharebackup($web_host,$web_user,$web_password,$dst,$webuser,$getRow['name'],$action);
         $msg = "「".$webdomain."」のバックアップデータをリストアしました";
+        if(preg_replace("/\s+/", "", $res)=='error'){
+            $pserr = true;;
+        }
         
     } elseif (isset($action) and $action=="auto_backup")
     {
@@ -117,6 +128,10 @@ if (!$webuser)
                 die("");
             }
         }
+    }
+    if($pserr){
+        $msgsession = 'msg';
+        $msg = 'powershellerror';
     }
     flash($msgsession,$msg);
     header("location: /admin/share/various?setting=backup&act=index&webid=$webid");

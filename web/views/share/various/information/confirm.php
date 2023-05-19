@@ -3,6 +3,8 @@ require_once("views/share_config.php");
 $action = $_POST['action'];
 $msg = "jp message";
 $msgsession ="msg";
+$pserr = false;
+$res = 'noerror';
 if ( $action=='onoff' )
 {
     $act_id = $_POST['act_id'];
@@ -19,7 +21,10 @@ if ( $action=='onoff' )
             die("");
     }
     // echo shell_exec("%windir%\system32\inetsrv\appcmd.exe $startstop sites $sitename");
-    shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" site '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
+    $res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" site '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
+    if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
     // die;
 } elseif ($action=='apponoff')
 {
@@ -37,7 +42,14 @@ if ( $action=='onoff' )
     }
     // echo shell_Exec("%windir%\system32\inetsrv\appcmd.exe $startstop  apppool /apppool.name:$sitename");
     
-    shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" app '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
+    $res = shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" app '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
+    if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
+}
+if($pserr){
+    $msgsession = 'msg';
+    $msg = 'powershellerror';
 }
 flash($msgsession,$msg);
 header("location: /share/various?setting=information&act=index");

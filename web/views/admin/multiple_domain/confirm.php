@@ -3,6 +3,8 @@ require_once("views/admin/admin_config.php");
 $action = $_POST['action'];
 $msgsession = "";
 $msg ="";
+$pserr = false;
+$res = 'noerror';
 if ( $action === 'new' )
 {
     $webdomain = $_POST['domain'];
@@ -78,7 +80,7 @@ if ( $action === 'new' )
     $origin= $commons->getRow($query_origin);
     $origin_user= $origin['user'];
 
-     shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/new.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$webdomain.' '.$user.' '.$password.' '.$web_host. ' '.$origin_user);
+    $res = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/new.ps1" new '.$web_host.' '.$web_user.' '.$web_password.' '.$webdomain.' '.$user.' '.$password.' '.$web_host. ' '.$origin_user);
 
     // $commons->mail_server($webdomain,'winserverroot','welcome123!','new','noexist');
 
@@ -88,6 +90,14 @@ if ( $action === 'new' )
 
     $data = ['status'=>false, "message"=>"ok"];
     echo json_encode($data);
+    
+    if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
+    if($pserr){
+        $msgsession = 'msg';
+        $msg = 'powershellerror';
+    }
     flash($msgsession,$msg);
     die;
 } elseif ( $action === 'onoff')
@@ -119,8 +129,10 @@ if ( $action === 'new' )
             die("");
     }
     // shell_exec("%windir%\system32\inetsrv\appcmd.exe $startstop sites $sitename");
-    shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" site '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
-    // die;
+    $res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" site '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
+    if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
 } elseif ( $action === 'apponoff')
 {
     $act_id = $_POST['act_id'];
@@ -148,8 +160,11 @@ if ( $action === 'new' )
             die("");
     }
     // echo shell_Exec("%windir%\system32\inetsrv\appcmd.exe $startstop  apppool /apppool.name:$sitename");
-    shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" app '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
-    // die;
+    $res = shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" app '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
+    
+    if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
 } elseif ( $action=='sitebinding')
 {
     $act_id = $_POST['act_id'];
@@ -234,8 +249,10 @@ if($sitebinding==1){
     // shell_exec("%systemroot%\system32\inetsrv\appcmd.exe set site /site.name:$sitename /".$do."bindings.[protocol='http',bindingInformation='".$ip.":80:".$bindDomain."']");
 
 
-    shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/sitebinding.ps1" '.$do.' '.$web_host.' '.$web_user.' '.$web_password.' '.$bindDomain.' '.$sitename);
-    // die;
+    $res = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/sitebinding.ps1" '.$do.' '.$web_host.' '.$web_user.' '.$web_password.' '.$bindDomain.' '.$sitename);
+    if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
     
 } elseif ($action == 'delete')
 {
@@ -267,7 +284,14 @@ if($sitebinding==1){
     }
     $sitename = $getRow['user'];
     $startstop = 'stop';
-    shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" sitedelete '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
+    $res = shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" sitedelete '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
+    if(preg_replace("/\s+/", "", $res)=='error'){
+        $pserr = true;;
+    }
+}
+if($pserr){
+    $msgsession = 'msg';
+    $msg = 'powershellerror';
 }
 flash($msgsession,$msg);
 
