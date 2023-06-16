@@ -41,6 +41,7 @@ class Common{
 	function doThis($query, $params = [])
 	{
 		// echo $query;
+		// print_r($query);
 		// echo "<pre>";
 		// print_r($params);
 		// die();

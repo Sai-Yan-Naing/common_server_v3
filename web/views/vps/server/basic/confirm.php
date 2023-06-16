@@ -11,6 +11,8 @@ $ipaddress = $webip;
 $gateway = $webgateway;
 $msgsession =  "msg";
 $msg = "jb message";
+$pserr = false;
+$res = 'noerror';
     if ( isset($_POST['action']) )
     {
         
@@ -59,7 +61,7 @@ $msg = "jb message";
                         // require_once("views/share.php");
                         die("error");
                 }
-                shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vps_basicsetting\changeplan.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$changedate);
+                $res = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vps_basicsetting\changeplan.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$changedate);
 
         } else
         {
@@ -79,10 +81,18 @@ $msg = "jb message";
 		$msg = "OS初期化が完了しました";
                 // $vm_storage = 60*1024*1048576;
         $osname = str_replace(" ","-",$osname);
-               echo shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu.' '.$ipaddress.' '.$gateway.' '.$os.' '.$osname);
+               $res = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_memory.' '.$vm_storage.' '.$vm_cpu.' '.$ipaddress.' '.$gateway.' '.$os.' '.$osname);
                // die();
                 
         }
+    }
+    $res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
     }
     flash($msgsession,$msg);
 header("location: /vps/server?tab=basic&act=index&webid=$webid");

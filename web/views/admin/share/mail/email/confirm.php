@@ -47,13 +47,14 @@ $res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\s
 
 $data = ['status'=>false, "message"=>"ok"];
 echo json_encode($data);
-if(preg_replace("/\s+/", "", $res)=='error'){
-	$pserr = true;;
-}
-if($pserr){
-$msgsession = 'msg';
-$msg = 'powershellerror';
-}
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
 flash($msgsession,$msg);
 die;
 } elseif ( isset($_POST['action']) and $_POST['action'] === 'edit') {
@@ -73,13 +74,14 @@ die;
 $res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" edit '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$mail_pass_word.' '.$getRow['email']);
 $data = ['status'=>false, "message"=>"ok"];
     echo json_encode($data);
-	if(preg_replace("/\s+/", "", $res)=='error'){
-        $pserr = true;;
+	$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
     }
-if($pserr){
-    $msgsession = 'msg';
-    $msg = 'powershellerror';
-}
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
     flash($msgsession,$msg);
     die;
 }elseif ( isset($_POST['action']) and $_POST['action'] === 'export')
@@ -310,6 +312,14 @@ if($pserr){
 						$res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." ".$incsv." ".$upcsv);
 						// echo ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" csv '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain." '".json_encode($temp)."'");
 					// die();
+					$res = json_decode($res);
+					if($res->error){
+						$pserr = true;
+					}
+					if($pserr){
+						$msgsession = 'msg';
+						$msg = $res->msg;
+					}
 				}
 
 			}
@@ -343,13 +353,14 @@ if($pserr){
 		}
 $res =  shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/email.ps1" delete '.MAILIP.' '.MAILUSER.' '.MAILPASS.' '.$webdomain.' '.$getRow['email'].' '.$getRow['email']);
 }
-if(preg_replace("/\s+/", "", $res)=='error'){
-	$pserr = true;;
-}
-if($pserr){
-$msgsession = 'msg';
-$msg = 'powershellerror';
-}
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
 // $commons->mail_server($webdomain,$email,$mail_pass_word,$action,$isexist);
 flash($msgsession,$msg);
 header("location: /admin/share/mail?setting=email&tab=tab&act=index&webid=$webid");

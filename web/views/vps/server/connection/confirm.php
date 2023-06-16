@@ -12,15 +12,25 @@ $vm_pass = JAPANSYS_PASS;
 $vm_action = "change_pass";
 $vm_change_action  = WINSERVERROOT;
 $vm_fw = $_POST['password'];
+$pserr = false;
+$res = 'noerror';
 $update_q = "UPDATE vps_account SET password='$vm_fw' WHERE id='$webid'";
 $commons->doThis($update_q,[$status,$webid]);
 if($os=='windows'){
-   echo Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$vm_change_action.' '.$vm_fw. ' '.$os);  
+   $res = Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_init.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$vm_change_action.' '.$vm_fw. ' '.$os);  
 }else{
-     echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$webip.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$vm_change_action.' '.$vm_fw. ' '.$os);
+     $res = Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$webip.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$vm_change_action.' '.$vm_fw. ' '.$os);
 }
 
- // die('ok');
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
+    flash($msgsession,$msg);
 header("location: /vps/server?tab=connection&act=index&webid=$webid");
 
 ?>

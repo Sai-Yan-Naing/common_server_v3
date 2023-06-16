@@ -8,6 +8,8 @@ $vm_name = $webvm_name;
 $vm_user = JAPANSYS;
 $vm_pass = JAPANSYS_PASS;
 $vm_action = $_GET['action'];
+$pserr = false;
+$res = 'noerror';
 // $vm_change_action  = WINSERVERROOT;
 //$getvps = $commons->getRow("SELECT * FROM vps_account WHERE ip='$webip'");
 // echo "<pre>";
@@ -66,8 +68,17 @@ if(!$commons->doThis($insert_q,[$webip]))
     echo $error="cannot update vps";
     die();
 }
-shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_v1.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$chport.' '.$chip);
+$res = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw_v1.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$chport.' '.$chip);
  // die('ok');
+ $res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
+    flash($msgsession,$msg);
 header("location: /vps/various?setting=firewall&tab=firewall&act=index&webid=$webid");
 
 ?>

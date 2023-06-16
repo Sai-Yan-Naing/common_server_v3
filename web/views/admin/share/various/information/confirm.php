@@ -22,8 +22,9 @@ if ( $action=='onoff' )
     }
     // echo shell_exec("%windir%\system32\inetsrv\appcmd.exe $startstop sites $sitename");
     $res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" site '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
-    if(preg_replace("/\s+/", "", $res)=='error'){
-        $pserr = true;;
+    $res = json_decode($res);
+    if($res->error){
+        $pserr = true;
     }
     // die;
 } elseif ($action=='apponoff')
@@ -43,13 +44,14 @@ if ( $action=='onoff' )
     // echo shell_Exec("%windir%\system32\inetsrv\appcmd.exe $startstop  apppool /apppool.name:$sitename");
     
     $res = shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/site/onoff.ps1" app '.$web_host.' '.$web_user.' '.$web_password.' '.$startstop. ' '.$sitename);
-    if(preg_replace("/\s+/", "", $res)=='error'){
-        $pserr = true;;
+    $res = json_decode($res);
+    if($res->error){
+        $pserr = true;
     }
 }
 if($pserr){
     $msgsession = 'msg';
-    $msg = 'powershellerror';
+    $msg = $res->msg;
 }
 flash($msgsession,$msg);
 header("location: /admin/share/various?setting=information&act=index&webid=$webid");

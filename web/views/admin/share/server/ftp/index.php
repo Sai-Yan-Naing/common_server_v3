@@ -47,7 +47,8 @@ $getAllRow=$commons->getAllRow($query,$params);
                                                     if($webplan>3):
                                                 ?>
                                                 <button class="btn btn-info btn-sm common_dialog" gourl="/admin/share/server?setting=ftp&tab=tab&act=new&webid=<?=$webid?>"  data-toggle="modal" data-target="#common_dialog"><span class="mr-2"><i class="fas fa-plus-square"></i></span>ＦＴＰユーザー追加</button>
-                                            <?php endif?>
+                                            <?php endif 
+                                            ?>
                                             </div>
                                         </div>
                                         <table class="table table-bordered">

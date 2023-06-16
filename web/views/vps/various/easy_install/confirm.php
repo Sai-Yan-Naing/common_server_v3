@@ -7,6 +7,8 @@ $host_password = $webvmhost_password;
 $vm_name = $webvm_name;
 $vm_user = JAPANSYS;
 $vm_pass = JAPANSYS_PASS;
+$pserr = false;
+$res = 'noerror';
 if ( isset($_GET['action']) and $_GET['action']=='iisinstall')
 {
     $cmd = "iisinstall";
@@ -19,7 +21,7 @@ if ( isset($_GET['action']) and $_GET['action']=='iisinstall')
     $msgsession = 'msg';
     $msg = 'IISはインストール済みです。';
     if($web_iis==0){
-        shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
+        $res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action);
         $msg = "IISのインストールが完了しました。";
     }
     
@@ -66,13 +68,20 @@ if ( isset($_GET['action']) and $_GET['action']=='iisinstall')
                 // require_once("views/share.php");
                 die("error");
         }
-        shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$web_ssms);
+        $res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$web_ssms);
         // die();
     }
     
     // shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\firewall\change_fw.ps1" '.$cmd.' '.$host_ip.' '.$host_user.' '.$host_password.' '.$vm_name.' '.$vm_user.' '.$vm_pass.' '.$vm_action.' '.$web_ssms);
 }
-
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
 flash($msgsession,$msg);
 
 header("location: /vps/various?setting=easy_install&tab=easy_install&act=index&webid=$webid");

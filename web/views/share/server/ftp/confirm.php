@@ -50,13 +50,14 @@ if ( $action=='new')
 	
 	$data = ['status'=>false, "message"=>"ok"];
     echo json_encode($data);
-	if(preg_replace("/\s+/", "", $res)=='error'){
-        $pserr = true;;
+	$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
     }
 	if($pserr){
-		$msgsession = 'msg';
-		$msg = 'powershellerror';
-	}
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
     flash($msgsession,$msg);
     die;
 } elseif ($action=='edit')
@@ -82,13 +83,14 @@ if ( $action=='new')
 	 $msgsession ="msg";
 	 $data = ['status'=>false, "message"=>"ok"];
     echo json_encode($data);
-	if(preg_replace("/\s+/", "", $res)=='error'){
-        $pserr = true;;
+	$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
     }
 	if($pserr){
-		$msgsession = 'msg';
-		$msg = 'powershellerror';
-	}
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
     flash($msgsession,$msg);
     die;
 }else
@@ -125,13 +127,14 @@ if ( $weborigin!=1)
 // }
 
 // die;
-if(preg_replace("/\s+/", "", $res)=='error'){
-	$pserr = true;;
-}
-if($pserr){
-	$msgsession = 'msg';
-	$msg = 'powershellerror';
-}
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
 flash($msgsession,$msg);
 header("location: /share/server?setting=ftp&tab=tab&act=index&webid=$webid$pagy");
 ?>

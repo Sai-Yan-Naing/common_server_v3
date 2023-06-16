@@ -6,6 +6,8 @@ if ( !isset($_POST['action']))
 $date = date('d-m-Y');
 $backupname = $date.'-'.time().'-'.$webip;
 $dirname = "E:\Backup/$backupname/";
+$pserr = false;
+$res = 'noerror';
 
 $host_ip = $webvmhost_ip;
 $host_user = $webvmhost_user;
@@ -31,7 +33,7 @@ $msgsession ="msg";
         $msg = $webip."のバックアップデータの削除が完了しました";
         // $backup_vmname = $_POST['backup_vmname'];
         $del_dir = $getvpsbackup['name'];
-        Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\backup.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $del_dir);
+        $res = Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\backup.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $del_dir);
     } elseif (isset($_POST['action']) and $_POST['action'] === "backup")
     {
         // die('ok');
@@ -57,7 +59,7 @@ $msgsession ="msg";
         // die('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/manage_vm/vm.ps1" '. $webvm_name." ".$action." ".$dirname);
         // Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/manage_vm/vm.ps1" '. $webvm_name." ".$action." ".$dirname);
         $action = 'export_vm';
-        echo  Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\backup.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $backupname." ". $del_dir);
+        $res = Shell_Exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\backup.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $backupname." ". $del_dir);
         // die('ol');
     } elseif (isset($_POST['action']) and $_POST['action'] === "restore")
     {
@@ -66,7 +68,7 @@ $msgsession ="msg";
         $getvps = $commons->getRow("SELECT * FROM vps_account WHERE ip=?",[$webip]);
         $active = $getvps['active'];
         $action = 'restore_backup';
-        echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\backup.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $back_name);
+        $res = Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\backup.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name." ". $back_name);
         // die('restore');
     } elseif (isset($_POST['action']) and $_POST['action'] === "auto_backup")
     {
@@ -80,6 +82,14 @@ $msgsession ="msg";
             die();
         }
         // die();
+    }
+    $res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
     }
     flash($msgsession,$msg);
     header("location: /vps/various?setting=backup&tab=backup&act=index&webid=$webid");

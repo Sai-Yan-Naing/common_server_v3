@@ -33,7 +33,8 @@ if (!$webuser)
                 require_once('views/admin/share/various/backup/index.php');
                 die("");
             }
-            if(preg_replace("/\s+/", "", $res)=='error'){
+            $res = json_decode($res);
+            if($res->error){
                 $pserr = true;
             }
         
@@ -74,7 +75,8 @@ if (!$webuser)
         }
         $res = sharebackup($web_host,$web_user,$web_password,$src,$webuser,$bkname,$action);
         $msg = $webdomain." のバックアップが完了しました";
-        if(preg_replace("/\s+/", "", $res)=='error'){
+        $res = json_decode($res);
+        if($res->error){
             $pserr = true;
         }
     } elseif (isset($action) and $action=="restore")
@@ -93,8 +95,9 @@ if (!$webuser)
      //    copy_paste($src, $dst);
         $res = sharebackup($web_host,$web_user,$web_password,$dst,$webuser,$getRow['name'],$action);
         $msg = "「".$webdomain."」のバックアップデータをリストアしました";
-        if(preg_replace("/\s+/", "", $res)=='error'){
-            $pserr = true;;
+        $res = json_decode($res);
+        if($res->error){
+            $pserr = true;
         }
         
     } elseif (isset($action) and $action=="auto_backup")
@@ -129,9 +132,9 @@ if (!$webuser)
             }
         }
     }
-    if($pserr){
+	if($pserr){
         $msgsession = 'msg';
-        $msg = 'powershellerror';
+        $msg = $res->msg;
     }
     flash($msgsession,$msg);
     header("location: /admin/share/various?setting=backup&act=index&webid=$webid");

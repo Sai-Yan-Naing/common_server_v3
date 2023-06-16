@@ -5,6 +5,8 @@ $host_ip = $webvmhost_ip;
 $host_user = $webvmhost_user;
 $host_password = $webvmhost_password;
 $vm_name = $webvm_name;
+$pserr = false;
+$res = 'noerror';
 if($act == "onoff"){
     $status=$webactive==1?0:1;
     $action=$webactive==1?"shutdown":"startup";
@@ -19,7 +21,16 @@ if($act == "onoff"){
     }
 }
 
-echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
+$res = Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v_init.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
+    flash($msgsession,$msg);
 //  die('ok');
 header("location: /vps/various?setting=$setting&tab=$tab&act=index&webid=$webid");
 

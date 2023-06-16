@@ -40,13 +40,14 @@ if ( $action  === 'delete')
 	}
 }
 $res = shell_exec('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts\vm_manager\hyper-v.ps1" '.$action." ".$host_ip." ".$host_user." ".$host_password." ". $vm_name);
-if(preg_replace("/\s+/", "", $res)=='error'){
-	$pserr = true;;
-}
-if($pserr){
-$msgsession = 'msg';
-$msg = 'powershellerror';
-}
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
 flash($msgsession,$msg);
 header("location: /admin?main=vps$pagy");
 ?>

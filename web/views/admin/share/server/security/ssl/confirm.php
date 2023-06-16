@@ -8,6 +8,8 @@ $sitename = $webuser;
 // echo $getid = Shell_Exec(escapeshellcmd("powershell.exe  -NoProfile -Noninteractive -command  Get-Website -Name $sitename | Select -ExpandProperty ID"));
 // shell_exec("E:\scripts\ssl.bat $getid");
 $action = $_POST['action'];
+$pserr = false;
+$res = 'noerror';
 if($action =='new')
 {
 	if(!domainChecker($webdomain))
@@ -32,7 +34,7 @@ if($action =='new')
 	$query = "UPDATE web_account SET ssl='$webssl' WHERE id='$webid'";
 	$commons->doThis($query);
 // die;
-	shell_exec  ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' new');
+	$res = shell_exec  ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' new');
 	// die();
 }elseif($action =='edit'){
 	$common_name = $_POST['common_name'];
@@ -48,17 +50,24 @@ if($action =='new')
 	// $webssl = 2;
 	$query = "UPDATE web_account SET ssl='$webssl' WHERE id='$webid'";
 	$commons->doThis($query);
-		shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' renew');
+		$res = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' renew');
 	}else{
 	$temp1 = [];
 	$webssl = json_encode($temp1);
 	// $webssl = 1;
 	$query = "UPDATE web_account SET ssl='$webssl' WHERE id='$webid'";
 	$commons->doThis($query);
-	shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' delete');
+	$res = shell_exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/ssl.ps1" ssl '.$web_host.' '.$web_user.' '.$web_password.' '.$webuser.' '.$webdomain.' delete');
 }
 
-// die;
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
 flash($msgsession,$msg);
 header("location: /admin/share/server?setting=security&tab=ssl&act=index&webid=$webid");
 die;

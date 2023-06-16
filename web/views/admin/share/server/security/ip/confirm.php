@@ -6,6 +6,8 @@ $action = $_POST['action'];
 $temp = json_decode($webblacklist,true);
 $msg = "jp message";
 $msgsession ="msg";
+$pserr = false;
+$res = 'noerror';
 if ( $action=='new')
 {
 	$msg = "ブラックリストに 「".$ip."」 を追加しました";
@@ -36,9 +38,17 @@ if ( $action=='new')
 		include('views/admin/share/server/security/ip/index.php');
 	  die();
 	}
-	Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/blockip.ps1" ip '.$web_host.' '.$web_user.' '.$web_password.' '.$site.' '.$ip.' '.$action);
+	$res = Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/blockip.ps1" ip '.$web_host.' '.$web_user.' '.$web_password.' '.$site.' '.$ip.' '.$action);
 $data = ['status'=>false, "message"=>"ok"];
 echo json_encode($data);
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
 flash($msgsession,$msg);
 die;
 } else {
@@ -58,7 +68,14 @@ die;
 }
 
 // Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/blockip/blockip.ps1" '. $site." ".$ip.' '.$action);
-echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/blockip.ps1" ip '.$web_host.' '.$web_user.' '.$web_password.' '.$site.' '.$ip.' '.$action);
-// die;
+$res = Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/commons/blockip.ps1" ip '.$web_host.' '.$web_user.' '.$web_password.' '.$site.' '.$ip.' '.$action);
+$res = json_decode($res);
+    if($res->error){
+        $pserr = true;
+    }
+	if($pserr){
+        $msgsession = 'msg';
+        $msg = $res->msg;
+    }
 flash($msgsession,$msg);
 header("location:/admin/share/server?setting=security&tab=ip&act=index&webid=$webid");

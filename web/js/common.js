@@ -389,14 +389,14 @@ function get_state(event,side,id){
     success: function (data) {
       if(data.state.replace(/\s+/g, '')=='Off'){
         $("#serverreboot").modal("show");
-        $('.common_dialog').removeAttr('data-toggle');
-        $('.common_dialog').removeAttr('data-target');
-          $('#reboot').attr('data-toggle','modal');
-          $('#reboot').attr('data-target','#common_dialog');
+        // $('.common_dialog').removeAttr('data-toggle');
+        // $('.common_dialog').removeAttr('data-target');
+        //   $('#reboot').attr('data-toggle','modal');
+        //   $('#reboot').attr('data-target','#common_dialog');
         $res = false;
       }else{
-        $('.common_dialog').attr('data-toggle','modal');
-        $('.common_dialog').attr('data-target','#common_dialog');
+        // $('.common_dialog').attr('data-toggle','modal');
+        // $('.common_dialog').attr('data-target','#common_dialog');
         $res = true;
       }
     },
